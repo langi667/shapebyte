@@ -15,6 +15,8 @@
 		1DF3AF572C5021E50054520F /* ShapeByteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF562C5021E50054520F /* ShapeByteTests.swift */; };
 		1DF3AF612C5021E50054520F /* ShapeByteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF602C5021E50054520F /* ShapeByteUITests.swift */; };
 		1DF3AF632C5021E50054520F /* ShapeByteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF622C5021E50054520F /* ShapeByteUITestsLaunchTests.swift */; };
+		1DF3AF722C5026FA0054520F /* AnimatedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF712C5026FA0054520F /* AnimatedProgressRing.swift */; };
+		1DF3AF732C5026FA0054520F /* AnimatedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF712C5026FA0054520F /* AnimatedProgressRing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,7 @@
 		1DF3AF5C2C5021E50054520F /* ShapeByteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeByteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3AF602C5021E50054520F /* ShapeByteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteUITests.swift; sourceTree = "<group>"; };
 		1DF3AF622C5021E50054520F /* ShapeByteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1DF3AF712C5026FA0054520F /* AnimatedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedProgressRing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,7 @@
 		1DF3AF422C5021E10054520F /* ShapeByte */ = {
 			isa = PBXGroup;
 			children = (
+				1DF3AF6F2C5026BB0054520F /* shared */,
 				1DF3AF432C5021E10054520F /* ShapeByteApp.swift */,
 				1DF3AF452C5021E10054520F /* ContentView.swift */,
 				1DF3AF472C5021E10054520F /* Item.swift */,
@@ -130,6 +134,22 @@
 			path = ShapeByteUITests;
 			sourceTree = "<group>";
 		};
+		1DF3AF6F2C5026BB0054520F /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				1DF3AF702C5026C20054520F /* ui */,
+			);
+			path = shared;
+			sourceTree = "<group>";
+		};
+		1DF3AF702C5026C20054520F /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				1DF3AF712C5026FA0054520F /* AnimatedProgressRing.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,6 +164,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1DCAB3F02C51443F00638DDD /* PBXTargetDependency */,
 			);
 			name = ShapeByte;
 			productName = ShapeByte;
@@ -218,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 1DF3AF372C5021E10054520F;
+			packageReferences = (
+				1DCAB3EE2C51442700638DDD /* XCRemoteSwiftPackageReference "SwiftLint" */,
+			);
 			productRefGroup = 1DF3AF412C5021E10054520F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DF3AF462C5021E10054520F /* ContentView.swift in Sources */,
+				1DF3AF722C5026FA0054520F /* AnimatedProgressRing.swift in Sources */,
 				1DF3AF482C5021E10054520F /* Item.swift in Sources */,
 				1DF3AF442C5021E10054520F /* ShapeByteApp.swift in Sources */,
 			);
@@ -280,12 +305,17 @@
 			files = (
 				1DF3AF632C5021E50054520F /* ShapeByteUITestsLaunchTests.swift in Sources */,
 				1DF3AF612C5021E50054520F /* ShapeByteUITests.swift in Sources */,
+				1DF3AF732C5026FA0054520F /* AnimatedProgressRing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1DCAB3F02C51443F00638DDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 1DCAB3EF2C51443F00638DDD /* SwiftLintBuildToolPlugin */;
+		};
 		1DF3AF542C5021E50054520F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1DF3AF3F2C5021E10054520F /* ShapeByte */;
@@ -592,6 +622,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1DCAB3EE2C51442700638DDD /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1DCAB3EF2C51443F00638DDD /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1DCAB3EE2C51442700638DDD /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1DF3AF382C5021E10054520F /* Project object */;
 }
