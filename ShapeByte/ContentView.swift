@@ -13,18 +13,24 @@ struct ContentView: View {
     @Query private var items: [Item]
 
     @State
-    var progress: CGFloat = 0.0
+    var viewModel: TimedExerciseSetsViewModel = TimedExerciseSetsViewModel(
+        exerciseSets:
+                .init(
+                    sets: [
+                        ExerciseSet.timed(duration: 5),
+                        ExerciseSet.timed(duration: 4),
+                        ExerciseSet.timed(duration: 6),
+                        ExerciseSet.timed(duration: 2)
+                    ]
+                )
+        )
 
     var body: some View {
-
-        VStack {
-
-            AnimatedProgressRing(progress: 0.0)
-            Button("reset", action: {
-                self.progress = 0
-            }
-            )
+        ZStack {
+            Theme.Colors.backgroundColor
+            TimedExerciseSetsView(viewModel: viewModel)
         }
+
     }
 
     private func addItem() {
