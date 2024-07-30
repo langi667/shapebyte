@@ -32,6 +32,13 @@ struct ContentView: View {
         )
 
     var body: some View {
+
+//        ZStack {
+//            Theme.Colors.backgroundColor
+//            RotatingProgressRing(duration: 2, lineWidth: 20)
+//                .padding(35)
+//        }
+
         ZStack {
             Theme.Colors.backgroundColor
             TimedExerciseSetsView(viewModel: viewModel)

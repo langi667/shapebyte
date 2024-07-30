@@ -12,9 +12,8 @@ struct TimedExerciseSetsView: View {
 
     var body: some View {
         ZStack {
-            AnimatedProgressRing(
-                progress: viewModel.currentSetProgress
-            )
+
+            RotatingProgressRing(duration: $viewModel.currentSetDuration)
 
             SegmentedProgressRing(
                 numberOfSegments: $viewModel.numberOfSets,
@@ -23,7 +22,7 @@ struct TimedExerciseSetsView: View {
                 backgroundColor: Theme.Colors.backgroundColor
             )
             .padding(35)
-            Text("\(viewModel.currentSetElapsedTime)")
+            Text("\(Int(viewModel.currentSetElapsedTime))")
                 .h1PrimaryColor()
 
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D360E2E2C59132600EDC052 /* RotatingProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E2D2C59132600EDC052 /* RotatingProgressRing.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedExerciseSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedExerciseSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedExerciseSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedExerciseSetsViewModel.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D360E2D2C59132600EDC052 /* RotatingProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingProgressRing.swift; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedExerciseSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedExerciseSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedExerciseSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedExerciseSetsViewModel.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			children = (
 				1DF3AF712C5026FA0054520F /* AnimatedProgressRing.swift */,
 				1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */,
+				1D360E2D2C59132600EDC052 /* RotatingProgressRing.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				1DD8C0AD2C56524C0023D4EA /* CGFloat+Extensions.swift in Sources */,
 				1DD8C1172C57C4650023D4EA /* LogLevel.swift in Sources */,
 				1DD8C0F32C56F3300023D4EA /* ExerciseSet.swift in Sources */,
+				1D360E2E2C59132600EDC052 /* RotatingProgressRing.swift in Sources */,
 				1DD8C1052C56FA9B0023D4EA /* ExerciseSetsCoordinator.swift in Sources */,
 				1DD8C0C12C56C3990023D4EA /* ExerciseSetCoordinating.swift in Sources */,
 				1DD8C1022C56FA560023D4EA /* ExerciseSetsModule.swift in Sources */,
