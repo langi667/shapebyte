@@ -9,12 +9,17 @@ import Foundation
 import Combine
 
 class ExerciseSetsCoordinator {
+    private let logger: Logging
     fileprivate (set) var statePublisher: CurrentValueSubject<ExerciseSetsState, Never> = CurrentValueSubject<ExerciseSetsState, Never>(.idle)
 
     private var currSetCoordinator: (any ExerciseSetCoordinating)?
     private var sets: [ExerciseSet] = []
     private var statePublisherSink: AnyCancellable?
     private var currSetIndex: Int = -1
+
+    init(logger: Logging) {
+        self.logger = logger
+    }
 
     func start(sets: [ExerciseSet]) {
         if self.statePublisher.value != .idle || self.statePublisher.value == .finished {
@@ -90,7 +95,6 @@ class ExerciseSetsCoordinator {
         let totalProgressRelative = totalProgress / total
 
         let retVal: Progress = Progress(totalProgressRelative)
-        print("set: \(currSetIndex), progress: \(retVal.absoluteValue)")
         return retVal
     }
 

@@ -13,20 +13,49 @@ struct AnimatedProgressRing: View {
     let background: Color
     let primaryColor: Color
     let progress: Progress
+    let roundedEnd: Bool
 
     @State private var rotationDegree: CGFloat
     @State private var opacity: CGFloat
-
     @State private var viewSize: CGSize = .zero
 
     var body: some View {
+        ZStack {
+            progressView(progress: self.progress.value)
+                .sizeReader(size: $viewSize)
+            }
+    }
+
+    init(
+        progress: Progress = Progress(0),
+        lineWidth: CGFloat = 20,
+        primaryColor: Color = Color.red,
+        background: Color = Color.gray.opacity(0.3),
+        roundedEnd: Bool = true
+    ) {
+        self.progress = progress
+        self.startOpacity = 0
+
+        let data = Self.updateVisuals(progress: progress.value)
+
+        self.opacity = data.opacity
+        self.rotationDegree = data.rotationDegree
+
+        self.lineWidth = lineWidth
+        self.primaryColor = primaryColor
+        self.background = background
+        self.roundedEnd = roundedEnd
+    }
+
+    @ViewBuilder
+    func progressView(progress: CGFloat) -> some View {
         ZStack {
             Circle()
                 .stroke(background, lineWidth: self.lineWidth)
 
             // Progress ring
             Circle()
-                .trim(from: 0.0, to: self.progress.value) // Trimmen basierend auf dem Fortschritt
+                .trim(from: 0.0, to: progress) // Trimmen basierend auf dem Fortschritt
                 .stroke(
                     AngularGradient(
                         gradient: Gradient(stops: [
@@ -43,35 +72,17 @@ struct AnimatedProgressRing: View {
             // round end of the progress circle
             // was no direct way to have a circle with a rounded ending, so creating and moving it along
 
-            HalfCircleView(color: primaryColor.opacity(opacity), lineWidth: self.lineWidth)
-                .offset(x: 0, y: viewSize.width / 2)
-                .rotationEffect(.degrees(self.rotationDegree))
+            if roundedEnd {
+                HalfCircleView(color: primaryColor.opacity(opacity), lineWidth: self.lineWidth)
+                    .offset(x: 0, y: viewSize.width / 2)
+                    .rotationEffect(.degrees(self.rotationDegree))
+            }
+
         }.onAppear {
             updateVisuals()
         }.onChange(of: progress, initial: false) { _, _  in
             updateVisuals() // Update visuals every time progress changes
         }
-        .sizeReader(size: $viewSize)
-    }
-
-    init(
-        progress: Progress = Progress(0),
-        size: CGFloat = 200,
-        lineWidth: CGFloat = 20,
-        primaryColor: Color = Color.red,
-        background: Color = Color.gray.opacity(0.3)
-    ) {
-        self.progress = progress
-        self.startOpacity = 0
-
-        let data = Self.updateVisuals(progress: progress.value)
-
-        self.opacity = data.opacity
-        self.rotationDegree = data.rotationDegree
-
-        self.lineWidth = lineWidth
-        self.primaryColor = primaryColor
-        self.background = background
     }
 
     private func updateVisuals() {
@@ -104,7 +115,7 @@ private struct HalfCircleView: View {
 #Preview {
     HStack(alignment: .center) {
         AnimatedProgressRing(
-            progress: Progress(0.3),
+            progress: Progress(1),
             lineWidth: 20
         ).padding(100)
     }

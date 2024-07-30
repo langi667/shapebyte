@@ -13,7 +13,7 @@ struct TimedExerciseSetsView: View {
     var body: some View {
         ZStack {
             AnimatedProgressRing(
-                progress: $viewModel.currentSetProgress.wrappedValue
+                progress: viewModel.currentSetProgress
             )
 
             SegmentedProgressRing(
@@ -23,23 +23,28 @@ struct TimedExerciseSetsView: View {
                 backgroundColor: Theme.Colors.backgroundColor
             )
             .padding(35)
-        }.padding(50)
-            .onAppear {
-                viewModel.startWorkout()
-            }
+            Text("\(viewModel.currentSetElapsedTime)")
+                .h1PrimaryColor()
+
+        }
+        .padding(50)
+        .onAppear {
+            viewModel.startWorkout()
+        }
     }
 }
 
 #Preview {
-    TimedExerciseSetsView(viewModel: TimedExerciseSetsViewModel(
-        exerciseSets:
-                .init(
+    TimedExerciseSetsView(
+        viewModel: ExerciseSetsModule
+            .timedExerciseSetsViewModel(
+                with: ExerciseSets(
                     sets: [
                         ExerciseSet.timed(duration: 5),
                         ExerciseSet.timed(duration: 5),
                         ExerciseSet.timed(duration: 5)
                     ]
                 )
-        )
+            )
     )
 }

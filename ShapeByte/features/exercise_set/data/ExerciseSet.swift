@@ -9,4 +9,11 @@ import Foundation
 
 enum ExerciseSet: Equatable {
     case timed(duration: TimeInterval)
+
+    var duration: TimeInterval {
+        switch self {
+        case .timed(let duration):
+            return duration
+        }
+    }
 }

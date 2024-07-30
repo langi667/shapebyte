@@ -13,33 +13,28 @@ class TimedExerciseSetsViewModel: ObservableObject {
 
     @Published var numberOfSets: Int = 0
     @Published var currentSetProgress: Progress = .zero
-    @Published var workoutElapsedTime: CGFloat = 0
+    @Published var currentSetElapsedTime: Int = 1
     @Published var workoutProgress: Progress = Progress(0)
+    @Published var currentSetIndex: Int = 0
+    @Published var fadeOutOpacity: CGFloat = 0.0
 
     private var workoutTimer: AnyCancellable?
-    private let setsCoordinator: ExerciseSetsCoordinator = ExerciseSetsModule.shared.setsCoordinator
+    private let setsCoordinator: ExerciseSetsCoordinator = ExerciseSetsModule.setsCoordinator
     private var cancelables: Set<AnyCancellable> = Set<AnyCancellable>()
+    private let logger: Logging
 
     init(
-        exerciseSets: ExerciseSets
+        exerciseSets: ExerciseSets,
+        logger: Logging
     ) {
         self.exerciseSets = exerciseSets
         self.numberOfSets = exerciseSets.count
+        self.logger = logger
     }
 
     func startWorkout() {
         setsCoordinator.statePublisher.sink { state in
-            switch state {
-            case .idle:
-                break // TODO: handle
-            case .running(_, _, let currentSetProgress, let totalProgress):
-                self.currentSetProgress = currentSetProgress
-                self.workoutProgress = totalProgress
-            case .paused:
-                break // TODO: handle
-            case .finished:
-                break // TODO: handle
-            }
+            self.handleStateChanged(state)
         }.store(in: &cancelables) // TODO: clear cancelables
 
         self.numberOfSets = exerciseSets.count
@@ -52,5 +47,30 @@ class TimedExerciseSetsViewModel: ObservableObject {
     func stopWorkoutTimer() {
         workoutTimer?.cancel()
         workoutTimer = nil
+    }
+
+    private func handleStateChanged(_ state: ExerciseSetsState) {
+        switch state {
+        case .idle:
+            break
+        case .running(let setIndex, _, let currentSetProgress, let totalProgress):
+            if let setDuration = self.exerciseSets.exerciseSetFor(index: setIndex)?.duration {
+                let elapsed = ((1.0 - currentSetProgress.value) * setDuration)
+                self.currentSetIndex = setIndex
+
+                if elapsed > 0 {
+                    currentSetElapsedTime = Int(elapsed.rounded(.up))
+                }
+            }
+
+            self.currentSetProgress = currentSetProgress
+            self.workoutProgress = totalProgress
+
+        case .paused:
+            break // TODO: handle
+        case .finished:
+           break
+
+        }
     }
 }

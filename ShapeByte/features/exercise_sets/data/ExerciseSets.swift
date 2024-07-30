@@ -14,4 +14,9 @@ struct ExerciseSets: Equatable {
     var count: Int {
         return sets.count
     }
+
+    func exerciseSetFor(index: Int) -> ExerciseSet? {
+        let retVal = sets.getOrNull(index)
+        return retVal
+    }
 }

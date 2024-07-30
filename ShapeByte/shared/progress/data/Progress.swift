@@ -10,6 +10,7 @@ import Foundation
 // TODO: test
 struct Progress: Equatable {
     static let zero = Progress(0)
+    static let complete = Progress(1)
 
     let value: CGFloat // 0..1
 

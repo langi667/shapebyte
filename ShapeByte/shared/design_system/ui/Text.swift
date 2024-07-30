@@ -1,0 +1,32 @@
+//
+//  Label.swift
+//  ShapeByte
+//
+//  Created by Lang, Stefan [RTL Tech] on 29.07.24.
+//
+
+import SwiftUI
+
+extension View {
+    func h1() -> some View {
+        self.font(Theme.Fonts.h1)
+    }
+
+    func h1PrimaryColor() -> some View {
+        self
+            .h1()
+            .foregroundStyle(Theme.Colors.primaryColor)
+    }
+
+    func h2() -> some View {
+        self.font(Theme.Fonts.h2)
+    }
+
+    func h3() -> some View {
+        self.font(Theme.Fonts.h3)
+    }
+
+    func h4() -> some View {
+        self.font(Theme.Fonts.h4)
+    }
+}

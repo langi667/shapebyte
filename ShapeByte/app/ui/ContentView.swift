@@ -13,14 +13,20 @@ struct ContentView: View {
     @Query private var items: [Item]
 
     @State
-    var viewModel: TimedExerciseSetsViewModel = TimedExerciseSetsViewModel(
-        exerciseSets:
-                .init(
+    var viewModel: TimedExerciseSetsViewModel = ExerciseSetsModule
+        .timedExerciseSetsViewModel(
+            with:
+                ExerciseSets(
                     sets: [
                         ExerciseSet.timed(duration: 5),
-                        ExerciseSet.timed(duration: 4),
-                        ExerciseSet.timed(duration: 6),
-                        ExerciseSet.timed(duration: 2)
+                        ExerciseSet.timed(duration: 5),
+                        ExerciseSet.timed(duration: 5),
+                        ExerciseSet.timed(duration: 2),
+                        ExerciseSet.timed(duration: 3),
+                        ExerciseSet.timed(duration: 5),
+                        ExerciseSet.timed(duration: 3),
+                        ExerciseSet.timed(duration: 10),
+                        ExerciseSet.timed(duration: 8)
                     ]
                 )
         )

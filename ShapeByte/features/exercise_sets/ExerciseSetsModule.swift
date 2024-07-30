@@ -7,15 +7,22 @@
 
 import Foundation
 
-class ExerciseSetsModule: BaseModule {
-    static let shared = ExerciseSetsModule()
+class ExerciseSetsModule {
+    static private let module = BaseModule()
 
-    lazy var setsCoordinator: ExerciseSetsCoordinator = instanceTypeOrCreate(
+    static var setsCoordinator: ExerciseSetsCoordinator = module.instanceTypeOrCreate(
         type: ExerciseSetsCoordinator.self,
         create: {
-            ExerciseSetsCoordinator()
+            ExerciseSetsCoordinator(logger: DefaultLogger())
         }
     )
 
-    private override init() {}
+    static func timedExerciseSetsViewModel(with exerciseSets: ExerciseSets) -> TimedExerciseSetsViewModel {
+        TimedExerciseSetsViewModel(
+            exerciseSets: exerciseSets,
+            logger: DefaultLogger()
+        )
+    }
+
+    private init() {}
 }

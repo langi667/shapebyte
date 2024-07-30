@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SizeReader: ViewModifier {
     @Binding var size: CGSize // Binding für die Größe
+    @State var consumed: Bool = false
 
     func body(content: Content) -> some View {
         content // Der eigentliche Inhalt
@@ -17,10 +18,19 @@ struct SizeReader: ViewModifier {
                     Color.clear
                         .onAppear {
                             self.size = geometry.size // Größe setzen
+                            DefaultLogger().logInfo("Size: \(size)")
                         }
                 }
-                    .hidden() // Verstecke den GeometryReader
-            )
+                .hidden() // Verstecke den GeometryReader
+            ).onAppear(perform: {
+                self.consumed = true
+            })
+    }
+}
+
+struct Nothing: ViewModifier {
+    func body(content: Content) -> some View {
+        content
     }
 }
 
