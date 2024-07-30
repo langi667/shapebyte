@@ -34,6 +34,8 @@ class TimedExerciseSetsViewModel: ObservableObject {
     @Published var currentSetIndex: Int = -1
     @Published var fadeOutOpacity: CGFloat = 0.0
 
+    @Published var currentSetElapsedTimeText: String = ""
+
     private var workoutTimer: AnyCancellable?
     private let setsCoordinator: ExerciseSetsCoordinator = ExerciseSetsModule.setsCoordinator
     private var cancelables: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -82,6 +84,7 @@ class TimedExerciseSetsViewModel: ObservableObject {
 
                 if elapsed > 0 {
                     currentSetElapsedTime = Int(elapsed.rounded(.up))
+                    currentSetElapsedTimeText = DurationFormatter.secondsToString(currentSetElapsedTime)
                 }
             }
 

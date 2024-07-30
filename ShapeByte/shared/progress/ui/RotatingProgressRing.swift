@@ -64,8 +64,6 @@ struct RotatingProgressRing: View {
                 )
                 .rotationEffect(Angle(degrees: 270))
 
-            // round end of the progress circle
-            // was no direct way to have a circle with a rounded ending, so creating and moving it along
             HalfCircleView(
                 color: primaryColor.opacity(stateHolder.opacity),
                 lineWidth: self.lineWidth

@@ -10,7 +10,9 @@ import Combine
 
 class ExerciseSetsCoordinator {
     private let logger: Logging
-    fileprivate (set) var statePublisher: CurrentValueSubject<ExerciseSetsState, Never> = CurrentValueSubject<ExerciseSetsState, Never>(.idle)
+
+    fileprivate (set)
+    var statePublisher: CurrentValueSubject<ExerciseSetsState, Never> = CurrentValueSubject<ExerciseSetsState, Never>(.idle)
 
     private var currSetCoordinator: (any ExerciseSetCoordinating)?
     private var sets: [ExerciseSet] = []

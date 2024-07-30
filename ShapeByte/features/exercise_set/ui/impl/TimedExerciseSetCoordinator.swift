@@ -43,6 +43,7 @@ class TimedExerciseSetCoordinator: ExerciseSetCoordinating {
     func finish() {
         self.state = .finished
         self.stopTimer()
+
         resetValues()
         self.statePublisher.send(.finished)
     }

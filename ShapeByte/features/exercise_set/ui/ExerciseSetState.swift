@@ -15,7 +15,7 @@ enum ExerciseSetState: Equatable {
 
     var isRunning: Bool {
         switch self {
-        case .running(let setData):
+        case .running:
             return true
         default:
             return false
@@ -30,7 +30,6 @@ enum ExerciseSetState: Equatable {
             return false
         }
     }
-
 }
 
 enum ExerciseSetStateData: Equatable {
@@ -40,7 +39,7 @@ enum ExerciseSetStateData: Equatable {
         let retVal: Progress
 
         switch self {
-        case .timed(let timePassed, let timeRemaining, let progress):
+        case .timed(_, _, let progress):
             retVal = progress
         }
 

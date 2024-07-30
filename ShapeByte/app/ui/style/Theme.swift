@@ -15,7 +15,9 @@ struct Theme {
     }
 
     struct Fonts {
-        static let h1: Font = .system(size: 48, weight: .black)
+        static let title: Font = .system(size: 64, weight: .black)
+
+        static let h1: Font = .system(size: 28, weight: .black)
         static let h2: Font = .system(size: 24, weight: .bold)
         static let h3: Font = .system(size: 21, weight: .bold)
         static let h4: Font = .system(size: 19, weight: .bold)

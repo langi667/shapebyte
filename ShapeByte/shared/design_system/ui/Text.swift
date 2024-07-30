@@ -8,6 +8,16 @@
 import SwiftUI
 
 extension View {
+    func title() -> some View {
+        self.font(Theme.Fonts.title)
+    }
+
+    func titlePrimaryColor() -> some View {
+        self
+            .title()
+            .foregroundStyle(Theme.Colors.primaryColor)
+    }
+
     func h1() -> some View {
         self.font(Theme.Fonts.h1)
     }

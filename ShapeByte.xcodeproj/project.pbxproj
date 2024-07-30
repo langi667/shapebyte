@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1D360E2E2C59132600EDC052 /* RotatingProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E2D2C59132600EDC052 /* RotatingProgressRing.swift */; };
+		1D360E312C594B7900EDC052 /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E302C594B7900EDC052 /* DurationFormatter.swift */; };
+		1D360E322C594B7900EDC052 /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E302C594B7900EDC052 /* DurationFormatter.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedExerciseSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedExerciseSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedExerciseSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedExerciseSetsViewModel.swift */; };
@@ -63,7 +65,6 @@
 		1DD8C13B2C5820440023D4EA /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C1392C5820440023D4EA /* Array+Extensions.swift */; };
 		1DF3AF442C5021E10054520F /* ShapeByteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF432C5021E10054520F /* ShapeByteApp.swift */; };
 		1DF3AF462C5021E10054520F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF452C5021E10054520F /* ContentView.swift */; };
-		1DF3AF482C5021E10054520F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF472C5021E10054520F /* Item.swift */; };
 		1DF3AF4A2C5021E30054520F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3AF492C5021E30054520F /* Assets.xcassets */; };
 		1DF3AF4D2C5021E30054520F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3AF4C2C5021E30054520F /* Preview Assets.xcassets */; };
 		1DF3AF572C5021E50054520F /* ShapeByteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF562C5021E50054520F /* ShapeByteTests.swift */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		1D360E2D2C59132600EDC052 /* RotatingProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingProgressRing.swift; sourceTree = "<group>"; };
+		1D360E302C594B7900EDC052 /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedExerciseSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedExerciseSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedExerciseSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedExerciseSetsViewModel.swift; sourceTree = "<group>"; };
@@ -118,7 +120,6 @@
 		1DF3AF402C5021E10054520F /* ShapeByte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeByte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3AF432C5021E10054520F /* ShapeByteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteApp.swift; sourceTree = "<group>"; };
 		1DF3AF452C5021E10054520F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1DF3AF472C5021E10054520F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1DF3AF492C5021E30054520F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DF3AF4C2C5021E30054520F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1DF3AF522C5021E50054520F /* ShapeByteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeByteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +145,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D360E2F2C594B5C00EDC052 /* formatting */ = {
+			isa = PBXGroup;
+			children = (
+				1D360E302C594B7900EDC052 /* DurationFormatter.swift */,
+			);
+			path = formatting;
+			sourceTree = "<group>";
+		};
 		1DD8C0952C553A370023D4EA /* workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				1DF3AF452C5021E10054520F /* ContentView.swift */,
-				1DF3AF472C5021E10054520F /* Item.swift */,
 				1DD8C0A12C5573430023D4EA /* style */,
 			);
 			path = ui;
@@ -199,6 +207,7 @@
 		1DD8C0AA2C5652170023D4EA /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				1D360E2F2C594B5C00EDC052 /* formatting */,
 				1DD8C1232C57C4F30023D4EA /* versioning */,
 				1DD8C1122C57C44C0023D4EA /* logging */,
 				1DD8C0D42C56DC6E0023D4EA /* dependency-injection */,
@@ -213,8 +222,8 @@
 				1DD8C12C2C5815480023D4EA /* Result+Extensions.swift */,
 				1DD8C12D2C5815480023D4EA /* String+Extensions.swift */,
 				1DD8C0AC2C56524C0023D4EA /* CGFloat+Extensions.swift */,
-				1DD8C1342C5815580023D4EA /* tests */,
 				1DD8C1392C5820440023D4EA /* Array+Extensions.swift */,
+				1DD8C1342C5815580023D4EA /* tests */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -577,12 +586,12 @@
 				1DD8C1102C57A17F0023D4EA /* ExerciseSets.swift in Sources */,
 				1DD8C10C2C57A0F90023D4EA /* WorkoutSession.swift in Sources */,
 				1DD8C0DD2C56E0030023D4EA /* ExerciseSetModule.swift in Sources */,
+				1D360E312C594B7900EDC052 /* DurationFormatter.swift in Sources */,
 				1DD8C1142C57C45B0023D4EA /* Logging.swift in Sources */,
 				1DF3AF462C5021E10054520F /* ContentView.swift in Sources */,
 				1DD8C1302C5815480023D4EA /* String+Extensions.swift in Sources */,
 				1DD8C13A2C5820440023D4EA /* Array+Extensions.swift in Sources */,
 				1DF3AF722C5026FA0054520F /* AnimatedProgressRing.swift in Sources */,
-				1DF3AF482C5021E10054520F /* Item.swift in Sources */,
 				1DD8C0B12C56783C0023D4EA /* TimedExerciseSetCoordinator.swift in Sources */,
 				1DD8C0982C553AAB0023D4EA /* TimedExerciseSetsView.swift in Sources */,
 				1DD8C0CC2C56DACA0023D4EA /* SizeReader.swift in Sources */,
@@ -612,6 +621,7 @@
 				1DD8C0E62C56EBD10023D4EA /* Progress.swift in Sources */,
 				1DD8C1182C57C4650023D4EA /* LogLevel.swift in Sources */,
 				1DD8C12F2C5815480023D4EA /* Result+Extensions.swift in Sources */,
+				1D360E322C594B7900EDC052 /* DurationFormatter.swift in Sources */,
 				1DD8C1362C5815580023D4EA /* String+ExtensionsTest.swift in Sources */,
 				1DD8C1312C5815480023D4EA /* String+Extensions.swift in Sources */,
 				1DD8C1292C57C51F0023D4EA /* Versioning.swift in Sources */,

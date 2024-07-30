@@ -23,7 +23,7 @@ struct TimedExerciseSetsView: View {
             )
             .padding(35)
             Text("\(Int(viewModel.currentSetElapsedTime))")
-                .h1PrimaryColor()
+                .titlePrimaryColor()
 
         }
         .padding(50)
