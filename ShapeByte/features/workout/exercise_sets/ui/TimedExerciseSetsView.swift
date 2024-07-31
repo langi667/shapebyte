@@ -2,13 +2,15 @@
 //  TimedSetView.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 27.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 27.07.24.
 //
 
 import SwiftUI
 
 struct TimedExerciseSetsView: View {
-    @ObservedObject var viewModel: TimedExerciseSetsViewModel
+    
+    @StateObject
+    var viewModel = ExerciseSetsModule.timedExerciseSetsViewModel()
 
     var body: some View {
         ZStack {
@@ -36,14 +38,6 @@ struct TimedExerciseSetsView: View {
 #Preview {
     TimedExerciseSetsView(
         viewModel: ExerciseSetsModule
-            .timedExerciseSetsViewModel(
-                with: ExerciseSets(
-                    sets: [
-                        ExerciseSet.timed(duration: 5),
-                        ExerciseSet.timed(duration: 5),
-                        ExerciseSet.timed(duration: 5)
-                    ]
-                )
-            )
+            .timedExerciseSetsViewModel()
     )
 }

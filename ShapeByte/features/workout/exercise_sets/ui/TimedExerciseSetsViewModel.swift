@@ -2,25 +2,11 @@
 //  TimedSetViewModel.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 27.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 27.07.24.
 //
 
 import Foundation
 import Combine
-
-class DurationWrapper: Equatable {
-    let value: TimeInterval
-
-    static let invalid = DurationWrapper(-1)
-
-    static func == (lhs: DurationWrapper, rhs: DurationWrapper) -> Bool {
-        return lhs === rhs
-    }
-
-    init(_ value: TimeInterval) {
-        self.value = value
-    }
-}
 
 class TimedExerciseSetsViewModel: ObservableObject {
     fileprivate (set) var exerciseSets: ExerciseSets = .empty
@@ -36,35 +22,41 @@ class TimedExerciseSetsViewModel: ObservableObject {
 
     @Published var currentSetElapsedTimeText: String = ""
 
-    private var workoutTimer: AnyCancellable?
     private let setsCoordinator: ExerciseSetsCoordinator = ExerciseSetsModule.setsCoordinator
     private var cancelables: Set<AnyCancellable> = Set<AnyCancellable>()
     private let logger: Logging
 
     init(
-        exerciseSets: ExerciseSets,
         logger: Logging
     ) {
-        self.exerciseSets = exerciseSets
-        self.numberOfSets = exerciseSets.count
         self.logger = logger
     }
 
-    func startWorkout() {
-        setsCoordinator.statePublisher.sink { state in
-            self.handleStateChanged(state)
-        }.store(in: &cancelables) // TODO: clear cancelables
+    func startWorkouWith(_ sets: ExerciseSets) {
+        stopWorkout()
 
+        self.exerciseSets = sets
         self.numberOfSets = exerciseSets.count
 
+        startWorkout()
+    }
+
+    func startWorkout() {
+        stopWorkout()
+
+        setsCoordinator.statePublisher.sink { state in
+            self.handleStateChanged(state)
+        }.store(in: &cancelables)
+
+        self.numberOfSets = exerciseSets.count
+        
         setsCoordinator.start(
             sets: exerciseSets.sets
         )
     }
 
-    func stopWorkoutTimer() {
-        workoutTimer?.cancel()
-        workoutTimer = nil
+    func stopWorkout() {
+        cancelables.removeAll()
     }
 
     private func handleStateChanged(_ state: ExerciseSetsState) {

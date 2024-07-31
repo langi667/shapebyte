@@ -2,7 +2,7 @@
 //  BaseModuleTest.swift
 //  GraphQLFragmentJoinerTests
 //
-//  Created by Lang, Stefan [RTL Tech] on 04.04.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 04.04.24.
 //
 
 import XCTest

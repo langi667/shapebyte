@@ -2,7 +2,7 @@
 //  SegmentedProgressRing.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 24.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 24.07.24.
 //
 
 import SwiftUI

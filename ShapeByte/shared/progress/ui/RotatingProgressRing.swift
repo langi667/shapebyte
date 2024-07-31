@@ -2,7 +2,7 @@
 //  RotatingProgressRing.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 30.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 30.07.24.
 //
 
 import Foundation
@@ -15,7 +15,7 @@ struct RotatingProgressRing: View {
     let background: Color
     let primaryColor: Color
 
-    @StateObject private var stateHolder = RotatingProgressRingStateHolder()
+    @StateObject private var stateHolder = StateHolder()
     @State private var viewSize: CGSize = .zero
     @Binding var duration: DurationWrapper
 
@@ -72,39 +72,37 @@ struct RotatingProgressRing: View {
             .rotationEffect(Angle(degrees: stateHolder.rotationDegree))
         }
     }
-}
 
-private class RotatingProgressRingStateHolder: ObservableObject {
-    @Published var progress: CGFloat = 0
-    @Published var opacity: CGFloat = 0
-    @Published var rotationDegree: CGFloat = 0
-    @Published var duration: DurationWrapper = DurationWrapper(0)
+    private class StateHolder: ObservableObject {
+        @Published var progress: CGFloat = 0
+        @Published var opacity: CGFloat = 0
+        @Published var rotationDegree: CGFloat = 0
+        @Published var duration: DurationWrapper = DurationWrapper(0)
 
-    private var isAnimating = false
-
-    func reset() {
-        self.progress = 0
-        self.rotationDegree = (progress * 360) - 180.2
-        self.opacity = progress
-    }
-
-    func animate() {
-        withAnimation(.linear(duration: duration.value)) {
-            self.progress = 1.0
-            self.rotationDegree = 179.8
-            self.opacity = 1
-
-        }
-    }
-
-    func resetWith(duration: DurationWrapper) {
-        if self.duration == duration {
-            return
+        func reset() {
+            self.progress = 0
+            self.rotationDegree = (progress * 360) - 180.2
+            self.opacity = progress
         }
 
-        self.duration = duration
-        self.reset()
-        animate()
+        func animate() {
+            withAnimation(.linear(duration: duration.value)) {
+                self.progress = 1.0
+                self.rotationDegree = 179.8
+                self.opacity = 1
+
+            }
+        }
+
+        func resetWith(duration: DurationWrapper) {
+            if self.duration == duration {
+                return
+            }
+
+            self.duration = duration
+            self.reset()
+            animate()
+        }
     }
 }
 

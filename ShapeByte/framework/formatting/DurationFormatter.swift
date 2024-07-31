@@ -2,7 +2,7 @@
 //  DurationFormatter.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 30.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 30.07.24.
 //
 
 import Foundation

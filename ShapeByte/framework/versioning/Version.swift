@@ -2,7 +2,7 @@
 //  Version.swift
 //  GraphQLFragmentJoiner
 //
-//  Created by Lang, Stefan [RTL Tech] on 14.05.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 14.05.24.
 //
 
 import Foundation

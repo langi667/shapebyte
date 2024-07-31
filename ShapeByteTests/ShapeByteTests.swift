@@ -2,7 +2,7 @@
 //  ShapeByteTests.swift
 //  ShapeByteTests
 //
-//  Created by Lang, Stefan [RTL Tech] on 23.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 23.07.24.
 //
 
 import XCTest

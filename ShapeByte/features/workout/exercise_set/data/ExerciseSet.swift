@@ -2,7 +2,7 @@
 //  Set.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 28.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 28.07.24.
 //
 
 import Foundation

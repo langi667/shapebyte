@@ -2,13 +2,12 @@
 //  GraphQLSourceJoiningProvider.swift
 //  GraphQLFragmentJoiner
 //
-//  Created by Lang, Stefan [RTL Tech] on 30.03.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 30.03.24.
 //
 
 import Foundation
 
 open class BaseModule {
-
     private var instances: [String: Any] = [:]
 
     func instanceFor<T>(type: T.Type) -> T? {

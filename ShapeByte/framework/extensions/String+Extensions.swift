@@ -2,7 +2,7 @@
 //  String+Extensions.swift
 //  GraphQLFragmentJoiner
 //
-//  Created by Lang, Stefan [RTL Tech] on 21.03.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 21.03.24.
 //
 
 import Foundation

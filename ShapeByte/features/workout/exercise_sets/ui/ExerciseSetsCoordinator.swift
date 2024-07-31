@@ -2,7 +2,7 @@
 //  ExerciseSetsCoordinator.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 29.07.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 29.07.24.
 //
 
 import Foundation
@@ -24,12 +24,12 @@ class ExerciseSetsCoordinator {
     }
 
     func start(sets: [ExerciseSet]) {
-        if self.statePublisher.value != .idle || self.statePublisher.value == .finished {
+        if self.sets == sets {
             return
-        } // TODO: clear data
+        }
 
         self.sets = sets
-        // TODO: check if empty
+        self.statePublisher.send(.idle)
 
         currSetIndex = -1
         startNextSet()
@@ -109,10 +109,10 @@ class ExerciseSetsCoordinator {
 
         switch exerciseSet {
         case .timed:
-            retVal = ExerciseSetModule.shared.timedSetCoordinator
+            retVal = ExerciseSetModule.timedSetCoordinator
         default:
             // TODO: log fallback
-            retVal = ExerciseSetModule.shared.defaultSetCoordinator
+            retVal = ExerciseSetModule.defaultSetCoordinator
         }
 
         retVal.start(set: exerciseSet)
