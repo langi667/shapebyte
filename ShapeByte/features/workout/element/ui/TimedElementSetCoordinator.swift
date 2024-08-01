@@ -8,20 +8,20 @@
 import Foundation
 import Combine
 
-class TimedExerciseSetCoordinator: ExerciseSetCoordinating {
-    fileprivate(set) var statePublisher: PassthroughSubject<ExerciseSetState, Never>
-    = PassthroughSubject<ExerciseSetState, Never>()
+class TimedElementSetCoordinator: ElementSetCoordinating {
+    fileprivate(set) var statePublisher: PassthroughSubject<ElementSet.State, Never>
+    = PassthroughSubject<ElementSet.State, Never>()
 
-    fileprivate(set) var set: ExerciseSet?
+    fileprivate(set) var set: ElementSet?
 
-    private var duration: TimeInterval = 5
+    private var duration: TimeInterval = 0
     private var timer: AnyCancellable?
     private var elapsedTime: TimeInterval = 0
     private var progress: Progress = .zero
 
-    private var state: ExerciseSetState = .idle
+    private var state: ElementSet.State = .idle
 
-    func start(set: ExerciseSet) {
+    func start(set: ElementSet) {
         if !state.isStopped {
             return
         }
@@ -31,9 +31,10 @@ class TimedExerciseSetCoordinator: ExerciseSetCoordinating {
 
             stopTimer()
             resetValues()
-            self.duration = duration
 
+            self.duration = duration
             self.state = .running(setData: currentStateData())
+
             startTimer()
         } else {
             // TODO: log invalid type
@@ -90,8 +91,8 @@ class TimedExerciseSetCoordinator: ExerciseSetCoordinating {
         }
     }
 
-    private func currentStateData() -> ExerciseSetStateData {
-        ExerciseSetStateData.timed(
+    private func currentStateData() -> ElementSet.Data {
+        ElementSet.Data.timed(
             timePassed: self.elapsedTime,
             timeRemaining: self.duration - self.elapsedTime,
             progress: self.progress

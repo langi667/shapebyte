@@ -12,7 +12,7 @@ extension View {
         self.font(Theme.Fonts.title)
     }
 
-    func titlePrimaryColor() -> some View {
+    public func titlePrimaryColor() -> some View {
         self
             .title()
             .foregroundStyle(Theme.Colors.primaryColor)

@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-protocol ExerciseSetCoordinating {
-    var statePublisher: PassthroughSubject<ExerciseSetState, Never> { get }
+protocol ElementSetCoordinating {
+    var statePublisher: PassthroughSubject<ElementSet.State, Never> { get }
 
-    func start(set: ExerciseSet)
+    func start(set: ElementSet)
 }

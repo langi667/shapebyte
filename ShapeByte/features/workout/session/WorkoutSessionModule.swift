@@ -8,20 +8,20 @@
 import Foundation
 
 class WorkoutSessionModule {
-    static let module = BaseModule()
+    private static let diModule = DIModule()
 
-    static func workoutSessionCoordinator() -> WorkoutSessionCoordinator { module.instanceTypeOrCreate(
+    static func workoutSessionCoordinator() -> WorkoutSessionCoordinator { diModule.instanceTypeOrCreate(
         type: WorkoutSessionCoordinator.self,
         create: {
             WorkoutSessionCoordinator(
                 workoutSessionUseCase: Self.currentWorkoutSessionUseCase(),
-                timedExerciseSetsViewModel: ExerciseSetsModule.timedExerciseSetsViewModel()
+                logger: DefaultLogger()
             )
         }
     )}
 
     static func currentWorkoutSessionUseCase() -> CurrentWorkoutSessionUseCase {
-        return module.instanceTypeOrCreate(
+        return diModule.instanceTypeOrCreate(
             type: CurrentWorkoutSessionUseCase.self,
             create: {
                 CurrentWorkoutSessionUseCase(repository: Self.workoutSessionRepository())
@@ -30,7 +30,7 @@ class WorkoutSessionModule {
     }
 
     private static func workoutSessionRepository() -> WorkoutSessionRepository {
-        return module.instanceTypeOrCreate(
+        return diModule.instanceTypeOrCreate(
             type: WorkoutSessionRepository.self,
             create: {
                 WorkoutSessionRepository(datasource: Self.workoutDatasource())
@@ -39,7 +39,7 @@ class WorkoutSessionModule {
     }
 
     private static func workoutDatasource() -> any WorkoutSessionDatasource {
-        return  module.instanceTypeOrCreate(
+        return  diModule.instanceTypeOrCreate(
             type: WorkoutSessionDatasource.self,
             create: {
                 WorkoutSessionDatasourceMock()

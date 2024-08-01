@@ -1,5 +1,5 @@
 //
-//  ExerciseSetsCoordinator.swift
+//  ElementSetsCoordinator.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 29.07.24.
@@ -8,29 +8,35 @@
 import Foundation
 import Combine
 
-class ExerciseSetsCoordinator {
+class ElementSetsCoordinator: ObservableObject {
+    @Published var state: ElementSetsUIState = .idle
+
     private let logger: Logging
-
-    fileprivate (set)
-    var statePublisher: CurrentValueSubject<ExerciseSetsState, Never> = CurrentValueSubject<ExerciseSetsState, Never>(.idle)
-
-    private var currSetCoordinator: (any ExerciseSetCoordinating)?
-    private var sets: [ExerciseSet] = []
+    private var currSetCoordinator: (any ElementSetCoordinating)?
+    private var sets: [ElementSet] = []
     private var statePublisherSink: AnyCancellable?
     private var currSetIndex: Int = -1
 
-    init(logger: Logging) {
+    private let timedSetCoordinator: ElementSetCoordinating
+    private let defaultSetCoordinator: ElementSetCoordinating
+
+    init(logger: Logging,
+         timedSetCoordinator: ElementSetCoordinating,
+         defaultSetCoordinator: ElementSetCoordinating
+    ) {
         self.logger = logger
+        self.timedSetCoordinator = timedSetCoordinator
+        self.defaultSetCoordinator = defaultSetCoordinator
     }
 
-    func start(sets: [ExerciseSet]) {
+    func start(sets: [ElementSet]) {
         if self.sets == sets {
             return
         }
 
-        self.sets = sets
-        self.statePublisher.send(.idle)
+        self.state = .idle
 
+        self.sets = sets
         currSetIndex = -1
         startNextSet()
     }
@@ -51,31 +57,33 @@ class ExerciseSetsCoordinator {
         self.currSetCoordinator = startCoordinationFor(nextSet)
         currSetIndex = nextSetIndex
 
-        self.statePublisherSink = currSetCoordinator!.statePublisher.sink { state in
-            self.handleSetStateReceived(state)
+        self.statePublisherSink = currSetCoordinator?.statePublisher
+            .sink { state in
+                self.handleSetStateReceived(state)
         }
     }
 
-    private func handleSetStateReceived(_ state: ExerciseSetState) {
+    private func handleSetStateReceived(_ state: ElementSet.State) {
         let nextSetIndex = currSetIndex + 1
 
         switch state {
         case .idle:
             break // TODO: handle
         case .running(let setData):
-            self.statePublisher.value = ExerciseSetsState.running(
+            self.state = ElementSetsUIState.running(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: setData.progress,
                 totalProgress: totalProgress(currentSetProgress: setData.progress)
             )
         case .paused(let setData):
-            self.statePublisher.value = ExerciseSetsState.paused(
+            self.state = ElementSetsUIState.paused(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: setData.progress,
                 totalProgress: totalProgress(currentSetProgress: setData.progress)
             )
+
         case .finished:
             if nextSetIndex >= sets.count {
                 finish()
@@ -101,21 +109,21 @@ class ExerciseSetsCoordinator {
     }
 
     private func finish() {
-        statePublisher.value = .finished
+        state = .finished
     }
 
-    private func startCoordinationFor(_ exerciseSet: ExerciseSet) -> any ExerciseSetCoordinating {
-        let retVal: any ExerciseSetCoordinating
+    private func startCoordinationFor(_ elementSet: ElementSet) -> any ElementSetCoordinating {
+        let retVal: any ElementSetCoordinating
 
-        switch exerciseSet {
+        switch elementSet {
         case .timed:
-            retVal = ExerciseSetModule.timedSetCoordinator
+            retVal = timedSetCoordinator
         default:
             // TODO: log fallback
-            retVal = ExerciseSetModule.defaultSetCoordinator
+            retVal = defaultSetCoordinator
         }
 
-        retVal.start(set: exerciseSet)
+        retVal.start(set: elementSet)
         return retVal
 
     }

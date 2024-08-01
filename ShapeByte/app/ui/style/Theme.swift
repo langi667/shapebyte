@@ -8,6 +8,18 @@
 import SwiftUI
 
 struct Theme {
+    // TODO: should be device screen size specific
+
+    struct Dimenstions {
+        static let XXS = CGFloat(4)
+        static let XS = CGFloat(8)
+        static let S = CGFloat(16)
+        static let M = CGFloat(32)
+        static let L = CGFloat(48)
+        static let XL = CGFloat(64)
+        static let XXL = CGFloat(128)
+    }
+
     struct Colors {
         static let backgroundColor: Color = Color("BackgroundColor")
         static let primaryColor: Color = Color("PrimaryColor")

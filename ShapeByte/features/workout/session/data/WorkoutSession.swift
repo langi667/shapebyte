@@ -7,8 +7,26 @@
 
 import Foundation
 
-struct WorkoutSession {
-    static let empty = WorkoutSession(exercises: .empty)
+class WorkoutSession {
+    static let empty = WorkoutSession(elements: .init())
 
-    let exercises: ExerciseSets
+    var isFinished: Bool {
+        return currElementIndex >= self.elements.count
+    }
+
+    private var currElementIndex = -1
+    private let elements: [ElementGroup]
+
+    init(elements: [ElementGroup]) {
+        self.elements = elements
+    }
+
+    func nextElementGroup() -> ElementGroup? {
+        if isFinished {
+            return nil
+        }
+
+        currElementIndex += 1
+        return elements.getOrNull(currElementIndex)
+    }
 }

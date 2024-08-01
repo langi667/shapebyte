@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class BaseModule {
+open class DIModule {
     private var instances: [String: Any] = [:]
 
     func instanceFor<T>(type: T.Type) -> T? {

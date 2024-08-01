@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct SegmentedProgressRing: View {
+    @Binding var numberOfSegments: Int
+    @Binding var progress: Progress
+
     let fillColor: Color
     let backgroundColor: Color
-
-    @Binding
-    var numberOfSegments: Int
-
-    @Binding
-    var progress: Progress
 
     var gapPercentage: Double {
         if numberOfSegments <= 1 {
@@ -26,7 +23,6 @@ struct SegmentedProgressRing: View {
             return 0.01
         }
 
-        // Berechnet den Prozentsatz der Lücke.
         return 0.1 / Double(numberOfSegments)
     }
 
