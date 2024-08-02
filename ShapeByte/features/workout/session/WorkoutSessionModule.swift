@@ -15,7 +15,7 @@ class WorkoutSessionModule {
         create: {
             WorkoutSessionCoordinator(
                 workoutSessionUseCase: Self.currentWorkoutSessionUseCase(),
-                logger: DefaultLogger()
+                logger: SharedModule.logger
             )
         }
     )}

@@ -19,11 +19,11 @@ struct WorkoutSessionCoordinatorView: View {
             case .idle:
                 EmptyView() // TODO: show maybe loading or info view
 
-            case .finished:
-                EmptyView() // TODO: show finished view
-
             case .running(let group):
                 handleStateRunning(group: group)
+
+            case .finished:
+                WorkoutSessionFinishedScreen()
             }
 
         }.onAppear {
@@ -50,7 +50,7 @@ struct WorkoutSessionCoordinatorView: View {
         }
         .onReceive(coordinator.$state.filter { $0.isRunning }) { state in
             if case let .running(group) = state {
-                timedElementSetsViewModel.startWith(group.sets)
+                timedElementSetsViewModel.startWith(group)
             }
         }
     }
@@ -65,7 +65,7 @@ struct WorkoutSessionCoordinatorView: View {
          }
          .onReceive(coordinator.$state.filter { $0.isRunning }) { state in
              if case let .running(group) = state {
-                 countdownElementSetsViewModel.startWith(group.sets)
+                 countdownElementSetsViewModel.startWith(group)
              }
          }
     }

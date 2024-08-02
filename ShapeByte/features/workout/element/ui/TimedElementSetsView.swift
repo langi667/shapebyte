@@ -15,21 +15,38 @@ struct TimedElementSetsView: View {
     private let padding = Theme.Dimenstions.M
 
     var body: some View {
-        ZStack {
-            RotatingProgressRing(
-                progress: $viewModel.ringProgress,
-                background: Color.gray.opacity(0.3)
-            )
+        VStack(alignment: .center ) {
 
-            SegmentedProgressRing(
-                numberOfSegments: $viewModel.numberOfSets,
-                progress: $viewModel.setsProgress,
-                fillColor: Theme.Colors.accentColor,
-                backgroundColor: Theme.Colors.backgroundColor
-            )
-            .padding(padding + Theme.Dimenstions.XXS)
-            Text(viewModel.currentSetElapsedTimeText)
-                .titlePrimaryColor()
+            HStack {
+                Spacer()
+                Text(viewModel.setCountProgress)
+                    .h1().foregroundStyle(Color.gray.opacity(0.7))
+            }.frame(minHeight: Theme.Dimenstions.L)
+
+            Spacer()
+            ZStack {
+                RotatingProgressRing(
+                    progress: $viewModel.ringProgress,
+                    background: Color.gray.opacity(0.3)
+                )
+
+                if viewModel.numberOfSets > 1 {
+                    SegmentedProgressRing(
+                        numberOfSegments: $viewModel.numberOfSets,
+                        progress: $viewModel.setsProgress,
+                        fillColor: Theme.Colors.accentColor,
+                        backgroundColor: Theme.Colors.backgroundColor
+                    )
+                    .padding(padding + Theme.Dimenstions.XXS)
+                }
+
+                Text(viewModel.currentSetElapsedTimeText)
+                    .titlePrimaryColor()
+            }
+
+            Spacer().frame(height: Theme.Dimenstions.M)
+            Text(viewModel.currentElement.name).h1PrimaryColor()
+            Spacer()
         }
         .padding( padding )
     }
@@ -39,9 +56,26 @@ struct TimedElementSetsView: View {
     }
 }
 
-#Preview {
-    TimedElementSetsView(
-        viewModel: ElementModule
-            .timedElementSetsViewModel()
-    )
+struct TimedElementSetsView_Previews: PreviewProvider {
+    static let viewModel = ElementModule.timedElementSetsViewModel()
+
+    static var previews: some View {
+        TimedElementSetsView(
+            viewModel: viewModel
+        ).onAppear {
+            viewModel.startWith(
+                ElementGroup(
+                    element: Exercise(name: "Push Up"),
+                    elementSets: ElementSets(
+                        sets: [
+                            ElementSet.timed(duration: 8),
+                            ElementSet.timed(duration: 5),
+                            ElementSet.timed(duration: 6)
+
+                        ]
+                    )
+                )
+            )
+        }
+    }
 }

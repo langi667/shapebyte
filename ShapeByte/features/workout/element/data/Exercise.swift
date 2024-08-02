@@ -11,6 +11,9 @@ import Foundation
  Represents an exercise such as Push Up, Pull Up ...
  */
 struct Exercise: Element, Equatable {
+
+    static let none = Exercise(name: "")
+
     fileprivate (set) var name: String
 
     func isEqualTo(_ other: Any) -> Bool {

@@ -19,35 +19,33 @@ struct RotatingProgressRing: View {
 
     var body: some View {
         ZStack {
-            ZStack {
-                Circle()
-                    .stroke(background, lineWidth: self.lineWidth)
+            Circle()
+                .stroke(background, lineWidth: self.lineWidth)
 
-                // Progress ring
-                Circle()
-                    .trim(from: 0.0, to: self.progress)
-                    .stroke(
-                        AngularGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: primaryColor.opacity(0), location: 0),
-                                .init(color: primaryColor.opacity(0.5), location: 0.5),
-                                .init(color: primaryColor.opacity(1.0), location: 1)
-                            ]),
-                            center: .center
-                        ),
-                        style: StrokeStyle(lineWidth: self.lineWidth, lineCap: .butt)
-                    )
-                    .rotationEffect(Angle(degrees: 270))
-
-                HalfCircleView(
-                    color: primaryColor.opacity(progress),
-                    lineWidth: self.lineWidth
+            // Progress ring
+            Circle()
+                .trim(from: 0.0, to: self.progress)
+                .stroke(
+                    AngularGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: primaryColor.opacity(0), location: 0),
+                            .init(color: primaryColor.opacity(0.5), location: 0.5),
+                            .init(color: primaryColor.opacity(1.0), location: 1)
+                        ]),
+                        center: .center
+                    ),
+                    style: StrokeStyle(lineWidth: self.lineWidth, lineCap: .butt)
                 )
+                .rotationEffect(Angle(degrees: 270))
 
-                .offset(x: 0, y: viewSize.width / 2)
-                .rotationEffect(Angle(degrees: (progress * 360) - 180.2))
-            }.sizeReader(size: $viewSize)
-        }
+            HalfCircleView(
+                color: primaryColor.opacity(progress),
+                lineWidth: self.lineWidth
+            )
+
+            .offset(x: 0, y: viewSize.width / 2)
+            .rotationEffect(Angle(degrees: (progress * 360) - 180.2))
+        }.sizeReader(size: $viewSize)
     }
 }
 

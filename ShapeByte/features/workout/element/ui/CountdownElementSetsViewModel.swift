@@ -32,21 +32,23 @@ class CountdownElementSetsViewModel: ElementSetsViewModel {
     }
 
     private func handleStateRunning(currentSet: Int) {
-        if currentSet != self.currentSet {
-            DefaultLogger().logDebug("\(currentSet)")
+        if currentSet == self.currentSet {
+            return
+        }
 
-            self.currentSet = currentSet
-            self.currentSetElapsedTimeText = "\(currentSet +  1)"
+        logger.logDebug("\(currentSet)")
 
-            let duration = sets.elementSetFor(index: currentSet)?.duration ?? 0
+        self.currentSet = currentSet
+        self.currentSetElapsedTimeText = "\(currentSet +  1)"
 
-            self.alpha = 1
-            self.scale = 1
+        let duration = group.elementSetFor(index: currentSet)?.duration ?? 0
 
-            withAnimation(.easeInOut(duration: duration)) {
-                self.alpha = 0
-                self.scale = 3 + CGFloat(currentSet)
-            }
+        self.alpha = 1
+        self.scale = 1
+
+        withAnimation(.easeInOut(duration: duration)) {
+            self.alpha = 0
+            self.scale = 3 + CGFloat(currentSet)
         }
     }
 }

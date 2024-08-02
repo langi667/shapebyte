@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ShapeByteApp: App {
+
     var body: some Scene {
         WindowGroup {
-            MainView()
+            AppView()
         }
     }
 }

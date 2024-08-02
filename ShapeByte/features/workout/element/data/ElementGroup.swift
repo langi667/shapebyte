@@ -10,15 +10,33 @@ import Foundation
 /**
  Assignment of an Element like a push up or break or countdown elements  to amount of sets
  */
-struct ElementGroup {
+struct ElementGroup: Equatable {
+
+    static let empty = ElementGroup(
+        element: Exercise.none,
+        elementSets: .empty
+    )
+
     let element: any Element
-    let sets: ElementSets
+    let elementSets: ElementSets
 
     var isTimedExercise: Bool {
-        return sets.isTimed && element is Exercise
+        return elementSets.isTimed && element is Exercise
     }
 
     var isCountdown: Bool {
-        return sets.isTimed && (element as? Countdown) != nil
+        return elementSets.isTimed && (element as? Countdown) != nil
+    }
+
+    var count: Int {
+        return elementSets.count
+    }
+
+    static func == (lhs: ElementGroup, rhs: ElementGroup) -> Bool {
+        return lhs.element.isEqualTo(rhs.element) && lhs.elementSets == rhs.elementSets
+    }
+
+    func elementSetFor(index: Int) -> ElementSet? {
+        return elementSets.elementSetFor(index: index)
     }
 }

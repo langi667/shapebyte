@@ -10,8 +10,9 @@ import SwiftUI
 
 open class ElementSetsViewModel: ViewModel, ObservableObject {
     @Published var state: ElementSetsUIState = .idle
-    @Published var sets: ElementSets = .empty
+    @Published var group: ElementGroup = .empty
     @Published var numberOfSets: Int = 0
+    @Published var currentElement: any Element = Exercise.none
 
     let setsCoordinator: ElementSetsCoordinator
     let logger: Logging
@@ -33,27 +34,28 @@ open class ElementSetsViewModel: ViewModel, ObservableObject {
         /* Override to perform specific actions for new UI state */
     }
 
-    func startWith(_ sets: ElementSets) {
+    func startWith(_ group: ElementGroup) {
         stop()
 
-        self.sets = sets
-        self.numberOfSets = sets.count
+        self.group = group
+        self.currentElement = group.element
+
+        self.numberOfSets = group.count
 
         start()
     }
 
     func start() {
         stop()
-        self.numberOfSets = sets.count
+        self.numberOfSets = group.count
 
         setsCoordinator.start(
-            sets: sets.sets
+            sets: group.elementSets.sets
         )
 
         setsCoordinator.$state.sink { state in
             self.handleCoordinatorStateChanged(state)
         }.store(in: &cancelables)
-
     }
 
     func stop() {
@@ -74,6 +76,7 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
     @Published var currentSetIndex: Int = -1
     @Published var currentSetElapsedTimeText: String = ""
     @Published var ringProgress: CGFloat = 0
+    @Published var setCountProgress: String = ""
 
     override func handleUIStateReceived(_ state: ElementSetsUIState) {
 
@@ -83,7 +86,7 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
 
         case .running(let setIndex, _, let currentSetProgress, let totalProgress):
             guard let setDuration = self
-                .sets
+                .group
                 .elementSetFor(index: setIndex)?.duration else {
                 return
             }
@@ -91,6 +94,7 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
             let lastSetIndex = currentSetIndex
             if lastSetIndex != setIndex {
                 self.currentSetIndex = setIndex
+                self.setCountProgress = "\(setIndex + 1)/\(group.count)"
 
                 ringProgress = 0
                 withAnimation( .linear(duration: setDuration) ) {
@@ -99,20 +103,19 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
             }
 
             let elapsed = ((1.0 - currentSetProgress.value) * setDuration)
-
             if elapsed > 0 {
                 currentSetElapsedTime = Int(elapsed.rounded(.up))
                 self.currentSetElapsedTimeText = DurationFormatter.secondsToString(currentSetElapsedTime)
             }
 
-        self.currentSetProgress = currentSetProgress
-        self.setsProgress = totalProgress
+            self.currentSetProgress = currentSetProgress
+            self.setsProgress = totalProgress
 
-    case .paused:
-        break // TODO: handle
-    case .finished:
-        break
+        case .paused:
+            break // TODO: handle
+        case .finished:
+            break
 
+        }
     }
-}
 }

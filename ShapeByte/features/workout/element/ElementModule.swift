@@ -12,21 +12,21 @@ class ElementModule {
 
     static func timedElementSetsViewModel() -> TimedElementSetsViewModel {
         return TimedElementSetsViewModel(
-            logger: DefaultLogger(),
+            logger: SharedModule.logger,
             setsCoordinator: self.setsCoordinator()
         )
     }
 
     static func countdownElementSetsViewModel() -> CountdownElementSetsViewModel {
         return CountdownElementSetsViewModel(
-            logger: DefaultLogger(),
+            logger: SharedModule.logger,
             setsCoordinator: self.setsCoordinator()
         )
     }
 
     static func setsCoordinator() -> ElementSetsCoordinator {
         return ElementSetsCoordinator(
-            logger: DefaultLogger(),
+            logger: SharedModule.logger,
             timedSetCoordinator: self.timedSetCoordinator,
             defaultSetCoordinator: self.defaultSetCoordinator
         )
@@ -45,4 +45,6 @@ class ElementModule {
             DefaultElementSetCoordinator()
         }
     )
+
+    private init() {}
 }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Countdown: Element {
     private (set) var name: String = "Countdown"
+
     let ticks: ElementSets
 
     init(seconds: UInt) {
@@ -16,7 +17,11 @@ struct Countdown: Element {
     }
 
     func toGroup() -> ElementGroup {
-        return ElementGroup(element: self, sets: ticks)
+        return ElementGroup(element: self, elementSets: ticks)
+    }
+
+    func isEqualTo(_ other: Any) -> Bool {
+        return (other as? Countdown) != nil
     }
 
     private static func createElements(seconds: UInt) -> [ElementSet] {
@@ -35,7 +40,4 @@ struct Countdown: Element {
          return ElementSets(sets: elements)
     }
 
-    func isEqualTo(_ other: Any) -> Bool {
-        return (other as? Countdown) != nil
-    }
 }

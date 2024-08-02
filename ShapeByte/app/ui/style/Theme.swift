@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct Theme {
+public struct Theme {
     // TODO: should be device screen size specific
 
-    struct Dimenstions {
+    public struct Dimenstions {
         static let XXS = CGFloat(4)
         static let XS = CGFloat(8)
         static let S = CGFloat(16)
@@ -20,13 +20,13 @@ struct Theme {
         static let XXL = CGFloat(128)
     }
 
-    struct Colors {
+    public struct Colors {
         static let backgroundColor: Color = Color("BackgroundColor")
         static let primaryColor: Color = Color("PrimaryColor")
         static let accentColor: Color = Color("AccentColor")
     }
 
-    struct Fonts {
+    public struct Fonts {
         static let title: Font = .system(size: 64, weight: .black)
         static let h1: Font = .system(size: 28, weight: .black)
         static let h2: Font = .system(size: 24, weight: .bold)

@@ -31,7 +31,7 @@ struct CountdownElementSetsView_Previews: PreviewProvider {
         CountdownElementSetsView(
             viewModel: viewModel
         ).onAppear {
-            viewModel.startWith(Countdown(seconds: 3).ticks)
+            viewModel.startWith(Countdown(seconds: 3).toGroup())
         }
     }
 }

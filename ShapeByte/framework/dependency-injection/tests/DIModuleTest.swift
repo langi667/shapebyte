@@ -7,13 +7,13 @@
 
 import XCTest
 
-final class DIServiceTest: XCTestCase {
+final class DIModuleTest: XCTestCase {
 
     class TestClass: Equatable {
         let value: Int
         let name: String
 
-        static func == (lhs: DIServiceTest.TestClass, rhs: DIServiceTest.TestClass) -> Bool {
+        static func == (lhs: DIModuleTest.TestClass, rhs: DIModuleTest.TestClass) -> Bool {
             let retVal = lhs.name == rhs.name && lhs.value == rhs.value
             return retVal
         }
@@ -33,7 +33,7 @@ final class DIServiceTest: XCTestCase {
     }
 
     func testInstanceForTypeOrCreate() throws {
-        let sut = DIService()
+        let sut = DIModule()
         let value = 42
         let name = "Test"
 
@@ -59,7 +59,7 @@ final class DIServiceTest: XCTestCase {
     }
 
     func testInstanceForType() throws {
-        let sut = DIService()
+        let sut = DIModule()
         var result = sut.instanceFor(type: TestClass.self)
         XCTAssertNil(result)
 
@@ -74,7 +74,7 @@ final class DIServiceTest: XCTestCase {
     }
 
     func testRegister() throws {
-        let sut = DIService()
+        let sut = DIModule()
 
         var result = sut.instanceFor(type: TestClass.self)
         XCTAssertNil(result)

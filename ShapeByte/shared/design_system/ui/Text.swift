@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func title() -> some View {
+    public func title() -> some View {
         self.font(Theme.Fonts.title)
     }
 
