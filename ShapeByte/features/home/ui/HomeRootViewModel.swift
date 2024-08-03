@@ -15,7 +15,7 @@ class HomeRootViewModel: ViewModel, ObservableObject {
     }
 
     @Published var currWorkoutScheduleEntry: WorkoutScheduleEntry?
-    @Published var currWorkoutScheduleEntryProgress: CGFloat = 0
+    @Published var currWorkoutScheduleEntryProgress: CGFloat = 0.7
 
     var eventPublisher: PassthroughSubject<Event, Never> = PassthroughSubject<Event, Never>()
 

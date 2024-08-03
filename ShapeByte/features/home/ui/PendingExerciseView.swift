@@ -11,7 +11,6 @@ struct PendingExerciseView: View {
     @Binding var progress: CGFloat
 
     let exerciseImageName: String = "Sprints"
-
     @State private var size: CGSize = .zero
 
     private let sizeFactor: CGFloat = 0.65
