@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension CGFloat {
+public extension CGFloat {
     var integerPart: Int {
         let retVal = floor(self) // Ganzzahlteil
         return Int(retVal)

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SizeReader: ViewModifier {
     @Binding var size: CGSize
-    @State var consumed: Bool = false
 
     func body(content: Content) -> some View {
         content
@@ -21,15 +20,36 @@ struct SizeReader: ViewModifier {
                         }
                 }
                 .hidden()
-            ).onAppear(perform: {
-                self.consumed = true
-            }
-        )
+            )
     }
 }
 
 extension View {
     func sizeReader(size: Binding<CGSize>) -> some View {
         self.modifier(SizeReader(size: size))
+    }
+}
+
+struct PositionReader: ViewModifier {
+    @Binding var yPos: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .background(
+                GeometryReader { geometry in
+                    Color.clear
+                        .onAppear {
+                            self.yPos = geometry.frame(in: .global).minY
+                        }
+                }
+                .hidden()
+            )
+
+    }
+}
+
+extension View {
+    func positionReader(yPos: Binding<CGFloat>) -> some View {
+        self.modifier(PositionReader(yPos: yPos))
     }
 }

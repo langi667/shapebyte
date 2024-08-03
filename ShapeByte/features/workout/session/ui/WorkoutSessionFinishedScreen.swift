@@ -16,9 +16,8 @@ struct WorkoutSessionFinishedScreen: View {
             Text("Workout Finished\nGreat Job!")
                 .h1PrimaryColor()
                 .multilineTextAlignment(.center)
-
         }
-        .padding(Theme.Dimenstions.M)
+        .padding(Theme.Spacing.M)
     }
 }
 

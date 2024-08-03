@@ -12,44 +12,47 @@ struct TimedElementSetsView: View {
     @ObservedObject
     var viewModel: TimedElementSetsViewModel
 
-    private let padding = Theme.Dimenstions.M
+    private let padding = Theme.Spacing.M
 
     var body: some View {
-        VStack(alignment: .center ) {
+        ZStack {
+            BackgroundView()
 
-            HStack {
+            VStack(alignment: .center ) {
+
+                HStack {
+                    Spacer()
+                    Text(viewModel.setCountProgress)
+                        .h1().foregroundStyle(Color.gray.opacity(0.7))
+                }.frame(minHeight: Theme.Spacing.L)
+
                 Spacer()
-                Text(viewModel.setCountProgress)
-                    .h1().foregroundStyle(Color.gray.opacity(0.7))
-            }.frame(minHeight: Theme.Dimenstions.L)
-
-            Spacer()
-            ZStack {
-                RotatingProgressRing(
-                    progress: $viewModel.ringProgress,
-                    background: Color.gray.opacity(0.3)
-                )
-
-                if viewModel.numberOfSets > 1 {
-                    SegmentedProgressRing(
-                        numberOfSegments: $viewModel.numberOfSets,
-                        progress: $viewModel.setsProgress,
-                        fillColor: Theme.Colors.accentColor,
-                        backgroundColor: Theme.Colors.backgroundColor
+                ZStack {
+                    RotatingProgressRing(
+                        progress: $viewModel.ringProgress,
+                        background: Color.gray.opacity(0.3)
                     )
-                    .padding(padding + Theme.Dimenstions.XXS)
+
+                    if viewModel.numberOfSets > 1 {
+                        SegmentedProgressRing(
+                            numberOfSegments: $viewModel.numberOfSets,
+                            progress: $viewModel.setsProgress,
+                            fillColor: Theme.Colors.accentColor,
+                            backgroundColor: Theme.Colors.backgroundColor
+                        )
+                        .padding(padding + Theme.Spacing.XXS)
+                    }
+
+                    Text(viewModel.currentSetElapsedTimeText)
+                        .titlePrimaryColor()
                 }
 
-                Text(viewModel.currentSetElapsedTimeText)
-                    .titlePrimaryColor()
+                Spacer().frame(height: Theme.Spacing.M)
+                Text(viewModel.currentElement.name).h1PrimaryColor()
+                Spacer()
             }
-
-            Spacer().frame(height: Theme.Dimenstions.M)
-            Text(viewModel.currentElement.name).h1PrimaryColor()
-            Spacer()
-        }
-        .padding( padding )
-    }
+            .padding( padding )
+        }}
 
     init(viewModel: TimedElementSetsViewModel) {
         self.viewModel = viewModel

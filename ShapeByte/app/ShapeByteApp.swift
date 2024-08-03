@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct ShapeByteApp: App {
+    @StateObject var coordinator = AppCoordinator()
 
     var body: some Scene {
         WindowGroup {
-            AppView()
+            // StickyScrollview()
+            AppCoordinatorView()
         }
     }
 }

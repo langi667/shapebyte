@@ -12,14 +12,16 @@ struct CountdownElementSetsView: View {
     @ObservedObject var viewModel: CountdownElementSetsViewModel
 
     var body: some View {
-        VStack {
-
-            Text(viewModel.currentSetElapsedTimeText)
-                .titlePrimaryColor()
-                .opacity(viewModel.alpha)
-                .scaleEffect(viewModel.scale)
-        }.onAppear {
-            viewModel.start()
+        ZStack {
+            BackgroundView()
+            VStack {
+                Text(viewModel.currentSetElapsedTimeText)
+                    .titlePrimaryColor()
+                    .opacity(viewModel.alpha)
+                    .scaleEffect(viewModel.scale)
+            }.onAppear {
+                viewModel.start()
+            }
         }
     }
 }
