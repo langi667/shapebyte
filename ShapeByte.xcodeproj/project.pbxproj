@@ -416,14 +416,6 @@
 			path = domain;
 			sourceTree = "<group>";
 		};
-		1DA2335F2C5D8FA9003AC8E2 /* extensions */ = {
-			isa = PBXGroup;
-			children = (
-				1DFBA7CD2C5C16BD00F9BC78 /* Equals.swift */,
-			);
-			path = extensions;
-			sourceTree = "<group>";
-		};
 		1DA233602C5D8FC2003AC8E2 /* modal_view */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,14 +430,6 @@
 				1DA233622C5D8FED003AC8E2 /* ModalViewWrapper.swift */,
 			);
 			path = ui;
-			sourceTree = "<group>";
-		};
-		1DA2336F2C5F6605003AC8E2 /* environment */ = {
-			isa = PBXGroup;
-			children = (
-				1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */,
-			);
-			path = environment;
 			sourceTree = "<group>";
 		};
 		1DA233732C5F9446003AC8E2 /* background */ = {
@@ -487,6 +471,36 @@
 				1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */,
 			);
 			path = formatter;
+			sourceTree = "<group>";
+		};
+		1DA233932C600400003AC8E2 /* view_model */ = {
+			isa = PBXGroup;
+			children = (
+				1D360E8D2C5A7C0D00EDC052 /* ViewModel.swift */,
+			);
+			path = view_model;
+			sourceTree = "<group>";
+		};
+		1DA233942C60057B003AC8E2 /* comparing_data */ = {
+			isa = PBXGroup;
+			children = (
+				1DFBA7CD2C5C16BD00F9BC78 /* Equals.swift */,
+			);
+			path = comparing_data;
+			sourceTree = "<group>";
+		};
+		1DA233952C60060C003AC8E2 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */,
+				1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */,
+				1DA233932C600400003AC8E2 /* view_model */,
+				1DA233732C5F9446003AC8E2 /* background */,
+				1DA233602C5D8FC2003AC8E2 /* modal_view */,
+				1DD8C12A2C57C55C0023D4EA /* design_system */,
+				1DA233312C5D2CE2003AC8E2 /* shapes */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 		1DD8C0952C553A370023D4EA /* workout */ = {
@@ -757,16 +771,10 @@
 			isa = PBXGroup;
 			children = (
 				1DE5F8082C5CB63000BDB7A3 /* SharedModule.swift */,
-				1D360E8D2C5A7C0D00EDC052 /* ViewModel.swift */,
-				1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */,
+				1DA233942C60057B003AC8E2 /* comparing_data */,
 				1DA2338C2C5FCCB5003AC8E2 /* formatter */,
-				1DA233732C5F9446003AC8E2 /* background */,
-				1DA2336F2C5F6605003AC8E2 /* environment */,
-				1DA233602C5D8FC2003AC8E2 /* modal_view */,
-				1DA2335F2C5D8FA9003AC8E2 /* extensions */,
-				1DA233312C5D2CE2003AC8E2 /* shapes */,
-				1DD8C12A2C57C55C0023D4EA /* design_system */,
 				1DD8C0A92C562E550023D4EA /* progress */,
+				1DA233952C60060C003AC8E2 /* ui */,
 			);
 			path = shared;
 			sourceTree = "<group>";
