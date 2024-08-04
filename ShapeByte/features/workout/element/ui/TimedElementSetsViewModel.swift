@@ -69,14 +69,16 @@ open class ElementSetsViewModel: ViewModel, ObservableObject {
 }
 
 class TimedElementSetsViewModel: ElementSetsViewModel {
+    @Published var setsProgress: Progress = Progress(0)
+    @Published var setCountProgress: String = ""
+
     @Published var currentSetProgress: Progress = .zero
     @Published var currentSetElapsedTime: Int = 1
-
-    @Published var setsProgress: Progress = Progress(0)
     @Published var currentSetIndex: Int = -1
     @Published var currentSetElapsedTimeText: String = ""
+
     @Published var ringProgress: CGFloat = 0
-    @Published var setCountProgress: String = ""
+    @Published var descriptionText: String = ""
 
     override func handleUIStateReceived(_ state: ElementSetsUIState) {
 
@@ -97,6 +99,8 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
                 self.setCountProgress = "\(setIndex + 1)/\(group.count)"
 
                 ringProgress = 0
+                descriptionText = "Perform as much \(group.element.name)s as possible in \(setDuration) seconds"
+
                 withAnimation( .linear(duration: setDuration) ) {
                     ringProgress = 1
                 }

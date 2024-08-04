@@ -2,13 +2,13 @@
 //  WorkoutHistoryRepository.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 04.08.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 04.08.24.
 //
 
 import Foundation
 import Combine
 
-class WorkoutHistoryRepository: ObservableObject  {
+class WorkoutHistoryRepository: ObservableObject {
     let dataSource: WorkoutHistoryDataSource
 
     @Published private(set) var recentHistory: [WorkoutScheduleEntry] = []
@@ -37,4 +37,3 @@ class WorkoutHistoryRepository: ObservableObject  {
         return dataSource.historyFor(date: date, untilPastDate: pastDate)
     }
 }
-

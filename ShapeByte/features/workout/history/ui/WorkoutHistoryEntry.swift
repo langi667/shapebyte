@@ -2,12 +2,12 @@
 //  WorkoutHistoryEntry.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 04.08.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 04.08.24.
 //
 
 import Foundation
 
-struct WorkoutHistoryEntry : Equatable, Identifiable {
+struct WorkoutHistoryEntry: Equatable, Identifiable {
     var id: String {
         return entry.id
     }

@@ -18,12 +18,11 @@ struct TimedElementSetsView: View {
         ZStack {
             BackgroundView()
 
-            VStack(alignment: .center ) {
-                Spacer()
+            VStack(alignment: .center, spacing: padding) {
                 ZStack {
                     RotatingProgressRing(
                         progress: $viewModel.ringProgress,
-                        background: Color.gray.opacity(0.3)
+                        background: Color.gray.opacity(0.6)
                     )
 
                     if viewModel.numberOfSets > 1 {
@@ -38,13 +37,16 @@ struct TimedElementSetsView: View {
 
                     Text(viewModel.currentSetElapsedTimeText)
                         .title()
-                }
+                }.padding(.top, padding * 2)
 
-                Spacer().frame(height: Theme.Spacing.M)
                 Text(viewModel.currentElement.name).h1()
-                Spacer()
+                Text(viewModel.descriptionText)
+                    .body()
+                    .multilineTextAlignment(.center)
+                    .frame(minHeight: Theme.Spacing.XL)
+                // TODO: should be dimension
             }
-            .padding( padding )
+            .padding(padding)
         }
     }
 
@@ -68,7 +70,6 @@ struct TimedElementSetsView_Previews: PreviewProvider {
                             ElementSet.timed(duration: 8),
                             ElementSet.timed(duration: 5),
                             ElementSet.timed(duration: 6)
-
                         ]
                     )
                 )

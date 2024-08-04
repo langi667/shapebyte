@@ -18,7 +18,6 @@ struct ShapeByteApp: App {
                     AppCoordinatorView()
                         .environment(\.safeAreaInsets, geometry.safeAreaInsets)
                 }
-
             }
         }
     }

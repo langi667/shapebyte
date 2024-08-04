@@ -2,7 +2,7 @@
 //  CountdownElementSetsView.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 01.08.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 01.08.24.
 //
 
 import SwiftUI

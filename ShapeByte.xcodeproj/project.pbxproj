@@ -585,6 +585,7 @@
 				1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */,
 				1DFBA7C32C5BBE8400F9BC78 /* CountdownElementSetsView.swift */,
 				1DFBA7CA2C5BDFA600F9BC78 /* CountdownElementSetsViewModel.swift */,
+				1DA233352C5D388A003AC8E2 /* PendingExerciseView.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -697,7 +698,6 @@
 				1DA233562C5D79F3003AC8E2 /* HomeCoordinatorView.swift */,
 				1DEC1C6E2C5CF0920055AA26 /* HomeRootView.swift */,
 				1DA2335C2C5D7D98003AC8E2 /* HomeRootViewModel.swift */,
-				1DA233352C5D388A003AC8E2 /* PendingExerciseView.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";

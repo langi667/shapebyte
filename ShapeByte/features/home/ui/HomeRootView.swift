@@ -2,7 +2,7 @@
 //  OverviewView.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [RTL Tech] on 02.08.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
 //
 
 import SwiftUI
@@ -77,7 +77,7 @@ struct HomeRootView: View {
                 self.offsetY = value
                 self.radialOffset = max(0, Self.defaultRadialOffset + offsetY)
                 self.headerProgress = (-offsetY + viewTopOffset) / (headerHeight - minimumHeaderHeight - viewTopOffset)
-                
+
                 self.headerOverlayOpacity = min(max(headerProgress, 0), 1)
                 self.headerScale = min(max(1 - (headerProgress * 0.5), 0), 1.2)
                 self.headerImageScale = min(max(1 - (headerProgress * 0.5), 0.5), 1.2)
