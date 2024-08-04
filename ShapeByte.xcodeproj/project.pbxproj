@@ -93,6 +93,10 @@
 		1DA2338F2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */; };
 		1DA233912C5FEE76003AC8E2 /* ElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233902C5FEE76003AC8E2 /* ElementSetsViewModel.swift */; };
 		1DA233922C5FEE76003AC8E2 /* ElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233902C5FEE76003AC8E2 /* ElementSetsViewModel.swift */; };
+		1DA233992C60096F003AC8E2 /* CurrentStreakUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233982C60096F003AC8E2 /* CurrentStreakUseCase.swift */; };
+		1DA2339A2C60096F003AC8E2 /* CurrentStreakUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233982C60096F003AC8E2 /* CurrentStreakUseCase.swift */; };
+		1DA2339D2C600984003AC8E2 /* Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2339C2C600984003AC8E2 /* Streak.swift */; };
+		1DA2339E2C600984003AC8E2 /* Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2339C2C600984003AC8E2 /* Streak.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedElementSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */; };
@@ -215,6 +219,8 @@
 		1DA233892C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryEntry.swift; sourceTree = "<group>"; };
 		1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		1DA233902C5FEE76003AC8E2 /* ElementSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementSetsViewModel.swift; sourceTree = "<group>"; };
+		1DA233982C60096F003AC8E2 /* CurrentStreakUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStreakUseCase.swift; sourceTree = "<group>"; };
+		1DA2339C2C600984003AC8E2 /* Streak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streak.swift; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsViewModel.swift; sourceTree = "<group>"; };
@@ -496,6 +502,31 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
+		1DA233962C600949003AC8E2 /* streak */ = {
+			isa = PBXGroup;
+			children = (
+				1DA2339B2C600973003AC8E2 /* data */,
+				1DA233972C600951003AC8E2 /* domain */,
+			);
+			path = streak;
+			sourceTree = "<group>";
+		};
+		1DA233972C600951003AC8E2 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				1DA233982C60096F003AC8E2 /* CurrentStreakUseCase.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		1DA2339B2C600973003AC8E2 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				1DA2339C2C600984003AC8E2 /* Streak.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		1DD8C0952C553A370023D4EA /* workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +591,7 @@
 		1DD8C0AF2C565AFD0023D4EA /* features */ = {
 			isa = PBXGroup;
 			children = (
+				1DA233962C600949003AC8E2 /* streak */,
 				1DEC1C642C5CEC580055AA26 /* home */,
 				1DD8C0952C553A370023D4EA /* workout */,
 			);
@@ -899,7 +931,9 @@
 				1DD8C1102C57A17F0023D4EA /* ElementSets.swift in Sources */,
 				1DD8C10C2C57A0F90023D4EA /* WorkoutSession.swift in Sources */,
 				1DD8C0DD2C56E0030023D4EA /* ElementModule.swift in Sources */,
+				1DA233992C60096F003AC8E2 /* CurrentStreakUseCase.swift in Sources */,
 				1D360E7C2C5A6A3500EDC052 /* WorkoutSessionModule.swift in Sources */,
+				1DA2339D2C600984003AC8E2 /* Streak.swift in Sources */,
 				1DA2338A2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */,
 				1DA233432C5D7714003AC8E2 /* WorkoutScheduleRepository.swift in Sources */,
 				1DE5F8092C5CB63000BDB7A3 /* SharedModule.swift in Sources */,
@@ -1008,6 +1042,8 @@
 				1DD8C0F42C56F3300023D4EA /* ElementSet.swift in Sources */,
 				1DA2338F2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */,
 				1DA2334E2C5D7838003AC8E2 /* WorkoutScheduleModule.swift in Sources */,
+				1DA2339A2C60096F003AC8E2 /* CurrentStreakUseCase.swift in Sources */,
+				1DA2339E2C600984003AC8E2 /* Streak.swift in Sources */,
 				1DA233342C5D2FEA003AC8E2 /* Arc.swift in Sources */,
 				1DA233412C5D7676003AC8E2 /* WorkoutScheduleEntry.swift in Sources */,
 				1DA233852C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */,
