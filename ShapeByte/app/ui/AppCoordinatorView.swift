@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AppCoordinatorView: View {
+
     @StateObject
     private var coordinator = AppCoordinator()
 
@@ -19,12 +20,6 @@ struct AppCoordinatorView: View {
             }
         }
     }
-
-    @ViewBuilder
-    private func mainScreen() -> some View {
-        WorkoutSessionCoordinatorView()
-    }
-
 }
 
 #Preview {

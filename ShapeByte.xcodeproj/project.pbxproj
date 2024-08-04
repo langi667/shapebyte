@@ -75,6 +75,8 @@
 		1DA233682C5D93AD003AC8E2 /* CountdownElementSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBA7C32C5BBE8400F9BC78 /* CountdownElementSetsView.swift */; };
 		1DA233692C5D93BD003AC8E2 /* RotatingProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E2D2C59132600EDC052 /* RotatingProgressRing.swift */; };
 		1DA2336A2C5D93C2003AC8E2 /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
+		1DA233712C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */; };
+		1DA233722C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedElementSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */; };
@@ -188,6 +190,7 @@
 		1DA233592C5D7A19003AC8E2 /* HomeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModule.swift; sourceTree = "<group>"; };
 		1DA2335C2C5D7D98003AC8E2 /* HomeRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootViewModel.swift; sourceTree = "<group>"; };
 		1DA233622C5D8FED003AC8E2 /* ModalViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewWrapper.swift; sourceTree = "<group>"; };
+		1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInsets.swift; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsViewModel.swift; sourceTree = "<group>"; };
@@ -408,6 +411,22 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
+		1DA2336F2C5F6605003AC8E2 /* environment */ = {
+			isa = PBXGroup;
+			children = (
+				1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */,
+			);
+			path = environment;
+			sourceTree = "<group>";
+		};
+		1DA233732C5F9446003AC8E2 /* background */ = {
+			isa = PBXGroup;
+			children = (
+				1DEC1C762C5D0BDC0055AA26 /* BackgroundView.swift */,
+			);
+			path = background;
+			sourceTree = "<group>";
+		};
 		1DD8C0952C553A370023D4EA /* workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,7 +607,6 @@
 			isa = PBXGroup;
 			children = (
 				1DEC1C602C5CE1590055AA26 /* Theme.swift */,
-				1DEC1C762C5D0BDC0055AA26 /* BackgroundView.swift */,
 			);
 			path = style;
 			sourceTree = "<group>";
@@ -675,10 +693,12 @@
 		1DF3AF6F2C5026BB0054520F /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				1DA233602C5D8FC2003AC8E2 /* modal_view */,
+				1DA233732C5F9446003AC8E2 /* background */,
+				1DA2336F2C5F6605003AC8E2 /* environment */,
 				1DE5F8082C5CB63000BDB7A3 /* SharedModule.swift */,
 				1D360E8D2C5A7C0D00EDC052 /* ViewModel.swift */,
 				1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */,
+				1DA233602C5D8FC2003AC8E2 /* modal_view */,
 				1DA2335F2C5D8FA9003AC8E2 /* extensions */,
 				1DA233312C5D2CE2003AC8E2 /* shapes */,
 				1DD8C12A2C57C55C0023D4EA /* design_system */,
@@ -828,6 +848,7 @@
 				1DA2334D2C5D7838003AC8E2 /* WorkoutScheduleModule.swift in Sources */,
 				1DA233632C5D8FED003AC8E2 /* ModalViewWrapper.swift in Sources */,
 				1DA2335A2C5D7A19003AC8E2 /* HomeModule.swift in Sources */,
+				1DA233712C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */,
 				1DD8C13A2C5820440023D4EA /* Array+Extensions.swift in Sources */,
 				1D360E982C5ABE3C00EDC052 /* Element.swift in Sources */,
 				1DA233542C5D79C7003AC8E2 /* HomeCoordinator.swift in Sources */,
@@ -934,6 +955,7 @@
 				1DFBA7CC2C5BDFA600F9BC78 /* CountdownElementSetsViewModel.swift in Sources */,
 				1DA2334B2C5D77C5003AC8E2 /* WorkoutScheduleDatasourceMock.swift in Sources */,
 				1DA233372C5D3CBA003AC8E2 /* PendingExerciseView.swift in Sources */,
+				1DA233722C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */,
 				1D360EAA2C5AF9C000EDC052 /* ElementGroup.swift in Sources */,
 				1D360E812C5A6AEC00EDC052 /* WorkoutSessionDatasourceMock.swift in Sources */,
 				1DD8C0DF2C56EB510023D4EA /* ElementModule.swift in Sources */,

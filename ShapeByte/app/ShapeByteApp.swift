@@ -13,8 +13,14 @@ struct ShapeByteApp: App {
 
     var body: some Scene {
         WindowGroup {
-            // StickyScrollview()
-            AppCoordinatorView()
+            ZStack {
+                GeometryReader { geometry in
+
+                    AppCoordinatorView()
+                        .environment(\.safeAreaInsets, geometry.safeAreaInsets)
+                }
+
+            }
         }
     }
 }

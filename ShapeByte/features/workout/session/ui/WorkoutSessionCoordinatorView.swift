@@ -20,7 +20,7 @@ struct WorkoutSessionCoordinatorView: View {
                 EmptyView() // TODO: show maybe loading or info view
 
             case .running(let group):
-                handleStateRunning(group: group)
+                RunningStateView(group: group)
 
             case .finished:
                 WorkoutSessionFinishedScreen()
@@ -32,16 +32,16 @@ struct WorkoutSessionCoordinatorView: View {
     }
 
     @ViewBuilder
-    private func handleStateRunning(group: ElementGroup) -> some View {
+    private func RunningStateView(group: ElementGroup) -> some View {
         if group.isTimedExercise {
-            timedElementSetsView(group: group)
+            TimedView(group: group)
         } else if group.isCountdown {
-            countdownView(group: group)
+            CountdownView(group: group)
         }
     }
 
     @ViewBuilder
-    private func timedElementSetsView(group: ElementGroup) -> some View {
+    private func TimedView(group: ElementGroup) -> some View {
         TimedElementSetsView(
             viewModel: timedElementSetsViewModel
         )
@@ -56,7 +56,7 @@ struct WorkoutSessionCoordinatorView: View {
     }
 
     @ViewBuilder
-    private func countdownView(group: ElementGroup) -> some View {
+    private func CountdownView(group: ElementGroup) -> some View {
          CountdownElementSetsView(
             viewModel: countdownElementSetsViewModel
         )

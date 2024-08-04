@@ -11,11 +11,11 @@ struct PendingExerciseView: View {
     @Binding var progress: CGFloat
 
     let exerciseImageName: String = "Sprints"
+
     @State private var size: CGSize = .zero
 
     private let sizeFactor: CGFloat = 0.65
     private let imageSize: CGFloat = 220
-
     private let progressColor: Color = Color(
         red: 104 / 255,
         green: 187 / 255,
@@ -31,14 +31,8 @@ struct PendingExerciseView: View {
                     blue: 193 / 255)
                 )
 
-           VStack(spacing: 0) {
-                Spacer().frame(height: Theme.Spacing.S )
-
-                Text("In Progress")
-                    .body()
-                    .foregroundStyle(Color.white)
-
-               Spacer().frame(height: Theme.Spacing.S )
+            VStack(spacing: 0) {
+                Spacer().frame(height: Theme.Spacing.M )
 
                 ZStack {
                     Image(exerciseImageName)
@@ -67,7 +61,7 @@ struct PendingExerciseView: View {
                 Text("\(Int(progress * 100)) %")
                     .body()
                     .foregroundStyle(Color.white)
-           }.frame(width: imageSize * 1.5, height: imageSize * 1.5)
+            }.frame(width: imageSize * 1.5, height: imageSize * 1.5)
 
         }.fixedSize()
     }
