@@ -1,5 +1,5 @@
 //
-//  TimedSetCoordinator.swift
+//  TimedElementSetHandler.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 28.07.24.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class TimedElementSetCoordinator: ElementSetCoordinating {
+class TimedElementSetHandler: ElementSetHandling {
     fileprivate(set) var statePublisher: PassthroughSubject<ElementSet.State, Never>
     = PassthroughSubject<ElementSet.State, Never>()
 

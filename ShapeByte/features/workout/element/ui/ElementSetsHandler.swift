@@ -1,5 +1,5 @@
 //
-//  ElementSetsCoordinator.swift
+//  ElementSetsHandler.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 29.07.24.
@@ -8,25 +8,25 @@
 import Foundation
 import Combine
 
-class ElementSetsCoordinator: ObservableObject {
+class ElementSetsHandler: ObservableObject {
     @Published var state: ElementSetsUIState = .idle
 
     private let logger: Logging
-    private var currSetCoordinator: (any ElementSetCoordinating)?
+    private var currSetHandler: (any ElementSetHandling)?
     private var sets: [ElementSet] = []
     private var statePublisherSink: AnyCancellable?
     private var currSetIndex: Int = -1
 
-    private let timedSetCoordinator: ElementSetCoordinating
-    private let defaultSetCoordinator: ElementSetCoordinating
+    private let timedSetHandler: ElementSetHandling
+    private let defaultSetHandler: ElementSetHandling
 
     init(logger: Logging,
-         timedSetCoordinator: ElementSetCoordinating,
-         defaultSetCoordinator: ElementSetCoordinating
+         timedSetHandler: ElementSetHandling,
+         defaultSetHandler: ElementSetHandling
     ) {
         self.logger = logger
-        self.timedSetCoordinator = timedSetCoordinator
-        self.defaultSetCoordinator = defaultSetCoordinator
+        self.timedSetHandler = timedSetHandler
+        self.defaultSetHandler = defaultSetHandler
     }
 
     func start(sets: [ElementSet]) {
@@ -54,10 +54,10 @@ class ElementSetsCoordinator: ObservableObject {
         statePublisherSink?.cancel()
         statePublisherSink = nil
 
-        self.currSetCoordinator = startCoordinationFor(nextSet)
+        self.currSetHandler = startCoordinationFor(nextSet)
         currSetIndex = nextSetIndex
 
-        self.statePublisherSink = currSetCoordinator?.statePublisher
+        self.statePublisherSink = currSetHandler?.statePublisher
             .sink { state in
                 self.handleSetStateReceived(state)
         }
@@ -112,15 +112,15 @@ class ElementSetsCoordinator: ObservableObject {
         state = .finished
     }
 
-    private func startCoordinationFor(_ elementSet: ElementSet) -> any ElementSetCoordinating {
-        let retVal: any ElementSetCoordinating
+    private func startCoordinationFor(_ elementSet: ElementSet) -> any ElementSetHandling {
+        let retVal: any ElementSetHandling
 
         switch elementSet {
         case .timed:
-            retVal = timedSetCoordinator
+            retVal = timedSetHandler
         default:
             // TODO: log fallback
-            retVal = defaultSetCoordinator
+            retVal = defaultSetHandler
         }
 
         retVal.start(set: elementSet)

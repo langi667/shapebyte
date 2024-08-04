@@ -13,36 +13,36 @@ class ElementModule {
     static func timedElementSetsViewModel() -> TimedElementSetsViewModel {
         return TimedElementSetsViewModel(
             logger: SharedModule.logger,
-            setsCoordinator: self.setsCoordinator()
+            setsHandler: self.setsHandler()
         )
     }
 
     static func countdownElementSetsViewModel() -> CountdownElementSetsViewModel {
         return CountdownElementSetsViewModel(
             logger: SharedModule.logger,
-            setsCoordinator: self.setsCoordinator()
+            setsHandler: self.setsHandler()
         )
     }
 
-    static func setsCoordinator() -> ElementSetsCoordinator {
-        return ElementSetsCoordinator(
+    static func setsHandler() -> ElementSetsHandler {
+        return ElementSetsHandler(
             logger: SharedModule.logger,
-            timedSetCoordinator: self.timedSetCoordinator,
-            defaultSetCoordinator: self.defaultSetCoordinator
+            timedSetHandler: self.timedSetHandler,
+            defaultSetHandler: self.defaultSetHandler
         )
     }
 
-    private static let timedSetCoordinator: some ElementSetCoordinating = diModule.instanceTypeOrCreate(
-        type: TimedElementSetCoordinator.self,
+    private static let timedSetHandler: some ElementSetHandling = diModule.instanceTypeOrCreate(
+        type: TimedElementSetHandler.self,
         create: {
-            TimedElementSetCoordinator()
+            TimedElementSetHandler()
         }
     )
 
-    private static let defaultSetCoordinator: some ElementSetCoordinating = diModule.instanceTypeOrCreate(
-        type: DefaultElementSetCoordinator.self,
+    private static let defaultSetHandler: some ElementSetHandling = diModule.instanceTypeOrCreate(
+        type: DefaultElementSetHandler.self,
         create: {
-            DefaultElementSetCoordinator()
+            DefaultElementSetHandler()
         }
     )
 

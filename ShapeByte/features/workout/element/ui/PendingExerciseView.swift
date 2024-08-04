@@ -45,7 +45,6 @@ struct PendingExerciseView: View {
                 }
 
                 Spacer().frame(height: Theme.Spacing.XXS )
-
                 Text("Legs and Core")
                     .h4()
                     .foregroundStyle(Color.white)

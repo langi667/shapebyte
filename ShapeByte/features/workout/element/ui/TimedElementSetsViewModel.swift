@@ -8,66 +8,6 @@
 import Combine
 import SwiftUI
 
-open class ElementSetsViewModel: ViewModel, ObservableObject {
-    @Published var state: ElementSetsUIState = .idle
-    @Published var group: ElementGroup = .empty
-    @Published var numberOfSets: Int = 0
-    @Published var currentElement: any Element = Exercise.none
-
-    let setsCoordinator: ElementSetsCoordinator
-    let logger: Logging
-    var cancelables: Set<AnyCancellable> = Set<AnyCancellable>()
-
-    init(
-        logger: Logging,
-        setsCoordinator: ElementSetsCoordinator
-    ) {
-        self.logger = logger
-        self.setsCoordinator = setsCoordinator
-    }
-
-    func onViewAppeared() {
-        /* Override for specific handling of the UI */
-    }
-
-    func handleUIStateReceived( _ state: ElementSetsUIState ) {
-        /* Override to perform specific actions for new UI state */
-    }
-
-    func startWith(_ group: ElementGroup) {
-        stop()
-
-        self.group = group
-        self.currentElement = group.element
-
-        self.numberOfSets = group.count
-
-        start()
-    }
-
-    func start() {
-        stop()
-        self.numberOfSets = group.count
-
-        setsCoordinator.start(
-            sets: group.elementSets.sets
-        )
-
-        setsCoordinator.$state.sink { state in
-            self.handleCoordinatorStateChanged(state)
-        }.store(in: &cancelables)
-    }
-
-    func stop() {
-        cancelables.removeAll()
-    }
-
-    private func handleCoordinatorStateChanged(_ state: ElementSetsUIState) {
-        handleUIStateReceived(state)
-        self.state = state
-    }
-}
-
 class TimedElementSetsViewModel: ElementSetsViewModel {
     @Published var setsProgress: Progress = Progress(0)
     @Published var setCountProgress: String = ""

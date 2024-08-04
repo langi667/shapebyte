@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol ElementSetCoordinating {
+protocol ElementSetHandling {
     var statePublisher: PassthroughSubject<ElementSet.State, Never> { get }
 
     func start(set: ElementSet)
