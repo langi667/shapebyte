@@ -39,7 +39,8 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
                 self.setCountProgress = "\(setIndex + 1)/\(group.count)"
 
                 ringProgress = 0
-                descriptionText = "Perform as much \(group.element.name)s as possible in \(setDuration) seconds"
+                let setDurationString = DurationFormatter.secondsToString(setDuration)
+                descriptionText = "Perform as much \(group.element.name)s as possible in \(setDurationString) seconds"
 
                 withAnimation( .linear(duration: setDuration) ) {
                     ringProgress = 1

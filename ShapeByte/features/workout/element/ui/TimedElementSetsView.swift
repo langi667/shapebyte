@@ -22,7 +22,7 @@ struct TimedElementSetsView: View {
                 ZStack {
                     RotatingProgressRing(
                         progress: $viewModel.ringProgress,
-                        background: Color.gray.opacity(0.6)
+                        background: Theme.Colors.secondaryColor
                     )
 
                     if viewModel.numberOfSets > 1 {

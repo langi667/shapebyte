@@ -283,6 +283,7 @@
 		1D360E2F2C594B5C00EDC052 /* formatting */ = {
 			isa = PBXGroup;
 			children = (
+				1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */,
 				1D360E302C594B7900EDC052 /* DurationFormatter.swift */,
 			);
 			path = formatting;
@@ -463,14 +464,6 @@
 				1DA233832C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift */,
 			);
 			path = domain;
-			sourceTree = "<group>";
-		};
-		1DA2338C2C5FCCB5003AC8E2 /* formatter */ = {
-			isa = PBXGroup;
-			children = (
-				1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */,
-			);
-			path = formatter;
 			sourceTree = "<group>";
 		};
 		1DA233932C600400003AC8E2 /* view_model */ = {
@@ -772,7 +765,6 @@
 			children = (
 				1DE5F8082C5CB63000BDB7A3 /* SharedModule.swift */,
 				1DA233942C60057B003AC8E2 /* comparing_data */,
-				1DA2338C2C5FCCB5003AC8E2 /* formatter */,
 				1DD8C0A92C562E550023D4EA /* progress */,
 				1DA233952C60060C003AC8E2 /* ui */,
 			);
