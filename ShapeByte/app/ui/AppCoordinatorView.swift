@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppCoordinatorView: View {
-
+    
     @StateObject
     private var coordinator = AppCoordinator()
 
@@ -18,7 +18,19 @@ struct AppCoordinatorView: View {
             case .home:
                 HomeCoordinatorView()
             }
+        }.onAppear {
+            setupNavigationBar()
         }
+    }
+
+    private func setupNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.textLight] // Setze die gewünschte Farbe
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.textLight] // Setze die gewünschte Farbe
+
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
 }
 

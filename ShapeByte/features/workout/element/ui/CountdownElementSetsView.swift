@@ -16,7 +16,7 @@ struct CountdownElementSetsView: View {
             BackgroundView()
             VStack {
                 Text(viewModel.currentSetElapsedTimeText)
-                    .titlePrimaryColor()
+                    .title()
                     .opacity(viewModel.alpha)
                     .scaleEffect(viewModel.scale)
             }.onAppear {

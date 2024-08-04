@@ -16,21 +16,13 @@ struct PendingExerciseView: View {
 
     private let sizeFactor: CGFloat = 0.65
     private let imageSize: CGFloat = 220
-    private let progressColor: Color = Color(
-        red: 104 / 255,
-        green: 187 / 255,
-        blue: 193 / 255
-    ).opacity(0.4)
+    private let progressColor: Color = Theme.Colors.secondaryColor.opacity(0.4)
 
     var body: some View {
         ZStack {
             Circle()
-                .strokeBorder(Color(
-                    red: 104 / 255,
-                    green: 187 / 255,
-                    blue: 193 / 255)
-                )
-
+                .strokeBorder(progressColor)
+            
             VStack(spacing: 0) {
                 Spacer().frame(height: Theme.Spacing.M )
 
@@ -54,7 +46,7 @@ struct PendingExerciseView: View {
 
                 Spacer().frame(height: Theme.Spacing.XXS )
 
-                Text("Leg Day")
+                Text("Legs and Core")
                     .h4()
                     .foregroundStyle(Color.white)
 
@@ -76,5 +68,4 @@ struct PendingExerciseView: View {
         BackgroundView()
         PendingExerciseView(progress: .constant(1))
     }
-
 }

@@ -15,7 +15,6 @@ struct ShapeByteApp: App {
         WindowGroup {
             ZStack {
                 GeometryReader { geometry in
-
                     AppCoordinatorView()
                         .environment(\.safeAreaInsets, geometry.safeAreaInsets)
                 }

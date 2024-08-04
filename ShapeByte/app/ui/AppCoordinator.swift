@@ -14,7 +14,5 @@ class AppCoordinator: ViewModel, ObservableObject {
 
     @Published var state: State = .home
 
-    func onViewAppeared() {
-
-    }
+    func onViewAppeared() {/* NO OP */}
 }

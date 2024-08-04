@@ -19,13 +19,6 @@ struct TimedElementSetsView: View {
             BackgroundView()
 
             VStack(alignment: .center ) {
-
-                HStack {
-                    Spacer()
-                    Text(viewModel.setCountProgress)
-                        .h1().foregroundStyle(Color.gray.opacity(0.7))
-                }.frame(minHeight: Theme.Spacing.L)
-
                 Spacer()
                 ZStack {
                     RotatingProgressRing(
@@ -37,22 +30,23 @@ struct TimedElementSetsView: View {
                         SegmentedProgressRing(
                             numberOfSegments: $viewModel.numberOfSets,
                             progress: $viewModel.setsProgress,
-                            fillColor: Theme.Colors.accentColor,
+                            fillColor: Theme.Colors.successColor,
                             backgroundColor: Theme.Colors.backgroundColor
                         )
                         .padding(padding + Theme.Spacing.XXS)
                     }
 
                     Text(viewModel.currentSetElapsedTimeText)
-                        .titlePrimaryColor()
+                        .title()
                 }
 
                 Spacer().frame(height: Theme.Spacing.M)
-                Text(viewModel.currentElement.name).h1PrimaryColor()
+                Text(viewModel.currentElement.name).h1()
                 Spacer()
             }
             .padding( padding )
-        }}
+        }
+    }
 
     init(viewModel: TimedElementSetsViewModel) {
         self.viewModel = viewModel

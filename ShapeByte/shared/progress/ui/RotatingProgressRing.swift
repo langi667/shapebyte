@@ -11,7 +11,7 @@ import SwiftUI
 struct RotatingProgressRing: View {
     @Binding var progress: CGFloat
 
-    let primaryColor: Color = Color.red
+    let primaryColor: Color = Theme.Colors.accentColor
     let lineWidth: CGFloat = 20
     let background: Color
 
@@ -42,24 +42,24 @@ struct RotatingProgressRing: View {
                 color: primaryColor.opacity(progress),
                 lineWidth: self.lineWidth
             )
-
             .offset(x: 0, y: viewSize.width / 2)
-            .rotationEffect(Angle(degrees: (progress * 360) - 180.2))
+            .rotationEffect(Angle(degrees: (progress * 360) - (180 + (0.3 * progress))))
         }.sizeReader(size: $viewSize)
     }
-}
 
-private struct HalfCircleView: View {
-    let color: Color
-    let lineWidth: CGFloat
-
-    var body: some View {
+    @ViewBuilder
+    private func HalfCircleView(color: Color, lineWidth: CGFloat) -> some View {
         Circle()
             .trim(from: 0.0, to: 0.5)
             .fill(color)
             .rotationEffect(Angle(degrees: 90))
             .frame(width: lineWidth, height: lineWidth)
     }
+
+    private func halfCircleColor() -> Color {
+        return primaryColor.opacity(progress)
+    }
+
 }
 
 #Preview {

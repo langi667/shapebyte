@@ -12,7 +12,8 @@ struct HomeModule {
 
     static func homeRootViewModel() -> HomeRootViewModel {
         return HomeRootViewModel(
-            currentWorkoutScheduleEntryUseCase: WorkoutScheduleModule.currentWorkoutScheduleEntryUseCase()
+            currentWorkoutScheduleEntryUseCase: WorkoutScheduleModule.currentWorkoutScheduleEntryUseCase(),
+            recentHistoryUseCase: WorkoutHistoryModule.recentHistoryUseCase()
         )
     }
 

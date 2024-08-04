@@ -10,14 +10,21 @@ import SwiftUI
 struct WorkoutSessionFinishedScreen: View {
     var body: some View {
         ZStack {
-            Circle()
-                .stroke(Theme.Colors.accentColor, lineWidth: 20)
+            BackgroundView()
 
-            Text("Workout Finished\nGreat Job!")
-                .h1PrimaryColor()
-                .multilineTextAlignment(.center)
+            VStack(spacing: 0) {
+                Image("Logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(Theme.Spacing.L)
+
+                Text("Workout Finished\nGreat Job!")
+                    .h1()
+                    .multilineTextAlignment(.center)
+
+                Spacer()
+            }.fixedSize()
         }
-        .padding(Theme.Spacing.M)
     }
 }
 

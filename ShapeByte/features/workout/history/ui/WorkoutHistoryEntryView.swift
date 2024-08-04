@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct WorkoutHistoryEntryView: View {
-
     private let cornerRadius = Theme.Spacing.L
+
+    private let title: String
+    private let date: String
+
     var body: some View {
 
         HStack {
@@ -19,12 +22,12 @@ struct WorkoutHistoryEntryView: View {
                 .clipShape(Circle())
 
             VStack(alignment: .leading) {
-                Text("HIIT")
+                Text(title)
                     .h4()
                     .foregroundStyle(Color.white)
 
                 Spacer().frame(height: Theme.Spacing.XS)
-                Text("Mo. 26.08.2024")
+                Text(date)
                     .footnote()
                     .foregroundStyle(Color.white)
             }
@@ -40,19 +43,28 @@ struct WorkoutHistoryEntryView: View {
                 RoundedRectangle(
                     cornerRadius: cornerRadius
                 )
-                    .strokeBorder(Color(
-                        red: 104 / 255,
-                        green: 187 / 255,
-                        blue: 193 / 255)
-                    )
+                .strokeBorder(Theme.Colors.secondaryColor)
             }
+    }
+
+    init(entry: WorkoutHistoryEntry) {
+        self.title = entry.name
+        self.date = entry.dateString
     }
 }
 
 #Preview {
     ZStack {
         BackgroundView()
-        WorkoutHistoryEntryView()
+        WorkoutHistoryEntryView(
+            entry: WorkoutHistoryEntry(
+                entry: WorkoutScheduleEntry(
+                    id: "1",
+                    name: "Squats",
+                    date: Date(),
+                    progress: .complete)
+            )
+        )
     }
 
 }

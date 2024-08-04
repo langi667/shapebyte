@@ -35,10 +35,7 @@ struct HomeRootView: View {
     @State private var headerImageScale: CGFloat = .zero
 
     private let minimumHeaderHeight: CGFloat = Theme.Spacing.XXL
-    private let headerOverlayColor: Color = Color(
-        red: 104 / 255,
-        green: 187 / 255,
-        blue: 193 / 255)
+    private let headerOverlayColor: Color = Theme.Colors.secondaryColor
 
     private var headerHeight: CGFloat {
         self.scrollViewSize.height * 0.15
@@ -69,8 +66,8 @@ struct HomeRootView: View {
                 PendingExerciseActionView()
                     .zIndex(1001)
 
-                ForEach(0..<15, id: \.self) { _ in
-                    WorkoutHistoryEntryView()
+                ForEach(viewModel.recentHistory) { entry in
+                    WorkoutHistoryEntryView(entry: entry)
                         .padding(.top, Theme.Spacing.S)
                 }.padding(.horizontal, paddingHorizontal)
             }
@@ -78,14 +75,13 @@ struct HomeRootView: View {
             .sizeReader(size: $scrollViewSize)
             .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
                 self.offsetY = value
-                self.radialOffset = Self.defaultRadialOffset + offsetY
+                self.radialOffset = max(0, Self.defaultRadialOffset + offsetY)
                 self.headerProgress = (-offsetY + viewTopOffset) / (headerHeight - minimumHeaderHeight - viewTopOffset)
+                
                 self.headerOverlayOpacity = min(max(headerProgress, 0), 1)
                 self.headerScale = min(max(1 - (headerProgress * 0.5), 0), 1.2)
                 self.headerImageScale = min(max(1 - (headerProgress * 0.5), 0.5), 1.2)
-
             }
-
         }
         .onAppear { viewModel.onViewAppeared() }
         .ignoresSafeArea(.all)
@@ -150,7 +146,7 @@ struct HomeRootView: View {
 
     private func pendingExerciseOffset() -> CGFloat {
         let offset: CGFloat
-        let threshold = (minimumHeaderHeight / 2 + safeAreaInsets.top + Theme.Spacing.S ) * -1
+        let threshold = (minimumHeaderHeight / 2 + safeAreaInsets.top + Theme.Spacing.XS ) * -1
 
         if offsetY <=  threshold {
             offset = -offsetY + threshold

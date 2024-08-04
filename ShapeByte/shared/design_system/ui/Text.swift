@@ -7,29 +7,19 @@
 
 import SwiftUI
 
-public extension View {
+public extension Text {
     func title() -> some View {
         self.font(Theme.Fonts.title)
+            .foregroundColor(Theme.Colors.textLight)
     }
 
     func subtitle() -> some View {
         self.font(Theme.Fonts.subtitle)
     }
 
-    func titlePrimaryColor() -> some View {
-        self
-            .title()
-            .foregroundStyle(Theme.Colors.primaryColor)
-    }
-
     func h1() -> some View {
         self.font(Theme.Fonts.h1)
-    }
-
-    func h1PrimaryColor() -> some View {
-        self
-            .h1()
-            .foregroundStyle(Theme.Colors.primaryColor)
+            .foregroundColor(Theme.Colors.textLight)
     }
 
     func h2() -> some View {
@@ -45,7 +35,9 @@ public extension View {
     }
 
     func body() -> some View {
-        self.font(Theme.Fonts.body)
+        self
+            .font(Theme.Fonts.body)
+            .foregroundStyle(Theme.Colors.textLight)
     }
 
     func footnote() -> some View {

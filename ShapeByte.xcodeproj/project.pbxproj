@@ -77,6 +77,20 @@
 		1DA2336A2C5D93C2003AC8E2 /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DA233712C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */; };
 		1DA233722C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */; };
+		1DA233792C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233782C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift */; };
+		1DA2337A2C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233782C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift */; };
+		1DA2337C2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2337B2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift */; };
+		1DA2337D2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2337B2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift */; };
+		1DA233802C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2337F2C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift */; };
+		1DA233812C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2337F2C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift */; };
+		1DA233842C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233832C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift */; };
+		1DA233852C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233832C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift */; };
+		1DA233872C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233862C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift */; };
+		1DA233882C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233862C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift */; };
+		1DA2338A2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233892C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift */; };
+		1DA2338B2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233892C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift */; };
+		1DA2338E2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */; };
+		1DA2338F2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedElementSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */; };
@@ -191,6 +205,13 @@
 		1DA2335C2C5D7D98003AC8E2 /* HomeRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootViewModel.swift; sourceTree = "<group>"; };
 		1DA233622C5D8FED003AC8E2 /* ModalViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewWrapper.swift; sourceTree = "<group>"; };
 		1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInsets.swift; sourceTree = "<group>"; };
+		1DA233782C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryRepository.swift; sourceTree = "<group>"; };
+		1DA2337B2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryDataSource.swift; sourceTree = "<group>"; };
+		1DA2337F2C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryDataSourceMocks.swift; sourceTree = "<group>"; };
+		1DA233832C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentWorkoutHistoryUseCase.swift; sourceTree = "<group>"; };
+		1DA233862C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryModule.swift; sourceTree = "<group>"; };
+		1DA233892C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryEntry.swift; sourceTree = "<group>"; };
+		1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsViewModel.swift; sourceTree = "<group>"; };
@@ -337,7 +358,11 @@
 		1DA233382C5D529A003AC8E2 /* history */ = {
 			isa = PBXGroup;
 			children = (
+				1DA233862C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift */,
+				1DA233772C5FC594003AC8E2 /* data */,
+				1DA233822C5FC8BC003AC8E2 /* domain */,
 				1DA2333C2C5D52E6003AC8E2 /* ui */,
+				1DA2337E2C5FC642003AC8E2 /* mocks */,
 			);
 			path = history;
 			sourceTree = "<group>";
@@ -346,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				1DA233392C5D52E1003AC8E2 /* WorkoutHistoryEntryView.swift */,
+				1DA233892C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -425,6 +451,39 @@
 				1DEC1C762C5D0BDC0055AA26 /* BackgroundView.swift */,
 			);
 			path = background;
+			sourceTree = "<group>";
+		};
+		1DA233772C5FC594003AC8E2 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				1DA233782C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift */,
+				1DA2337B2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		1DA2337E2C5FC642003AC8E2 /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1DA2337F2C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift */,
+			);
+			path = mocks;
+			sourceTree = "<group>";
+		};
+		1DA233822C5FC8BC003AC8E2 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				1DA233832C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		1DA2338C2C5FCCB5003AC8E2 /* formatter */ = {
+			isa = PBXGroup;
+			children = (
+				1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */,
+			);
+			path = formatter;
 			sourceTree = "<group>";
 		};
 		1DD8C0952C553A370023D4EA /* workout */ = {
@@ -693,11 +752,12 @@
 		1DF3AF6F2C5026BB0054520F /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				1DA233732C5F9446003AC8E2 /* background */,
-				1DA2336F2C5F6605003AC8E2 /* environment */,
 				1DE5F8082C5CB63000BDB7A3 /* SharedModule.swift */,
 				1D360E8D2C5A7C0D00EDC052 /* ViewModel.swift */,
 				1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */,
+				1DA2338C2C5FCCB5003AC8E2 /* formatter */,
+				1DA233732C5F9446003AC8E2 /* background */,
+				1DA2336F2C5F6605003AC8E2 /* environment */,
 				1DA233602C5D8FC2003AC8E2 /* modal_view */,
 				1DA2335F2C5D8FA9003AC8E2 /* extensions */,
 				1DA233312C5D2CE2003AC8E2 /* shapes */,
@@ -830,13 +890,16 @@
 				1DD8C09D2C553AE00023D4EA /* TimedElementSetsViewModel.swift in Sources */,
 				1D360E9E2C5AC2F800EDC052 /* ElementSet+Data.swift in Sources */,
 				1DA2334A2C5D77C5003AC8E2 /* WorkoutScheduleDatasourceMock.swift in Sources */,
+				1DA2338E2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */,
 				1DA233572C5D79F3003AC8E2 /* HomeCoordinatorView.swift in Sources */,
 				1DD8C1102C57A17F0023D4EA /* ElementSets.swift in Sources */,
 				1DD8C10C2C57A0F90023D4EA /* WorkoutSession.swift in Sources */,
 				1DD8C0DD2C56E0030023D4EA /* ElementModule.swift in Sources */,
 				1D360E7C2C5A6A3500EDC052 /* WorkoutSessionModule.swift in Sources */,
+				1DA2338A2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */,
 				1DA233432C5D7714003AC8E2 /* WorkoutScheduleRepository.swift in Sources */,
 				1DE5F8092C5CB63000BDB7A3 /* SharedModule.swift in Sources */,
+				1DA233802C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift in Sources */,
 				1DEC1C682C5CECAA0055AA26 /* AppCoordinator.swift in Sources */,
 				1D360E312C594B7900EDC052 /* DurationFormatter.swift in Sources */,
 				1DD8C1142C57C45B0023D4EA /* Logging.swift in Sources */,
@@ -854,6 +917,7 @@
 				1DA233542C5D79C7003AC8E2 /* HomeCoordinator.swift in Sources */,
 				1D360EA52C5ACC1600EDC052 /* Exercise.swift in Sources */,
 				1D360E792C5A693000EDC052 /* WorkoutSessionDatasource.swift in Sources */,
+				1DA233842C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */,
 				1DD8C0B12C56783C0023D4EA /* TimedElementSetCoordinator.swift in Sources */,
 				1DD8C0982C553AAB0023D4EA /* TimedElementSetsView.swift in Sources */,
 				1DD8C0CC2C56DACA0023D4EA /* SizeReader.swift in Sources */,
@@ -874,10 +938,12 @@
 				1DEC1C622C5CE1590055AA26 /* Theme.swift in Sources */,
 				1D360EA12C5AC5CD00EDC052 /* ElementSetsUIState.swift in Sources */,
 				1D360EA92C5AF9C000EDC052 /* ElementGroup.swift in Sources */,
+				1DA233872C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift in Sources */,
 				1DD8C0C12C56C3990023D4EA /* ElementSetCoordinating.swift in Sources */,
 				1D360E8E2C5A7C0D00EDC052 /* ViewModel.swift in Sources */,
 				1DA2335D2C5D7D98003AC8E2 /* HomeRootViewModel.swift in Sources */,
 				1D360E842C5A6EB400EDC052 /* WorkoutSessionCoordinator.swift in Sources */,
+				1DA233792C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift in Sources */,
 				1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */,
 				1D360E872C5A6EEC00EDC052 /* WorkoutSessionCoordinatorView.swift in Sources */,
 				1D360E802C5A6AEC00EDC052 /* WorkoutSessionDatasourceMock.swift in Sources */,
@@ -885,6 +951,7 @@
 				1DA233332C5D2CF0003AC8E2 /* Arc.swift in Sources */,
 				1DFBA7D42C5C2DC400F9BC78 /* WorkoutSessionFinishedScreen.swift in Sources */,
 				1DA2333A2C5D52E1003AC8E2 /* WorkoutHistoryEntryView.swift in Sources */,
+				1DA2337C2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */,
 				1DD8C11A2C57C46C0023D4EA /* DefaultLogger.swift in Sources */,
 				1DA233462C5D7747003AC8E2 /* WorkoutScheduleDatasource.swift in Sources */,
 			);
@@ -894,12 +961,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DA2337A2C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift in Sources */,
 				1DD8C0E62C56EBD10023D4EA /* Progress.swift in Sources */,
 				1D360EA22C5AC5CD00EDC052 /* ElementSetsUIState.swift in Sources */,
 				1DD8C1182C57C4650023D4EA /* LogLevel.swift in Sources */,
 				1DEC1C632C5CE1590055AA26 /* Theme.swift in Sources */,
 				1DA233582C5D79F3003AC8E2 /* HomeCoordinatorView.swift in Sources */,
 				1DD8C12F2C5815480023D4EA /* Result+Extensions.swift in Sources */,
+				1DA2337D2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */,
 				1D360E9F2C5AC2F800EDC052 /* ElementSet+Data.swift in Sources */,
 				1D360E772C5A68C800EDC052 /* WorkoutSessionRepository.swift in Sources */,
 				1D360E992C5ABE3C00EDC052 /* Element.swift in Sources */,
@@ -918,6 +987,8 @@
 				1DD8C1062C56FA9B0023D4EA /* ElementSetsCoordinator.swift in Sources */,
 				1D360E742C5A687A00EDC052 /* CurrentWorkoutSessionUseCase.swift in Sources */,
 				1DD8C1282C57C51C0023D4EA /* Version.swift in Sources */,
+				1DA233882C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift in Sources */,
+				1DA233812C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift in Sources */,
 				1DA233642C5D8FED003AC8E2 /* ModalViewWrapper.swift in Sources */,
 				1DE5F80A2C5CB63000BDB7A3 /* SharedModule.swift in Sources */,
 				1DD8C1092C5705B90023D4EA /* DefaultElementSetCoordinator.swift in Sources */,
@@ -929,13 +1000,16 @@
 				1D360EAE2C5AFB0A00EDC052 /* WorkoutSessionCoordinator.swift in Sources */,
 				1DA233442C5D7714003AC8E2 /* WorkoutScheduleRepository.swift in Sources */,
 				1DD8C0F42C56F3300023D4EA /* ElementSet.swift in Sources */,
+				1DA2338F2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */,
 				1DA2334E2C5D7838003AC8E2 /* WorkoutScheduleModule.swift in Sources */,
 				1DA233342C5D2FEA003AC8E2 /* Arc.swift in Sources */,
 				1DA233412C5D7676003AC8E2 /* WorkoutScheduleEntry.swift in Sources */,
+				1DA233852C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */,
 				1DD8C1352C5815580023D4EA /* Result+ExtensionsTest.swift in Sources */,
 				1DA233662C5D938A003AC8E2 /* WorkoutSessionFinishedScreen.swift in Sources */,
 				1DD8C0DA2C56DE1A0023D4EA /* DIModule.swift in Sources */,
 				1DA233652C5D9378003AC8E2 /* WorkoutSessionCoordinatorView.swift in Sources */,
+				1DA2338B2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */,
 				1DD8C11E2C57C4AE0023D4EA /* DefaultLoggerTest.swift in Sources */,
 				1DFBA7D12C5C1B2900F9BC78 /* Equals.swift in Sources */,
 				1DA233682C5D93AD003AC8E2 /* CountdownElementSetsView.swift in Sources */,

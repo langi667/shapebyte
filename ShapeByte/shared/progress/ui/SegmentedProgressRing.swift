@@ -102,7 +102,7 @@ struct SegmentedProgressRing: View {
         SegmentedProgressRing(
             numberOfSegments: .constant(10),
             progress: .constant(Progress(0.5)),
-            fillColor: Color.accentColor
+            fillColor: Theme.Colors.successColor
         ).padding(35)
     }
 }

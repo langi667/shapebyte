@@ -13,17 +13,8 @@ struct BackgroundView: View {
 
     @State private var screenSize: CGSize = .zero
 
-    var secondaryColor: Color = Color(
-        red: 104 / 255,
-        green: 187 / 255,
-        blue: 193 / 255
-    )
-
-    var radialColor: Color = Color(
-        red: 60 / 255,
-        green: 112 / 255,
-        blue: 138 / 255
-    )
+    var secondaryColor: Color = Theme.Colors.secondaryColor
+    var radialColor: Color = Theme.Colors.backgroundColor
 
     var body: some View {
         ZStack {

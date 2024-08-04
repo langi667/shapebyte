@@ -17,7 +17,7 @@ class WorkoutSessionDatasourceMock: WorkoutSessionDatasource {
                     element: Exercise(name: "Push Up"),
                     elementSets: ElementSets(
                         sets: [
-                            ElementSet.timed(duration: 8),
+                            ElementSet.timed(duration: 3),
                             ElementSet.timed(duration: 5),
                             ElementSet.timed(duration: 6)
 
