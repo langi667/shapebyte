@@ -93,6 +93,8 @@
 		1DA2338F2C5FCCCA003AC8E2 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */; };
 		1DA233912C5FEE76003AC8E2 /* ElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233902C5FEE76003AC8E2 /* ElementSetsViewModel.swift */; };
 		1DA233922C5FEE76003AC8E2 /* ElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233902C5FEE76003AC8E2 /* ElementSetsViewModel.swift */; };
+		1DA233A22C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233A12C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift */; };
+		1DA233A32C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233A12C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedElementSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedElementSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */; };
@@ -215,6 +217,7 @@
 		1DA233892C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryEntry.swift; sourceTree = "<group>"; };
 		1DA2338D2C5FCCCA003AC8E2 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		1DA233902C5FEE76003AC8E2 /* ElementSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementSetsViewModel.swift; sourceTree = "<group>"; };
+		1DA233A12C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollOffsetPreferenceKey.swift; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedElementSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedElementSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedElementSetsViewModel.swift; sourceTree = "<group>"; };
@@ -486,6 +489,7 @@
 		1DA233952C60060C003AC8E2 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				1DA233A02C601071003AC8E2 /* preferences */,
 				1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */,
 				1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */,
 				1DA233932C600400003AC8E2 /* view_model */,
@@ -506,6 +510,14 @@
 				1DD8C0B02C56783C0023D4EA /* TimedElementSetHandler.swift */,
 			);
 			path = domain;
+			sourceTree = "<group>";
+		};
+		1DA233A02C601071003AC8E2 /* preferences */ = {
+			isa = PBXGroup;
+			children = (
+				1DA233A12C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift */,
+			);
+			path = preferences;
 			sourceTree = "<group>";
 		};
 		1DD8C0952C553A370023D4EA /* workout */ = {
@@ -909,6 +921,7 @@
 				1DD8C0DD2C56E0030023D4EA /* ElementModule.swift in Sources */,
 				1D360E7C2C5A6A3500EDC052 /* WorkoutSessionModule.swift in Sources */,
 				1DA2338A2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */,
+				1DA233A22C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift in Sources */,
 				1DA233432C5D7714003AC8E2 /* WorkoutScheduleRepository.swift in Sources */,
 				1DE5F8092C5CB63000BDB7A3 /* SharedModule.swift in Sources */,
 				1DA233802C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift in Sources */,
@@ -983,6 +996,7 @@
 				1DD8C12F2C5815480023D4EA /* Result+Extensions.swift in Sources */,
 				1DA2337D2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */,
 				1D360E9F2C5AC2F800EDC052 /* ElementSet+Data.swift in Sources */,
+				1DA233A32C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift in Sources */,
 				1D360E772C5A68C800EDC052 /* WorkoutSessionRepository.swift in Sources */,
 				1D360E992C5ABE3C00EDC052 /* Element.swift in Sources */,
 				1DA2335B2C5D7A19003AC8E2 /* HomeModule.swift in Sources */,

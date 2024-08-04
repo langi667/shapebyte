@@ -2,7 +2,7 @@
 //  ModalViewWrapper.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [Shape Byte Tech] on 03.08.24.
+//  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
 //
 
 import SwiftUI

@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-// TODO: move
-struct ScrollOffsetPreferenceKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value += nextValue()
-    }
-}
-
 struct HomeRootView: View {
     private static let defaultRadialOffset: CGFloat = Theme.Spacing.XXXL
 
