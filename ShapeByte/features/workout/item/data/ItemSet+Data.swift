@@ -1,5 +1,5 @@
 //
-//  ElementSet+Data.swift
+//  ItemSet+Data.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 31.07.24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ElementSet {
+extension ItemSet {
     enum Data: Equatable {
         case timed(timePassed: TimeInterval, timeRemaining: TimeInterval, progress: Progress)
 

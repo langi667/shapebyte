@@ -1,5 +1,5 @@
 //
-//  ExerciseSets.swift
+//  ItemSets.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 29.07.24.
@@ -12,10 +12,10 @@ import Foundation
 
  If the workout countains for example 4 Sets of push ups, this would be represented by this struct
  */
-struct ElementSets: Equatable {
-    static let empty = ElementSets(sets: [])
+struct ItemSets: Equatable {
+    static let empty = ItemSets(sets: [])
 
-    let sets: [ElementSet]
+    let sets: [ItemSet]
 
     var count: Int {
         return sets.count
@@ -25,7 +25,7 @@ struct ElementSets: Equatable {
         return sets.getOrNull(0)?.isTimed ?? false
     }
 
-    func elementSetFor(index: Int) -> ElementSet? {
+    func itemSetFor(index: Int) -> ItemSet? {
         let retVal = sets.getOrNull(index)
         return retVal
     }

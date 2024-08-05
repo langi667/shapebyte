@@ -1,5 +1,5 @@
 //
-//  ElementSetState.swift
+//  ItemSet.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 31.07.24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-extension ElementSet {
+extension ItemSet {
     enum State: Equatable {
         case idle
-        case running(setData: ElementSet.Data)
-        case paused(setData: ElementSet.Data)
+        case running(setData: ItemSet.Data)
+        case paused(setData: ItemSet.Data)
         case finished
 
         var isRunning: Bool {

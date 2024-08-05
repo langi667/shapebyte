@@ -1,5 +1,5 @@
 //
-//  CountdownElementSetsViewModel.swift
+//  CountdownItemSetsViewModel.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 01.08.24.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class CountdownElementSetsViewModel: ElementSetsViewModel {
+class CountdownItemSetsViewModel: ItemSetsViewModel {
     @Published var currentSetElapsedTimeText: String = ""
     @Published var isRunning: Bool = false
 
@@ -18,7 +18,7 @@ class CountdownElementSetsViewModel: ElementSetsViewModel {
 
     private var currentSet: Int = -1
 
-    override func handleUIStateReceived(_ state: ElementSetsUIState) {
+    override func handleUIStateReceived(_ state: ItemSetsUIState) {
         switch state {
         case .idle:
             break
@@ -41,7 +41,7 @@ class CountdownElementSetsViewModel: ElementSetsViewModel {
         self.currentSet = currentSet
         self.currentSetElapsedTimeText = "\(currentSet +  1)"
 
-        let duration = group.elementSetFor(index: currentSet)?.duration ?? 0
+        let duration = group.itemSetFor(index: currentSet)?.duration ?? 0
 
         self.alpha = 1
         self.scale = 1

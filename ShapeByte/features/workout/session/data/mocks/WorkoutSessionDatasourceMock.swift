@@ -10,28 +10,28 @@ import Foundation
 class WorkoutSessionDatasourceMock: WorkoutSessionDatasource {
     func currentWorkSession() -> WorkoutSession? {
         return WorkoutSession(
-            elements: [
+            items: [
                Countdown(seconds: 3).toGroup(),
 
-                ElementGroup(
-                    element: Exercise(name: "Push Up"),
-                    elementSets: ElementSets(
+                ItemGroup(
+                    item: Exercise(name: "Push Up"),
+                    itemSets: ItemSets(
                         sets: [
-                            ElementSet.timed(duration: 20),
-                            ElementSet.timed(duration: 40),
-                            ElementSet.timed(duration: 60)
+                            ItemSet.timed(duration: 20),
+                            ItemSet.timed(duration: 40),
+                            ItemSet.timed(duration: 60)
 
                         ]
                     )
                 ),
 
-                ElementGroup(
-                    element: Exercise(name: "Pull Up"),
-                    elementSets: ElementSets(
+                ItemGroup(
+                    item: Exercise(name: "Pull Up"),
+                    itemSets: ItemSets(
                         sets: [
-                            ElementSet.timed(duration: 20),
-                            ElementSet.timed(duration: 40),
-                            ElementSet.timed(duration: 60)
+                            ItemSet.timed(duration: 20),
+                            ItemSet.timed(duration: 40),
+                            ItemSet.timed(duration: 60)
                         ]
                     )
                 )

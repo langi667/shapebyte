@@ -1,5 +1,5 @@
 //
-//  TimedSetView.swift
+//  TimedItemSetsView.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 27.07.24.
@@ -8,9 +8,9 @@
 import SwiftUI
 import Combine
 
-struct TimedElementSetsView: View {
+struct TimedItemSetsView: View {
     @ObservedObject
-    var viewModel: TimedElementSetsViewModel
+    var viewModel: TimedItemSetsViewModel
 
     private let padding = Theme.Spacing.M
 
@@ -39,7 +39,7 @@ struct TimedElementSetsView: View {
                         .title()
                 }.padding(.top, padding * 2)
 
-                Text(viewModel.currentElement.name).h1()
+                Text(viewModel.currentItem.name).h1()
                 Text(viewModel.descriptionText)
                     .body()
                     .multilineTextAlignment(.center)
@@ -50,26 +50,26 @@ struct TimedElementSetsView: View {
         }
     }
 
-    init(viewModel: TimedElementSetsViewModel) {
+    init(viewModel: TimedItemSetsViewModel) {
         self.viewModel = viewModel
     }
 }
 
-struct TimedElementSetsView_Previews: PreviewProvider {
-    static let viewModel = ElementModule.timedElementSetsViewModel()
+struct TimedItemSetsView_Previews: PreviewProvider {
+    static let viewModel = ItemModule.timedItemSetsViewModel()
 
     static var previews: some View {
-        TimedElementSetsView(
+        TimedItemSetsView(
             viewModel: viewModel
         ).onAppear {
             viewModel.startWith(
-                ElementGroup(
-                    element: Exercise(name: "Push Up"),
-                    elementSets: ElementSets(
+                ItemGroup(
+                    item: Exercise(name: "Push Up"),
+                    itemSets: ItemSets(
                         sets: [
-                            ElementSet.timed(duration: 8),
-                            ElementSet.timed(duration: 5),
-                            ElementSet.timed(duration: 6)
+                            ItemSet.timed(duration: 8),
+                            ItemSet.timed(duration: 5),
+                            ItemSet.timed(duration: 6)
                         ]
                     )
                 )

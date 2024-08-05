@@ -1,5 +1,5 @@
 //
-//  ElementSetsHandler.swift
+//  ItemSetsHandler.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 29.07.24.
@@ -8,28 +8,28 @@
 import Foundation
 import Combine
 
-class ElementSetsHandler: ObservableObject {
-    @Published var state: ElementSetsUIState = .idle
+class ItemSetsHandler: ObservableObject {
+    @Published var state: ItemSetsUIState = .idle
 
     private let logger: Logging
-    private var currSetHandler: (any ElementSetHandling)?
-    private var sets: [ElementSet] = []
+    private var currSetHandler: (any ItemSetHandling)?
+    private var sets: [ItemSet] = []
     private var statePublisherSink: AnyCancellable?
     private var currSetIndex: Int = -1
 
-    private let timedSetHandler: ElementSetHandling
-    private let defaultSetHandler: ElementSetHandling
+    private let timedSetHandler: ItemSetHandling
+    private let defaultSetHandler: ItemSetHandling
 
     init(logger: Logging,
-         timedSetHandler: ElementSetHandling,
-         defaultSetHandler: ElementSetHandling
+         timedSetHandler: ItemSetHandling,
+         defaultSetHandler: ItemSetHandling
     ) {
         self.logger = logger
         self.timedSetHandler = timedSetHandler
         self.defaultSetHandler = defaultSetHandler
     }
 
-    func start(sets: [ElementSet]) {
+    func start(sets: [ItemSet]) {
         if self.sets == sets {
             return
         }
@@ -63,21 +63,21 @@ class ElementSetsHandler: ObservableObject {
         }
     }
 
-    private func handleSetStateReceived(_ state: ElementSet.State) {
+    private func handleSetStateReceived(_ state: ItemSet.State) {
         let nextSetIndex = currSetIndex + 1
 
         switch state {
         case .idle:
             break // TODO: handle
         case .running(let setData):
-            self.state = ElementSetsUIState.running(
+            self.state = ItemSetsUIState.running(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: setData.progress,
                 totalProgress: totalProgress(currentSetProgress: setData.progress)
             )
         case .paused(let setData):
-            self.state = ElementSetsUIState.paused(
+            self.state = ItemSetsUIState.paused(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: setData.progress,
@@ -112,10 +112,10 @@ class ElementSetsHandler: ObservableObject {
         state = .finished
     }
 
-    private func startCoordinationFor(_ elementSet: ElementSet) -> any ElementSetHandling {
-        let retVal: any ElementSetHandling
+    private func startCoordinationFor(_ itemSet: ItemSet) -> any ItemSetHandling {
+        let retVal: any ItemSetHandling
 
-        switch elementSet {
+        switch itemSet {
         case .timed:
             retVal = timedSetHandler
         default:
@@ -123,7 +123,7 @@ class ElementSetsHandler: ObservableObject {
             retVal = defaultSetHandler
         }
 
-        retVal.start(set: elementSet)
+        retVal.start(set: itemSet)
         return retVal
 
     }

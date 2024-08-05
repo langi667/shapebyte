@@ -46,13 +46,13 @@ struct Version: Equatable, CustomStringConvertible, Codable {
         var minor: Int = 0
         var patch: Int = 0
 
-        for (index, element) in components.enumerated() {
+        for (index, item) in components.enumerated() {
             if index == 0 {
-                major = Int(element) ?? 0
+                major = Int(item) ?? 0
             } else if index == 1 {
-                minor = Int(element) ?? 0
+                minor = Int(item) ?? 0
             } else if index == 2 {
-                patch = Int(element) ?? 0
+                patch = Int(item) ?? 0
             }
         }
 

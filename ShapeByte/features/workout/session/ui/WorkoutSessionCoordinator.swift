@@ -12,7 +12,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     // TODO: add loading, paused, stopped, ...
     enum State {
         case idle
-        case running(group: ElementGroup)
+        case running(group: ItemGroup)
         case finished
 
         var isRunning: Bool {
@@ -29,7 +29,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
 
     @Published var state: State = .idle
     @Published var session: WorkoutSession = .empty
-    @Published var currentSetsState: ElementSetsUIState = .idle
+    @Published var currentSetsState: ItemSetsUIState = .idle
 
     private var cancellables = Set<AnyCancellable>()
     private let logger: Logging
@@ -51,7 +51,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
         start()
     }
 
-    func onRunningSetsStateChanged(_ state: ElementSetsUIState) {
+    func onRunningSetsStateChanged(_ state: ItemSetsUIState) {
         if state == .finished {
             self.continueRunning()
         }
@@ -74,7 +74,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     }
 
     private func continueRunning() {
-        guard let nextGroup = self.session.nextElementGroup() else {
+        guard let nextGroup = self.session.nextItemGroup() else {
             finish()
             return
         }

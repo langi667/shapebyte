@@ -1,5 +1,5 @@
 //
-//  CountdownElementSetsView.swift
+//  CountdownItemSetsView.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 01.08.24.
@@ -8,8 +8,8 @@
 import SwiftUI
 import Combine
 
-struct CountdownElementSetsView: View {
-    @ObservedObject var viewModel: CountdownElementSetsViewModel
+struct CountdownItemSetsView: View {
+    @ObservedObject var viewModel: CountdownItemSetsViewModel
 
     var body: some View {
         ZStack {
@@ -26,11 +26,11 @@ struct CountdownElementSetsView: View {
     }
 }
 
-struct CountdownElementSetsView_Previews: PreviewProvider {
-    static let viewModel = ElementModule.countdownElementSetsViewModel()
+struct CountdownItemSetsView_Previews: PreviewProvider {
+    static let viewModel = ItemModule.countdownItemSetsViewModel()
 
     static var previews: some View {
-        CountdownElementSetsView(
+        CountdownItemSetsView(
             viewModel: viewModel
         ).onAppear {
             viewModel.startWith(Countdown(seconds: 3).toGroup())

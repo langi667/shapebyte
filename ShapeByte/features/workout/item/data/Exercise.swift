@@ -10,7 +10,7 @@ import Foundation
 /**
  Represents an exercise such as Push Up, Pull Up ...
  */
-struct Exercise: Element, Equatable {
+struct Exercise: Item, Equatable {
 
     static let none = Exercise(name: "")
 

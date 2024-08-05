@@ -1,5 +1,5 @@
 //
-//  TimedElementSetHandler.swift
+//  TimedItemSetHandler.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 28.07.24.
@@ -8,20 +8,20 @@
 import Foundation
 import Combine
 
-class TimedElementSetHandler: ElementSetHandling {
-    fileprivate(set) var statePublisher: PassthroughSubject<ElementSet.State, Never>
-    = PassthroughSubject<ElementSet.State, Never>()
+class TimedItemSetHandler: ItemSetHandling {
+    fileprivate(set) var statePublisher: PassthroughSubject<ItemSet.State, Never>
+    = PassthroughSubject<ItemSet.State, Never>()
 
-    fileprivate(set) var set: ElementSet?
+    fileprivate(set) var set: ItemSet?
 
     private var duration: TimeInterval = 0
     private var timer: AnyCancellable?
     private var elapsedTime: TimeInterval = 0
     private var progress: Progress = .zero
 
-    private var state: ElementSet.State = .idle
+    private var state: ItemSet.State = .idle
 
-    func start(set: ElementSet) {
+    func start(set: ItemSet) {
         if !state.isStopped {
             return
         }
@@ -91,8 +91,8 @@ class TimedElementSetHandler: ElementSetHandling {
         }
     }
 
-    private func currentStateData() -> ElementSet.Data {
-        ElementSet.Data.timed(
+    private func currentStateData() -> ItemSet.Data {
+        ItemSet.Data.timed(
             timePassed: self.elapsedTime,
             timeRemaining: self.duration - self.elapsedTime,
             progress: self.progress

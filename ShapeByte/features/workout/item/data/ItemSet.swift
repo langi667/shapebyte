@@ -1,5 +1,5 @@
 //
-//  Set.swift
+//  ItemSet.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 28.07.24.
@@ -11,7 +11,7 @@ import Foundation
  Representing a single performance of either an excerise (push up, squat) or break or countdown
  */
 
-enum ElementSet: Equatable {
+enum ItemSet: Equatable {
     case timed(duration: TimeInterval)
 
     var duration: TimeInterval? {

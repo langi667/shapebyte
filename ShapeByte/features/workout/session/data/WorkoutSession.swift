@@ -8,25 +8,25 @@
 import Foundation
 
 class WorkoutSession {
-    static let empty = WorkoutSession(elements: .init())
+    static let empty = WorkoutSession(items: .init())
 
     var isFinished: Bool {
-        return currElementIndex >= self.elements.count
+        return currItemIndex >= self.items.count
     }
 
-    private var currElementIndex = -1
-    private let elements: [ElementGroup]
+    private var currItemIndex = -1
+    private let items: [ItemGroup]
 
-    init(elements: [ElementGroup]) {
-        self.elements = elements
+    init(items: [ItemGroup]) {
+        self.items = items
     }
 
-    func nextElementGroup() -> ElementGroup? {
+    func nextItemGroup() -> ItemGroup? {
         if isFinished {
             return nil
         }
 
-        currElementIndex += 1
-        return elements.getOrNull(currElementIndex)
+        currItemIndex += 1
+        return items.getOrNull(currItemIndex)
     }
 }

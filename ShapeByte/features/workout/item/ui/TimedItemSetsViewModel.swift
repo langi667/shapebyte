@@ -1,5 +1,5 @@
 //
-//  TimedSetViewModel.swift
+//  TimedItemSetsViewModel.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 27.07.24.
@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class TimedElementSetsViewModel: ElementSetsViewModel {
+class TimedItemSetsViewModel: ItemSetsViewModel {
     @Published var setsProgress: Progress = Progress(0)
     @Published var setCountProgress: String = ""
 
@@ -20,8 +20,7 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
     @Published var ringProgress: CGFloat = 0
     @Published var descriptionText: String = ""
 
-    override func handleUIStateReceived(_ state: ElementSetsUIState) {
-
+    override func handleUIStateReceived(_ state: ItemSetsUIState) {
         switch state {
         case .idle:
             break
@@ -29,7 +28,7 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
         case .running(let setIndex, _, let currentSetProgress, let totalProgress):
             guard let setDuration = self
                 .group
-                .elementSetFor(index: setIndex)?.duration else {
+                .itemSetFor(index: setIndex)?.duration else {
                 return
             }
 
@@ -40,7 +39,7 @@ class TimedElementSetsViewModel: ElementSetsViewModel {
 
                 ringProgress = 0
                 let setDurationString = DurationFormatter.secondsToString(setDuration)
-                descriptionText = "Perform as much \(group.element.name)s as possible in \(setDurationString) seconds"
+                descriptionText = "Perform as much \(group.item.name)s as possible in \(setDurationString) seconds"
 
                 withAnimation( .linear(duration: setDuration) ) {
                     ringProgress = 1

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct WorkoutSessionCoordinatorView: View {
     @StateObject private var coordinator = WorkoutSessionModule.workoutSessionCoordinator()
-    @StateObject private var timedElementSetsViewModel = ElementModule.timedElementSetsViewModel()
-    @StateObject private var countdownElementSetsViewModel = ElementModule.countdownElementSetsViewModel()
+    @StateObject private var timedItemSetsViewModel = ItemModule.timedItemSetsViewModel()
+    @StateObject private var countdownItemSetsViewModel = ItemModule.countdownItemSetsViewModel()
 
     var body: some View {
         // TODO: Navigation Stack and path
@@ -32,7 +32,7 @@ struct WorkoutSessionCoordinatorView: View {
     }
 
     @ViewBuilder
-    private func RunningStateView(group: ElementGroup) -> some View {
+    private func RunningStateView(group: ItemGroup) -> some View {
         if group.isTimedExercise {
             TimedView(group: group)
         } else if group.isCountdown {
@@ -41,31 +41,31 @@ struct WorkoutSessionCoordinatorView: View {
     }
 
     @ViewBuilder
-    private func TimedView(group: ElementGroup) -> some View {
-        TimedElementSetsView(
-            viewModel: timedElementSetsViewModel
+    private func TimedView(group: ItemGroup) -> some View {
+        TimedItemSetsView(
+            viewModel: timedItemSetsViewModel
         )
-        .onReceive(timedElementSetsViewModel.$state) { state in
+        .onReceive(timedItemSetsViewModel.$state) { state in
             coordinator.onRunningSetsStateChanged(state)
         }
         .onReceive(coordinator.$state.filter { $0.isRunning }) { state in
             if case let .running(group) = state {
-                timedElementSetsViewModel.startWith(group)
+                timedItemSetsViewModel.startWith(group)
             }
         }
     }
 
     @ViewBuilder
-    private func CountdownView(group: ElementGroup) -> some View {
-         CountdownElementSetsView(
-            viewModel: countdownElementSetsViewModel
+    private func CountdownView(group: ItemGroup) -> some View {
+         CountdownItemSetsView(
+            viewModel: countdownItemSetsViewModel
         )
-         .onReceive(countdownElementSetsViewModel.$state) { state in
+         .onReceive(countdownItemSetsViewModel.$state) { state in
              coordinator.onRunningSetsStateChanged(state)
          }
          .onReceive(coordinator.$state.filter { $0.isRunning }) { state in
              if case let .running(group) = state {
-                 countdownElementSetsViewModel.startWith(group)
+                 countdownItemSetsViewModel.startWith(group)
              }
          }
     }

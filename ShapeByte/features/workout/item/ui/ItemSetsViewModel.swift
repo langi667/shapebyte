@@ -1,5 +1,5 @@
 //
-//  ElementSetsViewModel.swift
+//  ItemSetsViewModel.swift
 //  ShapeByte
 //
 //  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
@@ -8,19 +8,19 @@
 import Combine
 import SwiftUI
 
-open class ElementSetsViewModel: ViewModel, ObservableObject {
-    @Published var state: ElementSetsUIState = .idle
-    @Published var group: ElementGroup = .empty
+open class ItemSetsViewModel: ViewModel, ObservableObject {
+    @Published var state: ItemSetsUIState = .idle
+    @Published var group: ItemGroup = .empty
     @Published var numberOfSets: Int = 0
-    @Published var currentElement: any Element = Exercise.none
+    @Published var currentItem: any Item = Exercise.none
 
-    let setsHandler: ElementSetsHandler
+    let setsHandler: ItemSetsHandler
     let logger: Logging
     var cancelables: Set<AnyCancellable> = Set<AnyCancellable>()
 
     init(
         logger: Logging,
-        setsHandler: ElementSetsHandler
+        setsHandler: ItemSetsHandler
     ) {
         self.logger = logger
         self.setsHandler = setsHandler
@@ -30,16 +30,15 @@ open class ElementSetsViewModel: ViewModel, ObservableObject {
         /* Override for specific handling of the UI */
     }
 
-    func handleUIStateReceived( _ state: ElementSetsUIState ) {
+    func handleUIStateReceived( _ state: ItemSetsUIState ) {
         /* Override to perform specific actions for new UI state */
     }
 
-    func startWith(_ group: ElementGroup) {
+    func startWith(_ group: ItemGroup) {
         stop()
 
         self.group = group
-        self.currentElement = group.element
-
+        self.currentItem = group.item
         self.numberOfSets = group.count
 
         start()
@@ -50,7 +49,7 @@ open class ElementSetsViewModel: ViewModel, ObservableObject {
         self.numberOfSets = group.count
 
         setsHandler.start(
-            sets: group.elementSets.sets
+            sets: group.itemSets.sets
         )
 
         setsHandler.$state.sink { state in
@@ -62,7 +61,7 @@ open class ElementSetsViewModel: ViewModel, ObservableObject {
         cancelables.removeAll()
     }
 
-    private func handleCoordinatorStateChanged(_ state: ElementSetsUIState) {
+    private func handleCoordinatorStateChanged(_ state: ItemSetsUIState) {
         handleUIStateReceived(state)
         self.state = state
     }
