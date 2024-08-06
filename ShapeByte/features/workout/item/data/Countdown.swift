@@ -7,8 +7,19 @@
 
 import Foundation
 
+// TODO: check if needs to inherit from Item
+
 struct Countdown: Item {
+    private struct Tick: Item {
+        private (set) var name: String = "CountdownTick"
+
+        func isEqualTo(_ other: Any) -> Bool {
+            return (other as? Tick) != nil
+        }
+    }
+
     private (set) var name: String = "Countdown"
+    private static let tick = Tick()
 
     let ticks: ItemSets
 
@@ -28,7 +39,7 @@ struct Countdown: Item {
         var items: [ItemSet] = .init()
 
         for _ in 0..<seconds {
-            let currItem = ItemSet.timed(duration: 1)
+            let currItem = ItemSet.timed(item: tick, duration: 1)
             items.append( currItem )
         }
 
@@ -39,5 +50,4 @@ struct Countdown: Item {
          let items = createItems(seconds: seconds)
          return ItemSets(sets: items)
     }
-
 }

@@ -67,9 +67,9 @@ struct TimedItemSetsView_Previews: PreviewProvider {
                     item: Exercise(name: "Push Up"),
                     itemSets: ItemSets(
                         sets: [
-                            ItemSet.timed(duration: 8),
-                            ItemSet.timed(duration: 5),
-                            ItemSet.timed(duration: 6)
+                            ItemSet.timed(item: Exercise(name: "Push Up"), duration: 8),
+                            ItemSet.timed(item: Exercise(name: "Push Up"), duration: 5),
+                            ItemSet.timed(item: Exercise(name: "Push Up"), duration: 6)
                         ]
                     )
                 )

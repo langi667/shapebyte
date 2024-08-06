@@ -8,8 +8,10 @@
 import Foundation
 
 struct DurationFormatter {
+
+    // TODO: 
     static func secondsToString(_ seconds: TimeInterval) -> String {
-        let secondsRounded = Int(seconds.rounded(.up))
+        let secondsRounded = Int(seconds.rounded(.toNearestOrAwayFromZero))
         let retVal = Self.secondsToString(Int(secondsRounded))
 
         return retVal
@@ -20,4 +22,6 @@ struct DurationFormatter {
 
         return retVal
     }
+
+    private init() {}
 }

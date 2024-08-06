@@ -26,7 +26,7 @@ class TimedItemSetHandler: ItemSetHandling {
             return
         }
 
-        if case let .timed(duration) = set {
+        if case let .timed(_, duration) = set {
             self.set = set
 
             stopTimer()

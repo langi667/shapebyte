@@ -55,7 +55,31 @@ final class DIModuleTest: XCTestCase {
         XCTAssertEqual(result2, result3)
         XCTAssertTrue(result === result3) // should not have recreated instance
         XCTAssertTrue(result2 === result3) // should not have recreated instance
+    }
 
+    func testInstanceForTypeOrCreateForString() throws {
+        let sut = DIModule()
+        let value = 42
+        let name = "Test"
+
+        let result = sut.instanceTypeOrCreate(name: "TestClass", create: { TestClass(value: value, name: name) })
+        let expected = TestClass(value: value, name: name)
+        XCTAssertEqual(expected, result)
+
+        let result2 = sut.instanceTypeOrCreate(name: "TestClass", create: { TestClass(value: value, name: name) })
+
+        XCTAssertEqual(expected, result2)
+        XCTAssertEqual(result, result2)
+        XCTAssertTrue(result === result2) // should not have recreated instance
+
+        // Different creator, instance should still be the same
+        let result3 = sut.instanceTypeOrCreate(name: "TestClass", create: { TestClass(value: value + 1, name: name + "123") })
+
+        XCTAssertEqual(expected, result3)
+        XCTAssertEqual(result, result3)
+        XCTAssertEqual(result2, result3)
+        XCTAssertTrue(result === result3) // should not have recreated instance
+        XCTAssertTrue(result2 === result3) // should not have recreated instance
     }
 
     func testInstanceForType() throws {

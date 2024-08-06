@@ -14,4 +14,3 @@ Represents any kind of workout item, such as exercise, breaks, countdown, cooldo
 protocol Item: Equatable, Equals {
     var name: String { get }
 }
-

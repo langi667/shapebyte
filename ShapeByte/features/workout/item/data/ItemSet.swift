@@ -7,16 +7,28 @@
 
 import Foundation
 
+protocol ItemProviding {
+    var item: any Item { get }
+}
+
 /**
  Representing a single performance of either an excerise (push up, squat) or break or countdown
  */
 
-enum ItemSet: Equatable {
-    case timed(duration: TimeInterval)
+enum ItemSet: Equatable, ItemProviding {
+    case timed(item: any Item, duration: TimeInterval)
+
+    var item: any Item {
+        switch self {
+
+        case .timed(let item, _):
+            return item
+        }
+    }
 
     var duration: TimeInterval? {
         switch self {
-        case .timed(let duration):
+        case .timed(_, let duration):
             return duration
         }
     }
@@ -25,6 +37,19 @@ enum ItemSet: Equatable {
         switch self {
         case .timed:
             return true
+        }
+    }
+
+    // TODO: Test!
+    func castItem<T: Item>() -> T? {
+        return self.item as? T
+    }
+
+    // TODO: Test!
+    static func == (lhs: ItemSet, rhs: ItemSet) -> Bool {
+        switch (lhs, rhs) {
+        case let (.timed(lhsItem, lhsDuration), .timed(rhsItem, rhsDuration)):
+            return lhsItem.isEqualTo(rhsItem) && lhsDuration == rhsDuration
         }
     }
 }

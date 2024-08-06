@@ -25,8 +25,6 @@ open class DIModule {
         instanceTypeOrCreate(name: String(describing: type), create: create)
     }
 
-    // TODO: test
-
     func instanceTypeOrCreate<Base>(name: String, create: () -> Base) -> Base {
         let retVal: Base
         if let instance = instances[name] as? Base {
