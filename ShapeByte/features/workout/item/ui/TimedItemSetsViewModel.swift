@@ -24,12 +24,10 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
         switch state {
         case .idle:
             break
-            
-        case .started(_):
+            case .started:
             self.ringProgress = 0
             self.currentSetIndex = 0
             self.currentSetElapsedTime = 0
-            break
 
         case .running(let setIndex, _, let currentSetProgress, let totalProgress):
             guard let setDuration = self
@@ -58,9 +56,18 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
                 self.currentSetElapsedTimeText = DurationFormatter.secondsToString(currentSetElapsedTime)
             }
 
+            let prevSetsProgress = self.setsProgress
             self.currentSetProgress = currentSetProgress
 
-            withAnimation( .linear(duration: setDuration) ) {
+            let animationDuration: TimeInterval
+
+            if totalProgress.value == 0 {
+                animationDuration = 0
+            } else {
+                animationDuration = setDuration
+            }
+
+            withAnimation( .linear(duration: animationDuration) ) {
                 self.setsProgress = totalProgress
             }
 
@@ -68,7 +75,6 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
             break // TODO: handle
         case .finished:
             break
-
         }
     }
 }

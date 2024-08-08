@@ -85,11 +85,9 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     private func viewTypeFor(group: ItemGroup) -> (ViewType, ItemSetsViewModel?) {
         if group.isTimedExercise {
             return (.timed, timedItemSetsViewModel)
-        }
-        else if group.isCountdown {
+        } else if group.isCountdown {
             return (.countdown, countdownItemSetsViewModel)
-        }
-        else {
+        } else {
             logger.logWarning("Unknown item group: \(group)")
             return (.none, nil)
         }
@@ -104,7 +102,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     }
 
     private func continueRunning() {
-        vmCancelables.forEach{$0.cancel()}
+        vmCancelables.forEach {$0.cancel()}
         vmCancelables.removeAll()
 
         guard let nextGroup = self.session.nextItemGroup() else {

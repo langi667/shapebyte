@@ -22,7 +22,7 @@ class CountdownItemSetsViewModel: ItemSetsViewModel {
         switch state {
         case .idle:
             break
-        case .started(_):
+        case .started:
             handleStateRunning(currentSet: currentSet)
         case .running(let currentSet, _, _, _):
             handleStateRunning(currentSet: currentSet)

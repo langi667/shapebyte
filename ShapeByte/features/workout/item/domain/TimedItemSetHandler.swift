@@ -15,7 +15,7 @@ class TimedItemSetHandler: ItemSetHandling {
     = PassthroughSubject<ItemSet.State, Never>()
 
     fileprivate(set) var set: ItemSet?
-    
+
     private var duration: TimeInterval = 0
     private var timer: AnyCancellable?
     private var elapsedTime: TimeInterval = 0

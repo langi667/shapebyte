@@ -51,7 +51,7 @@ open class ItemSetsViewModel: ViewModel, ObservableObject {
         self.group = group
         self.currentItem = group.item
         self.numberOfSets = group.count
-        
+
         if viewAppeared {
             start()
         }

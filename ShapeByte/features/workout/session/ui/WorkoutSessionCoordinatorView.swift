@@ -31,7 +31,6 @@ struct WorkoutSessionCoordinatorView: View {
         }
     }
 
-
     @ViewBuilder
     private func RunningStateView(viewType: WorkoutSessionCoordinator.ViewType) -> some View {
         switch viewType {
@@ -57,7 +56,6 @@ struct WorkoutSessionCoordinatorView: View {
                 }
         }
     }
-
 }
 
 #Preview {

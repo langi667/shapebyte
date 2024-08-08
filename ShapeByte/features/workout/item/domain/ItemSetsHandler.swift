@@ -61,7 +61,7 @@ class ItemSetsHandler: ObservableObject {
         switch state {
         case .idle:
             break // TODO: handle
-        case .started:
+            case .started:
             logger.logDebug("Started set \(currSetIndex)")
             self.state = ItemSetsUIState.running(
                 currentSet: currSetIndex,
@@ -69,7 +69,6 @@ class ItemSetsHandler: ObservableObject {
                 currentSetProgress: Progress(0),
                 totalProgress: totalProgress(currentSetProgress: Progress(0))
             )
-            break
         case .running(let setData):
             self.state = ItemSetsUIState.running(
                 currentSet: currSetIndex,
@@ -134,7 +133,7 @@ class ItemSetsHandler: ObservableObject {
             nextHandler = defaultSetHandler
         }
 
-        if self.currSetHandler !== nextHandler{
+        if self.currSetHandler !== nextHandler {
             self.statePublisherSink?.cancel()
             self.statePublisherSink = nil
 

@@ -20,12 +20,11 @@ final class TimedItemSetHandlerTest: XCTestCase {
     }
 
     func testShouldNotPublsihAnyStateInitially() throws {
-        let sut = TimedItemSetHandler()
-
+        let sut = createSUT()
         let expectation = XCTestExpectation(description: "Inital state shoud not publish")
-        
+
         expectation.isInverted = true
-        evaluatePublisher(sut.statePublisher) { state in
+        evaluatePublisher(sut.statePublisher) { _ in
             expectation.fulfill()
 
         }
@@ -34,7 +33,7 @@ final class TimedItemSetHandlerTest: XCTestCase {
     }
 
     func testStartShouldPublishStatesInCorrectOrder() throws {
-        let sut = TimedItemSetHandler()
+        let sut = createSUT()
         var emittedStates: [ItemSet.State] = []
         let duration = 1.0
 
@@ -59,7 +58,7 @@ final class TimedItemSetHandlerTest: XCTestCase {
     }
 
     func testShouldTickMultipleTimes() throws {
-        let sut = TimedItemSetHandler()
+        let sut = createSUT()
         var emittedStates: [ItemSet.State] = []
         let duration: TimeInterval = 5.0
 
@@ -78,7 +77,7 @@ final class TimedItemSetHandlerTest: XCTestCase {
         expectedState.append(.finished)
 
         let expectation = XCTestExpectation(description: "Receive all states in correct order")
-        
+
         evaluatePublisher(sut.statePublisher) { state in
             emittedStates.append(state)
             if state == .finished {
@@ -92,7 +91,7 @@ final class TimedItemSetHandlerTest: XCTestCase {
         XCTAssertEqual(emittedStates, expectedState)
     }
 
-    func evaluatePublisher(
+    private func evaluatePublisher(
         _ publisher: PassthroughSubject<ItemSet.State, Never>,
         test: @escaping (ItemSet.State) -> Void) {
             publisher.sink { state in
@@ -100,4 +99,8 @@ final class TimedItemSetHandlerTest: XCTestCase {
             }.store(in: &cancellables)
 
         }
+
+    private func createSUT() -> TimedItemSetHandler {
+        return TimedItemSetHandler(logger: DefaultLogger())
+    }
 }
