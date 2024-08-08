@@ -8,6 +8,7 @@
 import Foundation
 
 class HomeCoordinator: ViewModel, ObservableObject {
+
     enum State {
         case root
         case workout
@@ -16,7 +17,8 @@ class HomeCoordinator: ViewModel, ObservableObject {
     @Published var state: State = .root
     @Published var presentWorkoutModal: Bool = false
 
-    func onViewAppeared() { /* No op */}
+    func onViewAppeared() { /* No op */ }
+    func onViewDisappeared() { /* No op */ }
 
     func onHomeRootEventreceived(event: HomeRootViewModel.Event) {
         switch event {

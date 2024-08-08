@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct WorkoutSessionCoordinatorView: View {
     @StateObject private var coordinator = WorkoutSessionModule.workoutSessionCoordinator()
-    @StateObject private var timedItemSetsViewModel = ItemModule.timedItemSetsViewModel()
-    @StateObject private var countdownItemSetsViewModel = ItemModule.countdownItemSetsViewModel()
+    @State private var cancellables: Set<AnyCancellable> = []
 
     var body: some View {
         // TODO: Navigation Stack and path
@@ -19,8 +19,8 @@ struct WorkoutSessionCoordinatorView: View {
             case .idle:
                 EmptyView() // TODO: show maybe loading or info view
 
-            case .running(let group):
-                RunningStateView(group: group)
+            case .running(let viewType):
+                RunningStateView(viewType: viewType)
 
             case .finished:
                 WorkoutSessionFinishedScreen()
@@ -31,44 +31,33 @@ struct WorkoutSessionCoordinatorView: View {
         }
     }
 
+
     @ViewBuilder
-    private func RunningStateView(group: ItemGroup) -> some View {
-        if group.isTimedExercise {
-            TimedView(group: group)
-        } else if group.isCountdown {
-            CountdownView(group: group)
+    private func RunningStateView(viewType: WorkoutSessionCoordinator.ViewType) -> some View {
+        switch viewType {
+        case .none:
+            EmptyView()
+
+        case .timed:
+            TimedItemSetsView(viewModel: coordinator.timedItemSetsViewModel)
+                .onAppear {
+                    coordinator.timedItemSetsViewModel.onViewAppeared()
+                }
+                .onDisappear {
+                    coordinator.timedItemSetsViewModel.onViewDisappeared()
+                }
+
+        case .countdown:
+            CountdownItemSetsView(viewModel: coordinator.countdownItemSetsViewModel)
+                .onAppear {
+                    coordinator.countdownItemSetsViewModel.onViewAppeared()
+                }
+                .onDisappear {
+                    coordinator.countdownItemSetsViewModel.onViewDisappeared()
+                }
         }
     }
 
-    @ViewBuilder
-    private func TimedView(group: ItemGroup) -> some View {
-        TimedItemSetsView(
-            viewModel: timedItemSetsViewModel
-        )
-        .onReceive(timedItemSetsViewModel.$state) { state in
-            coordinator.onRunningSetsStateChanged(state)
-        }
-        .onReceive(coordinator.$state.filter { $0.isRunning }) { state in
-            if case let .running(group) = state {
-                timedItemSetsViewModel.startWith(group)
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func CountdownView(group: ItemGroup) -> some View {
-         CountdownItemSetsView(
-            viewModel: countdownItemSetsViewModel
-        )
-         .onReceive(countdownItemSetsViewModel.$state) { state in
-             coordinator.onRunningSetsStateChanged(state)
-         }
-         .onReceive(coordinator.$state.filter { $0.isRunning }) { state in
-             if case let .running(group) = state {
-                 countdownItemSetsViewModel.startWith(group)
-             }
-         }
-    }
 }
 
 #Preview {

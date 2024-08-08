@@ -15,4 +15,5 @@ class AppCoordinator: ViewModel, ObservableObject {
     @Published var state: State = .home
 
     func onViewAppeared() {/* NO OP */}
+    func onViewDisappeared() { /* No op */ }
 }

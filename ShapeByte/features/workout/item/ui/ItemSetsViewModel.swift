@@ -17,6 +17,7 @@ open class ItemSetsViewModel: ViewModel, ObservableObject {
     let setsHandler: ItemSetsHandler
     let logger: Logging
     var cancelables: Set<AnyCancellable> = Set<AnyCancellable>()
+    private var viewAppeared: Bool = false
 
     init(
         logger: Logging,
@@ -27,7 +28,13 @@ open class ItemSetsViewModel: ViewModel, ObservableObject {
     }
 
     func onViewAppeared() {
-        /* Override for specific handling of the UI */
+        viewAppeared = true
+        start()
+    }
+
+    func onViewDisappeared() {
+        viewAppeared = false
+        stop()
     }
 
     func handleUIStateReceived( _ state: ItemSetsUIState ) {
@@ -35,16 +42,26 @@ open class ItemSetsViewModel: ViewModel, ObservableObject {
     }
 
     func startWith(_ group: ItemGroup) {
+        if group == self.group {
+            return
+        }
+
         stop()
 
         self.group = group
         self.currentItem = group.item
         self.numberOfSets = group.count
-
-        start()
+        
+        if viewAppeared {
+            start()
+        }
     }
 
     func start() {
+        if self.group.isEmpty {
+            return
+        }
+
         stop()
         self.numberOfSets = group.count
 

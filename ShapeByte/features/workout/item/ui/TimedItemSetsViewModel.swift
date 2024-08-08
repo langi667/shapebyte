@@ -13,7 +13,7 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
     @Published var setCountProgress: String = ""
 
     @Published var currentSetProgress: Progress = .zero
-    @Published var currentSetElapsedTime: Int = 1
+    @Published var currentSetElapsedTime: Int = 0
     @Published var currentSetIndex: Int = -1
     @Published var currentSetElapsedTimeText: String = ""
 
@@ -23,6 +23,12 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
     override func handleUIStateReceived(_ state: ItemSetsUIState) {
         switch state {
         case .idle:
+            break
+            
+        case .started(_):
+            self.ringProgress = 0
+            self.currentSetIndex = 0
+            self.currentSetElapsedTime = 0
             break
 
         case .running(let setIndex, _, let currentSetProgress, let totalProgress):
@@ -48,12 +54,15 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
 
             let elapsed = ((1.0 - currentSetProgress.value) * setDuration)
             if elapsed > 0 {
-                currentSetElapsedTime = Int(elapsed.rounded(.up))
+                currentSetElapsedTime = Int(elapsed.rounded(.toNearestOrAwayFromZero))
                 self.currentSetElapsedTimeText = DurationFormatter.secondsToString(currentSetElapsedTime)
             }
 
             self.currentSetProgress = currentSetProgress
-            self.setsProgress = totalProgress
+
+            withAnimation( .linear(duration: setDuration) ) {
+                self.setsProgress = totalProgress
+            }
 
         case .paused:
             break // TODO: handle

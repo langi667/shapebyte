@@ -12,7 +12,6 @@ import Foundation
  Assignment of an item like a push up or break or countdown items  to amount of sets
  */
 struct ItemGroup: Equatable {
-
     static let empty = ItemGroup(
         item: Exercise.none,
         itemSets: .empty
@@ -20,6 +19,11 @@ struct ItemGroup: Equatable {
 
     let item: any Item
     let itemSets: ItemSets
+
+    // TODO: test
+    var isEmpty: Bool {
+        return itemSets == .empty
+    }
 
     var isTimedExercise: Bool {
         return itemSets.isTimed && item is Exercise

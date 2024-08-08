@@ -22,6 +22,8 @@ class CountdownItemSetsViewModel: ItemSetsViewModel {
         switch state {
         case .idle:
             break
+        case .started(_):
+            handleStateRunning(currentSet: currentSet)
         case .running(let currentSet, _, _, _):
             handleStateRunning(currentSet: currentSet)
         case .paused:
@@ -36,10 +38,8 @@ class CountdownItemSetsViewModel: ItemSetsViewModel {
             return
         }
 
-        logger.logDebug("\(currentSet)")
-
         self.currentSet = currentSet
-        self.currentSetElapsedTimeText = "\(currentSet +  1)"
+        self.currentSetElapsedTimeText = "\(group.count - currentSet)"
 
         let duration = group.itemSetFor(index: currentSet)?.duration ?? 0
 

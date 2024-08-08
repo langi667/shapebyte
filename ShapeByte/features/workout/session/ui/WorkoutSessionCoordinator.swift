@@ -10,9 +10,16 @@ import Combine
 
 class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     // TODO: add loading, paused, stopped, ...
+
+    enum ViewType {
+        case none
+        case timed
+        case countdown
+    }
+
     enum State {
         case idle
-        case running(group: ItemGroup)
+        case running(viewType: ViewType)
         case finished
 
         var isRunning: Bool {
@@ -31,13 +38,21 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     @Published var session: WorkoutSession = .empty
     @Published var currentSetsState: ItemSetsUIState = .idle
 
+    let timedItemSetsViewModel: TimedItemSetsViewModel
+    let countdownItemSetsViewModel: CountdownItemSetsViewModel
+
     private var cancellables = Set<AnyCancellable>()
+    private var vmCancelables = Set<AnyCancellable>()
     private let logger: Logging
 
     init(
+        timedItemSetsViewModel: TimedItemSetsViewModel,
+        countdownItemSetsViewModel: CountdownItemSetsViewModel,
         workoutSessionUseCase: CurrentWorkoutSessionUseCase,
         logger: Logging
     ) {
+        self.timedItemSetsViewModel = timedItemSetsViewModel
+        self.countdownItemSetsViewModel = countdownItemSetsViewModel
         self.workoutSessionUseCase = workoutSessionUseCase
         self.logger = logger
 
@@ -50,6 +65,8 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
         updateData()
         start()
     }
+
+    func onViewDisappeared() {}
 
     func onRunningSetsStateChanged(_ state: ItemSetsUIState) {
         if state == .finished {
@@ -65,6 +82,19 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
         }
     }
 
+    private func viewTypeFor(group: ItemGroup) -> (ViewType, ItemSetsViewModel?) {
+        if group.isTimedExercise {
+            return (.timed, timedItemSetsViewModel)
+        }
+        else if group.isCountdown {
+            return (.countdown, countdownItemSetsViewModel)
+        }
+        else {
+            logger.logWarning("Unknown item group: \(group)")
+            return (.none, nil)
+        }
+    }
+
     private func start() {
         if case .running = state {
             return
@@ -74,12 +104,22 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
     }
 
     private func continueRunning() {
+        vmCancelables.forEach{$0.cancel()}
+        vmCancelables.removeAll()
+
         guard let nextGroup = self.session.nextItemGroup() else {
             finish()
             return
         }
 
-        self.state = .running(group: nextGroup)
+        let (viewType, viewModel) = viewTypeFor(group: nextGroup)
+
+        viewModel?.$state.sink { state in
+            self.onRunningSetsStateChanged(state)
+        }.store(in: &self.vmCancelables)
+
+        viewModel?.startWith(nextGroup)
+        self.state = .running(viewType: viewType)
     }
 
     private func finish() {

@@ -47,6 +47,8 @@ class HomeRootViewModel: ViewModel, ObservableObject {
         setup()
     }
 
+    func onViewDisappeared() { /* No op */ }
+
     func onCurrentWorkoutSelected() {
         eventPublisher.send(.currWorkoutScheduleEntrySelected)
     }
