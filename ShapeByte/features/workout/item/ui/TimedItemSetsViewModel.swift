@@ -56,9 +56,7 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
                 self.currentSetElapsedTimeText = DurationFormatter.secondsToString(currentSetElapsedTime)
             }
 
-            let prevSetsProgress = self.setsProgress
             self.currentSetProgress = currentSetProgress
-
             let animationDuration: TimeInterval
 
             if totalProgress.value == 0 {
