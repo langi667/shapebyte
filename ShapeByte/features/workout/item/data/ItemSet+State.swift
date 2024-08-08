@@ -10,13 +10,14 @@ import Foundation
 extension ItemSet {
     enum State: Equatable {
         case idle
+        case started
         case running(setData: ItemSet.Data)
         case paused(setData: ItemSet.Data)
         case finished
 
         var isRunning: Bool {
             switch self {
-            case .running:
+            case .running, .started:
                 return true
             default:
                 return false

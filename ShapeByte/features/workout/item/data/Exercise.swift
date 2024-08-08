@@ -17,7 +17,7 @@ struct Exercise: Item, Equatable {
     fileprivate (set) var name: String
 
     func isEqualTo(_ other: Any) -> Bool {
-        guard let otherAsExercise = other as? Self else {
+        guard let otherAsExercise = other as? Exercise else {
             return false
         }
 

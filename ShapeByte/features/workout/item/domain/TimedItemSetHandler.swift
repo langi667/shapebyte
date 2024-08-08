@@ -9,17 +9,27 @@ import Foundation
 import Combine
 
 class TimedItemSetHandler: ItemSetHandling {
+    let logger: Logging
+
     fileprivate(set) var statePublisher: PassthroughSubject<ItemSet.State, Never>
     = PassthroughSubject<ItemSet.State, Never>()
 
     fileprivate(set) var set: ItemSet?
-
+    
     private var duration: TimeInterval = 0
     private var timer: AnyCancellable?
     private var elapsedTime: TimeInterval = 0
     private var progress: Progress = .zero
 
-    private var state: ItemSet.State = .idle
+    private var state: ItemSet.State = .idle {
+        didSet {
+            statePublisher.send(state)
+        }
+    }
+
+    init(logger: Logging) {
+        self.logger = logger
+    }
 
     func start(set: ItemSet) {
         if !state.isStopped {
@@ -33,7 +43,7 @@ class TimedItemSetHandler: ItemSetHandling {
             resetValues()
 
             self.duration = duration
-            self.state = .running(setData: currentStateData())
+            self.state = .started
 
             startTimer()
         } else {
@@ -42,11 +52,9 @@ class TimedItemSetHandler: ItemSetHandling {
     }
 
     func finish() {
-        self.state = .finished
         self.stopTimer()
-
         resetValues()
-        self.statePublisher.send(.finished)
+        self.state = .finished
     }
 
     private func resetValues() {
@@ -56,7 +64,7 @@ class TimedItemSetHandler: ItemSetHandling {
     }
 
     private func startTimer() {
-        let interval: CGFloat = 0.1
+        let interval: TimeInterval = 1
 
         timer = Timer
             .publish(every: interval, on: .main, in: .common)
@@ -76,16 +84,14 @@ class TimedItemSetHandler: ItemSetHandling {
             return
         }
 
-        self.elapsedTime += 0.1
+        self.elapsedTime += interval
         let newProgress = self.elapsedTime / self.duration
         self.progress = Progress(newProgress)
 
         let stateData = currentStateData()
+        self.state = .running(setData: stateData)
 
-        if self.progress.value < 1.0 {
-            self.statePublisher.send(.running(setData: stateData))
-        } else {
-            self.statePublisher.send(.running(setData: stateData))
+        if self.progress.value >= 1.0 {
             stopTimer()
             finish()
         }

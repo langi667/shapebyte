@@ -104,6 +104,7 @@
 		1DA233B22C61799B003AC8E2 /* ItemSetDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233B12C61799B003AC8E2 /* ItemSetDataTest.swift */; };
 		1DA233B42C617AF0003AC8E2 /* ItemSet+StateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233B32C617AF0003AC8E2 /* ItemSet+StateTest.swift */; };
 		1DCAB3F22C51874D00638DDD /* SegmentedProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */; };
+		1DD2ABB32C62B2D40072D3EE /* TimedItemSetHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2ABB22C62B2D40072D3EE /* TimedItemSetHandlerTest.swift */; };
 		1DD8C0982C553AAB0023D4EA /* TimedItemSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0972C553AAB0023D4EA /* TimedItemSetsView.swift */; };
 		1DD8C09D2C553AE00023D4EA /* TimedItemSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedItemSetsViewModel.swift */; };
 		1DD8C0A72C562A310023D4EA /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0A62C562A310023D4EA /* Progress.swift */; };
@@ -233,6 +234,7 @@
 		1DA233B12C61799B003AC8E2 /* ItemSetDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetDataTest.swift; sourceTree = "<group>"; };
 		1DA233B32C617AF0003AC8E2 /* ItemSet+StateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemSet+StateTest.swift"; sourceTree = "<group>"; };
 		1DCAB3F12C51874D00638DDD /* SegmentedProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressRing.swift; sourceTree = "<group>"; };
+		1DD2ABB22C62B2D40072D3EE /* TimedItemSetHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedItemSetHandlerTest.swift; sourceTree = "<group>"; };
 		1DD8C0972C553AAB0023D4EA /* TimedItemSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedItemSetsView.swift; sourceTree = "<group>"; };
 		1DD8C09C2C553AE00023D4EA /* TimedItemSetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedItemSetsViewModel.swift; sourceTree = "<group>"; };
 		1DD8C0A62C562A310023D4EA /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				1DD8C1042C56FA9B0023D4EA /* ItemSetsHandler.swift */,
 				1DD8C1072C5705B90023D4EA /* DefaultItemSetHandler.swift */,
 				1DD8C0B02C56783C0023D4EA /* TimedItemSetHandler.swift */,
+				1DD2ABB12C62B1D30072D3EE /* tests */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -550,6 +553,14 @@
 				1DA233AF2C6178FD003AC8E2 /* ItemSetTest.swift */,
 				1DA233B12C61799B003AC8E2 /* ItemSetDataTest.swift */,
 				1DA233B32C617AF0003AC8E2 /* ItemSet+StateTest.swift */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		1DD2ABB12C62B1D30072D3EE /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1DD2ABB22C62B2D40072D3EE /* TimedItemSetHandlerTest.swift */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -1069,6 +1080,7 @@
 				1DA233412C5D7676003AC8E2 /* WorkoutScheduleEntry.swift in Sources */,
 				1DA233852C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */,
 				1DD8C1352C5815580023D4EA /* Result+ExtensionsTest.swift in Sources */,
+				1DD2ABB32C62B2D40072D3EE /* TimedItemSetHandlerTest.swift in Sources */,
 				1DA233662C5D938A003AC8E2 /* WorkoutSessionFinishedScreen.swift in Sources */,
 				1DD8C0DA2C56DE1A0023D4EA /* DIModule.swift in Sources */,
 				1DA233652C5D9378003AC8E2 /* WorkoutSessionCoordinatorView.swift in Sources */,

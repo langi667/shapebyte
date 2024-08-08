@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: remove
 /**
  Assignment of an item like a push up or break or countdown items  to amount of sets
  */

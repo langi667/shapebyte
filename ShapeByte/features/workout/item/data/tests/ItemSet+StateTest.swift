@@ -28,6 +28,9 @@ final class ItemSet_StateTest: XCTestCase {
         sut = .paused(setData: data)
         XCTAssertFalse(sut.isRunning)
 
+        sut = .started
+        XCTAssertTrue(sut.isRunning)
+
         sut = .running(setData: data)
         XCTAssertTrue(sut.isRunning)
     }

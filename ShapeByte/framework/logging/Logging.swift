@@ -17,6 +17,11 @@ protocol Logging {
 extension Logging {
 
     @discardableResult
+    func logDebug(obj: Any) -> String {
+        return log(String(describing: obj), level: .debug)
+    }
+
+    @discardableResult
     func logDebug(_ message: String) -> String {
         return log(message, level: .debug)
     }

@@ -34,10 +34,10 @@ class ItemSetsHandler: ObservableObject {
             return
         }
 
-        self.state = .idle
-
         self.sets = sets
         currSetIndex = -1
+
+        self.state = .started(totalSets: sets.count)
         startNextSet()
     }
 
@@ -50,17 +50,9 @@ class ItemSetsHandler: ObservableObject {
         }
 
         let nextSet = sets[nextSetIndex]
-
-        statePublisherSink?.cancel()
-        statePublisherSink = nil
-
-        self.currSetHandler = startCoordinationFor(nextSet)
         currSetIndex = nextSetIndex
 
-        self.statePublisherSink = currSetHandler?.statePublisher
-            .sink { state in
-                self.handleSetStateReceived(state)
-        }
+        startCoordinationFor(nextSet, onReceivedState: handleSetStateReceived(_:))
     }
 
     private func handleSetStateReceived(_ state: ItemSet.State) {
@@ -69,6 +61,15 @@ class ItemSetsHandler: ObservableObject {
         switch state {
         case .idle:
             break // TODO: handle
+        case .started:
+            logger.logDebug("Started set \(currSetIndex)")
+            self.state = ItemSetsUIState.running(
+                currentSet: currSetIndex,
+                totalSets: sets.count,
+                currentSetProgress: Progress(0),
+                totalProgress: totalProgress(currentSetProgress: Progress(0))
+            )
+            break
         case .running(let setData):
             self.state = ItemSetsUIState.running(
                 currentSet: currSetIndex,
@@ -109,22 +110,42 @@ class ItemSetsHandler: ObservableObject {
     }
 
     private func finish() {
+        self.statePublisherSink?.cancel()
+        self.statePublisherSink = nil
+        self.currSetHandler = nil
+
+        self.currSetIndex = -1
+        self.sets = []
+
         state = .finished
     }
 
-    private func startCoordinationFor(_ itemSet: ItemSet) -> any ItemSetHandling {
-        let retVal: any ItemSetHandling
+    private func startCoordinationFor(
+        _ itemSet: ItemSet,
+        onReceivedState: @escaping (ItemSet.State) -> Void
+    ) {
+        let nextHandler: any ItemSetHandling
 
         switch itemSet {
         case .timed:
-            retVal = timedSetHandler
+            nextHandler = timedSetHandler
         default:
             // TODO: log fallback
-            retVal = defaultSetHandler
+            nextHandler = defaultSetHandler
         }
 
-        retVal.start(set: itemSet)
-        return retVal
+        if self.currSetHandler !== nextHandler{
+            self.statePublisherSink?.cancel()
+            self.statePublisherSink = nil
 
+            self.currSetHandler = nextHandler
+            self.statePublisherSink = nextHandler.statePublisher
+                .removeDuplicates()
+                .sink { state in
+                    onReceivedState(state)
+            }
+        }
+
+        nextHandler.start(set: itemSet)
     }
 }

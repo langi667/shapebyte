@@ -20,9 +20,9 @@ class WorkoutSessionDatasourceMock: WorkoutSessionDatasource {
                     item: pushUps,
                     itemSets: ItemSets(
                         sets: [
-                            ItemSet.timed(item: pushUps, duration: 20),
-                            ItemSet.timed(item: pushUps, duration: 40),
-                            ItemSet.timed(item: pushUps, duration: 60)
+                            ItemSet.timed(item: pushUps, duration: 3),
+                            ItemSet.timed(item: pushUps, duration: 4),
+                            ItemSet.timed(item: pushUps, duration: 5)
 
                         ]
                     )

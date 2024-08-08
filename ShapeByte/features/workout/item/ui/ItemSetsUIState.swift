@@ -9,6 +9,7 @@ import Foundation
 
 enum ItemSetsUIState: Equatable {
     case idle
+    case started(totalSets: Int)
     case running(currentSet: Int, totalSets: Int, currentSetProgress: Progress, totalProgress: Progress)
     case paused(currentSet: Int, totalSets: Int, currentSetProgress: Progress, totalProgress: Progress)
     case finished

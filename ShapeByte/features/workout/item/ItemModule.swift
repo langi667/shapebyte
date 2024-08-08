@@ -27,17 +27,14 @@ class ItemModule {
     static func setsHandler() -> ItemSetsHandler {
         return ItemSetsHandler(
             logger: SharedModule.logger,
-            timedSetHandler: self.timedSetHandler,
+            timedSetHandler: self.timedSetHandler(),
             defaultSetHandler: self.defaultSetHandler
         )
     }
 
-    private static let timedSetHandler: some ItemSetHandling = diModule.instanceTypeOrCreate(
-        type: TimedItemSetHandler.self,
-        create: {
-            TimedItemSetHandler()
-        }
-    )
+    private static func timedSetHandler() -> some ItemSetHandling {
+        return TimedItemSetHandler(logger: SharedModule.logger)
+    }
 
     private static let defaultSetHandler: some ItemSetHandling = diModule.instanceTypeOrCreate(
         type: DefaultItemSetHandler.self,
