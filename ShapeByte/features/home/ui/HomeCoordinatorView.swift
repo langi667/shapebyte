@@ -17,7 +17,7 @@ struct HomeCoordinatorView: View {
             case .root, .workout:
                 HomeRootView(viewModel: homeRootViewModel)
                     .onReceive(homeRootViewModel.eventPublisher) { event in
-                        coordinator.onHomeRootEventreceived(event: event)
+                        coordinator.onHomeRootEventReceived(event: event)
                     }
                     .fullScreenCover(isPresented: $coordinator.presentWorkoutModal) {
                         ModalViewWrapper(

@@ -20,7 +20,7 @@ class HomeCoordinator: ViewModel, ObservableObject {
     func onViewAppeared() { /* No op */ }
     func onViewDisappeared() { /* No op */ }
 
-    func onHomeRootEventreceived(event: HomeRootViewModel.Event) {
+    func onHomeRootEventReceived(event: HomeRootViewModel.Event) {
         switch event {
         case .currWorkoutScheduleEntrySelected:
             self.state = .workout

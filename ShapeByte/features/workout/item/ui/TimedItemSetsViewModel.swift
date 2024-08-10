@@ -20,7 +20,7 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
     @Published var ringProgress: CGFloat = 0
     @Published var descriptionText: String = ""
 
-    override func handleUIStateReceived(_ state: ItemSetsUIState) {
+    override func handleUIStateReceived(_ state: ItemSetsUIState) -> Bool {
         switch state {
         case .idle:
             break
@@ -33,7 +33,7 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
             guard let setDuration = self
                 .group
                 .itemSetFor(index: setIndex)?.duration else {
-                return
+                return true
             }
 
             let lastSetIndex = currentSetIndex
@@ -45,9 +45,6 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
                 let setDurationString = DurationFormatter.secondsToString(setDuration)
                 descriptionText = "Perform as much \(group.item.name)s as possible in \(setDurationString) seconds"
 
-                withAnimation( .linear(duration: setDuration) ) {
-                    ringProgress = 1
-                }
             }
 
             let elapsed = ((1.0 - currentSetProgress.value) * setDuration)
@@ -57,22 +54,25 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
             }
 
             self.currentSetProgress = currentSetProgress
-            let animationDuration: TimeInterval
+            let setsProgressAnimationDuration: TimeInterval = totalProgress.value == 0 ? 0 : 1
 
-            if totalProgress.value == 0 {
-                animationDuration = 0
-            } else {
-                animationDuration = setDuration
+            withAnimation( .linear(duration: setsProgressAnimationDuration) ) {
+                self.setsProgress = totalProgress
             }
 
-            withAnimation( .linear(duration: animationDuration) ) {
-                self.setsProgress = totalProgress
+            let ringProgressAnimationDuration: TimeInterval = setsProgress.value == 0 ? 0 : 1
+
+            withAnimation(.linear(duration: ringProgressAnimationDuration)) {
+                ringProgress = currentSetProgress.value
             }
 
         case .paused:
             break // TODO: handle
         case .finished:
+            return false
             break
         }
+
+        return true
     }
 }

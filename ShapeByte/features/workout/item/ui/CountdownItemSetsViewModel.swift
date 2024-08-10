@@ -18,7 +18,7 @@ class CountdownItemSetsViewModel: ItemSetsViewModel {
 
     private var currentSet: Int = -1
 
-    override func handleUIStateReceived(_ state: ItemSetsUIState) {
+    override func handleUIStateReceived(_ state: ItemSetsUIState) -> Bool{
         switch state {
         case .idle:
             break
@@ -31,6 +31,8 @@ class CountdownItemSetsViewModel: ItemSetsViewModel {
         case .finished:
             break // TODO: set state to finish
         }
+
+        return true
     }
 
     private func handleStateRunning(currentSet: Int) {

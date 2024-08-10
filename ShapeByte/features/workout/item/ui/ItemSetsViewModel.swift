@@ -37,8 +37,13 @@ open class ItemSetsViewModel: ViewModel, ObservableObject {
         stop()
     }
 
-    func handleUIStateReceived( _ state: ItemSetsUIState ) {
-        /* Override to perform specific actions for new UI state */
+    /**
+     Override to perform specific actions for new UI state 
+     return true, if the state was handled. In case the state is set. If false is returned,, the specific implementation has to take over and set the state when it's required
+     */
+
+    func handleUIStateReceived( _ state: ItemSetsUIState ) -> Bool {
+        return true
     }
 
     func startWith(_ group: ItemGroup) {
@@ -79,7 +84,9 @@ open class ItemSetsViewModel: ViewModel, ObservableObject {
     }
 
     private func handleCoordinatorStateChanged(_ state: ItemSetsUIState) {
-        handleUIStateReceived(state)
-        self.state = state
+        if handleUIStateReceived(state) {
+            self.state = state
+        }
+
     }
 }
