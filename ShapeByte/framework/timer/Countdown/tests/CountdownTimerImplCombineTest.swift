@@ -8,7 +8,7 @@
 import XCTest
 
 final class CountdownTimerImplCombineTest: XCTestCase {
-    var sut: CountdownTimer? = nil
+    var sut: CountdownTimer?
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -76,7 +76,7 @@ final class CountdownTimerImplCombineTest: XCTestCase {
                     expectationStop.fulfill()
                 }
             }
-        
+
         wait(for: [expectationStop], timeout: 0.5)
         XCTAssertEqual(self.sut?.state, .stopped)
 
@@ -104,7 +104,7 @@ final class CountdownTimerImplCombineTest: XCTestCase {
         XCTAssertEqual(self.sut?.state, .stopped)
 
         expectation = XCTestExpectation(description: "Timer")
-        
+
         _ = sut?.start(interval: interval) { interval in
             XCTAssertEqual(self.sut?.state, .running)
             currInterval += interval

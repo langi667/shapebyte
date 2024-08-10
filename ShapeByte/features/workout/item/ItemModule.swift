@@ -33,7 +33,10 @@ class ItemModule {
     }
 
     private static func timedSetHandler() -> some ItemSetHandling {
-        return TimedItemSetHandler(logger: SharedModule.logger)
+        return TimedItemSetHandler(
+            logger: SharedModule.logger,
+            timer: TimerModule.countdownTimer
+        )
     }
 
     private static let defaultSetHandler: some ItemSetHandling = diModule.instanceTypeOrCreate(

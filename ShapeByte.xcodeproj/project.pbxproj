@@ -167,6 +167,9 @@
 		1DED4EE62C68031B00E59732 /* CountdownTimerImplCombineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EE52C68031B00E59732 /* CountdownTimerImplCombineTest.swift */; };
 		1DED4EE92C680A7E00E59732 /* TimerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EE82C680A7E00E59732 /* TimerModule.swift */; };
 		1DED4EEA2C680A7E00E59732 /* TimerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EE82C680A7E00E59732 /* TimerModule.swift */; };
+		1DED4EED2C68103100E59732 /* CountdownTimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */; };
+		1DED4EEE2C68103100E59732 /* CountdownTimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */; };
+		1DED4EF32C68160800E59732 /* TimerModule+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */; };
 		1DF3AF442C5021E10054520F /* ShapeByteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF432C5021E10054520F /* ShapeByteApp.swift */; };
 		1DF3AF462C5021E10054520F /* AppCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF452C5021E10054520F /* AppCoordinatorView.swift */; };
 		1DF3AF4A2C5021E30054520F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3AF492C5021E30054520F /* Assets.xcassets */; };
@@ -279,6 +282,8 @@
 		1DED4EE12C67FF6800E59732 /* CountdownTimerImplCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerImplCombine.swift; sourceTree = "<group>"; };
 		1DED4EE52C68031B00E59732 /* CountdownTimerImplCombineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerImplCombineTest.swift; sourceTree = "<group>"; };
 		1DED4EE82C680A7E00E59732 /* TimerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModule.swift; sourceTree = "<group>"; };
+		1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerMock.swift; sourceTree = "<group>"; };
+		1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerModule+Mocks.swift"; sourceTree = "<group>"; };
 		1DF3AF402C5021E10054520F /* ShapeByte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeByte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3AF432C5021E10054520F /* ShapeByteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteApp.swift; sourceTree = "<group>"; };
 		1DF3AF452C5021E10054520F /* AppCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorView.swift; sourceTree = "<group>"; };
@@ -580,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				1DED4EE82C680A7E00E59732 /* TimerModule.swift */,
+				1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */,
 				1DED4EEB2C680A8600E59732 /* Countdown */,
 			);
 			path = timer;
@@ -821,9 +827,18 @@
 			children = (
 				1DAB77302C67FE420024C07D /* CountdownTimer.swift */,
 				1DAB77332C67FF160024C07D /* impl */,
+				1DED4EEF2C68104200E59732 /* mocks */,
 				1DED4EE42C6802D400E59732 /* tests */,
 			);
 			path = Countdown;
+			sourceTree = "<group>";
+		};
+		1DED4EEF2C68104200E59732 /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */,
+			);
+			path = mocks;
 			sourceTree = "<group>";
 		};
 		1DF3AF372C5021E10054520F = {
@@ -1008,6 +1023,7 @@
 				1D360E7C2C5A6A3500EDC052 /* WorkoutSessionModule.swift in Sources */,
 				1DA2338A2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */,
 				1DA233A22C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift in Sources */,
+				1DED4EED2C68103100E59732 /* CountdownTimerMock.swift in Sources */,
 				1DA233432C5D7714003AC8E2 /* WorkoutScheduleRepository.swift in Sources */,
 				1DE5F8092C5CB63000BDB7A3 /* SharedModule.swift in Sources */,
 				1DA233802C5FC656003AC8E2 /* WorkoutHistoryDataSourceMocks.swift in Sources */,
@@ -1134,6 +1150,7 @@
 				1DA233412C5D7676003AC8E2 /* WorkoutScheduleEntry.swift in Sources */,
 				1DA233852C5FC8D1003AC8E2 /* RecentWorkoutHistoryUseCase.swift in Sources */,
 				1DD8C1352C5815580023D4EA /* Result+ExtensionsTest.swift in Sources */,
+				1DED4EEE2C68103100E59732 /* CountdownTimerMock.swift in Sources */,
 				1DD2ABB32C62B2D40072D3EE /* TimedItemSetHandlerTest.swift in Sources */,
 				1DA233662C5D938A003AC8E2 /* WorkoutSessionFinishedScreen.swift in Sources */,
 				1DD8C0DA2C56DE1A0023D4EA /* DIModule.swift in Sources */,
@@ -1161,6 +1178,7 @@
 				1D360EAA2C5AF9C000EDC052 /* ItemGroup.swift in Sources */,
 				1D360E812C5A6AEC00EDC052 /* WorkoutSessionDatasourceMock.swift in Sources */,
 				1DD8C0DF2C56EB510023D4EA /* ItemModule.swift in Sources */,
+				1DED4EF32C68160800E59732 /* TimerModule+Mocks.swift in Sources */,
 				1D360EAF2C5B6FB900EDC052 /* TimedItemSetsViewModel.swift in Sources */,
 				1DD8C1152C57C45B0023D4EA /* Logging.swift in Sources */,
 				1DA233552C5D79C7003AC8E2 /* HomeCoordinator.swift in Sources */,

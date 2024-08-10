@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class CountdownTimerImplCombine: CountdownTimer {
-    private var cancellable: AnyCancellable? = nil
+    private var cancellable: AnyCancellable?
     private (set) var state: CountdownTimerState = .idle
 
     func start(interval: TimeInterval = 1, onTick: @escaping (_ interval: TimeInterval) -> Void) -> any CountdownTimer {
@@ -29,11 +29,11 @@ class CountdownTimerImplCombine: CountdownTimer {
 
         return self
     }
-    
+
     func pause() {
         self.state = .paused
     }
-    
+
     func stop() {
         self.state = .stopped
         self.cancellable?.cancel()

@@ -69,7 +69,6 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
         case .paused:
             break // TODO: handle
         case .finished:
-            return false
             break
         }
 

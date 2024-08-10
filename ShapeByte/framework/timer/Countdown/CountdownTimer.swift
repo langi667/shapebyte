@@ -22,13 +22,3 @@ public protocol CountdownTimer {
     func pause()
     func stop()
 }
-
-
-/*
- Timer
-     .publish(every: interval, on: .main, in: .common)
-     .autoconnect()
-     .sink { _ in
-         self.handleTimerTick(interval: interval)
-     }
- */

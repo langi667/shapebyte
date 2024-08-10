@@ -101,6 +101,6 @@ final class TimedItemSetHandlerTest: XCTestCase {
         }
 
     private func createSUT() -> TimedItemSetHandler {
-        return TimedItemSetHandler(logger: DefaultLogger())
+        return TimedItemSetHandler(logger: DefaultLogger(), timer: TimerModule.countdownTimerMock)
     }
 }

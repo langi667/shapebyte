@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct TimerModule {
     private static let diModule = DIModule()
 
@@ -18,7 +17,6 @@ struct TimerModule {
                 CountdownTimerImplCombine()
             }
         )
-
 
     private init() {}
 }

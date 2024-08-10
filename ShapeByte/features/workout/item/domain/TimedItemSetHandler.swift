@@ -17,7 +17,8 @@ class TimedItemSetHandler: ItemSetHandling {
     fileprivate(set) var set: ItemSet?
 
     private var duration: TimeInterval = 0
-    private var timer: AnyCancellable?
+    private let timer: CountdownTimer
+
     private var elapsedTime: TimeInterval = 0
     private var progress: Progress = .zero
 
@@ -27,8 +28,9 @@ class TimedItemSetHandler: ItemSetHandling {
         }
     }
 
-    init(logger: Logging) {
+    init(logger: Logging, timer: CountdownTimer) {
         self.logger = logger
+        self.timer = timer
     }
 
     func start(set: ItemSet) {
@@ -66,17 +68,13 @@ class TimedItemSetHandler: ItemSetHandling {
     private func startTimer() {
         let interval: TimeInterval = 1
 
-        timer = Timer
-            .publish(every: interval, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                self.handleTimerTick(interval: interval)
-            }
+        _ = timer.start(interval: interval) { interval in
+            self.handleTimerTick(interval: interval)
+        }
     }
 
     private func stopTimer() {
-        timer?.cancel()
-        timer = nil
+        timer.stop()
     }
 
     private func handleTimerTick(interval: CGFloat) {
