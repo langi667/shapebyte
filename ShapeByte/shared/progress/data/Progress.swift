@@ -7,7 +7,6 @@
 
 import Foundation
 
-// TODO: test
 struct Progress: Equatable {
     static let zero = Progress(0)
     static let complete = Progress(1)
@@ -23,7 +22,6 @@ struct Progress: Equatable {
         self.value = Self.adjustProgress(value)
     }
 
-    // TODO: test
     // TODO: consider rounding rule
     init(absoluteValue: Int) {
         let relativeValue = CGFloat(absoluteValue) / 100.0
@@ -31,15 +29,7 @@ struct Progress: Equatable {
     }
 
     private static func adjustProgress(_ progress: CGFloat) -> CGFloat {
-        let retVal: CGFloat
-        if progress > 1.0 {
-            retVal = 1.0
-        } else if progress < 0.0 {
-            retVal = 0.0
-        } else {
-            retVal = progress
-        }
-
+        let retVal: CGFloat = min(1.0, progress)
         return retVal
     }
 }

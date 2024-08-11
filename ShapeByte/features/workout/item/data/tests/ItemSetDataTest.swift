@@ -19,7 +19,7 @@ final class ItemSetDataTest: XCTestCase {
 
     func testTimedItemData() throws {
         let progress = Progress(0.5)
-        let sut: ItemSet.Data = .timed(timePassed: 30, timeRemaining: 30, progress: progress)
+        let sut: ItemSet.Data = .timed(timePassed: 30, timeRemaining: 30, progress: progress, nextProgress: .complete)
 
         XCTAssertEqual(progress, sut.progress)
     }

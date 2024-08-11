@@ -46,39 +46,6 @@ final class ItemSetsHandlerTest: XCTestCase {
         wait(for: [expectation])
 
         XCTAssertTrue(states.contains(.started(totalSets: 5)))
-
-//        let pushUps = Exercise(name: "Push Up")
-//        let pullUps = Exercise(name: "Pull Up")
-//
-//        let session = WorkoutSession(
-//            items: [
-//                Countdown(seconds: 3).toGroup(),
-//
-//                ItemGroup(
-//                    item: pushUps,
-//                    itemSets: ItemSets(
-//                        sets: [
-//                            ItemSet.timed(item: pushUps, duration: 3),
-//                            ItemSet.timed(item: pushUps, duration: 4),
-//                            ItemSet.timed(item: pushUps, duration: 5)
-//
-//                        ]
-//                    )
-//                ),
-//
-//                ItemGroup(
-//                    item: pullUps,
-//                    itemSets: ItemSets(
-//                        sets: [
-//                            ItemSet.timed(item: pullUps, duration: 20),
-//                            ItemSet.timed(item: pullUps, duration: 40),
-//                            ItemSet.timed(item: pullUps, duration: 60)
-//                        ]
-//                    )
-//                )
-//            ]
-//        )
-
     }
 
     func createSUT() -> ItemSetsHandler {

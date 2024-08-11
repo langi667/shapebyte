@@ -14,7 +14,6 @@ enum ItemSetsState: Equatable {
     case paused
     case finished
 
-    // TODO: test
     var isRunning: Bool {
         let retVal: Bool
 

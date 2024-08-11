@@ -41,11 +41,6 @@ enum ItemSet: Equatable, ItemProviding {
     }
 
     // TODO: Test!
-    func castItem<T: Item>() -> T? {
-        return self.item as? T
-    }
-
-    // TODO: Test!
     static func == (lhs: ItemSet, rhs: ItemSet) -> Bool {
         switch (lhs, rhs) {
         case let (.timed(lhsItem, lhsDuration), .timed(rhsItem, rhsDuration)):

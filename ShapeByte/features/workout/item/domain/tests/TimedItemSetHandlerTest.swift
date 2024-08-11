@@ -38,8 +38,8 @@ final class TimedItemSetHandlerTest: XCTestCase {
         let duration = 1.0
 
         let expectedState: [ItemSet.State] = [
-            .started,
-            .running(setData: ItemSet.Data.timed(timePassed: duration, timeRemaining: 0, progress: .complete)),
+            .started(setData: ItemSet.Data.timed(timePassed: 0, timeRemaining: duration, progress: .zero, nextProgress: .complete)),
+            .running(setData: ItemSet.Data.timed(timePassed: duration, timeRemaining: 0, progress: .complete, nextProgress: .complete)),
             .finished
         ]
 
@@ -63,14 +63,29 @@ final class TimedItemSetHandlerTest: XCTestCase {
         let duration: TimeInterval = 5.0
 
         var expectedState: [ItemSet.State] = [
-            .started
+            .started(
+                setData: ItemSet.Data.timed(
+                    timePassed: 0,
+                    timeRemaining: duration,
+                    progress: .zero,
+                    nextProgress: Progress( 1.0 / duration )
+                )
+            )
         ]
 
         for i in 1...Int(duration) {
             let currSecond = Double(i)
 
             expectedState.append(
-                .running(setData: ItemSet.Data.timed(timePassed: currSecond, timeRemaining: duration - currSecond, progress: Progress(currSecond / duration)))
+                .running(
+                    setData:
+                        ItemSet.Data.timed(
+                            timePassed: currSecond,
+                            timeRemaining: duration - currSecond,
+                            progress: Progress(currSecond / duration),
+                            nextProgress: Progress(min(1, (currSecond + 1) / duration))
+                        )
+                )
             )
         }
 

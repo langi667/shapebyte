@@ -24,11 +24,11 @@ final class ItemSet_StateTest: XCTestCase {
         sut = .finished
         XCTAssertFalse(sut.isRunning)
 
-        let data: ItemSet.Data = .timed(timePassed: 30, timeRemaining: 30, progress: Progress(0.5))
+        let data: ItemSet.Data = .timed(timePassed: 30, timeRemaining: 30, progress: Progress(0.5), nextProgress: .complete)
         sut = .paused(setData: data)
         XCTAssertFalse(sut.isRunning)
 
-        sut = .started
+        sut = .started(setData: data)
         XCTAssertTrue(sut.isRunning)
 
         sut = .running(setData: data)
@@ -42,7 +42,7 @@ final class ItemSet_StateTest: XCTestCase {
         sut = .finished
         XCTAssertTrue(sut.isStopped)
 
-        let data: ItemSet.Data = .timed(timePassed: 30, timeRemaining: 30, progress: Progress(0.5))
+        let data: ItemSet.Data = .timed(timePassed: 30, timeRemaining: 30, progress: Progress(0.5), nextProgress: .complete)
         sut = .paused(setData: data)
         XCTAssertFalse(sut.isStopped)
 

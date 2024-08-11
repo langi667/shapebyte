@@ -171,6 +171,8 @@
 		1DED4EEE2C68103100E59732 /* CountdownTimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */; };
 		1DED4EF32C68160800E59732 /* TimerModule+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */; };
 		1DED4EF52C68C61500E59732 /* ItemSetsHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EF42C68C61500E59732 /* ItemSetsHandlerTest.swift */; };
+		1DED4EF82C690E2900E59732 /* ItemSetsStateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EF72C690E2900E59732 /* ItemSetsStateTest.swift */; };
+		1DED4EFB2C69103300E59732 /* ProgressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EFA2C69103300E59732 /* ProgressTest.swift */; };
 		1DF3AF442C5021E10054520F /* ShapeByteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF432C5021E10054520F /* ShapeByteApp.swift */; };
 		1DF3AF462C5021E10054520F /* AppCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF452C5021E10054520F /* AppCoordinatorView.swift */; };
 		1DF3AF4A2C5021E30054520F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3AF492C5021E30054520F /* Assets.xcassets */; };
@@ -286,6 +288,8 @@
 		1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerMock.swift; sourceTree = "<group>"; };
 		1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerModule+Mocks.swift"; sourceTree = "<group>"; };
 		1DED4EF42C68C61500E59732 /* ItemSetsHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetsHandlerTest.swift; sourceTree = "<group>"; };
+		1DED4EF72C690E2900E59732 /* ItemSetsStateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetsStateTest.swift; sourceTree = "<group>"; };
+		1DED4EFA2C69103300E59732 /* ProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTest.swift; sourceTree = "<group>"; };
 		1DF3AF402C5021E10054520F /* ShapeByte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeByte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3AF432C5021E10054520F /* ShapeByteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteApp.swift; sourceTree = "<group>"; };
 		1DF3AF452C5021E10054520F /* AppCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorView.swift; sourceTree = "<group>"; };
@@ -626,6 +630,7 @@
 			isa = PBXGroup;
 			children = (
 				1DD8C0A62C562A310023D4EA /* Progress.swift */,
+				1DED4EF92C69101E00E59732 /* tests */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -700,6 +705,7 @@
 				1DFBA7C32C5BBE8400F9BC78 /* CountdownItemSetsView.swift */,
 				1DFBA7CA2C5BDFA600F9BC78 /* CountdownItemSetsViewModel.swift */,
 				1DA233352C5D388A003AC8E2 /* PendingExerciseView.swift */,
+				1DED4EF62C690E1300E59732 /* tests */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -842,6 +848,22 @@
 				1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */,
 			);
 			path = mocks;
+			sourceTree = "<group>";
+		};
+		1DED4EF62C690E1300E59732 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1DED4EF72C690E2900E59732 /* ItemSetsStateTest.swift */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		1DED4EF92C69101E00E59732 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1DED4EFA2C69103300E59732 /* ProgressTest.swift */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 		1DF3AF372C5021E10054520F = {
@@ -1156,6 +1178,7 @@
 				1DD8C1352C5815580023D4EA /* Result+ExtensionsTest.swift in Sources */,
 				1DED4EEE2C68103100E59732 /* CountdownTimerMock.swift in Sources */,
 				1DD2ABB32C62B2D40072D3EE /* TimedItemSetHandlerTest.swift in Sources */,
+				1DED4EF82C690E2900E59732 /* ItemSetsStateTest.swift in Sources */,
 				1DA233662C5D938A003AC8E2 /* WorkoutSessionFinishedScreen.swift in Sources */,
 				1DD8C0DA2C56DE1A0023D4EA /* DIModule.swift in Sources */,
 				1DA233652C5D9378003AC8E2 /* WorkoutSessionCoordinatorView.swift in Sources */,
@@ -1167,6 +1190,7 @@
 				1D360E8F2C5A7C0D00EDC052 /* ViewModel.swift in Sources */,
 				1DA233672C5D939B003AC8E2 /* TimedItemSetsView.swift in Sources */,
 				1DD8C0D92C56DD9A0023D4EA /* DIModuleTest.swift in Sources */,
+				1DED4EFB2C69103300E59732 /* ProgressTest.swift in Sources */,
 				1DD8C13B2C5820440023D4EA /* Array+Extensions.swift in Sources */,
 				1DD8C11B2C57C46C0023D4EA /* DefaultLogger.swift in Sources */,
 				1D360E7D2C5A6A3500EDC052 /* WorkoutSessionModule.swift in Sources */,

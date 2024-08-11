@@ -9,7 +9,7 @@ import XCTest
 
 final class ItemSetTest: XCTestCase {
 
-    private struct TestItem: Item {
+    private struct TestItem: Item, Equatable {
         var name = "TestItem"
 
         func isEqualTo(_ other: Any) -> Bool {
@@ -18,7 +18,7 @@ final class ItemSetTest: XCTestCase {
 
     }
 
-    private struct TestItemTwo: Item {
+    private struct TestItemTwo: Item, Equatable {
         var name = "TestItemTwo"
 
         func isEqualTo(_ other: Any) -> Bool {
@@ -35,26 +35,24 @@ final class ItemSetTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testCastItem() throws {
-        let duration = 30.0
-        let testItem = TestItem()
-        let sut: ItemSet = .timed(item: testItem, duration: duration)
+    func testDurationShouldReturnValue() throws {
+        let duration = 5.0
+        let sut = ItemSet.timed(item: TestItemTwo(), duration: duration)
 
-        let result: TestItem? = sut.castItem()
-        XCTAssertNotNil(result)
-        XCTAssertEqual(testItem, result)
-
-        let resultTwo: TestItemTwo? = sut.castItem()
-        XCTAssertNil(resultTwo)
+        XCTAssertEqual(duration, sut.duration)
     }
 
-    func testTimedItemSet() throws {
-        let duration = 30.0
-        let exercise = Exercise.none
-        let sut: ItemSet = .timed(item: exercise, duration: duration)
+    func testIsTimedShouldReturnTrue() throws {
+        let duration = 5.0
+        let sut = ItemSet.timed(item: TestItemTwo(), duration: duration)
 
         XCTAssertTrue(sut.isTimed)
-        XCTAssertEqual(duration, sut.duration)
-        XCTAssertEqual(exercise, sut.castItem())
+    }
+
+    func testItem() throws {
+        let item = TestItemTwo()
+        let sut = ItemSet.timed(item: TestItemTwo(), duration: 5.0)
+
+        XCTAssertEqual(item, sut.item as! ItemSetTest.TestItemTwo)
     }
 }

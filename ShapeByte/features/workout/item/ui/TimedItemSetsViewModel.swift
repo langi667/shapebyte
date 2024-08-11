@@ -29,7 +29,6 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
             self.currentSetIndex = 0
             self.currentSetElapsedTime = 0
 
-     
         case .running(let setIndex, _, let currentSetProgress, let totalProgress, let setData):
             guard let setDuration = self
                 .group
