@@ -36,7 +36,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
 
     @Published var state: State = .idle
     @Published var session: WorkoutSession = .empty
-    @Published var currentSetsState: ItemSetsUIState = .idle
+    @Published var currentSetsState: ItemSetsState = .idle
 
     let timedItemSetsViewModel: TimedItemSetsViewModel
     let countdownItemSetsViewModel: CountdownItemSetsViewModel
@@ -68,7 +68,7 @@ class WorkoutSessionCoordinator: ViewModel, ObservableObject {
 
     func onViewDisappeared() {}
 
-    func onRunningSetsStateChanged(_ state: ItemSetsUIState) {
+    func onRunningSetsStateChanged(_ state: ItemSetsState) {
         if state == .finished {
             self.continueRunning()
         }

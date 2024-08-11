@@ -56,7 +56,7 @@ struct TimedItemSetsView: View {
 }
 
 struct TimedItemSetsView_Previews: PreviewProvider {
-    static let viewModel = ItemModule.timedItemSetsViewModel()
+    static let viewModel = WorkoutItemModule.timedItemSetsViewModel()
 
     static var previews: some View {
         TimedItemSetsView(

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ItemModule {
+class WorkoutItemModule {
     static private let diModule = DIModule()
 
     static func timedItemSetsViewModel() -> TimedItemSetsViewModel {
@@ -32,19 +32,19 @@ class ItemModule {
         )
     }
 
+    static let defaultSetHandler: some ItemSetHandling = diModule.instanceTypeOrCreate(
+        type: DefaultItemSetHandler.self,
+        create: {
+            DefaultItemSetHandler()
+        }
+    )
+
     private static func timedSetHandler() -> some ItemSetHandling {
         return TimedItemSetHandler(
             logger: SharedModule.logger,
             timer: TimerModule.countdownTimer
         )
     }
-
-    private static let defaultSetHandler: some ItemSetHandling = diModule.instanceTypeOrCreate(
-        type: DefaultItemSetHandler.self,
-        create: {
-            DefaultItemSetHandler()
-        }
-    )
 
     private init() {}
 }

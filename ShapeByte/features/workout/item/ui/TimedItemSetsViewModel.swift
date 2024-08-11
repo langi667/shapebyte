@@ -20,7 +20,7 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
     @Published var ringProgress: CGFloat = 0
     @Published var descriptionText: String = ""
 
-    override func handleUIStateReceived(_ state: ItemSetsUIState) -> Bool {
+    override func handleSetsStateReceived(_ state: ItemSetsState) -> Bool {
         switch state {
         case .idle:
             break
@@ -44,7 +44,6 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
                 ringProgress = 0
                 let setDurationString = DurationFormatter.secondsToString(setDuration)
                 descriptionText = "Perform as much \(group.item.name)s as possible in \(setDurationString) seconds"
-
             }
 
             let elapsed = ((1.0 - currentSetProgress.value) * setDuration)

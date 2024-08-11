@@ -53,6 +53,15 @@ class TimedItemSetHandler: ItemSetHandling {
         }
     }
 
+    func pause() {
+        if !state.isRunning {
+            return
+        }
+
+        self.state = .paused(setData: currentStateData())
+        self.timer.pause()
+    }
+
     func finish() {
         self.stopTimer()
         resetValues()

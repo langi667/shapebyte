@@ -27,7 +27,7 @@ struct CountdownItemSetsView: View {
 }
 
 struct CountdownItemSetsView_Previews: PreviewProvider {
-    static let viewModel = ItemModule.countdownItemSetsViewModel()
+    static let viewModel = WorkoutItemModule.countdownItemSetsViewModel()
 
     static var previews: some View {
         CountdownItemSetsView(

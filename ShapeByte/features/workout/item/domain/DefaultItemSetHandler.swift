@@ -16,4 +16,9 @@ class DefaultItemSetHandler: ItemSetHandling {
 
     func start(set: ItemSet) { }
 
+    // TODO: implement
+    func pause() {
+
+    }
+
 }

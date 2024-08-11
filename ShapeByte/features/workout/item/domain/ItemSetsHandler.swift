@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class ItemSetsHandler: ObservableObject {
-    @Published var state: ItemSetsUIState = .idle
+    @Published var state: ItemSetsState = .idle
 
     private let logger: Logging
     private var currSetHandler: (any ItemSetHandling)?
@@ -63,26 +63,21 @@ class ItemSetsHandler: ObservableObject {
             break // TODO: handle
             case .started:
             logger.logDebug("Started set \(currSetIndex)")
-            self.state = ItemSetsUIState.running(
+            self.state = ItemSetsState.running(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: Progress(0),
                 totalProgress: totalProgress(currentSetProgress: Progress(0))
             )
         case .running(let setData):
-            self.state = ItemSetsUIState.running(
+            self.state = ItemSetsState.running(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: setData.progress,
                 totalProgress: totalProgress(currentSetProgress: setData.progress)
             )
         case .paused(let setData):
-            self.state = ItemSetsUIState.paused(
-                currentSet: currSetIndex,
-                totalSets: sets.count,
-                currentSetProgress: setData.progress,
-                totalProgress: totalProgress(currentSetProgress: setData.progress)
-            )
+            self.state = ItemSetsState.paused
 
         case .finished:
             if nextSetIndex >= sets.count {

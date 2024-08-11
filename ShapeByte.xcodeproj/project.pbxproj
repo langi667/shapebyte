@@ -31,8 +31,8 @@
 		1D360E9C2C5AC2C800EDC052 /* ItemSet+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E9A2C5AC2C800EDC052 /* ItemSet+State.swift */; };
 		1D360E9E2C5AC2F800EDC052 /* ItemSet+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E9D2C5AC2F800EDC052 /* ItemSet+Data.swift */; };
 		1D360E9F2C5AC2F800EDC052 /* ItemSet+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360E9D2C5AC2F800EDC052 /* ItemSet+Data.swift */; };
-		1D360EA12C5AC5CD00EDC052 /* ItemSetsUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA02C5AC5CD00EDC052 /* ItemSetsUIState.swift */; };
-		1D360EA22C5AC5CD00EDC052 /* ItemSetsUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA02C5AC5CD00EDC052 /* ItemSetsUIState.swift */; };
+		1D360EA12C5AC5CD00EDC052 /* ItemSetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA02C5AC5CD00EDC052 /* ItemSetsState.swift */; };
+		1D360EA22C5AC5CD00EDC052 /* ItemSetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA02C5AC5CD00EDC052 /* ItemSetsState.swift */; };
 		1D360EA52C5ACC1600EDC052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA42C5ACC1600EDC052 /* Exercise.swift */; };
 		1D360EA62C5ACC1600EDC052 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA42C5ACC1600EDC052 /* Exercise.swift */; };
 		1D360EA92C5AF9C000EDC052 /* ItemGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EA82C5AF9C000EDC052 /* ItemGroup.swift */; };
@@ -117,8 +117,8 @@
 		1DD8C0D72C56DC6E0023D4EA /* DIModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0D32C56DC6E0023D4EA /* DIModule.swift */; };
 		1DD8C0D92C56DD9A0023D4EA /* DIModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0D12C56DC6E0023D4EA /* DIModuleTest.swift */; };
 		1DD8C0DA2C56DE1A0023D4EA /* DIModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0D32C56DC6E0023D4EA /* DIModule.swift */; };
-		1DD8C0DD2C56E0030023D4EA /* ItemModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0DC2C56E0030023D4EA /* ItemModule.swift */; };
-		1DD8C0DF2C56EB510023D4EA /* ItemModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0DC2C56E0030023D4EA /* ItemModule.swift */; };
+		1DD8C0DD2C56E0030023D4EA /* WorkoutItemModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0DC2C56E0030023D4EA /* WorkoutItemModule.swift */; };
+		1DD8C0DF2C56EB510023D4EA /* WorkoutItemModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0DC2C56E0030023D4EA /* WorkoutItemModule.swift */; };
 		1DD8C0E02C56EB600023D4EA /* TimedItemSetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0B02C56783C0023D4EA /* TimedItemSetHandler.swift */; };
 		1DD8C0E52C56EBC70023D4EA /* ItemSetHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0C02C56C3990023D4EA /* ItemSetHandling.swift */; };
 		1DD8C0E62C56EBD10023D4EA /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C0A62C562A310023D4EA /* Progress.swift */; };
@@ -170,6 +170,7 @@
 		1DED4EED2C68103100E59732 /* CountdownTimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */; };
 		1DED4EEE2C68103100E59732 /* CountdownTimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */; };
 		1DED4EF32C68160800E59732 /* TimerModule+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */; };
+		1DED4EF52C68C61500E59732 /* ItemSetsHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DED4EF42C68C61500E59732 /* ItemSetsHandlerTest.swift */; };
 		1DF3AF442C5021E10054520F /* ShapeByteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF432C5021E10054520F /* ShapeByteApp.swift */; };
 		1DF3AF462C5021E10054520F /* AppCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3AF452C5021E10054520F /* AppCoordinatorView.swift */; };
 		1DF3AF4A2C5021E30054520F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3AF492C5021E30054520F /* Assets.xcassets */; };
@@ -208,7 +209,7 @@
 		1D360E972C5ABE3C00EDC052 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1D360E9A2C5AC2C800EDC052 /* ItemSet+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemSet+State.swift"; sourceTree = "<group>"; };
 		1D360E9D2C5AC2F800EDC052 /* ItemSet+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemSet+Data.swift"; sourceTree = "<group>"; };
-		1D360EA02C5AC5CD00EDC052 /* ItemSetsUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetsUIState.swift; sourceTree = "<group>"; };
+		1D360EA02C5AC5CD00EDC052 /* ItemSetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetsState.swift; sourceTree = "<group>"; };
 		1D360EA42C5ACC1600EDC052 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		1D360EA82C5AF9C000EDC052 /* ItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGroup.swift; sourceTree = "<group>"; };
 		1D360EB32C5B846B00EDC052 /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
@@ -255,7 +256,7 @@
 		1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeReader.swift; sourceTree = "<group>"; };
 		1DD8C0D12C56DC6E0023D4EA /* DIModuleTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIModuleTest.swift; sourceTree = "<group>"; };
 		1DD8C0D32C56DC6E0023D4EA /* DIModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIModule.swift; sourceTree = "<group>"; };
-		1DD8C0DC2C56E0030023D4EA /* ItemModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModule.swift; sourceTree = "<group>"; };
+		1DD8C0DC2C56E0030023D4EA /* WorkoutItemModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutItemModule.swift; sourceTree = "<group>"; };
 		1DD8C0F22C56F3300023D4EA /* ItemSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSet.swift; sourceTree = "<group>"; };
 		1DD8C1042C56FA9B0023D4EA /* ItemSetsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetsHandler.swift; sourceTree = "<group>"; };
 		1DD8C1072C5705B90023D4EA /* DefaultItemSetHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultItemSetHandler.swift; sourceTree = "<group>"; };
@@ -284,6 +285,7 @@
 		1DED4EE82C680A7E00E59732 /* TimerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModule.swift; sourceTree = "<group>"; };
 		1DED4EEC2C68103100E59732 /* CountdownTimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerMock.swift; sourceTree = "<group>"; };
 		1DED4EF22C68160800E59732 /* TimerModule+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerModule+Mocks.swift"; sourceTree = "<group>"; };
+		1DED4EF42C68C61500E59732 /* ItemSetsHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSetsHandlerTest.swift; sourceTree = "<group>"; };
 		1DF3AF402C5021E10054520F /* ShapeByte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeByte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3AF432C5021E10054520F /* ShapeByteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteApp.swift; sourceTree = "<group>"; };
 		1DF3AF452C5021E10054520F /* AppCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorView.swift; sourceTree = "<group>"; };
@@ -364,7 +366,7 @@
 		1D360E952C5ABE2600EDC052 /* item */ = {
 			isa = PBXGroup;
 			children = (
-				1DD8C0DC2C56E0030023D4EA /* ItemModule.swift */,
+				1DD8C0DC2C56E0030023D4EA /* WorkoutItemModule.swift */,
 				1D360E962C5ABE2E00EDC052 /* data */,
 				1DA2339F2C600F88003AC8E2 /* domain */,
 				1DD8C0FB2C56F6F90023D4EA /* ui */,
@@ -595,6 +597,7 @@
 			isa = PBXGroup;
 			children = (
 				1DD2ABB22C62B2D40072D3EE /* TimedItemSetHandlerTest.swift */,
+				1DED4EF42C68C61500E59732 /* ItemSetsHandlerTest.swift */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -690,7 +693,7 @@
 		1DD8C0FB2C56F6F90023D4EA /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				1D360EA02C5AC5CD00EDC052 /* ItemSetsUIState.swift */,
+				1D360EA02C5AC5CD00EDC052 /* ItemSetsState.swift */,
 				1DA233902C5FEE76003AC8E2 /* ItemSetsViewModel.swift */,
 				1DD8C0972C553AAB0023D4EA /* TimedItemSetsView.swift */,
 				1DD8C09C2C553AE00023D4EA /* TimedItemSetsViewModel.swift */,
@@ -1019,7 +1022,7 @@
 				1DA233572C5D79F3003AC8E2 /* HomeCoordinatorView.swift in Sources */,
 				1DD8C1102C57A17F0023D4EA /* ItemSets.swift in Sources */,
 				1DD8C10C2C57A0F90023D4EA /* WorkoutSession.swift in Sources */,
-				1DD8C0DD2C56E0030023D4EA /* ItemModule.swift in Sources */,
+				1DD8C0DD2C56E0030023D4EA /* WorkoutItemModule.swift in Sources */,
 				1D360E7C2C5A6A3500EDC052 /* WorkoutSessionModule.swift in Sources */,
 				1DA2338A2C5FCC13003AC8E2 /* WorkoutHistoryEntry.swift in Sources */,
 				1DA233A22C60107D003AC8E2 /* ScrollOffsetPreferenceKey.swift in Sources */,
@@ -1063,7 +1066,7 @@
 				1D360E2E2C59132600EDC052 /* RotatingProgressRing.swift in Sources */,
 				1DD8C1052C56FA9B0023D4EA /* ItemSetsHandler.swift in Sources */,
 				1DEC1C622C5CE1590055AA26 /* Theme.swift in Sources */,
-				1D360EA12C5AC5CD00EDC052 /* ItemSetsUIState.swift in Sources */,
+				1D360EA12C5AC5CD00EDC052 /* ItemSetsState.swift in Sources */,
 				1D360EA92C5AF9C000EDC052 /* ItemGroup.swift in Sources */,
 				1DA233872C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift in Sources */,
 				1DED4EE22C67FF6800E59732 /* CountdownTimerImplCombine.swift in Sources */,
@@ -1094,7 +1097,8 @@
 				1DA2337A2C5FC5B0003AC8E2 /* WorkoutHistoryRepository.swift in Sources */,
 				1DED4EE32C67FF6800E59732 /* CountdownTimerImplCombine.swift in Sources */,
 				1DD8C0E62C56EBD10023D4EA /* Progress.swift in Sources */,
-				1D360EA22C5AC5CD00EDC052 /* ItemSetsUIState.swift in Sources */,
+				1D360EA22C5AC5CD00EDC052 /* ItemSetsState.swift in Sources */,
+				1DED4EF52C68C61500E59732 /* ItemSetsHandlerTest.swift in Sources */,
 				1DD8C1182C57C4650023D4EA /* LogLevel.swift in Sources */,
 				1DEC1C632C5CE1590055AA26 /* Theme.swift in Sources */,
 				1DA233582C5D79F3003AC8E2 /* HomeCoordinatorView.swift in Sources */,
@@ -1177,7 +1181,7 @@
 				1DA233722C5F6628003AC8E2 /* SafeAreaInsets.swift in Sources */,
 				1D360EAA2C5AF9C000EDC052 /* ItemGroup.swift in Sources */,
 				1D360E812C5A6AEC00EDC052 /* WorkoutSessionDatasourceMock.swift in Sources */,
-				1DD8C0DF2C56EB510023D4EA /* ItemModule.swift in Sources */,
+				1DD8C0DF2C56EB510023D4EA /* WorkoutItemModule.swift in Sources */,
 				1DED4EF32C68160800E59732 /* TimerModule+Mocks.swift in Sources */,
 				1D360EAF2C5B6FB900EDC052 /* TimedItemSetsViewModel.swift in Sources */,
 				1DD8C1152C57C45B0023D4EA /* Logging.swift in Sources */,

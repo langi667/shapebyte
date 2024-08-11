@@ -14,8 +14,8 @@ class WorkoutSessionModule {
         type: WorkoutSessionCoordinator.self,
         create: {
             WorkoutSessionCoordinator(
-                timedItemSetsViewModel: ItemModule.timedItemSetsViewModel(),
-                countdownItemSetsViewModel: ItemModule.countdownItemSetsViewModel(),
+                timedItemSetsViewModel: WorkoutItemModule.timedItemSetsViewModel(),
+                countdownItemSetsViewModel: WorkoutItemModule.countdownItemSetsViewModel(),
                 workoutSessionUseCase: Self.currentWorkoutSessionUseCase(),
                 logger: SharedModule.logger
             )

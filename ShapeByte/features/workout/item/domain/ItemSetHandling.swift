@@ -12,4 +12,5 @@ protocol ItemSetHandling: AnyObject {
     var statePublisher: PassthroughSubject<ItemSet.State, Never> { get }
 
     func start(set: ItemSet)
+    func pause()
 }
