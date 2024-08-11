@@ -29,7 +29,8 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
             self.currentSetIndex = 0
             self.currentSetElapsedTime = 0
 
-        case .running(let setIndex, _, let currentSetProgress, let totalProgress):
+     
+        case .running(let setIndex, _, let currentSetProgress, let totalProgress, let setData):
             guard let setDuration = self
                 .group
                 .itemSetFor(index: setIndex)?.duration else {
@@ -53,16 +54,11 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
             }
 
             self.currentSetProgress = currentSetProgress
-            let setsProgressAnimationDuration: TimeInterval = totalProgress.value == 0 ? 0 : 1
+            let animationDuration: TimeInterval = 1
 
-            withAnimation( .linear(duration: setsProgressAnimationDuration) ) {
+            withAnimation( .linear(duration: animationDuration) ) {
                 self.setsProgress = totalProgress
-            }
-
-            let ringProgressAnimationDuration: TimeInterval = setsProgress.value == 0 ? 0 : 1
-
-            withAnimation(.linear(duration: ringProgressAnimationDuration)) {
-                ringProgress = currentSetProgress.value
+                ringProgress = setData.nextProgress?.value ?? currentSetProgress.value
             }
 
         case .paused:
@@ -73,4 +69,5 @@ class TimedItemSetsViewModel: ItemSetsViewModel {
 
         return true
     }
+
 }

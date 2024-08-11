@@ -10,7 +10,7 @@ import Foundation
 extension ItemSet {
     enum State: Equatable {
         case idle
-        case started
+        case started(setData: ItemSet.Data)
         case running(setData: ItemSet.Data)
         case paused(setData: ItemSet.Data)
         case finished

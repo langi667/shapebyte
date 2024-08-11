@@ -10,7 +10,7 @@ import Foundation
 enum ItemSetsState: Equatable {
     case idle
     case started(totalSets: Int)
-    case running(currentSet: Int, totalSets: Int, currentSetProgress: Progress, totalProgress: Progress)
+    case running(currentSet: Int, totalSets: Int, currentSetProgress: Progress, totalProgress: Progress, setData: ItemSet.Data)
     case paused
     case finished
 
@@ -21,9 +21,9 @@ enum ItemSetsState: Equatable {
         switch self {
         case .idle:
             retVal = false
-        case .started(let totalSets):
+        case .started:
             retVal = true
-        case .running(let currentSet, let totalSets, let currentSetProgress, let totalProgress):
+        case .running:
             retVal = true
         case .paused:
             retVal = false

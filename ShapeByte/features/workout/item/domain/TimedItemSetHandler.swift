@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+// TODO: test paused
 class TimedItemSetHandler: ItemSetHandling {
     let logger: Logging
 
@@ -28,6 +29,8 @@ class TimedItemSetHandler: ItemSetHandling {
         }
     }
 
+    private let timerTick: TimeInterval = 1
+
     init(logger: Logging, timer: CountdownTimer) {
         self.logger = logger
         self.timer = timer
@@ -45,7 +48,8 @@ class TimedItemSetHandler: ItemSetHandling {
             resetValues()
 
             self.duration = duration
-            self.state = .started
+            let setData = currentStateData()
+            self.state = .started(setData: setData)
 
             startTimer()
         } else {
@@ -75,9 +79,7 @@ class TimedItemSetHandler: ItemSetHandling {
     }
 
     private func startTimer() {
-        let interval: TimeInterval = 1
-
-        _ = timer.start(interval: interval) { interval in
+        _ = timer.start(interval: timerTick) { interval in
             self.handleTimerTick(interval: interval)
         }
     }
@@ -108,7 +110,8 @@ class TimedItemSetHandler: ItemSetHandling {
         ItemSet.Data.timed(
             timePassed: self.elapsedTime,
             timeRemaining: self.duration - self.elapsedTime,
-            progress: self.progress
+            progress: self.progress,
+            nextProgress: Progress( min(1.0, (self.elapsedTime + timerTick) / self.duration))
         )
     }
 }

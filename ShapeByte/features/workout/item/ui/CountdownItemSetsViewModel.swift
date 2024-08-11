@@ -24,7 +24,7 @@ class CountdownItemSetsViewModel: ItemSetsViewModel {
             break
         case .started:
             handleStateRunning(currentSet: currentSet)
-        case .running(let currentSet, _, _, _):
+        case .running(let currentSet, _, _, _, _):
             handleStateRunning(currentSet: currentSet)
         case .paused:
             break

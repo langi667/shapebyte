@@ -9,14 +9,25 @@ import Foundation
 
 extension ItemSet {
     enum Data: Equatable {
-        case timed(timePassed: TimeInterval, timeRemaining: TimeInterval, progress: Progress)
+        case timed(timePassed: TimeInterval, timeRemaining: TimeInterval, progress: Progress, nextProgress: Progress)
 
         var progress: Progress {
             let retVal: Progress
 
             switch self {
-            case .timed(_, _, let progress):
+            case .timed(_, _, let progress, _):
                 retVal = progress
+            }
+
+            return retVal
+        }
+
+        var nextProgress: Progress? {
+            let retVal: Progress?
+
+            switch self {
+            case .timed(_, _, _, let nextProgress):
+                retVal = nextProgress
             }
 
             return retVal

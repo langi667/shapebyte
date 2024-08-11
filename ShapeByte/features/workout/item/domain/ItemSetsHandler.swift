@@ -61,20 +61,22 @@ class ItemSetsHandler: ObservableObject {
         switch state {
         case .idle:
             break // TODO: handle
-            case .started:
+            case .started(let setData):
             logger.logDebug("Started set \(currSetIndex)")
             self.state = ItemSetsState.running(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: Progress(0),
-                totalProgress: totalProgress(currentSetProgress: Progress(0))
+                totalProgress: totalProgress(currentSetProgress: Progress(0)),
+                setData: setData
             )
         case .running(let setData):
             self.state = ItemSetsState.running(
                 currentSet: currSetIndex,
                 totalSets: sets.count,
                 currentSetProgress: setData.progress,
-                totalProgress: totalProgress(currentSetProgress: setData.progress)
+                totalProgress: totalProgress(currentSetProgress: setData.progress),
+                setData: setData
             )
         case .paused(let setData):
             self.state = ItemSetsState.paused
