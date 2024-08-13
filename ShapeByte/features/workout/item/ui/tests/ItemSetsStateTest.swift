@@ -46,4 +46,160 @@ final class ItemSetsStateTest: XCTestCase {
 
     }
 
+    func testEqualsIdle() throws {
+        let sut: ItemSetsState = .idle
+        XCTAssertEqual(.idle, sut)
+        XCTAssertNotEqual(.started(totalSets: 5), sut)
+
+    }
+
+    func testEqualsStart() throws {
+        let totalSets = 5
+        let sut: ItemSetsState = .started(totalSets: totalSets)
+
+        XCTAssertEqual(.started(totalSets: totalSets), sut)
+        XCTAssertNotEqual(.started(totalSets: totalSets + 1), sut)
+        XCTAssertNotEqual(.idle, sut)
+    }
+
+    
+    func testEqualsRunning() throws {
+        let totalSets = 5
+        let currentSet = 1
+        let currentSetProgress: Progress = .zero
+        let totalSetProgress: Progress = Progress(0.5)
+        let setData: ItemSet.Data = ItemSet.Data.timed(
+            timePassed: 0,
+            timeRemaining: 5,
+            progress: .zero,
+            nextProgress: .complete
+        )
+
+        let sut: ItemSetsState = .running(
+            currentSet: currentSet,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: setData
+        )
+
+        XCTAssertEqual(.running(
+            currentSet: currentSet,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: setData
+        ), sut )
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet + 1,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: setData
+        ), sut )
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets + 1,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: setData
+        ), sut )
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets + 1,
+            currentSetProgress: Progress(0.3333),
+            totalProgress: totalSetProgress,
+            setData: setData
+        ), sut )
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: Progress(0.3333),
+            setData: setData
+        ), sut ) 
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: ItemSet.Data.timed(
+                timePassed: 1,
+                timeRemaining: 5,
+                progress: .zero,
+                nextProgress: .complete)
+        ), sut )
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: ItemSet.Data.timed(
+                timePassed: 0,
+                timeRemaining: 4,
+                progress: .zero,
+                nextProgress: .complete)
+        ), sut )
+
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: ItemSet.Data.timed(
+                timePassed: 0,
+                timeRemaining: 5,
+                progress: Progress(0.3),
+                nextProgress: .complete)
+        ), sut )
+
+        XCTAssertNotEqual(.running(
+            currentSet: currentSet ,
+            totalSets: totalSets,
+            currentSetProgress: currentSetProgress,
+            totalProgress: totalSetProgress,
+            setData: ItemSet.Data.timed(
+                timePassed: 0,
+                timeRemaining: 5,
+                progress: .zero,
+                nextProgress: Progress(0.3))
+        ), sut )
+
+
+        XCTAssertNotEqual(.started(totalSets: totalSets + 1), sut)
+        XCTAssertNotEqual(.idle, sut)
+    }
+
+    func testEqualsFinish() throws {
+        let totalSets = 5
+        let sut: ItemSetsState = .finished
+
+        XCTAssertEqual(.finished, sut)
+        XCTAssertNotEqual(.started(totalSets: totalSets), sut)
+        XCTAssertNotEqual(.idle, sut)
+
+        let running: ItemSetsState = .running(
+            currentSet: 1,
+            totalSets: 2,
+            currentSetProgress: .zero,
+            totalProgress: .complete,
+            setData: ItemSet.Data.timed(
+                timePassed: 0,
+                timeRemaining: 5,
+                progress: .zero,
+                nextProgress: .complete
+            )
+        )
+
+        XCTAssertNotEqual(running, sut)
+
+    }
+
 }
