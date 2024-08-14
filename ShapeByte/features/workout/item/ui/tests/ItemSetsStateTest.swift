@@ -62,7 +62,6 @@ final class ItemSetsStateTest: XCTestCase {
         XCTAssertNotEqual(.idle, sut)
     }
 
-    
     func testEqualsRunning() throws {
         let totalSets = 5
         let currentSet = 1
@@ -100,7 +99,7 @@ final class ItemSetsStateTest: XCTestCase {
         ), sut )
 
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets + 1,
             currentSetProgress: currentSetProgress,
             totalProgress: totalSetProgress,
@@ -108,7 +107,7 @@ final class ItemSetsStateTest: XCTestCase {
         ), sut )
 
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets + 1,
             currentSetProgress: Progress(0.3333),
             totalProgress: totalSetProgress,
@@ -116,15 +115,15 @@ final class ItemSetsStateTest: XCTestCase {
         ), sut )
 
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets,
             currentSetProgress: currentSetProgress,
             totalProgress: Progress(0.3333),
             setData: setData
-        ), sut ) 
+        ), sut )
 
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets,
             currentSetProgress: currentSetProgress,
             totalProgress: totalSetProgress,
@@ -136,7 +135,7 @@ final class ItemSetsStateTest: XCTestCase {
         ), sut )
 
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets,
             currentSetProgress: currentSetProgress,
             totalProgress: totalSetProgress,
@@ -147,9 +146,8 @@ final class ItemSetsStateTest: XCTestCase {
                 nextProgress: .complete)
         ), sut )
 
-
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets,
             currentSetProgress: currentSetProgress,
             totalProgress: totalSetProgress,
@@ -161,7 +159,7 @@ final class ItemSetsStateTest: XCTestCase {
         ), sut )
 
         XCTAssertNotEqual(.running(
-            currentSet: currentSet ,
+            currentSet: currentSet,
             totalSets: totalSets,
             currentSetProgress: currentSetProgress,
             totalProgress: totalSetProgress,
@@ -171,7 +169,6 @@ final class ItemSetsStateTest: XCTestCase {
                 progress: .zero,
                 nextProgress: Progress(0.3))
         ), sut )
-
 
         XCTAssertNotEqual(.started(totalSets: totalSets + 1), sut)
         XCTAssertNotEqual(.idle, sut)

@@ -41,6 +41,17 @@
 		1D360EAF2C5B6FB900EDC052 /* TimedItemSetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8C09C2C553AE00023D4EA /* TimedItemSetsViewModel.swift */; };
 		1D360EB42C5B846B00EDC052 /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EB32C5B846B00EDC052 /* Countdown.swift */; };
 		1D360EB52C5B846B00EDC052 /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D360EB32C5B846B00EDC052 /* Countdown.swift */; };
+		1D3D97B72C6B577A00DEE6C8 /* DeviceSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97B62C6B577A00DEE6C8 /* DeviceSizeCategory.swift */; };
+		1D3D97B82C6B577A00DEE6C8 /* DeviceSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97B62C6B577A00DEE6C8 /* DeviceSizeCategory.swift */; };
+		1D3D97BA2C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97B92C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift */; };
+		1D3D97BB2C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97B92C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift */; };
+		1D3D97BD2C6B6DC000DEE6C8 /* DeviceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97BC2C6B6DC000DEE6C8 /* DeviceModule.swift */; };
+		1D3D97BE2C6B6DC000DEE6C8 /* DeviceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97BC2C6B6DC000DEE6C8 /* DeviceModule.swift */; };
+		1D3D97C12C6B7CEB00DEE6C8 /* DeviceSizeCategoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97C02C6B7CEB00DEE6C8 /* DeviceSizeCategoryTest.swift */; };
+		1D3D97C42C6B810800DEE6C8 /* DeviceSizeCategoryProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97C32C6B810800DEE6C8 /* DeviceSizeCategoryProviderTest.swift */; };
+		1D3D97C72C6C83B800DEE6C8 /* DimensionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97C62C6C83B800DEE6C8 /* DimensionProvider.swift */; };
+		1D3D97C82C6C83B800DEE6C8 /* DimensionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97C62C6C83B800DEE6C8 /* DimensionProvider.swift */; };
+		1D3D97CB2C6C88D500DEE6C8 /* DimensionProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D97CA2C6C88D500DEE6C8 /* DimensionProviderTest.swift */; };
 		1DA233332C5D2CF0003AC8E2 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233322C5D2CF0003AC8E2 /* Arc.swift */; };
 		1DA233342C5D2FEA003AC8E2 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233322C5D2CF0003AC8E2 /* Arc.swift */; };
 		1DA233362C5D388A003AC8E2 /* PendingExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA233352C5D388A003AC8E2 /* PendingExerciseView.swift */; };
@@ -215,6 +226,13 @@
 		1D360EA42C5ACC1600EDC052 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		1D360EA82C5AF9C000EDC052 /* ItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGroup.swift; sourceTree = "<group>"; };
 		1D360EB32C5B846B00EDC052 /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
+		1D3D97B62C6B577A00DEE6C8 /* DeviceSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSizeCategory.swift; sourceTree = "<group>"; };
+		1D3D97B92C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSizeCategoryProvider.swift; sourceTree = "<group>"; };
+		1D3D97BC2C6B6DC000DEE6C8 /* DeviceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModule.swift; sourceTree = "<group>"; };
+		1D3D97C02C6B7CEB00DEE6C8 /* DeviceSizeCategoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSizeCategoryTest.swift; sourceTree = "<group>"; };
+		1D3D97C32C6B810800DEE6C8 /* DeviceSizeCategoryProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSizeCategoryProviderTest.swift; sourceTree = "<group>"; };
+		1D3D97C62C6C83B800DEE6C8 /* DimensionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionProvider.swift; sourceTree = "<group>"; };
+		1D3D97CA2C6C88D500DEE6C8 /* DimensionProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionProviderTest.swift; sourceTree = "<group>"; };
 		1DA233322C5D2CF0003AC8E2 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
 		1DA233352C5D388A003AC8E2 /* PendingExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingExerciseView.swift; sourceTree = "<group>"; };
 		1DA233392C5D52E1003AC8E2 /* WorkoutHistoryEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryEntryView.swift; sourceTree = "<group>"; };
@@ -394,6 +412,51 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		1D3D97B52C6B574C00DEE6C8 /* device */ = {
+			isa = PBXGroup;
+			children = (
+				1D3D97BC2C6B6DC000DEE6C8 /* DeviceModule.swift */,
+				1D3D97C22C6B809100DEE6C8 /* device_size */,
+			);
+			path = device;
+			sourceTree = "<group>";
+		};
+		1D3D97BF2C6B7CBF00DEE6C8 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1D3D97C02C6B7CEB00DEE6C8 /* DeviceSizeCategoryTest.swift */,
+				1D3D97C32C6B810800DEE6C8 /* DeviceSizeCategoryProviderTest.swift */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		1D3D97C22C6B809100DEE6C8 /* device_size */ = {
+			isa = PBXGroup;
+			children = (
+				1D3D97B62C6B577A00DEE6C8 /* DeviceSizeCategory.swift */,
+				1D3D97B92C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift */,
+				1D3D97BF2C6B7CBF00DEE6C8 /* tests */,
+			);
+			path = device_size;
+			sourceTree = "<group>";
+		};
+		1D3D97C52C6C839500DEE6C8 /* dimensions */ = {
+			isa = PBXGroup;
+			children = (
+				1D3D97C62C6C83B800DEE6C8 /* DimensionProvider.swift */,
+				1D3D97C92C6C889300DEE6C8 /* tests */,
+			);
+			path = dimensions;
+			sourceTree = "<group>";
+		};
+		1D3D97C92C6C889300DEE6C8 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1D3D97CA2C6C88D500DEE6C8 /* DimensionProviderTest.swift */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
 		1DA233312C5D2CE2003AC8E2 /* shapes */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,9 +591,10 @@
 		1DA233952C60060C003AC8E2 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				1DA233A02C601071003AC8E2 /* preferences */,
 				1DA233702C5F6628003AC8E2 /* SafeAreaInsets.swift */,
 				1DD8C0CB2C56DACA0023D4EA /* SizeReader.swift */,
+				1D3D97C52C6C839500DEE6C8 /* dimensions */,
+				1DA233A02C601071003AC8E2 /* preferences */,
 				1DA233932C600400003AC8E2 /* view_model */,
 				1DA233732C5F9446003AC8E2 /* background */,
 				1DA233602C5D8FC2003AC8E2 /* modal_view */,
@@ -647,6 +711,7 @@
 		1DD8C0AA2C5652170023D4EA /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				1D3D97B52C6B574C00DEE6C8 /* device */,
 				1DBBF0B52C67FC8500F34025 /* timer */,
 				1D360E2F2C594B5C00EDC052 /* formatting */,
 				1DD8C1232C57C4F30023D4EA /* versioning */,
@@ -761,17 +826,9 @@
 		1DD8C12A2C57C55C0023D4EA /* design_system */ = {
 			isa = PBXGroup;
 			children = (
-				1DD8C12B2C57C5690023D4EA /* ui */,
-			);
-			path = design_system;
-			sourceTree = "<group>";
-		};
-		1DD8C12B2C57C5690023D4EA /* ui */ = {
-			isa = PBXGroup;
-			children = (
 				1DD8C1372C5818D40023D4EA /* Text.swift */,
 			);
-			path = ui;
+			path = design_system;
 			sourceTree = "<group>";
 		};
 		1DD8C1342C5815580023D4EA /* tests */ = {
@@ -1084,14 +1141,17 @@
 				1DD8C1172C57C4650023D4EA /* LogLevel.swift in Sources */,
 				1DA233402C5D7676003AC8E2 /* WorkoutScheduleEntry.swift in Sources */,
 				1DD8C0F32C56F3300023D4EA /* ItemSet.swift in Sources */,
+				1D3D97C72C6C83B800DEE6C8 /* DimensionProvider.swift in Sources */,
 				1D360E9B2C5AC2C800EDC052 /* ItemSet+State.swift in Sources */,
 				1D360E2E2C59132600EDC052 /* RotatingProgressRing.swift in Sources */,
 				1DD8C1052C56FA9B0023D4EA /* ItemSetsHandler.swift in Sources */,
 				1DEC1C622C5CE1590055AA26 /* Theme.swift in Sources */,
+				1D3D97B72C6B577A00DEE6C8 /* DeviceSizeCategory.swift in Sources */,
 				1D360EA12C5AC5CD00EDC052 /* ItemSetsState.swift in Sources */,
 				1D360EA92C5AF9C000EDC052 /* ItemGroup.swift in Sources */,
 				1DA233872C5FC9D6003AC8E2 /* WorkoutHistoryModule.swift in Sources */,
 				1DED4EE22C67FF6800E59732 /* CountdownTimerImplCombine.swift in Sources */,
+				1D3D97BD2C6B6DC000DEE6C8 /* DeviceModule.swift in Sources */,
 				1DD8C0C12C56C3990023D4EA /* ItemSetHandling.swift in Sources */,
 				1D360E8E2C5A7C0D00EDC052 /* ViewModel.swift in Sources */,
 				1DA2335D2C5D7D98003AC8E2 /* HomeRootViewModel.swift in Sources */,
@@ -1106,6 +1166,7 @@
 				1DFBA7D42C5C2DC400F9BC78 /* WorkoutSessionFinishedScreen.swift in Sources */,
 				1DA2333A2C5D52E1003AC8E2 /* WorkoutHistoryEntryView.swift in Sources */,
 				1DA2337C2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */,
+				1D3D97BA2C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift in Sources */,
 				1DD8C11A2C57C46C0023D4EA /* DefaultLogger.swift in Sources */,
 				1DA233462C5D7747003AC8E2 /* WorkoutScheduleDatasource.swift in Sources */,
 				1DA233912C5FEE76003AC8E2 /* ItemSetsViewModel.swift in Sources */,
@@ -1123,6 +1184,7 @@
 				1DED4EF52C68C61500E59732 /* ItemSetsHandlerTest.swift in Sources */,
 				1DD8C1182C57C4650023D4EA /* LogLevel.swift in Sources */,
 				1DEC1C632C5CE1590055AA26 /* Theme.swift in Sources */,
+				1D3D97B82C6B577A00DEE6C8 /* DeviceSizeCategory.swift in Sources */,
 				1DA233582C5D79F3003AC8E2 /* HomeCoordinatorView.swift in Sources */,
 				1DD8C12F2C5815480023D4EA /* Result+Extensions.swift in Sources */,
 				1DA2337D2C5FC5C7003AC8E2 /* WorkoutHistoryDataSource.swift in Sources */,
@@ -1139,13 +1201,16 @@
 				1D360E322C594B7900EDC052 /* DurationFormatter.swift in Sources */,
 				1DD8C1362C5815580023D4EA /* String+ExtensionsTest.swift in Sources */,
 				1DEC1C782C5D0BDC0055AA26 /* BackgroundView.swift in Sources */,
+				1D3D97C12C6B7CEB00DEE6C8 /* DeviceSizeCategoryTest.swift in Sources */,
 				1DD8C1312C5815480023D4EA /* String+Extensions.swift in Sources */,
 				1DD8C1292C57C51F0023D4EA /* Versioning.swift in Sources */,
 				1DA233472C5D7747003AC8E2 /* WorkoutScheduleDatasource.swift in Sources */,
 				1D360EB52C5B846B00EDC052 /* Countdown.swift in Sources */,
 				1DEC1C702C5CF0920055AA26 /* HomeRootView.swift in Sources */,
 				1DA233A72C616DC0003AC8E2 /* DateStringFormatterTest.swift in Sources */,
+				1D3D97BB2C6B683900DEE6C8 /* DeviceSizeCategoryProvider.swift in Sources */,
 				1DA233522C5D7971003AC8E2 /* CurrentWorkoutScheduleEntryUseCase.swift in Sources */,
+				1D3D97BE2C6B6DC000DEE6C8 /* DeviceModule.swift in Sources */,
 				1DD8C1062C56FA9B0023D4EA /* ItemSetsHandler.swift in Sources */,
 				1D360E742C5A687A00EDC052 /* CurrentWorkoutSessionUseCase.swift in Sources */,
 				1DD8C1282C57C51C0023D4EA /* Version.swift in Sources */,
@@ -1155,6 +1220,7 @@
 				1DA233642C5D8FED003AC8E2 /* ModalViewWrapper.swift in Sources */,
 				1DE5F80A2C5CB63000BDB7A3 /* SharedModule.swift in Sources */,
 				1DD8C1092C5705B90023D4EA /* DefaultItemSetHandler.swift in Sources */,
+				1D3D97CB2C6C88D500DEE6C8 /* DimensionProviderTest.swift in Sources */,
 				1DA233692C5D93BD003AC8E2 /* RotatingProgressRing.swift in Sources */,
 				1DED4EE62C68031B00E59732 /* CountdownTimerImplCombineTest.swift in Sources */,
 				1DA233A82C616FB6003AC8E2 /* Text.swift in Sources */,
@@ -1170,6 +1236,7 @@
 				1DA233442C5D7714003AC8E2 /* WorkoutScheduleRepository.swift in Sources */,
 				1DD8C0F42C56F3300023D4EA /* ItemSet.swift in Sources */,
 				1DA2338F2C5FCCCA003AC8E2 /* DateStringFormatter.swift in Sources */,
+				1D3D97C42C6B810800DEE6C8 /* DeviceSizeCategoryProviderTest.swift in Sources */,
 				1DA233B42C617AF0003AC8E2 /* ItemSet+StateTest.swift in Sources */,
 				1DA2334E2C5D7838003AC8E2 /* WorkoutScheduleModule.swift in Sources */,
 				1DA233342C5D2FEA003AC8E2 /* Arc.swift in Sources */,
@@ -1210,6 +1277,7 @@
 				1D360EAF2C5B6FB900EDC052 /* TimedItemSetsViewModel.swift in Sources */,
 				1DD8C1152C57C45B0023D4EA /* Logging.swift in Sources */,
 				1DA233552C5D79C7003AC8E2 /* HomeCoordinator.swift in Sources */,
+				1D3D97C82C6C83B800DEE6C8 /* DimensionProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

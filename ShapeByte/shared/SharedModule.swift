@@ -5,7 +5,7 @@
 //  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
 //
 
-import Foundation
+import UIKit
 
 struct SharedModule {
     static private let diModule = DIModule()
@@ -14,6 +14,18 @@ struct SharedModule {
         name: "Logging",
         create: {
             DefaultLogger()
+        }
+    )
+
+    static let dimensionProvider: DimensionProvider = diModule.instanceTypeOrCreate(
+        type: DimensionProvider.self,
+        create: {
+            DimensionProvider(deviceSizeCategoryProvider: DeviceModule
+                .deviceSizeCategoryProvider
+                .setup(
+                    screenSize: UIScreen.main.bounds.size // TODO: consider changing that
+                )
+            )
         }
     )
 

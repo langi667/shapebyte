@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct BackgroundView: View {
-    var topOffset = Theme.Spacing.XXXL
-    var radialOffset = Theme.Spacing.XXXL
+    var topOffset = Theme.Spacing.XXXL.toDimension(max: Theme.Spacing.XXXL)
+    var radialOffset = Theme.Spacing.XXXL.toDimension(max: Theme.Spacing.XXXL)
 
     @State private var screenSize: CGSize = .zero
 

@@ -44,4 +44,22 @@ public struct Theme {
         static let body: Font = .system(size: 19, weight: .regular)
         static let footnote: Font = .system(size: 16, weight: .regular)
     }
+
+    fileprivate static let dimensionProvider = SharedModule.dimensionProvider
+}
+
+extension CGFloat {
+    func toDimension(max: CGFloat? = nil) -> CGFloat {
+        let retVal = Theme.dimensionProvider.withDimensionalAspect(
+            height: self,
+            max: max
+        )
+
+        return retVal
+    }
+
+    func toDimensionMax() -> CGFloat {
+        let retVal = toDimension(max: self)
+        return retVal
+    }
 }

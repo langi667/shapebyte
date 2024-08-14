@@ -91,7 +91,6 @@ final class ItemSetsHandlerTest: XCTestCase {
         XCTAssertTrue(states.contains(.started(totalSets: 5)))
     }
 
-
     func createSUT() -> ItemSetsHandler {
         let retVal = ItemSetsHandler(
             logger: SharedModule.logger,

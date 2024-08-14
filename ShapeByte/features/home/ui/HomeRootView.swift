@@ -37,8 +37,8 @@ struct HomeRootView: View {
     var body: some View {
         ZStack {
             BackgroundView(
-                topOffset: Theme.Spacing.XXL,
-                radialOffset: radialOffset
+                topOffset: Theme.Spacing.XXL.toDimensionMax(),
+                radialOffset: radialOffset.toDimensionMax()
             )
 
             ScrollView {
