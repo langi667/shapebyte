@@ -44,4 +44,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.core.splashscreen)
     debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 }

@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared
+package de.stefan.lang.shapebyte.utils
 
 import android.util.Log
 

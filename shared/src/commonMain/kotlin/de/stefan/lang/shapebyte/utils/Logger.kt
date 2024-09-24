@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared
+package de.stefan.lang.shapebyte.utils
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 expect class Logger() {

@@ -4,9 +4,12 @@ import shared
 struct ContentView: View {
 	let greet = Greeting().greet()
 
+    @State
+    var logger = LoggerInjector().logger
+
 	var body: some View {
         Text(greet).onAppear {
-            Logger().i(tag: "ContentView", message: "onAppear")
+            logger.i(tag: "ContentView", message: "onAppear")
         }
     }
 }

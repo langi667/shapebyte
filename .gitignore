@@ -8,4 +8,5 @@ captures
 .cxx
 local.properties
 xcuserdata
-/.kotlin/sessions/*.salive
+/.kotlin/*
+
