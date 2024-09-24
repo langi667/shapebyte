@@ -1,3 +1,5 @@
+import ExcludedResources.excludedResourcesList
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -19,7 +21,7 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += excludedResourcesList
         }
     }
     buildTypes {

@@ -1,3 +1,5 @@
+import ExcludedResources.excludedResourcesList
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -43,5 +45,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    packaging {
+        resources {
+            excludes += excludedResourcesList
+        }
     }
 }
