@@ -5,8 +5,10 @@ struct ContentView: View {
 	let greet = Greeting().greet()
 
 	var body: some View {
-		Text(greet)
-	}
+        Text(greet).onAppear {
+            Logger().i(tag: "ContentView", message: "onAppear")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
