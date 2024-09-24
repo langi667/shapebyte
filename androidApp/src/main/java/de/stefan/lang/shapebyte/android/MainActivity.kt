@@ -22,11 +22,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
+        logger.d("MainActivity", "onCreate")
+
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     GreetingView(Greeting().greet())
                 }
@@ -36,14 +38,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingView(text: String) {
-    Text(text = text)
+fun GreetingView(text: String, modifier: Modifier = Modifier) {
+    Text(modifier = modifier, text = text)
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        GreetingView("Hello, Android!")
+        GreetingView(text = "Hello, Android!")
     }
 }

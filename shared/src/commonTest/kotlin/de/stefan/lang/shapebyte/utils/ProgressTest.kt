@@ -18,7 +18,7 @@ class ProgressTest {
         assertEquals(1f, sut.value)
 
         sut = Progress(1.3f)
-        assertEquals(1f, sut.value)
+        assertEquals(1.0f, sut.value)
     }
 
     @Test

@@ -6,12 +6,14 @@ data class Progress(private val progress: Float) {
     companion object {
         val ZERO = Progress(0f)
         val COMPLETE = Progress(1f)
+
+        private const val ABSOLUTE: Int = 100
     }
 
     val value: Float = adjustProgress(progress)
-    val absoluteValue: Int by lazy { (value * 100).roundToInt() }
+    val absoluteValue: Int by lazy { (value * ABSOLUTE).roundToInt() }
 
-    constructor(value: Int) : this(value.toFloat() / 100)
+    constructor(value: Int) : this(value.toFloat() / ABSOLUTE)
 
     private fun adjustProgress(value: Float): Float {
         return when {

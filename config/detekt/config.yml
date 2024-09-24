@@ -1,0 +1,113 @@
+formatting:
+  MaximumLineLength:
+    active: true
+    maxLineLength: 140
+    ignoreBackTickedIdentifier: true
+  ArgumentListWrapping:
+    active: false
+  NoTrailingSpaces:
+    active: false
+  PropertyWrapping:
+    maxLineLength: 140
+  ParameterWrapping:
+    maxLineLength: 140
+  ParameterListWrapping:
+    maxLineLength: 140
+  Wrapping:
+    maxLineLength: 140
+  TrailingCommaOnCallSite:
+    active: true
+  TrailingCommaOnDeclarationSite:
+    active: true
+
+style:
+  MaxLineLength:
+    active: false
+  ForbiddenComment:
+    active: false
+  ForbiddenImport:
+    active: true
+    imports:
+      - value: kotlinx.coroutines.flow.first
+        reason: 'Flow.first() leads to NoSuchElementException. Use .firstOrNull(), or .value for stateFlows instead'
+      - value: androidx.compose.runtime.collectAsState
+        reason: 'collectAsState() is not lifecycle aware. Use collectAsStateWithLifecycle() instead'
+  UnusedPrivateMember:
+    ignoreAnnotated: [ 'Preview' ]
+complexity:
+  TooManyFunctions:
+    active: false
+  LongMethod:
+    active: false
+  LongParameterList:
+    functionThreshold: 20
+    constructorThreshold: 24
+
+naming:
+  FunctionNaming:
+    functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    ignoreAnnotated: [ 'Composable' ]
+
+Compose:
+  CompositionLocalAllowlist:
+    active: true
+    # You can optionally define a list of CompositionLocals that are allowed here
+    allowedCompositionLocals: LocalRtlColors,LocalRtlTypography
+  CompositionLocalNaming:
+    active: true
+  ContentEmitterReturningValues:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  DefaultsVisibility:
+    active: true
+  ModifierClickableOrder:
+    active: true
+  ModifierComposable:
+    active: true
+  ModifierMissing:
+    active: true
+    # You can optionally control the visibility of which composables to check for here
+    # Possible values are: `only_public`, `public_and_internal` and `all` (default is `only_public`)
+    # checkModifiersForVisibility: only_public
+  ModifierNaming:
+    active: true
+  ModifierNotUsedAtRoot:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  ModifierReused:
+    active: true
+  ModifierWithoutDefault:
+    active: true
+  MultipleEmitters:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  MutableParams:
+    active: true
+  ComposableNaming:
+    active: true
+    # You can optionally disable the checks in this rule for regex matches against the composable name (e.g. molecule presenters)
+    # allowedComposableFunctionNames: .*Presenter,.*MoleculePresenter
+  ComposableParamOrder:
+    active: true
+  PreviewAnnotationNaming:
+    active: true
+  PreviewPublic:
+    active: false
+    # has to be deactivated so that we can snapshot test our previews with paparazzi
+  RememberMissing:
+    active: true
+  RememberContentMissing:
+    active: true
+  UnstableCollections:
+    active: true
+  ViewModelForwarding:
+    active: true
+    # You can optionally use this rule on things other than types ending in "ViewModel" or "Presenter" (which are the defaults). You can add your own via a regex here:
+    # allowedStateHolderNames: .*ViewModel,.*Presenter
+  ViewModelInjection:
+    active: true
+    # You can optionally add your own ViewModel factories here
+    # viewModelFactories: hiltViewModel,potatoViewModel

@@ -1,15 +1,14 @@
-import ExcludedResources.excludedResourcesList
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.detekt)
 }
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = App.Android.BuildSettings.javaVersion.toString()
             }
         }
     }
@@ -43,13 +42,13 @@ android {
         minSdk = 24
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = App.Android.BuildSettings.javaVersion
+        targetCompatibility = App.Android.BuildSettings.javaVersion
     }
 
     packaging {
         resources {
-            excludes += excludedResourcesList
+            excludes += App.Android.BuildSettings.excludedResourcesList
         }
     }
 }
