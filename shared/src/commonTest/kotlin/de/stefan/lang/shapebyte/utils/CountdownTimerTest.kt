@@ -5,6 +5,8 @@ import de.stefan.lang.shapebyte.utils.mocks.MockLogger
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.seconds
 
 class CountdownTimerTest : BaseCoroutineTest() {
@@ -180,7 +182,10 @@ class CountdownTimerTest : BaseCoroutineTest() {
                 }
 
                 assertEquals(
-                    expected = CountdownTimer.State.Stopped(elapsed = duration.seconds, duration = duration.seconds),
+                    expected = CountdownTimer.State.Stopped(
+                        elapsed = duration.seconds,
+                        duration = duration.seconds,
+                    ),
                     actual = awaitItem(),
                 )
             }
@@ -203,7 +208,11 @@ class CountdownTimerTest : BaseCoroutineTest() {
                     val msg = "Loop $it, Duration: $i"
                     println(msg)
                     assertEquals(
-                        expected = CountdownTimer.State.Running(i.seconds, duration.seconds, interval),
+                        expected = CountdownTimer.State.Running(
+                            i.seconds,
+                            duration.seconds,
+                            interval,
+                        ),
                         actual = awaitItem(),
                     )
                 }
@@ -296,12 +305,14 @@ class CountdownTimerTest : BaseCoroutineTest() {
                 )
 
                 if (i == durationBreak) {
-                    timer.setup( // should stop timer
+                    timer.setup(
+                        // should stop timer
                         duration = newDuration.seconds,
                         interval = interval,
                     )
 
-                    assertEquals( // check if timer is stopped
+                    assertEquals(
+                        // check if timer is stopped
                         CountdownTimer.State.Stopped(durationBreak.seconds, duration.seconds),
                         awaitItem(),
                     )
@@ -322,7 +333,8 @@ class CountdownTimerTest : BaseCoroutineTest() {
                 )
             }
 
-            assertEquals( // check if timer is stopped
+            assertEquals(
+                // check if timer is stopped
                 CountdownTimer.State.Stopped(newDuration.seconds, newDuration.seconds),
                 awaitItem(),
             )
@@ -357,6 +369,65 @@ class CountdownTimerTest : BaseCoroutineTest() {
             expectNoEvents()
         }
     }
-    
+
+    @Test
+    fun `test isFinished on all states`() {
+        var sut: CountdownTimer.State =
+            CountdownTimer.State.Stopped(elapsed = 2.seconds, duration = 2.seconds)
+        assertTrue(sut.isFinished)
+
+        sut = CountdownTimer.State.Stopped(elapsed = 3.seconds, duration = 2.seconds)
+        assertTrue(sut.isFinished)
+
+        sut = CountdownTimer.State.Stopped(elapsed = 1.seconds, duration = 2.seconds)
+        assertFalse(sut.isFinished)
+
+        sut = CountdownTimer.State.Idle
+        assertFalse(sut.isFinished)
+
+        sut = CountdownTimer.State.Running(
+            elapsed = 1.seconds,
+            duration = 2.seconds,
+            interval = 1.seconds,
+        )
+        assertFalse(sut.isFinished)
+
+        sut = CountdownTimer.State.Paused(
+            elapsed = 1.seconds,
+            duration = 2.seconds,
+            interval = 1.seconds,
+        )
+        assertFalse(sut.isFinished)
+    }
+
+    @Test
+    fun `test isCanceled on all states`() {
+        var sut: CountdownTimer.State = CountdownTimer.State.Stopped(elapsed = 1.seconds, duration = 2.seconds)
+        assertTrue(sut.isCanceled)
+
+        sut = CountdownTimer.State.Stopped(elapsed = 2.seconds, duration = 2.seconds)
+        assertFalse(sut.isCanceled)
+
+        sut = CountdownTimer.State.Stopped(elapsed = 3.seconds, duration = 2.seconds)
+        assertFalse(sut.isCanceled)
+
+        sut = CountdownTimer.State.Idle
+        assertFalse(sut.isCanceled)
+
+        sut = CountdownTimer.State.Running(
+            elapsed = 1.seconds,
+            duration = 2.seconds,
+            interval = 1.seconds,
+        )
+        assertFalse(sut.isCanceled)
+
+        sut = CountdownTimer.State.Paused(
+            elapsed = 1.seconds,
+            duration = 2.seconds,
+            interval = 1.seconds,
+        )
+        assertFalse(sut.isCanceled)
+    }
+
     private fun createSUT(): CountdownTimer = CountdownTimer(MockLogger())
 }

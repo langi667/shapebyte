@@ -16,7 +16,6 @@ class CountdownTimer(
     private val logger: Logging,
 ) {
     sealed class State {
-
         sealed class ValuedState : State() {
             abstract val elapsed: Duration
             abstract val duration: Duration
