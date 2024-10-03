@@ -10,7 +10,7 @@ import Combine
 
 class CountdownTimerImplCombine: CountdownTimer {
     private var cancellable: AnyCancellable?
-    private (set) var state: CountdownTimerState = .idle
+    private(set) var state: CountdownTimerState = .idle
 
     func start(interval: TimeInterval = 1, onTick: @escaping (_ interval: TimeInterval) -> Void) -> any CountdownTimer {
         if state != .paused {

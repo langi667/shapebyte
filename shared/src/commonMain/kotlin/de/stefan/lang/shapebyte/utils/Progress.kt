@@ -1,5 +1,4 @@
 package de.stefan.lang.shapebyte.utils
-
 import kotlin.math.roundToInt
 
 data class Progress(private val progress: Float) {

@@ -1,9 +1,8 @@
 package de.stefan.lang.shapebyte
 
+private const val TO_BE_REMOVED = "Hello World!"
 class Greeting {
-    private val platform: Platform = getPlatform()
-
     fun greet(): String {
-        return "Hello, ${platform.name}!"
+        return TO_BE_REMOVED
     }
 }

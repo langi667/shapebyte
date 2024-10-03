@@ -19,6 +19,7 @@ subprojects {
         buildUponDefaultConfig = true
         config.from("../config/detekt/config.yml")
         autoCorrect = true
+        source.from("src/androidMain/kotlin/", "src/androidTest/kotlin/", "src/commonMain/kotlin/", "src/commonTest/kotlin/", "src/main/java/")
     }
 
     plugins.withType<org.jetbrains.kotlin.gradle.plugin.KotlinBasePluginWrapper> {

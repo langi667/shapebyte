@@ -38,7 +38,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingView(text: String, modifier: Modifier = Modifier) {
+fun GreetingView(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Text(modifier = modifier, text = text)
 }
 
