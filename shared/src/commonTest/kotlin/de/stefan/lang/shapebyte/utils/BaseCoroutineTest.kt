@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.utils
 
-import de.stefan.lang.shapebyte.features.workout.di.workoutTestModule
+import de.stefan.lang.shapebyte.di.CommonMainTestModules
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,7 +21,6 @@ abstract class BaseCoroutineTest : BaseTest() {
     @AfterTest
     fun tearDown() {
         Dispatchers.resetMain()
-        // testDispatcher.cleanupTestCoroutines()
     }
 
     fun test(block: suspend CoroutineScope.() -> Unit) = runTest {
@@ -32,8 +31,10 @@ abstract class BaseCoroutineTest : BaseTest() {
     }
 }
 
+// TODO: separate file
 abstract class BaseTest : KoinTest {
-    private val testModules = testUtilsModule + workoutTestModule
+    // TODO: Improve this, WorkoutModule.testModule should not be in BaseTest
+    private val testModules = CommonMainTestModules
 
     @BeforeTest
     fun startDI() {

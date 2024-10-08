@@ -1,8 +1,7 @@
 package de.stefan.lang.shapebyte.android
 
 import android.app.Application
-import de.stefan.lang.shapebyte.di.commonModule
-import de.stefan.lang.shapebyte.features.workout.di.workoutModule
+import de.stefan.lang.shapebyte.di.CommonMainModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -13,7 +12,7 @@ class ShapeByteApplication : Application() {
     }
 
     private fun startKoin() {
-        val modules = commonModule + workoutModule
+        val modules = CommonMainModules
 
         startKoin {
             androidContext(this@ShapeByteApplication)
