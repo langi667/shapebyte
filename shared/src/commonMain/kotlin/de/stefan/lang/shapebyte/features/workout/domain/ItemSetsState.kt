@@ -36,7 +36,6 @@ sealed interface ItemSetsState {
     data object Paused : ItemSetsState
     data object Finished : ItemSetsState
 
-    // TODO: test
     val isRunning: Boolean
         get() {
             return this is Running || this is Started

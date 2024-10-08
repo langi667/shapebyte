@@ -44,4 +44,14 @@ class ProgressTest {
         assertEquals(0f, Progress.ZERO.value)
         assertEquals(1f, Progress.COMPLETE.value)
     }
+
+    @Test
+    fun `with should compute correct progress`() {
+        assertEquals(Progress(0.0f), Progress.with(0, 100))
+        assertEquals(Progress(0.5f), Progress.with(50, 100))
+        assertEquals(Progress(0.75f), Progress.with(75, 100))
+
+        assertEquals(Progress(1f), Progress.with(100, 100))
+        assertEquals(Progress(1f).value, Progress.with(120, 100).value)
+    }
 }

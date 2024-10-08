@@ -402,7 +402,8 @@ class CountdownTimerTest : BaseCoroutineTest() {
 
     @Test
     fun `test isCanceled on all states`() {
-        var sut: CountdownTimer.State = CountdownTimer.State.Stopped(elapsed = 1.seconds, duration = 2.seconds)
+        var sut: CountdownTimer.State =
+            CountdownTimer.State.Stopped(elapsed = 1.seconds, duration = 2.seconds)
         assertTrue(sut.isCanceled)
 
         sut = CountdownTimer.State.Stopped(elapsed = 2.seconds, duration = 2.seconds)
@@ -427,6 +428,204 @@ class CountdownTimerTest : BaseCoroutineTest() {
             interval = 1.seconds,
         )
         assertFalse(sut.isCanceled)
+    }
+
+    @Test
+    fun `isFinished in State class should be correctly computed`() {
+        assertTrue(
+            CountdownTimer.State.Stopped(
+                elapsed = 2.seconds,
+                duration = 2.seconds,
+            ).isFinished,
+        )
+
+        assertTrue(
+            CountdownTimer.State.Stopped(
+                elapsed = 3.seconds,
+                duration = 2.seconds,
+            ).isFinished,
+        )
+
+        assertFalse(CountdownTimer.State.Idle.isFinished)
+
+        assertFalse(
+            CountdownTimer.State.Running(
+                elapsed = 1.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isFinished,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Running(
+                elapsed = 2.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isFinished,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Paused(
+                elapsed = 2.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isFinished,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Paused(
+                elapsed = 0.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isFinished,
+        )
+    }
+
+    @Test
+    fun `isCanceled in State class should be correctly computed`() {
+        assertTrue(
+            CountdownTimer.State.Stopped(
+                elapsed = 2.seconds,
+                duration = 3.seconds,
+            ).isCanceled,
+        )
+
+        assertTrue(
+            CountdownTimer.State.Stopped(
+                elapsed = 0.seconds,
+                duration = 2.seconds,
+            ).isCanceled,
+        )
+
+        assertFalse(CountdownTimer.State.Idle.isCanceled)
+
+        assertFalse(
+            CountdownTimer.State.Running(
+                elapsed = 1.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isCanceled,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Running(
+                elapsed = 2.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isCanceled,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Paused(
+                elapsed = 2.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isCanceled,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Paused(
+                elapsed = 0.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isCanceled,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Running(
+                elapsed = 2.seconds,
+                interval = 1.seconds,
+                duration = 2.seconds,
+            ).isCanceled,
+        )
+    }
+
+    @Test
+    fun `progress in State class should be correctly computed`() {
+        assertEquals(
+            Progress.ZERO,
+            CountdownTimer.State.Running(
+                elapsed = 0.seconds,
+                duration = 1.seconds,
+                interval = 0.seconds,
+            ).progress,
+        )
+
+        assertEquals(
+            Progress(0.5f),
+            CountdownTimer.State.Running(
+                elapsed = 2.seconds,
+                duration = 4.seconds,
+                interval = 1.seconds,
+            ).progress,
+        )
+
+        assertEquals(
+            Progress(1f),
+            CountdownTimer.State.Running(
+                elapsed = 4.seconds,
+                duration = 4.seconds,
+                interval = 1.seconds,
+            ).progress,
+        )
+    }
+
+    @Test
+    fun `nextProgress in State class should be correctly computed`() {
+        assertEquals(
+            Progress.COMPLETE,
+            CountdownTimer.State.Running(
+                elapsed = 0.seconds,
+                duration = 1.seconds,
+                interval = 1.seconds,
+            ).nextProgress(1.seconds),
+        )
+
+        assertEquals(
+            Progress(0.5f),
+            CountdownTimer.State.Running(
+                elapsed = 1.seconds,
+                duration = 4.seconds,
+                interval = 1.seconds,
+            ).nextProgress(1.seconds),
+        )
+
+        assertEquals(
+            Progress(0.75f),
+            CountdownTimer.State.Running(
+                elapsed = 1.seconds,
+                duration = 4.seconds,
+                interval = 2.seconds,
+            ).nextProgress(2.seconds),
+        )
+
+        assertEquals(
+            Progress.COMPLETE.value,
+            CountdownTimer.State.Running(
+                elapsed = 1.seconds,
+                duration = 1.seconds,
+                interval = 1.seconds,
+            ).nextProgress(1.seconds).value,
+        )
+    }
+
+    @Test
+    fun `isFirstRUn in Running State class should be correctly computed`() {
+        assertTrue(
+            CountdownTimer.State.Running(
+                elapsed = 0.seconds,
+                duration = 1.seconds,
+                interval = 1.seconds,
+            ).isFirstRun,
+        )
+
+        assertFalse(
+            CountdownTimer.State.Running(
+                elapsed = 1.seconds,
+                duration = 3.seconds,
+                interval = 1.seconds,
+            ).isFirstRun,
+        )
     }
 
     private fun createSUT(): CountdownTimer = CountdownTimer(MockLogger())

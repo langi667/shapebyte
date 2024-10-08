@@ -8,7 +8,6 @@ import de.stefan.lang.shapebyte.utils.CountdownTimer
 import de.stefan.lang.shapebyte.utils.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
@@ -107,7 +106,7 @@ class TimedItemSetHandler(
         val state = when (timerState) {
             is CountdownTimer.State.Idle -> ItemSetState.Idle
             is CountdownTimer.State.Running -> {
-                if (timerState.started) {
+                if (timerState.isFirstRun) {
                     mapTimerStateStarted(timerState)
                 } else {
                     mapTimerStateRunning(timerState)

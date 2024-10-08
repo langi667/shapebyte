@@ -1,7 +1,5 @@
 package de.stefan.lang.shapebyte.utils
 
-// TODO: extract to separate file
-// TODO: test
 interface Loggable {
     val logger: Logging
     val tag: String get() = this::class.simpleName ?: "Unknown"

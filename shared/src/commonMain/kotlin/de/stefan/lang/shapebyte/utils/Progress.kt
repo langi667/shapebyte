@@ -8,7 +8,6 @@ data class Progress(private val progress: Float) {
 
         const val ABSOLUTE: Int = 100
 
-        // TODO: test
         // TODO: consider rounding rule
         fun with(current: Int, total: Int): Progress {
             val progress = current.toFloat() / total.toFloat()

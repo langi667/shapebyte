@@ -1,11 +1,9 @@
-package de.stefan.lang.shapebyte.android.designsystem.ui.components
+package de.stefan.lang.shapebyte.android.designsystem.ui
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import de.stefan.lang.shapebyte.android.designsystem.ui.toAndroidFontWeight
 import de.stefan.lang.shapebyte.designsystem.data.FontDescriptor
 
-// TODO: Test
 fun FontDescriptor.toTextStyle(): TextStyle {
     when (this) {
         is FontDescriptor.System -> {

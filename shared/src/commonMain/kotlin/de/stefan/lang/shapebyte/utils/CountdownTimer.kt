@@ -17,11 +17,9 @@ class CountdownTimer(
             abstract val elapsed: Duration
             abstract val duration: Duration
 
-            // TODO: Test !!!!!
             val progress: Progress
                 get() = Progress((elapsed.inWholeSeconds.toFloat() / duration.inWholeSeconds.toFloat()))
 
-            // TODO: Test !!!!!
             fun nextProgress(interval: Duration): Progress {
                 val nextElapsed = elapsed + interval
                 return Progress((nextElapsed.inWholeSeconds.toFloat() / duration.inWholeSeconds.toFloat()))
@@ -35,8 +33,7 @@ class CountdownTimer(
             override val duration: Duration,
             val interval: Duration,
         ) : ValuedState() {
-            // TODO: Test
-            val started: Boolean
+            val isFirstRun: Boolean
                 get() = elapsed == Duration.ZERO
         }
 
@@ -49,14 +46,12 @@ class CountdownTimer(
         data class Stopped(override val elapsed: Duration, override val duration: Duration) :
             ValuedState()
 
-        // TODO: test
         val isFinished: Boolean
             get() = when (val stoppedState = this as? Stopped) {
                 null -> false
                 else -> stoppedState.elapsed >= stoppedState.duration
             }
 
-        // TODO: test
         val isCanceled: Boolean
             get() = when (val stoppedState = this as? Stopped) {
                 null -> false

@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.components.toTextStyle
+import de.stefan.lang.shapebyte.android.designsystem.ui.toTextStyle
 import de.stefan.lang.shapebyte.android.workout.item.ui.WithTheme
 
 @Composable
