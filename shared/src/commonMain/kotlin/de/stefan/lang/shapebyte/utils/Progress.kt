@@ -6,7 +6,14 @@ data class Progress(private val progress: Float) {
         val ZERO = Progress(0f)
         val COMPLETE = Progress(1f)
 
-        private const val ABSOLUTE: Int = 100
+        const val ABSOLUTE: Int = 100
+
+        // TODO: test
+        // TODO: consider rounding rule
+        fun with(current: Int, total: Int): Progress {
+            val progress = current.toFloat() / total.toFloat()
+            return Progress(progress)
+        }
     }
 
     val value: Float = adjustProgress(progress)

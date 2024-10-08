@@ -7,3 +7,7 @@ Represents any kind of workout item, such as exercise, breaks, countdown, cooldo
 interface Item {
     val name: String
 }
+
+object None : Item {
+    override val name: String = "None"
+}

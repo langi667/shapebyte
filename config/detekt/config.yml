@@ -21,6 +21,8 @@ formatting:
     active: true
 
 style:
+  ReturnCount:
+    active: false
   MaxLineLength:
     active: false
   ForbiddenComment:

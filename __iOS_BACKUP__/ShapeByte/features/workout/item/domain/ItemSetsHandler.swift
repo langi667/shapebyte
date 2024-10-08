@@ -78,6 +78,7 @@ class ItemSetsHandler: ObservableObject {
                 totalProgress: totalProgress(currentSetProgress: setData.progress),
                 setData: setData
             )
+
         case .paused(let setData):
             self.state = ItemSetsState.paused
 

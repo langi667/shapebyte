@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.domain
+package de.stefan.lang.shapebyte.features.workout.domain.sethandler
 
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.data.Exercise
@@ -7,6 +7,7 @@ import de.stefan.lang.shapebyte.features.workout.data.ItemSetState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.CountdownTimer
 import de.stefan.lang.shapebyte.utils.mocks.MockLogger
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -22,7 +23,7 @@ class TimedItemSetHandlerTest : BaseCoroutineTest() {
     }
 
     @Test
-    fun `Test start`() = test {
+    fun `Test start`() = runTest {
         val sut = createSUT()
 
         val item = Exercise("Dummy")

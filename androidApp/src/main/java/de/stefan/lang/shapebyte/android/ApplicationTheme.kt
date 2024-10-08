@@ -10,18 +10,16 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import de.stefan.lang.shapebyte.android.designsystem.ui.components.toTextStyle
+import de.stefan.lang.shapebyte.android.workout.item.ui.WithTheme
 
 @Composable
 @Suppress("MagicNumber")
-fun MyApplicationTheme(
+fun ApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
-) {
+) = WithTheme { themeBase ->
     val context = LocalContext.current
     val colors = if (darkTheme) {
         darkColorScheme(
@@ -39,12 +37,10 @@ fun MyApplicationTheme(
         )
     }
     val typography = Typography(
-        bodyMedium = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp,
-        ),
+        bodyMedium = themeBase.fonts.body.toTextStyle(),
+        titleLarge = themeBase.fonts.title.toTextStyle(),
     )
+
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
         medium = RoundedCornerShape(4.dp),

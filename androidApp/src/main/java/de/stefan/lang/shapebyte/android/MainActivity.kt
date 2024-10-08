@@ -11,26 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import de.stefan.lang.shapebyte.Greeting
-import de.stefan.lang.shapebyte.utils.Logger
+import de.stefan.lang.shapebyte.android.workout.item.ui.CountdownItemSetsView
+import de.stefan.lang.shapebyte.utils.Loggable
+import de.stefan.lang.shapebyte.utils.Logging
 import org.koin.android.ext.android.inject
+import org.koin.androidx.compose.getViewModel
 
-class MainActivity : ComponentActivity() {
-    private val logger: Logger by inject()
+class MainActivity : ComponentActivity(), Loggable {
+    override val logger: Logging by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
-        logger.d("MainActivity", "onCreate")
-
         setContent {
-            MyApplicationTheme {
+            ApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    GreetingView(Greeting().greet())
+                    CountdownItemSetsView(getViewModel())
                 }
             }
         }
@@ -48,7 +48,6 @@ fun GreetingView(
 @Preview
 @Composable
 fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView(text = "Hello, Android!")
+    ApplicationTheme {
     }
 }

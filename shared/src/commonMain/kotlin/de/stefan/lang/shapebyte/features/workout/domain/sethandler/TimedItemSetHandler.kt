@@ -1,8 +1,9 @@
-package de.stefan.lang.shapebyte.features.workout.domain
+package de.stefan.lang.shapebyte.features.workout.domain.sethandler
 
 import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.ItemSetData
 import de.stefan.lang.shapebyte.features.workout.data.ItemSetState
+import de.stefan.lang.shapebyte.features.workout.domain.ItemSetHandling
 import de.stefan.lang.shapebyte.utils.CountdownTimer
 import de.stefan.lang.shapebyte.utils.Logging
 import kotlinx.coroutines.CoroutineScope
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 // TODO: maybe stop/cancel required
@@ -80,8 +82,10 @@ class TimedItemSetHandler(
                 handleTimerState(timerState)
 
                 if (!coroutineContext.isActive || stateFlow.value is ItemSetState.Finished) {
-                    cancel()
+                    timerJob?.cancel()
                 }
+
+                yield()
             }
         }
     }
@@ -93,9 +97,7 @@ class TimedItemSetHandler(
                 timer.stop()
             }
 
-            else -> {
-                logger.d(tag, "State: $state")
-            }
+            else -> { /* No Op */ }
         }
 
         _stateFlow.value = state
@@ -105,7 +107,11 @@ class TimedItemSetHandler(
         val state = when (timerState) {
             is CountdownTimer.State.Idle -> ItemSetState.Idle
             is CountdownTimer.State.Running -> {
-                mapTimerStateRunning(timerState)
+                if (timerState.started) {
+                    mapTimerStateStarted(timerState)
+                } else {
+                    mapTimerStateRunning(timerState)
+                }
             }
 
             is CountdownTimer.State.Paused -> {
@@ -117,6 +123,7 @@ class TimedItemSetHandler(
             }
         }
 
+        logger.d(tag, "timerState: $timerState  to TimedItemSetState: $state")
         return state
     }
 
@@ -126,11 +133,18 @@ class TimedItemSetHandler(
 
     // TODO: check if a canceled state might be needed
     @Suppress("unused")
-    fun TimedItemSetHandler.mapTimerStateStopped(
-        state: CountdownTimer.State.Stopped,
-    ) = ItemSetState.Finished
+    private fun mapTimerStateStopped(
+        timerState: CountdownTimer.State.Stopped,
+    ) = ItemSetState.Finished(
+        ItemSetData.Timed(
+            timerState.elapsed,
+            timerState.duration,
+            timerState.progress,
+            timerState.nextProgress(timerTick),
+        ),
+    )
 
-    fun TimedItemSetHandler.mapTimerStatePaused(
+    private fun mapTimerStatePaused(
         timerState: CountdownTimer.State.Paused,
     ) = ItemSetState.Paused(
         ItemSetData.Timed(
@@ -141,25 +155,36 @@ class TimedItemSetHandler(
         ),
     )
 
-    fun TimedItemSetHandler.mapTimerStateRunning(
+    private fun mapTimerStateStarted(
+        timerState: CountdownTimer.State.Running,
+    ) = ItemSetState.Started(
+        ItemSetData.Timed(
+            timerState.elapsed,
+            timerState.duration,
+            timerState.progress,
+            timerState.nextProgress(timerTick),
+        ),
+    )
+
+    private fun mapTimerStateRunning(
         timerState: CountdownTimer.State.Running,
     ): ItemSetState {
         val state = if (timerState.elapsed == 0.seconds) {
             ItemSetState.Started(
                 ItemSetData.Timed(
-                    timerState.elapsed,
-                    timerState.duration,
-                    timerState.progress,
-                    timerState.nextProgress(timerTick),
+                    timePassed = timerState.elapsed,
+                    timeRemaining = timerState.duration,
+                    progress = timerState.progress,
+                    nextProgress = timerState.nextProgress(timerTick),
                 ),
             )
         } else {
             ItemSetState.Running(
                 ItemSetData.Timed(
-                    timerState.elapsed,
-                    timerState.duration,
-                    timerState.progress,
-                    timerState.nextProgress(timerTick),
+                    timePassed = timerState.elapsed,
+                    timeRemaining = timerState.duration,
+                    progress = timerState.progress,
+                    nextProgress = timerState.nextProgress(timerTick),
                 ),
             )
         }

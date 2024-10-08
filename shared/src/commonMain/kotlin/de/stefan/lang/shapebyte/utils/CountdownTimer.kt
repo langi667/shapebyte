@@ -5,10 +5,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
@@ -20,23 +17,30 @@ class CountdownTimer(
             abstract val elapsed: Duration
             abstract val duration: Duration
 
+            // TODO: Test !!!!!
             val progress: Progress
-                get() = Progress((elapsed.inWholeSeconds / duration.inWholeSeconds).toFloat())
+                get() = Progress((elapsed.inWholeSeconds.toFloat() / duration.inWholeSeconds.toFloat()))
 
+            // TODO: Test !!!!!
             fun nextProgress(interval: Duration): Progress {
                 val nextElapsed = elapsed + interval
-                return Progress((nextElapsed.inWholeSeconds / duration.inWholeSeconds).toFloat())
+                return Progress((nextElapsed.inWholeSeconds.toFloat() / duration.inWholeSeconds.toFloat()))
             }
         }
 
         data object Idle : State()
-        data class Paused(
+
+        data class Running(
             override val elapsed: Duration,
             override val duration: Duration,
             val interval: Duration,
-        ) : ValuedState()
+        ) : ValuedState() {
+            // TODO: Test
+            val started: Boolean
+                get() = elapsed == Duration.ZERO
+        }
 
-        data class Running(
+        data class Paused(
             override val elapsed: Duration,
             override val duration: Duration,
             val interval: Duration,
@@ -92,6 +96,8 @@ class CountdownTimer(
         }
 
         reset()
+        currRunJob?.cancel()
+        currRunJob = null
         this.data = Data(duration, interval)
     }
 
@@ -107,7 +113,7 @@ class CountdownTimer(
                 reset()
             }
 
-            state = State.Running(elapsed, data.duration, data.interval)
+            _stateFlow.value = State.Running(elapsed, data.duration, data.interval)
             currRunJob = scope.launch {
                 run()
             }
@@ -127,8 +133,6 @@ class CountdownTimer(
     fun stop() {
         withData { data ->
             this.state = State.Stopped(elapsed, data.duration)
-            currRunJob?.cancel()
-
             reset()
         }
     }
@@ -137,30 +141,19 @@ class CountdownTimer(
         elapsed = 0.seconds
     }
 
-    private suspend fun run() {
-        while (canRun(coroutineContext)) {
-            coWithData { data ->
-                delay(data.interval)
+    private suspend fun run() = coWithData { data ->
+        while (elapsed < data.duration) {
+            delay(data.interval)
+            this.elapsed += data.interval
 
-                if (!canRun(coroutineContext)) {
-                    return@coWithData
-                }
-
-                elapsed += data.interval
-
-                if (elapsed <= data.duration) {
-                    _stateFlow.value = State.Running(elapsed, data.duration, data.interval)
-                }
-
-                if (elapsed >= data.duration) {
-                    stop()
-                    return@coWithData
-                }
+            if (state is State.Idle || state is State.Running) {
+                _stateFlow.emit(State.Running(this.elapsed, data.duration, data.interval))
             }
         }
+
+        stop()
     }
 
-    private fun canRun(context: CoroutineContext) = state is State.Running && context.isActive
     private fun logNoData() = logger.e("CountdownTimer", "No duration or interval set")
 
     private fun withData(block: (Data) -> Unit) {

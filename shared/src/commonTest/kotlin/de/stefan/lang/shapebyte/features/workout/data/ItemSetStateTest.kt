@@ -8,8 +8,19 @@ import kotlin.time.Duration.Companion.seconds
 class ItemSetStateTest {
     @Test
     fun `isStopped should return correct value`() {
-        assertEquals(true, ItemSetState.Idle.isStopped)
-        assertEquals(true, ItemSetState.Finished.isStopped)
+        assertEquals(expected = true, actual = ItemSetState.Idle.isStopped)
+        assertEquals(
+            expected = true,
+            actual = ItemSetState.Finished(
+                ItemSetData.Timed(
+                    timePassed = 1.seconds,
+                    timeRemaining = 0.seconds,
+                    progress = Progress.COMPLETE,
+                    nextProgress = Progress.COMPLETE,
+                ),
+            ).isStopped,
+        )
+
         assertEquals(
             expected = false,
             actual = ItemSetState.Started(
