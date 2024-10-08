@@ -2,13 +2,11 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
     @State
     var logger = LoggerInjector().logger
 
 	var body: some View {
-        Text(greet).onAppear {
+        Text("Hello").onAppear {
             logger.i(tag: "ContentView", message: "onAppear")
         }
     }

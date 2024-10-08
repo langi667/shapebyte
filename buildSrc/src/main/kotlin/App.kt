@@ -3,7 +3,7 @@ import org.gradle.api.JavaVersion
 object App {
     object Android {
         object BuildSettings {
-            val javaVersion = JavaVersion.VERSION_11
+            val javaVersion = JavaVersion.VERSION_21
             val excludedResourcesList = listOf(
                 "META-INF/*.kotlin_module",
                 "META-INF/DEPENDENCIES",
