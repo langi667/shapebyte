@@ -11,18 +11,16 @@ import shared
 
 class CountdownItemSetsViewModelWrapper: BaseViewModelWrapper<CountdownItemSetsViewModel> {
     @Published
-    var state: CountdownItemSetsViewModel.UIState
-
-    @Published
     var scale: CGFloat = 1
 
     @Published
     var alpha: CGFloat = 1
 
+    @Published
+    var countdownText: String = ""
+
     init() {
         let wrapped = CommonMainModule.shared.countdownItemSetsViewModel
-        self.state = wrapped.state.value
-
         super.init(wrapped: wrapped)
     }
 
@@ -30,17 +28,25 @@ class CountdownItemSetsViewModelWrapper: BaseViewModelWrapper<CountdownItemSetsV
         wrapped.start(itemSets: itemSets)
     }
 
-    override func onObserveState() async {
-        for await currState in wrapped.state {
-            self.state = currState
-            self.scale = 1
-            self.alpha = 1
+    override func handleObservedState(_ state: UIState) async {
+        self.state = state
+        self.scale = 1
+        self.alpha = 1
 
-            withAnimation(.easeInOut(duration: 1)) {
-                self.scale = CGFloat(currState.scale)
-                self.alpha = CGFloat(currState.alpha)
-            }
+        guard let viewData: CountdownItemSetsViewData = state.viewData() else {
+            wrapped.logE(message: "Unable to get CountdownItemSetsViewData from \(state)") // TODO: interface must be implemented by BaseViewModelWrapper
+            return
+        }
+
+        handleViewData(viewData)
+    }
+
+    private func handleViewData(_ stateData: CountdownItemSetsViewData) {
+        self.countdownText = stateData.countdownText
+
+        withAnimation(.easeInOut(duration: 1)) {
+            self.scale = CGFloat(stateData.scale)
+            self.alpha = CGFloat(stateData.alpha)
         }
     }
 }
-

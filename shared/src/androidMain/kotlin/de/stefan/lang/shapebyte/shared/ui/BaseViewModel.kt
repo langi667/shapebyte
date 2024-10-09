@@ -6,8 +6,8 @@ import de.stefan.lang.shapebyte.utils.Loggable
 import de.stefan.lang.shapebyte.utils.Logging
 import kotlinx.coroutines.CoroutineScope
 
-actual open class BaseViewModel actual constructor(
+actual abstract class BaseViewModel actual constructor(
     actual override val logger: Logging,
-) : ViewModel(), Loggable {
+) : ViewModel(), Loggable, UIStateProvider {
     actual val scope: CoroutineScope = viewModelScope
 }

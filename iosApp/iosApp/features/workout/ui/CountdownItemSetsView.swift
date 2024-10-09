@@ -17,7 +17,7 @@ struct CountdownItemSetsView: View {
 
     var body: some View {
         ZStack {
-            Text(viewModel.state.countdownText)
+            Text(viewModel.countdownText)
                 .scaleEffect(viewModel.scale)
                 .opacity(viewModel.alpha)
 

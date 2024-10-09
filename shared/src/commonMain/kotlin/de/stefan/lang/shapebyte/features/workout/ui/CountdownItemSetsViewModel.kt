@@ -4,15 +4,14 @@ import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.ItemSetsHandler
 import de.stefan.lang.shapebyte.features.workout.domain.ItemSetsState
 import de.stefan.lang.shapebyte.shared.ui.BaseViewModel
+import de.stefan.lang.shapebyte.shared.ui.UIState
 import de.stefan.lang.shapebyte.utils.Logging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-
 // TODO: there is an ItemSetsViewModel in original code, check if needed later
-// TODO: Test
 class CountdownItemSetsViewModel(
     private val itemSetsHandler: ItemSetsHandler,
     logger: Logging,
@@ -21,15 +20,13 @@ class CountdownItemSetsViewModel(
         private const val TIMER_OFFSET = 100L
     }
 
-    data class UIState(
-        val countdownText: String = "",
-        val scale: Float = 1f,
-        val animationDuration: Int = 0,
-        val alpha: Float = 1f,
+    private val _state: MutableStateFlow<UIState.Data<CountdownItemSetsViewData>> = MutableStateFlow(
+        UIState.Data(
+            CountdownItemSetsViewData(),
+        ),
     )
-
-    private val _state = MutableStateFlow(UIState())
-    val state: StateFlow<UIState> = _state
+    
+    override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>> = _state
 
     private var itemSets: List<ItemSet.Timed>? = null
 
@@ -85,25 +82,25 @@ class CountdownItemSetsViewModel(
         val countdownText = (itemSets.count() - setsState.currentSet).toString() // TODO: formatting
         val animationDuration = itemSet.duration.inWholeMilliseconds - TIMER_OFFSET
 
-        val state = UIState(
+        val state = CountdownItemSetsViewData(
             countdownText = countdownText,
             animationDuration = animationDuration.toInt(),
             scale = 3f,
             alpha = 0f,
         )
 
-        _state.value = state
+        _state.value = UIState.Data(state)
     }
 
     private suspend fun handleSetStateFinished() {
-        val state = UIState(
+        val state = CountdownItemSetsViewData(
             countdownText = "",
             animationDuration = 0,
             scale = 1f,
             alpha = 1f,
         )
 
-        _state.value = state
+        _state.value = UIState.Data(state)
         delay(TIMER_OFFSET) // TODO: check if needed
     }
 }

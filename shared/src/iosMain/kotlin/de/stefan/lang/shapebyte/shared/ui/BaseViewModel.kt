@@ -7,9 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.cancel
 
-actual open class BaseViewModel actual constructor(
+actual abstract class BaseViewModel actual constructor(
     actual override val logger: Logging
-) : Loggable {
+) : Loggable, UIStateProvider {
     actual val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun clear() {

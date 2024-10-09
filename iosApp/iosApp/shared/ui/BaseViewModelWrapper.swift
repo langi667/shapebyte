@@ -13,8 +13,12 @@ import shared
 open class BaseViewModelWrapper<T: BaseViewModel>: ObservableObject {
     let wrapped: T
 
+    @Published
+    var state: UIState
+
     init(wrapped: T) {
         self.wrapped = wrapped
+        self.state = wrapped.state.value
     }
 
     /**
@@ -22,12 +26,14 @@ open class BaseViewModelWrapper<T: BaseViewModel>: ObservableObject {
      */
     func observeState() {
         Task {
-            await onObserveState()
+            for await currState in wrapped.state {
+                await handleObservedState(currState)
+            }
         }
     }
 
     /**
       Override to perform state observing
      */
-    func onObserveState() async {}
+    func handleObservedState(_ observedState: UIState) async {}
 }

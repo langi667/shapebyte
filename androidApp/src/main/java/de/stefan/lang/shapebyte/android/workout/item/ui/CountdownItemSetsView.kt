@@ -33,14 +33,14 @@ fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modif
     val state = viewModel.state.collectAsStateWithLifecycle()
 
     val scale by animateFloatAsState(
-        targetValue = state.value.scale,
-        animationSpec = tween(durationMillis = state.value.animationDuration),
+        targetValue = state.value.data.scale,
+        animationSpec = tween(durationMillis = state.value.data.animationDuration),
         label = "scale",
     )
 
     val alpha by animateFloatAsState(
-        targetValue = state.value.alpha,
-        animationSpec = tween(durationMillis = state.value.animationDuration),
+        targetValue = state.value.data.alpha,
+        animationSpec = tween(durationMillis = state.value.data.animationDuration),
         label = "scale",
     )
 
@@ -64,7 +64,7 @@ fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modif
             modifier = Modifier
                 .scale(scale)
                 .alpha(alpha),
-            text = state.value.countdownText,
+            text = state.value.data.countdownText,
         )
     }
 }
