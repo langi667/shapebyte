@@ -6,25 +6,10 @@
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
-import Foundation
-import shared
 import SwiftUI
+import shared
 
-// TODO: separate file
-@MainActor
-open class ViewModelWrapper: ObservableObject {
-    func observeState() {
-        Task {
-            await onObserveState()
-        }
-    }
-
-    func onObserveState() async {}
-}
-
-class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
-    private let wrapped: CountdownItemSetsViewModel
-
+class CountdownItemSetsViewModelWrapper: BaseViewModelWrapper<CountdownItemSetsViewModel> {
     @Published
     var state: CountdownItemSetsViewModel.UIState
 
@@ -34,9 +19,11 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
     @Published
     var alpha: CGFloat = 1
 
-    override init() {
-        self.wrapped = CommonMainModule.shared.countdownItemSetsViewModel
+    init() {
+        let wrapped = CommonMainModule.shared.countdownItemSetsViewModel
         self.state = wrapped.state.value
+
+        super.init(wrapped: wrapped)
     }
 
     func start(itemSets: [ItemSet.Timed]) {

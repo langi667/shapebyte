@@ -18,7 +18,7 @@ class CountdownItemSetsViewModel(
     logger: Logging,
 ) : BaseViewModel(logger) {
     companion object {
-        private const val timerOffset = 100L
+        private const val TIMER_OFFSET = 100L
     }
 
     data class UIState(
@@ -83,7 +83,7 @@ class CountdownItemSetsViewModel(
         val itemSet = itemSets.getOrNull(setsState.currentSet) ?: return
 
         val countdownText = (itemSets.count() - setsState.currentSet).toString() // TODO: formatting
-        val animationDuration = itemSet.duration.inWholeMilliseconds - timerOffset
+        val animationDuration = itemSet.duration.inWholeMilliseconds - TIMER_OFFSET
 
         val state = UIState(
             countdownText = countdownText,
@@ -104,6 +104,6 @@ class CountdownItemSetsViewModel(
         )
 
         _state.value = state
-        delay(timerOffset) // TODO: check if needed
+        delay(TIMER_OFFSET) // TODO: check if needed
     }
 }
