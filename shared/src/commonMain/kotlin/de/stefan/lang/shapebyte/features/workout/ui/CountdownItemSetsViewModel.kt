@@ -7,7 +7,9 @@ import de.stefan.lang.shapebyte.shared.ui.BaseViewModel
 import de.stefan.lang.shapebyte.utils.Logging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+
 
 // TODO: there is an ItemSetsViewModel in original code, check if needed later
 // TODO: Test
@@ -27,7 +29,7 @@ class CountdownItemSetsViewModel(
     )
 
     private val _state = MutableStateFlow(UIState())
-    val state = _state
+    val state: StateFlow<UIState> = _state
 
     private var itemSets: List<ItemSet.Timed>? = null
 

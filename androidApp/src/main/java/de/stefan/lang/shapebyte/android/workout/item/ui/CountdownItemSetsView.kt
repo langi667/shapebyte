@@ -1,3 +1,4 @@
+// TODO: remove item package and move to workout.ui package
 package de.stefan.lang.shapebyte.android.workout.item.ui
 
 import androidx.compose.animation.core.animateFloatAsState
@@ -19,6 +20,8 @@ import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.ui.CountdownItemSetsViewModel
 import kotlin.time.Duration.Companion.seconds
 
+// TODO: check if needed
+// TODO: if needed, move to designsystem.ui package
 @Composable
 fun WithTheme(content: @Composable (theme: ThemeProvider) -> Unit) {
     val theme: ThemeProvider = remember { ThemeProvider() }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,6 +37,10 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1DA299732CB5B52C00DBFA55 /* workout */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = workout; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		7555FF78242A565900829871 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -54,6 +58,14 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1DA299722CB5B52300DBFA55 /* features */ = {
+			isa = PBXGroup;
+			children = (
+				1DA299732CB5B52C00DBFA55 /* workout */,
+			);
+			path = features;
 			sourceTree = "<group>";
 		};
 		1DC097212C7B51AC0096CAE1 /* app */ = {
@@ -93,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				1DC097212C7B51AC0096CAE1 /* app */,
+				1DA299722CB5B52300DBFA55 /* features */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -125,6 +138,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1DA299732CB5B52C00DBFA55 /* workout */,
 			);
 			name = iosApp;
 			productName = iosApp;

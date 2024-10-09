@@ -3,13 +3,10 @@ import shared
 
 struct ContentView: View {
     @State
-    var logger = UtilsModule.shared.logger
+    var logger = CommonMainModule.shared.logger
 
 	var body: some View {
-        Text("Hello").onAppear {
-            print("Test")
-            logger.i(tag: "ContentView", message: "onAppear")
-        }
+        CountdownItemSetsView(viewModel: .init())
     }
 }
 

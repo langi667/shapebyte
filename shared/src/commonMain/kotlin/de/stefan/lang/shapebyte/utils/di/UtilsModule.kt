@@ -5,7 +5,6 @@ import de.stefan.lang.shapebyte.utils.Logger
 import de.stefan.lang.shapebyte.utils.Logging
 import de.stefan.lang.shapebyte.utils.dicore.DIModule
 import de.stefan.lang.shapebyte.utils.mocks.MockLogger
-import org.koin.core.component.inject
 import org.koin.dsl.module
 
 object UtilsModule : DIModule {
@@ -18,6 +17,4 @@ object UtilsModule : DIModule {
         single<Logging> { MockLogger() }
         factory { CountdownTimer(logger = get()) }
     }
-
-    val logger: Logging by inject()
 }
