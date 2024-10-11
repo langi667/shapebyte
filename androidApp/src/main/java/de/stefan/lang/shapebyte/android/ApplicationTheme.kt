@@ -8,9 +8,8 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.toTextStyle
 import de.stefan.lang.shapebyte.android.workout.item.ui.WithTheme
 
@@ -20,20 +19,17 @@ fun ApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) = WithTheme { themeBase ->
-    val context = LocalContext.current
     val colors = if (darkTheme) {
         darkColorScheme(
-            primary = Color(0xFFBB86FC),
-            secondary = Color(0xFF03DAC5),
-            tertiary = Color(0xFF3700B3),
-            background = Color(context.getColor(R.color.background)),
+            primary = themeBase.colors.primary.darkModeColor.color,
+            secondary = themeBase.colors.secondary.darkModeColor.color,
+            background = themeBase.colors.background.darkModeColor.color,
         )
     } else {
         lightColorScheme(
-            primary = Color(0xFF6200EE),
-            secondary = Color(0xFF03DAC5),
-            tertiary = Color(0xFF3700B3),
-            background = Color(context.getColor(R.color.background)),
+            primary = themeBase.colors.primary.defaultColor.color,
+            secondary = themeBase.colors.secondary.defaultColor.color,
+            background = themeBase.colors.background.defaultColor.color,
         )
     }
     val typography = Typography(

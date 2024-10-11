@@ -1,5 +1,8 @@
 package de.stefan.lang.shapebyte.designsystem.ui
 
+import de.stefan.lang.shapebyte.designsystem.data.ColorCollection
+import de.stefan.lang.shapebyte.designsystem.data.ColorDescriptor
+import de.stefan.lang.shapebyte.designsystem.data.ColorSchemeDescriptor
 import de.stefan.lang.shapebyte.designsystem.data.Dimension
 import de.stefan.lang.shapebyte.designsystem.data.FontCollection
 import de.stefan.lang.shapebyte.designsystem.data.FontDescriptor
@@ -50,5 +53,17 @@ actual class ThemeProvider {
             weight = FontWeight.Regular,
             size = 16
         )
+    )
+
+    actual val colors = ColorCollection(
+        primary = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.NamedAsset("BackgroundColor"),
+        ),
+        secondary = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.NamedAsset("PrimaryColor"),
+        ),
+        background = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.NamedAsset("SecondaryColor"),
+        ),
     )
 }

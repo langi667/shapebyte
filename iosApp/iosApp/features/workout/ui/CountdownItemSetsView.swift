@@ -10,7 +10,6 @@ import SwiftUI
 import shared
 
 struct CountdownItemSetsView: View {
-    
     @ObservedObject
     var viewModel: CountdownItemSetsViewModelWrapper
     private let logger = CommonMainModule.shared.logger
@@ -18,10 +17,14 @@ struct CountdownItemSetsView: View {
     var body: some View {
         ZStack {
             Text(viewModel.countdownText)
+                .title()
                 .scaleEffect(viewModel.scale)
                 .opacity(viewModel.alpha)
 
-        }.onAppear {
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Theme.Colors.backgroundColor)
+        .onAppear {
             viewModel.start(itemSets: [
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared),

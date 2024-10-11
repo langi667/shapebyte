@@ -14,5 +14,6 @@ fun Title(
         modifier = modifier,
         text = text,
         style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.primary, // TODO: consider passing this from Title
     )
 }

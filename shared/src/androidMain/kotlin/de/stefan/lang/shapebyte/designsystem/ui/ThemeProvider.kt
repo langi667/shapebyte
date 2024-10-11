@@ -1,10 +1,14 @@
 package de.stefan.lang.shapebyte.designsystem.ui
 
+import de.stefan.lang.shapebyte.designsystem.data.ColorCollection
+import de.stefan.lang.shapebyte.designsystem.data.ColorDescriptor
+import de.stefan.lang.shapebyte.designsystem.data.ColorSchemeDescriptor
 import de.stefan.lang.shapebyte.designsystem.data.Dimension
 import de.stefan.lang.shapebyte.designsystem.data.FontCollection
 import de.stefan.lang.shapebyte.designsystem.data.FontDescriptor
 import de.stefan.lang.shapebyte.designsystem.data.FontWeight
 
+@Suppress("MagicNumber")
 actual class ThemeProvider {
     actual val spacing: Dimension = Dimension(
         xxs = 4,
@@ -49,6 +53,19 @@ actual class ThemeProvider {
         footnote = FontDescriptor.System(
             weight = FontWeight.Regular,
             size = 16,
+        ),
+    )
+
+    actual val colors = ColorCollection(
+        primary = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.Hex(0xFFDC584D),
+            darkModeColor = ColorDescriptor.Hex(0xFF9F584D),
+        ),
+        secondary = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.Hex(0xFF68BBC1),
+        ),
+        background = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.Hex(0xFF3B6F89),
         ),
     )
 }
