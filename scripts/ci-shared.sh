@@ -14,7 +14,7 @@ if [ $return_code -ne 0 ]; then
 fi
 
 ### Unit tests ###
-"$script_directory/unit_tests-common.sh"
+"$script_directory/unit_tests-shared.sh"
 return_code=$?
 if [ $return_code -ne 0 ]; then
   exit $ERROR_SHARED_UNIT_TEST_FAILED
