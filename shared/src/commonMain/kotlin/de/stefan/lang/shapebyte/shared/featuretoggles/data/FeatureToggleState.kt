@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.featuretoggles.data
+package de.stefan.lang.shapebyte.shared.featuretoggles.data
 
 // TODO: extract
 enum class FeatureToggleState {

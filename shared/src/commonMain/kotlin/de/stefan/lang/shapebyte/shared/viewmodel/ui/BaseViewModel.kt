@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared.ui
+package de.stefan.lang.shapebyte.shared.viewmodel.ui
 
 import de.stefan.lang.shapebyte.utils.Loggable
 import de.stefan.lang.shapebyte.utils.Logging

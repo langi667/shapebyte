@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared.ui
+package de.stefan.lang.shapebyte.shared.viewmodel.ui
 
 import kotlinx.coroutines.flow.StateFlow
 

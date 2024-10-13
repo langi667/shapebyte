@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.di
 
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.ui.CountdownItemSetsViewModel
-import de.stefan.lang.shapebyte.featuretoggles.di.FeatureTogglesModule
+import de.stefan.lang.shapebyte.shared.featuretoggles.di.FeatureTogglesModule
 import de.stefan.lang.shapebyte.utils.Logging
 import de.stefan.lang.shapebyte.utils.di.UtilsModule
 import org.koin.core.component.KoinComponent

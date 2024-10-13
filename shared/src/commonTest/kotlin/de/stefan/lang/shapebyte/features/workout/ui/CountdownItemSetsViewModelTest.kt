@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.None
 import de.stefan.lang.shapebyte.features.workout.domain.ItemSetsHandler
-import de.stefan.lang.shapebyte.shared.ui.UIState
+import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.Logging
 import org.koin.test.inject

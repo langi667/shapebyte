@@ -1,8 +1,8 @@
-package de.stefan.lang.shapebyte.shared.ui
+package de.stefan.lang.shapebyte.shared.viewmodel.ui
 
 sealed class UIState {
-    object Idle : UIState()
-    object Loading : UIState()
+    data object Idle : UIState()
+    data object Loading : UIState()
 
     sealed class Content : UIState()
 

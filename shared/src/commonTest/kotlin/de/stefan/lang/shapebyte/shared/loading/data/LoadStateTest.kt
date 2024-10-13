@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared.data
+package de.stefan.lang.shapebyte.shared.loading.data
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

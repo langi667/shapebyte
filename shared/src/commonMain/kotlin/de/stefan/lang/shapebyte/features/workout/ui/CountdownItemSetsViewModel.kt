@@ -3,8 +3,8 @@ package de.stefan.lang.shapebyte.features.workout.ui
 import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.ItemSetsHandler
 import de.stefan.lang.shapebyte.features.workout.domain.ItemSetsState
-import de.stefan.lang.shapebyte.shared.ui.BaseViewModel
-import de.stefan.lang.shapebyte.shared.ui.UIState
+import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
+import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.Logging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

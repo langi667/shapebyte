@@ -1,6 +1,6 @@
-package de.stefan.lang.shapebyte.featuretoggles.data
+package de.stefan.lang.shapebyte.shared.featuretoggles.data
 
-import de.stefan.lang.shapebyte.shared.data.LoadState
+import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import kotlinx.coroutines.flow.Flow
 
 interface FeatureToggleDatasource {

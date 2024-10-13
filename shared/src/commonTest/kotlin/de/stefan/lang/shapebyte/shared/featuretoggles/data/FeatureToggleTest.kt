@@ -1,10 +1,11 @@
-package de.stefan.lang.shapebyte.featuretoggles.data
+package de.stefan.lang.shapebyte.shared.featuretoggles.data
 
+import de.stefan.lang.shapebyte.utils.BaseTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class FeatureToggleTest {
+class FeatureToggleTest : BaseTest() {
     @Test
     fun `isEnabled should return correct value`() {
         assertTrue(FeatureToggle("identifier", FeatureToggleState.ENABLED).isEnabled)

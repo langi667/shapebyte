@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared.data
+package de.stefan.lang.shapebyte.shared.loading.data
 
 sealed interface LoadState<out T> {
     data object Loading : LoadState<Nothing>

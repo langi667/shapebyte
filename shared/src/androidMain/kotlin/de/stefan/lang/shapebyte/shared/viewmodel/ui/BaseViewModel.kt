@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.shared.ui
+ package de.stefan.lang.shapebyte.shared.viewmodel.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
