@@ -10,7 +10,7 @@ import Testing
 import SwiftUI
 import shared
 
-struct FontWeight_NativeTest {
+struct FontWeightNativeTest {
 
     @Test("should map to correct native font weight values")
     func mapCorrectNativeValues() async throws {

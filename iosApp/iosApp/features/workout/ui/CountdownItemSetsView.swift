@@ -28,7 +28,7 @@ struct CountdownItemSetsView: View {
             viewModel.start(itemSets: [
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
-                    ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
+                    ItemSet.Timed.forDuration(.seconds(1), item: None.shared)
                 ]
             )
             viewModel.observeState()

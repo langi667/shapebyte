@@ -13,9 +13,9 @@
 		1D4546552CB7FEC000FC6383 /* FontWeight+Native.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4546542CB7FEC000FC6383 /* FontWeight+Native.swift */; };
 		1D4546572CB8041900FC6383 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4546562CB8041900FC6383 /* Theme.swift */; };
 		1D45465A2CB8070E00FC6383 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4546582CB8070E00FC6383 /* Text.swift */; };
-		1D45466D2CB80D0600FC6383 /* FontWeight+NativeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D45466B2CB80D0600FC6383 /* FontWeight+NativeTest.swift */; };
+		1D45466D2CB80D0600FC6383 /* FontWeightNativeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D45466B2CB80D0600FC6383 /* FontWeightNativeTest.swift */; };
 		1D45466E2CB80F7B00FC6383 /* FontWeight+Native.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4546542CB7FEC000FC6383 /* FontWeight+Native.swift */; };
-		1D4546702CB813E600FC6383 /* FontDescriptor_NativeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D45466F2CB813E600FC6383 /* FontDescriptor_NativeTest.swift */; };
+		1D4546702CB813E600FC6383 /* FontDescriptorNativeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D45466F2CB813E600FC6383 /* FontDescriptorNativeTest.swift */; };
 		1D4546712CB81D8B00FC6383 /* FontDescriptor+Native.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4546522CB7FD7100FC6383 /* FontDescriptor+Native.swift */; };
 		1D6506822CB946DD00246D6B /* ColorDescriptor+Native.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6506812CB946DD00246D6B /* ColorDescriptor+Native.swift */; };
 		1D6506832CB946DD00246D6B /* ColorDescriptor+Native.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6506812CB946DD00246D6B /* ColorDescriptor+Native.swift */; };
@@ -58,8 +58,8 @@
 		1D4546582CB8070E00FC6383 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		1D45465F2CB80C3100FC6383 /* ShapeByteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeByteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D45466A2CB80D0600FC6383 /* ShapeByteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShapeByteTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		1D45466B2CB80D0600FC6383 /* FontWeight+NativeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FontWeight+NativeTest.swift"; sourceTree = "<group>"; };
-		1D45466F2CB813E600FC6383 /* FontDescriptor_NativeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDescriptor_NativeTest.swift; sourceTree = "<group>"; };
+		1D45466B2CB80D0600FC6383 /* FontWeightNativeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeightNativeTest.swift; sourceTree = "<group>"; };
+		1D45466F2CB813E600FC6383 /* FontDescriptorNativeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDescriptorNativeTest.swift; sourceTree = "<group>"; };
 		1D6506812CB946DD00246D6B /* ColorDescriptor+Native.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorDescriptor+Native.swift"; sourceTree = "<group>"; };
 		1DA2997F2CB64DEC00DBFA55 /* BaseViewModelWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelWrapper.swift; sourceTree = "<group>"; };
 		1DA299812CB6711300DBFA55 /* UIState+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIState+Data.swift"; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 		1D4546692CB80CC400FC6383 /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				1D45466B2CB80D0600FC6383 /* FontWeight+NativeTest.swift */,
-				1D45466F2CB813E600FC6383 /* FontDescriptor_NativeTest.swift */,
+				1D45466B2CB80D0600FC6383 /* FontWeightNativeTest.swift */,
+				1D45466F2CB813E600FC6383 /* FontDescriptorNativeTest.swift */,
 				1D45466A2CB80D0600FC6383 /* ShapeByteTests-Bridging-Header.h */,
 			);
 			path = tests;
@@ -245,6 +245,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
+				1D6506952CB971E200246D6B /* ShellScript */,
 				7555FFB5242A651A00829871 /* ShellScript */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF78242A565900829871 /* Frameworks */,
@@ -323,6 +324,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1D6506952CB971E200246D6B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		7555FFB5242A651A00829871 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,8 +365,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D45466D2CB80D0600FC6383 /* FontWeight+NativeTest.swift in Sources */,
-				1D4546702CB813E600FC6383 /* FontDescriptor_NativeTest.swift in Sources */,
+				1D45466D2CB80D0600FC6383 /* FontWeightNativeTest.swift in Sources */,
+				1D4546702CB813E600FC6383 /* FontDescriptorNativeTest.swift in Sources */,
 				1D4546712CB81D8B00FC6383 /* FontDescriptor+Native.swift in Sources */,
 				1D45466E2CB80F7B00FC6383 /* FontWeight+Native.swift in Sources */,
 				1D6506832CB946DD00246D6B /* ColorDescriptor+Native.swift in Sources */,

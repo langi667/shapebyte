@@ -12,7 +12,7 @@ import SwiftUI
 extension FontWeight {
     var value: Font.Weight {
         let weight: Font.Weight
-        
+
         switch self {
             case .ultraLight:
                 weight = .ultraLight

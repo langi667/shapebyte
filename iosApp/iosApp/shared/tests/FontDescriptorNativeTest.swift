@@ -10,7 +10,7 @@ import Testing
 import SwiftUI
 import shared
 
-struct FontDescriptor_NativeTest {
+struct FontDescriptorNativeTest {
 
     @Test("Should map FontDescriptor for System to correct Native font")
     func testNative() async throws {

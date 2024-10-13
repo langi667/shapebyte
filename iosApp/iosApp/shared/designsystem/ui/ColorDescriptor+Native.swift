@@ -11,18 +11,15 @@ import shared
 
 extension ColorDescriptor {
     var color: Color {
-        get {
-            let color: Color
-            switch onEnum(of: self) {
-            case .hex(let hex):
-                color = Color("none") // TODO: implement
+        let color: Color
+        switch onEnum(of: self) {
+        case .hex(let hex):
+            color = Color("none") // TODO: implement
 
-            case .namedAsset(let namedAsset):
-                color = Color(namedAsset.value)
-            }
-
-            return color
+        case .namedAsset(let namedAsset):
+            color = Color(namedAsset.value)
         }
-    }
 
+        return color
+    }
 }

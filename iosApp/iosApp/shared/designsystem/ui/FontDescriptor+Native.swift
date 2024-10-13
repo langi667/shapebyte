@@ -14,7 +14,7 @@ extension FontDescriptor {
         let font: Font
         switch onEnum(of: self) {
 
-        case .system(_):
+        case .system:
             font = .system(
                 size: CGFloat(self.size),
                 weight: self.weight.value
