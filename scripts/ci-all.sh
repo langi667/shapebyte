@@ -24,6 +24,10 @@ run() {
   fi
 }
 
+print_error_codes() {
+  cat "$script_directory/core/error_codes.sh"
+}
+
 run ci-shared.sh
 
 run ci-android.sh &
@@ -33,19 +37,22 @@ run ci-ios.sh &
 pid_ci_ios=$!
 
 wait $pid_ci_android
-return_android=0
+return_android=$?
 
 wait $pid_ci_ios
 return_ios=$?
 
-echo "hier"
 # Evaluate the return codes
 if [ $return_android -ne 0 ]; then
-    log_error "CI checks for Android failed with return code $return_android 😣"
+    log_error "CI checks for Android failed with code $return_android 😣. You can check the referring error here:"
+    print_error_codes
+    exit $return_android
 fi
 
 if [ $return_ios -ne 0 ]; then
-    log_error "CI checks for iOS failed with return code $return_ios 😣"
+    log_error "CI checks for iOS failed with code $return_ios 😣. You can check the referring error here:"
+    print_error_codes
+    exit $return_ios
 fi
 
 if [ $return_android -eq 0 ] && [ $return_ios -eq 0 ]; then
