@@ -1,16 +1,11 @@
 #!/bin/bash
 script_path=$(realpath "$0")
 script_directory=$(dirname "$script_path")
-project_root="$script_directory/../"
-cd "$project_root"
 
-source $script_directory/core/logging.sh
+source "$script_directory/core/logging.sh"
 
 lint() {
-     DIR=$PWD
-     param=$1
-     cd "$project_root/iosApp"
-     swiftlint $param
+     swiftlint "$script_directory/../iosApp"
 }
 
 iOSLogI "📋 Starting lint checks ..."

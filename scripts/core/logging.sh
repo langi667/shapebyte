@@ -8,36 +8,36 @@ PLATFORM_IOS="iOS"
 PLATFORM_SHARED="SHARED"
 
 log() {
-    local platform=$1
+    local tag=$1
     local msg=$2
-    echo -e "${NC}[$1] $msg ${NC}"
+    echo -e "${NC}[$tag] $msg ${NC}"
 }
 
 logS() {
     BOLD=$(tput bold)
     NORMAL=$(tput sgr0)
 
-    local platform=$1
+    local tag=$1
     local msg=$2
-    echo -e "${GREEN}${BOLD}[$1] $msg ${NC}${NORMAL}"
+    echo -e "${GREEN}${BOLD}[$tag] $msg ${NC}${NORMAL}"
 }
 
 logI() {
-    local platform=$1
+    local tag=$1
     local msg=$2
-    echo -e "${GREEN}[$1] $msg ${NC}"
+    echo -e "${GREEN}[$tag] $msg ${NC}"
 }
 
 logW() {
-    local platform=$1
+    local tag=$1
     local msg=$2
-    echo -e "${ORANGE}[$1] $msg ${NC}"
+    echo -e "${ORANGE}[$tag] $msg ${NC}"
 }
 
 logE() {
-    local platform=$1
+    local tag=$1
     local msg=$2
-    echo -e "${RED}[$1] $msg ${NC}"
+    echo -e "${RED}[$tag] $msg ${NC}"
 }
 
 andLog() {

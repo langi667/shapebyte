@@ -1,9 +1,9 @@
 #!/bin/bash
 script_path=$(realpath "$0")
 script_directory=$(dirname "$script_path")
-cd "$script_directory/../"
+cd "$script_directory/../" || exit 200
 
-source $script_directory/core/logging.sh
+source "$script_directory/core/logging.sh"
 
 log_error() {
   logE "ERROR" "$1"
@@ -15,7 +15,7 @@ log_success() {
 
 run() {
   script_name=$1
-  $script_directory/$script_name
+  "$script_directory/$script_name"
   return_code=$?
 
   if [ $return_code -ne 0 ]; then
