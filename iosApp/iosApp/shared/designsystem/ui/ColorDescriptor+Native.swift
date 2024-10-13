@@ -13,7 +13,7 @@ extension ColorDescriptor {
     var color: Color {
         let color: Color
         switch onEnum(of: self) {
-        case .hex(let hex):
+        case .hex:
             color = Color("none") // TODO: implement
 
         case .namedAsset(let namedAsset):

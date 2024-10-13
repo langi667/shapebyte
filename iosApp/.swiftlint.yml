@@ -1,2 +1,1 @@
-type_name:
-    allowed_symbols: ["_"]
+#check https://realm.github.io/SwiftLint/rule-directory.html

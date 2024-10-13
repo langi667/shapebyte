@@ -2,7 +2,7 @@ import SwiftUI
 import shared
 
 @main
-struct iOSApp: App {
+struct ShapeByteApp: App {
 
     init() {
         KoinInitializerKt.startKoin()

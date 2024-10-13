@@ -12,11 +12,19 @@ import shared
 public struct Theme {
     public struct Spacing { // TODO: Test mapping
         static let XXS = themeProvider.spacing.xxs
+        // swiftlint:disable:next identifier_name
         static let XS = themeProvider.spacing.xxs
+
+        // swiftlint:disable:next identifier_name
         static let S = themeProvider.spacing.small
 
+        // swiftlint:disable:next identifier_name
         static let M = themeProvider.spacing.medium
+
+        // swiftlint:disable:next identifier_name
         static let L = themeProvider.spacing.large
+
+        // swiftlint:disable:next identifier_name
         static let XL = themeProvider.spacing.xLarge
 
         static let XXL = themeProvider.spacing.xxLarge
@@ -27,9 +35,13 @@ public struct Theme {
         static let title: Font = themeProvider.fonts.title.font
         static let subtitle: Font = themeProvider.fonts.subtitle.font
 
+        // swiftlint:disable:next identifier_name
         static let h1: Font = themeProvider.fonts.h1.font
+        // swiftlint:disable:next identifier_name
         static let h2: Font = themeProvider.fonts.h2.font
+        // swiftlint:disable:next identifier_name
         static let h3: Font = themeProvider.fonts.h3.font
+        // swiftlint:disable:next identifier_name
         static let h4: Font = themeProvider.fonts.h4.font
 
         static let body: Font = themeProvider.fonts.body.font
