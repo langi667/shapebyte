@@ -6,7 +6,7 @@ cd "$script_directory/../" || exit 200
 source "$script_directory/core/logging.sh"
 
 andLogI "Start unit tests for Android ..."
-./gradlew androidApp:testDebugUnitTest
+./gradlew androidApp:testDevelopmentDebugUnitTest
 
 return_code=$?
 if [ $return_code -eq 0 ]; then

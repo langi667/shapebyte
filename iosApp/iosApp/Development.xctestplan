@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "524A04F1-363A-47D0-B903-3670B9B36A22",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iosApp.xcodeproj",
+        "identifier" : "1D45465E2CB80C3100FC6383",
+        "name" : "ShapeByteTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -77,7 +77,7 @@ iOSLogI() {
 
 iOSLogS() {
     local msg=$1
-    logI "$PLATFORM_IOS" "$msg"
+    logS "$PLATFORM_IOS" "$msg"
 }
 
 iOSLogW() {

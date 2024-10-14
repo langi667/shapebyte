@@ -26,6 +26,7 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+
     }
     compileOptions {
         sourceCompatibility = App.Android.BuildSettings.javaVersion
@@ -33,6 +34,27 @@ android {
     }
     kotlinOptions {
         jvmTarget = App.Android.BuildSettings.javaVersion.toString()
+    }
+
+    flavorDimensions += "environment"
+
+    productFlavors {
+        create("development") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            isDefault = true
+        }
+
+        create("staging") {
+            dimension = "environment"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+        }
+
+        create("production") {
+            dimension = "environment"
+        }
     }
 }
 

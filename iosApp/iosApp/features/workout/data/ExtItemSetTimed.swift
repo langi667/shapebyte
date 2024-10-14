@@ -9,7 +9,6 @@
 import Foundation
 import shared
 
-// TODO: maybe move to common iOS
 // TODO: Test
 
 extension ItemSet.Timed {
