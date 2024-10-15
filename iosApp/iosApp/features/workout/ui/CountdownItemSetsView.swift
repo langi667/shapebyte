@@ -42,7 +42,7 @@ struct CountdownItemSetsView: View {
 
 struct CountdownItemSetsView_Previews: PreviewProvider {
     static var previews: some View {
-        snapshots.previews.previewLayout(.sizeThatFits)
+        snapshots.previews.previewLayout(.device)
     }
 
     static var snapshots: PreviewSnapshots<CountdownItemSetsViewData> {
@@ -68,7 +68,7 @@ struct CountdownItemSetsView_Previews: PreviewProvider {
                 ),
 
                 .init(
-                    name: "State end",
+                    name: "State End",
                     state: .init(
                         countdownText: "1",
                         scale: 1,
