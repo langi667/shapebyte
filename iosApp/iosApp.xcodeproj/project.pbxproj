@@ -98,10 +98,10 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1D2DC3BD2CBD4D5900A29DA5 /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D2DC3BF2CBD4D5A00A29DA5 /* ShapeByteApp copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ShapeByteApp copy-Info.plist"; path = "/Users/langs/Documents/work/rtl/dev/ShapeByte/iosApp/ShapeByteApp copy-Info.plist"; sourceTree = "<absolute>"; };
+		1D2DC3BF2CBD4D5A00A29DA5 /* ShapeByteApp-Development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ShapeByteApp-Development-Info.plist"; path = "/Users/langs/Documents/work/rtl/dev/ShapeByte/iosApp/ShapeByteApp-Development-Info.plist"; sourceTree = "<absolute>"; };
 		1D31BB632CBDA8B9002F5818 /* Development.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Development.xctestplan; path = iosApp/Development.xctestplan; sourceTree = SOURCE_ROOT; };
 		1D3DADCA2CBD4DE100185160 /* Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Staging.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D3DADCC2CBD4DE100185160 /* Development copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Development copy-Info.plist"; path = "/Users/langs/Documents/work/rtl/dev/ShapeByte/iosApp/Development copy-Info.plist"; sourceTree = "<absolute>"; };
+		1D3DADCC2CBD4DE100185160 /* ShapeByteApp-Staging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ShapeByteApp-Staging-Info.plist"; path = "/Users/langs/Documents/work/rtl/dev/ShapeByte/iosApp/ShapeByteApp-Staging-Info.plist"; sourceTree = "<absolute>"; };
 		1D4546522CB7FD7100FC6383 /* FontDescriptor+Native.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FontDescriptor+Native.swift"; sourceTree = "<group>"; };
 		1D4546542CB7FEC000FC6383 /* FontWeight+Native.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FontWeight+Native.swift"; sourceTree = "<group>"; };
 		1D4546562CB8041900FC6383 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -259,8 +259,8 @@
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
 				7555FFB0242A642200829871 /* Frameworks */,
-				1D2DC3BF2CBD4D5A00A29DA5 /* ShapeByteApp copy-Info.plist */,
-				1D3DADCC2CBD4DE100185160 /* Development copy-Info.plist */,
+				1D2DC3BF2CBD4D5A00A29DA5 /* ShapeByteApp-Development-Info.plist */,
+				1D3DADCC2CBD4DE100185160 /* ShapeByteApp-Staging-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -488,7 +488,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n../scripts/lint-ios.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		1D2DC3A92CBD4D5900A29DA5 /* ShellScript */ = {
@@ -523,7 +523,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n../scripts/lint-ios.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		1D3DADB62CBD4DE100185160 /* ShellScript */ = {
@@ -558,7 +558,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n../scripts/lint-ios.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		7555FFB5242A651A00829871 /* ShellScript */ = {
@@ -664,7 +664,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
-				INFOPLIST_FILE = "ShapeByteApp copy-Info.plist";
+				INFOPLIST_FILE = "ShapeByteApp-Development-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "ShapeByte Dev";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -696,7 +696,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
-				INFOPLIST_FILE = "ShapeByteApp copy-Info.plist";
+				INFOPLIST_FILE = "ShapeByteApp-Development-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "ShapeByte Dev";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -728,7 +728,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
-				INFOPLIST_FILE = "Development copy-Info.plist";
+				INFOPLIST_FILE = "ShapeByteApp-Staging-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "ShapeByte Staging";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -760,7 +760,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
-				INFOPLIST_FILE = "Development copy-Info.plist";
+				INFOPLIST_FILE = "ShapeByteApp-Staging-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "ShapeByte Staging";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
