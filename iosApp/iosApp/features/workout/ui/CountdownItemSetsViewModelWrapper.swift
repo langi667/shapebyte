@@ -10,7 +10,13 @@ import SwiftUI
 import shared
 
 // TODO: Test
-class CountdownItemSetsViewModelWrapper: BaseViewModelWrapper<CountdownItemSetsViewModel> {
+@MainActor
+class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
+    lazy var wrapped: some CountdownItemSetsViewModel = CommonMainModule.shared.countdownItemSetsViewModel
+
+    @Published
+    var state: UIState = .Idle.shared
+
     @Published
     var scale: CGFloat = 1
 
@@ -20,16 +26,18 @@ class CountdownItemSetsViewModelWrapper: BaseViewModelWrapper<CountdownItemSetsV
     @Published
     var countdownText: String = ""
 
-    init() {
-        let wrapped = CommonMainModule.shared.countdownItemSetsViewModel
-        super.init(wrapped: wrapped)
+    required convenience init(
+        data: CountdownItemSetsViewData
+    ) {
+        self.init()
+        handleViewData(data)
     }
 
     func start(itemSets: [ItemSet.Timed]) {
         wrapped.start(itemSets: itemSets)
     }
 
-    override func handleObservedState(_ state: UIState) async {
+    func handleObservedState(_ state: UIState) async {
         self.state = state
         self.scale = 1
         self.alpha = 1
@@ -43,12 +51,12 @@ class CountdownItemSetsViewModelWrapper: BaseViewModelWrapper<CountdownItemSetsV
         handleViewData(viewData)
     }
 
-    private func handleViewData(_ stateData: CountdownItemSetsViewData) {
-        self.countdownText = stateData.countdownText
+    func handleViewData(_ viewData: CountdownItemSetsViewData) {
+        self.countdownText = viewData.countdownText
 
         withAnimation(.easeInOut(duration: 1)) {
-            self.scale = CGFloat(stateData.scale)
-            self.alpha = CGFloat(stateData.alpha)
+            self.scale = CGFloat(viewData.scale)
+            self.alpha = CGFloat(viewData.alpha)
         }
     }
 }
