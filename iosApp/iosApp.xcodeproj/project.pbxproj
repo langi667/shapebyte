@@ -328,7 +328,6 @@
 		1DC097212C7B51AC0096CAE1 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				1D4DACE72CBDAC6D00901EAC /* testplans */,
 				1D0348712CBE2A400037A844 /* environments */,
 				1DC097222C7B51B60096CAE1 /* ui */,
 			);
@@ -370,6 +369,7 @@
 				1DC097212C7B51AC0096CAE1 /* app */,
 				1DA299722CB5B52300DBFA55 /* features */,
 				1DA2997D2CB64DCD00DBFA55 /* shared */,
+				1D4DACE72CBDAC6D00901EAC /* testplans */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				2152FB032600AC8F00CF470E /* ShapeByteApp.swift */,
@@ -393,7 +393,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D2DC3BA2CBD4D5900A29DA5 /* Build configuration list for PBXNativeTarget "Development" */;
 			buildPhases = (
-				1D2DC3A82CBD4D5900A29DA5 /* ShellScript */,
+				1D2DC3A82CBD4D5900A29DA5 /* Run Script */,
 				1D2DC3A92CBD4D5900A29DA5 /* ShellScript */,
 				1D2DC3AA2CBD4D5900A29DA5 /* Sources */,
 				1D2DC3B42CBD4D5900A29DA5 /* Frameworks */,
@@ -571,7 +571,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D2DC3A82CBD4D5900A29DA5 /* ShellScript */ = {
+		1D2DC3A82CBD4D5900A29DA5 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -580,6 +580,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
