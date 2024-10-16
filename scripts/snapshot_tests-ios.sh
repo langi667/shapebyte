@@ -5,8 +5,8 @@ cd "$script_directory/../" || exit 200
 
 source "$script_directory/core/logging.sh"
 
-iOSLogI "👩‍🔬 Start unit tests ..."
-xcodebuild -project ./iosApp/iosApp.xcodeproj test -scheme Development -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' -testPlan "Development"
+iOSLogI "📸 Start snapshot tests ..."
+xcodebuild -project ./iosApp/iosApp.xcodeproj test -scheme Development -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' -testPlan "SnapshotTests"
 
 return_code=$?
 if [ $return_code -eq 0 ]; then

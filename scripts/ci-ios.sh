@@ -21,3 +21,11 @@ if [ $return_code -ne 0 ]; then
   exit $ERROR_IOS_UNIT_TEST_FAILED
 fi
 
+### Snapshot tests ###
+"$script_directory/snapshot_tests-ios.sh"
+return_code=$?
+if [ $return_code -ne 0 ]; then
+  # shellcheck disable=SC2086
+  exit $ERROR_IOS_SNAPSHOT_TEST_FAILED
+fi
+
