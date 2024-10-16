@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "524A04F1-363A-47D0-B903-3670B9B36A22",
+      "id" : "B5EEC508-5484-4922-81E4-89685DCF2C7B",
       "name" : "Configuration 1",
       "options" : {
 
@@ -9,14 +9,20 @@
     }
   ],
   "defaultOptions" : {
-
+    "testTimeoutsEnabled" : true
   },
   "testTargets" : [
     {
-      "skippedTests" : [
-        "CountdownItemSetsViewSnapShotTest",
-        "CountdownItemSetsViewSnapShotTest\/testCountdownItemSetsViewSnapShot()"
-      ],
+      "skippedTests" : {
+        "suites" : [
+          {
+            "name" : "FontDescriptorNativeTest"
+          },
+          {
+            "name" : "FontWeightNativeTest"
+          }
+        ]
+      },
       "target" : {
         "containerPath" : "container:iosApp.xcodeproj",
         "identifier" : "1D45465E2CB80C3100FC6383",
@@ -24,5 +30,5 @@
       }
     }
   ],
-  "version" : 1
+  "version" : 2
 }

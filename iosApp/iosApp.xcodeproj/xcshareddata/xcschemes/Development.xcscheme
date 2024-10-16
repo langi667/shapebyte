@@ -33,6 +33,9 @@
             reference = "container:iosApp/Development.xctestplan"
             default = "YES">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:iosApp/testplans/Development-UITests.xctestplan">
+         </TestPlanReference>
       </TestPlans>
    </TestAction>
    <LaunchAction

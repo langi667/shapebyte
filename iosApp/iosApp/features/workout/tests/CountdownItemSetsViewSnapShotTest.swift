@@ -1,15 +1,18 @@
 //
-//  CountdownItemSetsViewSnapShotTest.swift
+//  SnapshotTest.swift
 //  ShapeByteTests
 //
-//  Created by Lang, Stefan [RTL Tech] on 15.10.24.
+//  Created by Lang, Stefan [RTL Tech] on 16.10.24.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
-import XCTest
+import Testing
 import PreviewSnapshotsTesting
 
-final class CountdownItemSetsViewSnapShotTest: XCTestCase {
+@MainActor
+struct CountdownItemSetsViewSnapShotTest {
+
+    @Test
     func testCountdownItemSetsViewSnapShot() throws {
         CountdownItemSetsView_Previews.snapshots.assertSnapshots(
             as: .image(
@@ -18,4 +21,5 @@ final class CountdownItemSetsViewSnapShotTest: XCTestCase {
             )
         )
     }
+
 }
