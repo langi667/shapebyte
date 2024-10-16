@@ -7,7 +7,7 @@
 //
 
 import shared
-// TODO: consider testing
+
 extension UIState {
     func viewData<T: AnyObject>() -> T? {
         return (self as? UIStateData<T>)?.data

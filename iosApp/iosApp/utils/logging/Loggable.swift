@@ -19,7 +19,6 @@ protocol Loggable {
     func logE(message: String)
 }
 
-// TODO: unit tests, check TestLogger class in CommonMain
 extension Loggable where Self: AnyObject {
 
     var logger: any Logging { CommonMainModule.shared.logger }
