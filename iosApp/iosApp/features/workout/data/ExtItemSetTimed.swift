@@ -11,6 +11,19 @@ import shared
 
 extension ItemSet.Timed {
     static func forDuration(_ duration: Duration, item: any Item) -> ItemSet.Timed {
-        return ItemSet.Timed(duration: duration.components.seconds * 1000, item: item)
+
+        let components = duration.components
+        let seconds = components.seconds
+        let attoseconds = components.attoseconds
+
+        // Convert seconds to milliseconds
+        let millisecondsFromSeconds = seconds * 1_000
+
+        // Convert attoseconds to milliseconds
+        let millisecondsFromAttoseconds = attoseconds / 1_000_000_000_000_000
+        let milliseconds = millisecondsFromSeconds + millisecondsFromAttoseconds
+
+        let itemSet = ItemSet.Timed(duration: milliseconds, item: item)
+        return itemSet
     }
 }

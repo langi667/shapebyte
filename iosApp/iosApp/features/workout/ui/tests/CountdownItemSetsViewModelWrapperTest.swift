@@ -9,9 +9,14 @@
 import Testing
 import Combine
 import shared
-import XCTest
+import Foundation
+
+enum TimeoutError: Error {
+    case timedOut
+}
 
 struct CountdownItemSetsViewModelWrapperTest {
+
     @Test
     func initialStateTest() async throws {
         let sut = await CountdownItemSetsViewModelWrapper()
@@ -52,43 +57,48 @@ struct CountdownItemSetsViewModelWrapperTest {
         await #expect(sut.alpha == data.cgAlpha)
         await #expect(sut.scale == data.cgScale)
     }
-}
 
-class CountdownItemSetsViewModelWrapperStateTest: XCTestCase {
-    private var cancellables: Set<AnyCancellable> = []
-
-    @MainActor
-    func test_observeState() {
+    @Test
+    @MainActor func observeStateTest() async {
         let sut = CountdownItemSetsViewModelWrapper()
-        let expectation = XCTestExpectation(description: "Value should be updated")
-
         let itemSets = [
-            ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
-            ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
-            ItemSet.Timed.forDuration(.seconds(1), item: None.shared)
+            ItemSet.Timed.forDuration(.seconds(0.1), item: None.shared),
+            ItemSet.Timed.forDuration(.seconds(0.1), item: None.shared),
+            ItemSet.Timed.forDuration(.seconds(0.1), item: None.shared)
         ]
 
-        var texts = [String]()
+        var cancellables: Set<AnyCancellable> = []
 
-        sut.$state.sink { state in
-            if let data: CountdownItemSetsViewData = state.viewData(), !data.countdownText.isEmpty {
-                texts.append(data.countdownText)
+        do {
+            let texts: [String] = try await withCheckedThrowingContinuation { continuation in
+                var texts = [String]()
 
-                if texts.count == itemSets.count {
-                    expectation.fulfill()
+                let timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { _ in
+                    continuation.resume(throwing: TimeoutError.timedOut)
                 }
 
+                sut.$state.sink { state in
+                    if let data: CountdownItemSetsViewData = state.viewData(), !data.countdownText.isEmpty {
+                        texts.append(data.countdownText)
+
+                        if texts.count == itemSets.count {
+                            timer.invalidate()
+                            continuation.resume(returning: texts)
+                        }
+                    }
+
+                }.store(in: &cancellables)
+
+                sut.start(itemSets: itemSets)
+                sut.observeState()
             }
-        }.store(in: &cancellables)
 
-        sut.start(itemSets: itemSets)
-        sut.observeState()
-
-        wait(for: [expectation], timeout: 5.0)
-
-        for index in 0..<texts.count { // Backward counting 3 .. 1. Check
-            let text = (texts.count - index).description
-            XCTAssertEqual(texts[index], text )
+            for index in 0..<texts.count { // Backward counting 3 .. 1. Check
+                let text = (texts.count - index).description
+                #expect(texts[index] == text )
+            }
+        } catch {
+            Issue.record("Timeout observing state in \(sut)")
         }
     }
 }

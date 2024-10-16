@@ -4,9 +4,9 @@ import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.ItemSetState
 import de.stefan.lang.shapebyte.features.workout.domain.sethandler.DefaultItemSetHandler
 import de.stefan.lang.shapebyte.features.workout.domain.sethandler.TimedItemSetHandler
+import de.stefan.lang.shapebyte.utils.Progress
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
-import de.stefan.lang.shapebyte.utils.Progress
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel

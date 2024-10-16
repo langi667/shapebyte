@@ -3,8 +3,8 @@ package de.stefan.lang.shapebyte.di
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.ui.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.shared.featuretoggles.di.FeatureTogglesModule
-import de.stefan.lang.shapebyte.utils.logging.Logging
 import de.stefan.lang.shapebyte.utils.di.UtilsModule
+import de.stefan.lang.shapebyte.utils.logging.Logging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

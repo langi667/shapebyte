@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.utils.di
 
 import de.stefan.lang.shapebyte.utils.CountdownTimer
+import de.stefan.lang.shapebyte.utils.dicore.DIModule
 import de.stefan.lang.shapebyte.utils.logging.Logger
 import de.stefan.lang.shapebyte.utils.logging.Logging
-import de.stefan.lang.shapebyte.utils.dicore.DIModule
 import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import org.koin.dsl.module
 

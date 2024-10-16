@@ -12,6 +12,9 @@ log_error() {
 log_success() {
   logS "SUCCESS" "CI checks completed successfully ☺️"
 }
+print_error_codes() {
+  cat "$script_directory/core/error_codes.sh"
+}
 
 run() {
   script_name=$1
@@ -20,13 +23,11 @@ run() {
 
   if [ $return_code -ne 0 ]; then
     log_error "Unable to perform $script_name 😞 ! It returned with $return_code"
+     print_error_codes
     exit $return_code
   fi
 }
 
-print_error_codes() {
-  cat "$script_directory/core/error_codes.sh"
-}
 
 run ci-shared.sh
 

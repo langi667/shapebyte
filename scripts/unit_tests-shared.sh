@@ -6,7 +6,7 @@ cd "$script_directory/../" || exit 200
 source "$script_directory/core/logging.sh"
 
 sharedLogI "👩‍🔬 Start unit tests ..."
-./gradlew :shared:connectedAndroidTest :shared:iosSimulatorArm64Test
+./gradlew :shared:connectedAndroidTest :shared:iosSimulatorArm64Test :shared:testDebugUnitTest
 
 return_code=$?
 if [ $return_code -eq 0 ]; then
