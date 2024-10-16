@@ -34,9 +34,22 @@
             default = "YES">
          </TestPlanReference>
          <TestPlanReference
-            reference = "container:iosApp/testplans/Development-UITests.xctestplan">
+            reference = "container:iosApp/testplans/SnapshotTests.xctestplan">
          </TestPlanReference>
       </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1D6206082CBFA05300F6242D"
+               BuildableName = "ShapeByteAppSnapshotTests.xctest"
+               BlueprintName = "ShapeByteAppSnapshotTests"
+               ReferencedContainer = "container:iosApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
