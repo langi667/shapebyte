@@ -11,32 +11,40 @@ import SwiftUI
 import shared
 
 struct CountdownItemSetsView: View {
-
     @ObservedObject
     var viewModel: CountdownItemSetsViewModelWrapper
     private let logger = CommonMainModule.shared.logger
 
     var body: some View {
         ZStack {
-            Text(viewModel.countdownText)
-                .title()
-                .scaleEffect(viewModel.scale)
-                .opacity(viewModel.alpha)
-
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Theme.Colors.backgroundColor)
+            Self.contentView(
+                countdownText: viewModel.countdownText,
+                scale: viewModel.scale,
+                alpha: viewModel.alpha
+            )
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            if !isInPreview {
-                viewModel.start(itemSets: [
+            viewModel.start(
+                itemSets: [
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared),
                     ItemSet.Timed.forDuration(.seconds(1), item: None.shared)
                 ]
-                )
-                viewModel.observeState()
-            }
+            )
+            viewModel.observeState()
         }
+    }
+
+    @ViewBuilder
+    static func contentView(countdownText: String, scale: CGFloat, alpha: CGFloat) -> some View {
+        ZStack {
+            Text(countdownText)
+                .title()
+                .scaleEffect(scale)
+                .opacity(alpha)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Theme.Colors.backgroundColor)
     }
 }
 
@@ -79,10 +87,10 @@ struct CountdownItemSetsView_Previews: PreviewProvider {
             ],
 
             configure: { state in
-                CountdownItemSetsView(
-                    viewModel: CountdownItemSetsViewModelWrapper(
-                        data: state
-                    )
+                CountdownItemSetsView.contentView(
+                    countdownText: state.countdownText,
+                    scale: state.cgScale,
+                    alpha: state.cgAlpha
                 )
             }
         )

@@ -9,13 +9,12 @@
 import SwiftUI
 import shared
 
-// TODO: Test
 @MainActor
 class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
-    lazy var wrapped: some CountdownItemSetsViewModel = CommonMainModule.shared.countdownItemSetsViewModel
+    var wrapped: CountdownItemSetsViewModel
 
     @Published
-    var state: UIState = .Idle.shared
+    var state: UIState = UIState.Idle.shared
 
     @Published
     var scale: CGFloat = 1
@@ -26,11 +25,8 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
     @Published
     var countdownText: String = ""
 
-    required convenience init(
-        data: CountdownItemSetsViewData
-    ) {
-        self.init()
-        handleViewData(data)
+    init(wrapped: CountdownItemSetsViewModel = CommonMainModule.shared.countdownItemSetsViewModel) {
+        self.wrapped = wrapped
     }
 
     func start(itemSets: [ItemSet.Timed]) {
@@ -54,8 +50,13 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
         self.countdownText = viewData.countdownText
 
         withAnimation(.easeInOut(duration: 1)) {
-            self.scale = CGFloat(viewData.scale)
-            self.alpha = CGFloat(viewData.alpha)
+            self.scale = viewData.cgScale
+            self.alpha = viewData.cgAlpha
         }
     }
+}
+
+extension CountdownItemSetsViewData {
+    var cgScale: CGFloat { CGFloat(self.scale) }
+    var cgAlpha: CGFloat { CGFloat(self.alpha) }
 }

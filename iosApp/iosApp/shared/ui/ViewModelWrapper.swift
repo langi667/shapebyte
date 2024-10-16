@@ -12,14 +12,12 @@ import shared
 @MainActor
 protocol ViewModelWrapper: ObservableObject, Loggable {
     associatedtype BVW: BaseViewModel
-    associatedtype DATA
     var wrapped: BVW { get }
 
-    init(data: DATA)
+    var state: UIState { get set }
 
     func observeState()
     func handleObservedState(_ observedState: UIState) async
-    func handleViewData(_ viewData: CountdownItemSetsViewData)
 }
 
 extension ViewModelWrapper {
