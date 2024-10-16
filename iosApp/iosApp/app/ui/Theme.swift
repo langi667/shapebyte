@@ -10,6 +10,7 @@ import SwiftUI
 import shared
 
 public struct Theme {
+
     public struct Spacing {
         static let XXS = themeProvider.spacing.xxs
         // swiftlint:disable:next identifier_name

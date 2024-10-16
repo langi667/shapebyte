@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.utils
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.utils.mocks.MockLogger
+import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -628,5 +628,5 @@ class CountdownTimerTest : BaseCoroutineTest() {
         )
     }
 
-    private fun createSUT(): CountdownTimer = CountdownTimer(MockLogger())
+    private fun createSUT(): CountdownTimer = CountdownTimer(SilentLogger())
 }

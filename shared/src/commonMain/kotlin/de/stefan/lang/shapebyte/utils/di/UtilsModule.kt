@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.utils.di
 
 import de.stefan.lang.shapebyte.utils.CountdownTimer
-import de.stefan.lang.shapebyte.utils.Logger
-import de.stefan.lang.shapebyte.utils.Logging
+import de.stefan.lang.shapebyte.utils.logging.Logger
+import de.stefan.lang.shapebyte.utils.logging.Logging
 import de.stefan.lang.shapebyte.utils.dicore.DIModule
-import de.stefan.lang.shapebyte.utils.mocks.MockLogger
+import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import org.koin.dsl.module
 
 object UtilsModule : DIModule {
@@ -14,7 +14,7 @@ object UtilsModule : DIModule {
     }
 
     override val testModule = module {
-        single<Logging> { MockLogger() }
+        single<Logging> { SilentLogger() }
         factory { CountdownTimer(logger = get()) }
     }
 }

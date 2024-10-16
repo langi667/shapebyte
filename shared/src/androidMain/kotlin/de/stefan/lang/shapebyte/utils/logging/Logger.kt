@@ -1,6 +1,4 @@
-@file:Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
-
-package de.stefan.lang.shapebyte.utils
+package de.stefan.lang.shapebyte.utils.logging
 
 import android.util.Log
 

@@ -10,7 +10,7 @@ import SwiftUI
 import shared
 
 @MainActor
-protocol ViewModelWrapper: ObservableObject {
+protocol ViewModelWrapper: ObservableObject, Loggable {
     associatedtype BVW: BaseViewModel
     associatedtype DATA
     var wrapped: BVW { get }

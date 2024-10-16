@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.utils
 
+import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

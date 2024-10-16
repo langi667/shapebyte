@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.utils
+package de.stefan.lang.shapebyte.utils.logging
 
 import platform.Foundation.NSLog
 

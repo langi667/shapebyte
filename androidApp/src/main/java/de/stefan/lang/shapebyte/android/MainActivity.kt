@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import de.stefan.lang.shapebyte.android.workout.item.ui.CountdownItemSetsView
-import de.stefan.lang.shapebyte.utils.Loggable
-import de.stefan.lang.shapebyte.utils.Logging
+import de.stefan.lang.shapebyte.utils.logging.Loggable
+import de.stefan.lang.shapebyte.utils.logging.Logging
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.getViewModel
 

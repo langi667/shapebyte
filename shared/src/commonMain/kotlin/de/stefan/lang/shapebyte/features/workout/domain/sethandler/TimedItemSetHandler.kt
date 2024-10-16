@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.features.workout.data.ItemSetData
 import de.stefan.lang.shapebyte.features.workout.data.ItemSetState
 import de.stefan.lang.shapebyte.features.workout.domain.ItemSetHandling
 import de.stefan.lang.shapebyte.utils.CountdownTimer
-import de.stefan.lang.shapebyte.utils.Logging
+import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

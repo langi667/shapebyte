@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.features.workout.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.ItemSetState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.CountdownTimer
-import de.stefan.lang.shapebyte.utils.mocks.MockLogger
+import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -87,7 +87,7 @@ class TimedItemSetHandlerTest : BaseCoroutineTest() {
     }
 
     private fun createSUT(): TimedItemSetHandler {
-        val logger = MockLogger()
+        val logger = SilentLogger()
         return TimedItemSetHandler(
             logger = logger,
             timer = CountdownTimer(logger),

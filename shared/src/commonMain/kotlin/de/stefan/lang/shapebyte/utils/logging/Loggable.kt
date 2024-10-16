@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.utils
+package de.stefan.lang.shapebyte.utils.logging
 
 interface Loggable {
     val logger: Logging

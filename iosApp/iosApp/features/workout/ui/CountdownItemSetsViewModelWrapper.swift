@@ -43,8 +43,7 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
         self.alpha = 1
 
         guard let viewData: CountdownItemSetsViewData = state.viewData() else {
-            // TODO: interface must be implemented by BaseViewModelWrapper
-            wrapped.logE(message: "Unable to get CountdownItemSetsViewData from \(state)")
+            logE(message: "Unable to get CountdownItemSetsViewData from \(state)")
             return
         }
 

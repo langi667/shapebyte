@@ -61,6 +61,16 @@
 		1DA299802CB64DEC00DBFA55 /* ViewModelWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA2997F2CB64DEC00DBFA55 /* ViewModelWrapper.swift */; };
 		1DA299822CB6711300DBFA55 /* UIState+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA299812CB6711300DBFA55 /* UIState+Data.swift */; };
 		1DC097242C7B51C50096CAE1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DC097232C7B51C50096CAE1 /* Launch Screen.storyboard */; };
+		1DFB07782CBFC1470013C589 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB07772CBFC1470013C589 /* Loggable.swift */; };
+		1DFB07792CBFC1470013C589 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB07772CBFC1470013C589 /* Loggable.swift */; };
+		1DFB077A2CBFC1470013C589 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB07772CBFC1470013C589 /* Loggable.swift */; };
+		1DFB077B2CBFC1470013C589 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB07772CBFC1470013C589 /* Loggable.swift */; };
+		1DFB07802CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */; };
+		1DFB07812CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */; };
+		1DFB07822CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */; };
+		1DFB07832CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */; };
+		1DFB07882CBFC4780013C589 /* TypeDescriptionUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB07862CBFC4780013C589 /* TypeDescriptionUtilTest.swift */; };
+		1DFB078D2CBFD0EA0013C589 /* LoggableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB078B2CBFD0EA0013C589 /* LoggableTest.swift */; };
 		2152FB042600AC8F00CF470E /* ShapeByteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* ShapeByteApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -136,6 +146,10 @@
 		1DA2997F2CB64DEC00DBFA55 /* ViewModelWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelWrapper.swift; sourceTree = "<group>"; };
 		1DA299812CB6711300DBFA55 /* UIState+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIState+Data.swift"; sourceTree = "<group>"; };
 		1DC097232C7B51C50096CAE1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../../../../__iOS_BACKUP__/ShapeByte/app/ui/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		1DFB07772CBFC1470013C589 /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
+		1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeDescriptionUtil.swift; sourceTree = "<group>"; };
+		1DFB07862CBFC4780013C589 /* TypeDescriptionUtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeDescriptionUtilTest.swift; sourceTree = "<group>"; };
+		1DFB078B2CBFD0EA0013C589 /* LoggableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggableTest.swift; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* ShapeByteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* ShapeByte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeByte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -347,6 +361,49 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
+		1DFB07762CBFC1170013C589 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				1DFB077E2CBFC27F0013C589 /* types */,
+				1DFB077C2CBFC25B0013C589 /* logging */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		1DFB077C2CBFC25B0013C589 /* logging */ = {
+			isa = PBXGroup;
+			children = (
+				1DFB077D2CBFC2670013C589 /* tests */,
+				1DFB07772CBFC1470013C589 /* Loggable.swift */,
+			);
+			path = logging;
+			sourceTree = "<group>";
+		};
+		1DFB077D2CBFC2670013C589 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1DFB078B2CBFD0EA0013C589 /* LoggableTest.swift */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		1DFB077E2CBFC27F0013C589 /* types */ = {
+			isa = PBXGroup;
+			children = (
+				1DFB07842CBFC4640013C589 /* tests */,
+				1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */,
+			);
+			path = types;
+			sourceTree = "<group>";
+		};
+		1DFB07842CBFC4640013C589 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1DFB07862CBFC4780013C589 /* TypeDescriptionUtilTest.swift */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +431,7 @@
 				1DA299722CB5B52300DBFA55 /* features */,
 				1DA2997D2CB64DCD00DBFA55 /* shared */,
 				1D4DACE72CBDAC6D00901EAC /* testplans */,
+				1DFB07762CBFC1170013C589 /* utils */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				2152FB032600AC8F00CF470E /* ShapeByteApp.swift */,
@@ -690,6 +748,8 @@
 			files = (
 				1D2DC3AB2CBD4D5900A29DA5 /* FontDescriptor+Native.swift in Sources */,
 				1D2DC3AC2CBD4D5900A29DA5 /* ViewModelWrapper.swift in Sources */,
+				1DFB07792CBFC1470013C589 /* Loggable.swift in Sources */,
+				1DFB07822CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */,
 				1D2DC3AD2CBD4D5900A29DA5 /* ShapeByteApp.swift in Sources */,
 				1D2DC3AE2CBD4D5900A29DA5 /* UIState+Data.swift in Sources */,
 				1D2DC3AF2CBD4D5900A29DA5 /* ContentView.swift in Sources */,
@@ -707,6 +767,8 @@
 			files = (
 				1D3DADB82CBD4DE100185160 /* FontDescriptor+Native.swift in Sources */,
 				1D3DADB92CBD4DE100185160 /* ViewModelWrapper.swift in Sources */,
+				1DFB07782CBFC1470013C589 /* Loggable.swift in Sources */,
+				1DFB07832CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */,
 				1D3DADBA2CBD4DE100185160 /* ShapeByteApp.swift in Sources */,
 				1D3DADBB2CBD4DE100185160 /* UIState+Data.swift in Sources */,
 				1D3DADBC2CBD4DE100185160 /* ContentView.swift in Sources */,
@@ -724,9 +786,13 @@
 			files = (
 				1D17A3562CBEC2C2003E7FD8 /* View+Preview.swift in Sources */,
 				1D17A3552CBEC29E003E7FD8 /* ViewModelWrapper.swift in Sources */,
+				1DFB077B2CBFC1470013C589 /* Loggable.swift in Sources */,
 				1D45466D2CB80D0600FC6383 /* FontWeightNativeTest.swift in Sources */,
+				1DFB07882CBFC4780013C589 /* TypeDescriptionUtilTest.swift in Sources */,
 				1D17A3592CBEC304003E7FD8 /* UIState+Data.swift in Sources */,
+				1DFB07812CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */,
 				1D4546702CB813E600FC6383 /* FontDescriptorNativeTest.swift in Sources */,
+				1DFB078D2CBFD0EA0013C589 /* LoggableTest.swift in Sources */,
 				1D4546712CB81D8B00FC6383 /* FontDescriptor+Native.swift in Sources */,
 				1D17A3582CBEC2EC003E7FD8 /* Text.swift in Sources */,
 				1D17A3572CBEC2CC003E7FD8 /* Theme.swift in Sources */,
@@ -742,6 +808,8 @@
 			files = (
 				1D4546532CB7FD7100FC6383 /* FontDescriptor+Native.swift in Sources */,
 				1DA299802CB64DEC00DBFA55 /* ViewModelWrapper.swift in Sources */,
+				1DFB077A2CBFC1470013C589 /* Loggable.swift in Sources */,
+				1DFB07802CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */,
 				2152FB042600AC8F00CF470E /* ShapeByteApp.swift in Sources */,
 				1DA299822CB6711300DBFA55 /* UIState+Data.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
