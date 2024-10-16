@@ -173,6 +173,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				tests/CountdownItemSetsViewSnapShotTest.swift,
+				tests/ExtItemSetTimedTest.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
 		};
@@ -180,6 +181,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				tests/CountdownItemSetsViewSnapShotTest.swift,
+				tests/ExtItemSetTimedTest.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
 		};
@@ -187,6 +189,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				tests/CountdownItemSetsViewSnapShotTest.swift,
+				tests/ExtItemSetTimedTest.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
 		};
@@ -195,6 +198,7 @@
 			membershipExceptions = (
 				data/ExtItemSetTimed.swift,
 				tests/CountdownItemSetsViewSnapShotTest.swift,
+				tests/ExtItemSetTimedTest.swift,
 				ui/CountdownItemSetsView.swift,
 				ui/CountdownItemSetsViewModelWrapper.swift,
 			);

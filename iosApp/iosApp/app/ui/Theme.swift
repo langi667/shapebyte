@@ -10,7 +10,7 @@ import SwiftUI
 import shared
 
 public struct Theme {
-    public struct Spacing { // TODO: Test mapping
+    public struct Spacing {
         static let XXS = themeProvider.spacing.xxs
         // swiftlint:disable:next identifier_name
         static let XS = themeProvider.spacing.xxs
@@ -31,7 +31,7 @@ public struct Theme {
         static let XXXL = themeProvider.spacing.xxxLarge
     }
 
-    public struct Fonts { // TODO: Test mapping
+    public struct Fonts {
         static let title: Font = themeProvider.fonts.title.font
         static let subtitle: Font = themeProvider.fonts.subtitle.font
 

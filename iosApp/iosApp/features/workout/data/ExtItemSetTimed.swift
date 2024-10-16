@@ -9,8 +9,6 @@
 import Foundation
 import shared
 
-// TODO: Test
-
 extension ItemSet.Timed {
     static func forDuration(_ duration: Duration, item: any Item) -> ItemSet.Timed {
         return ItemSet.Timed(duration: duration.components.seconds * 1000, item: item)
