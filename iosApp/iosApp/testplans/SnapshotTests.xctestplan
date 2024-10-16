@@ -13,10 +13,15 @@
   },
   "testTargets" : [
     {
+      "selectedTags" : {
+        "tags" : [
+          ".snapshotTest"
+        ]
+      },
       "target" : {
         "containerPath" : "container:iosApp.xcodeproj",
-        "identifier" : "1D6206082CBFA05300F6242D",
-        "name" : "ShapeByteAppSnapshotTests"
+        "identifier" : "1D45465E2CB80C3100FC6383",
+        "name" : "ShapeByteTests"
       }
     }
   ],

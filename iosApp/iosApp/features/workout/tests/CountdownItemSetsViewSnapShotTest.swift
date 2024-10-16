@@ -10,8 +10,8 @@ import Testing
 import PreviewSnapshotsTesting
 
 @MainActor
-struct CountdownItemSetsViewSnapShotTest {
 
+struct CountdownItemSetsViewSnapShotTest {
     @Test(.tags(.snapshotTest))
     func testCountdownItemSetsViewSnapShot() throws {
         CountdownItemSetsView_Previews.snapshots.assertSnapshots(

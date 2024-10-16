@@ -10,8 +10,8 @@ xcodebuild -project ./iosApp/iosApp.xcodeproj test -scheme Development -destinat
 
 return_code=$?
 if [ $return_code -eq 0 ]; then
-  iOSLogS "Running unit tests successful 😊"
+  iOSLogS "Running snapshot tests successful 😊"
 else
-  iOSLogE "Running unit tests failed 😞"
+  iOSLogE "Running snapshot tests failed 😞"
   exit $return_code
 fi
