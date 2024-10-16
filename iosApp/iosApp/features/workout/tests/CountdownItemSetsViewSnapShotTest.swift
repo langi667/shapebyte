@@ -12,7 +12,7 @@ import PreviewSnapshotsTesting
 @MainActor
 struct CountdownItemSetsViewSnapShotTest {
 
-    @Test
+    @Test(.tags(.snapshotTest))
     func testCountdownItemSetsViewSnapShot() throws {
         CountdownItemSetsView_Previews.snapshots.assertSnapshots(
             as: .image(
