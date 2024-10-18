@@ -54,6 +54,10 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
             self.alpha = viewData.cgAlpha
         }
     }
+
+    func onViewAppeared() { }
+
+    func onViewDisappeared() { }
 }
 
 extension CountdownItemSetsViewData {

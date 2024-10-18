@@ -57,13 +57,13 @@ actual class ThemeProvider {
 
     actual val colors = ColorCollection(
         primary = ColorSchemeDescriptor(
-            defaultColor = ColorDescriptor.NamedAsset("BackgroundColor"),
-        ),
-        secondary = ColorSchemeDescriptor(
             defaultColor = ColorDescriptor.NamedAsset("PrimaryColor"),
         ),
-        background = ColorSchemeDescriptor(
+        secondary = ColorSchemeDescriptor(
             defaultColor = ColorDescriptor.NamedAsset("SecondaryColor"),
+        ),
+        background = ColorSchemeDescriptor(
+            defaultColor = ColorDescriptor.NamedAsset("BackgroundColor"),
         ),
     )
 }

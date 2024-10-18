@@ -10,11 +10,9 @@ import SwiftUI
 import shared
 
 @MainActor
-protocol ViewModelWrapper: ObservableObject, Loggable {
+protocol ViewModelWrapper: ViewModel {
     associatedtype BVW: BaseViewModel
     var wrapped: BVW { get }
-
-    var state: UIState { get set }
 
     func observeState()
     func handleObservedState(_ observedState: UIState) async

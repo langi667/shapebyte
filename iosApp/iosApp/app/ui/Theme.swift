@@ -11,25 +11,25 @@ import shared
 
 public struct Theme {
 
-    public struct Spacing {
-        static let XXS = themeProvider.spacing.xxs
+    public struct Spacings {
+        static let XXS = CGFloat(themeProvider.spacing.xxs)
         // swiftlint:disable:next identifier_name
-        static let XS = themeProvider.spacing.xxs
+        static let XS = CGFloat(themeProvider.spacing.xxs)
 
         // swiftlint:disable:next identifier_name
-        static let S = themeProvider.spacing.small
+        static let S = CGFloat(themeProvider.spacing.small)
 
         // swiftlint:disable:next identifier_name
-        static let M = themeProvider.spacing.medium
+        static let M = CGFloat(themeProvider.spacing.medium)
 
         // swiftlint:disable:next identifier_name
-        static let L = themeProvider.spacing.large
+        static let L = CGFloat(themeProvider.spacing.large)
 
         // swiftlint:disable:next identifier_name
-        static let XL = themeProvider.spacing.xLarge
+        static let XL = CGFloat(themeProvider.spacing.xLarge)
 
-        static let XXL = themeProvider.spacing.xxLarge
-        static let XXXL = themeProvider.spacing.xxxLarge
+        static let XXL = CGFloat(themeProvider.spacing.xxLarge)
+        static let XXXL = CGFloat(themeProvider.spacing.xxxLarge)
     }
 
     public struct Fonts {
@@ -60,4 +60,26 @@ public struct Theme {
     }
 
     fileprivate static let themeProvider = ThemeProvider()
+
+    // TODO: move to shared / ThemeProvider
+    fileprivate static let dimensionProvider =
+    DimensionProvider(
+        deviceSizeCategoryProvider: DeviceSizeCategoryProvider().setup(screenSize: UIScreen.main.bounds.size)
+    )
+}
+
+extension CGFloat {
+    func toDimension(max: CGFloat? = nil) -> CGFloat {
+        let retVal = Theme.dimensionProvider.withDimensionalAspect(
+            height: self,
+            max: max
+        )
+
+        return retVal
+    }
+
+    func toDimensionMax() -> CGFloat {
+        let retVal = toDimension(max: self)
+        return retVal
+    }
 }

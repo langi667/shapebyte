@@ -2,3 +2,8 @@
 
 excluded:
   - build
+
+type_name:
+  excluded:
+    - DeviceSizeCategoryProvider.swift
+
