@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct WorkoutHistoryEntryView: View {
     private let cornerRadius = Theme.Spacings.L
@@ -53,18 +54,22 @@ struct WorkoutHistoryEntryView: View {
     }
 }
 
-#Preview {
+// TODO: snapshot tests
+ #Preview {
     ZStack {
         BackgroundView()
         WorkoutHistoryEntryView(
-            entry: WorkoutHistoryEntry(
-                entry: WorkoutScheduleEntry(
-                    id: "1",
-                    name: "Squats",
-                    date: Date(),
-                    progress: .Companion.shared.COMPLETE)
+            entry: WorkoutModule // TODO: subject to change
+                .shared
+                .workoutHistoryEntry(
+                    scheduleEntry: WorkoutScheduleEntry(
+                        id: "1",
+                        name: "Legs",
+                        date: Date(timeIntervalSince1970: 1_729_360_000).toInstant(),
+                        progress: Progress(progress: 0.7)
+                    )
+                )
             )
-        )
     }
 
-}
+ }

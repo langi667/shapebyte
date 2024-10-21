@@ -9,10 +9,7 @@ struct AppRootView: View {
         ZStack {
             GeometryReader { geometry in
                 HomeRootView( // TODO: Use Coordinator
-                    viewModel: HomeRootViewModel(
-                        currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase(),
-                        recentHistoryUseCase: RecentWorkoutHistoryUseCase()
-                    )
+                    viewModel: HomeRootViewModelWrapper()
                 )
                 .environment(\.safeAreaInsets, geometry.safeAreaInsets)
             }

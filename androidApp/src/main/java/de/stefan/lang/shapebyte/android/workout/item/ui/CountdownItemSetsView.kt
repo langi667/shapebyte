@@ -1,4 +1,3 @@
-// TODO: remove item package and move to workout.ui package
 package de.stefan.lang.shapebyte.android.workout.item.ui
 
 import androidx.compose.animation.core.animateFloatAsState
@@ -8,25 +7,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.Title
-import de.stefan.lang.shapebyte.designsystem.ui.ThemeProvider
-import de.stefan.lang.shapebyte.features.workout.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.ui.CountdownItemSetsViewModel
 import kotlin.time.Duration.Companion.seconds
-
-// TODO: check if needed
-// TODO: if needed, move to designsystem.ui package
-@Composable
-fun WithTheme(content: @Composable (theme: ThemeProvider) -> Unit) {
-    val theme: ThemeProvider = remember { ThemeProvider() }
-    content(theme)
-}
 
 @Composable
 fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modifier = Modifier) {

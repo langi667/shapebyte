@@ -19,6 +19,9 @@ protocol ViewModelWrapper: ViewModel {
 }
 
 extension ViewModelWrapper {
+    /**
+      Call this function when the view appears
+     */
     func observeState() {
         Task {
             for await currState in wrapped.state {

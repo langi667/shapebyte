@@ -1,15 +1,43 @@
 package de.stefan.lang.shapebyte.features.workout.di
 
-import de.stefan.lang.shapebyte.features.workout.domain.ItemSetsHandler
-import de.stefan.lang.shapebyte.features.workout.domain.sethandler.DefaultItemSetHandler
-import de.stefan.lang.shapebyte.features.workout.domain.sethandler.TimedItemSetHandler
-import de.stefan.lang.shapebyte.features.workout.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryDataSource
+import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
+import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks
+import de.stefan.lang.shapebyte.features.workout.history.domain.RecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.item.domain.DefaultItemSetHandler
+import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetsHandler
+import de.stefan.lang.shapebyte.features.workout.item.domain.TimedItemSetHandler
+import de.stefan.lang.shapebyte.features.workout.item.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
+import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
+import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
+import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.utils.dicore.DIModule
-import org.koin.core.component.inject
+import org.koin.core.component.get
+import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 
 object WorkoutModule : DIModule {
     override val module = module {
+        single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks } // TODO: change once implemented !!!
+        single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
+        single<RecentWorkoutHistoryUseCase> {
+            RecentWorkoutHistoryUseCase(
+                repository = get(),
+                logger = get(),
+            )
+        }
+        single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock } // TODO: change once implemented !!!
+        single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
+        single<CurrentWorkoutScheduleEntryUseCase> {
+            CurrentWorkoutScheduleEntryUseCase(
+                repository = get(),
+                logger = get(),
+            )
+        }
+
         factory<ItemSetsHandler> {
             ItemSetsHandler(
                 logger = get(),
@@ -21,9 +49,35 @@ object WorkoutModule : DIModule {
         factory<TimedItemSetHandler> { TimedItemSetHandler(logger = get(), timer = get()) }
         factory<DefaultItemSetHandler> { DefaultItemSetHandler() }
         factory { CountdownItemSetsViewModel(logger = get(), itemSetsHandler = get()) }
+
+        factory { (entry: WorkoutScheduleEntry) ->
+            WorkoutHistoryEntry(
+                entry = entry, dateStringFormatter = get(),
+            )
+        }
     }
 
     override val testModule = module {
+        single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks }
+        single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
+
+        single<RecentWorkoutHistoryUseCase> {
+            RecentWorkoutHistoryUseCase(
+                repository = get(),
+                logger = get(),
+            )
+        }
+
+        single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock } // TODO: change once implemented !!!
+        single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
+
+        single<CurrentWorkoutScheduleEntryUseCase> {
+            CurrentWorkoutScheduleEntryUseCase(
+                repository = get(),
+                logger = get(),
+            )
+        }
+
         factory<ItemSetsHandler> {
             ItemSetsHandler(
                 logger = get(),
@@ -34,7 +88,22 @@ object WorkoutModule : DIModule {
 
         factory<TimedItemSetHandler> { TimedItemSetHandler(logger = get(), timer = get()) }
         factory<DefaultItemSetHandler> { DefaultItemSetHandler() }
+        factory { (entry: WorkoutScheduleEntry) ->
+            WorkoutHistoryEntry(
+                entry = entry, dateStringFormatter = get(),
+            )
+        }
     }
 
-    val countdownItemSetsViewModel: CountdownItemSetsViewModel by inject()
+    fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
+
+    fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
+        get(
+            parameters = {
+                parametersOf(scheduleEntry)
+            },
+        )
+
+    fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase = get()
+    fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
 }

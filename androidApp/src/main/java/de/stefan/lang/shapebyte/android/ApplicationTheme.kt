@@ -9,9 +9,9 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.toTextStyle
-import de.stefan.lang.shapebyte.android.workout.item.ui.WithTheme
 
 @Composable
 @Suppress("MagicNumber")

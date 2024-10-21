@@ -33,6 +33,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -59,4 +60,7 @@ android {
             excludes += App.Android.BuildSettings.excludedResourcesList
         }
     }
+}
+dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 }

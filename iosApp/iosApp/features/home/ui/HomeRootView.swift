@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import shared
 
 struct HomeRootView: View {
 
     private static let defaultRadialOffset: CGFloat = Theme.Spacings.XXXL
-    @ObservedObject var viewModel: HomeRootViewModel
+    @ObservedObject var viewModel: HomeRootViewModelWrapper
     @Environment(\.safeAreaInsets) var safeAreaInsets: EdgeInsets
 
     @State private var offsetY: CGFloat = 0
@@ -161,9 +162,6 @@ struct HomeRootView: View {
 #Preview {
 
     HomeRootView(
-        viewModel: HomeRootViewModel(
-            currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase(),
-            recentHistoryUseCase: RecentWorkoutHistoryUseCase()
-        )
+        viewModel: HomeRootViewModelWrapper()
     )
 }

@@ -11,10 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import de.stefan.lang.shapebyte.android.workout.item.ui.CountdownItemSetsView
+import de.stefan.lang.shapebyte.utils.di.UtilsModule
+import de.stefan.lang.shapebyte.utils.dimension.DimensionProvider
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.component.get
 
 class MainActivity : ComponentActivity(), Loggable {
     override val logger: Logging by inject()
@@ -23,6 +26,10 @@ class MainActivity : ComponentActivity(), Loggable {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
+        val test = UtilsModule.get<DimensionProvider>()
+
+        // CommonMainModule.dimensionProvider
+        print(test)
         setContent {
             ApplicationTheme {
                 Surface(

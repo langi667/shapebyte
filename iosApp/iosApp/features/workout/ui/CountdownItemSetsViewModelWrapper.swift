@@ -25,7 +25,7 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
     @Published
     var countdownText: String = ""
 
-    init(wrapped: CountdownItemSetsViewModel = CommonMainModule.shared.countdownItemSetsViewModel) {
+    init(wrapped: CountdownItemSetsViewModel = CommonMainModule.shared.countdownItemSetsViewModel()) {
         self.wrapped = wrapped
     }
 

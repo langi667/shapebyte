@@ -59,27 +59,5 @@ public struct Theme {
         static let successColor: Color = Color("SuccessColor") // TODO: check if needed and where
     }
 
-    fileprivate static let themeProvider = ThemeProvider()
-
-    // TODO: move to shared / ThemeProvider
-    fileprivate static let dimensionProvider =
-    DimensionProvider(
-        deviceSizeCategoryProvider: DeviceSizeCategoryProvider().setup(screenSize: UIScreen.main.bounds.size)
-    )
-}
-
-extension CGFloat {
-    func toDimension(max: CGFloat? = nil) -> CGFloat {
-        let retVal = Theme.dimensionProvider.withDimensionalAspect(
-            height: self,
-            max: max
-        )
-
-        return retVal
-    }
-
-    func toDimensionMax() -> CGFloat {
-        let retVal = toDimension(max: self)
-        return retVal
-    }
+    fileprivate static let themeProvider = ThemeProvider() // TODO: Inject
 }
