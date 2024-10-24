@@ -12,5 +12,10 @@ sealed interface ItemSetData {
         val nextProgress: Progress,
     ) : ItemSetData
 
+    data class Repetitions(
+        val repetitionsDone: UInt,
+        override val progress: Progress,
+    ) : ItemSetData
+
     val progress: Progress
 }

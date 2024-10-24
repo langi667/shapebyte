@@ -4,6 +4,7 @@ import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetData
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetState
 import de.stefan.lang.shapebyte.utils.CountdownTimer
+import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -15,10 +16,11 @@ import kotlinx.coroutines.yield
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 // TODO: maybe stop/cancel required
+// TODO: loggable
 class TimedItemSetHandler(
-    private val logger: Logging,
+    override val logger: Logging,
     private val timer: CountdownTimer,
-) : ItemSetHandling {
+) : ItemSetHandling, Loggable {
     var itemSet: ItemSet.Timed? = null
         private set
 
@@ -28,19 +30,18 @@ class TimedItemSetHandler(
     override val stateFlow: StateFlow<ItemSetState> = _stateFlow
 
     private val className = TimedItemSetHandler::class.simpleName ?: "TimedItemSetHandler"
-    private val tag = className
     private var timerJob: Job? = null
 
     override fun start(set: ItemSet, scope: CoroutineScope) {
         if (!stateFlow.value.isStopped) {
-            logger.d(tag, "Cannot start a new set while another one is running")
+            logD("Cannot start a new set while another one is running")
             return
         }
 
         when (set) {
             set as ItemSet.Timed -> startTimedSet(set, scope)
             else -> {
-                logger.e(tag, "Unsupported set type for $className: ${set::class.simpleName}")
+                logE("Unsupported set type for $className: ${set::class.simpleName}")
                 return
             }
         }
@@ -57,7 +58,7 @@ class TimedItemSetHandler(
             timer.start(resumeScope)
             startTimer(resumeScope)
         } else {
-            logger.w(tag, "Cannot resume a set that is not paused")
+            logW("Cannot resume a set that is not paused")
         }
     }
 
@@ -121,7 +122,7 @@ class TimedItemSetHandler(
             }
         }
 
-        logger.d(tag, "timerState: $timerState  to TimedItemSetState: $state")
+        logD("timerState: $timerState  to TimedItemSetState: $state")
         return state
     }
 

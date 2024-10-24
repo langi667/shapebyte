@@ -12,3 +12,11 @@ interface ItemSetHandling {
     fun pause()
     fun resume(resumeScope: CoroutineScope)
 }
+
+sealed interface ItemSetWithInputValue {
+    data class Repetitions(val repetitions: UInt) : ItemSetWithInputValue
+}
+
+interface ItemSetWithInputValueHandling : ItemSetHandling {
+    fun setInputValue(value: ItemSetWithInputValue)
+}

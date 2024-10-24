@@ -77,9 +77,9 @@ class CountdownItemSetsViewModel(
 
     private fun handleSetStateStarted(setsState: ItemSetsState.Running.SetStarted) {
         val itemSets = this.itemSets ?: return
-        val itemSet = itemSets.getOrNull(setsState.currentSet) ?: return
+        val itemSet = itemSets.getOrNull(setsState.currentSetIndex) ?: return
 
-        val countdownText = (itemSets.count() - setsState.currentSet).toString() // TODO: formatting
+        val countdownText = (itemSets.count() - setsState.currentSetIndex).toString() // TODO: formatting
         val animationDuration = itemSet.duration.inWholeMilliseconds - TIMER_OFFSET
 
         val state = CountdownItemSetsViewData(

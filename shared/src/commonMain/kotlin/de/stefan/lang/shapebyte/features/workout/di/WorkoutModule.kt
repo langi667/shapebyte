@@ -8,6 +8,7 @@ import de.stefan.lang.shapebyte.features.workout.history.domain.RecentWorkoutHis
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.item.domain.DefaultItemSetHandler
 import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetsHandler
+import de.stefan.lang.shapebyte.features.workout.item.domain.RepetitionItemSetHandler
 import de.stefan.lang.shapebyte.features.workout.item.domain.TimedItemSetHandler
 import de.stefan.lang.shapebyte.features.workout.item.ui.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
@@ -49,11 +50,13 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
             ItemSetsHandler(
                 logger = get(),
                 timedSetHandler = get(),
+                repetitionSetHandler = get(),
                 defaultSetHandler = get(),
             )
         }
 
         factory<TimedItemSetHandler> { TimedItemSetHandler(logger = get(), timer = get()) }
+        factory<RepetitionItemSetHandler> { RepetitionItemSetHandler(logger = get()) }
         factory<DefaultItemSetHandler> { DefaultItemSetHandler() }
         factory { CountdownItemSetsViewModel(logger = get(), itemSetsHandler = get()) }
 
@@ -89,11 +92,13 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
             ItemSetsHandler(
                 logger = get(),
                 timedSetHandler = get(),
+                repetitionSetHandler = get(),
                 defaultSetHandler = get(),
             )
         }
 
         factory<TimedItemSetHandler> { TimedItemSetHandler(logger = get(), timer = get()) }
+        factory<RepetitionItemSetHandler> { RepetitionItemSetHandler(logger = get()) }
         factory<DefaultItemSetHandler> { DefaultItemSetHandler() }
         factory { (entry: WorkoutScheduleEntry) ->
             WorkoutHistoryEntry(

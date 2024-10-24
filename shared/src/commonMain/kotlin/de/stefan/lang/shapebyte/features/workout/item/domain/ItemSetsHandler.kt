@@ -17,12 +17,13 @@ class ItemSetsHandler(
     override val logger: Logging,
     private val timedSetHandler: TimedItemSetHandler,
     private val defaultSetHandler: DefaultItemSetHandler,
+    private val repetitionSetHandler: RepetitionItemSetHandler,
 ) : Loggable {
     private var sets: List<ItemSet>? = null
     private var currSetHandler: ItemSetHandling? = null
     private var currSetIndex: Int = -1
     private val _stateFlow: MutableStateFlow<ItemSetsState> =
-        MutableStateFlow<ItemSetsState>(ItemSetsState.Idle)
+        MutableStateFlow(ItemSetsState.Idle)
 
     val stateFlow: MutableStateFlow<ItemSetsState> = _stateFlow
     private var stateFlowJob: Job? = null
@@ -37,6 +38,11 @@ class ItemSetsHandler(
 
         _stateFlow.value = ItemSetsState.Started(totalSets = sets.count())
         startNextSet(scope)
+    }
+
+    fun setInputValue(value: ItemSetWithInputValue) {
+        val inputHandler = currSetHandler as? ItemSetWithInputValueHandling ?: return
+        inputHandler.setInputValue(value)
     }
 
     private fun startNextSet(scope: CoroutineScope) {
@@ -74,6 +80,7 @@ class ItemSetsHandler(
     ) {
         val nextHandler: ItemSetHandling = when (itemSet) {
             is ItemSet.Timed -> timedSetHandler
+            is ItemSet.Repetition -> repetitionSetHandler
             else -> defaultSetHandler
         }
 
@@ -108,7 +115,7 @@ class ItemSetsHandler(
             is ItemSetState.Started -> {
                 logD("Started set $currSetIndex")
                 _stateFlow.value = ItemSetsState.Running.SetStarted(
-                    currentSet = currSetIndex,
+                    currentSetIndex = currSetIndex,
                     totalSets = sets.count(),
                     setData = state.setData,
                 )
@@ -117,7 +124,7 @@ class ItemSetsHandler(
             is ItemSetState.Running -> {
                 logD("Running set $currSetIndex")
                 _stateFlow.value = ItemSetsState.Running.SetRunning(
-                    currentSet = currSetIndex,
+                    currentSetIndex = currSetIndex,
                     totalSets = sets.count(),
                     currentSetProgress = state.setData.progress,
                     totalProgress = totalProgress(currentSetProgress = state.setData.progress),
@@ -133,7 +140,7 @@ class ItemSetsHandler(
             is ItemSetState.Finished -> {
                 logD("Finished set $currSetIndex")
                 _stateFlow.value = ItemSetsState.Running.SetFinished(
-                    currentSet = currSetIndex,
+                    currentSetIndex = currSetIndex,
                     totalSets = sets.count(),
                     setData = state.setData,
                 )

@@ -3,6 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.item.domain
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.item.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import org.koin.test.inject
 import kotlin.test.Test
@@ -53,6 +54,43 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
                 }
 
                 assertIs<ItemSetsState.Running.SetFinished>(awaitItem())
+            }
+
+            assertIs<ItemSetsState.Finished>(awaitItem())
+            expectNoEvents()
+        }
+    }
+
+    @Test
+    fun `Repetition sets should emit correct states`() = test {
+        val exercise = Exercise("Dummy")
+        val sets = listOf(
+            ItemSet.Repetition(exercise),
+            ItemSet.Repetition(exercise),
+            ItemSet.Repetition(exercise),
+        )
+
+        sut.start(sets, this)
+
+        sut.stateFlow.test {
+            assertEquals(ItemSetsState.Started(sets.count()), awaitItem())
+            
+            for (i in 1..sets.count()) {
+                val reps = i.toUInt()
+                sut.setInputValue(ItemSetWithInputValue.Repetitions(reps))
+
+                val item = awaitItem()
+                var current: ItemSetsState.Running = item as ItemSetsState.Running.SetFinished
+                assertEquals(i - 1, current.currentSetIndex)
+                assertEquals(sets.count(), current.totalSets)
+
+                assertEquals(reps, (current.setData as ItemSetData.Repetitions).repetitionsDone)
+
+                if (i < sets.count()) {
+                    current = awaitItem() as ItemSetsState.Running.SetStarted
+                    assertIs<ItemSetsState.Running.SetStarted>(current)
+                    assertEquals(0u, (current.setData as ItemSetData.Repetitions).repetitionsDone)
+                }
             }
 
             assertIs<ItemSetsState.Finished>(awaitItem())

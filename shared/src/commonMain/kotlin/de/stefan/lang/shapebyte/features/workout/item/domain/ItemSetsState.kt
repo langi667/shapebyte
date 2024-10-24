@@ -8,18 +8,18 @@ sealed interface ItemSetsState {
     data class Started(val totalSets: Int) : ItemSetsState
 
     sealed interface Running : ItemSetsState {
-        val currentSet: Int
+        val currentSetIndex: Int
         val totalSets: Int
         val setData: ItemSetData
 
         data class SetStarted(
-            override val currentSet: Int,
+            override val currentSetIndex: Int,
             override val totalSets: Int,
             override val setData: ItemSetData,
         ) : Running
 
         data class SetRunning(
-            override val currentSet: Int,
+            override val currentSetIndex: Int,
             override val totalSets: Int,
             val currentSetProgress: Progress,
             val totalProgress: Progress,
@@ -27,7 +27,7 @@ sealed interface ItemSetsState {
         ) : Running
 
         data class SetFinished(
-            override val currentSet: Int,
+            override val currentSetIndex: Int,
             override val totalSets: Int,
             override val setData: ItemSetData,
         ) : Running
