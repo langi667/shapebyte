@@ -19,7 +19,14 @@ import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 
-object WorkoutModule : DIModule {
+interface WorkoutModuleProviding {
+    fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
+    fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
+    fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase
+    fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
+}
+
+object WorkoutModule : DIModule, WorkoutModuleProviding {
     override val module = module {
         single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks } // TODO: change once implemented !!!
         single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
@@ -95,15 +102,14 @@ object WorkoutModule : DIModule {
         }
     }
 
-    fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
-
-    fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
+    override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
+    override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         get(
             parameters = {
                 parametersOf(scheduleEntry)
             },
         )
 
-    fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase = get()
-    fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
+    override fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase = get()
+    override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
 }

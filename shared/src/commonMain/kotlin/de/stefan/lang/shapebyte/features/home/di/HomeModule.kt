@@ -5,7 +5,11 @@ import de.stefan.lang.shapebyte.utils.dicore.DIModule
 import org.koin.core.component.get
 import org.koin.dsl.module
 
-object HomeModule : DIModule {
+interface HomeModuleProviding {
+    fun homeRootViewModel(): HomeRootViewModel
+}
+
+object HomeModule : DIModule, HomeModuleProviding {
     override val module = module {
         single<HomeRootViewModel> {
             HomeRootViewModel(
@@ -26,5 +30,5 @@ object HomeModule : DIModule {
         }
     }
 
-    fun homeRootViewModel(): HomeRootViewModel = get()
+    override fun homeRootViewModel(): HomeRootViewModel = get()
 }

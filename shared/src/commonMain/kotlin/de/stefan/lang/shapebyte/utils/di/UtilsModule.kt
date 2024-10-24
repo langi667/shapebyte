@@ -15,7 +15,14 @@ import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import org.koin.core.component.get
 import org.koin.dsl.module
 
-object UtilsModule : DIModule {
+interface UtilsModuleProviding {
+    fun logger(): Logging
+    fun countdownTimer(): CountdownTimer
+    fun dimensionProvider(): DimensionProvider
+    fun dateTimeStringFormatter(): DateTimeStringFormatter
+}
+
+object UtilsModule : DIModule, UtilsModuleProviding {
     override val module = module {
         single<Logging> { Logger() }
         single<ScreenSizeProviding> { ScreenSizeProvider() }
@@ -37,4 +44,9 @@ object UtilsModule : DIModule {
 
         factory { CountdownTimer(logger = get()) }
     }
+
+    override fun logger(): Logging = get()
+    override fun countdownTimer(): CountdownTimer = get()
+    override fun dimensionProvider(): DimensionProvider = get()
+    override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
 }

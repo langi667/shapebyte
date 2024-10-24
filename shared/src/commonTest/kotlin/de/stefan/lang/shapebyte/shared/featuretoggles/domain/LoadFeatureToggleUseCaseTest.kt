@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.domain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.CommonMainModule
+import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
@@ -17,7 +17,7 @@ class LoadFeatureToggleUseCaseTest : BaseCoroutineTest() {
     private val sut: LoadFeatureToggleUseCase by inject()
 
     private val datasource: FeatureToggleDatasourceMock
-        get() = CommonMainModule.featureToggleDatasourceMock
+        get() = DPI.featureToggleDatasourceMock
 
     @Test
     fun `should emit Success with null if toggle is not present`() = test {

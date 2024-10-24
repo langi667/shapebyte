@@ -59,7 +59,7 @@ struct WorkoutHistoryEntryView: View {
     ZStack {
         BackgroundView()
         WorkoutHistoryEntryView(
-            entry: WorkoutModule // TODO: subject to change
+            entry: DPI
                 .shared
                 .workoutHistoryEntry(
                     scheduleEntry: WorkoutScheduleEntry(
@@ -70,6 +70,6 @@ struct WorkoutHistoryEntryView: View {
                     )
                 )
             )
-    }
+        }
 
  }

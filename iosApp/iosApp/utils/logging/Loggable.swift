@@ -21,7 +21,7 @@ protocol Loggable {
 
 extension Loggable where Self: AnyObject {
 
-    var logger: any Logging { CommonMainModule.shared.logger() }
+    var logger: any Logging { DPI.shared.logger() }
     var tag: String { TypeDescriptionUtil.typeName(from: self) }
 
     func logD(message: String) {

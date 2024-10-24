@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.data
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.CommonMainModule
+import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.shared.featuretoggles.di.featureToggleDatasourceMock
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
@@ -15,7 +15,7 @@ class FeatureToggleRepositoryTest : BaseCoroutineTest() {
     private val sut: FeatureToggleRepository by inject()
 
     private val datasource: FeatureToggleDatasourceMock
-        get() = CommonMainModule.featureToggleDatasourceMock
+        get() = DPI.featureToggleDatasourceMock
 
     @Test
     fun `evaluate Mocks`() = test {

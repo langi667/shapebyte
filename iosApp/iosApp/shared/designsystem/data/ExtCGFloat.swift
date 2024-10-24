@@ -11,7 +11,7 @@ import shared
 
 extension CGFloat {
     func toDimension(max: CGFloat? = nil) -> CGFloat {
-        let dimensionProvider = CommonMainModule.shared.dimensionProvider()
+        let dimensionProvider = DPI.shared.dimensionProvider()
         let retVal: Float
 
         if let maxNotNull = max {

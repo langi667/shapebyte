@@ -3,7 +3,7 @@ import shared
 
 struct AppRootView: View {
     @State
-    var logger = CommonMainModule.shared.logger
+    var logger = DPI.shared.logger
 
 	var body: some View {
         ZStack {

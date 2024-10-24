@@ -27,7 +27,7 @@ class HomeRootViewModelWrapper: ViewModelWrapper {
 
     var eventPublisher: PassthroughSubject<Event, Never> = PassthroughSubject<Event, Never>()
 
-    init(wrapped: HomeRootViewModel = CommonMainModule.shared.homeRootViewModel()) {
+    init(wrapped: HomeRootViewModel = DPI.shared.homeRootViewModel()) {
         self.wrapped = wrapped
     }
 

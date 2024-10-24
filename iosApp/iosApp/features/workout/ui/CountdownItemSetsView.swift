@@ -13,7 +13,7 @@ import shared
 struct CountdownItemSetsView: View {
     @ObservedObject
     var viewModel: CountdownItemSetsViewModelWrapper
-    private let logger = CommonMainModule.shared.logger
+    private let logger = DPI.shared.logger
 
     var body: some View {
         ZStack {

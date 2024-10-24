@@ -4,6 +4,6 @@ import org.koin.core.context.startKoin
 
 fun startKoin(){
     startKoin {
-        modules(CommonMainModule.modules)
+        modules(DPI.modules)
     }
 }

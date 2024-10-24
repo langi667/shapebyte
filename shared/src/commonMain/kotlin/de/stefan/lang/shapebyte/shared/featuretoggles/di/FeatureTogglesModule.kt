@@ -6,10 +6,15 @@ import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDat
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.shared.featuretoggles.domain.LoadFeatureToggleUseCase
 import de.stefan.lang.shapebyte.utils.dicore.DIModule
+import org.koin.core.component.get
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-object FeatureTogglesModule : DIModule {
+interface FeatureTogglesModuleProviding {
+    fun loadFeatureToggleUseCase(): LoadFeatureToggleUseCase
+}
+
+object FeatureTogglesModule : DIModule, FeatureTogglesModuleProviding {
     override val module: Module = module {
         single<LoadFeatureToggleUseCase> { LoadFeatureToggleUseCase(logger = get(), repository = get()) }
         single<FeatureToggleRepository> { FeatureToggleRepository(logger = get(), datasource = get()) }
@@ -21,4 +26,6 @@ object FeatureTogglesModule : DIModule {
         single<FeatureToggleRepository> { FeatureToggleRepository(logger = get(), datasource = get()) }
         single<FeatureToggleDatasource> { FeatureToggleDatasourceMock(logger = get()) }
     }
+
+    override fun loadFeatureToggleUseCase(): LoadFeatureToggleUseCase = get()
 }
