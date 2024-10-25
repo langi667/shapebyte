@@ -14,6 +14,7 @@ sealed interface ItemSetData {
 
     data class Repetitions(
         val repetitionsDone: UInt,
+        val repetitionGoal: UInt? = null,
         override val progress: Progress,
     ) : ItemSetData
 

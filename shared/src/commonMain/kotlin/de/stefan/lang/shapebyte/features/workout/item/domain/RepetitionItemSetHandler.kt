@@ -25,6 +25,12 @@ class RepetitionItemSetHandler(
             }
         }
 
+    val repetitionGoal: UInt?
+        get() = set?.maxRepetitions
+
+    val progress: Progress
+        get() = computeProgress(repetitionsDone ?: 0u)
+
     private val _stateFlow = MutableStateFlow<ItemSetState>(ItemSetState.Idle)
 
     override val stateFlow: StateFlow<ItemSetState>
@@ -37,7 +43,9 @@ class RepetitionItemSetHandler(
         }
 
         when (set) {
-            set as ItemSet.Repetition -> this.set = set
+            set as ItemSet.Repetition -> {
+                this.set = set
+            }
             else -> {
                 logE("Unsupported set type for $tag: ${set::class.simpleName}")
                 return
@@ -45,7 +53,11 @@ class RepetitionItemSetHandler(
         }
 
         _stateFlow.value = ItemSetState.Started(
-            setData = ItemSetData.Repetitions(0u, Progress.ZERO),
+            setData = ItemSetData.Repetitions(
+                repetitionsDone = 0u,
+                repetitionGoal = repetitionGoal,
+                progress = Progress.ZERO,
+            ),
         )
     }
 
@@ -55,7 +67,13 @@ class RepetitionItemSetHandler(
             return
         }
 
-        _stateFlow.value = ItemSetState.Paused(ItemSetData.Repetitions(repetitionsDone ?: 0u, Progress.ZERO))
+        _stateFlow.value = ItemSetState.Paused(
+            setData = ItemSetData.Repetitions(
+                repetitionsDone = repetitionsDone ?: 0u,
+                repetitionGoal = repetitionGoal,
+                progress = computeProgress(repetitionsDone ?: 0u),
+            ),
+        )
     }
 
     override fun resume(resumeScope: CoroutineScope) {
@@ -69,8 +87,28 @@ class RepetitionItemSetHandler(
             return
         }
 
-        // TODO: could also be a running state if repetitions are not 0
-        _stateFlow.value = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO))
+        val repetitionsDone = repetitionsDone ?: 0u
+        val progress = computeProgress(repetitionsDone)
+
+        val nextState: ItemSetState = if (repetitionGoal == null) {
+            ItemSetState.Started(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 0u,
+                    repetitionGoal = repetitionGoal,
+                    progress = progress,
+                ),
+            )
+        } else {
+            ItemSetState.Running(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = repetitionsDone,
+                    repetitionGoal = repetitionGoal,
+                    progress = progress,
+                ),
+            )
+        }
+
+        _stateFlow.value = nextState
     }
 
     override fun setInputValue(value: ItemSetWithInputValue) {
@@ -85,14 +123,43 @@ class RepetitionItemSetHandler(
         }
 
         if (set == null) {
-            logE("Cannot set repetitions without a set, cass start first")
+            logE("Cannot set repetitions without a set, call start first")
             return
         }
 
-        _stateFlow.value = ItemSetState.Finished(ItemSetData.Repetitions(value.repetitions, Progress.COMPLETE))
+        val nextState = if (value.repetitions < (repetitionGoal ?: 0u)) {
+            ItemSetState.Running(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = value.repetitions,
+                    repetitionGoal = repetitionGoal,
+                    progress = computeProgress(value.repetitions),
+                ),
+            )
+        } else {
+            ItemSetState.Finished(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = value.repetitions,
+                    repetitionGoal = repetitionGoal,
+                    progress = Progress.COMPLETE,
+                ),
+            )
+        }
+
+        _stateFlow.value = nextState
     }
 
     fun setInputValue(value: UInt) {
         setInputValue(ItemSetWithInputValue.Repetitions(value))
+    }
+
+    private fun computeProgress(repetitionsDone: UInt): Progress {
+        if (repetitionsDone == 0u) {
+            return Progress.ZERO
+        }
+
+        val goal = repetitionGoal ?: return Progress.COMPLETE
+        val progressValue = repetitionsDone.toFloat() / goal.toFloat()
+
+        return Progress(progressValue)
     }
 }

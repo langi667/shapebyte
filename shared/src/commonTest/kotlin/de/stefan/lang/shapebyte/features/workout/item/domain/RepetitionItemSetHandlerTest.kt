@@ -22,6 +22,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
         assertNull(sut.repetitionsDone)
         assertNull(sut.set)
+        assertEquals(Progress.ZERO, sut.progress)
     }
 
     @Test
@@ -31,7 +32,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -46,7 +47,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -63,7 +64,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -74,7 +75,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Finished(ItemSetData.Repetitions(reps, Progress.COMPLETE)),
+                expected = ItemSetState.Finished(ItemSetData.Repetitions(reps, null, Progress.COMPLETE)),
                 actual = awaitItem(),
             )
         }
@@ -92,7 +93,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Finished(ItemSetData.Repetitions(reps, Progress.COMPLETE)),
+                expected = ItemSetState.Finished(ItemSetData.Repetitions(reps, null, Progress.COMPLETE)),
                 actual = awaitItem(),
             )
         }
@@ -121,7 +122,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -141,7 +142,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -150,7 +151,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Paused(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Paused(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -181,7 +182,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -190,7 +191,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Paused(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Paused(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -199,7 +200,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, Progress.ZERO)),
+                expected = ItemSetState.Started(ItemSetData.Repetitions(0u, null, Progress.ZERO)),
                 actual = awaitItem(),
             )
         }
@@ -209,7 +210,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(
-                expected = ItemSetState.Finished(ItemSetData.Repetitions(reps, Progress.COMPLETE)),
+                expected = ItemSetState.Finished(ItemSetData.Repetitions(reps, null, Progress.COMPLETE)),
                 actual = awaitItem(),
             )
         }
@@ -233,5 +234,123 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
         sut.stateFlow.test {
             assertFalse(awaitItem().isRunning)
         }
+    }
+
+    @Test
+    fun `Progress computation with rep goals`() = test {
+        val sut: RepetitionItemSetHandler = WorkoutModule.get()
+        val set = ItemSet.Repetition(Exercise("Test"), maxRepetitions = 10u)
+
+        assertEquals(Progress.ZERO, sut.progress)
+        sut.start(set, this)
+        assertEquals(Progress.ZERO, sut.progress)
+
+        sut.setInputValue(5u)
+        assertEquals(Progress(0.5f), sut.progress)
+
+        sut.setInputValue(8u)
+        assertEquals(Progress(0.8f), sut.progress)
+
+        sut.setInputValue(10u)
+        assertEquals(Progress.COMPLETE, sut.progress)
+    }
+
+    @Test
+    fun `Progress computation without rep goals`() = test {
+        val sut: RepetitionItemSetHandler = WorkoutModule.get()
+        val set = ItemSet.Repetition(Exercise("Test"))
+
+        assertEquals(Progress.ZERO, sut.progress)
+        sut.start(set, this)
+        assertEquals(Progress.ZERO, sut.progress)
+
+        sut.setInputValue(5u)
+        assertEquals(Progress.COMPLETE, sut.progress)
+    }
+
+    @Test
+    fun `States with rep goals`() = test {
+        val sut: RepetitionItemSetHandler = WorkoutModule.get()
+        val repGoal = 10u
+        val set = ItemSet.Repetition(Exercise("Test"), maxRepetitions = repGoal)
+
+        assertEquals(ItemSetState.Idle, sut.stateFlow.value)
+        sut.start(set, this)
+
+        assertEquals(
+            expected = ItemSetState.Started(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 0u,
+                    repetitionGoal = repGoal,
+                    progress = Progress.ZERO,
+                ),
+            ),
+            actual = sut.stateFlow.value,
+        )
+
+        sut.setInputValue(5u)
+
+        assertEquals(
+            expected = ItemSetState.Running(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 5u,
+                    repetitionGoal = repGoal,
+                    progress = Progress(0.5f),
+                ),
+            ),
+            actual = sut.stateFlow.value,
+        )
+
+        sut.setInputValue(8u)
+
+        assertEquals(
+            expected = ItemSetState.Running(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 8u,
+                    repetitionGoal = repGoal,
+                    progress = Progress(0.8f),
+                ),
+            ),
+            actual = sut.stateFlow.value,
+        )
+
+        sut.pause()
+
+        assertEquals(
+            expected = ItemSetState.Paused(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 8u,
+                    repetitionGoal = repGoal,
+                    progress = Progress(0.8f),
+                ),
+            ),
+            actual = sut.stateFlow.value,
+        )
+
+        sut.resume(this)
+
+        assertEquals(
+            expected = ItemSetState.Running(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 8u,
+                    repetitionGoal = repGoal,
+                    progress = Progress(0.8f),
+                ),
+            ),
+            actual = sut.stateFlow.value,
+        )
+
+        sut.setInputValue(10u)
+
+        assertEquals(
+            expected = ItemSetState.Finished(
+                setData = ItemSetData.Repetitions(
+                    repetitionsDone = 10u,
+                    repetitionGoal = repGoal,
+                    progress = Progress.COMPLETE,
+                ),
+            ),
+            actual = sut.stateFlow.value,
+        )
     }
 }

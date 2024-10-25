@@ -5,6 +5,7 @@ import de.stefan.lang.shapebyte.features.workout.item.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
+import de.stefan.lang.shapebyte.utils.Progress
 import org.koin.test.inject
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -62,7 +63,7 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
     }
 
     @Test
-    fun `Repetition sets should emit correct states`() = test {
+    fun `Repetition without rep goal sets should emit correct states`() = test {
         val exercise = Exercise("Dummy")
         val sets = listOf(
             ItemSet.Repetition(exercise),
@@ -74,13 +75,14 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
 
         sut.stateFlow.test {
             assertEquals(ItemSetsState.Started(sets.count()), awaitItem())
-            
+
             for (i in 1..sets.count()) {
                 val reps = i.toUInt()
                 sut.setInputValue(ItemSetWithInputValue.Repetitions(reps))
 
                 val item = awaitItem()
                 var current: ItemSetsState.Running = item as ItemSetsState.Running.SetFinished
+
                 assertEquals(i - 1, current.currentSetIndex)
                 assertEquals(sets.count(), current.totalSets)
 
@@ -91,6 +93,56 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
                     assertIs<ItemSetsState.Running.SetStarted>(current)
                     assertEquals(0u, (current.setData as ItemSetData.Repetitions).repetitionsDone)
                 }
+            }
+
+            assertIs<ItemSetsState.Finished>(awaitItem())
+            expectNoEvents()
+        }
+    }
+
+    @Test
+    fun `Repetition with rep goal sets should emit correct states`() = test {
+        val exercise = Exercise("Dummy")
+        val reps = 10u
+        val sets = listOf(
+            ItemSet.Repetition(exercise, maxRepetitions = reps),
+            ItemSet.Repetition(exercise, maxRepetitions = reps),
+            ItemSet.Repetition(exercise, maxRepetitions = reps),
+        )
+
+        sut.start(sets, this)
+
+        sut.stateFlow.test {
+            assertEquals(ItemSetsState.Started(sets.count()), awaitItem())
+
+            for (i in 1..sets.count()) {
+                val currReps = reps / 2u
+                var current: ItemSetsState.Running = awaitItem() as ItemSetsState.Running.SetStarted
+
+                assertEquals(i - 1, current.currentSetIndex)
+                assertEquals(sets.count(), current.totalSets)
+                assertEquals(0u, (current.setData as ItemSetData.Repetitions).repetitionsDone)
+                assertEquals(reps, (current.setData as ItemSetData.Repetitions).repetitionGoal)
+                assertEquals(Progress.ZERO, (current.setData as ItemSetData.Repetitions).progress)
+
+                sut.setInputValue(ItemSetWithInputValue.Repetitions(currReps))
+
+                current = awaitItem() as ItemSetsState.Running.SetRunning
+
+                assertEquals(i - 1, current.currentSetIndex)
+                assertEquals(sets.count(), current.totalSets)
+                assertEquals(currReps, (current.setData as ItemSetData.Repetitions).repetitionsDone)
+                assertEquals(reps, (current.setData as ItemSetData.Repetitions).repetitionGoal)
+                assertEquals(Progress(0.5f), (current.setData as ItemSetData.Repetitions).progress)
+
+                sut.setInputValue(ItemSetWithInputValue.Repetitions(reps))
+                current = awaitItem() as ItemSetsState.Running.SetFinished
+
+                assertEquals(i - 1, current.currentSetIndex)
+                assertEquals(sets.count(), current.totalSets)
+                assertEquals(reps, (current.setData as ItemSetData.Repetitions).repetitionsDone)
+                assertEquals(reps, (current.setData as ItemSetData.Repetitions).repetitionGoal)
+                assertEquals(Progress.COMPLETE, (current.setData as ItemSetData.Repetitions).progress)
             }
 
             assertIs<ItemSetsState.Finished>(awaitItem())

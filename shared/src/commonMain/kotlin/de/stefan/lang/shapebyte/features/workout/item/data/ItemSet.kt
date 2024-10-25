@@ -8,5 +8,5 @@ Representing a single performance of either an exercise (push up, squat) or brea
 
 sealed class ItemSet(val item: Item) {
     class Timed(val duration: Duration, item: Item = None) : ItemSet(item)
-    class Repetition(item: Item) : ItemSet(item)
+    class Repetition(item: Item, val maxRepetitions: UInt? = null) : ItemSet(item)
 }
