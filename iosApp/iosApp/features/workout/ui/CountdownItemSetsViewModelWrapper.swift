@@ -29,7 +29,7 @@ class CountdownItemSetsViewModelWrapper: ViewModelWrapper {
         self.wrapped = wrapped
     }
 
-    func start(itemSets: [ItemSet.Timed]) {
+    func start(itemSets: [ItemSetTimed]) {
         wrapped.start(itemSets: itemSets)
     }
 

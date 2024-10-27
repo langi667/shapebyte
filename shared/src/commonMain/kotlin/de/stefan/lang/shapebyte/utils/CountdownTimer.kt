@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
+// TODO: check if this is still needed
 class CountdownTimer(
     private val logger: Logging,
 ) {

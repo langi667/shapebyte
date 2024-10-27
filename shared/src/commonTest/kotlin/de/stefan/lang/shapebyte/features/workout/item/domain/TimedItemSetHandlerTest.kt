@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.item.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetState
+import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemSetHandler
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.CountdownTimer
 import de.stefan.lang.shapebyte.utils.mocks.SilentLogger

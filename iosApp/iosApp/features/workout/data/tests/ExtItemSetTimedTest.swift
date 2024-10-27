@@ -12,15 +12,15 @@ import shared
 struct ExtItemSetTimedTest {
 
     @Test(
-        "Test creating ItemSet.Timed with forDuration",
+        "Test creating ItemSetTimed with forDuration",
         arguments: [0, 10_0000, 200_000]
     )
     func testForDuration(_ durationRaw: Int64) async throws {
         let item: Item = None.shared
-        let expected = ItemSet.Timed(duration: durationRaw, item: item)
+        let expected = ItemSetTimed(duration: durationRaw, item: item)
 
         let expectedSeconds: Duration = .seconds( durationRaw / 1000 )
-        let result = ItemSet.Timed.forDuration(expectedSeconds, item: item)
+        let result = ItemSetTimed.forDuration(expectedSeconds, item: item)
 
         #expect(expected.duration == result.duration)
         #expect(expected.item === result.item)

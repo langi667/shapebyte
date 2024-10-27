@@ -1,8 +1,9 @@
-package de.stefan.lang.shapebyte.features.workout.item.domain
+package de.stefan.lang.shapebyte.features.workout.item.domain.timed
 
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetData
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetState
+import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetHandling
 import de.stefan.lang.shapebyte.utils.CountdownTimer
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
