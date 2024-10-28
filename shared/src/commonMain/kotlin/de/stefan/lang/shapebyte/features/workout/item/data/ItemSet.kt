@@ -8,7 +8,13 @@ Representing a single performance of either an exercise (push up, squat) or brea
  */
 
 sealed interface ItemSet {
-    data class Timed(val duration: Duration) : ItemSet
+    // TODO: make interface Timed,  have Timed.Seconds and Timed.Milliseconds
+
+    data class Timed(val durationSeconds: Int) : ItemSet {
+        val seconds: Duration
+            get() = durationSeconds.seconds
+    }
+
     data class Repetition(val repetitions: UInt? = null) : ItemSet
 }
 
@@ -17,7 +23,7 @@ fun List<ItemSet.Timed>.sumDurations(): Duration {
     val retVal: Duration = if (this.isEmpty()) {
         Duration.ZERO
     } else {
-        this.map { it.duration }
+        this.map { it.seconds }
             .sumOf { it.inWholeSeconds }.seconds
     }
 

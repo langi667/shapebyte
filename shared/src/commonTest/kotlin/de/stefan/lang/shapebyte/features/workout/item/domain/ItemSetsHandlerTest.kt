@@ -35,9 +35,9 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
     @Test
     fun `Timed sets should emit correct states`() = test {
         val sets = listOf(
-            ItemSet.Timed(1.seconds),
-            ItemSet.Timed(2.seconds),
-            ItemSet.Timed(3.seconds),
+            ItemSet.Timed(1),
+            ItemSet.Timed(2),
+            ItemSet.Timed(3),
         )
 
         sut.start(sets, this)
@@ -48,7 +48,7 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
             for (i in 0 until sets.count()) {
                 assertIs<ItemSetsState.Running.SetStarted>(awaitItem())
 
-                repeat(sets[i].duration.inWholeSeconds.toInt() - 1) {
+                repeat(sets[i].seconds.inWholeSeconds.toInt() - 1) {
                     assertIs<ItemSetsState.Running>(awaitItem())
                 }
 

@@ -51,9 +51,11 @@ class CountdownItemSetsViewModel(
                         handleStateRunning(state)
                     }
 
-                    else -> {
+                    is ItemExecutionState.Finished -> {
+                        logD("Finished")
                         /* fall through */
                     }
+                    else -> { /* fall through */ }
                 }
             }
         }
@@ -66,10 +68,12 @@ class CountdownItemSetsViewModel(
             }
 
             is ItemExecutionState.SetStarted -> {
+                logI("Set started")
                 handleSetStateStarted(setsState)
             }
 
             is ItemExecutionState.SetFinished -> {
+                logI("Set finished")
                 handleSetStateFinished()
             }
         }

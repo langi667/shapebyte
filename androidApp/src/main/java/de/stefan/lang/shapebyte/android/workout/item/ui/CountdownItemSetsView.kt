@@ -15,7 +15,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.Title
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.ui.timed.CountdownItemSetsViewModel
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modifier = Modifier) {
@@ -36,11 +35,11 @@ fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modif
     LaunchedEffect(key1 = Unit) {
         viewModel.start(
             listOf(
-                ItemSet.Timed(1.seconds),
-                ItemSet.Timed(1.seconds),
-                ItemSet.Timed(1.seconds),
-                ItemSet.Timed(1.seconds),
-                ItemSet.Timed(1.seconds),
+                ItemSet.Timed(1),
+                ItemSet.Timed(1),
+                ItemSet.Timed(1),
+                ItemSet.Timed(1),
+                ItemSet.Timed(1),
             ),
         )
     }

@@ -11,19 +11,12 @@ import shared
 
 extension ItemSetTimed {
     static func forDuration(_ duration: Duration) -> ItemSetTimed {
-
         let components = duration.components
         let seconds = components.seconds
-        let attoseconds = components.attoseconds
+        let milliseconds = components.attoseconds / 1_000_000_000_000_000
+        let total = ((seconds * 1000) + milliseconds )
 
-        // Convert seconds to milliseconds
-        let millisecondsFromSeconds = seconds * 1_000
-
-        // Convert attoseconds to milliseconds
-        let millisecondsFromAttoseconds = attoseconds / 1_000_000_000_000_000
-        let milliseconds = millisecondsFromSeconds + millisecondsFromAttoseconds
-
-        let itemSet = ItemSetTimed(duration: milliseconds)
+        let itemSet = ItemSetTimed(durationSeconds: Int32(seconds))
         return itemSet
     }
 }

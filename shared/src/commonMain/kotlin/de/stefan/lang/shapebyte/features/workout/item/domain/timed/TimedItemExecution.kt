@@ -30,7 +30,7 @@ class TimedItemExecution(
             val sets = mutableListOf<ItemSet.Timed>()
 
             repeat(seconds.toInt()) {
-                sets.add(ItemSet.Timed(1.seconds))
+                sets.add(ItemSet.Timed(1))
             }
 
             return DPI.createTimedItemExecution(None, sets)
@@ -58,29 +58,32 @@ class TimedItemExecution(
         val totalTime = sets.sumDurations()
         _state.value = ItemExecutionState.Started(item)
 
+        logI("Starting timed item execution for ${item.name} with ${sets.size} sets and a total duration of $totalTime")
+
         sets.forEachIndexed { index, set ->
             var timePassed: Duration = if (index == 0) { Duration.ZERO } else { sets.sumDurationTo(index) }
             var timeRemaining = totalTime - timePassed
 
+            yield()
             _state.value = ItemExecutionState.SetStarted(
                 item = item,
                 set = set,
                 setProgress = Progress.ZERO,
                 totalProgress = Progress(index.toFloat() / sets.size.toFloat()),
-                setData = TimedItemExecutionData(set.duration, timePassed, timeRemaining, totalTime),
+                setData = TimedItemExecutionData(set.seconds, timePassed, timeRemaining, totalTime),
             )
 
-            delay(set.duration)
+            delay(set.seconds)
 
-            timePassed += set.duration
-            timeRemaining -= set.duration
+            timePassed += set.seconds
+            timeRemaining -= set.seconds
 
             _state.value = ItemExecutionState.SetFinished(
                 item,
                 set,
                 Progress.COMPLETE,
                 totalProgress = Progress((index + 1).toFloat() / sets.size.toFloat()),
-                setData = TimedItemExecutionData(set.duration, timePassed, timeRemaining, totalTime),
+                setData = TimedItemExecutionData(set.seconds, timePassed, timeRemaining, totalTime),
             )
 
             yield()

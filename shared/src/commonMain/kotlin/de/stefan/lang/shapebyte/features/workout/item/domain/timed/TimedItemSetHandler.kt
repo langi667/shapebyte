@@ -67,7 +67,7 @@ class TimedItemSetHandler(
         stopTimer()
 
         this.itemSet = set
-        timer.setup(set.duration, timerTick)
+        timer.setup(set.seconds, timerTick)
         startTimer(scope)
     }
 

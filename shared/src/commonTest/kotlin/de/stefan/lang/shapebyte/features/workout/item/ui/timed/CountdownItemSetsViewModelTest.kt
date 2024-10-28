@@ -10,7 +10,6 @@ import org.koin.test.inject
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 
 class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
     private val itemSetsHandler by inject<ItemSetsHandler>()
@@ -28,11 +27,11 @@ class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
         assertEquals(UIState.Data(CountdownItemSetsViewData()), sut.state.value)
 
         val items = listOf(
-            ItemSet.Timed(1.seconds),
-            ItemSet.Timed(1.seconds),
-            ItemSet.Timed(1.seconds),
-            ItemSet.Timed(1.seconds),
-            ItemSet.Timed(1.seconds),
+            ItemSet.Timed(1),
+            ItemSet.Timed(1),
+            ItemSet.Timed(1),
+            ItemSet.Timed(1),
+            ItemSet.Timed(1),
         )
         sut.state.test(timeout = 1.minutes) {
             sut.start(items)
