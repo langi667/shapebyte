@@ -27,7 +27,7 @@ class TimedItemSetHandlerTest : BaseCoroutineTest() {
         val sut = createSUT()
 
         val duration = 5
-        val itemSet = ItemSet.Timed(duration)
+        val itemSet = ItemSet.Timed.Seconds(duration)
         sut.start(itemSet, this)
 
         sut.stateFlow.test {
@@ -52,7 +52,7 @@ class TimedItemSetHandlerTest : BaseCoroutineTest() {
         val sut = createSUT()
 
         val duration = 6
-        val itemSet = ItemSet.Timed(duration)
+        val itemSet = ItemSet.Timed.Seconds(duration)
         sut.start(itemSet, this)
 
         sut.stateFlow.test {

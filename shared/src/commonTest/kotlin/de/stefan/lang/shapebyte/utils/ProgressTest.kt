@@ -54,4 +54,14 @@ class ProgressTest {
         assertEquals(Progress(1f), Progress.with(100, 100))
         assertEquals(Progress(1f).value, Progress.with(120, 100).value)
     }
+
+    @Test
+    fun `with unsigned integer should compute correct progress`() {
+        assertEquals(Progress(0.0f), Progress.with(0u, 100u))
+        assertEquals(Progress(0.5f), Progress.with(50u, 100u))
+        assertEquals(Progress(0.75f), Progress.with(75u, 100u))
+
+        assertEquals(Progress(1f), Progress.with(100u, 100u))
+        assertEquals(Progress(1f).value, Progress.with(120u, 100u).value)
+    }
 }

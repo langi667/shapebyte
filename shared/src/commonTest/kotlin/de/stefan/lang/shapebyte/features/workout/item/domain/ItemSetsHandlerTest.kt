@@ -35,9 +35,9 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
     @Test
     fun `Timed sets should emit correct states`() = test {
         val sets = listOf(
-            ItemSet.Timed(1),
-            ItemSet.Timed(2),
-            ItemSet.Timed(3),
+            ItemSet.Timed.Seconds(1),
+            ItemSet.Timed.Seconds(2),
+            ItemSet.Timed.Seconds(3),
         )
 
         sut.start(sets, this)

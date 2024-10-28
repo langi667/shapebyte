@@ -22,7 +22,7 @@ class TimedItemSetHandler(
     override val logger: Logging,
     private val timer: CountdownTimer,
 ) : ItemSetHandling, Loggable {
-    var itemSet: ItemSet.Timed? = null
+    var itemSet: ItemSet.Timed.Seconds? = null
         private set
 
     val timerTick: Duration = 1.seconds
@@ -40,7 +40,7 @@ class TimedItemSetHandler(
         }
 
         when (set) {
-            set as ItemSet.Timed -> startTimedSet(set, scope)
+            set as ItemSet.Timed.Seconds -> startTimedSet(set, scope)
             else -> {
                 logE("Unsupported set type for $className: ${set::class.simpleName}")
                 return
@@ -63,7 +63,7 @@ class TimedItemSetHandler(
         }
     }
 
-    private fun startTimedSet(set: ItemSet.Timed, scope: CoroutineScope) {
+    private fun startTimedSet(set: ItemSet.Timed.Seconds, scope: CoroutineScope) {
         stopTimer()
 
         this.itemSet = set

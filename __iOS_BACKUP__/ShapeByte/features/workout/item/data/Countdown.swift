@@ -7,7 +7,7 @@
 
 import Foundation
 
-// TODO: check if needs to inherit from Item
+// TODO: check if needed
 
 struct Countdown: Item {
     private struct Tick: Item {

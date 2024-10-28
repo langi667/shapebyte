@@ -1,48 +1,28 @@
 package de.stefan.lang.shapebyte.features.workout.item.data
 
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 /**
 Representing a single performance of either an exercise (push up, squat) or break or countdown
  */
 
-sealed interface ItemSet {
-    // TODO: make interface Timed,  have Timed.Seconds and Timed.Milliseconds
+internal const val SECOND_IN_MILLISECONDS = 1000
 
-    data class Timed(val durationSeconds: Int) : ItemSet {
-        val seconds: Duration
-            get() = durationSeconds.seconds
+sealed interface ItemSet {
+    sealed interface Timed : ItemSet {
+        val milliSecsRaw: Int
+
+        val seconds: Duration get() = (milliSecsRaw / SECOND_IN_MILLISECONDS).seconds
+        val milliseconds: Duration get() = milliSecsRaw.milliseconds
+
+        data class Seconds(val durationSeconds: Int) : Timed {
+            override val milliSecsRaw: Int = durationSeconds * SECOND_IN_MILLISECONDS
+        }
+
+        data class Milliseconds(override val milliSecsRaw: Int) : Timed
     }
 
     data class Repetition(val repetitions: UInt? = null) : ItemSet
-}
-
-// TODO: test
-fun List<ItemSet.Timed>.sumDurations(): Duration {
-    val retVal: Duration = if (this.isEmpty()) {
-        Duration.ZERO
-    } else {
-        this.map { it.seconds }
-            .sumOf { it.inWholeSeconds }.seconds
-    }
-
-    return retVal
-}
-
-// TODO: test
-fun List<ItemSet.Timed>.sumDurationTo(index: Int): Duration {
-    val retVal = if (this.isEmpty()) {
-        return Duration.ZERO
-    } else {
-        val list = if (index == 0) {
-            listOf(this[0])
-        } else {
-            this.subList(0, index)
-        }
-
-        list.sumDurations()
-    }
-
-    return retVal
 }

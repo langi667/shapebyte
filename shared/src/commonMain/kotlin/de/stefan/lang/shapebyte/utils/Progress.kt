@@ -14,7 +14,6 @@ data class Progress(private val progress: Float) {
             return Progress(progress)
         }
 
-        // TODO: Test
         // TODO: consider rounding rule
         fun with(current: UInt, total: UInt): Progress {
             val progress = current.toFloat() / total.toFloat()

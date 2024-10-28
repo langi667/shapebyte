@@ -10,9 +10,8 @@ struct AppRootView: View {
 
 	var body: some View {
         ZStack {
-            GeometryReader { geometry in
+            GeometryReader { _ in
                 CountdownItemSetsView(viewModel: vm)
-
 
 //                HomeRootView( // TODO: Use Coordinator
 //                    viewModel: HomeRootViewModelWrapper()

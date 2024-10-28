@@ -166,14 +166,14 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
     }
 
     private fun createSUT(item: Item, seconds: Int): TimedItemExecution {
-        val items = mutableListOf<ItemSet.Timed>()
+        val items = mutableListOf<ItemSet.Timed.Seconds>()
         repeat(seconds) {
-            items.add(ItemSet.Timed(1))
+            items.add(ItemSet.Timed.Seconds(1))
         }
 
         return createSUT(item, items)
     }
 
-    private fun createSUT(item: Item, sets: List<ItemSet.Timed>) =
+    private fun createSUT(item: Item, sets: List<ItemSet.Timed.Seconds>) =
         WorkoutModule.createTimedItemExecution(item, sets)
 }

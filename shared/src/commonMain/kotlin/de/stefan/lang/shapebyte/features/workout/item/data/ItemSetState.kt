@@ -15,7 +15,6 @@ sealed interface ItemSetState {
     val isStopped: Boolean
         get() = this is Idle || this is Finished
 
-    // TODO: test
     val isRunning: Boolean
         get() = this is Started || this is Running
 }

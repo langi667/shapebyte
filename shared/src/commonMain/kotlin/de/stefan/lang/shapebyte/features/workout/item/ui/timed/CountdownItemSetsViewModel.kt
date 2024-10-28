@@ -31,9 +31,9 @@ class CountdownItemSetsViewModel(
     )
     
     override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>> = _state
-    private var itemSets: List<ItemSet.Timed>? = null
+    private var itemSets: List<ItemSet.Timed.Seconds>? = null
 
-    fun start(itemSets: List<ItemSet.Timed>) {
+    fun start(itemSets: List<ItemSet.Timed.Seconds>) {
         // TODO: check if started already
         this.itemSets = itemSets
 

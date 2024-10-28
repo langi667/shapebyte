@@ -7,10 +7,14 @@ import de.stefan.lang.shapebyte.utils.Progress
 sealed interface ItemExecutionState<out T> {
     data object Idle : ItemExecutionState<Nothing>
 
-    data class Started(val item: Item) : ItemExecutionState<Nothing>
-
-    interface Running<T> : ItemExecutionState<T> {
+    interface ItemContaining<T> : ItemExecutionState<T> {
         val item: Item
+    }
+
+    data class Started(override val item: Item) : ItemContaining<Nothing>
+
+    interface Running<T> : ItemContaining<T> {
+        override val item: Item
         val set: ItemSet
         val setProgress: Progress
         val totalProgress: Progress

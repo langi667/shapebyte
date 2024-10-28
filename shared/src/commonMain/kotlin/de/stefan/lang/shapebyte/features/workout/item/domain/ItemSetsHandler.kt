@@ -80,7 +80,7 @@ class ItemSetsHandler(
         onReceivedState: suspend (ItemSetState, CoroutineScope) -> Unit,
     ) {
         val nextHandler: ItemSetHandling = when (itemSet) {
-            is ItemSet.Timed -> timedSetHandler
+            is ItemSet.Timed.Seconds -> timedSetHandler
             is ItemSet.Repetition -> repetitionSetHandler
             else -> defaultSetHandler
         }

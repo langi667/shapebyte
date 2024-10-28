@@ -29,7 +29,7 @@ interface WorkoutModuleProviding {
     fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
     fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase
     fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
-    fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed>): TimedItemExecution
+    fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution
     fun createRepetitiveItemExecution(
         item: Item,
         sets: List<ItemSet.Repetition>,
@@ -75,7 +75,7 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
             )
         }
 
-        factory<TimedItemExecution> { (item: Item, sets: List<ItemSet.Timed>) ->
+        factory<TimedItemExecution> { (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
             TimedItemExecution(item, sets, get())
         }
 
@@ -123,7 +123,7 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
             )
         }
         factory<TimedItemExecution> {
-                (item: Item, sets: List<ItemSet.Timed>) ->
+                (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
             TimedItemExecution(item, sets, get())
         }
         factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
@@ -141,7 +141,7 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
 
     override fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase = get()
     override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
-    override fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed>): TimedItemExecution =
+    override fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution =
         get(
             parameters = {
                 parametersOf(item, sets)

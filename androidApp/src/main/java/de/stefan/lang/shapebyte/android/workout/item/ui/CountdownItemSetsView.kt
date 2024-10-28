@@ -35,11 +35,11 @@ fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modif
     LaunchedEffect(key1 = Unit) {
         viewModel.start(
             listOf(
-                ItemSet.Timed(1),
-                ItemSet.Timed(1),
-                ItemSet.Timed(1),
-                ItemSet.Timed(1),
-                ItemSet.Timed(1),
+                ItemSet.Timed.Seconds(1),
+                ItemSet.Timed.Seconds(1),
+                ItemSet.Timed.Seconds(1),
+                ItemSet.Timed.Seconds(1),
+                ItemSet.Timed.Seconds(1),
             ),
         )
     }

@@ -10,13 +10,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-data class RepetitiveItemExecutionData(
-    val repsPerSetPerformed: UInt,
-    val totalRepsPerformed: UInt,
-    val totalRepsRemaining: UInt? = null,
-    val totalRepsGoal: UInt? = null,
-)
-
 class RepetitiveItemExecution(
     override val item: Item,
     override val sets: List<ItemSet.Repetition>,
@@ -64,9 +57,12 @@ class RepetitiveItemExecution(
             return
         }
 
-        val set = sets[setIndex.toInt()]
-        val maxRepetitions = set.repetitions ?: 0u
+        val set = currentSet ?: run {
+            logE("Invalid state, Expected currentSet to be set, but it is not")
+            return
+        }
 
+        val maxRepetitions = set.repetitions ?: 0u
         val nextTotalRepsPerformed = totalRepsPerformed + value
         val nextTotalRepsRemaining = totalRepsRemaining(nextTotalRepsPerformed)
 

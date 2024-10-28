@@ -4,8 +4,8 @@ import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.item.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.None
-import de.stefan.lang.shapebyte.features.workout.item.data.sumDurationTo
-import de.stefan.lang.shapebyte.features.workout.item.data.sumDurations
+import de.stefan.lang.shapebyte.features.workout.item.data.sumSeconds
+import de.stefan.lang.shapebyte.features.workout.item.data.sumSecondsTo
 import de.stefan.lang.shapebyte.features.workout.item.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.item.domain.TimedItemExecuting
 import de.stefan.lang.shapebyte.utils.Progress
@@ -17,20 +17,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
 
 class TimedItemExecution(
     override val item: Item,
-    override val sets: List<ItemSet.Timed>,
+    override val sets: List<ItemSet.Timed.Seconds>,
     override val logger: Logging,
 ) : TimedItemExecuting {
 
     companion object {
         fun countdown(seconds: UInt): TimedItemExecution {
-            val sets = mutableListOf<ItemSet.Timed>()
+            val sets = mutableListOf<ItemSet.Timed.Seconds>()
 
             repeat(seconds.toInt()) {
-                sets.add(ItemSet.Timed(1))
+                sets.add(ItemSet.Timed.Seconds(1))
             }
 
             return DPI.createTimedItemExecution(None, sets)
@@ -55,13 +54,13 @@ class TimedItemExecution(
     }
 
     private fun startSets(scope: CoroutineScope) = scope.launch {
-        val totalTime = sets.sumDurations()
+        val totalTime = sets.sumSeconds()
         _state.value = ItemExecutionState.Started(item)
 
         logI("Starting timed item execution for ${item.name} with ${sets.size} sets and a total duration of $totalTime")
 
         sets.forEachIndexed { index, set ->
-            var timePassed: Duration = if (index == 0) { Duration.ZERO } else { sets.sumDurationTo(index) }
+            var timePassed: Duration = if (index == 0) { Duration.ZERO } else { sets.sumSecondsTo(index) }
             var timeRemaining = totalTime - timePassed
 
             yield()

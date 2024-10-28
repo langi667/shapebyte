@@ -27,11 +27,11 @@ class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
         assertEquals(UIState.Data(CountdownItemSetsViewData()), sut.state.value)
 
         val items = listOf(
-            ItemSet.Timed(1),
-            ItemSet.Timed(1),
-            ItemSet.Timed(1),
-            ItemSet.Timed(1),
-            ItemSet.Timed(1),
+            ItemSet.Timed.Seconds(1),
+            ItemSet.Timed.Seconds(1),
+            ItemSet.Timed.Seconds(1),
+            ItemSet.Timed.Seconds(1),
+            ItemSet.Timed.Seconds(1),
         )
         sut.state.test(timeout = 1.minutes) {
             sut.start(items)
