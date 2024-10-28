@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.item.ui
+package de.stefan.lang.shapebyte.features.workout.item.ui.timed
 
 data class CountdownItemSetsViewData(
     val countdownText: String = "",

@@ -44,13 +44,13 @@ class RepetitiveItemExecution(
         get() = if (hasSetWithoutMaxReps) {
             null
         } else {
-            sets.sumOf { it.maxRepetitions?.toInt() ?: 0 }.toUInt()
+            sets.sumOf { it.repetitions?.toInt() ?: 0 }.toUInt()
         }
 
     val totalRepsRemaining: UInt?
         get() = totalRepsRemaining(totalRepsPerformed)
 
-    private val hasSetWithoutMaxReps = sets.firstOrNull { it.maxRepetitions == null } != null
+    private val hasSetWithoutMaxReps = sets.firstOrNull { it.repetitions == null } != null
     private var currentSetIndex: UInt? = null
 
     override fun setInputValue(value: UInt) {
@@ -65,7 +65,7 @@ class RepetitiveItemExecution(
         }
 
         val set = sets[setIndex.toInt()]
-        val maxRepetitions = set.maxRepetitions ?: 0u
+        val maxRepetitions = set.repetitions ?: 0u
 
         val nextTotalRepsPerformed = totalRepsPerformed + value
         val nextTotalRepsRemaining = totalRepsRemaining(nextTotalRepsPerformed)

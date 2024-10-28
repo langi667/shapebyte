@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.scale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.Title
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.item.ui.timed.CountdownItemSetsViewModel
 import kotlin.time.Duration.Companion.seconds
 
 @Composable

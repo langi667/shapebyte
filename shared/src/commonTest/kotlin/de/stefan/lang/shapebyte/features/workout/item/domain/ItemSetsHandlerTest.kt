@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item.domain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.features.workout.item.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
@@ -35,11 +34,10 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
 
     @Test
     fun `Timed sets should emit correct states`() = test {
-        val exercise = Exercise("Dummy")
         val sets = listOf(
-            ItemSet.Timed(1.seconds, exercise),
-            ItemSet.Timed(2.seconds, exercise),
-            ItemSet.Timed(3.seconds, exercise),
+            ItemSet.Timed(1.seconds),
+            ItemSet.Timed(2.seconds),
+            ItemSet.Timed(3.seconds),
         )
 
         sut.start(sets, this)
@@ -64,11 +62,10 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
 
     @Test
     fun `Repetition without rep goal sets should emit correct states`() = test {
-        val exercise = Exercise("Dummy")
         val sets = listOf(
-            ItemSet.Repetition(exercise),
-            ItemSet.Repetition(exercise),
-            ItemSet.Repetition(exercise),
+            ItemSet.Repetition(),
+            ItemSet.Repetition(),
+            ItemSet.Repetition(),
         )
 
         sut.start(sets, this)
@@ -102,12 +99,11 @@ class ItemSetsHandlerTest : BaseCoroutineTest() {
 
     @Test
     fun `Repetition with rep goal sets should emit correct states`() = test {
-        val exercise = Exercise("Dummy")
         val reps = 10u
         val sets = listOf(
-            ItemSet.Repetition(exercise, maxRepetitions = reps),
-            ItemSet.Repetition(exercise, maxRepetitions = reps),
-            ItemSet.Repetition(exercise, maxRepetitions = reps),
+            ItemSet.Repetition(repetitions = reps),
+            ItemSet.Repetition(repetitions = reps),
+            ItemSet.Repetition(repetitions = reps),
         )
 
         sut.start(sets, this)

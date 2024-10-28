@@ -10,7 +10,7 @@ import Foundation
 import shared
 
 extension ItemSetTimed {
-    static func forDuration(_ duration: Duration, item: any Item) -> ItemSetTimed {
+    static func forDuration(_ duration: Duration) -> ItemSetTimed {
 
         let components = duration.components
         let seconds = components.seconds
@@ -23,7 +23,7 @@ extension ItemSetTimed {
         let millisecondsFromAttoseconds = attoseconds / 1_000_000_000_000_000
         let milliseconds = millisecondsFromSeconds + millisecondsFromAttoseconds
 
-        let itemSet = ItemSetTimed(duration: milliseconds, item: item)
+        let itemSet = ItemSetTimed(duration: milliseconds)
         return itemSet
     }
 }

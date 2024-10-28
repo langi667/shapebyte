@@ -16,13 +16,11 @@ struct ExtItemSetTimedTest {
         arguments: [0, 10_0000, 200_000]
     )
     func testForDuration(_ durationRaw: Int64) async throws {
-        let item: Item = None.shared
-        let expected = ItemSetTimed(duration: durationRaw, item: item)
+        let expected = ItemSetTimed(duration: durationRaw)
 
         let expectedSeconds: Duration = .seconds( durationRaw / 1000 )
-        let result = ItemSetTimed.forDuration(expectedSeconds, item: item)
+        let result = ItemSetTimed.forDuration(expectedSeconds)
 
         #expect(expected.duration == result.duration)
-        #expect(expected.item === result.item)
     }
 }

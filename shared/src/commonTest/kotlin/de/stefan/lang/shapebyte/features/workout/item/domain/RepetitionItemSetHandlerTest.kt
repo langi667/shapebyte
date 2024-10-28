@@ -2,7 +2,6 @@ package de.stefan.lang.shapebyte.features.workout.item.domain
 
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.item.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetData
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetState
@@ -28,7 +27,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `start should emit Started state`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        sut.start(ItemSet.Repetition(Exercise("Test")), this)
+        sut.start(ItemSet.Repetition(), this)
 
         sut.stateFlow.test {
             assertEquals(
@@ -42,7 +41,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     fun `start twice should not start again`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
 
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
         sut.start(set, this)
 
         sut.stateFlow.test {
@@ -52,14 +51,14 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
             )
         }
 
-        sut.start(ItemSet.Repetition(Exercise("Test 1232323")), this)
+        sut.start(ItemSet.Repetition(), this)
         assertEquals(set, sut.set)
     }
 
     @Test
     fun `setRepetitions should emit Finished state`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
         sut.start(set, this)
 
         sut.stateFlow.test {
@@ -85,7 +84,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     fun `should not be able to set repetitions when finished`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
 
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
         sut.start(set, this)
 
         val reps = 10u
@@ -117,7 +116,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     fun `should not be able to set repetitions if paused`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
 
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
         sut.start(set, this)
 
         sut.stateFlow.test {
@@ -136,7 +135,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `pause should emit paused state`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
 
         sut.start(set, this)
 
@@ -160,7 +159,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `pause should not emit if state is not running`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
 
         sut.pause()
 
@@ -176,7 +175,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `resume should emit started after paused`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
 
         sut.start(set, this)
 
@@ -219,7 +218,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `resume should not emit if state is not running`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
 
         sut.resume(this)
 
@@ -239,7 +238,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `Progress computation with rep goals`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"), maxRepetitions = 10u)
+        val set = ItemSet.Repetition(repetitions = 10u)
 
         assertEquals(Progress.ZERO, sut.progress)
         sut.start(set, this)
@@ -258,7 +257,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     @Test
     fun `Progress computation without rep goals`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
-        val set = ItemSet.Repetition(Exercise("Test"))
+        val set = ItemSet.Repetition()
 
         assertEquals(Progress.ZERO, sut.progress)
         sut.start(set, this)
@@ -272,7 +271,7 @@ class RepetitionItemSetHandlerTest : BaseCoroutineTest() {
     fun `States with rep goals`() = test {
         val sut: RepetitionItemSetHandler = WorkoutModule.get()
         val repGoal = 10u
-        val set = ItemSet.Repetition(Exercise("Test"), maxRepetitions = repGoal)
+        val set = ItemSet.Repetition(repetitions = repGoal)
 
         assertEquals(ItemSetState.Idle, sut.stateFlow.value)
         sut.start(set, this)

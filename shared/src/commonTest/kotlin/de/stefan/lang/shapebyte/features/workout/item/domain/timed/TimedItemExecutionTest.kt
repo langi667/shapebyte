@@ -44,9 +44,10 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
 
             for (i in 0 until seconds) {
                 var state = awaitItem()
-
+                val setDuration = 1.seconds
                 val currSet = sut.sets[i]
-                var secsPassed = 1.seconds * i
+
+                var secsPassed = setDuration * i
                 var secsRemaining = seconds.seconds - secsPassed
 
                 val started = ItemExecutionState.SetStarted(
@@ -54,7 +55,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     currSet,
                     Progress.ZERO,
                     Progress.with(i, seconds),
-                    TimedItemExecutionData(secsPassed, secsRemaining, seconds.seconds),
+                    TimedItemExecutionData(setDuration, secsPassed, secsRemaining, seconds.seconds),
                 )
 
                 assertEquals(started, state)
@@ -68,7 +69,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     set = currSet,
                     setProgress = Progress.COMPLETE,
                     totalProgress = Progress.with(i + 1, seconds),
-                    setData = TimedItemExecutionData(secsPassed, secsRemaining, seconds.seconds),
+                    setData = TimedItemExecutionData(setDuration, secsPassed, secsRemaining, seconds.seconds),
                 )
 
                 assertEquals(finished, state)
@@ -122,9 +123,10 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
 
             for (i in 0 until seconds) {
                 var state = awaitItem()
-
+                val setDuration = 1.seconds
                 val currSet = sut.sets[i]
-                var secsPassed = 1.seconds * i
+
+                var secsPassed = setDuration * i
                 var secsRemaining = seconds.seconds - secsPassed
 
                 val started = ItemExecutionState.SetStarted(
@@ -132,7 +134,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     currSet,
                     Progress.ZERO,
                     Progress.with(i, seconds),
-                    TimedItemExecutionData(secsPassed, secsRemaining, seconds.seconds),
+                    TimedItemExecutionData(setDuration, secsPassed, secsRemaining, seconds.seconds),
                 )
 
                 assertEquals(started, state)
@@ -146,7 +148,12 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     set = currSet,
                     setProgress = Progress.COMPLETE,
                     totalProgress = Progress.with(i + 1, seconds),
-                    setData = TimedItemExecutionData(secsPassed, secsRemaining, seconds.seconds),
+                    setData = TimedItemExecutionData(
+                        setDuration = setDuration,
+                        timePassed = secsPassed,
+                        timeRemaining = secsRemaining,
+                        totalDuration = seconds.seconds,
+                    ),
                 )
 
                 assertEquals(finished, state)
@@ -161,7 +168,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
     private fun createSUT(item: Item, seconds: Int): TimedItemExecution {
         val items = mutableListOf<ItemSet.Timed>()
         repeat(seconds) {
-            items.add(ItemSet.Timed(1.seconds, item))
+            items.add(ItemSet.Timed(1.seconds))
         }
 
         return createSUT(item, items)

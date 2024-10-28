@@ -27,7 +27,7 @@ class RepetitionItemSetHandler(
         }
 
     val repetitionGoal: UInt?
-        get() = set?.maxRepetitions
+        get() = set?.repetitions
 
     val progress: Progress
         get() = computeProgress(repetitionsDone ?: 0u)

@@ -1,8 +1,11 @@
-package de.stefan.lang.shapebyte.features.workout.item.ui
+package de.stefan.lang.shapebyte.features.workout.item.ui.timed
 
+import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.data.None
+import de.stefan.lang.shapebyte.features.workout.item.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetsHandler
-import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetsState
+import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemExecutionData
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.logging.Logging
@@ -13,7 +16,8 @@ import kotlinx.coroutines.launch
 
 // TODO: there is an ItemSetsViewModel in original code, check if needed later
 class CountdownItemSetsViewModel(
-    private val itemSetsHandler: ItemSetsHandler,
+    // TODO: remove
+    val itemSetsHandler: ItemSetsHandler,
     logger: Logging,
 ) : BaseViewModel(logger) {
     companion object {
@@ -27,21 +31,23 @@ class CountdownItemSetsViewModel(
     )
     
     override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>> = _state
-
     private var itemSets: List<ItemSet.Timed>? = null
 
     fun start(itemSets: List<ItemSet.Timed>) {
         // TODO: check if started already
         this.itemSets = itemSets
 
+        val timedHandler = DPI.createTimedItemExecution(None, itemSets)
+        timedHandler.start(scope)
+
         scope.launch {
-            itemSetsHandler.stateFlow.collect { state ->
+            timedHandler.state.collect { state ->
                 when (state) {
-                    is ItemSetsState.Started -> {
+                    is ItemExecutionState.Started -> {
                         logD("Started")
                     }
 
-                    is ItemSetsState.Running -> {
+                    is ItemExecutionState.Running -> {
                         handleStateRunning(state)
                     }
 
@@ -51,36 +57,33 @@ class CountdownItemSetsViewModel(
                 }
             }
         }
-
-        itemSetsHandler.start(itemSets, this.scope)
     }
 
-    private suspend fun handleStateRunning(setsState: ItemSetsState.Running) {
+    private suspend fun handleStateRunning(setsState: ItemExecutionState.Running<TimedItemExecutionData>) {
         when (setsState) {
-            is ItemSetsState.Running.SetRunning -> {
+            is ItemExecutionState.SetRunning -> {
                 return
             }
 
-            is ItemSetsState.Running.SetStarted -> {
+            is ItemExecutionState.SetStarted -> {
                 handleSetStateStarted(setsState)
             }
 
-            is ItemSetsState.Running.SetFinished -> {
+            is ItemExecutionState.SetFinished -> {
                 handleSetStateFinished()
             }
         }
-
-        if (setsState.isRunning) {
-            return
-        }
     }
 
-    private fun handleSetStateStarted(setsState: ItemSetsState.Running.SetStarted) {
-        val itemSets = this.itemSets ?: return
-        val itemSet = itemSets.getOrNull(setsState.currentSetIndex) ?: return
+    private fun handleSetStateStarted(
+        setsState: ItemExecutionState.SetStarted<TimedItemExecutionData>,
+    ) {
+        val setData = setsState.setData
+        val countdownText = setData.timeRemaining
+            .toString()
+            .replace(Regex("[^0-9]"), "") // TODO: formatting
 
-        val countdownText = (itemSets.count() - setsState.currentSetIndex).toString() // TODO: formatting
-        val animationDuration = itemSet.duration.inWholeMilliseconds - TIMER_OFFSET
+        val animationDuration = setData.setDuration.inWholeMilliseconds - TIMER_OFFSET
 
         val state = CountdownItemSetsViewData(
             countdownText = countdownText,

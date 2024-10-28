@@ -14,7 +14,7 @@ import de.stefan.lang.shapebyte.features.workout.item.domain.RepetitionItemSetHa
 import de.stefan.lang.shapebyte.features.workout.item.domain.repetitive.RepetitiveItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemSetHandler
-import de.stefan.lang.shapebyte.features.workout.item.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.item.ui.timed.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock

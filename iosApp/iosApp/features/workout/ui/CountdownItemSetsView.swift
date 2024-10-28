@@ -26,9 +26,9 @@ struct CountdownItemSetsView: View {
         .onAppear {
             viewModel.start(
                 itemSets: [
-                    ItemSetTimed.forDuration(.seconds(1), item: None.shared),
-                    ItemSetTimed.forDuration(.seconds(1), item: None.shared),
-                    ItemSetTimed.forDuration(.seconds(1), item: None.shared)
+                    ItemSetTimed.forDuration(.seconds(1)),
+                    ItemSetTimed.forDuration(.seconds(1)),
+                    ItemSetTimed.forDuration(.seconds(1))
                 ]
             )
             viewModel.observeState()

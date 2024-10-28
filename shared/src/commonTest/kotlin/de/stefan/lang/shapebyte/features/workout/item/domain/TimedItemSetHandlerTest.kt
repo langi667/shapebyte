@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item.domain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.features.workout.item.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSetState
 import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemSetHandler
@@ -27,9 +26,8 @@ class TimedItemSetHandlerTest : BaseCoroutineTest() {
     fun `Test start`() = runTest {
         val sut = createSUT()
 
-        val item = Exercise("Dummy")
         val duration = 5
-        val itemSet = ItemSet.Timed(duration.seconds, item)
+        val itemSet = ItemSet.Timed(duration.seconds)
         sut.start(itemSet, this)
 
         sut.stateFlow.test {
@@ -53,9 +51,8 @@ class TimedItemSetHandlerTest : BaseCoroutineTest() {
     fun `Test start pause and resume`() = test {
         val sut = createSUT()
 
-        val item = Exercise("Dummy")
         val duration = 6
-        val itemSet = ItemSet.Timed(duration.seconds, item)
+        val itemSet = ItemSet.Timed(duration.seconds)
         sut.start(itemSet, this)
 
         sut.stateFlow.test {

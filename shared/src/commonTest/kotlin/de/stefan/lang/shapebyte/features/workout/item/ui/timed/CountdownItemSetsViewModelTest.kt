@@ -1,8 +1,7 @@
-package de.stefan.lang.shapebyte.features.workout.item.ui
+package de.stefan.lang.shapebyte.features.workout.item.ui.timed
 
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.data.None
 import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetsHandler
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
@@ -10,6 +9,7 @@ import de.stefan.lang.shapebyte.utils.logging.Logging
 import org.koin.test.inject
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
@@ -28,15 +28,14 @@ class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
         assertEquals(UIState.Data(CountdownItemSetsViewData()), sut.state.value)
 
         val items = listOf(
-            ItemSet.Timed(1.seconds, None),
-            ItemSet.Timed(1.seconds, None),
-            ItemSet.Timed(1.seconds, None),
-            ItemSet.Timed(1.seconds, None),
-            ItemSet.Timed(1.seconds, None),
+            ItemSet.Timed(1.seconds),
+            ItemSet.Timed(1.seconds),
+            ItemSet.Timed(1.seconds),
+            ItemSet.Timed(1.seconds),
+            ItemSet.Timed(1.seconds),
         )
-
-        sut.start(items)
-        sut.state.test {
+        sut.state.test(timeout = 1.minutes) {
+            sut.start(items)
             for (i in items.indices) {
                 // initial state, that is invoked when the current countdown tick/ item is about to
                 // be started. Should reset the UI

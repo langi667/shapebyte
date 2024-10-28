@@ -18,7 +18,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
 
     @Test
     fun `initial state`() {
-        val sets = listOf(ItemSet.Repetition(item))
+        val sets = listOf(ItemSet.Repetition())
         val sut = createSUT(item, sets)
 
         assertFalse(sut.isRunning)
@@ -49,7 +49,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                 assertEquals(
                     ItemExecutionState.SetStarted(
                         item = item,
-                        set = ItemSet.Repetition(item),
+                        set = ItemSet.Repetition(),
                         setProgress = Progress.ZERO,
                         totalProgress = Progress.with(i + 1, 3),
                         setData = RepetitiveItemExecutionData(
@@ -68,9 +68,9 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
     @Test
     fun `Progress should be computed based on set count when one item has no max reps`() = test {
         val sets = listOf(
-            ItemSet.Repetition(item, 10u),
-            ItemSet.Repetition(item),
-            ItemSet.Repetition(item, 10u),
+            ItemSet.Repetition(10u),
+            ItemSet.Repetition(),
+            ItemSet.Repetition(10u),
         )
 
         val sut = createSUT(item, sets)
@@ -84,9 +84,9 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
     @Test
     fun `Progress should be computed based on reps performed when max reps are set`() = test {
         val sets = listOf(
-            ItemSet.Repetition(item, 10u),
-            ItemSet.Repetition(item, 10u),
-            ItemSet.Repetition(item, 10u),
+            ItemSet.Repetition(10u),
+            ItemSet.Repetition(10u),
+            ItemSet.Repetition(10u),
         )
 
         val sut = createSUT(item, sets)
@@ -100,12 +100,12 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
     @Test
     fun `total sets count`() = test {
         val sets = listOf(
-            ItemSet.Repetition(item, 10u),
-            ItemSet.Repetition(item, 10u),
-            ItemSet.Repetition(item, 10u),
+            ItemSet.Repetition(10u),
+            ItemSet.Repetition(10u),
+            ItemSet.Repetition(10u),
         )
 
-        val total = sets.sumOf { it.maxRepetitions?.toInt() ?: 0 }.toUInt()
+        val total = sets.sumOf { it.repetitions?.toInt() ?: 0 }.toUInt()
         val sut = createSUT(item, sets)
 
         assertTrue(sut.start(this))
@@ -129,14 +129,14 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
         val numberOfSets = 3
         val maxRepsPerSet = 10u
 
-        val sets = List(numberOfSets) { ItemSet.Repetition(item, maxRepsPerSet) }
+        val sets = List(numberOfSets) { ItemSet.Repetition(maxRepsPerSet) }
         val sut = createSUT(item, sets)
 
         assertTrue(sut.start(this))
 
         var currReps = 0u
         val repIncrease = maxRepsPerSet / 2u
-        val totalRepGoal = sets.sumOf { it.maxRepetitions?.toInt() ?: 0 }.toUInt()
+        val totalRepGoal = sets.sumOf { it.repetitions?.toInt() ?: 0 }.toUInt()
 
         for (i in 0 until numberOfSets) {
             var inputVal = repIncrease
@@ -147,7 +147,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
             assertEquals(
                 ItemExecutionState.SetRunning(
                     item = item,
-                    set = ItemSet.Repetition(item, maxRepsPerSet),
+                    set = ItemSet.Repetition(maxRepsPerSet),
                     setProgress = Progress(0.5f),
                     totalProgress = Progress.with(
                         currReps,
@@ -173,7 +173,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                 assertEquals(
                     ItemExecutionState.SetStarted(
                         item = item,
-                        set = ItemSet.Repetition(item, maxRepsPerSet),
+                        set = ItemSet.Repetition(maxRepsPerSet),
                         setProgress = Progress.ZERO,
                         totalProgress = Progress.with(
                             currReps,
@@ -214,7 +214,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
         item: Item,
         numberOfSets: Int,
     ): RepetitiveItemExecution {
-        val sets = List(numberOfSets) { ItemSet.Repetition(item) }
+        val sets = List(numberOfSets) { ItemSet.Repetition() }
         return createSUT(item, sets)
     }
 

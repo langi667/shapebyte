@@ -15,6 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
@@ -27,10 +28,9 @@ class TimedItemExecution(
     companion object {
         fun countdown(seconds: UInt): TimedItemExecution {
             val sets = mutableListOf<ItemSet.Timed>()
-            val item = None
 
             repeat(seconds.toInt()) {
-                sets.add(ItemSet.Timed(1.seconds, item))
+                sets.add(ItemSet.Timed(1.seconds))
             }
 
             return DPI.createTimedItemExecution(None, sets)
@@ -67,7 +67,7 @@ class TimedItemExecution(
                 set = set,
                 setProgress = Progress.ZERO,
                 totalProgress = Progress(index.toFloat() / sets.size.toFloat()),
-                setData = TimedItemExecutionData(timePassed, timeRemaining, totalTime),
+                setData = TimedItemExecutionData(set.duration, timePassed, timeRemaining, totalTime),
             )
 
             delay(set.duration)
@@ -80,8 +80,10 @@ class TimedItemExecution(
                 set,
                 Progress.COMPLETE,
                 totalProgress = Progress((index + 1).toFloat() / sets.size.toFloat()),
-                setData = TimedItemExecutionData(timePassed, timeRemaining, totalTime),
+                setData = TimedItemExecutionData(set.duration, timePassed, timeRemaining, totalTime),
             )
+
+            yield()
         }
 
         _state.value = ItemExecutionState.Finished(item)

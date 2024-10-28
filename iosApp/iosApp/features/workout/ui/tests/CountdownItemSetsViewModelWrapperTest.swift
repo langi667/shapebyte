@@ -62,9 +62,9 @@ struct CountdownItemSetsViewModelWrapperTest {
     @MainActor func observeStateTest() async {
         let sut = CountdownItemSetsViewModelWrapper()
         let itemSets = [
-            ItemSetTimed.forDuration(.seconds(0.1), item: None.shared),
-            ItemSetTimed.forDuration(.seconds(0.1), item: None.shared),
-            ItemSetTimed.forDuration(.seconds(0.1), item: None.shared)
+            ItemSetTimed.forDuration(.seconds(0.1)),
+            ItemSetTimed.forDuration(.seconds(0.1)),
+            ItemSetTimed.forDuration(.seconds(0.1))
         ]
 
         var cancellables: Set<AnyCancellable> = []
