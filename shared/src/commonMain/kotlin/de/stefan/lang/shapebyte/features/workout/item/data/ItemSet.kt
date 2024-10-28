@@ -10,8 +10,8 @@ Representing a single performance of either an exercise (push up, squat) or brea
 sealed interface ItemSet {
     val item: Item
 
-    class Timed(val duration: Duration, override val item: Item = None) : ItemSet
-    class Repetition(override val item: Item, val maxRepetitions: UInt? = null) : ItemSet
+    data class Timed(val duration: Duration, override val item: Item = None) : ItemSet
+    data class Repetition(override val item: Item, val maxRepetitions: UInt? = null) : ItemSet
 }
 
 // TODO: test

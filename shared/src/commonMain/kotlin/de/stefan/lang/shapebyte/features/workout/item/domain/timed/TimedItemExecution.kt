@@ -6,8 +6,8 @@ import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.data.None
 import de.stefan.lang.shapebyte.features.workout.item.data.sumDurationTo
 import de.stefan.lang.shapebyte.features.workout.item.data.sumDurations
-import de.stefan.lang.shapebyte.features.workout.item.domain.ItemExecuting
 import de.stefan.lang.shapebyte.features.workout.item.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.domain.TimedItemExecuting
 import de.stefan.lang.shapebyte.utils.Progress
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +22,7 @@ class TimedItemExecution(
     override val item: Item,
     override val sets: List<ItemSet.Timed>,
     override val logger: Logging,
-) : ItemExecuting<TimedItemExecutionData, ItemSet.Timed> {
+) : TimedItemExecuting {
 
     companion object {
         fun countdown(seconds: UInt): TimedItemExecution {
@@ -42,9 +42,6 @@ class TimedItemExecution(
     )
 
     override val state: StateFlow<ItemExecutionState<TimedItemExecutionData>> get() = _state
-
-    val isRunning: Boolean
-        get() = _state.value is ItemExecutionState.Running || _state.value is ItemExecutionState.Started
 
     override fun start(scope: CoroutineScope): Boolean {
         if (isRunning) {

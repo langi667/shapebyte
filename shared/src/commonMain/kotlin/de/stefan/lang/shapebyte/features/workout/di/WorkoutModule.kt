@@ -11,6 +11,7 @@ import de.stefan.lang.shapebyte.features.workout.item.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.domain.DefaultItemSetHandler
 import de.stefan.lang.shapebyte.features.workout.item.domain.ItemSetsHandler
 import de.stefan.lang.shapebyte.features.workout.item.domain.RepetitionItemSetHandler
+import de.stefan.lang.shapebyte.features.workout.item.domain.repetitive.RepetitiveItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.domain.timed.TimedItemSetHandler
 import de.stefan.lang.shapebyte.features.workout.item.ui.CountdownItemSetsViewModel
@@ -29,6 +30,10 @@ interface WorkoutModuleProviding {
     fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase
     fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
     fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed>): TimedItemExecution
+    fun createRepetitiveItemExecution(
+        item: Item,
+        sets: List<ItemSet.Repetition>,
+    ): RepetitiveItemExecution
 }
 
 object WorkoutModule : DIModule, WorkoutModuleProviding {
@@ -70,9 +75,12 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
             )
         }
 
-        factory<TimedItemExecution> {
-                (item: Item, sets: List<ItemSet.Timed>) ->
+        factory<TimedItemExecution> { (item: Item, sets: List<ItemSet.Timed>) ->
             TimedItemExecution(item, sets, get())
+        }
+
+        factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
+            RepetitiveItemExecution(item, sets, get())
         }
     }
 
@@ -118,6 +126,9 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
                 (item: Item, sets: List<ItemSet.Timed>) ->
             TimedItemExecution(item, sets, get())
         }
+        factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
+            RepetitiveItemExecution(item, sets, get())
+        }
     }
 
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
@@ -136,4 +147,13 @@ object WorkoutModule : DIModule, WorkoutModuleProviding {
                 parametersOf(item, sets)
             },
         )
+
+    override fun createRepetitiveItemExecution(
+        item: Item,
+        sets: List<ItemSet.Repetition>,
+    ): RepetitiveItemExecution = get(
+        parameters = {
+            parametersOf(item, sets)
+        },
+    )
 }
