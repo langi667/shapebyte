@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.utils.di
 
-import de.stefan.lang.shapebyte.utils.CountdownTimer
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
@@ -17,7 +16,6 @@ import org.koin.dsl.module
 
 interface UtilsModuleProviding {
     fun logger(): Logging
-    fun countdownTimer(): CountdownTimer
     fun dimensionProvider(): DimensionProvider
     fun dateTimeStringFormatter(): DateTimeStringFormatter
 }
@@ -30,8 +28,6 @@ object UtilsModule : DIModule, UtilsModuleProviding {
 
         single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
         single<DateTimeStringFormatter> { DateTimeStringFormatter() }
-
-        factory { CountdownTimer(logger = get()) }
     }
 
     override val testModule = module {
@@ -41,12 +37,9 @@ object UtilsModule : DIModule, UtilsModuleProviding {
 
         single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
         single<DateTimeStringFormatter> { DateTimeStringFormatter() }
-
-        factory { CountdownTimer(logger = get()) }
     }
 
     override fun logger(): Logging = get()
-    override fun countdownTimer(): CountdownTimer = get()
     override fun dimensionProvider(): DimensionProvider = get()
     override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
 }
