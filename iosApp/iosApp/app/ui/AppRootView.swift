@@ -5,18 +5,13 @@ struct AppRootView: View {
     @State
     var logger = DPI.shared.logger
 
-    @StateObject
-    var vm: CountdownItemSetsViewModelWrapper = .init()
-
 	var body: some View {
         ZStack {
-            GeometryReader { _ in
-                CountdownItemSetsView(viewModel: vm)
-
-//                HomeRootView( // TODO: Use Coordinator
-//                    viewModel: HomeRootViewModelWrapper()
-//                )
-//                .environment(\.safeAreaInsets, geometry.safeAreaInsets)
+            GeometryReader { geometry in
+                HomeRootView( // TODO: Use Coordinator
+                    viewModel: HomeRootViewModelWrapper()
+                )
+                .environment(\.safeAreaInsets, geometry.safeAreaInsets)
             }
         }
     }
