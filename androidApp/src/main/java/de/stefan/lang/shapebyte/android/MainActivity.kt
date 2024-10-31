@@ -13,9 +13,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import de.stefan.lang.shapebyte.android.workout.item.ui.CountdownItemSetsView
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
+import home.ui.HomeRootView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.getViewModel
-import org.koin.core.component.get
 
 class MainActivity : ComponentActivity(), Loggable {
     override val logger: Logging by inject()
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity(), Loggable {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    CountdownItemSetsView(getViewModel())
+                    HomeRootView()
                 }
             }
         }

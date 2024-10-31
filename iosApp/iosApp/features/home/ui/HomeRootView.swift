@@ -72,6 +72,8 @@ struct HomeRootView: View {
                 self.headerOverlayOpacity = min(max(headerProgress, 0), 1)
                 self.headerScale = min(max(1 - (headerProgress * 0.5), 0), 1.2)
                 self.headerImageScale = min(max(1 - (headerProgress * 0.5), 0.5), 1.2)
+
+                NSLog("headerOverlayOpacity: \(headerOverlayOpacity)")
             }
         }
         .onAppear { viewModel.onViewAppeared() }
@@ -101,24 +103,17 @@ struct HomeRootView: View {
 
                     Image("Logo")
                         .resizable()
-                        .frame(width: Theme.Spacings.XL * headerImageScale, height: Theme.Spacings.XL * headerImageScale)
+                        .frame(width: Theme.Spacings.XL * headerImageScale,
+                               height: Theme.Spacings.XL * headerImageScale)
                         .clipShape(Circle())
 
                 }.padding(.horizontal, paddingHorizontal)
                     .padding(.top, safeAreaInsets.top / 2)
             }
-            .frame(height: (headerHeight + offsetY) < minimumHeaderHeight ? minimumHeaderHeight : (headerHeight + offsetY), alignment: .bottom)
+            .frame(
+                height: (headerHeight + offsetY) < minimumHeaderHeight ? minimumHeaderHeight : (headerHeight + offsetY), alignment: .bottom)
             .offset(y: -offsetY)
         }.frame(height: headerHeight)
-    }
-
-    @ViewBuilder
-    private func headerBackground() -> some View {
-        Color(
-            red: 104 / 255,
-            green: 187 / 255,
-            blue: 193 / 255)
-        .opacity(headerOverlayOpacity)
     }
 
     @ViewBuilder
