@@ -1,10 +1,12 @@
-package de.stefan.lang.shapebyte.utils.device.devicesize
+package de.stefan.lang.shapebyte.utils.device.deviceinfo
 
+import de.stefan.lang.shapebyte.utils.device.devicesize.ScreenSizeProviding
+import de.stefan.lang.shapebyte.utils.device.devicesize.Size
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.copy
 import platform.UIKit.UIScreen
 
-actual class ScreenSizeProvider : ScreenSizeProviding {
+actual class DeviceInfo: DeviceInfoProviding {
     actual override val screenSize: Size by lazy { computeScreenSize() }
 
     @OptIn(ExperimentalForeignApi::class)

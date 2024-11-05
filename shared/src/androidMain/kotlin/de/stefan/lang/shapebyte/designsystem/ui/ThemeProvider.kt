@@ -21,8 +21,7 @@ actual object ThemeProvider {
         xxxLarge = 128,
     )
 
-    // TODO: Add actual values
-    val dimensions: Dimension = Dimension(
+    actual val dimensions: Dimension = Dimension(
         xxs = 16,
         xs = 24,
         small = 36,

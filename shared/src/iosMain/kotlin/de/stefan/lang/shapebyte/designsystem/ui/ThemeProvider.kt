@@ -66,4 +66,15 @@ actual object ThemeProvider {
             defaultColor = ColorDescriptor.NamedAsset("BackgroundColor"),
         ),
     )
+
+    actual val dimensions: Dimension = Dimension(
+        xxs = 16,
+        xs = 24,
+        small = 36,
+        medium = 72,
+        large = 128,
+        xLarge = 192,
+        xxLarge = 256,
+        xxxLarge = 320,
+    )
 }

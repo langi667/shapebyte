@@ -8,4 +8,5 @@ expect object ThemeProvider {
     val spacing: Dimension
     val fonts: FontCollection
     val colors: ColorCollection
+    val dimensions: Dimension
 }

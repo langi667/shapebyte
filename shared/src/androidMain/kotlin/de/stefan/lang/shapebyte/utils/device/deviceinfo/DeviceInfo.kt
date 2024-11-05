@@ -1,9 +1,10 @@
-package de.stefan.lang.shapebyte.utils.device.devicesize
+package de.stefan.lang.shapebyte.utils.device.deviceinfo
 
 import android.content.res.Resources
 import android.util.DisplayMetrics
+import de.stefan.lang.shapebyte.utils.device.devicesize.Size
 
-actual class ScreenSizeProvider : ScreenSizeProviding {
+actual class DeviceInfo : DeviceInfoProviding {
     actual override val screenSize: Size by lazy { computeScreenSize() }
 
     private fun computeScreenSize(): Size {
