@@ -8,7 +8,7 @@ import de.stefan.lang.shapebyte.designsystem.data.FontCollection
 import de.stefan.lang.shapebyte.designsystem.data.FontDescriptor
 import de.stefan.lang.shapebyte.designsystem.data.FontWeight
 
-actual class ThemeProvider {
+actual object ThemeProvider {
     actual val spacing: Dimension = Dimension(
         xxs = 4,
         xs = 8,

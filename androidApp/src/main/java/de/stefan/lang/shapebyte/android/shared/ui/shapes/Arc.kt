@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 fun Arc(
     modifier: Modifier = Modifier,
     width: Dp = 50.dp,
-    height: Dp = 50.dp,
+    height: Dp = 20.dp,
     color: Color = MaterialTheme.colorScheme.background,
 ) {
     Canvas(
@@ -43,5 +43,5 @@ fun DrawScope.drawQuadraticBezierCurve(color: Color) {
 @Preview
 @Composable
 fun PreviewQuadraticBezierCurve() {
-    Arc()
+    Arc(width = 200.dp, height = 20.dp)
 }

@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.designsystem.data.FontDescriptor
 import de.stefan.lang.shapebyte.designsystem.data.FontWeight
 
 @Suppress("MagicNumber")
-actual class ThemeProvider {
+actual object ThemeProvider {
     actual val spacing: Dimension = Dimension(
         xxs = 4,
         xs = 8,
@@ -19,6 +19,18 @@ actual class ThemeProvider {
         xLarge = 64,
         xxLarge = 84,
         xxxLarge = 128,
+    )
+
+    // TODO: Add actual values
+    val dimensions: Dimension = Dimension(
+        xxs = 16,
+        xs = 24,
+        small = 36,
+        medium = 72,
+        large = 128,
+        xLarge = 192,
+        xxLarge = 256,
+        xxxLarge = 320,
     )
 
     actual val fonts = FontCollection(
