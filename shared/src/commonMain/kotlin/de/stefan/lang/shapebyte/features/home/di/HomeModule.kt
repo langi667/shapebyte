@@ -1,34 +1,26 @@
 package de.stefan.lang.shapebyte.features.home.di
 
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
-import de.stefan.lang.shapebyte.utils.dicore.DIModule
+import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
 import org.koin.core.component.get
-import org.koin.dsl.module
 
 interface HomeModuleProviding {
     fun homeRootViewModel(): HomeRootViewModel
 }
 
-object HomeModule : DIModule, HomeModuleProviding {
-    override val module = module {
-        single<HomeRootViewModel> {
-            HomeRootViewModel(
-                currentWorkoutScheduleEntryUseCase = get(),
-                recentHistoryUseCase = get(),
-                logger = get(),
-            )
-        }
-    }
-
-    override val testModule = module {
-        single<HomeRootViewModel> {
-            HomeRootViewModel(
-                currentWorkoutScheduleEntryUseCase = get(),
-                recentHistoryUseCase = get(),
-                logger = get(),
-            )
-        }
-    }
+object HomeModule :
+    DIModuleDeclaration(
+        allEnvironments = {
+            single<HomeRootViewModel> {
+                HomeRootViewModel(
+                    currentWorkoutScheduleEntryUseCase = get(),
+                    recentHistoryUseCase = get(),
+                    logger = get(),
+                )
+            }
+        },
+    ),
+    HomeModuleProviding {
 
     override fun homeRootViewModel(): HomeRootViewModel = get()
 }

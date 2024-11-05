@@ -15,10 +15,9 @@ import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDa
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
 import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.utils.dicore.DIModule
+import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
-import org.koin.dsl.module
 
 interface WorkoutModuleProviding {
     fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
@@ -32,77 +31,49 @@ interface WorkoutModuleProviding {
     ): RepetitiveItemExecution
 }
 
-object WorkoutModule : DIModule, WorkoutModuleProviding {
-    override val module = module {
-        single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks } // TODO: change once implemented !!!
-        single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
-        single<RecentWorkoutHistoryUseCase> {
-            RecentWorkoutHistoryUseCase(
-                repository = get(),
-                logger = get(),
-            )
-        }
-        single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock } // TODO: change once implemented !!!
-        single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
-        single<CurrentWorkoutScheduleEntryUseCase> {
-            CurrentWorkoutScheduleEntryUseCase(
-                repository = get(),
-                logger = get(),
-            )
-        }
+object WorkoutModule :
+    DIModuleDeclaration(
+        allEnvironments = {
+            single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
+            single<RecentWorkoutHistoryUseCase> {
+                RecentWorkoutHistoryUseCase(
+                    repository = get(),
+                    logger = get(),
+                )
+            }
+            single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
+            single<CurrentWorkoutScheduleEntryUseCase> {
+                CurrentWorkoutScheduleEntryUseCase(
+                    repository = get(),
+                    logger = get(),
+                )
+            }
 
-        factory { CountdownItemSetsViewModel(logger = get()) }
+            factory { CountdownItemSetsViewModel(logger = get()) }
+            factory<WorkoutHistoryEntry> { (entry: WorkoutScheduleEntry) ->
+                WorkoutHistoryEntry(
+                    entry = entry, dateStringFormatter = get(),
+                )
+            }
+            factory<TimedItemExecution> { (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
+                TimedItemExecution(item, sets, get())
+            }
 
-        factory<WorkoutHistoryEntry> { (entry: WorkoutScheduleEntry) ->
-            WorkoutHistoryEntry(
-                entry = entry, dateStringFormatter = get(),
-            )
-        }
+            factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
+                RepetitiveItemExecution(item, sets, get())
+            }
+        },
+        appEnvironmentOnly = {
+            single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks } // TODO: change once implemented !!!
+            single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock } // TODO: change once implemented !!!
+        },
+        testEnvironmentOnly = {
+            single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks }
+            single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock }
+        },
 
-        factory<TimedItemExecution> { (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
-            TimedItemExecution(item, sets, get())
-        }
-
-        factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
-            RepetitiveItemExecution(item, sets, get())
-        }
-    }
-
-    override val testModule = module {
-        single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks }
-        single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
-
-        single<RecentWorkoutHistoryUseCase> {
-            RecentWorkoutHistoryUseCase(
-                repository = get(),
-                logger = get(),
-            )
-        }
-
-        single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock } // TODO: change once implemented !!!
-        single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
-
-        single<CurrentWorkoutScheduleEntryUseCase> {
-            CurrentWorkoutScheduleEntryUseCase(
-                repository = get(),
-                logger = get(),
-            )
-        }
-
-        factory<WorkoutHistoryEntry> { (entry: WorkoutScheduleEntry) ->
-            WorkoutHistoryEntry(
-                entry = entry, dateStringFormatter = get(),
-            )
-        }
-        factory<TimedItemExecution> {
-                (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
-            TimedItemExecution(item, sets, get())
-        }
-        factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
-            RepetitiveItemExecution(item, sets, get())
-        }
-    }
-
+    ),
+    WorkoutModuleProviding {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
     override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         get(
