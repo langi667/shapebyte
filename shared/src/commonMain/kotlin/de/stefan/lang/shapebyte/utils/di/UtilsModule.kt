@@ -17,6 +17,7 @@ import org.koin.core.component.get
 interface UtilsModuleProviding {
     fun logger(): Logging
     fun dimensionProvider(): DimensionProvider
+    fun deviceInfoProvider(): DeviceInfoProviding
     fun dateTimeStringFormatter(): DateTimeStringFormatter
 }
 
@@ -41,4 +42,5 @@ object UtilsModule :
     override fun logger(): Logging = get()
     override fun dimensionProvider(): DimensionProvider = get()
     override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
+    override fun deviceInfoProvider(): DeviceInfoProviding = get()
 }

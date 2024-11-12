@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Arc: Shape {
-
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
@@ -23,7 +22,9 @@ struct Arc: Shape {
 }
 
 #Preview {
-    Arc()
-        .fill(Color.blue)
-        .frame(width: 400, height: 200)
+    VStack {
+        Arc()
+            .fill(Color.blue)
+            .frame(width: 400, height: 200)
+    }
 }

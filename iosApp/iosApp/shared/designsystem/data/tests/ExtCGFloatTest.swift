@@ -2,7 +2,7 @@
 //  ExtCGFloatTest.swift
 //  ShapeByteTests
 //
-//  Created by Lang, Stefan [RTL Tech] on 24.10.24.
+//  Created by Lang, Stefan [ShapeByte Tech] on 24.10.24.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 

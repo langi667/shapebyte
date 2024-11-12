@@ -8,10 +8,8 @@ struct AppRootView: View {
 	var body: some View {
         ZStack {
             GeometryReader { geometry in
-                HomeRootView( // TODO: Use Coordinator
-                    viewModel: HomeRootViewModelWrapper()
-                )
-                .environment(\.safeAreaInsets, geometry.safeAreaInsets)
+                HomeRootView(viewModel: HomeRootViewModelWrapper())
+                    .environment(\.safeAreaInsets, geometry.safeAreaInsets)
             }
         }
     }
