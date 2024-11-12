@@ -9,8 +9,8 @@ import SwiftUI
 import shared
 
 struct HomeRootView: View {
+     private static let defaultRadialOffset: CGFloat = Theme.Spacings.XXXL
 
-    private static let defaultRadialOffset: CGFloat = Theme.Spacings.XXXL
     @ObservedObject var viewModel: HomeRootViewModelWrapper
     @Environment(\.safeAreaInsets) var safeAreaInsets: EdgeInsets
 
@@ -25,11 +25,14 @@ struct HomeRootView: View {
     @State private var headerScale: CGFloat = .zero
     @State private var headerImageScale: CGFloat = .zero
 
-    private let minimumHeaderHeight: CGFloat = Theme.Spacings.XXL
     private let headerOverlayColor: Color = Theme.Colors.secondaryColor
 
     private var headerHeight: CGFloat {
-        self.scrollViewSize.height * 0.15
+        (Theme.Dimensions.large + safeAreaInsets.top / 2).toDimensionMax()
+    }
+
+    private var minimumHeaderHeight: CGFloat {
+        headerHeight * 0.6
     }
 
     private let viewTopOffset: CGFloat = 8
@@ -37,7 +40,7 @@ struct HomeRootView: View {
 
     var body: some View {
         ZStack {
-            BackgroundView(
+            RadialBackgroundView(
                 topOffset: Theme.Spacings.XXL.toDimensionMax(),
                 radialOffset: radialOffset.toDimensionMax()
             )
@@ -54,7 +57,7 @@ struct HomeRootView: View {
                 headerView()
                     .zIndex(1000)
 
-                pendingExerciseActionView()
+                buildPerformPersistView()
                     .zIndex(1001)
 
                 ForEach(viewModel.recentHistory) { entry in
@@ -72,8 +75,6 @@ struct HomeRootView: View {
                 self.headerOverlayOpacity = min(max(headerProgress, 0), 1)
                 self.headerScale = min(max(1 - (headerProgress * 0.5), 0), 1.2)
                 self.headerImageScale = min(max(1 - (headerProgress * 0.5), 0.5), 1.2)
-
-                NSLog("headerOverlayOpacity: \(headerOverlayOpacity)")
             }
         }
         .onAppear { viewModel.onViewAppeared() }
@@ -82,57 +83,30 @@ struct HomeRootView: View {
 
     @ViewBuilder
     private func headerView() -> some View {
-        GeometryReader {_ in
-            ZStack {
-                Rectangle()
-                    .fill(headerOverlayColor.opacity(headerOverlayOpacity))
-
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Welcome back")
-                            .body()
-                            .foregroundStyle(Color.white)
-
-                        Text("Stefan")
-                            .h2()
-                            .foregroundStyle(Color.white)
-                    }
-                    .scaleEffect(headerScale, anchor: .leading)
-
-                    Spacer()
-
-                    Image("Logo")
-                        .resizable()
-                        .frame(width: Theme.Spacings.XL * headerImageScale,
-                               height: Theme.Spacings.XL * headerImageScale)
-                        .clipShape(Circle())
-
-                }.padding(.horizontal, paddingHorizontal)
-                    .padding(.top, safeAreaInsets.top / 2)
-            }
-            .frame(
-                height: (headerHeight + offsetY) < minimumHeaderHeight ? minimumHeaderHeight : (headerHeight + offsetY), alignment: .bottom)
-            .offset(y: -offsetY)
-        }.frame(height: headerHeight)
+        HeaderView(
+            headerHeight: headerHeight,
+            minimumHeaderHeight: minimumHeaderHeight,
+            offsetY: offsetY,
+            overlayColor: headerOverlayColor,
+            overlayOpacity: headerOverlayOpacity,
+            scale: headerScale,
+            imageScale: headerImageScale,
+            contentPaddingVertical: safeAreaInsets.top / 2
+        )
     }
 
     @ViewBuilder
-    private func pendingExerciseActionView() -> some View {
-            Button(action: {
-                self.viewModel.onCurrentWorkoutSelected()
-            }) {
-                PendingExerciseView(progress: $viewModel.currWorkoutScheduleEntryProgress)
-                    .padding(.top, Theme.Spacings.M)
-                    .sizeReader(size: $pendingExerciseSize)
-
-            }
-            .scaleEffect(pendingExerciseScale(), anchor: .top)
-            .offset(y: pendingExerciseOffset())
+    private func buildPerformPersistView() -> some View {
+        BuildPerformPersistView()
+            .padding(.top, Theme.Spacings.M)
+            .sizeReader(size: $pendingExerciseSize)
+            .scaleEffect(buildPerformPersistViewScale(), anchor: .top)
+            .offset(y: buildPerformPersistViewOffset())
     }
 
-    private func pendingExerciseOffset() -> CGFloat {
+    private func buildPerformPersistViewOffset() -> CGFloat {
         let offset: CGFloat
-        let threshold = (minimumHeaderHeight / 2 + safeAreaInsets.top + Theme.Spacings.XS ) * -1
+        let threshold = (minimumHeaderHeight / 2 + pendingExerciseSize.height / 2) * -1
 
         if offsetY <=  threshold {
             offset = -offsetY + threshold
@@ -143,14 +117,31 @@ struct HomeRootView: View {
         return offset
     }
 
-    private func pendingExerciseScale() -> CGFloat {
-        let offset = pendingExerciseOffset()
+    private func buildPerformPersistViewScale() -> CGFloat {
+        let offset = buildPerformPersistViewOffset()
         if offset == 0 {
             return 1
         }
 
-        let scale = max(0.3, 1 - (offset / pendingExerciseSize.height))
+        let maxScale = maxBuildPerformPersistViewScale()
+        let scale = max(maxScale, 1 - (offset / pendingExerciseSize.height))
         return scale
+    }
+
+    private func maxBuildPerformPersistViewScale() -> CGFloat {
+        let screenCategory = DPI.shared.dimensionProvider().deviceSizeCategory
+        let retVal: CGFloat
+
+        switch onEnum(of: screenCategory) {
+        case .xSmall:
+            retVal = 0.65
+        case .small:
+            retVal = 0.65
+        default:
+            retVal = 0.6
+        }
+
+        return retVal
     }
 }
 

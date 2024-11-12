@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BackgroundView: View {
+struct RadialBackgroundView: View {
     var topOffset = Theme.Spacings.XXXL.toDimension(max: Theme.Spacings.XXXL)
     var radialOffset = Theme.Spacings.XXXL.toDimension(max: Theme.Spacings.XXXL)
 
@@ -38,5 +38,5 @@ struct BackgroundView: View {
 }
 
 #Preview {
-    BackgroundView()
+    RadialBackgroundView()
 }

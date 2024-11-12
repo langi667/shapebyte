@@ -2,7 +2,7 @@
 //  Theme.swift
 //  iosApp
 //
-//  Created by Lang, Stefan [RTL Tech] on 10.10.24.
+//  Created by Lang, Stefan [ShapeByte Tech] on 10.10.24.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ public struct Theme {
     public struct Spacings {
         static let XXS = CGFloat(themeProvider.spacing.xxs)
         // swiftlint:disable:next identifier_name
-        static let XS = CGFloat(themeProvider.spacing.xxs)
+        static let XS = CGFloat(themeProvider.spacing.xs)
 
         // swiftlint:disable:next identifier_name
         static let S = CGFloat(themeProvider.spacing.small)
@@ -47,6 +47,22 @@ public struct Theme {
 
         static let body: Font = themeProvider.fonts.body.font
         static let footnote: Font = themeProvider.fonts.footnote.font
+    }
+
+    // TODO: test
+    public struct Dimensions {
+        static let xxs: CGFloat = CGFloat(themeProvider.dimensions.xxs)
+        // swiftlint:disable:next identifier_name
+        static let xs: CGFloat = CGFloat(themeProvider.dimensions.xs)
+        static let small: CGFloat = CGFloat(themeProvider.dimensions.small)
+
+        static let medium: CGFloat = CGFloat(themeProvider.dimensions.medium)
+        static let large: CGFloat = CGFloat(themeProvider.dimensions.large)
+        static let xLarge: CGFloat = CGFloat(themeProvider.dimensions.xLarge)
+
+        static let xxLarge: CGFloat = CGFloat(themeProvider.dimensions.xxLarge)
+        static let xxxLarge: CGFloat = CGFloat(themeProvider.dimensions.xxxLarge)
+
     }
 
     public struct Colors {

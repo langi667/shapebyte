@@ -11,7 +11,7 @@ class DimensionProvider(
     val screenSize: Size
         get() = deviceSizeCategory.size
 
-    private val deviceSizeCategory: DeviceSizeCategory
+    val deviceSizeCategory: DeviceSizeCategory
         get() = deviceSizeCategoryProvider.sizeCategory
 
     private val defaultSize: Size by lazy {

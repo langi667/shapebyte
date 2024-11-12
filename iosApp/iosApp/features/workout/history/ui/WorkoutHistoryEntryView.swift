@@ -57,7 +57,7 @@ struct WorkoutHistoryEntryView: View {
 // TODO: snapshot tests
  #Preview {
     ZStack {
-        BackgroundView()
+        RadialBackgroundView()
         WorkoutHistoryEntryView(
             entry: DPI
                 .shared
