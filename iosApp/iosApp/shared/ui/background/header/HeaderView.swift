@@ -1,4 +1,4 @@
- //
+//
 //  HeaderView.swift
 //  iosApp
 //
@@ -150,7 +150,7 @@ struct HeaderView_Previews: PreviewProvider {
                         scale: state.scale,
                         imageScale: state.imageScale,
                         contentPaddingVertical: 64
-                    ).frame(width: 390).fixedSize(horizontal: true, vertical: true)
+                    ).snapshotSetup()
                 }.edgesIgnoringSafeArea(.all)
             }
         )

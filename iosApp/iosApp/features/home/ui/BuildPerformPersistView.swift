@@ -2,7 +2,7 @@
 //  PendingExerciseView.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
+//  Created by Lang, Stefan [ShapeByte Tech] on 02.08.24.
 //
 
 import SwiftUI
@@ -23,7 +23,7 @@ struct BuildPerformPersistView: View {
     let secondaryButtonOffset = Theme.Dimensions.xxs
 
     static let buttonPadding = BuildPerformPersistViewSettings.primaryButtonPadding
-    static let buttonOffset = Self.buttonPadding + Theme.Spacings.XS
+    static let buttonOffset = Self.buttonPadding + Theme.Spacings.XS + Theme.Spacings.XXS
 
     var body: some View {
         ZStack(alignment: Alignment.center) {
@@ -121,5 +121,4 @@ struct BuildPerformPersistView_Previews: PreviewProvider {
              }
          )
      }
-
 }

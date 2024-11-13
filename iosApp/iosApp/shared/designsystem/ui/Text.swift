@@ -2,7 +2,7 @@
 //  Label.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [Shape Byte Tech] on 29.07.24.
+//  Created by Lang, Stefan [ShapeByte Tech] on 29.07.24.
 //
 
 import SwiftUI

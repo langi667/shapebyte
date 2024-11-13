@@ -2,114 +2,69 @@
 //  OverviewView.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
+//  Created by Lang, Stefan [ShapeByte Tech] on 02.08.24.
 //
 
 import SwiftUI
 import shared
 
 struct HomeRootView: View {
-     private static let defaultRadialOffset: CGFloat = Theme.Spacings.XXXL
-
     @ObservedObject var viewModel: HomeRootViewModelWrapper
-    @Environment(\.safeAreaInsets) var safeAreaInsets: EdgeInsets
+    private var safeAreaInsets: EdgeInsets {
+        SafeArea.insets
+    }
 
-    @State private var offsetY: CGFloat = 0
-    @State private var scrollViewSize: CGSize = .zero
-
-    @State private var radialOffset: CGFloat = defaultRadialOffset
-    @State private var pendingExerciseSize: CGSize = .zero
-    @State private var headerProgress: CGFloat = .zero
-
-    @State private var headerOverlayOpacity: CGFloat = .zero
-    @State private var headerScale: CGFloat = .zero
-    @State private var headerImageScale: CGFloat = .zero
-
-    private let headerOverlayColor: Color = Theme.Colors.secondaryColor
+    @State private var buildPerformPersistViewSize: CGSize = .zero
 
     private var headerHeight: CGFloat {
-        (Theme.Dimensions.large + safeAreaInsets.top / 2).toDimensionMax()
+        BackgroundViewAppearance.headerHeight
     }
 
     private var minimumHeaderHeight: CGFloat {
-        headerHeight * 0.6
+        BackgroundViewAppearance.minimumHeaderHeight
     }
 
-    private let viewTopOffset: CGFloat = 8
     private let paddingHorizontal: CGFloat = Theme.Spacings.S
 
     var body: some View {
-        ZStack {
-            RadialBackgroundView(
-                topOffset: Theme.Spacings.XXL.toDimensionMax(),
-                radialOffset: radialOffset.toDimensionMax()
-            )
-
-            ScrollView {
-                GeometryReader { geometry in
-                    Color.clear
-                        .preference(key: ScrollOffsetPreferenceKey.self, value: (geometry.frame(in: .global).minY) )
-
-                }
-                .frame(height: 0)
-                .offset(y: viewTopOffset)
-
-                headerView()
-                    .zIndex(1000)
-
-                buildPerformPersistView()
-                    .zIndex(1001)
-
-                ForEach(viewModel.recentHistory) { entry in
-                    WorkoutHistoryEntryView(entry: entry)
-                        .padding(.top, Theme.Spacings.S)
-                }.padding(.horizontal, paddingHorizontal)
+        BackgroundView(
+            floatingViewIsEmpty: false,
+            floatingView: { offsetY in
+                buildPerformPersistView(scrollPosY: offsetY)
+            },
+            contentView: {
+                content()
             }
-            .scrollIndicators(.hidden)
-            .sizeReader(size: $scrollViewSize)
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                self.offsetY = value
-                self.radialOffset = max(0, Self.defaultRadialOffset + offsetY)
-                self.headerProgress = (-offsetY + viewTopOffset) / (headerHeight - minimumHeaderHeight - viewTopOffset)
-
-                self.headerOverlayOpacity = min(max(headerProgress, 0), 1)
-                self.headerScale = min(max(1 - (headerProgress * 0.5), 0), 1.2)
-                self.headerImageScale = min(max(1 - (headerProgress * 0.5), 0.5), 1.2)
-            }
-        }
+        )
         .onAppear { viewModel.onViewAppeared() }
         .ignoresSafeArea(.all)
     }
 
     @ViewBuilder
-    private func headerView() -> some View {
-        HeaderView(
-            headerHeight: headerHeight,
-            minimumHeaderHeight: minimumHeaderHeight,
-            offsetY: offsetY,
-            overlayColor: headerOverlayColor,
-            overlayOpacity: headerOverlayOpacity,
-            scale: headerScale,
-            imageScale: headerImageScale,
-            contentPaddingVertical: safeAreaInsets.top / 2
-        )
+    private func content() -> some View {
+        VStack(spacing: 0) {
+            ForEach(viewModel.recentHistory) { entry in
+                WorkoutHistoryEntryView(entry: entry)
+                    .padding(.top, Theme.Spacings.S)
+            }.padding(.horizontal, paddingHorizontal)
+        }
     }
 
     @ViewBuilder
-    private func buildPerformPersistView() -> some View {
+    private func buildPerformPersistView(scrollPosY: CGFloat) -> some View {
         BuildPerformPersistView()
             .padding(.top, Theme.Spacings.M)
-            .sizeReader(size: $pendingExerciseSize)
-            .scaleEffect(buildPerformPersistViewScale(), anchor: .top)
-            .offset(y: buildPerformPersistViewOffset())
+            .sizeReader(size: $buildPerformPersistViewSize)
+            .scaleEffect(buildPerformPersistViewScale(scrollPosY: scrollPosY), anchor: .top)
+            .offset(y: buildPerformPersistViewOffset(scrollPosY: scrollPosY))
     }
 
-    private func buildPerformPersistViewOffset() -> CGFloat {
+    private func buildPerformPersistViewOffset(scrollPosY: CGFloat) -> CGFloat {
         let offset: CGFloat
-        let threshold = (minimumHeaderHeight / 2 + pendingExerciseSize.height / 2) * -1
+        let threshold = (minimumHeaderHeight / 2 + buildPerformPersistViewSize.height / 2) * -1
 
-        if offsetY <=  threshold {
-            offset = -offsetY + threshold
+        if scrollPosY <=  threshold {
+            offset = -scrollPosY + threshold
         } else {
             offset = 0
         }
@@ -117,14 +72,14 @@ struct HomeRootView: View {
         return offset
     }
 
-    private func buildPerformPersistViewScale() -> CGFloat {
-        let offset = buildPerformPersistViewOffset()
+    private func buildPerformPersistViewScale(scrollPosY: CGFloat) -> CGFloat {
+        let offset = buildPerformPersistViewOffset(scrollPosY: scrollPosY)
         if offset == 0 {
             return 1
         }
 
         let maxScale = maxBuildPerformPersistViewScale()
-        let scale = max(maxScale, 1 - (offset / pendingExerciseSize.height))
+        let scale = max(maxScale, 1 - (offset / buildPerformPersistViewSize.height))
         return scale
     }
 

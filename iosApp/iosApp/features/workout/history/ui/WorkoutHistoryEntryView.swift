@@ -2,11 +2,12 @@
 //  WorkoutHistoryEntryView.swift
 //  ShapeByte
 //
-//  Created by Lang, Stefan [Shape Byte Tech] on 02.08.24.
+//  Created by Lang, Stefan [ShapeByte Tech] on 02.08.24.
 //
 
 import SwiftUI
 import shared
+import PreviewSnapshots
 
 struct WorkoutHistoryEntryView: View {
     private let cornerRadius = Theme.Spacings.L
@@ -54,22 +55,35 @@ struct WorkoutHistoryEntryView: View {
     }
 }
 
-// TODO: snapshot tests
- #Preview {
-    ZStack {
-        RadialBackgroundView()
-        WorkoutHistoryEntryView(
-            entry: DPI
-                .shared
-                .workoutHistoryEntry(
-                    scheduleEntry: WorkoutScheduleEntry(
-                        id: "1",
-                        name: "Legs",
-                        date: Date(timeIntervalSince1970: 1_729_360_000).toInstant(),
-                        progress: Progress(progress: 0.7)
-                    )
+struct WorkoutHistoryEntryView_Previews: PreviewProvider {
+    struct State {
+        let entry: WorkoutHistoryEntry =  DPI
+            .shared
+            .workoutHistoryEntry(
+                scheduleEntry: WorkoutScheduleEntry(
+                    id: "1",
+                    name: "Legs",
+                    date: Date(timeIntervalSince1970: 1_729_360_000).toInstant(),
+                    progress: Progress(progress: 0.7)
                 )
             )
-        }
+    }
 
- }
+    static var previews: some View {
+        snapshots.previews.previewLayout(.device)
+    }
+
+    static var snapshots: PreviewSnapshots<State> {
+        PreviewSnapshots(
+            configurations: [
+                .init(name: "Default", state: State() )
+            ],
+
+            configure: { state in
+                WorkoutHistoryEntryView(entry: state.entry)
+                    .snapshotSetup()
+                    .background(Theme.Colors.backgroundColor)
+            }
+        )
+    }
+}

@@ -6,12 +6,7 @@ struct AppRootView: View {
     var logger = DPI.shared.logger
 
 	var body: some View {
-        ZStack {
-            GeometryReader { geometry in
-                HomeRootView(viewModel: HomeRootViewModelWrapper())
-                    .environment(\.safeAreaInsets, geometry.safeAreaInsets)
-            }
-        }
+        HomeRootView(viewModel: HomeRootViewModelWrapper())
     }
 }
 
