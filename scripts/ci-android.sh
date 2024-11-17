@@ -20,7 +20,14 @@ return_code=$?
 if [ $return_code -ne 0 ]; then
   # shellcheck disable=SC2086
   exit $ERROR_ANDROID_UNIT_TEST_FAILED
-else
-  exit 0
 fi
 
+### Android instrumented tests ###
+"$script_directory/android-tests.sh"
+return_code=$?
+if [ $return_code -ne 0 ]; then
+  # shellcheck disable=SC2086
+  exit $ERROR_ANDROID_INSTRUMENTED_TESTS_FAILED
+fi
+
+exit 0

@@ -36,6 +36,12 @@ android {
         jvmTarget = App.Android.BuildSettings.javaVersion.toString()
     }
 
+    sourceSets {
+        defaultConfig {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+    }
+
     flavorDimensions += "environment"
 
     productFlavors {
@@ -75,4 +81,8 @@ dependencies {
     testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation (libs.koin.test)
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }
