@@ -1,9 +1,10 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
+import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.history.domain.RecentWorkoutHistoryUseCase
-import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.quick.domain.FetchQuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.quick.ui.QuickWorkoutsUIState
 import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
@@ -14,15 +15,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-
-data class HomeRootViewModelViewData(
-    val currWorkoutScheduleEntry: WorkoutScheduleEntry? = null,
-    val recentHistory: List<WorkoutHistoryEntry> = emptyList(),
-)
+import org.koin.core.component.get
 
 class HomeRootViewModel(
     private val currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase,
     private val recentHistoryUseCase: RecentWorkoutHistoryUseCase,
+    private val fetchQuickWorkoutsUseCase: FetchQuickWorkoutsUseCase,
     logger: Logging,
 ) : BaseViewModel(logger) {
     private val _state: MutableStateFlow<UIState> = MutableStateFlow(
@@ -38,10 +36,20 @@ class HomeRootViewModel(
                 WorkoutModule.workoutHistoryEntry(currEntry)
             }
         },
-    ) { currentWorkoutScheduleEntry, recentHistory ->
+        fetchQuickWorkoutsUseCase.flow.map {
+            it.dataOrNull<List<Workout>>()?.let { workouts ->
+                if (workouts.isNotEmpty()) {
+                    QuickWorkoutsUIState.Enabled(workouts)
+                } else {
+                    QuickWorkoutsUIState.Hidden
+                }
+            } ?: QuickWorkoutsUIState.Hidden
+        },
+    ) { currentWorkoutScheduleEntry, recentHistory, quickWorkoutsState ->
         val data = HomeRootViewModelViewData(
             currWorkoutScheduleEntry = currentWorkoutScheduleEntry,
             recentHistory = recentHistory,
+            quickWorkoutsState = quickWorkoutsState,
         )
 
         UIState.Data(data)
@@ -60,5 +68,6 @@ class HomeRootViewModel(
 
         recentHistoryUseCase.invoke(scope)
         currentWorkoutScheduleEntryUseCase.invoke(scope)
+        fetchQuickWorkoutsUseCase.invoke(scope)
     }
 }

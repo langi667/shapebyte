@@ -10,6 +10,7 @@ struct ShapeByteApp: App {
 
     init() {
         KoinInitializerKt.startKoin()
+        DPI.shared.assetLoader().setup(context: Bundle.main)
     }
 
 	var body: some Scene {

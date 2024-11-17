@@ -26,7 +26,7 @@ fun Body(
 
 @Preview
 @Composable
-fun PreviewBody() {
+fun BodyPreview() {
     Box(
         Modifier
             .fillMaxWidth()

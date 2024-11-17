@@ -10,7 +10,7 @@ import shared
 import PreviewSnapshots
 
 struct WorkoutHistoryEntryView: View {
-    private let cornerRadius = Theme.Spacings.L
+    private let cornerRadius = Theme.Shapes.xLarge
 
     private let title: String
     private let date: String

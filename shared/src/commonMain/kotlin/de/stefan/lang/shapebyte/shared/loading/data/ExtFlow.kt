@@ -6,3 +6,8 @@ import kotlinx.coroutines.flow.mapNotNull
 fun <T> Flow<LoadState<T>>.asDataFlow() = this.mapNotNull {
     it.dataOrNull() as? T
 }
+
+// TODO: Test
+fun <T> Flow<LoadState<T>>.asResultFlow() = this.mapNotNull {
+    it.resultOrNull<T>()
+}

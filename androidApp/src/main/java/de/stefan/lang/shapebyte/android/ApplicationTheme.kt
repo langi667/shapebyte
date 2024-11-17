@@ -35,12 +35,13 @@ fun ApplicationTheme(
     val typography = Typography(
         bodyMedium = themeBase.fonts.body.toTextStyle(),
         titleLarge = themeBase.fonts.title.toTextStyle(),
+        labelMedium = themeBase.fonts.footnote.toTextStyle(),
     )
 
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
         medium = RoundedCornerShape(4.dp),
-        large = RoundedCornerShape(0.dp),
+        large = RoundedCornerShape(16.dp),
     )
 
     MaterialTheme(

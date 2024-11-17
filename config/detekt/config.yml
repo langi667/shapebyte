@@ -50,6 +50,12 @@ naming:
     functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
     ignoreAnnotated: [ 'Composable' ]
 
+  MatchingDeclarationName:
+    active: true
+    excludes:
+      - '**.android.kt'
+      - '**.iOS.kt'
+      - '**.ios.kt'
 Compose:
   CompositionLocalAllowlist:
     active: true

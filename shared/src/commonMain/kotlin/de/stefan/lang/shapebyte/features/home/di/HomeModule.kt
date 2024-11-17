@@ -15,6 +15,7 @@ object HomeModule :
                 HomeRootViewModel(
                     currentWorkoutScheduleEntryUseCase = get(),
                     recentHistoryUseCase = get(),
+                    fetchQuickWorkoutsUseCase = get(),
                     logger = get(),
                 )
             }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
     id("co.touchlab.skie") version "0.8.4"
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -34,6 +35,10 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.serialization.json)
+
+
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

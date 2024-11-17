@@ -26,7 +26,7 @@ fun Title(
 
 @Preview
 @Composable
-fun PreviewTitle() {
+fun TitlePreview() {
     Box(
         Modifier
             .fillMaxWidth()

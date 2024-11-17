@@ -253,7 +253,9 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"development/ShapeByteApp-Development-Info.plist",
+				production/featuretoggle_defaults.json,
 				"production/ShapeByteApp-Production-Info.plist",
+				staging/featuretoggle_defaults.json,
 				"staging/ShapeByteApp-Staging-Info.plist",
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
@@ -261,7 +263,9 @@
 		1D0348EC2CBE2DC40037A844 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				development/featuretoggle_defaults.json,
 				"development/ShapeByteApp-Development-Info.plist",
+				production/featuretoggle_defaults.json,
 				"production/ShapeByteApp-Production-Info.plist",
 				"staging/ShapeByteApp-Staging-Info.plist",
 			);
@@ -270,8 +274,10 @@
 		1D0348ED2CBE2DC40037A844 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				development/featuretoggle_defaults.json,
 				"development/ShapeByteApp-Development-Info.plist",
 				"production/ShapeByteApp-Production-Info.plist",
+				staging/featuretoggle_defaults.json,
 				"staging/ShapeByteApp-Staging-Info.plist",
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
@@ -280,6 +286,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
 				ui/tests/CountdownItemSetsViewModelWrapperTest.swift,
 				ui/tests/CountdownItemSetsViewSnapshotTest.swift,
 			);
@@ -289,6 +296,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
 				ui/tests/CountdownItemSetsViewModelWrapperTest.swift,
 				ui/tests/CountdownItemSetsViewSnapshotTest.swift,
 			);
@@ -298,6 +306,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
 				ui/tests/CountdownItemSetsViewModelWrapperTest.swift,
 				ui/tests/CountdownItemSetsViewSnapshotTest.swift,
 			);
@@ -310,6 +319,9 @@
 				history/data/ExtWorkoutHistoryEntry.swift,
 				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
 				history/ui/WorkoutHistoryEntryView.swift,
+				quick/ui/QuickWorkoutEntryView.swift,
+				quick/ui/QuickWorkoutsListView.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
 				ui/CountdownItemSetsView.swift,
 				ui/CountdownItemSetsViewModelWrapper.swift,
 				ui/tests/CountdownItemSetsViewModelWrapperTest.swift,

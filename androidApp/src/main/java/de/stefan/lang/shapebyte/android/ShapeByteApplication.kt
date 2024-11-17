@@ -18,5 +18,7 @@ class ShapeByteApplication : Application() {
             androidContext(this@ShapeByteApplication)
             modules(modules)
         }
+
+        DPI.assetLoader().setup(this)
     }
 }

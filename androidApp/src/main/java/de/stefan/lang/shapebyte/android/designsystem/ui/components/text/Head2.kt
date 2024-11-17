@@ -26,7 +26,7 @@ fun Head2(
 
 @Preview
 @Composable
-fun PreviewHead2() {
+fun Head2Preview() {
     Box(
         Modifier
             .fillMaxWidth()

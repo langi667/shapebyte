@@ -75,5 +75,13 @@ public struct Theme {
         static let successColor: Color = Color("SuccessColor") // TODO: check if needed and where
     }
 
+    public struct Shapes {
+        static let small: CGFloat = 4.0
+        static let medium: CGFloat = 16.0
+        static let large: CGFloat = 32
+        static let xLarge: CGFloat = 48
+
+    }
+
     fileprivate static let themeProvider = ThemeProvider() // TODO: Inject
 }

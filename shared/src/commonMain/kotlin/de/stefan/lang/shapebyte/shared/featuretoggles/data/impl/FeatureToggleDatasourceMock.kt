@@ -13,8 +13,14 @@ class FeatureToggleDatasourceMock(
     private val featureToggles: MutableMap<String, FeatureToggle> = hashMapOf(),
 ) : FeatureToggleDatasource, Loggable {
 
-    override fun fetchFeatureToggle(identifier: String): Flow<LoadState<FeatureToggle?>> {
-        return flowOf(LoadState.Success(featureToggles[identifier]))
+    override fun fetchFeatureToggle(identifier: String): Flow<LoadState<FeatureToggle>> {
+        val state = featureToggles[identifier]?.let {
+            LoadState.Success(it)
+        } ?: run {
+            LoadState.Error(FeatureToggleError.NotFound(identifier))
+        }
+
+        return flowOf(state)
     }
 
     fun addFeatureToggle(featureToggle: FeatureToggle) {

@@ -11,6 +11,11 @@ import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
+import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsDatasourceMocks
+import de.stefan.lang.shapebyte.features.workout.quick.domain.FetchQuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsFeatureToggleUseCase
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
@@ -29,6 +34,8 @@ interface WorkoutModuleProviding {
         item: Item,
         sets: List<ItemSet.Repetition>,
     ): RepetitiveItemExecution
+    fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase
+    fun quickWorkoutsFeatureToggleUseCase(): QuickWorkoutsFeatureToggleUseCase
 }
 
 object WorkoutModule :
@@ -61,6 +68,28 @@ object WorkoutModule :
 
             factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
                 RepetitiveItemExecution(item, sets, get())
+            }
+
+            // TODO: change once implemented !!!
+            single<QuickWorkoutsDatasource> { QuickWorkoutsDatasourceMocks() }
+            single<QuickWorkoutsRepository> {
+                QuickWorkoutsRepository(
+                    quickWorkoutsDataSource = get(),
+                    logger = get(),
+                )
+            }
+
+            single<FetchQuickWorkoutsUseCase> {
+                FetchQuickWorkoutsUseCase(
+                    repository = get(),
+                    logger = get(),
+                    quickWorkoutsFeatureToggleUseCase = get(),
+                )
+            }
+            single<QuickWorkoutsFeatureToggleUseCase> {
+                QuickWorkoutsFeatureToggleUseCase(
+                    loadFeatureToggleUseCase = get(),
+                )
             }
         },
         appEnvironmentOnly = {
@@ -99,4 +128,7 @@ object WorkoutModule :
             parametersOf(item, sets)
         },
     )
+
+    override fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase = get()
+    override fun quickWorkoutsFeatureToggleUseCase(): QuickWorkoutsFeatureToggleUseCase = get()
 }

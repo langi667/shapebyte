@@ -7,9 +7,7 @@ import org.koin.test.KoinTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
-// TODO: separate file
 abstract class BaseTest : KoinTest {
-    // TODO: Improve this, WorkoutModule.testModule should not be in BaseTest
     private val testModules = DPI.testModules
 
     @BeforeTest
