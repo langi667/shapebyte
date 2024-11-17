@@ -6,6 +6,17 @@ cd "$script_directory/../" || exit 200
 source "$script_directory/core/logging.sh"
 source "$script_directory/core/error_codes.sh"
 
+### Gradle Update ###
+andLogI "Updating Project via gradle ..."
+./gradlew --refresh-dependencies
+
+return_code=$?
+if [ $return_code -ne 0 ]; then
+  # shellcheck disable=SC2086
+  exit $ERROR_ANDROID_GRADLE_UPDATE_FAILED
+fi
+
+
 ### Lint / Detekt ###
 "$script_directory/lint-android.sh"
 return_code=$?
@@ -20,7 +31,14 @@ return_code=$?
 if [ $return_code -ne 0 ]; then
   # shellcheck disable=SC2086
   exit $ERROR_ANDROID_UNIT_TEST_FAILED
-else
-  exit 0
 fi
 
+### Android instrumented tests ###
+"$script_directory/android-tests.sh"
+return_code=$?
+if [ $return_code -ne 0 ]; then
+  # shellcheck disable=SC2086
+  exit $ERROR_ANDROID_INSTRUMENTED_TESTS_FAILED
+fi
+
+exit 0
