@@ -14,13 +14,13 @@ struct WorkoutHistoryEntryView: View {
 
     private let title: String
     private let date: String
+    private let imageSize = Theme.Dimensions.medium
 
     var body: some View {
-
         HStack {
-            Image("Squats")
+            Image("Squats") // TODO: take from model
                 .resizable()
-                .frame(width: Theme.Spacings.L, height: Theme.Spacings.L)
+                .frame(width: imageSize, height: imageSize)
                 .clipShape(Circle())
 
             VStack(alignment: .leading) {

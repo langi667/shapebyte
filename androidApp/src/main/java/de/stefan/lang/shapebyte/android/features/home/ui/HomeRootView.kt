@@ -21,12 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.Head3
+import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.shared.ui.HeaderView
 import de.stefan.lang.shapebyte.android.shared.ui.background.BackgroundView
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModelViewData
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
+import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.quick.ui.QuickWorkoutsUIState
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
@@ -110,11 +112,16 @@ fun HomeRootView(
 
 @Composable
 private fun MainContentView(uiState: UIState) = WithTheme { theme ->
+    val uiState = uiState.dataOrNull<HomeRootViewModelViewData>()
     Column(modifier = Modifier.fillMaxSize()) {
         // Spacing in between the BuildPerformPersistView and the workout data view
         Box(modifier = Modifier.height(theme.spacing.xxLarge.dp + theme.spacing.xs.dp))
 
-        QuickWorkoutSection(uiState.dataOrNull<HomeRootViewModelViewData>()?.quickWorkoutsState)
+        QuickWorkoutSection(uiState?.quickWorkoutsState)
+        RecentHistorySection(
+            uiState?.recentHistory?.toImmutableList()
+                ?: emptyList<WorkoutHistoryEntry>().toImmutableList(),
+        ) // TODO: use feature toggle and referring state
     }
 }
 
@@ -127,8 +134,31 @@ private fun QuickWorkoutSection(state: QuickWorkoutsUIState?) {
 }
 
 @Composable
-private fun QuickWorkoutSection(workouts: ImmutableList<Workout>) = WithTheme { theme ->
+private fun RecentHistorySection(history: ImmutableList<WorkoutHistoryEntry>) = WithTheme { theme ->
     Column {
+        Spacer(modifier = Modifier.height(theme.spacing.medium.dp))
+        SectionHeader("Recent History")
+
+        for (entry in history) {
+            WorkoutHistoryEntryView(
+                entry = entry,
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = theme.spacing.small.dp)
+                    .padding(horizontal = theme.spacing.small.dp),
+            )
+        }
+
+//        LazyColumn(userScrollEnabled = false) {
+//            items(history) { entry ->
+//                WorkoutHistoryEntryView(entry)
+//            }
+//        }
+    }
+}
+
+@Composable
+private fun QuickWorkoutSection(workouts: ImmutableList<Workout>) = WithTheme { theme ->
+    Column { // TODO: check if empty first
         SectionHeader("Quick Workouts")
         Spacer(modifier = Modifier.height(theme.spacing.small.dp))
         QuickWorkoutsListView(

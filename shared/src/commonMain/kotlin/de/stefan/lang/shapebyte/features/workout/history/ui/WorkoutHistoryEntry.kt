@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.history.ui
 
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 
 data class WorkoutHistoryEntry(
@@ -13,4 +14,7 @@ data class WorkoutHistoryEntry(
     val dateString: String by lazy {
         dateStringFormatter.formatDateToDDMMYYYY(entry.date)
     }
+
+    // TODO: receive from WorkoutScheduleEntry / Workout
+    val image: ImageAsset by lazy { ImageAsset("sprints.png") }
 }

@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.shared.featuretoggles.di
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
-import de.stefan.lang.shapebyte.utils.assets.mocks.AssetLoaderMock
+import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
 import org.koin.core.component.get
 
 val DPI.featureToggleDatasource: FeatureToggleDatasource
@@ -13,5 +13,5 @@ val DPI.featureToggleDatasource: FeatureToggleDatasource
 val DPI.featureToggleDatasourceMock: FeatureToggleDatasourceMock
     get() = featureToggleDatasource as FeatureToggleDatasourceMock
 
-val DPI.assetLoaderMock: AssetLoaderMock
-    get() = assetLoader() as AssetLoaderMock
+val DPI.assetLoaderMock: FileAssetLoaderMock
+    get() = fileAssetLoader() as FileAssetLoaderMock

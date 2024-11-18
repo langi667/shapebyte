@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
-import de.stefan.lang.shapebyte.utils.assets.mocks.AssetLoaderMock
+import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
 import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -77,7 +77,7 @@ class FeatureToggleDatasourceImplTest : BaseCoroutineTest() {
     }
 
     private fun createSUT(defaultMockContent: String): FeatureToggleDatasourceImpl {
-        val loader = AssetLoaderMock()
+        val loader = FileAssetLoaderMock()
         loader.mockFileContent(
             FeatureToggleDatasourceImpl.defaultAssetFile,
             defaultMockContent,

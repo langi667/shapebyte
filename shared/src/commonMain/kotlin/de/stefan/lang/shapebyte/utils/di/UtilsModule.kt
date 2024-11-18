@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.utils.di
 
-import de.stefan.lang.shapebyte.utils.assets.AssetLoading
-import de.stefan.lang.shapebyte.utils.assets.impl.AssetLoader
-import de.stefan.lang.shapebyte.utils.assets.mocks.AssetLoaderMock
+import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
+import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
+import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfo
 import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoMock
@@ -23,7 +23,7 @@ interface UtilsModuleProviding {
     fun dimensionProvider(): DimensionProvider
     fun deviceInfoProvider(): DeviceInfoProviding
     fun dateTimeStringFormatter(): DateTimeStringFormatter
-    fun assetLoader(): AssetLoading
+    fun fileAssetLoader(): FileAssetLoading
 }
 
 object UtilsModule :
@@ -36,12 +36,12 @@ object UtilsModule :
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
         },
         appEnvironmentOnly = {
-            single<AssetLoading> { AssetLoader(logging = get()) } // AssetLoaderMock
+            single<FileAssetLoading> { FileAssetLoader(logging = get()) }
             single<DeviceInfoProviding> { DeviceInfo() }
             single<Logging> { Logger() }
         },
         testEnvironmentOnly = {
-            single<AssetLoading> { AssetLoaderMock() }
+            single<FileAssetLoading> { FileAssetLoaderMock() }
             single<Logging> { SilentLogger() }
             single<DeviceInfoProviding> { DeviceInfoMock() }
         },
@@ -52,5 +52,5 @@ object UtilsModule :
     override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
 
     override fun deviceInfoProvider(): DeviceInfoProviding = get()
-    override fun assetLoader(): AssetLoading = get()
+    override fun fileAssetLoader(): FileAssetLoading = get()
 }

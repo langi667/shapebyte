@@ -33,6 +33,7 @@ fun ApplicationTheme(
         )
     }
     val typography = Typography(
+        headlineSmall = themeBase.fonts.h4.toTextStyle(),
         bodyMedium = themeBase.fonts.body.toTextStyle(),
         titleLarge = themeBase.fonts.title.toTextStyle(),
         labelMedium = themeBase.fonts.footnote.toTextStyle(),
@@ -42,6 +43,7 @@ fun ApplicationTheme(
         small = RoundedCornerShape(4.dp),
         medium = RoundedCornerShape(4.dp),
         large = RoundedCornerShape(16.dp),
+        extraLarge = RoundedCornerShape(48.dp),
     )
 
     MaterialTheme(

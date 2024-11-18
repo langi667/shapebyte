@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.utils.assets.impl
 
-import de.stefan.lang.shapebyte.utils.assets.AssetLoading
+import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.FileAsset
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
@@ -10,8 +10,8 @@ import platform.Foundation.NSString
 import platform.Foundation.NSUTF8StringEncoding
 import platform.Foundation.stringWithContentsOfFile
 
-actual class AssetLoader actual constructor(logging: Logging) :
-    AssetLoading,
+actual class FileAssetLoader actual constructor(logging: Logging) :
+    FileAssetLoading,
     Loggable
 {
     actual override val logger = logging
