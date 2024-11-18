@@ -1,12 +1,12 @@
 package de.stefan.lang.shapebyte.utils.assets.impl
 
-import de.stefan.lang.shapebyte.utils.assets.AssetLoading
 import de.stefan.lang.shapebyte.utils.assets.FileAsset
+import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 
-expect class AssetLoader(logging: Logging) :
-    AssetLoading,
+expect class FileAssetLoader(logging: Logging) :
+    FileAssetLoading,
     Loggable {
     override val logger: Logging
 

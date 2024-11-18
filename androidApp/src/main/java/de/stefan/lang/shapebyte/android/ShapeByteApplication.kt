@@ -19,6 +19,6 @@ class ShapeByteApplication : Application() {
             modules(modules)
         }
 
-        DPI.assetLoader().setup(this)
+        DPI.fileAssetLoader().setup(this)
     }
 }

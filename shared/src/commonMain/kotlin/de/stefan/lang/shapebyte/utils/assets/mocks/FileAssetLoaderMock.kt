@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.utils.assets.mocks
 
-import de.stefan.lang.shapebyte.utils.assets.AssetLoading
 import de.stefan.lang.shapebyte.utils.assets.FileAsset
+import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 
-class AssetLoaderMock : AssetLoading {
+class FileAssetLoaderMock : FileAssetLoading {
     private val mockedContent = mutableMapOf<FileAsset, String>()
 
     fun mockFileContent(fileAsset: FileAsset, fileContent: String) {

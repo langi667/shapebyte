@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.utils.assets
 
-interface AssetLoading {
+interface FileAssetLoading {
     fun loadFile(fileAsset: FileAsset): String
 
     /**

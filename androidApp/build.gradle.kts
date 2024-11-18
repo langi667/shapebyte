@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.core.splashscreen)
+    implementation(libs.androidx.junit.ktx)
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
