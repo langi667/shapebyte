@@ -22,6 +22,7 @@ class ImageAssetLoaderTest {
         assertNotNull(content)
     }
 
+
     @Test
     fun testFileLoadingFailure() {
         val sut = ImageAssetLoader
