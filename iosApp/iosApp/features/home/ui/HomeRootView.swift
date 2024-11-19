@@ -11,7 +11,7 @@ import shared
 struct HomeRootView: View {
     @ObservedObject var viewModel: HomeRootViewModelWrapper
     private var safeAreaInsets: EdgeInsets {
-        SafeArea.insets
+        SafeAreaProvider.shared.insets
     }
 
     @State private var buildPerformPersistViewSize: CGSize = .zero
@@ -98,12 +98,13 @@ struct HomeRootView: View {
 
     private func buildPerformPersistViewOffset(scrollPosY: CGFloat) -> CGFloat {
         let offset: CGFloat
-        let threshold = (minimumHeaderHeight / 2 + buildPerformPersistViewSize.height / 2) * -1
+        let defaultOffset = -Theme.Spacings.M
+        let threshold = (minimumHeaderHeight / 2 + buildPerformPersistViewSize.height / 2 + defaultOffset) * -1
 
         if scrollPosY <=  threshold {
-            offset = -scrollPosY + threshold
+            offset = -scrollPosY + threshold + defaultOffset
         } else {
-            offset = 0
+            offset = defaultOffset
         }
 
         return offset
@@ -138,9 +139,7 @@ struct HomeRootView: View {
 }
 
 // TODO: screenshot tests
-
 #Preview {
-
     HomeRootView(
         viewModel: HomeRootViewModelWrapper()
     )

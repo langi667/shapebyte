@@ -10,9 +10,10 @@ import SwiftUI
 import shared
 import PreviewSnapshots
 
+@MainActor
 struct BackgroundViewAppearance {
     static var safeAreaInsets: EdgeInsets {
-        SafeArea.insets
+        SafeAreaProvider.shared.insets
     }
 
     static var headerHeight: CGFloat {
