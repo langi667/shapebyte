@@ -22,4 +22,22 @@ class UIStateTest : BaseTest() {
         sut = UIState.Loading
         assertNull(sut.dataOrNull<Any>())
     }
+
+    @Test
+    fun `dataOrElse returns data or else block value`() {
+        val data = "data"
+        var sut: UIState = UIState.Data(data)
+        var result = sut.dataOrElse { "Should not be called" }
+        assertEquals(data, result)
+
+        val nullData: String? = null
+        sut = UIState.Data(nullData)
+
+        val fallback = "fallback"
+        result = sut.dataOrElse { fallback }
+
+        assertEquals(fallback, result)
+        assertEquals(fallback, UIState.Idle.dataOrElse { fallback })
+        assertEquals(fallback, UIState.Loading.dataOrElse { fallback })
+    }
 }

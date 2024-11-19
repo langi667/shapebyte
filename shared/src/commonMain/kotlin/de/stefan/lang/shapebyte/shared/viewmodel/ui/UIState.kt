@@ -16,4 +16,9 @@ sealed class UIState {
             else -> null
         }
     }
+
+    inline fun <reified T> dataOrElse(elseBlock: () -> T): T {
+        val data = dataOrNull<T>()
+        return data ?: elseBlock()
+    }
 }

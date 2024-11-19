@@ -43,39 +43,39 @@ struct HomeRootView: View {
     @ViewBuilder
     private func content() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            quickWorkoutsViewOrEmpty()
-
+            quickWorkoutsView(viewModel.quickWorkouts)
             Spacer().frame(height: Theme.Spacings.S + Theme.Spacings.XS)
-
-            VStack(alignment: .leading, spacing: 0) {
-                sectionTitle("Recent Workouts")
-
-                ForEach(viewModel.recentHistory) { entry in
-                    WorkoutHistoryEntryView(entry: entry)
-                        .padding(.top, Theme.Spacings.S)
-                }
-            }.padding(.horizontal, paddingHorizontal)
+            recentHistoryView(viewModel.recentHistory)
         }
     }
 
     @ViewBuilder
-    private func quickWorkoutsViewOrEmpty() -> some View {
-        switch onEnum(of: viewModel.quickWorkoutsState) {
-        case .enabled(let state):
-            quickWorkoutsView(state.data)
-        default:
+    private func recentHistoryView(_ recentHistory: [WorkoutHistoryEntry]) -> some View {
+        if recentHistory.isEmpty {
             EmptyView()
-        }
+        } else {
+            VStack(alignment: .leading, spacing: 0) {
+                sectionTitle("Recent Workouts")
+
+                ForEach(recentHistory) { entry in
+                    WorkoutHistoryEntryView(entry: entry)
+                        .padding(.top, Theme.Spacings.S)
+                }
+            }.padding(.horizontal, paddingHorizontal) }
     }
 
     @ViewBuilder
     private func quickWorkoutsView(_ quickWorkouts: [Workout]) -> some View {
-        ZStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                sectionTitle("Quick Workouts")
-                    .padding(.leading, paddingHorizontal)
+        if quickWorkouts.isEmpty {
+            EmptyView()
+        } else {
+            ZStack(alignment: .leading) {
+                VStack(alignment: .leading) {
+                    sectionTitle("Quick Workouts")
+                        .padding(.leading, paddingHorizontal)
 
-                QuickWorkoutsListView(quickWorkouts: quickWorkouts)
+                    QuickWorkoutsListView(quickWorkouts: quickWorkouts)
+                }
             }
         }
     }

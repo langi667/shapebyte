@@ -29,7 +29,6 @@ import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModelViewData
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.quick.ui.QuickWorkoutsUIState
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import kotlinx.collections.immutable.ImmutableList
@@ -112,29 +111,23 @@ fun HomeRootView(
 
 @Composable
 private fun MainContentView(uiState: UIState) = WithTheme { theme ->
-    val uiState = uiState.dataOrNull<HomeRootViewModelViewData>()
+    val uiStateData: HomeRootViewModelViewData = uiState.dataOrElse { HomeRootViewModelViewData() }
+
     Column(modifier = Modifier.fillMaxSize()) {
         // Spacing in between the BuildPerformPersistView and the workout data view
         Box(modifier = Modifier.height(theme.spacing.xxLarge.dp + theme.spacing.xs.dp))
 
-        QuickWorkoutSection(uiState?.quickWorkoutsState)
-        RecentHistorySection(
-            uiState?.recentHistory?.toImmutableList()
-                ?: emptyList<WorkoutHistoryEntry>().toImmutableList(),
-        ) // TODO: use feature toggle and referring state
-    }
-}
-
-@Composable
-private fun QuickWorkoutSection(state: QuickWorkoutsUIState?) {
-    when (state) {
-        is QuickWorkoutsUIState.Enabled -> QuickWorkoutSection(state.data.toImmutableList())
-        else -> return
+        QuickWorkoutSection(uiStateData.quickWorkouts.toImmutableList())
+        RecentHistorySection(uiStateData.recentHistory.toImmutableList())
     }
 }
 
 @Composable
 private fun RecentHistorySection(history: ImmutableList<WorkoutHistoryEntry>) = WithTheme { theme ->
+    if (history.isEmpty()) {
+        return@WithTheme
+    }
+
     Column {
         Spacer(modifier = Modifier.height(theme.spacing.medium.dp))
         SectionHeader("Recent History")
@@ -147,18 +140,16 @@ private fun RecentHistorySection(history: ImmutableList<WorkoutHistoryEntry>) = 
                     .padding(horizontal = theme.spacing.small.dp),
             )
         }
-
-//        LazyColumn(userScrollEnabled = false) {
-//            items(history) { entry ->
-//                WorkoutHistoryEntryView(entry)
-//            }
-//        }
     }
 }
 
 @Composable
 private fun QuickWorkoutSection(workouts: ImmutableList<Workout>) = WithTheme { theme ->
-    Column { // TODO: check if empty first
+    if (workouts.isEmpty()) {
+        return@WithTheme
+    }
+
+    Column {
         SectionHeader("Quick Workouts")
         Spacer(modifier = Modifier.height(theme.spacing.small.dp))
         QuickWorkoutsListView(
@@ -196,15 +187,13 @@ private fun headerScale(
 fun HomeRootViewPreview() {
     val uiState = UIState.Data(
         HomeRootViewModelViewData(
-            quickWorkoutsState = QuickWorkoutsUIState.Enabled(
-                data = List(5) {
-                    Workout(
-                        name = "HIIT Workout ${it + 1}",
-                        shortDescription = "${20 + it} min. legs, core",
-                        image = ImageAsset("sprints.png"),
-                    )
-                },
-            ),
+            quickWorkouts = List(5) {
+                Workout(
+                    name = "HIIT Workout ${it + 1}",
+                    shortDescription = "${20 + it} min. legs, core",
+                    image = ImageAsset("sprints.png"),
+                )
+            },
         ),
     )
 

@@ -4,7 +4,7 @@ import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryData
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks
-import de.stefan.lang.shapebyte.features.workout.history.domain.RecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.history.domain.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.item.repetitive.domain.RepetitiveItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
@@ -15,7 +15,6 @@ import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasou
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.shapebyte.features.workout.quick.domain.FetchQuickWorkoutsUseCase
-import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsFeatureToggleUseCase
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
@@ -27,27 +26,30 @@ import org.koin.core.parameter.parametersOf
 interface WorkoutModuleProviding {
     fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
     fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
-    fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase
+
+    fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase
+
     fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
     fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution
     fun createRepetitiveItemExecution(
         item: Item,
         sets: List<ItemSet.Repetition>,
     ): RepetitiveItemExecution
+
     fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase
-    fun quickWorkoutsFeatureToggleUseCase(): QuickWorkoutsFeatureToggleUseCase
 }
 
 object WorkoutModule :
     DIModuleDeclaration(
         allEnvironments = {
             single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
-            single<RecentWorkoutHistoryUseCase> {
-                RecentWorkoutHistoryUseCase(
+            single<FetchRecentWorkoutHistoryUseCase> {
+                FetchRecentWorkoutHistoryUseCase(
                     repository = get(),
                     logger = get(),
                 )
             }
+
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
             single<CurrentWorkoutScheduleEntryUseCase> {
                 CurrentWorkoutScheduleEntryUseCase(
@@ -83,12 +85,6 @@ object WorkoutModule :
                 FetchQuickWorkoutsUseCase(
                     repository = get(),
                     logger = get(),
-                    quickWorkoutsFeatureToggleUseCase = get(),
-                )
-            }
-            single<QuickWorkoutsFeatureToggleUseCase> {
-                QuickWorkoutsFeatureToggleUseCase(
-                    loadFeatureToggleUseCase = get(),
                 )
             }
         },
@@ -111,9 +107,12 @@ object WorkoutModule :
             },
         )
 
-    override fun recentWorkoutHistoryUseCase(): RecentWorkoutHistoryUseCase = get()
+    override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase = get()
     override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
-    override fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution =
+    override fun createTimedItemExecution(
+        item: Item,
+        sets: List<ItemSet.Timed.Seconds>,
+    ): TimedItemExecution =
         get(
             parameters = {
                 parametersOf(item, sets)
@@ -130,5 +129,4 @@ object WorkoutModule :
     )
 
     override fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase = get()
-    override fun quickWorkoutsFeatureToggleUseCase(): QuickWorkoutsFeatureToggleUseCase = get()
 }

@@ -12,16 +12,13 @@ sealed interface LoadState<out T> {
         get() = this is Loading
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> resultOrNull(): Result<T>? {
-        val result = this as? Result<T>
-        return result
-    }
-
-    @Suppress("UNCHECKED_CAST")
     fun <T> dataOrNull(): T? {
         val data = (this as? Success<T>)?.data
         return data
     }
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T> resultOrNull(): Result<T>? = (this as? Result<T>)
 
     fun errorOrNull(): Throwable? {
         return (this as? Error)?.reason

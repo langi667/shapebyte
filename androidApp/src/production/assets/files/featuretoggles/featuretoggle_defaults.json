@@ -2,5 +2,9 @@
   {
     "identifier": "QUICK_WORKOUTS",
     "state": "ENABLED"
+  },
+  {
+    "identifier": "RECENT_HISTORY",
+    "state": "ENABLED"
   }
 ]

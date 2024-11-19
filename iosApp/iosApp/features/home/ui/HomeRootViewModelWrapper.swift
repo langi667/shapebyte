@@ -24,7 +24,7 @@ class HomeRootViewModelWrapper: ViewModelWrapper {
     @Published var currWorkoutScheduleEntry: WorkoutScheduleEntry?
     @Published var currWorkoutScheduleEntryProgress: CGFloat = 0.7
     @Published var recentHistory: [WorkoutHistoryEntry] = .init()
-    @Published var quickWorkoutsState: QuickWorkoutsUIState = QuickWorkoutsUIStateHidden()
+    @Published var quickWorkouts: [Workout] = .init()
 
     var eventPublisher: PassthroughSubject<Event, Never> = PassthroughSubject<Event, Never>()
 
@@ -57,7 +57,7 @@ class HomeRootViewModelWrapper: ViewModelWrapper {
     private func handleViewData(_ viewData: HomeRootViewModelViewData) {
         updateCurrentWorkoutSchedule(viewData.currWorkoutScheduleEntry)
         updateRecentHistory(viewData.recentHistory)
-        updateQuickWorkoutsState(viewData.quickWorkoutsState)
+        updateQuickWorkoutsState(viewData.quickWorkouts)
     }
 
     private func updateCurrentWorkoutSchedule(_ currSchedule: WorkoutScheduleEntry?) {
@@ -73,7 +73,7 @@ class HomeRootViewModelWrapper: ViewModelWrapper {
         self.recentHistory = recentHistory
     }
 
-    private func updateQuickWorkoutsState(_ state: QuickWorkoutsUIState) {
-        self.quickWorkoutsState = state
+    private func updateQuickWorkoutsState(_ workouts: [Workout]) {
+        self.quickWorkouts = workouts
     }
 }
