@@ -8,7 +8,6 @@ import kotlinx.collections.immutable.toImmutableList
 @DslMarker
 annotation class ContentViewItemTypeDsl
 
-// TODO: rename to ContentViewItemTypeBuilder
 @ContentViewItemTypeDsl
 class ContentViewItemBuilder {
     private val items = mutableListOf<ContentViewItem>()
