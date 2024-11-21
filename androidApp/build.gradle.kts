@@ -77,6 +77,9 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.coil.common)
+    implementation(libs.coil.compose)
+
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.turbine)

@@ -41,7 +41,7 @@ object BuildPerformPersistViewSettings {
 @Composable
 fun BuildPerformPersistView(
     modifier: Modifier = Modifier,
-) = WithTheme { theme ->
+) = WithTheme { theme, _ ->
     val primaryButtonSize = BuildPerformPersistViewSettings.primaryButtonSize
     val secondaryButtonSize = BuildPerformPersistViewSettings.secondaryButtonSize
     val secondaryButtonOffset = BuildPerformPersistViewSettings.secondaryButtonOffset
