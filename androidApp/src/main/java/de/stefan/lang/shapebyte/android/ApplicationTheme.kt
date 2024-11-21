@@ -18,7 +18,7 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.toTextStyle
 fun ApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
-) = WithTheme { themeBase ->
+) = WithTheme { themeBase, _ ->
     val colors = if (darkTheme) {
         darkColorScheme(
             primary = themeBase.colors.primary.darkModeColor.color,

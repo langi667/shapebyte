@@ -38,8 +38,7 @@ import kotlinx.collections.immutable.toImmutableList
 fun QuickWorkoutsListView(
     quickWorkouts: ImmutableList<Workout>,
     modifier: Modifier = Modifier,
-) = WithTheme { theme ->
-
+) = WithTheme { theme, _ ->
     val paddingHorizontal = theme.spacing.small.dp
     val spacerHeight = remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
