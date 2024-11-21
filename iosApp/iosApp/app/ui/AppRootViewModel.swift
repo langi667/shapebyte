@@ -15,7 +15,6 @@ class AppRootViewModel: ViewModel {
     @Published var state: UIState = UIState.Loading.shared
 
     // TODO: improve
-
     func onViewAppeared() {
         Task {
             await SafeAreaProvider.shared.detectSafeArea()

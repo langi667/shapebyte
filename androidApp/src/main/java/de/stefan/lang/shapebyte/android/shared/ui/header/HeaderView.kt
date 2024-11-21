@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.android.shared.ui
+package de.stefan.lang.shapebyte.android.shared.ui.header
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,14 +31,16 @@ fun HeaderView(
     maxHeight: Dp,
     currentHeight: Dp,
     modifier: Modifier = Modifier,
-) {
+) = WithTheme { _, log ->
     val scaleDivider = if (maxHeight.value == minHeight.value) 1f else (maxHeight.value - minHeight.value)
     val scaleRaw = (currentHeight.value - minHeight.value) / scaleDivider
     val scale = max(0f, scaleRaw)
 
+    log.d("HeaderView", "minHeight: $minHeight, maxHeight: $maxHeight, currentHeight: $currentHeight, scale: $scale")
+
     val headerProgress = 1f - min(max(scale, 0f), 1f)
 
-    WithTheme { theme ->
+    WithTheme { theme, _ ->
         val contentPadding = theme.spacing.small.dp
 
         Box(

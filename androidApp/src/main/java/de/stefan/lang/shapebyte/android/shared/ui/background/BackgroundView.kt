@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.android.shared.ui.background
 
-import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,12 +17,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -31,24 +29,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.zIndex
 import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
-import de.stefan.lang.shapebyte.android.shared.ui.HeaderView
+import de.stefan.lang.shapebyte.android.shared.ui.header.HeaderView
 import de.stefan.lang.shapebyte.android.shared.ui.shapes.Arc
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 
 @Composable
 @Suppress("MagicNumber")
-fun BackgroundView(
+fun <T> BackgroundView(
+    items: ImmutableList<T>,
     modifier: Modifier = Modifier,
     headerContent: @Composable (
         minHeight: Dp,
         maxHeight: Dp,
         currentHeight: Dp,
     ) -> Unit = { _, _, _ -> },
-    content: @Composable (scrollOffset: Dp, minimumHeaderHeight: Dp) -> Unit = { _, _ -> },
+    onScroll: (
+        scrollOffset: Dp,
+        minimumHeaderHeight: Dp,
+    ) -> Unit = { _, _ -> },
+    key: ((index: Int, item: T) -> Any)? = null,
+    contentType: (item: T) -> Any? = { null },
+    itemContent: @Composable LazyItemScope.(item: T) -> Unit,
 ) {
-    WithTheme { theme ->
+    WithTheme { theme, log ->
         val defaultArcHeight = remember { theme.dimensions.small.dp * 1.5f }
         val arcHeight = remember { mutableStateOf(defaultArcHeight) }
 
@@ -59,41 +67,71 @@ fun BackgroundView(
         val minimumHeaderHeight = maximumHeaderHeight / 2
 
         val scrollOffset = remember { mutableStateOf(0.dp) }
-
         val animatedArcHeight by animateDpAsState(
             targetValue = arcHeight.value - scrollOffset.value,
             label = "arcHeight",
         )
 
         val headerHeight =
-            max(minimumHeaderHeight, maximumHeaderHeight - (scrollOffset.value * 1.5f))
+            max(minimumHeaderHeight, maximumHeaderHeight - (scrollOffset.value))
         val listState = rememberLazyListState()
-        val coroutineScope = rememberCoroutineScope()
 
-        LaunchedEffect(listState) {
-            coroutineScope.launch {
-                snapshotFlow {
-                    listState.firstVisibleItemIndex *
-                        (listState.layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0) +
-                        listState.firstVisibleItemScrollOffset
-                }
-                    .distinctUntilChanged()
-                    .collectLatest { offset ->
-                        scrollOffset.value = with(density) { offset.toDp() }
-                        Log.d("BackgroundView", "scrollOffset: $scrollOffset")
-                    }
+        val reservedKey = "__BackgroundView-RESERVED_KEY_-TOP_ITEMS__"
+        val bgViewItems = listOf(reservedKey)
+        val allItems = bgViewItems + items
+
+        val bgKey: ((index: Int) -> Any) = { index ->
+            if (index < bgViewItems.size) {
+                reservedKey
+            } else {
+                val itemIndex = index - bgViewItems.size
+                val item = items.getOrNull(itemIndex)
+                item?.let { key?.invoke(itemIndex, it) } ?: index
             }
+        }
+
+        val bgContentType: (index: Int) -> Any? = { index ->
+            if (index < bgViewItems.size) {
+                reservedKey
+            } else {
+                val item = items.getOrNull(index - bgViewItems.size)
+                item?.let { contentType.invoke(it) }
+            }
+        }
+
+        val bgItemContent: @Composable LazyItemScope.(index: Int) -> Unit = { index ->
+            if (index < bgViewItems.size) {
+                TopItemViewView(
+                    maximumHeaderHeight = maximumHeaderHeight,
+                    animatedArcHeight = animatedArcHeight.value.dp,
+                    viewSize = viewSize.value,
+                )
+            } else {
+                items.getOrNull(index - bgViewItems.size)?.let {
+                    itemContent(it)
+                }
+            }
+        }
+
+        LaunchedEffect("ListState", onScroll, listState) {
+            snapshotFlow {
+                val index = listState.firstVisibleItemIndex
+                val size = listState.layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0
+                val offset = index * (size) + listState.firstVisibleItemScrollOffset
+                index to offset
+            }.distinctUntilChanged()
+                .filter { it.first == 0 }
+                .map { it.second }
+                .collectLatest { offset ->
+                    val targetScrollOffset = with(density) { offset.toDp() }
+                    scrollOffset.value = targetScrollOffset
+                    onScroll(scrollOffset.value, minimumHeaderHeight)
+                }
         }
 
         Box(
             modifier = modifier
                 .fillMaxSize()
-                .onGloballyPositioned {
-                    val widthDP = with(density) { it.size.width.toDp() }
-                    val heightDP = with(density) { it.size.height.toDp() }
-
-                    viewSize.value = DpSize(widthDP, heightDP)
-                }
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(MaterialTheme.colorScheme.secondary, Color.White),
@@ -118,7 +156,12 @@ fun BackgroundView(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = maximumHeaderHeight + defaultArcHeight)
+                    .padding(
+                        top = max(
+                            0.dp,
+                            (maximumHeaderHeight + animatedArcHeight - scrollOffset.value),
+                        ),
+                    )
                     .background(MaterialTheme.colorScheme.background),
             ) {}
 
@@ -127,43 +170,48 @@ fun BackgroundView(
                 modifier = Modifier.fillMaxSize(),
                 state = listState,
             ) {
-                items(1) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(maximumHeaderHeight),
-                    ) { /*No OP*/ }
-
-                    Arc(
-                        Modifier
-                            .fillMaxWidth(),
-                        height = animatedArcHeight,
-                        width = viewSize.value.width,
-                        color = MaterialTheme.colorScheme.background,
-                    )
-
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.background),
-                    ) {
-                        content(scrollOffset.value, minimumHeaderHeight)
-                    }
-                }
+                items(
+                    count = allItems.count(),
+                    key = bgKey,
+                    contentType = bgContentType,
+                    itemContent = bgItemContent,
+                )
             }
         }
     }
 }
 
+@Composable
+private fun TopItemViewView(
+    maximumHeaderHeight: Dp,
+    animatedArcHeight: Dp,
+    viewSize: DpSize,
+) = WithTheme { _, _ ->
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(maximumHeaderHeight),
+    ) { /*No OP*/ }
+
+    Arc(
+        Modifier
+            .fillMaxWidth(),
+        height = animatedArcHeight,
+        width = viewSize.width,
+        color = MaterialTheme.colorScheme.background,
+    )
+}
+
 @Preview
 @Composable
-fun BackgroundView2Preview() {
+fun BackgroundViewPreview() {
+    val items = listOf("Hello World", "Test", "Next").toImmutableList()
     BackgroundView(
         headerContent = { minHeight, maxHeight, currentHeight ->
             HeaderView(minHeight, maxHeight, currentHeight)
         },
-        content = { _, _ ->
-            Text("Hello World")
-        },
-    )
+        items = items,
+    ) { item ->
+        Text(item)
+    }
 }

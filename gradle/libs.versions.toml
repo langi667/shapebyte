@@ -22,6 +22,7 @@ junit = "4.13.2"
 extJUnit = "1.2.1"
 espresso = "3.4.0"
 junitKtx = "1.2.1"
+coil = "2.4.0"
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -54,7 +55,8 @@ androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "e
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
-
+coil-common = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
