@@ -18,7 +18,7 @@ struct WorkoutHistoryEntryView: View {
 
     var body: some View {
         HStack {
-            Image("Squats") // TODO: take from model
+            Image("Squats")
                 .resizable()
                 .frame(width: imageSize, height: imageSize)
                 .clipShape(Circle())
@@ -81,8 +81,8 @@ struct WorkoutHistoryEntryView_Previews: PreviewProvider {
 
             configure: { state in
                 WorkoutHistoryEntryView(entry: state.entry)
-                    .snapshotSetup()
                     .background(Theme.Colors.backgroundColor)
+                    .snapshotSetup()
             }
         )
     }

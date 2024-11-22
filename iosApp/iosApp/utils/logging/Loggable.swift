@@ -19,8 +19,7 @@ protocol Loggable {
     func logE(message: String)
 }
 
-extension Loggable where Self: AnyObject {
-
+extension Loggable {
     var logger: any Logging { DPI.shared.logger() }
     var tag: String { TypeDescriptionUtil.typeName(from: self) }
 

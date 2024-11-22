@@ -17,20 +17,20 @@ struct HomeRootView: View {
     @State private var buildPerformPersistViewSize: CGSize = .zero
 
     private var headerHeight: CGFloat {
-        BackgroundViewAppearance.headerHeight
+        ContentViewAppearance.headerHeight
     }
 
     private var minimumHeaderHeight: CGFloat {
-        BackgroundViewAppearance.minimumHeaderHeight
+        ContentViewAppearance.minimumHeaderHeight
     }
 
     private let paddingHorizontal: CGFloat = Theme.Spacings.S
 
     var body: some View {
-        BackgroundView(
+        ContentView(
             floatingViewIsEmpty: false,
             floatingView: { offsetY in
-                buildPerformPersistView(scrollPosY: offsetY)
+                AnyView(buildPerformPersistView(scrollPosY: offsetY))
             },
             contentView: {
                 content()
@@ -54,7 +54,7 @@ struct HomeRootView: View {
         if recentHistory.isEmpty {
             EmptyView()
         } else {
-            VStack(alignment: .leading, spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 sectionTitle("Recent Workouts")
 
                 ForEach(recentHistory) { entry in
