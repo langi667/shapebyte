@@ -1,153 +1,78 @@
 //
-//  BackgroundView.swift
-//  iosApp
+//  Background.swift
+//  ShapeByte
 //
-//  Created by Lang, Stefan [ShapeByte Tech] on 13.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
+//  Created by Lang, Stefan [ShapeByte Tech] on 02.08.24.
 //
 
 import SwiftUI
-import shared
 import PreviewSnapshots
 
-struct BackgroundView<Content: View, FloatingContent: View>: View {
-    @ViewBuilder
-    let contentView: () -> Content
+struct BackgroundView: View {
+    static let defaultRadialOffset = Theme.Spacings.XXXL.toDimension(max: Theme.Spacings.XXXL)
+    static let defaultTopOffset = Theme.Spacings.XXXL.toDimension(max: Theme.Spacings.XXXL)
 
-    @ViewBuilder
-    let floatingView: (_ scrollOffset: CGFloat) -> FloatingContent
+    var topOffset = Self.defaultTopOffset
+    var radialOffset = Self.defaultRadialOffset
 
-    private let defaultRadialOffset: CGFloat = Theme.Spacings.XXXL
-    private var safeAreaInsets: EdgeInsets {
-        BackgroundViewAppearance.safeAreaInsets
-    }
+    @State private var screenSize: CGSize = .zero
 
-    @State private var offsetY: CGFloat = 0
-    @State private var scrollViewSize: CGSize = .zero
-
-    @State private var radialOffset: CGFloat
-    @State private var pendingExerciseSize: CGSize = .zero
-    @State private var headerProgress: CGFloat = .zero
-
-    @State private var headerOverlayOpacity: CGFloat = .zero
-    @State private var headerScale: CGFloat = .zero
-    @State private var headerImageScale: CGFloat = .zero
-
-    private let headerOverlayColor: Color = Theme.Colors.secondaryColor
-    private let floatingViewIsEmpty: Bool
-
-    private var headerHeight: CGFloat {
-        BackgroundViewAppearance.headerHeight
-    }
-
-    private var minimumHeaderHeight: CGFloat {
-        BackgroundViewAppearance.minimumHeaderHeight
-    }
-
-    private let viewTopOffset: CGFloat = 8
-    private let paddingHorizontal: CGFloat = Theme.Spacings.S
-
-    init(
-        floatingViewIsEmpty: Bool,
-        floatingView: @escaping (_ scrollOffset: CGFloat) -> FloatingContent,
-        contentView: @escaping () -> Content
-    ) {
-        self.floatingViewIsEmpty = floatingViewIsEmpty
-        self.radialOffset = defaultRadialOffset
-        self.floatingView = floatingView
-
-        self.contentView = contentView
-    }
+    var secondaryColor: Color = Theme.Colors.secondaryColor
+    var radialColor: Color = Theme.Colors.backgroundColor
 
     var body: some View {
         ZStack {
-            RadialBackgroundView(
-                topOffset: Theme.Spacings.XXL.toDimensionMax(),
-                radialOffset: radialOffset.toDimensionMax()
-            )
+            Rectangle()
+                .fill(secondaryColor.gradient)
+                .sizeReader(size: $screenSize)
 
-            ScrollView {
-                GeometryReader { geometry in
-                    Color.clear
-                        .preference(key: ScrollOffsetPreferenceKey.self, value: (geometry.frame(in: .global).minY) )
+            VStack(spacing: 0) {
+                Spacer()
+                    .frame(height: topOffset)
 
-                }
-                .frame(height: 0)
-                .offset(y: viewTopOffset)
+                Arc()
+                    .fill(radialColor)
+                    .frame(height: radialOffset)
 
-                headerView()
-                    .zIndex(1000)
-
-                floatingView(self.offsetY)
-                    .zIndex(1001)
-
-                ZStack {
-                    self.contentView()
-                }
-                .offset(y: floatingViewIsEmpty ? Theme.Spacings.XL : 0.0)
+                Rectangle()
+                    .fill(radialColor)
             }
-            .scrollIndicators(.hidden)
-            .sizeReader(size: $scrollViewSize)
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                self.offsetY = value
-                self.radialOffset = max(0, defaultRadialOffset + offsetY)
-                self.headerProgress = (-offsetY + viewTopOffset) / (headerHeight - minimumHeaderHeight - viewTopOffset)
-
-                self.headerOverlayOpacity = min(max(headerProgress, 0), 1)
-                self.headerScale = min(max(1 - (headerProgress * 0.5), 0), 1.2)
-                self.headerImageScale = min(max(1 - (headerProgress * 0.5), 0.5), 1.2)
-            }
-        }
-        .ignoresSafeArea(.all)
-    }
-
-    @ViewBuilder
-    private func headerView() -> some View {
-        HeaderView(
-            headerHeight: headerHeight,
-            minimumHeaderHeight: minimumHeaderHeight,
-            offsetY: offsetY,
-            overlayColor: headerOverlayColor,
-            overlayOpacity: headerOverlayOpacity,
-            scale: headerScale,
-            imageScale: headerImageScale,
-            contentPaddingVertical: safeAreaInsets.top / 2
-        )
+        }.ignoresSafeArea()
     }
 }
 
-// TODO: screenshot tests
 struct BackgroundView_Previews: PreviewProvider {
-    struct Data {
-        let texts = [
-            "Oh Hello there",
-            "Obi Wan",
-            "Anakin Skywalker"
-        ]
+    struct State {
+        let radialOffset: CGFloat
+        let topOffset: CGFloat
     }
 
     static var previews: some View {
         snapshots.previews.previewLayout(.device)
     }
 
-    static var snapshots: PreviewSnapshots<Data> {
+    static var snapshots: PreviewSnapshots<State> {
         PreviewSnapshots(
             configurations: [
-                .init(name: "Default", state: Data() )
-            ],
+                .init(name: "Default", state: State(
+                    radialOffset: BackgroundView.defaultRadialOffset,
+                    topOffset: BackgroundView.defaultTopOffset
+                )),
+                .init(name: "Flat", state: State(
+                    radialOffset: 0.0,
+                    topOffset: BackgroundView.defaultTopOffset
+                )),
+                .init(name: "Plain", state: State(
+                    radialOffset: 0.0,
+                    topOffset: 0.0
+                ) )
 
-            configure: { data in
+            ],
+            configure: { state in
                 BackgroundView(
-                    floatingViewIsEmpty: true,
-                    floatingView: {_ in EmptyView()},
-                    contentView: {
-                        VStack {
-                            ForEach(data.texts, id: \.self) {
-                                Text($0)
-                            }
-                        }
-                    }
-                )
+                    topOffset: state.topOffset,
+                    radialOffset: state.radialOffset
+                ).snapshotSetupFullScreen()
             }
         )
     }

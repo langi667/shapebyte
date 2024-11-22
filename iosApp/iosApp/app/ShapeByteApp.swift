@@ -3,9 +3,10 @@ import shared
 
 @main
 struct ShapeByteApp: App {
+    @Env private var environment
 
     private var isRunningUnitTests: Bool {
-        return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        return environment.isRunningUnitTests
     }
 
     init() {
@@ -13,6 +14,7 @@ struct ShapeByteApp: App {
         DPI.shared.fileAssetLoader().setup(context: Bundle.main)
     }
 
+    // TODO: Loading State view here
 	var body: some Scene {
 		WindowGroup {
             if isRunningUnitTests {

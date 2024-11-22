@@ -140,7 +140,7 @@ struct HeaderView_Previews: PreviewProvider {
 
             configure: { state in
                 ZStack(alignment: .topLeading) {
-                    RadialBackgroundView()
+                    BackgroundView()
                     HeaderView(
                         headerHeight: 128,
                         minimumHeaderHeight: 128,

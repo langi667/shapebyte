@@ -11,10 +11,8 @@ import shared
 import PreviewSnapshots
 
 @MainActor
-struct BackgroundViewAppearance {
-    static var safeAreaInsets: EdgeInsets {
-        SafeAreaProvider.shared.insets
-    }
+struct ContentViewAppearance {
+    @SafeAreaInfo static var safeAreaInsets
 
     static var headerHeight: CGFloat {
         (Theme.Dimensions.large + safeAreaInsets.top / 2).toDimensionMax()

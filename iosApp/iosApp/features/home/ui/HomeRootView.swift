@@ -7,30 +7,35 @@
 
 import SwiftUI
 import shared
+import PreviewSnapshots
 
-struct HomeRootView: View {
-    @ObservedObject var viewModel: HomeRootViewModelWrapper
+struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
+    @ObservedObject var viewModel: ViewModel
     private var safeAreaInsets: EdgeInsets {
         SafeAreaProvider.shared.insets
     }
 
-    @State private var buildPerformPersistViewSize: CGSize = .zero
+    @Env
+    private var environment
+
+    @State
+    private var buildPerformPersistViewSize: CGSize = .zero
 
     private var headerHeight: CGFloat {
-        BackgroundViewAppearance.headerHeight
+        ContentViewAppearance.headerHeight
     }
 
     private var minimumHeaderHeight: CGFloat {
-        BackgroundViewAppearance.minimumHeaderHeight
+        ContentViewAppearance.minimumHeaderHeight
     }
 
     private let paddingHorizontal: CGFloat = Theme.Spacings.S
 
     var body: some View {
-        BackgroundView(
+        ContentView(
             floatingViewIsEmpty: false,
             floatingView: { offsetY in
-                buildPerformPersistView(scrollPosY: offsetY)
+                AnyView(buildPerformPersistView(scrollPosY: offsetY))
             },
             contentView: {
                 content()
@@ -54,7 +59,7 @@ struct HomeRootView: View {
         if recentHistory.isEmpty {
             EmptyView()
         } else {
-            VStack(alignment: .leading, spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 sectionTitle("Recent Workouts")
 
                 ForEach(recentHistory) { entry in
@@ -138,9 +143,72 @@ struct HomeRootView: View {
     }
 }
 
-// TODO: screenshot tests
-#Preview {
-    HomeRootView(
-        viewModel: HomeRootViewModelWrapper()
-    )
+struct HomeRootView_Previews: PreviewProvider {
+    class Data: HomeRootViewDataProviding {
+        var state: UIState = UIState.Idle.shared
+
+        func onViewAppeared() { /* NO OP */ }
+        func onViewDisappeared() { /* NO OP */ }
+
+        var currWorkoutScheduleEntry: WorkoutScheduleEntry?
+        var currWorkoutScheduleEntryProgress: CGFloat = 0
+        var recentHistory: [WorkoutHistoryEntry] = []
+        var quickWorkouts: [Workout] = []
+
+        init(currWorkoutScheduleEntry: WorkoutScheduleEntry? = nil,
+             currWorkoutScheduleEntryProgress: CGFloat = 0,
+             recentHistory: [WorkoutHistoryEntry] = [],
+             quickWorkouts: [Workout] = []
+        ) {
+            self.currWorkoutScheduleEntry = currWorkoutScheduleEntry
+            self.currWorkoutScheduleEntryProgress = currWorkoutScheduleEntryProgress
+            self.recentHistory = recentHistory
+            self.quickWorkouts = quickWorkouts
+        }
+    }
+
+    static var previews: some View {
+        snapshots.previews.previewLayout(.device)
+    }
+
+    static var snapshots: PreviewSnapshots<Data> {
+        PreviewSnapshots(
+            configurations: [
+                .init(name: "Empty", state: Data()),
+                .init(
+                    name: "History only",
+                    state: Data(
+                        recentHistory: WorkoutHistoryPreviewDataProvider
+                            .shared
+                            .previewData
+                    )
+                ),
+                .init(
+                    name: "Quick Workouts only",
+                    state: Data(
+                        quickWorkouts: QuickWorkoutsPreviewDataProvider
+                            .shared
+                            .previewData
+                    )
+                ),
+                .init(
+                    name: "All Data",
+                    state: Data(
+                        recentHistory: WorkoutHistoryPreviewDataProvider
+                            .shared
+                            .previewData,
+                        quickWorkouts: QuickWorkoutsPreviewDataProvider
+                            .shared
+                            .previewData
+                    )
+                )
+            ],
+
+            configure: { data in
+                HomeRootView(
+                    viewModel: data
+                ).snapshotSetupFullScreen()
+            }
+        )
+    }
 }

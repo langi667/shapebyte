@@ -9,13 +9,17 @@
 import SwiftUI
 
 @MainActor
-class SafeAreaProvider {
-
+class SafeAreaProvider: SafeAreaProviding, Loggable {
     static let shared = SafeAreaProvider()
-
     fileprivate(set) var insets: EdgeInsets = .init()
 
     func detectSafeArea() async {
+        // already detecting
+        if insets != EdgeInsets() {
+            logD(message: "Safe area already detected with \(insets)")
+            return
+        }
+
         var tryCount = 0
 
         repeat {
@@ -41,7 +45,8 @@ class SafeAreaProvider {
             tryCount += 1
 
         } while (tryCount < 10)
-        // TODO: log if save area wasn't found
+
+        logW(message: "Unable to determine Safe Area :/ ")
     }
 
     private init() {}
