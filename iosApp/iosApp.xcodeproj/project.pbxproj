@@ -643,6 +643,7 @@
 		1DB795D12CE3C52A00EBD8AF /* header */ = {
 			isa = PBXGroup;
 			children = (
+				1D9DE9732CF333CE002D931B /* tests */,
 				1DE276592CDD3C2800A8725D /* HeaderView.swift */,
 			);
 			path = header;
@@ -754,7 +755,6 @@
 		1DFB07902CBFDD5F0013C589 /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				1D9DE9732CF333CE002D931B /* tests */,
 				1DFB07912CBFDD770013C589 /* UIStateTest.swift */,
 			);
 			path = tests;

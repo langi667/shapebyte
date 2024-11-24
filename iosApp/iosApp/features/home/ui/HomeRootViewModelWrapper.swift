@@ -11,7 +11,15 @@ import SwiftUI
 import shared
 
 @MainActor
-class HomeRootViewModelWrapper: ViewModelWrapper {
+protocol HomeRootViewDataProviding: ViewModel, AnyObject {
+    var currWorkoutScheduleEntry: WorkoutScheduleEntry? { get }
+    var currWorkoutScheduleEntryProgress: CGFloat { get }
+    var recentHistory: [WorkoutHistoryEntry] { get }
+    var quickWorkouts: [Workout] { get }
+}
+
+@MainActor
+class HomeRootViewModelWrapper: HomeRootViewDataProviding, ViewModelWrapper {
     enum Event {
         case currWorkoutScheduleEntrySelected
     }

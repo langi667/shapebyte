@@ -14,12 +14,12 @@ protocol ViewModel: ObservableObject, Loggable {
     var state: UIState { get set }
 
     /**
-      Needs to be triggered automatically. Can be used to start observing state
+      Needs to be triggered manually. Can be used to start observing state
      */
     func onViewAppeared()
 
     /**
-      Needs to be triggered automatically. Can be used cancel/pause processes
+      Needs to be triggered manually. Can be used cancel/pause processes
      */
     func onViewDisappeared()
 }

@@ -10,6 +10,11 @@ import kotlin.time.Duration.Companion.days
 
 object WorkoutHistoryDataSourceMocks : WorkoutHistoryDataSource {
     override fun historyForDates(date: Instant, pastDate: Instant): Flow<List<WorkoutScheduleEntry>> {
+        val history = createHistoryEntries(date, pastDate)
+        return flowOf(history)
+    }
+
+    fun createHistoryEntries(date: Instant, pastDate: Instant): List<WorkoutScheduleEntry> {
         val history = mutableListOf<WorkoutScheduleEntry>()
         val daysCount = date.minus(pastDate).inWholeDays
 
@@ -23,6 +28,6 @@ object WorkoutHistoryDataSourceMocks : WorkoutHistoryDataSource {
             history.add(entry)
         }
 
-        return flowOf(history)
+        return history
     }
 }
