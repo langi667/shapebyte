@@ -10,17 +10,21 @@ import SwiftUI
 import shared
 
 struct SnapshotSetup: ViewModifier {
-    // TODO: from mock
-    static let iPhoneSize = CGSize(width: 393, height: 852) // iPhone 16 which is default for snapshot tests
+    @Device
+    fileprivate var device // returns mocked size, see DeviceInfoMock.ios.kt
 
     let height: CGFloat?
     func body(content: Content) -> some View {
         content
             .frame(
-                width: CGFloat(Self.iPhoneSize.width),
+                width: CGFloat(device.screenSize.width),
                 height: height
             )
             .fixedSize(horizontal: true, vertical: true)
+    }
+
+    func makeFullScreen() -> SnapshotSetup {
+        return SnapshotSetup(height: CGFloat(device.screenSize.height))
     }
 }
 
@@ -30,6 +34,6 @@ extension View {
     }
 
     func snapshotSetupFullScreen() -> some View {
-        self.modifier(SnapshotSetup(height: CGFloat(SnapshotSetup.iPhoneSize.height)))
+        self.modifier(SnapshotSetup(height: nil).makeFullScreen())
     }
 }

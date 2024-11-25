@@ -16,10 +16,11 @@ class AppRootViewModel: ViewModel {
 
     // TODO: improve
     func onViewAppeared() {
-        Task {
-            await SafeAreaProvider.shared.detectSafeArea()
-            self.state = UIStateData(data: AppRootViewModelData())
 
+        Task {
+            for await appInitState in AppInitializer.shared.initialize() where appInitState == .initialized {
+                self.state = UIStateData(data: AppRootViewModelData())
+            }
         }
     }
 

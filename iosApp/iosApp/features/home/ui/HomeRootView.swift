@@ -11,9 +11,6 @@ import PreviewSnapshots
 
 struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
     @ObservedObject var viewModel: ViewModel
-    private var safeAreaInsets: EdgeInsets {
-        SafeAreaProvider.shared.insets
-    }
 
     @Env
     private var environment

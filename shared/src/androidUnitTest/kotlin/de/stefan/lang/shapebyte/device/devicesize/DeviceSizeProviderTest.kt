@@ -1,9 +1,10 @@
 package de.stefan.lang.shapebyte.device.devicesize
 
-import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoMock
+import de.stefan.lang.shapebyte.utils.device.deviceinfo.mocks.DeviceInfoMock
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.shapebyte.utils.device.devicesize.Size
 import de.stefan.lang.shapebyte.utils.device.devicesize.AndroidSizeBounds
+import de.stefan.lang.shapebyte.utils.device.devicesize.mocks.ScreenSizeProviderMock
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -124,7 +125,7 @@ class DeviceSizeProviderTest {
     }
 
     private fun createSUT(size: Size): DeviceSizeCategoryProvider {
-        val screenSizeProvider = DeviceInfoMock(screenSize = size)
+        val screenSizeProvider = ScreenSizeProviderMock(size)
         return DeviceSizeCategoryProvider(screenSizeProvider)
     }
 

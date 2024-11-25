@@ -5,11 +5,12 @@ import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfo
-import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoMock
 import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoProviding
+import de.stefan.lang.shapebyte.utils.device.deviceinfo.mocks.DeviceInfoMock
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.shapebyte.utils.device.devicesize.ScreenSizeProviding
+import de.stefan.lang.shapebyte.utils.device.safearea.SafeAreaDetector
 import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
 import de.stefan.lang.shapebyte.utils.dimension.DimensionProvider
 import de.stefan.lang.shapebyte.utils.logging.Logger
@@ -34,10 +35,11 @@ object UtilsModule :
             single<DeviceSizeCategoryProviding> { DeviceSizeCategoryProvider(screenSizeProvider = get()) }
             single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
+            single<SafeAreaDetector> { SafeAreaDetector(logger = get()) }
         },
         appEnvironmentOnly = {
             single<FileAssetLoading> { FileAssetLoader(logging = get()) }
-            single<DeviceInfoProviding> { DeviceInfo() }
+            single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
             single<Logging> { Logger() }
         },
         testEnvironmentOnly = {

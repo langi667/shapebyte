@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.device.devicesize
 
-import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoMock
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategory
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.shapebyte.utils.device.devicesize.Size
 import de.stefan.lang.shapebyte.utils.device.devicesize.mocks.DeviceSizeCategoryProviderMock
+import de.stefan.lang.shapebyte.utils.device.devicesize.mocks.ScreenSizeProviderMock
 import kotlin.test.Test
 import kotlin.test.assertIs
 import kotlin.test.assertIsNot
@@ -102,7 +102,7 @@ class DeviceSizeCategoryProviderTest {
         screenSize: Size,
         category: DeviceSizeCategory,
     ): DeviceSizeCategoryProviding {
-        val screenSizeProviderMock = DeviceInfoMock(screenSize = screenSize)
+        val screenSizeProviderMock = ScreenSizeProviderMock(screenSize = screenSize)
         return DeviceSizeCategoryProviderMock(
             screenSizeProvider = screenSizeProviderMock,
             sizeCategory = category,
