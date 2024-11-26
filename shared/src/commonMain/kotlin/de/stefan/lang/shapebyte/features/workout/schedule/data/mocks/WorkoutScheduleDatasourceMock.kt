@@ -9,7 +9,7 @@ import kotlinx.datetime.Clock
 
 @Suppress("MagicNumber")
 object WorkoutScheduleDatasourceMock : WorkoutScheduleDatasource {
-    private val _currentWorkoutScheduleEntryFlow: Flow<WorkoutScheduleEntry> = flow {
+    override fun currentWorkoutScheduleEntry(): Flow<WorkoutScheduleEntry> = flow {
         val entry = WorkoutScheduleEntry(
             id = "1",
             name = "Leg Day",
@@ -17,9 +17,5 @@ object WorkoutScheduleDatasourceMock : WorkoutScheduleDatasource {
             progress = Progress(0.7f),
         )
         emit(entry)
-    }
-
-    override fun currentWorkoutScheduleEntry(): Flow<WorkoutScheduleEntry> {
-        return _currentWorkoutScheduleEntryFlow
     }
 }

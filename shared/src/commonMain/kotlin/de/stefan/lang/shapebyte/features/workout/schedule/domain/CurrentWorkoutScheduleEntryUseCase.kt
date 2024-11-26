@@ -7,6 +7,7 @@ import de.stefan.lang.shapebyte.shared.usecase.BaseDataUseCase
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class CurrentWorkoutScheduleEntryUseCase(
@@ -18,7 +19,7 @@ class CurrentWorkoutScheduleEntryUseCase(
         scope.launch {
             mutableFlow.emit(LoadState.Loading)
 
-            repository.currentWorkoutScheduleEntry().collect {
+            repository.currentWorkoutScheduleEntry().collectLatest {
                 mutableFlow.emit(LoadState.Success(it))
             }
         }

@@ -18,8 +18,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-// TODO: test
-//
 class HomeRootViewModel(
     private val currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase,
     private val recentHistoryUseCase: FetchRecentWorkoutHistoryUseCase,
@@ -33,7 +31,7 @@ class HomeRootViewModel(
     override val state: StateFlow<UIState> = _state
 
     private val dataFlow: Flow<UIState.Data<HomeRootViewModelViewData>> = combine(
-        currentWorkoutScheduleEntryUseCase.dataFlow,
+        mapCurrentWorkoutScheduleEntry(currentWorkoutScheduleEntryUseCase.flow),
         mapRecentHistory(recentHistoryUseCase.flow),
         mapQuickWorkouts(fetchQuickWorkoutsUseCase.flow),
     ) { currentWorkoutScheduleEntry, recentHistory, quickWorkoutsState ->
@@ -73,6 +71,16 @@ class HomeRootViewModel(
             }
             .map { entries ->
                 entries.map { entry -> WorkoutModule.workoutHistoryEntry(entry) }
+            }
+
+    private fun mapCurrentWorkoutScheduleEntry(flow: Flow<LoadState<WorkoutScheduleEntry?>>) =
+        flow
+            .asResultFlow()
+            .map { result ->
+                when (result) {
+                    is LoadState.Success -> result.data
+                    else -> null
+                }
             }
 
     private fun mapQuickWorkouts(flow: Flow<LoadState<List<Workout>>>) =

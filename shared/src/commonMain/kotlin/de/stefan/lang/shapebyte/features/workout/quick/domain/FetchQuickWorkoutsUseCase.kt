@@ -7,7 +7,6 @@ import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.shared.usecase.BaseFeatureDataUseCase
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -17,7 +16,6 @@ class FetchQuickWorkoutsUseCase(
     logger: Logging,
 ) : BaseFeatureDataUseCase<List<Workout>>(FeatureId.QUICK_WORKOUTS.name, logger) {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(scope: CoroutineScope): SharedFlow<LoadState<List<Workout>>> {
         scope.launch {
             mutableFlow.emit(LoadState.Loading)
