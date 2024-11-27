@@ -17,7 +17,7 @@ fun With(
     content: @Composable (dimension: Dimension, spacing: Spacing, logger: Logging) -> Unit,
 ) {
 
-    // check if in Preview Mode, DPI is not available in inspection mode
+    // TODO: check if in Preview Mode, DPI is not available in inspection mode
     // TODO: handle in preview for DPI, also for iOS
     val logger = if (LocalInspectionMode.current) {
         SilentLogger()

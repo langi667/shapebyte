@@ -61,6 +61,5 @@ public struct Theme {
         static let medium: CGFloat = 16.0
         static let large: CGFloat = 32
         static let xLarge: CGFloat = 48
-
     }
 }
