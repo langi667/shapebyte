@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.android.designsystem.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalInspectionMode
 import de.stefan.lang.shapebyte.android.ApplicationTheme
 import de.stefan.lang.shapebyte.android.LocalDimension
@@ -16,7 +15,6 @@ import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 fun With(
     content: @Composable (dimension: Dimension, spacing: Spacing, logger: Logging) -> Unit,
 ) {
-
     // TODO: check if in Preview Mode, DPI is not available in inspection mode
     // TODO: handle in preview for DPI, also for iOS
     val logger = if (LocalInspectionMode.current) {
