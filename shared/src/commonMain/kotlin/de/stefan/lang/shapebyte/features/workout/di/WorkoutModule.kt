@@ -9,6 +9,8 @@ import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.item.repetitive.domain.RepetitiveItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecuting
+import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
@@ -37,6 +39,7 @@ interface WorkoutModuleProviding {
     ): RepetitiveItemExecution
 
     fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase
+    fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution
 }
 
 object WorkoutModule :
@@ -49,7 +52,6 @@ object WorkoutModule :
                     logger = get(),
                 )
             }
-
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
             single<CurrentWorkoutScheduleEntryUseCase> {
                 CurrentWorkoutScheduleEntryUseCase(
@@ -86,6 +88,10 @@ object WorkoutModule :
                     repository = get(),
                     logger = get(),
                 )
+            }
+
+            factory<ItemsExecution> { (items: List<ItemExecuting<*, *>>) ->
+                ItemsExecution(items, get())
             }
         },
         appEnvironmentOnly = {
@@ -129,4 +135,9 @@ object WorkoutModule :
     )
 
     override fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase = get()
+    override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
+        parameters = {
+            parametersOf(items)
+        },
+    )
 }

@@ -9,7 +9,6 @@
 import Foundation
 import shared
 
-// TODO: Test
 public class Spacing {
     let xTiny: CGFloat
     let tiny: CGFloat
