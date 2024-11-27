@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.android.designsystem.ui
 
-import de.stefan.lang.shapebyte.designsystem.data.FontWeight
+import de.stefan.lang.shapebyte.utils.designsystem.data.FontWeight
 import androidx.compose.ui.text.font.FontWeight as AndroidFontWeight
 
 fun FontWeight.toAndroidFontWeight(): AndroidFontWeight {

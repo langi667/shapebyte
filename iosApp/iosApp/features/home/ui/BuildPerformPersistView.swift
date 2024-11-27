@@ -10,9 +10,9 @@ import shared
 import PreviewSnapshots
 
 struct BuildPerformPersistViewSettings {
-    static let primaryButtonSize = Theme.Dimensions.large
-    static let secondaryButtonSize = Theme.Dimensions.medium
-    static let primaryButtonPadding = Theme.Spacings.S
+    static let primaryButtonSize = Theme.dimensions.large
+    static let secondaryButtonSize = Theme.dimensions.medium
+    static let primaryButtonPadding = Theme.spacings.small
 
     static let height = primaryButtonSize + (2 * primaryButtonPadding)
 }
@@ -20,10 +20,10 @@ struct BuildPerformPersistViewSettings {
 struct BuildPerformPersistView: View {
     let primaryButtonSize = BuildPerformPersistViewSettings.primaryButtonSize
     let secondaryButtonSize = BuildPerformPersistViewSettings.secondaryButtonSize
-    let secondaryButtonOffset = Theme.Dimensions.xxs
+    let secondaryButtonOffset = Theme.dimensions.xTiny
 
     static let buttonPadding = BuildPerformPersistViewSettings.primaryButtonPadding
-    static let buttonOffset = Self.buttonPadding + Theme.Spacings.XS + Theme.Spacings.XXS
+    static let buttonOffset = Self.buttonPadding + Theme.spacings.tiny + Theme.spacings.xTiny
 
     var body: some View {
         ZStack(alignment: Alignment.center) {

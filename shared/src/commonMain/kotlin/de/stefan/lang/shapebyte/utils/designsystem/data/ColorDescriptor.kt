@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.designsystem.data
+package de.stefan.lang.shapebyte.utils.designsystem.data
 
 sealed interface ColorDescriptor {
     data class NamedAsset(val value: String) : ColorDescriptor

@@ -29,7 +29,7 @@ struct ShapeByteApp: App {
     func unitTestView() -> some View {
         ZStack {
             Text("Unit Tests running")
-                .title()
+                .titleMedium()
         }
     }
 }

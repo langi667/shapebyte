@@ -166,11 +166,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
     }
 
     private fun createSUT(item: Item, seconds: Int): TimedItemExecution {
-        val items = mutableListOf<ItemSet.Timed.Seconds>()
-        repeat(seconds) {
-            items.add(ItemSet.Timed.Seconds(1))
-        }
-
+        val items = List(seconds) { ItemSet.Timed.Seconds(1) }
         return createSUT(item, items)
     }
 

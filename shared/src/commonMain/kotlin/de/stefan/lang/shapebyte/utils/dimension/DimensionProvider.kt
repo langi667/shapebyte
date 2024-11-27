@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.utils.dimension
 
+import de.stefan.lang.shapebyte.utils.designsystem.data.Dimension
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategory
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.shapebyte.utils.device.devicesize.Size

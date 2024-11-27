@@ -27,7 +27,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import kotlinx.collections.immutable.ImmutableList
@@ -38,8 +39,8 @@ import kotlinx.collections.immutable.toImmutableList
 fun QuickWorkoutsListView(
     quickWorkouts: ImmutableList<Workout>,
     modifier: Modifier = Modifier,
-) = WithTheme { theme, _ ->
-    val paddingHorizontal = theme.spacing.small.dp
+) = With { _, spacings, _ ->
+    val paddingHorizontal = spacings.small.dp
     val spacerHeight = remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
     val horizontalClipWidth = paddingHorizontal * 2
@@ -124,8 +125,10 @@ fun QuickWorkoutsListViewPreview() {
         )
     }.toImmutableList()
 
-    QuickWorkoutsListView(
-        quickWorkouts = workouts,
-        modifier = Modifier.background(Color.LightGray),
-    )
+    PreviewContainer {
+        QuickWorkoutsListView(
+            quickWorkouts = workouts,
+            // modifier = Modifier.background(Color.LightGray),
+        )
+    }
 }

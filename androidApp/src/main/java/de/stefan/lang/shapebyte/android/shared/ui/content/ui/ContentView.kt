@@ -10,10 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
-import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.Head3
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.TitleMedium
 import de.stefan.lang.shapebyte.android.shared.ui.background.BackgroundView
 import de.stefan.lang.shapebyte.android.shared.ui.header.HeaderView
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -84,21 +85,23 @@ private fun Spacer(item: ContentViewItem.Spacer) {
 }
 
 @Composable
-private fun SectionTitle(item: ContentViewItem.SectionTitle) = WithTheme { theme, _ ->
-    Head3(
+private fun SectionTitle(item: ContentViewItem.SectionTitle) = With { _, spacings, _ ->
+    TitleMedium(
         item.title,
-        modifier = Modifier.padding(horizontal = theme.spacing.small.dp),
+        modifier = Modifier.padding(horizontal = spacings.small.dp),
     )
 }
 
 @Preview
 @Composable
 fun ContentViewPreview() {
-    ContentView(
-        items = {
-            sectionTitle("Section 1")
-            spacer(60.dp)
-            sectionTitle("Section 2")
-        },
-    )
+    PreviewContainer {
+        ContentView(
+            items = {
+                sectionTitle("Section 1")
+                spacer(60.dp)
+                sectionTitle("Section 2")
+            },
+        )
+    }
 }

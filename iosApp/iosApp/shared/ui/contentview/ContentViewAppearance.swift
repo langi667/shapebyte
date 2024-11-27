@@ -15,7 +15,7 @@ struct ContentViewAppearance {
     @SafeAreaInfo static var safeAreaInsets
 
     static var headerHeight: CGFloat {
-        (Theme.Dimensions.large + safeAreaInsets.top / 2).toDimensionMax()
+        (Theme.dimensions.large + safeAreaInsets.top / 2).toDimensionMax()
     }
 
     static var minimumHeaderHeight: CGFloat {

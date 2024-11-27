@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 
 @Composable
-fun Title(
+fun HeadlineSmall(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.White,
@@ -19,19 +20,21 @@ fun Title(
     Text(
         modifier = modifier,
         text = text,
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.headlineSmall,
         color = color,
     )
 }
 
 @Preview
 @Composable
-fun TitlePreview() {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
-    ) {
-        Title(text = "Title")
+fun HeadlineSmallPreview() {
+    PreviewContainer {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary),
+        ) {
+            HeadlineSmall(text = "HeadlineSmall")
+        }
     }
 }

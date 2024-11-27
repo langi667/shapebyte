@@ -11,9 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 
 @Composable
-fun Head4(
+fun TitleMedium(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.White,
@@ -24,9 +25,9 @@ fun Head4(
     Text(
         modifier = modifier,
         text = text,
-        style = MaterialTheme.typography.headlineSmall,
-        color = color,
+        style = MaterialTheme.typography.titleMedium,
         fontWeight = fontWeight,
+        color = color,
         maxLines = maxLines,
         overflow = overflow,
     )
@@ -34,12 +35,14 @@ fun Head4(
 
 @Preview
 @Composable
-fun Head4Preview() {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
-    ) {
-        Head4(text = "Head4")
+fun TitleMediumPreview() {
+    PreviewContainer {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary),
+        ) {
+            TitleMedium(text = "TitleMedium")
+        }
     }
 }

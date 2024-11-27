@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 
 @Composable
-fun Body(
+fun BodyMedium(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.White,
@@ -26,12 +27,14 @@ fun Body(
 
 @Preview
 @Composable
-fun BodyPreview() {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
-    ) {
-        Body(text = "Body")
+fun BodyBodyMediumPreview() {
+    PreviewContainer {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary),
+        ) {
+            BodyMedium(text = "Body")
+        }
     }
 }

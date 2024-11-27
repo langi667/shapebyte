@@ -20,10 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.shared.ui.content.ui.ContentView
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModelViewData
@@ -51,9 +52,9 @@ fun HomeRootView(
 fun HomeRootView(
     uiState: UIState,
     modifier: Modifier = Modifier.fillMaxSize(),
-) = WithTheme { theme, _ ->
+) = With { _, spacings, _ ->
     val buildPerformPersistViewDefaultOffset =
-        BuildPerformPersistViewSettings.primaryButtonSize + theme.spacing.xs.dp
+        BuildPerformPersistViewSettings.primaryButtonSize + spacings.tiny.dp
 
     val buildPerformPersistViewOffset =
         remember { mutableStateOf(buildPerformPersistViewDefaultOffset) }
@@ -80,16 +81,16 @@ fun HomeRootView(
                     minimumHeaderHeight = minimumHeaderHeight.value,
                 )
 
-                buildPerformPersistViewOffset.value -= (scrollOffset * (headerScale.value * 1.5f))
+                buildPerformPersistViewOffset.value -= (scrollOffset * (headerScale.floatValue * 1.5f))
             },
         ) {
-            spacer(theme.spacing.xxLarge.dp + theme.spacing.small.dp)
+            spacer(spacings.xxLarge.dp + spacings.small.dp)
 
             val quickWorkouts = uiStateData.quickWorkouts
 
             if (quickWorkouts.isNotEmpty()) {
                 sectionTitle("Quick Workouts")
-                spacer(theme.spacing.small.dp)
+                spacer(spacings.small.dp)
 
                 data(
                     id = FeatureId.QUICK_WORKOUTS.name,
@@ -101,7 +102,7 @@ fun HomeRootView(
                     )
                 }
 
-                spacer(theme.spacing.medium.dp)
+                spacer(spacings.medium.dp)
             }
 
             val recentHistory = uiStateData.recentHistory
@@ -117,8 +118,8 @@ fun HomeRootView(
                             entry = entry,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = theme.spacing.small.dp)
-                                .padding(horizontal = theme.spacing.small.dp),
+                                .padding(top = spacings.small.dp)
+                                .padding(horizontal = spacings.small.dp),
                         )
                     }
                 }
@@ -144,8 +145,8 @@ fun HomeRootView(
             BuildPerformPersistView(
                 Modifier
                     .graphicsLayer(
-                        scaleX = headerScale.value,
-                        scaleY = headerScale.value,
+                        scaleX = headerScale.floatValue,
+                        scaleY = headerScale.floatValue,
                     ),
             )
         }
@@ -183,5 +184,7 @@ fun HomeRootViewPreview() {
         ),
     )
 
-    HomeRootView(uiState)
+    PreviewContainer {
+        HomeRootView(uiState)
+    }
 }

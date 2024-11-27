@@ -39,7 +39,7 @@ struct CountdownItemSetsView: View {
     static func contentView(countdownText: String, scale: CGFloat, alpha: CGFloat) -> some View {
         ZStack {
             Text(countdownText)
-                .title()
+                .titleMedium()
                 .scaleEffect(scale)
                 .opacity(alpha)
         }

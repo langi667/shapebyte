@@ -17,7 +17,7 @@ struct ContentView<Content: View>: View {
     @ViewBuilder
     let floatingView: (_ scrollOffset: CGFloat) -> AnyView
 
-    private let defaultRadialOffset: CGFloat = Theme.Spacings.XXXL
+    private let defaultRadialOffset: CGFloat = Theme.spacings.xxxLarge
 
     @SafeAreaInfo
     private var safeAreaInsets: EdgeInsets
@@ -48,7 +48,7 @@ struct ContentView<Content: View>: View {
     }
 
     private let viewTopOffset: CGFloat = 8
-    private let paddingHorizontal: CGFloat = Theme.Spacings.S
+    private let paddingHorizontal: CGFloat = Theme.spacings.small
 
     init(
         floatingViewIsEmpty: Bool,
@@ -65,7 +65,7 @@ struct ContentView<Content: View>: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             BackgroundView(
-                topOffset: Theme.Spacings.XXL.toDimensionMax(),
+                topOffset: Theme.spacings.xxLarge.toDimensionMax(),
                 radialOffset: radialOffset.toDimensionMax()
             )
 
@@ -87,7 +87,7 @@ struct ContentView<Content: View>: View {
                 ZStack {
                     self.contentView()
                 }
-                .offset(y: floatingViewIsEmpty ? Theme.Spacings.XL : 0.0)
+                .offset(y: floatingViewIsEmpty ? Theme.spacings.xLarge : 0.0)
             }
             .scrollIndicators(.hidden)
             .sizeReader(size: $scrollViewSize)
@@ -154,7 +154,7 @@ struct ContentView_Previews: PreviewProvider {
                     contentView: {
                         VStack {
                             ForEach(data.texts, id: \.self) {
-                                Text($0).body()
+                                Text($0).bodyMedium()
                             }
                         }
                     }

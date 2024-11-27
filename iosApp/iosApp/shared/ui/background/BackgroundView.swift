@@ -9,8 +9,8 @@ import SwiftUI
 import PreviewSnapshots
 
 struct BackgroundView: View {
-    static let defaultRadialOffset = Theme.Spacings.XXXL.toDimension(max: Theme.Spacings.XXXL)
-    static let defaultTopOffset = Theme.Spacings.XXXL.toDimension(max: Theme.Spacings.XXXL)
+    static let defaultRadialOffset = Theme.spacings.xxxLarge.toDimension(max: Theme.spacings.xxxLarge)
+    static let defaultTopOffset = Theme.spacings.xxxLarge.toDimension(max: Theme.spacings.xxxLarge)
 
     var topOffset = Self.defaultTopOffset
     var radialOffset = Self.defaultRadialOffset

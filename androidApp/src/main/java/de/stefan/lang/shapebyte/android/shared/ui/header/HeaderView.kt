@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.ApplicationTheme
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
-import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.Body
-import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.Head2
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
+import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.HeadlineMedium
 import kotlin.math.max
 import kotlin.math.min
 
@@ -31,50 +31,52 @@ fun HeaderView(
     maxHeight: Dp,
     currentHeight: Dp,
     modifier: Modifier = Modifier,
-) = WithTheme { _, log ->
-    val scaleDivider = if (maxHeight.value == minHeight.value) 1f else (maxHeight.value - minHeight.value)
+) = With { _, spacings, log ->
+    val scaleDivider =
+        if (maxHeight.value == minHeight.value) 1f else (maxHeight.value - minHeight.value)
     val scaleRaw = (currentHeight.value - minHeight.value) / scaleDivider
     val scale = max(0f, scaleRaw)
 
-    log.d("HeaderView", "minHeight: $minHeight, maxHeight: $maxHeight, currentHeight: $currentHeight, scale: $scale")
+    log.d(
+        tag = "HeaderView",
+        message = "minHeight: $minHeight, maxHeight: $maxHeight, currentHeight: $currentHeight, " +
+            "scale: $scale",
+    )
 
     val headerProgress = 1f - min(max(scale, 0f), 1f)
+    val contentPadding = spacings.small.dp
 
-    WithTheme { theme, _ ->
-        val contentPadding = theme.spacing.small.dp
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                MaterialTheme.colorScheme.secondary
+                    .copy(alpha = headerProgress),
+            ),
+    )
 
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(
-                    MaterialTheme.colorScheme.secondary
-                        .copy(alpha = headerProgress),
-                ),
-        )
-
-        Row(
+    Row(
+        modifier = Modifier
+            .padding(contentPadding),
+    ) {
+        Column(
             modifier = Modifier
-                .padding(contentPadding),
+                .graphicsLayer(
+                    scaleX = scale,
+                    scaleY = scale,
+                    transformOrigin = TransformOrigin(0f, 0f),
+                ),
         ) {
-            Column(
-                modifier = Modifier
-                    .graphicsLayer(
-                        scaleX = scale,
-                        scaleY = scale,
-                        transformOrigin = TransformOrigin(0f, 0f),
-                    ),
-            ) {
-                Body(text = "Welcome back")
-                Head2(text = "Stefan")
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Description of the image",
-            )
+            BodyMedium(text = "Welcome back")
+            HeadlineMedium(text = "Stefan")
         }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "Description of the image",
+        )
     }
 }
 
@@ -83,7 +85,7 @@ fun HeaderView(
 fun PreviewHeaderView() {
     ApplicationTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.secondary)) {
-            HeaderView(64.dp, 128.dp, 128.dp)
+            HeaderView(32.dp, 64.dp, 64.dp)
         }
     }
 }

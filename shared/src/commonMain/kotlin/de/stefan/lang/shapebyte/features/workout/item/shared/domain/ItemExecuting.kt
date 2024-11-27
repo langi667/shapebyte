@@ -32,7 +32,7 @@ sealed interface ItemExecuting<out STATE_DATA_CLASS, out ITEM_SET_CLASS : ItemSe
 interface ItemValueExecuting<
     out STATE_DATA_CLASS,
     out ITEM_SET_CLASS : ItemSet,
-    ITEM_SET_WITH_INPUT_VALUE, // TODO: remove and use ItemSet
+    ITEM_SET_WITH_INPUT_VALUE,
     > : ItemExecuting<STATE_DATA_CLASS, ITEM_SET_CLASS> {
 
     fun setInputValue(value: ITEM_SET_WITH_INPUT_VALUE)

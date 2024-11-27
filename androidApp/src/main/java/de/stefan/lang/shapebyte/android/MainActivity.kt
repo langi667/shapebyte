@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import org.koin.android.ext.android.inject
@@ -43,7 +44,7 @@ fun AppView() {
 @Preview
 @Composable
 fun DefaultPreview() {
-    ApplicationTheme {
+    PreviewContainer {
         AppView()
     }
 }

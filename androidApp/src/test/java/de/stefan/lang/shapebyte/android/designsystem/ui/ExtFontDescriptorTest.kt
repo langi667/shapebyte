@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.android.designsystem.ui
 
 import androidx.compose.ui.unit.sp
-import de.stefan.lang.shapebyte.designsystem.data.FontDescriptor
-import de.stefan.lang.shapebyte.designsystem.data.FontWeight
+import de.stefan.lang.shapebyte.utils.designsystem.data.FontDescriptor
+import de.stefan.lang.shapebyte.utils.designsystem.data.FontWeight
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -8,36 +8,53 @@
 import SwiftUI
 
 public extension Text {
-    func title() -> some View {
-        self.font(Theme.Fonts.title)
+    func titleLarge() -> some View {
+        self.font(Theme.Fonts.titleLarge)
     }
 
-    func subtitle() -> some View {
-        self.font(Theme.Fonts.subtitle)
+    func titleMedium() -> some View {
+        self.font(Theme.Fonts.titleMedium)
     }
 
-    func h1() -> some View {
-        self.font(Theme.Fonts.h1)
+    func titleSmall() -> some View {
+        self.font(Theme.Fonts.titleSmall)
     }
 
-    func h2() -> some View {
-        self.font(Theme.Fonts.h2)
+    func headlineLarge() -> some View {
+        self.font(Theme.Fonts.headlineLarge)
     }
 
-    func h3() -> some View {
-        self.font(Theme.Fonts.h3)
+    func headlineMedium() -> some View {
+        self.font(Theme.Fonts.headlineMedium)
     }
 
-    func h4() -> some View {
-        self.font(Theme.Fonts.h4)
+    func headlineSmall() -> some View {
+        self.font(Theme.Fonts.headlineSmall)
     }
 
-    func body() -> some View {
-        self
-            .font(Theme.Fonts.body)
+    func labelLarge() -> some View {
+        self.font(Theme.Fonts.labelLarge)
     }
 
-    func footnote() -> some View {
-        self.font(Theme.Fonts.footnote)
+    func labelMedium() -> some View {
+        self.font(Theme.Fonts.labelLarge)
+    }
+
+    func labelSmall() -> some View {
+        self.font(Theme.Fonts.labelSmall)
+    }
+
+    func bodyLarge() -> some View {
+        self.font(Theme.Fonts.bodyMedium)
+    }
+
+    func bodyMedium() -> some View {
+        self.font(Theme.Fonts.bodyMedium)
+    }
+
+    func bodySmall() -> some View {
+        self.font(Theme.Fonts.bodySmall)
     }
 }
+
+// TODO: Previews

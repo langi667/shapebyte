@@ -1,8 +1,8 @@
-package de.stefan.lang.shapebyte.designsystem.data
+package de.stefan.lang.shapebyte.utils.designsystem.data
 
 data class Dimension(
-    val xxs: Int,
-    val xs: Int,
+    val xTiny: Int,
+    val tiny: Int,
     val small: Int,
     val medium: Int,
     val large: Int,

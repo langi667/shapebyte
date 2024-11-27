@@ -14,7 +14,7 @@ struct WorkoutHistoryEntryView: View {
 
     private let title: String
     private let date: String
-    private let imageSize = Theme.Dimensions.medium
+    private let imageSize = Theme.dimensions.medium
 
     var body: some View {
         HStack {
@@ -25,17 +25,17 @@ struct WorkoutHistoryEntryView: View {
 
             VStack(alignment: .leading) {
                 Text(title)
-                    .h4()
+                    .labelMedium()
                     .foregroundStyle(Color.white)
 
-                Spacer().frame(height: Theme.Spacings.XS)
+                Spacer().frame(height: Theme.spacings.tiny)
                 Text(date)
-                    .footnote()
+                    .labelSmall()
                     .foregroundStyle(Color.white)
             }
 
             Spacer()
-        }.padding(Theme.Spacings.XS)
+        }.padding(Theme.spacings.tiny)
             .clipShape(
                 RoundedRectangle(
                     cornerRadius: cornerRadius

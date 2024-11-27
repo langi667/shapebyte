@@ -156,6 +156,18 @@
 		1DFB07932CBFDD770013C589 /* UIStateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFB07912CBFDD770013C589 /* UIStateTest.swift */; };
 		2152FB042600AC8F00CF470E /* ShapeByteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* ShapeByteApp.swift */; };
 		7555FF83242A565900829871 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* AppRootView.swift */; };
+		F7359C352CF70B7000A0BD53 /* ExtInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C342CF70B7000A0BD53 /* ExtInt.swift */; };
+		F7359C362CF70B7000A0BD53 /* ExtInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C342CF70B7000A0BD53 /* ExtInt.swift */; };
+		F7359C372CF70B7000A0BD53 /* ExtInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C342CF70B7000A0BD53 /* ExtInt.swift */; };
+		F7359C382CF70B7000A0BD53 /* ExtInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C342CF70B7000A0BD53 /* ExtInt.swift */; };
+		F7359C3A2CF70D0500A0BD53 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C392CF70D0500A0BD53 /* Spacing.swift */; };
+		F7359C3B2CF70D0500A0BD53 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C392CF70D0500A0BD53 /* Spacing.swift */; };
+		F7359C3C2CF70D0500A0BD53 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C392CF70D0500A0BD53 /* Spacing.swift */; };
+		F7359C3D2CF70D0500A0BD53 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C392CF70D0500A0BD53 /* Spacing.swift */; };
+		F7359C3F2CF7115600A0BD53 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C3E2CF7115600A0BD53 /* Dimension.swift */; };
+		F7359C402CF7115600A0BD53 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C3E2CF7115600A0BD53 /* Dimension.swift */; };
+		F7359C412CF7115600A0BD53 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C3E2CF7115600A0BD53 /* Dimension.swift */; };
+		F7359C422CF7115600A0BD53 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7359C3E2CF7115600A0BD53 /* Dimension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +276,9 @@
 		2152FB032600AC8F00CF470E /* ShapeByteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeByteApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* ShapeByte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeByte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		F7359C342CF70B7000A0BD53 /* ExtInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtInt.swift; sourceTree = "<group>"; };
+		F7359C392CF70D0500A0BD53 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		F7359C3E2CF7115600A0BD53 /* Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -717,6 +732,7 @@
 		1DFB07762CBFC1170013C589 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				F7359C322CF70B4500A0BD53 /* designsystem */,
 				1D9DEDAC2CF4BB2A002D931B /* device */,
 				1DE10EF02CEF340C00D68F66 /* environment */,
 				1DB795C52CE3BF8700EBD8AF /* ui */,
@@ -748,6 +764,7 @@
 			children = (
 				1DFB07842CBFC4640013C589 /* tests */,
 				1DFB077F2CBFC2D30013C589 /* TypeDescriptionUtil.swift */,
+				F7359C342CF70B7000A0BD53 /* ExtInt.swift */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -808,6 +825,23 @@
 				1D17A3432CBEBC6D003E7FD8 /* XCTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7359C322CF70B4500A0BD53 /* designsystem */ = {
+			isa = PBXGroup;
+			children = (
+				F7359C332CF70B5300A0BD53 /* data */,
+			);
+			path = designsystem;
+			sourceTree = "<group>";
+		};
+		F7359C332CF70B5300A0BD53 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				F7359C392CF70D0500A0BD53 /* Spacing.swift */,
+				F7359C3E2CF7115600A0BD53 /* Dimension.swift */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1138,11 +1172,14 @@
 				1D2DC3B02CBD4D5900A29DA5 /* Theme.swift in Sources */,
 				1DAB549A2CC251C70020CFE2 /* ScrollOffsetPreferenceKey.swift in Sources */,
 				1DE10EF32CEF343900D68F66 /* EnvironmentInfo.swift in Sources */,
+				F7359C3D2CF70D0500A0BD53 /* Spacing.swift in Sources */,
 				1D2DC3B12CBD4D5900A29DA5 /* Text.swift in Sources */,
 				1DAB54932CC251020020CFE2 /* Arc.swift in Sources */,
 				1D9DEDAB2CF4B513002D931B /* SafeAreaPropertyWrapper.swift in Sources */,
 				1D9DEDB12CF4BB5B002D931B /* DeviceInfoPropertyWrapper.swift in Sources */,
 				1DE10E2F2CED072500D68F66 /* AppRootViewModel.swift in Sources */,
+				F7359C3F2CF7115600A0BD53 /* Dimension.swift in Sources */,
+				F7359C362CF70B7000A0BD53 /* ExtInt.swift in Sources */,
 				1D2DC3B22CBD4D5900A29DA5 /* ColorDescriptor+Native.swift in Sources */,
 				1DAB54CF2CCA368A0020CFE2 /* ExtCGFloat.swift in Sources */,
 				1D2DC3B32CBD4D5900A29DA5 /* FontWeight+Native.swift in Sources */,
@@ -1177,11 +1214,14 @@
 				1D3DADBD2CBD4DE100185160 /* Theme.swift in Sources */,
 				1DAB54992CC251C70020CFE2 /* ScrollOffsetPreferenceKey.swift in Sources */,
 				1DE10EF42CEF343900D68F66 /* EnvironmentInfo.swift in Sources */,
+				F7359C3A2CF70D0500A0BD53 /* Spacing.swift in Sources */,
 				1D3DADBE2CBD4DE100185160 /* Text.swift in Sources */,
 				1DAB54952CC251020020CFE2 /* Arc.swift in Sources */,
 				1D9DEDA82CF4B513002D931B /* SafeAreaPropertyWrapper.swift in Sources */,
 				1D9DEDB02CF4BB5B002D931B /* DeviceInfoPropertyWrapper.swift in Sources */,
 				1DE10E312CED072500D68F66 /* AppRootViewModel.swift in Sources */,
+				F7359C402CF7115600A0BD53 /* Dimension.swift in Sources */,
+				F7359C352CF70B7000A0BD53 /* ExtInt.swift in Sources */,
 				1D3DADBF2CBD4DE100185160 /* ColorDescriptor+Native.swift in Sources */,
 				1DAB54D22CCA368A0020CFE2 /* ExtCGFloat.swift in Sources */,
 				1D3DADC02CBD4DE100185160 /* FontWeight+Native.swift in Sources */,
@@ -1209,6 +1249,8 @@
 				1DAB54D02CCA368A0020CFE2 /* ExtCGFloat.swift in Sources */,
 				1DAB54962CC251020020CFE2 /* Arc.swift in Sources */,
 				1D17A3592CBEC304003E7FD8 /* UIState+Data.swift in Sources */,
+				F7359C3B2CF70D0500A0BD53 /* Spacing.swift in Sources */,
+				F7359C412CF7115600A0BD53 /* Dimension.swift in Sources */,
 				1DFB07812CBFC2D30013C589 /* TypeDescriptionUtil.swift in Sources */,
 				1DAB549C2CC251C70020CFE2 /* ScrollOffsetPreferenceKey.swift in Sources */,
 				1DE10EF22CEF343900D68F66 /* EnvironmentInfo.swift in Sources */,
@@ -1228,6 +1270,7 @@
 				1D7489182CBFADED00EFC3E7 /* TestTags.swift in Sources */,
 				1DB795C92CE3BFB000EBD8AF /* View+If.swift in Sources */,
 				1D6506832CB946DD00246D6B /* ColorDescriptor+Native.swift in Sources */,
+				F7359C372CF70B7000A0BD53 /* ExtInt.swift in Sources */,
 				1D9DEDA62CF4B476002D931B /* ExtSafeArea.swift in Sources */,
 				1DAB54552CC112750020CFE2 /* HomeRootView.swift in Sources */,
 			);
@@ -1258,11 +1301,14 @@
 				1D4546572CB8041900FC6383 /* Theme.swift in Sources */,
 				1DAB549B2CC251C70020CFE2 /* ScrollOffsetPreferenceKey.swift in Sources */,
 				1DE10EF52CEF343900D68F66 /* EnvironmentInfo.swift in Sources */,
+				F7359C3C2CF70D0500A0BD53 /* Spacing.swift in Sources */,
 				1D45465A2CB8070E00FC6383 /* Text.swift in Sources */,
 				1DAB54942CC251020020CFE2 /* Arc.swift in Sources */,
 				1D9DEDA92CF4B513002D931B /* SafeAreaPropertyWrapper.swift in Sources */,
 				1D9DEDB22CF4BB5B002D931B /* DeviceInfoPropertyWrapper.swift in Sources */,
 				1DE10E302CED072500D68F66 /* AppRootViewModel.swift in Sources */,
+				F7359C422CF7115600A0BD53 /* Dimension.swift in Sources */,
+				F7359C382CF70B7000A0BD53 /* ExtInt.swift in Sources */,
 				1D6506822CB946DD00246D6B /* ColorDescriptor+Native.swift in Sources */,
 				1DAB54D12CCA368A0020CFE2 /* ExtCGFloat.swift in Sources */,
 				1D4546552CB7FEC000FC6383 /* FontWeight+Native.swift in Sources */,

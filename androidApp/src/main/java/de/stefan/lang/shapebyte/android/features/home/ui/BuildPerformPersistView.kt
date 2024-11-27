@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.android.features.home.ui
 
-import androidx.annotation.IdRes
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,22 +26,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import de.stefan.lang.shapebyte.android.LocalDimension
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
-import de.stefan.lang.shapebyte.designsystem.ui.ThemeProvider
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 
 private const val LARGE_Z_INDEX = 1000f
 
 object BuildPerformPersistViewSettings {
-    val primaryButtonSize = ThemeProvider.dimensions.large.dp // set to define
-    val secondaryButtonSize = ThemeProvider.dimensions.medium.dp
-    val secondaryButtonOffset = ThemeProvider.dimensions.xxs.dp
+    val primaryButtonSize = LocalDimension.current.large.dp
+    val secondaryButtonSize = LocalDimension.current.medium.dp
+    val secondaryButtonOffset = LocalDimension.current.xTiny.dp
 }
 
 @Composable
 fun BuildPerformPersistView(
     modifier: Modifier = Modifier,
-) = WithTheme { theme, _ ->
+) = With { dimensions, spacings, _ ->
     val primaryButtonSize = BuildPerformPersistViewSettings.primaryButtonSize
     val secondaryButtonSize = BuildPerformPersistViewSettings.secondaryButtonSize
     val secondaryButtonOffset = BuildPerformPersistViewSettings.secondaryButtonOffset
@@ -51,7 +52,7 @@ fun BuildPerformPersistView(
     Box(contentAlignment = Alignment.Center, modifier = modifier) {
         Box(
             modifier = Modifier
-                .size(theme.dimensions.large.dp)
+                .size(dimensions.large.dp)
                 .clipToBounds()
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.background)
@@ -62,7 +63,7 @@ fun BuildPerformPersistView(
                 imageRes = R.drawable.logo,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(theme.spacing.xs.dp),
+                    .padding(spacings.tiny.dp),
                 onClick = { /*TODO*/ },
             )
         }
@@ -89,7 +90,7 @@ fun BuildPerformPersistView(
 
 @Composable
 private fun ImgButton(
-    @IdRes imageRes: Int,
+    @DrawableRes imageRes: Int,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
@@ -115,5 +116,9 @@ private fun ImgButton(
 @Preview
 @Composable
 fun BuildPerformPersistViewPreview() {
-    BuildPerformPersistView(modifier = Modifier.background(MaterialTheme.colorScheme.background))
+    PreviewContainer {
+        BuildPerformPersistView(
+            modifier = Modifier.background(MaterialTheme.colorScheme.background),
+        )
+    }
 }

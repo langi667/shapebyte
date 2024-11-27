@@ -26,7 +26,7 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
         ContentViewAppearance.minimumHeaderHeight
     }
 
-    private let paddingHorizontal: CGFloat = Theme.Spacings.S
+    private let paddingHorizontal: CGFloat = Theme.spacings.small
 
     var body: some View {
         ContentView(
@@ -46,7 +46,7 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
     private func content() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             quickWorkoutsView(viewModel.quickWorkouts)
-            Spacer().frame(height: Theme.Spacings.S + Theme.Spacings.XS)
+            Spacer().frame(height: Theme.spacings.small + Theme.spacings.tiny)
             recentHistoryView(viewModel.recentHistory)
         }
     }
@@ -61,7 +61,7 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
 
                 ForEach(recentHistory) { entry in
                     WorkoutHistoryEntryView(entry: entry)
-                        .padding(.top, Theme.Spacings.S)
+                        .padding(.top, Theme.spacings.small)
                 }
             }.padding(.horizontal, paddingHorizontal) }
     }
@@ -85,14 +85,14 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
     @ViewBuilder
     private func sectionTitle(_ title: String) -> some View {
         Text(title)
-            .h3()
+            .titleSmall()
             .foregroundStyle(Color.white) // TODO: define font color
     }
 
     @ViewBuilder
     private func buildPerformPersistView(scrollPosY: CGFloat) -> some View {
         BuildPerformPersistView()
-            .padding(.top, Theme.Spacings.M)
+            .padding(.top, Theme.spacings.medium)
             .sizeReader(size: $buildPerformPersistViewSize)
             .scaleEffect(buildPerformPersistViewScale(scrollPosY: scrollPosY), anchor: .top)
             .offset(y: buildPerformPersistViewOffset(scrollPosY: scrollPosY))
@@ -100,7 +100,7 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
 
     private func buildPerformPersistViewOffset(scrollPosY: CGFloat) -> CGFloat {
         let offset: CGFloat
-        let defaultOffset = -Theme.Spacings.M
+        let defaultOffset = -Theme.spacings.medium
         let threshold = (minimumHeaderHeight / 2 + buildPerformPersistViewSize.height / 2 + defaultOffset) * -1
 
         if scrollPosY <=  threshold {

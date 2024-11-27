@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.designsystem.data
+package de.stefan.lang.shapebyte.utils.designsystem.data
 
 // TODO: test
 val ColorDescriptor.colorHexValue: Long

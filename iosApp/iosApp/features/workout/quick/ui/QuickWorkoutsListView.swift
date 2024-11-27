@@ -12,8 +12,8 @@ import PreviewSnapshots
 
 struct QuickWorkoutsListView: View {
     let quickWorkouts: [Workout]
-    let paddingHorizontal: CGFloat = Theme.Spacings.S
-    let horizontalClipWidth: CGFloat = Theme.Spacings.S * 1.5
+    let paddingHorizontal: CGFloat = Theme.spacings.small
+    let horizontalClipWidth: CGFloat = Theme.spacings.small * 1.5
 
     var body: some View {
         ZStack(alignment: .topLeading) {

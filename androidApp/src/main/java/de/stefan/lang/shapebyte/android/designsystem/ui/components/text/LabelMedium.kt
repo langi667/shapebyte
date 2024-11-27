@@ -8,30 +8,41 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 
 @Composable
-fun Head2(
+fun LabelMedium(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.White,
+    fontWeight: FontWeight? = null,
+    maxLines: Int = 1,
+    overflow: TextOverflow = TextOverflow.Ellipsis,
 ) {
     Text(
         modifier = modifier,
         text = text,
-        style = MaterialTheme.typography.headlineMedium,
+        style = MaterialTheme.typography.labelMedium,
+        fontWeight = fontWeight,
         color = color,
+        maxLines = maxLines,
+        overflow = overflow,
     )
 }
 
 @Preview
 @Composable
-fun Head2Preview() {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
-    ) {
-        Head2(text = "Head2")
+fun LabelMediumPreview() {
+    PreviewContainer {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary),
+        ) {
+            LabelMedium(text = "LabelMedium")
+        }
     }
 }

@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 
 @Composable
-fun Head3(
+fun DisplayLarge(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.White,
@@ -19,19 +20,21 @@ fun Head3(
     Text(
         modifier = modifier,
         text = text,
-        style = MaterialTheme.typography.headlineSmall,
+        style = MaterialTheme.typography.displayLarge,
         color = color,
     )
 }
 
 @Preview
 @Composable
-fun Head3Preview() {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
-    ) {
-        Head3(text = "Head3")
+fun DisplayLargePreview() {
+    PreviewContainer {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary),
+        ) {
+            DisplayLarge(text = "DisplayLarge")
+        }
     }
 }

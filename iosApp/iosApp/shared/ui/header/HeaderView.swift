@@ -20,7 +20,7 @@ struct HeaderView: View {
 
     let offsetY: CGFloat
     let contentPaddingVertical: CGFloat
-    let contentPaddingHorizontal: CGFloat = Theme.Spacings.S
+    let contentPaddingHorizontal: CGFloat = Theme.spacings.small
 
     init(
         headerHeight: CGFloat = 128,
@@ -54,11 +54,11 @@ struct HeaderView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Welcome back")
-                            .body()
+                            .bodyMedium()
                             .foregroundStyle(Color.white)
 
                         Text("Stefan")
-                            .h2()
+                            .headlineMedium()
                             .foregroundStyle(Color.white)
                     }
                     .scaleEffect(scale, anchor: .leading)
@@ -67,8 +67,8 @@ struct HeaderView: View {
 
                     Image("Logo")
                         .resizable()
-                        .frame(width: Theme.Spacings.XL * imageScale,
-                               height: Theme.Spacings.XL * imageScale)
+                        .frame(width: Theme.spacings.xLarge * imageScale,
+                               height: Theme.spacings.xLarge * imageScale)
                         .clipShape(Circle())
 
                 }.padding(.horizontal, contentPaddingHorizontal)

@@ -28,8 +28,9 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.zIndex
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.ui.header.HeaderView
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.ui.shapes.Arc
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -55,163 +56,151 @@ fun <T> BackgroundView(
     key: ((index: Int, item: T) -> Any)? = null,
     contentType: (item: T) -> Any? = { null },
     itemContent: @Composable LazyItemScope.(item: T) -> Unit,
-) {
-    WithTheme { theme, log ->
-        val defaultArcHeight = remember { theme.dimensions.small.dp * 1.5f }
-        val arcHeight = remember { mutableStateOf(defaultArcHeight) }
+) = With { dimensions, spacings, _ ->
+    val defaultArcHeight = remember { dimensions.small.dp * 1.5f }
+    val arcHeight = remember { mutableStateOf(defaultArcHeight) }
 
-        val viewSize = remember { mutableStateOf(DpSize.Zero) }
-        val density = LocalDensity.current
+    val viewSize = remember { mutableStateOf(DpSize.Zero) }
+    val density = LocalDensity.current
 
-        val maximumHeaderHeight = theme.dimensions.large.dp
-        val minimumHeaderHeight = maximumHeaderHeight / 2
+    val maximumHeaderHeight = dimensions.large.dp
+    val minimumHeaderHeight = maximumHeaderHeight / 2
 
-        val scrollOffset = remember { mutableStateOf(0.dp) }
-        val animatedArcHeight by animateDpAsState(
-            targetValue = arcHeight.value - scrollOffset.value,
-            label = "arcHeight",
-        )
+    val scrollOffset = remember { mutableStateOf(0.dp) }
+    val animatedArcHeight by animateDpAsState(
+        targetValue = arcHeight.value - scrollOffset.value,
+        label = "arcHeight",
+    )
 
-        val headerHeight =
-            max(minimumHeaderHeight, maximumHeaderHeight - (scrollOffset.value))
-        val listState = rememberLazyListState()
+    val headerHeight =
+        max(minimumHeaderHeight, maximumHeaderHeight - (scrollOffset.value))
+    val listState = rememberLazyListState()
 
-        val reservedKey = "__BackgroundView-RESERVED_KEY_-TOP_ITEMS__"
-        val bgViewItems = listOf(reservedKey)
-        val allItems = bgViewItems + items
+    val reservedKey = "__BackgroundView-RESERVED_KEY_-TOP_ITEMS__"
+    val bgViewItems = listOf(reservedKey)
+    val allItems = bgViewItems + items
 
-        val bgKey: ((index: Int) -> Any) = { index ->
-            if (index < bgViewItems.size) {
-                reservedKey
-            } else {
-                val itemIndex = index - bgViewItems.size
-                val item = items.getOrNull(itemIndex)
-                item?.let { key?.invoke(itemIndex, it) } ?: index
-            }
+    val bgKey: ((index: Int) -> Any) = { index ->
+        if (index < bgViewItems.size) {
+            reservedKey
+        } else {
+            val itemIndex = index - bgViewItems.size
+            val item = items.getOrNull(itemIndex)
+            item?.let { key?.invoke(itemIndex, it) } ?: index
         }
+    }
 
-        val bgContentType: (index: Int) -> Any? = { index ->
-            if (index < bgViewItems.size) {
-                reservedKey
-            } else {
-                val item = items.getOrNull(index - bgViewItems.size)
-                item?.let { contentType.invoke(it) }
-            }
+    val bgContentType: (index: Int) -> Any? = { index ->
+        if (index < bgViewItems.size) {
+            reservedKey
+        } else {
+            val item = items.getOrNull(index - bgViewItems.size)
+            item?.let { contentType.invoke(it) }
         }
+    }
 
-        val bgItemContent: @Composable LazyItemScope.(index: Int) -> Unit = { index ->
-            if (index < bgViewItems.size) {
-                TopItemViewView(
-                    maximumHeaderHeight = maximumHeaderHeight,
-                    animatedArcHeight = animatedArcHeight.value.dp,
-                    viewSize = viewSize.value,
-                )
-            } else {
-                items.getOrNull(index - bgViewItems.size)?.let {
-                    itemContent(it)
-                }
-            }
-        }
-
-        LaunchedEffect("ListState", onScroll, listState) {
-            snapshotFlow {
-                val index = listState.firstVisibleItemIndex
-                val size = listState.layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0
-                val offset = index * (size) + listState.firstVisibleItemScrollOffset
-                index to offset
-            }.distinctUntilChanged()
-                .filter { it.first == 0 }
-                .map { it.second }
-                .collectLatest { offset ->
-                    val targetScrollOffset = with(density) { offset.toDp() }
-                    scrollOffset.value = targetScrollOffset
-                    onScroll(scrollOffset.value, minimumHeaderHeight)
-                }
-        }
-
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(MaterialTheme.colorScheme.secondary, Color.White),
-                    ),
-                ),
-        ) {
-            // Header
+    val bgItemContent: @Composable LazyItemScope.(index: Int) -> Unit = { index ->
+        if (index < bgViewItems.size) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(headerHeight)
-                    .zIndex(1000f),
-            ) {
-                headerContent(
-                    minimumHeaderHeight,
-                    maximumHeaderHeight,
-                    headerHeight,
-                )
-            }
+                    .height(maximumHeaderHeight),
+            ) { /*No OP*/ }
 
-            // Box to draw background, even if content is empty/ not filling screen
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        top = max(
-                            0.dp,
-                            (maximumHeaderHeight + animatedArcHeight - scrollOffset.value),
-                        ),
-                    )
-                    .background(MaterialTheme.colorScheme.background),
-            ) {}
-
-            // whole scroll view which is all over the screen
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                state = listState,
-            ) {
-                items(
-                    count = allItems.count(),
-                    key = bgKey,
-                    contentType = bgContentType,
-                    itemContent = bgItemContent,
-                )
+            Arc(
+                Modifier
+                    .fillMaxWidth(),
+                height = animatedArcHeight,
+                width = viewSize.value.width,
+                color = MaterialTheme.colorScheme.background,
+            )
+        } else {
+            items.getOrNull(index - bgViewItems.size)?.let {
+                itemContent(it)
             }
         }
     }
-}
 
-@Composable
-private fun TopItemViewView(
-    maximumHeaderHeight: Dp,
-    animatedArcHeight: Dp,
-    viewSize: DpSize,
-) = WithTheme { _, _ ->
+    LaunchedEffect("ListState", onScroll, listState) {
+        snapshotFlow {
+            val index = listState.firstVisibleItemIndex
+            val size = listState.layoutInfo.visibleItemsInfo.firstOrNull()?.size ?: 0
+            val offset = index * (size) + listState.firstVisibleItemScrollOffset
+            index to offset
+        }.distinctUntilChanged()
+            .filter { it.first == 0 }
+            .map { it.second }
+            .collectLatest { offset ->
+                val targetScrollOffset = with(density) { offset.toDp() }
+                scrollOffset.value = targetScrollOffset
+                onScroll(scrollOffset.value, minimumHeaderHeight)
+            }
+    }
+
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(maximumHeaderHeight),
-    ) { /*No OP*/ }
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(MaterialTheme.colorScheme.secondary, Color.White),
+                ),
+            ),
+    ) {
+        // Header
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(headerHeight)
+                .zIndex(1000f),
+        ) {
+            headerContent(
+                minimumHeaderHeight,
+                maximumHeaderHeight,
+                headerHeight,
+            )
+        }
 
-    Arc(
-        Modifier
-            .fillMaxWidth(),
-        height = animatedArcHeight,
-        width = viewSize.width,
-        color = MaterialTheme.colorScheme.background,
-    )
+        // Box to draw background, even if content is empty / not filling screen
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = max(
+                        0.dp,
+                        (maximumHeaderHeight + animatedArcHeight - scrollOffset.value),
+                    ),
+                )
+                .background(MaterialTheme.colorScheme.background),
+        ) {}
+
+        // whole scroll view which is all over the screen
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            state = listState,
+        ) {
+            items(
+                count = allItems.count(),
+                key = bgKey,
+                contentType = bgContentType,
+                itemContent = bgItemContent,
+            )
+        }
+    }
 }
 
 @Preview
 @Composable
 fun BackgroundViewPreview() {
     val items = listOf("Hello World", "Test", "Next").toImmutableList()
-    BackgroundView(
-        headerContent = { minHeight, maxHeight, currentHeight ->
-            HeaderView(minHeight, maxHeight, currentHeight)
-        },
-        items = items,
-    ) { item ->
-        Text(item)
+
+    PreviewContainer {
+        BackgroundView(
+            headerContent = { minHeight, maxHeight, currentHeight ->
+                HeaderView(minHeight, maxHeight, currentHeight)
+            },
+            items = items,
+        ) { item ->
+            Text(item)
+        }
     }
 }

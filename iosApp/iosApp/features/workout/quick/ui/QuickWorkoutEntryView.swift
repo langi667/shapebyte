@@ -16,9 +16,9 @@ struct QuickWorkoutEntryView: View {
     let imageName: String
 
     private let cornerRadius = Theme.Shapes.large
-    private let imageSize = Theme.Dimensions.small + Theme.Spacings.M
-    private let maxViewWidth = Theme.Dimensions.xLarge
-    private let itemSpacing = Theme.Spacings.XXS
+    private let imageSize = Theme.dimensions.small + Theme.spacings.medium
+    private let maxViewWidth = Theme.dimensions.xLarge
+    private let itemSpacing = Theme.spacings.xTiny
 
     init(name: String, teaser: String, imageName: String) {
         self.name = name
@@ -62,14 +62,14 @@ struct QuickWorkoutEntryView: View {
     @ViewBuilder
     func text(_ text: String, isBold: Bool) -> some View {
         Text(text)
-            .footnote()
+            .labelSmall()
             .if(isBold) {
                 $0.bold()
             }
             .foregroundStyle(Color.white)
             .lineLimit(1)
             .truncationMode(.tail)
-            .frame(width: maxViewWidth -  2 * Theme.Dimensions.xs)
+            .frame(width: maxViewWidth -  2 * Theme.dimensions.tiny)
     }
 }
 
@@ -134,7 +134,7 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
             ],
 
             configure: { states in
-                VStack(spacing: Theme.Spacings.XS) {
+                VStack(spacing: Theme.spacings.tiny) {
                     ForEach(states) { state in
                         switch state {
                         case .data(let name, let teaser, let imageName):

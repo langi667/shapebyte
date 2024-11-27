@@ -15,15 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.WithTheme
-import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.Footnote
+import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.ui.image.AsyncImage
-import de.stefan.lang.shapebyte.android.utils.assets.assetsPath
+import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 
@@ -46,10 +45,10 @@ fun WorkoutHistoryEntryView(
     date: String,
     image: ImageAsset,
     modifier: Modifier = Modifier,
-) = WithTheme { theme, _ ->
+) = With { dimensions, spacings, _ ->
     val bgShape = MaterialTheme.shapes.extraLarge
-    val itemSpacing = theme.spacing.xs.dp
-    val imageSize = theme.dimensions.small.dp + theme.spacing.medium.dp
+    val itemSpacing = spacings.tiny.dp
+    val imageSize = dimensions.small.dp + spacings.medium.dp
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -63,7 +62,7 @@ fun WorkoutHistoryEntryView(
 
     ) {
         AsyncImage(
-            url = image.assetsPath,
+            asset = image,
             modifier = Modifier
                 .size(imageSize)
                 .clip(CircleShape),
@@ -76,14 +75,13 @@ fun WorkoutHistoryEntryView(
                 .padding(horizontal = itemSpacing),
 
         ) {
-            Footnote(
+            LabelMedium(
                 text = title,
-                fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            Spacer(modifier = Modifier.height(theme.spacing.xxs.dp))
-            Footnote(
+            Spacer(modifier = Modifier.height(spacings.xTiny.dp))
+            LabelMedium(
                 text = date,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -95,19 +93,23 @@ fun WorkoutHistoryEntryView(
 @Preview
 @Composable
 fun WorkoutHistoryEntryViewPreview() {
-    Column(modifier = Modifier.background(Color.LightGray)) {
-        WorkoutHistoryEntryView(
-            title = "HIIT Workout",
-            date = "12.12.2021",
-            image = ImageAsset("sprints.png"),
-        )
+    PreviewContainer {
+        Column(
+            Modifier.background(MaterialTheme.colorScheme.background),
+        ) {
+            WorkoutHistoryEntryView(
+                title = "HIIT Workout",
+                date = "12.12.2021",
+                image = ImageAsset("sprints.png"),
+            )
 
-        Spacer(modifier = Modifier.size(8.dp))
+            Spacer(modifier = Modifier.size(8.dp))
 
-        WorkoutHistoryEntryView(
-            title = "HIIT Workout",
-            date = "13.12.2021",
-            image = ImageAsset("sprints.png"),
-        )
+            WorkoutHistoryEntryView(
+                title = "HIIT Workout",
+                date = "13.12.2021",
+                image = ImageAsset("sprints.png"),
+            )
+        }
     }
 }

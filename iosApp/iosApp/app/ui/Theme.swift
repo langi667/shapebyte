@@ -10,69 +10,50 @@ import SwiftUI
 import shared
 
 public struct Theme {
+    public static let spacings = Spacing(
+        xTiny: 4,
+        tiny: 8,
+        small: 16,
+        medium: 32,
+        large: 48,
+        xLarge: 64,
+        xxLarge: 84,
+        xxxLarge: 128
+    )
 
-    public struct Spacings {
-        static let XXS = CGFloat(themeProvider.spacing.xxs)
-        // swiftlint:disable:next identifier_name
-        static let XS = CGFloat(themeProvider.spacing.xs)
-
-        // swiftlint:disable:next identifier_name
-        static let S = CGFloat(themeProvider.spacing.small)
-
-        // swiftlint:disable:next identifier_name
-        static let M = CGFloat(themeProvider.spacing.medium)
-
-        // swiftlint:disable:next identifier_name
-        static let L = CGFloat(themeProvider.spacing.large)
-
-        // swiftlint:disable:next identifier_name
-        static let XL = CGFloat(themeProvider.spacing.xLarge)
-
-        static let XXL = CGFloat(themeProvider.spacing.xxLarge)
-        static let XXXL = CGFloat(themeProvider.spacing.xxxLarge)
-    }
+    public static let dimensions = Dimension(
+        xTiny: 16,
+        tiny: 24,
+        small: 36,
+        medium: 72,
+        large: 128,
+        xLarge: 192,
+        xxLarge: 256,
+        xxxLarge: 320
+    )
 
     public struct Fonts {
-        static let title: Font = themeProvider.fonts.title.font
-        static let subtitle: Font = themeProvider.fonts.subtitle.font
+        static let headlineLarge: Font = Font.system(size: 36, weight: .black)
+        static let headlineMedium: Font = Font.system(size: 34, weight: .bold)
+        static let headlineSmall: Font = Font.system(size: 32, weight: .medium)
 
-        // swiftlint:disable:next identifier_name
-        static let h1: Font = themeProvider.fonts.h1.font
-        // swiftlint:disable:next identifier_name
-        static let h2: Font = themeProvider.fonts.h2.font
-        // swiftlint:disable:next identifier_name
-        static let h3: Font = themeProvider.fonts.h3.font
-        // swiftlint:disable:next identifier_name
-        static let h4: Font = themeProvider.fonts.h4.font
+        static let titleLarge: Font = Font.system(size: 28, weight: .bold)
+        static let titleMedium: Font = Font.system(size: 24, weight: .bold)
+        static let titleSmall: Font = Font.system(size: 21, weight: .bold)
 
-        static let body: Font = themeProvider.fonts.body.font
-        static let footnote: Font = themeProvider.fonts.footnote.font
-    }
+        static let bodyLarge: Font = Font.system(size: 20, weight: .regular)
+        static let bodyMedium: Font = Font.system(size: 19, weight: .regular)
+        static let bodySmall: Font = Font.system(size: 18, weight: .regular)
 
-    // TODO: test
-    public struct Dimensions {
-        static let xxs: CGFloat = CGFloat(themeProvider.dimensions.xxs)
-        // swiftlint:disable:next identifier_name
-        static let xs: CGFloat = CGFloat(themeProvider.dimensions.xs)
-        static let small: CGFloat = CGFloat(themeProvider.dimensions.small)
-
-        static let medium: CGFloat = CGFloat(themeProvider.dimensions.medium)
-        static let large: CGFloat = CGFloat(themeProvider.dimensions.large)
-        static let xLarge: CGFloat = CGFloat(themeProvider.dimensions.xLarge)
-
-        static let xxLarge: CGFloat = CGFloat(themeProvider.dimensions.xxLarge)
-        static let xxxLarge: CGFloat = CGFloat(themeProvider.dimensions.xxxLarge)
-
+        static let labelLarge: Font = Font.system(size: 16, weight: .bold)
+        static let labelmedium: Font = Font.system(size: 14, weight: .bold)
+        static let labelSmall: Font = Font.system(size: 14, weight: .semibold)
     }
 
     public struct Colors {
-        static let backgroundColor: Color = themeProvider.colors.background.defaultColor.color
-        static let primaryColor: Color = themeProvider.colors.primary.defaultColor.color
-        static let secondaryColor: Color = themeProvider.colors.secondary.defaultColor.color
-
-        static let accentColor: Color = Color("AccentColor") // TODO: check if needed and where
-        static let textLight: Color = Color("TextLight") // TODO: check if needed and where
-        static let successColor: Color = Color("SuccessColor") // TODO: check if needed and where
+        static let backgroundColor: Color = Color("BackgroundColor")
+        static let primaryColor: Color = Color("PrimaryColor")
+        static let secondaryColor: Color = Color("SecondaryColor")
     }
 
     public struct Shapes {
@@ -82,6 +63,4 @@ public struct Theme {
         static let xLarge: CGFloat = 48
 
     }
-
-    fileprivate static let themeProvider = ThemeProvider() // TODO: Inject
 }

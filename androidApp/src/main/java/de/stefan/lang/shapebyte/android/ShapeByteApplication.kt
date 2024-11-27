@@ -9,6 +9,7 @@ class ShapeByteApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin()
+        DPI.fileAssetLoader().setup(this)
     }
 
     private fun startKoin() {
@@ -18,7 +19,5 @@ class ShapeByteApplication : Application() {
             androidContext(this@ShapeByteApplication)
             modules(modules)
         }
-
-        DPI.fileAssetLoader().setup(this)
     }
 }
