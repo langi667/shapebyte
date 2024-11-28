@@ -26,10 +26,8 @@ class TimedItemExecution(
 
     companion object {
         fun countdown(seconds: UInt): TimedItemExecution {
-            val sets = mutableListOf<ItemSet.Timed.Seconds>()
-
-            repeat(seconds.toInt()) {
-                sets.add(ItemSet.Timed.Seconds(1))
+            val sets = List(seconds.toInt()) {
+                ItemSet.Timed.Seconds(1)
             }
 
             return DPI.createTimedItemExecution(None, sets)
