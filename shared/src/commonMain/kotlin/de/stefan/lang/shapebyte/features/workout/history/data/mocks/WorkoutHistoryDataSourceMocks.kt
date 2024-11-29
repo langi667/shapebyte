@@ -2,16 +2,18 @@ package de.stefan.lang.shapebyte.features.workout.history.data.mocks
 
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.utils.Progress
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
 
 object WorkoutHistoryDataSourceMocks : WorkoutHistoryDataSource {
-    override fun historyForDates(date: Instant, pastDate: Instant): Flow<List<WorkoutScheduleEntry>> {
+    override suspend fun historyForDates(
+        date: Instant,
+        pastDate: Instant,
+    ): LoadState.Result<List<WorkoutScheduleEntry>> {
         val history = createHistoryEntries(date, pastDate)
-        return flowOf(history)
+        return LoadState.Success(history)
     }
 
     fun createHistoryEntries(date: Instant, pastDate: Instant): List<WorkoutScheduleEntry> {

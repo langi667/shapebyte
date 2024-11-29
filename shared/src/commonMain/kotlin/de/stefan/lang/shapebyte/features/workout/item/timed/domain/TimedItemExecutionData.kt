@@ -4,7 +4,8 @@ import kotlin.time.Duration
 
 data class TimedItemExecutionData(
     val setDuration: Duration,
-    val timePassed: Duration,
-    val timeRemaining: Duration,
+    val setTimePassed: Duration, // time in between start and finished of a single set
+    val totalTimePassed: Duration,
+    val totalTimeRemaining: Duration,
     val totalDuration: Duration,
 )

@@ -10,6 +10,7 @@ import Foundation
 import shared
 
 // TODO: DPI
+// TODO: must come from shared
 @MainActor
 class AppRootViewModel: ViewModel {
     @Published var state: UIState = UIState.Loading.shared

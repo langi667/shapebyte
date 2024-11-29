@@ -2,6 +2,7 @@ package de.stefan.lang.shapebyte.android.features.workout.quick.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,16 +20,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
-import de.stefan.lang.shapebyte.android.shared.ui.image.AsyncImage
-import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
+import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
+import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 
 @Composable
 fun QuickWorkoutEntryView(
     workout: Workout,
     modifier: Modifier = Modifier,
-) = With { dimensions, spacings, _ ->
+    onClick: () -> Unit = {},
+) = With { dimensions, spacings, logger ->
     val bgShape = MaterialTheme.shapes.large
     val imageSize = dimensions.small.dp + spacings.medium.dp
     val maxViewWidth = dimensions.xLarge.dp
@@ -42,7 +45,10 @@ fun QuickWorkoutEntryView(
                 shape = bgShape,
             )
             .width(maxViewWidth)
-            .clip(bgShape),
+            .clip(bgShape).clickable(true) {
+                logger.d("QuickWorkoutEntryView", "workout clicked: $workout")
+                onClick()
+            },
         horizontalArrangement = Arrangement.Center,
     ) {
         Spacer(modifier = Modifier.size(spacings.tiny.dp))
@@ -86,6 +92,8 @@ fun QuickWorkoutEntryViewPreview() {
                     name = "HIIT Workout",
                     shortDescription = "20 min. legs, core",
                     image = ImageAsset("sprints.png"),
+                    id = 1,
+                    type = WorkoutType.Timed.Interval(0, 0, 0),
                 ),
             )
 
@@ -95,6 +103,8 @@ fun QuickWorkoutEntryViewPreview() {
                     name = "very long HIIT Workout title that is too long",
                     shortDescription = "20 min. legs, core",
                     image = ImageAsset("sprints.png"),
+                    id = 2,
+                    type = WorkoutType.Timed.Interval(0, 0, 0),
                 ),
             )
             Spacer(modifier = Modifier.size(8.dp))
@@ -103,6 +113,8 @@ fun QuickWorkoutEntryViewPreview() {
                     name = "HIIT Workout",
                     shortDescription = "20 min. legs, core 20 min. legs, core 20 min. legs, core",
                     image = ImageAsset("sprints.png"),
+                    id = 3,
+                    type = WorkoutType.Timed.Interval(0, 0, 0),
                 ),
             )
 
@@ -113,6 +125,8 @@ fun QuickWorkoutEntryViewPreview() {
                     shortDescription = "20 min. legs, core 20 min. legs, core 20 min. legs, core 20 min. " +
                         "legs, core",
                     image = ImageAsset("sprints.png"),
+                    id = 4,
+                    type = WorkoutType.Timed.Interval(0, 0, 0),
                 ),
             )
         }

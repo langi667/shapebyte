@@ -20,8 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
-import de.stefan.lang.shapebyte.android.shared.ui.image.AsyncImage
-import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
+import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 

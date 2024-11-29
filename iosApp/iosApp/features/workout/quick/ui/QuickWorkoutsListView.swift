@@ -14,6 +14,7 @@ struct QuickWorkoutsListView: View {
     let quickWorkouts: [Workout]
     let paddingHorizontal: CGFloat = Theme.spacings.small
     let horizontalClipWidth: CGFloat = Theme.spacings.small * 1.5
+    let onWorkoutSelected: (Workout) -> Void
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -38,11 +39,13 @@ struct QuickWorkoutsListView: View {
 
     @ViewBuilder
     private func quickWorkoutEntryView(for workout: Workout) -> some View {
-        QuickWorkoutEntryView(workout: workout)
-            .padding(.leading, paddingHorizontal)
-            .if(workout == quickWorkouts.last) { view in
-                view.padding(.trailing, paddingHorizontal)
-            }
+        QuickWorkoutEntryView(workout: workout) {
+            onWorkoutSelected(workout)
+        }
+        .padding(.leading, paddingHorizontal)
+        .if(workout == quickWorkouts.last) { view in
+            view.padding(.trailing, paddingHorizontal)
+        }
     }
 
     @ViewBuilder
@@ -76,34 +79,58 @@ struct View_Previews: PreviewProvider {
                     name: "Default",
                     state: [
                         Workout(
+                            id: 1,
                             name: "Workout 1",
                             shortDescription: "Workout 1 desc",
-                            image: ImageAsset(assetName: "sprints")
+                            image: ImageAsset(assetName: "sprints"),
+                            type: WorkoutTypeTimedInterval(
+                                highDurationSec: 10,
+                                lowDurationSec: 10,
+                                rounds: 2
+                            )
                         ),
 
                         Workout(
+                            id: 2,
                             name: "Workout 2",
                             shortDescription: "Workout 2 desc",
-                            image: ImageAsset(assetName: "Squats")
+                            image: ImageAsset(assetName: "Squats"),
+                            type: WorkoutTypeTimedInterval(
+                                highDurationSec: 10,
+                                lowDurationSec: 10,
+                                rounds: 2
+                            )
                         ),
 
                         Workout(
+                            id: 3,
                             name: "Workout 3",
                             shortDescription: "Workout 3 desc",
-                            image: ImageAsset(assetName: "Logo")
+                            image: ImageAsset(assetName: "Logo"),
+                            type: WorkoutTypeTimedInterval(
+                                highDurationSec: 10,
+                                lowDurationSec: 10,
+                                rounds: 2
+                            )
                         ),
 
                         Workout(
+                            id: 4,
                             name: "Workout 4",
                             shortDescription: "Workout 4 desc",
-                            image: ImageAsset(assetName: "sprints")
+                            image: ImageAsset(assetName: "sprints"),
+                            type: WorkoutTypeTimedInterval(
+                                highDurationSec: 10,
+                                lowDurationSec: 10,
+                                rounds: 2
+                            )
                         )
                     ]
                 )
             ],
 
             configure: { workouts in
-                QuickWorkoutsListView(quickWorkouts: workouts)
+                QuickWorkoutsListView(quickWorkouts: workouts, onWorkoutSelected: {_ in })
                     .snapshotSetup()
                     .background(Theme.Colors.backgroundColor)
             }

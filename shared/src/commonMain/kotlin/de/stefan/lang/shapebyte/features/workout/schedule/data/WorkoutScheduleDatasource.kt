@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.schedule.data
 
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
-import kotlinx.coroutines.flow.Flow
+import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 
 interface WorkoutScheduleDatasource {
-    fun currentWorkoutScheduleEntry(): Flow<WorkoutScheduleEntry?>
+    suspend fun currentWorkoutScheduleEntry(): LoadState.Result<WorkoutScheduleEntry?>
 }

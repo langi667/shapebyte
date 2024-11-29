@@ -10,8 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
-import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
+import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView
+import de.stefan.lang.shapebyte.android.navigation.NavRoute
+import de.stefan.lang.shapebyte.android.navigation.workoutIdOr
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import org.koin.android.ext.android.inject
@@ -37,8 +43,26 @@ class MainActivity : ComponentActivity(), Loggable {
 }
 
 @Composable
-fun AppView() {
-    HomeRootView()
+fun AppView(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+    val startDestination = NavRoute.startDestination.path
+
+    NavHost(navController = navController, startDestination = startDestination) {
+        NavRoute.entries.forEach {
+            when (it) {
+                NavRoute.HomeRoot -> {
+                    composable(it.path) { HomeRootView(navController, modifier) }
+                }
+
+                NavRoute.QuickWorkout -> {
+                    composable(it.path) { backStackEntry ->
+                        val itemId = backStackEntry.arguments.workoutIdOr("-1").toInt()
+                        TimedWorkoutView(itemId, modifier.fillMaxSize())
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Preview

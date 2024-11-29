@@ -13,6 +13,8 @@ class ShapeByteApplication : Application() {
     }
 
     private fun startKoin() {
+        DPI.setup()
+
         val modules = DPI.modules
 
         startKoin {

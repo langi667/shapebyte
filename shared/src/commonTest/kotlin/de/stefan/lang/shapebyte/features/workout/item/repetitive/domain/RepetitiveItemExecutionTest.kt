@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.features.workout.item.repetitive.domain
 
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Exercise
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
+import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.Progress
 import kotlin.test.Test
@@ -50,7 +50,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                     ItemExecutionState.SetStarted(
                         item = item,
                         set = ItemSet.Repetition(),
-                        setProgress = Progress.ZERO,
+                        progress = Progress.ZERO,
                         totalProgress = Progress.with(i + 1, 3),
                         setData = RepetitiveItemExecutionData(
                             repsPerSetPerformed = 0u,
@@ -148,7 +148,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                 ItemExecutionState.SetRunning(
                     item = item,
                     set = ItemSet.Repetition(maxRepsPerSet),
-                    setProgress = Progress(0.5f),
+                    progress = Progress(0.5f),
                     totalProgress = Progress.with(
                         currReps,
                         totalRepGoal,
@@ -174,7 +174,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                     ItemExecutionState.SetStarted(
                         item = item,
                         set = ItemSet.Repetition(maxRepsPerSet),
-                        setProgress = Progress.ZERO,
+                        progress = Progress.ZERO,
                         totalProgress = Progress.with(
                             currReps,
                             totalRepGoal,
@@ -220,11 +220,12 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
         repsPerformedTotal += repsPerformedPerSet
         var totalRepsRemaining = totalRepGoal - repsPerformedTotal
 
-        assertEquals( // should be running since rep goal not reached
+        assertEquals(
+            // should be running since rep goal not reached
             ItemExecutionState.SetRunning(
                 item = item,
                 set = ItemSet.Repetition(setRepetition),
-                setProgress = Progress(progress),
+                progress = Progress(progress),
                 totalProgress = Progress.with(
                     repsPerformedTotal,
                     totalRepGoal,
@@ -250,11 +251,12 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
         currSet = sets[1]
         setRepetition = currSet.repetitions!!
 
-        assertEquals( // started next set but with zero progress
+        assertEquals(
+            // started next set but with zero progress
             ItemExecutionState.SetStarted(
                 item = item,
                 set = currSet,
-                setProgress = Progress.ZERO,
+                progress = Progress.ZERO,
                 totalProgress = Progress.with(
                     repsPerformedTotal,
                     totalRepGoal,
@@ -278,11 +280,12 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
         repsPerformedTotal += repsPerformedPerSet
         totalRepsRemaining = totalRepGoal - repsPerformedTotal
 
-        assertEquals( // should be running since rep goal not reached
+        assertEquals(
+            // should be running since rep goal not reached
             ItemExecutionState.SetRunning(
                 item = item,
                 set = ItemSet.Repetition(setRepetition),
-                setProgress = Progress(progress),
+                progress = Progress(progress),
                 totalProgress = Progress.with(
                     repsPerformedTotal,
                     totalRepGoal,

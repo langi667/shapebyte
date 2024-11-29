@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="486dp"
+    android:height="486dp"
+    android:viewportWidth="486"
+    android:viewportHeight="486">
+    <path
+        android:strokeColor="#68bbc1"
+        android:strokeWidth="10.2"
+        android:strokeMiterLimit="100"
+        android:name="Ellipse 2"
+        android:pathData="m242.9 5.9c130.9 0 237 106.1 237 237c0 130.9 -106.1 237 -237 237c-130.9 0 -237 -106.1 -237 -237c0 -130.9 106.1 -237 237 -237z" />
+    <path
+        android:fillColor="#68bbc1"
+        android:name="Dreieck 1"
+        android:pathData="m360 235 -173 128v-256l173 128z" />
+</vector>

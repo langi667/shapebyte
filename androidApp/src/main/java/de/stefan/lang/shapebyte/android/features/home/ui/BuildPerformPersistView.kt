@@ -29,7 +29,7 @@ import androidx.compose.ui.zIndex
 import de.stefan.lang.shapebyte.android.LocalDimension
 import de.stefan.lang.shapebyte.android.R
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
-import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 private const val LARGE_Z_INDEX = 1000f
 

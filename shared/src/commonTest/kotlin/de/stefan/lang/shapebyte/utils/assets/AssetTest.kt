@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.utils.assets
 
 import de.stefan.lang.shapebyte.utils.BaseTest
-import kotlin.test.DefaultAsserter.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

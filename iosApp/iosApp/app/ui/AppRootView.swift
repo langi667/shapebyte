@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import shared
 
 struct AppRootView: View {
@@ -7,7 +8,7 @@ struct AppRootView: View {
 	var body: some View {
         ZStack(alignment: .topLeading) {
             if viewModel.state is UIStateData<AppRootViewModel> {
-                HomeRootView(viewModel: HomeRootViewModelWrapper())
+                AppRootNavigationView()
             } else { // TODO: Loading State
                 EmptyView()
             }
@@ -17,6 +18,30 @@ struct AppRootView: View {
         }
         .onDisappear {
             viewModel.onViewDisappeared()
+        }
+    }
+}
+
+@MainActor
+private struct AppRootNavigationView: View {
+    @State private var navigationPath = NavigationPath()
+
+    var body: some View {
+        NavigationStack( path: $navigationPath ) {
+            HomeRootView(viewModel: HomeRootViewModelWrapper())
+
+            .navigationDestination(for: NavigationDestination.self) { destination in
+                switch destination {
+                case .quickWorkout(let workoutId):
+                        TimedWorkoutView(workoutId: workoutId)
+                            .navigationBarBackButtonHidden()
+                }
+            }
+        }
+        .task {
+            for await currDestination in NavigationHandler.shared.destinations {
+                navigationPath.append(currDestination)
+            }
         }
     }
 }

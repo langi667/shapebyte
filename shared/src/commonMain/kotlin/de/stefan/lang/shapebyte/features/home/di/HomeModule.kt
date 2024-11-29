@@ -15,13 +15,14 @@ object HomeModule :
                 HomeRootViewModel(
                     currentWorkoutScheduleEntryUseCase = get(),
                     recentHistoryUseCase = get(),
-                    fetchQuickWorkoutsUseCase = get(),
+                    quickWorkoutsUseCase = get(),
                     logger = get(),
+                    coroutineContextProvider = get(),
                 )
             }
         },
     ),
-    HomeModuleProviding {
 
+    HomeModuleProviding {
     override fun homeRootViewModel(): HomeRootViewModel = get()
 }

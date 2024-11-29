@@ -20,4 +20,21 @@ class DateTimeStringFormatterTest : BaseTest() {
         result = sut.formatDateToDDMMYYYY(date)
         assertEquals("24.12.2023", result)
     }
+
+    @Test
+    fun `formatSecondsToString should return formatted seconds`() {
+        var result = sut.formatSecondsToString(30)
+        assertEquals("00:30", result)
+
+        result = sut.formatSecondsToString(75)
+        assertEquals("01:15", result)
+
+        result = sut.formatSecondsToString(630)
+        assertEquals("10:30", result)
+
+        result = sut.formatSecondsToString(660)
+        assertEquals("11:00", result)
+        result = sut.formatSecondsToString(6015)
+        assertEquals("100:15", result)
+    }
 }

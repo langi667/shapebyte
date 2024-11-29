@@ -25,7 +25,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseCoroutineTest() {
         )
 
         val sut = createSUT()
-        sut.invoke(this).test {
+        sut.invoke().test {
             var item = awaitItem()
             assertIs<LoadState.Loading>(item)
 
@@ -45,7 +45,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseCoroutineTest() {
         )
 
         val sut = createSUT()
-        sut.invoke(this).test {
+        sut.invoke().test {
             val item = awaitItem()
             assertIs<LoadState.Loading>(item)
 
@@ -60,7 +60,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseCoroutineTest() {
         featureTogglesDCMock.setFeatureToggles(emptyList())
 
         val sut = createSUT()
-        sut.invoke(this).test {
+        sut.invoke().test {
             val item = awaitItem()
             assertIs<LoadState.Loading>(item)
 

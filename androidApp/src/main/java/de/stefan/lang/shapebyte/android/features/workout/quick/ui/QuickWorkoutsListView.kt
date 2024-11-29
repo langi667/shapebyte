@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.android.features.workout.quick.ui
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
@@ -28,17 +27,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
-import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
+import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun QuickWorkoutsListView(
     quickWorkouts: ImmutableList<Workout>,
     modifier: Modifier = Modifier,
+    onSelectWorkout: ((Workout) -> Unit) = {},
 ) = With { _, spacings, _ ->
     val paddingHorizontal = spacings.small.dp
     val spacerHeight = remember { mutableStateOf(0.dp) }
@@ -64,6 +64,7 @@ fun QuickWorkoutsListView(
                             val heightDP = with(density) { it.size.height.toDp() }
                             spacerHeight.value = heightDP
                         },
+                    onClick = { onSelectWorkout(currItem) },
                 )
             }
         }
@@ -122,6 +123,8 @@ fun QuickWorkoutsListViewPreview() {
             name = "Workout ${it + 1}",
             shortDescription = "Short description ${it + 1}",
             image = ImageAsset("sprints.png"),
+            id = 1,
+            type = WorkoutType.Timed.Interval(0, 0, 0),
         )
     }.toImmutableList()
 

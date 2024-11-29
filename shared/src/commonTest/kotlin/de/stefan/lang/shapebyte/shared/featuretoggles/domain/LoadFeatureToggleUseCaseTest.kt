@@ -6,6 +6,7 @@ import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.shared.featuretoggles.di.featureToggleDatasourceMock
+import de.stefan.lang.shapebyte.shared.loading.data.asResultFlow
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import org.koin.test.inject
 import kotlin.test.AfterTest
@@ -21,10 +22,10 @@ class LoadFeatureToggleUseCaseTest : BaseCoroutineTest() {
 
     @Test
     fun `should emit Success with null if toggle is not present`() = test {
-        sut.invoke("some").test {
+        sut.invoke("some").asResultFlow().test {
             val item = awaitItem()
             assertNull(item.dataOrNull())
-            awaitComplete()
+            expectNoEvents()
         }
     }
 
@@ -35,10 +36,10 @@ class LoadFeatureToggleUseCaseTest : BaseCoroutineTest() {
 
         datasource.addFeatureToggle(toggle)
 
-        sut.invoke(toggleId).test {
+        sut.invoke(toggleId).asResultFlow().test {
             val item = awaitItem()
             assertEquals(toggle, item.dataOrNull())
-            awaitComplete()
+            expectNoEvents()
         }
     }
 

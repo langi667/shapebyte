@@ -32,7 +32,7 @@ class FeatureToggleUseCaseTest : BaseCoroutineTest() {
             assertNull(item.dataOrNull())
             assertIs<FeatureToggleError.NotFound>(item.errorOrNull())
 
-            awaitComplete()
+            expectNoEvents()
         }
     }
 
@@ -41,7 +41,7 @@ class FeatureToggleUseCaseTest : BaseCoroutineTest() {
         datasource.setFeatureToggles(emptyList())
         sut.isEnabled.test {
             assertFalse(awaitItem())
-            awaitComplete()
+            expectNoEvents()
         }
     }
 
@@ -55,7 +55,7 @@ class FeatureToggleUseCaseTest : BaseCoroutineTest() {
         sut.invoke().test {
             val item = awaitItem() as LoadState.Success
             assertNotNull(item.data)
-            awaitComplete()
+            expectNoEvents()
         }
     }
 
@@ -68,7 +68,7 @@ class FeatureToggleUseCaseTest : BaseCoroutineTest() {
         )
         sut.isEnabled.test {
             assertTrue(awaitItem())
-            awaitComplete()
+            expectNoEvents()
         }
     }
 
@@ -81,7 +81,7 @@ class FeatureToggleUseCaseTest : BaseCoroutineTest() {
         )
         sut.isEnabled.test {
             assertFalse(awaitItem())
-            awaitComplete()
+            expectNoEvents()
         }
     }
 }

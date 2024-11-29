@@ -3,6 +3,8 @@ package de.stefan.lang.shapebyte.utils.di
 import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
+import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
+import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfo
 import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoProviding
@@ -11,6 +13,8 @@ import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProvid
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.shapebyte.utils.device.devicesize.ScreenSizeProviding
 import de.stefan.lang.shapebyte.utils.device.safearea.SafeAreaDetector
+import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineContextProvider
+import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineScopeProviding
 import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
 import de.stefan.lang.shapebyte.utils.dimension.DimensionProvider
 import de.stefan.lang.shapebyte.utils.logging.Logger
@@ -25,6 +29,8 @@ interface UtilsModuleProviding {
     fun deviceInfoProvider(): DeviceInfoProviding
     fun dateTimeStringFormatter(): DateTimeStringFormatter
     fun fileAssetLoader(): FileAssetLoading
+    fun coroutineContextProvider(): CoroutineContextProviding
+    fun coroutineScopeProvider(): CoroutineScopeProviding
 }
 
 object UtilsModule :
@@ -36,6 +42,8 @@ object UtilsModule :
             single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
             single<SafeAreaDetector> { SafeAreaDetector(logger = get()) }
+            single<CoroutineContextProviding> { coroutineContextProvider }
+            single<CoroutineScopeProviding> { coroutineScopeProviding }
         },
         appEnvironmentOnly = {
             single<FileAssetLoading> { FileAssetLoader(logging = get()) }
@@ -49,10 +57,24 @@ object UtilsModule :
         },
     ),
     UtilsModuleProviding {
+
+    private lateinit var coroutineContextProvider: CoroutineContextProviding
+    private lateinit var coroutineScopeProviding: CoroutineScopeProviding
+
+    fun initialize(
+        coroutineContextProvider: CoroutineContextProviding,
+        coroutineScopeProviding: CoroutineScopeProviding,
+    ) {
+        this.coroutineContextProvider = coroutineContextProvider
+        this.coroutineScopeProviding = coroutineScopeProviding
+    }
+
     override fun logger(): Logging = get()
     override fun dimensionProvider(): DimensionProvider = get()
     override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
 
     override fun deviceInfoProvider(): DeviceInfoProviding = get()
     override fun fileAssetLoader(): FileAssetLoading = get()
+    override fun coroutineContextProvider(): CoroutineContextProviding = get()
+    override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
 }

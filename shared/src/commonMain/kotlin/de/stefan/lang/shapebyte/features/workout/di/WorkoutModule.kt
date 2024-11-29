@@ -6,17 +6,20 @@ import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEnt
 import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks
 import de.stefan.lang.shapebyte.features.workout.history.domain.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
+import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecuting
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemsExecution
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemsExecutionBuilder
 import de.stefan.lang.shapebyte.features.workout.item.repetitive.domain.RepetitiveItemExecution
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecuting
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.item.timed.ui.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsDatasourceMocks
-import de.stefan.lang.shapebyte.features.workout.quick.domain.FetchQuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutForIdUseCase
+import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
@@ -27,6 +30,8 @@ import org.koin.core.parameter.parametersOf
 
 interface WorkoutModuleProviding {
     fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
+    fun timedWorkoutViewModel(): TimedWorkoutViewModel
+
     fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
 
     fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase
@@ -38,18 +43,32 @@ interface WorkoutModuleProviding {
         sets: List<ItemSet.Repetition>,
     ): RepetitiveItemExecution
 
-    fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase
+    fun quickWorkoutsUseCase(): QuickWorkoutsUseCase
+    fun createQuickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase
     fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution
+    fun itemsExecutionBuilder(): ItemsExecutionBuilder
 }
 
 object WorkoutModule :
     DIModuleDeclaration(
         allEnvironments = {
+            single<TimedWorkoutViewModel> {
+                TimedWorkoutViewModel(
+                    quickWorkoutForIdUseCase = get(),
+                    itemsExecutionBuilder = get(),
+                    dateStringFormatter = get(),
+                    logger = get(),
+                    coroutineContextProvider = get(),
+                )
+            }
+
             single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
             single<FetchRecentWorkoutHistoryUseCase> {
                 FetchRecentWorkoutHistoryUseCase(
                     repository = get(),
                     logger = get(),
+                    coroutineContextProviding = get(),
+                    coroutineScopeProviding = get(),
                 )
             }
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
@@ -57,10 +76,17 @@ object WorkoutModule :
                 CurrentWorkoutScheduleEntryUseCase(
                     repository = get(),
                     logger = get(),
+                    coroutineContextProviding = get(),
+                    coroutineScopeProviding = get(),
                 )
             }
 
-            factory { CountdownItemSetsViewModel(logger = get()) }
+            factory {
+                CountdownItemSetsViewModel(
+                    logger = get(),
+                    coroutineContextProvider = get(),
+                )
+            }
             factory<WorkoutHistoryEntry> { (entry: WorkoutScheduleEntry) ->
                 WorkoutHistoryEntry(
                     entry = entry, dateStringFormatter = get(),
@@ -78,21 +104,34 @@ object WorkoutModule :
             single<QuickWorkoutsDatasource> { QuickWorkoutsDatasourceMocks() }
             single<QuickWorkoutsRepository> {
                 QuickWorkoutsRepository(
-                    quickWorkoutsDataSource = get(),
+                    dataSource = get(),
                     logger = get(),
                 )
             }
 
-            single<FetchQuickWorkoutsUseCase> {
-                FetchQuickWorkoutsUseCase(
+            single<QuickWorkoutsUseCase> {
+                QuickWorkoutsUseCase(
                     repository = get(),
                     logger = get(),
+                    scopeProvider = get(),
+                    dispatcherProvider = get(),
+                )
+            }
+
+            factory<QuickWorkoutForIdUseCase> {
+                QuickWorkoutForIdUseCase(
+                    repository = get(),
+                    logger = get(),
+                    coroutineContextProvider = get(),
+                    coroutineScopeProvider = get(),
                 )
             }
 
             factory<ItemsExecution> { (items: List<ItemExecuting<*, *>>) ->
                 ItemsExecution(items, get())
             }
+
+            single<ItemsExecutionBuilder> { ItemsExecutionBuilder() }
         },
         appEnvironmentOnly = {
             single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks } // TODO: change once implemented !!!
@@ -134,10 +173,15 @@ object WorkoutModule :
         },
     )
 
-    override fun fetchQuickWorkoutsUseCase(): FetchQuickWorkoutsUseCase = get()
+    override fun quickWorkoutsUseCase(): QuickWorkoutsUseCase = get()
+    override fun createQuickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = get()
+
     override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
         parameters = {
             parametersOf(items)
         },
     )
+
+    override fun itemsExecutionBuilder(): ItemsExecutionBuilder = get()
+    override fun timedWorkoutViewModel(): TimedWorkoutViewModel = get()
 }

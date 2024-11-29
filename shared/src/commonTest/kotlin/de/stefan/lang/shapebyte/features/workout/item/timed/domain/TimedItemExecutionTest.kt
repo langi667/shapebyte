@@ -2,10 +2,10 @@ package de.stefan.lang.shapebyte.features.workout.item.timed.domain
 
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Exercise
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
+import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.Progress
 import kotlin.test.Test
@@ -15,7 +15,6 @@ import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.seconds
 
 class TimedItemExecutionTest : BaseCoroutineTest() {
-
     @Test
     fun `initial state`() {
         val seconds = 5
@@ -55,7 +54,13 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     currSet,
                     Progress.ZERO,
                     Progress.with(i, seconds),
-                    TimedItemExecutionData(setDuration, secsPassed, secsRemaining, seconds.seconds),
+                    TimedItemExecutionData(
+                        setDuration = setDuration,
+                        setTimePassed = 0.seconds,
+                        totalTimePassed = secsPassed,
+                        totalTimeRemaining = secsRemaining,
+                        totalDuration = seconds.seconds,
+                    ),
                 )
 
                 assertEquals(started, currState)
@@ -67,9 +72,15 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                 val finished = ItemExecutionState.SetFinished(
                     item = item,
                     set = currSet,
-                    setProgress = Progress.COMPLETE,
+                    progress = Progress.COMPLETE,
                     totalProgress = Progress.with(i + 1, seconds),
-                    setData = TimedItemExecutionData(setDuration, secsPassed, secsRemaining, seconds.seconds),
+                    setData = TimedItemExecutionData(
+                        setDuration = setDuration,
+                        setTimePassed = setDuration,
+                        totalTimePassed = secsPassed,
+                        totalTimeRemaining = secsRemaining,
+                        totalDuration = seconds.seconds,
+                    ),
                 )
 
                 assertEquals(finished, currState)
@@ -134,7 +145,13 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     currSet,
                     Progress.ZERO,
                     Progress.with(i, seconds),
-                    TimedItemExecutionData(setDuration, secsPassed, secsRemaining, seconds.seconds),
+                    TimedItemExecutionData(
+                        setDuration = setDuration,
+                        setTimePassed = 0.seconds,
+                        totalTimePassed = secsPassed,
+                        totalTimeRemaining = secsRemaining,
+                        totalDuration = seconds.seconds,
+                    ),
                 )
 
                 assertEquals(started, currState)
@@ -146,12 +163,13 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                 val finished = ItemExecutionState.SetFinished(
                     item = item,
                     set = currSet,
-                    setProgress = Progress.COMPLETE,
+                    progress = Progress.COMPLETE,
                     totalProgress = Progress.with(i + 1, seconds),
                     setData = TimedItemExecutionData(
                         setDuration = setDuration,
-                        timePassed = secsPassed,
-                        timeRemaining = secsRemaining,
+                        setTimePassed = setDuration,
+                        totalTimePassed = secsPassed,
+                        totalTimeRemaining = secsRemaining,
                         totalDuration = seconds.seconds,
                     ),
                 )

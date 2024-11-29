@@ -20,15 +20,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
-import de.stefan.lang.shapebyte.android.shared.ui.content.ui.ContentView
-import de.stefan.lang.shapebyte.android.shared.ui.preview.PreviewContainer
+import de.stefan.lang.shapebyte.android.navigation.navigateToQuickWorkouts
+import de.stefan.lang.shapebyte.android.shared.content.ui.ContentView
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModelViewData
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
+import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import kotlinx.collections.immutable.toImmutableList
@@ -37,6 +40,7 @@ import kotlin.math.max
 
 @Composable
 fun HomeRootView(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     viewModel: HomeRootViewModel = getViewModel(),
 ) {
@@ -44,14 +48,24 @@ fun HomeRootView(
         viewModel.update()
     }
 
-    val uiState = viewModel.state.collectAsStateWithLifecycle().value
-    HomeRootView(uiState, modifier.fillMaxSize())
+    val uiState = viewModel
+        .state
+        .collectAsStateWithLifecycle()
+        .value
+
+    HomeRootView(uiState, modifier.fillMaxSize()) {
+        // TODO: this should be propagated using events from view model
+        // TODO: so inform view model first and let it post an event
+        // TODO: SB-52
+        navController.navigateToQuickWorkouts(it)
+    }
 }
 
 @Composable
 fun HomeRootView(
     uiState: UIState,
     modifier: Modifier = Modifier.fillMaxSize(),
+    onSelectQuickWorkout: (Workout) -> Unit = {},
 ) = With { _, spacings, _ ->
     val buildPerformPersistViewDefaultOffset =
         BuildPerformPersistViewSettings.primaryButtonSize + spacings.tiny.dp
@@ -99,6 +113,7 @@ fun HomeRootView(
                 ) {
                     QuickWorkoutsListView(
                         quickWorkouts = quickWorkouts.toImmutableList(),
+                        onSelectWorkout = onSelectQuickWorkout,
                     )
                 }
 
@@ -176,9 +191,11 @@ fun HomeRootViewPreview() {
         HomeRootViewModelViewData(
             quickWorkouts = List(5) {
                 Workout(
+                    id = it,
                     name = "HIIT Workout ${it + 1}",
                     shortDescription = "${20 + it} min. legs, core",
                     image = ImageAsset("sprints.png"),
+                    type = WorkoutType.Timed.Interval(30, 30, 1),
                 )
             },
         ),

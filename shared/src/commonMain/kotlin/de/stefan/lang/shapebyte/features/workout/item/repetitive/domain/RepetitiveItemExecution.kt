@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.item.repetitive.domain
 
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecutionState
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.RepetitiveItemExecuting
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
+import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.RepetitiveItemExecuting
 import de.stefan.lang.shapebyte.utils.Progress
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
@@ -67,11 +67,12 @@ class RepetitiveItemExecution(
         val nextTotalRepsRemaining = totalRepsRemaining(nextTotalRepsPerformed)
 
         if (value >= maxRepetitions) {
+            val progress = computeTotalProgress(setIndex, nextTotalRepsPerformed)
             _state.value = ItemExecutionState.SetFinished(
                 item = item,
                 set = set,
-                setProgress = Progress.ZERO,
-                totalProgress = computeTotalProgress(setIndex, nextTotalRepsPerformed),
+                progress = Progress.ZERO,
+                totalProgress = progress,
                 setData = RepetitiveItemExecutionData(
                     repsPerSetPerformed = value,
                     totalRepsPerformed = nextTotalRepsPerformed,
@@ -86,7 +87,7 @@ class RepetitiveItemExecution(
             _state.value = ItemExecutionState.SetRunning(
                 item = item,
                 set = set,
-                setProgress = Progress.with(value.toInt(), maxRepetitions.toInt()),
+                progress = Progress.with(value.toInt(), maxRepetitions.toInt()),
                 totalProgress = computeTotalProgress(setIndex, nextTotalRepsPerformed),
                 setData = RepetitiveItemExecutionData(
                     repsPerSetPerformed = value,
@@ -121,7 +122,7 @@ class RepetitiveItemExecution(
         _state.value = ItemExecutionState.SetStarted(
             item = item,
             set = sets[index.toInt()],
-            setProgress = Progress.ZERO,
+            progress = Progress.ZERO,
             totalProgress = computeTotalProgress(index, totalRepsPerformed),
             setData = RepetitiveItemExecutionData(
                 repsPerSetPerformed = 0u,

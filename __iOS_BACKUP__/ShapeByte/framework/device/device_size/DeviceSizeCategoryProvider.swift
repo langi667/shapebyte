@@ -19,7 +19,7 @@ class DeviceSizeCategoryProvider {
         return Self.iPhoneSizeCategory(for: self.screenSize)
     }
 
-    private (set) var screenSize: CGSize = .zero
+    private(set) var screenSize: CGSize = .zero
 
     @discardableResult
     func setup(screenSize: CGSize) -> DeviceSizeCategoryProvider {

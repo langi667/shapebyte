@@ -14,27 +14,38 @@ struct QuickWorkoutEntryView: View {
     let name: String
     let teaser: String
     let imageName: String
+    let onClicked: () -> Void
 
     private let cornerRadius = Theme.Shapes.large
     private let imageSize = Theme.dimensions.small + Theme.spacings.medium
     private let maxViewWidth = Theme.dimensions.xLarge
     private let itemSpacing = Theme.spacings.xTiny
 
-    init(name: String, teaser: String, imageName: String) {
+    init(name: String, teaser: String, imageName: String, onClicked: @escaping () -> Void = {}) {
         self.name = name
         self.teaser = teaser
         self.imageName = imageName
+        self.onClicked = onClicked
     }
 
-    init(workout: Workout) {
+    init(workout: Workout, onClicked: @escaping () -> Void = {}) {
         self.init(
             name: workout.name,
             teaser: workout.shortDescription,
-            imageName: workout.image.fileNameWithoutEnding
+            imageName: workout.image.fileNameWithoutEnding,
+            onClicked: onClicked
         )
     }
 
     var body: some View {
+        Button(
+            action: onClicked,
+            label: { contentView() }
+        )
+    }
+
+    @ViewBuilder
+    private func contentView() -> some View {
         VStack(spacing: itemSpacing) {
             Spacer().frame(height: itemSpacing)
             text(name, isBold: true)
@@ -48,7 +59,6 @@ struct QuickWorkoutEntryView: View {
 
             text(teaser, isBold: false)
             Spacer().frame(height: itemSpacing)
-
         }
         .frame(width: maxViewWidth)
         .overlay {
@@ -60,7 +70,7 @@ struct QuickWorkoutEntryView: View {
     }
 
     @ViewBuilder
-    func text(_ text: String, isBold: Bool) -> some View {
+    private func text(_ text: String, isBold: Bool) -> some View {
         Text(text)
             .labelSmall()
             .if(isBold) {
@@ -125,9 +135,16 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
                             .workout(
                                 workout:
                                     Workout(
+                                        id: 1,
                                         name: "Workout",
                                         shortDescription: "legs, core",
-                                        image: ImageAsset(assetName: "Squats"))
+                                        image: ImageAsset(assetName: "Squats"),
+                                        type: WorkoutTypeTimedInterval(
+                                            highDurationSec: 10,
+                                            lowDurationSec: 10,
+                                            rounds: 2
+                                        )
+                                    )
                             )
                     ]
                 )

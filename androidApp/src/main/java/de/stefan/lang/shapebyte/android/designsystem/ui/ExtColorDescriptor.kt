@@ -1,13 +1,18 @@
 package de.stefan.lang.shapebyte.android.designsystem.ui
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
-import de.stefan.lang.shapebyte.utils.designsystem.data.colorHexValue
 
-val ColorDescriptor.color: Color
-    get() = when (this) {
-        is ColorDescriptor.Hex -> Color(this.colorHexValue)
-        is ColorDescriptor.NamedAsset -> throw IllegalArgumentException(
-            "NamedAsset is not supported for returning native Android Color",
-        )
+@Composable
+fun ColorDescriptor.Themed.color(): Color {
+    val color = when (this) {
+        is ColorDescriptor.Primary -> MaterialTheme.colorScheme.primary
+        is ColorDescriptor.Secondary -> MaterialTheme.colorScheme.secondary
+        is ColorDescriptor.Background -> MaterialTheme.colorScheme.background
+        is ColorDescriptor.InversePrimary -> MaterialTheme.colorScheme.inversePrimary
     }
+
+    return color
+}

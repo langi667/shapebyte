@@ -76,7 +76,9 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
                     sectionTitle("Quick Workouts")
                         .padding(.leading, paddingHorizontal)
 
-                    QuickWorkoutsListView(quickWorkouts: quickWorkouts)
+                    QuickWorkoutsListView(quickWorkouts: quickWorkouts) {
+                        NavigationHandler.shared.navigateToQuickWorkout(workoutId: $0.id)
+                    }
                 }
             }
         }

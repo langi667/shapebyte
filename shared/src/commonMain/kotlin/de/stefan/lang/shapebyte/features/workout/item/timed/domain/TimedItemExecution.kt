@@ -1,13 +1,13 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.domain
 
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.Item
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.None
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.sumSeconds
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.sumSecondsTo
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecutionState
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.TimedItemExecuting
+import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
+import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.core.data.None
+import de.stefan.lang.shapebyte.features.workout.item.core.data.sumSeconds
+import de.stefan.lang.shapebyte.features.workout.item.core.data.sumSecondsTo
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.TimedItemExecuting
 import de.stefan.lang.shapebyte.utils.Progress
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 class TimedItemExecution(
     override val item: Item,
@@ -65,9 +66,15 @@ class TimedItemExecution(
             _state.value = ItemExecutionState.SetStarted(
                 item = item,
                 set = set,
-                setProgress = Progress.ZERO,
+                progress = Progress.ZERO,
                 totalProgress = Progress(index.toFloat() / sets.size.toFloat()),
-                setData = TimedItemExecutionData(set.seconds, timePassed, timeRemaining, totalTime),
+                setData = TimedItemExecutionData(
+                    setDuration = set.seconds,
+                    setTimePassed = 0.seconds,
+                    totalTimePassed = timePassed,
+                    totalTimeRemaining = timeRemaining,
+                    totalDuration = totalTime,
+                ),
             )
 
             delay(set.seconds)
@@ -80,7 +87,13 @@ class TimedItemExecution(
                 set,
                 Progress.COMPLETE,
                 totalProgress = Progress((index + 1).toFloat() / sets.size.toFloat()),
-                setData = TimedItemExecutionData(set.seconds, timePassed, timeRemaining, totalTime),
+                setData = TimedItemExecutionData(
+                    setDuration = set.seconds,
+                    setTimePassed = set.seconds,
+                    totalTimePassed = timePassed,
+                    totalTimeRemaining = timeRemaining,
+                    totalDuration = totalTime,
+                ),
             )
 
             yield()

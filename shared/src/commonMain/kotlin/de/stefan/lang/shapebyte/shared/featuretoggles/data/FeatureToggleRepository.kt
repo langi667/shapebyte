@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.utils.logging.Logging
 
 class FeatureToggleRepository(
     override val logger: Logging,
-    internal val datasource: FeatureToggleDatasource,
+    internal val defaultFeatureTogglesDatasource: FeatureToggleDatasource,
 ) : Loggable {
-    fun fetchFeatureToggle(identifier: String) = datasource.fetchFeatureToggle(identifier)
+    suspend fun fetchFeatureToggle(identifier: String) = defaultFeatureTogglesDatasource.fetchFeatureToggle(identifier)
 }

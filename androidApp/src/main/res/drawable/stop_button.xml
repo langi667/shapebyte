@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="192dp"
+    android:height="192dp"
+    android:viewportWidth="192"
+    android:viewportHeight="192">
+    <path
+        android:fillColor="#68bbc1"
+        android:strokeColor="#68bbc1"
+        android:strokeWidth="0"
+        android:strokeMiterLimit="100"
+        android:name="Rechteck 3"
+        android:pathData="m62.79 59.82h71.37v72.36h-71.37v-72.36z" />
+    <path
+        android:strokeColor="#68bbc1"
+        android:strokeWidth="10.15"
+        android:strokeMiterLimit="100"
+        android:name="Ellipse 2"
+        android:pathData="m95.69 5.86c49.95 0 90.44 40.49 90.44 90.44c0 49.95 -40.49 90.44 -90.44 90.44c-49.95 0 -90.44 -40.49 -90.44 -90.44c0 -49.95 40.49 -90.44 90.44 -90.44z" />
+</vector>

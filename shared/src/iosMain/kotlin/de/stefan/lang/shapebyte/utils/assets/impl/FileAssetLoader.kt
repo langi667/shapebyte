@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.utils.assets.impl
 
-import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.FileAsset
+import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.cinterop.ExperimentalForeignApi

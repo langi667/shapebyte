@@ -27,17 +27,19 @@ fun ApplicationTheme(
             primary = Color(0xFFDC584D),
             secondary = Color(0xFF68BBC1),
             background = Color(0xFF3B6F89),
+            inversePrimary = Color(0xFF138B4E),
         )
     } else {
         lightColorScheme(
             primary = Color(0xFFDC584D),
             secondary = Color(0xFF68BBC1),
             background = Color(0xFF3B6F89),
+            inversePrimary = Color(0xFF138B4E),
         )
     }
 
     val typography = Typography(
-        displayLarge = TextStyle(fontSize = 64.sp, fontWeight = FontWeight.Black),
+        displayLarge = TextStyle(fontSize = 76.sp, fontWeight = FontWeight.Black),
         displayMedium = TextStyle(fontSize = 45.sp, fontWeight = FontWeight.Bold),
         displaySmall = TextStyle(fontSize = 36.sp, fontWeight = FontWeight.Medium),
 
@@ -55,7 +57,7 @@ fun ApplicationTheme(
 
         labelLarge = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
         labelMedium = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold),
-        labelSmall = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.SemiBold),
+        labelSmall = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal),
     )
 
     val shapes = Shapes(
@@ -101,4 +103,10 @@ object LocalDimension {
             xxxLarge = 320,
         )
     }
+}
+
+// TODO:pass in With function
+object LocalAnimationDuration {
+    const val short: Long = 350
+    const val long: Long = 700
 }

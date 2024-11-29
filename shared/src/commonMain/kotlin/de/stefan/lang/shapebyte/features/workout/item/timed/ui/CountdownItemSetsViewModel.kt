@@ -1,12 +1,13 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.ItemSet
-import de.stefan.lang.shapebyte.features.workout.item.shared.data.None
-import de.stefan.lang.shapebyte.features.workout.item.shared.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.features.workout.item.core.data.None
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
+import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 // TODO: there is an ItemSetsViewModel in original code, check if needed later
 class CountdownItemSetsViewModel(
     logger: Logging,
-) : BaseViewModel(logger) {
+    coroutineContextProvider: CoroutineContextProviding,
+) : BaseViewModel(logger, coroutineContextProvider) {
     companion object {
         private const val TIMER_OFFSET = 100L
     }
@@ -80,7 +82,7 @@ class CountdownItemSetsViewModel(
         setsState: ItemExecutionState.SetStarted<TimedItemExecutionData>,
     ) {
         val setData = setsState.setData
-        val countdownText = setData.timeRemaining
+        val countdownText = setData.totalTimeRemaining
             .toString()
             .replace(Regex("[^0-9]"), "") // TODO: formatting
 

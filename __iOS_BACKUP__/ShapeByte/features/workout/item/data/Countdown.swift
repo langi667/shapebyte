@@ -11,14 +11,14 @@ import Foundation
 
 struct Countdown: Item {
     private struct Tick: Item {
-        private (set) var name: String = "CountdownTick"
+        private(set) var name: String = "CountdownTick"
 
         func isEqualTo(_ other: Any) -> Bool {
             return (other as? Tick) != nil
         }
     }
 
-    private (set) var name: String = "Countdown"
+    private(set) var name: String = "Countdown"
     private static let tick = Tick()
 
     let ticks: ItemSets

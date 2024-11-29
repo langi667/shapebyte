@@ -1,4 +1,8 @@
 #!/bin/bash
+if [[ "$(uname -m)" == arm64 ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 script_path=$(realpath "$0")
 script_directory=$(dirname "$script_path")
 

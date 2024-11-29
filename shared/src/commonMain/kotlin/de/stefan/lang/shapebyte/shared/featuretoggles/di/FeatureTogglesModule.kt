@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.shared.featuretoggles.di
 
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleRepository
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceImpl
+import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.DefaultFeatureToggleDatasourceImpl
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.shared.featuretoggles.domain.FeatureToggleUseCase
 import de.stefan.lang.shapebyte.shared.featuretoggles.domain.LoadFeatureToggleUseCase
@@ -24,14 +24,22 @@ object FeatureTogglesModule :
                     loadFeatureToggleUseCase = get(),
                 )
             }
-            single<LoadFeatureToggleUseCase> { LoadFeatureToggleUseCase(logger = get(), repository = get()) }
-            single<FeatureToggleRepository> { FeatureToggleRepository(logger = get(), datasource = get()) }
+            factory<LoadFeatureToggleUseCase> {
+                LoadFeatureToggleUseCase(
+                    logger = get(),
+                    repository = get(),
+                    coroutineScopeProviding = get(),
+                    coroutineContextProviding = get(),
+                ) 
+            }
+            single<FeatureToggleRepository> { FeatureToggleRepository(logger = get(), defaultFeatureTogglesDatasource = get()) }
         },
         appEnvironmentOnly = {
             single<FeatureToggleDatasource> {
-                FeatureToggleDatasourceImpl(
+                DefaultFeatureToggleDatasourceImpl(
                     logger = get(),
                     assetLoader = get(),
+                    coroutineContextProviding = get(),
                 )
             }
         },

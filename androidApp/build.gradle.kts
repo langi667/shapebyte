@@ -79,7 +79,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.coil.common)
     implementation(libs.coil.compose)
-
+    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.turbine)

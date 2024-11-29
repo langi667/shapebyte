@@ -9,7 +9,6 @@ import kotlin.test.assertEquals
 class ExtFlowTest : BaseCoroutineTest() {
     @Test
     fun `asDataFlow should return data from flow`() = test {
-        // Given
         val data = "data"
         val flow = flowOf(LoadState.Success(data))
 
@@ -27,6 +26,35 @@ class ExtFlowTest : BaseCoroutineTest() {
         }
 
         flowOf(LoadState.Error(Exception())).asDataFlow().test {
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun `asResultFlow should emit in case of error`() = test {
+        val error = Exception()
+        flowOf(LoadState.Error(error)).asResultFlow().test {
+            val item = awaitItem()
+            assertEquals(LoadState.Error(error), item)
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun `asResultFlow should emit in case of data`() = test {
+        val loadState = LoadState.Success("data")
+        val flow = flowOf(loadState)
+
+        flow.asResultFlow().test {
+            val item = awaitItem()
+            assertEquals(loadState, item)
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun `asResultFlow should not emit in case of Loading`() = test {
+        flowOf(LoadState.Loading).asResultFlow().test {
             awaitComplete()
         }
     }

@@ -5,7 +5,6 @@ enum class FeatureToggleState {
     DISABLED,
     ;
 
-    // TODO: Test
     val isEnabled: Boolean
         get() = this == ENABLED
 }

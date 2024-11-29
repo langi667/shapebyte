@@ -19,16 +19,13 @@ class FeatureToggleRepositoryTest : BaseCoroutineTest() {
 
     @Test
     fun `evaluate Mocks`() = test {
-        assertEquals(datasource, sut.datasource)
+        assertEquals(datasource, sut.defaultFeatureTogglesDatasource)
     }
 
     @Test
-    fun `should emit Success with null if toggle is not present`() = test {
-        sut.fetchFeatureToggle("some").test {
-            val item = awaitItem()
-            assertNull(item.dataOrNull())
-            awaitComplete()
-        }
+    fun `should return Success with null if toggle is not present`() = test {
+        val item = sut.fetchFeatureToggle("some")
+        assertNull(item.dataOrNull())
     }
 
     @Test
@@ -37,12 +34,8 @@ class FeatureToggleRepositoryTest : BaseCoroutineTest() {
         val toggle = FeatureToggle(toggleId, FeatureToggleState.ENABLED)
 
         datasource.addFeatureToggle(toggle)
-
-        sut.fetchFeatureToggle(toggleId).test {
-            val item = awaitItem()
-            assertEquals(toggle, item.dataOrNull())
-            awaitComplete()
-        }
+        val item = sut.fetchFeatureToggle(toggleId)
+        assertEquals(toggle, item.dataOrNull())
     }
 
     @AfterTest

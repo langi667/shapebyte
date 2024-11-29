@@ -1,9 +1,11 @@
 package de.stefan.lang.shapebyte.features.workout.history.data
 
-import kotlinx.coroutines.flow.Flow
+import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import kotlinx.datetime.Instant
 
 interface WorkoutHistoryDataSource {
-    // TODO: Flow of LoadState
-    fun historyForDates(date: Instant, pastDate: Instant): Flow<List<WorkoutScheduleEntry>>
+    suspend fun historyForDates(
+        date: Instant,
+        pastDate: Instant,
+    ): LoadState.Result<List<WorkoutScheduleEntry>>
 }

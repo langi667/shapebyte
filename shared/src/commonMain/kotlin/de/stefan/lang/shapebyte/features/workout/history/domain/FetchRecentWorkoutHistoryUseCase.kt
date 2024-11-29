@@ -5,10 +5,11 @@ import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepo
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.shared.usecase.BaseFeatureDataUseCase
+import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
+import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
 import de.stefan.lang.shapebyte.utils.logging.Logging
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
@@ -16,30 +17,23 @@ import kotlin.time.Duration.Companion.days
 class FetchRecentWorkoutHistoryUseCase(
     private val repository: WorkoutHistoryRepository,
     logger: Logging,
-) : BaseFeatureDataUseCase<List<WorkoutScheduleEntry>>(FeatureId.RECENT_HISTORY.name, logger) {
-
+    coroutineContextProviding: CoroutineContextProviding,
+    coroutineScopeProviding: CoroutineScopeProviding,
+) : BaseFeatureDataUseCase<List<WorkoutScheduleEntry>>(
+    featureToggle = FeatureId.RECENT_HISTORY.name,
+    logger = logger,
+    dispatcher = coroutineContextProviding.iODispatcher(),
+    scope = coroutineScopeProviding.createCoroutineScope(SupervisorJob()),
+) {
     operator fun invoke(
-        scope: CoroutineScope,
         today: Instant = Clock.System.now(),
-    ): SharedFlow<LoadState<List<WorkoutScheduleEntry>>> {
-        scope.launch {
-            mutableFlow.emit(LoadState.Loading)
+    ): SharedFlow<LoadState<List<WorkoutScheduleEntry>>> = super.invoke(
+        onDisabled = { HistoryError.FeatureDisabled },
+        onEnabled = { fetchRecentHistory(today) },
+    )
 
-            collectFromFeatureToggle(scope) { enabled ->
-                if (enabled) {
-                    fetchRecentHistory(today)
-                } else {
-                    emitError(HistoryError.FeatureDisabled)
-                }
-            }
-        }
-
-        return mutableFlow
-    }
-
-    private suspend fun fetchRecentHistory(today: Instant) {
-        repository.historyForDates(today, today.minus(14.days)).collect {
-            mutableFlow.emit(LoadState.Success(it))
-        }
-    }
+    private suspend fun fetchRecentHistory(today: Instant) = repository.historyForDates(
+        date = today,
+        pastDate = today.minus(14.days),
+    )
 }

@@ -2,8 +2,10 @@
 
 excluded:
   - build
+  - build/*
 
 type_name:
   excluded:
     - DeviceSizeCategoryProvider.swift
+    - GeneratedAssetSymbols.swift
 

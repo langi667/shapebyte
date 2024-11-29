@@ -8,7 +8,14 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
 abstract class BaseTest : KoinTest {
-    private val testModules = DPI.testModules
+    private val testModules by lazy {
+        DPI.setup(
+            coroutineContextProvider = TestCoroutineContextProvider,
+            coroutineScopeProviding = TestCoroutineScopeProvider,
+        )
+
+        DPI.testModules
+    }
 
     @BeforeTest
     fun startDI() {
