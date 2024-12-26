@@ -28,7 +28,7 @@ private struct AppRootNavigationView: View {
 
     var body: some View {
         NavigationStack( path: $navigationPath ) {
-            HomeRootView(viewModel: HomeRootViewModelWrapper())
+            HomeRootView()
 
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {

@@ -18,7 +18,7 @@ struct WorkoutHistoryEntryView: View {
 
     var body: some View {
         HStack {
-            Image("Squats")
+            Image("squats")
                 .resizable()
                 .frame(width: imageSize, height: imageSize)
                 .clipShape(Circle())

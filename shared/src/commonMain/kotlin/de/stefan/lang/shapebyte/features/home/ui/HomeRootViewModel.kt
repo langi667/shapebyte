@@ -32,12 +32,12 @@ class HomeRootViewModel(
 
     override val state: StateFlow<UIState> = _state
 
-    private val dataFlow: Flow<UIState.Data<HomeRootViewModelViewData>> = combine(
+    private val dataFlow: Flow<UIState.Data<HomeRootViewData>> = combine(
         mapCurrentWorkoutScheduleEntry(currentWorkoutScheduleEntryUseCase.flow),
         mapRecentHistory(recentHistoryUseCase.flow),
         mapQuickWorkouts(quickWorkoutsUseCase.flow),
     ) { currWorkoutScheduleEntry, recentHistory, quickWorkoutsState ->
-        val data = HomeRootViewModelViewData(
+        val data = HomeRootViewData(
             currWorkoutScheduleEntry = currWorkoutScheduleEntry,
             recentHistory = recentHistory,
             quickWorkouts = quickWorkoutsState,

@@ -39,7 +39,7 @@ class HomeRootViewModelTest : BaseCoroutineTest() {
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
-            val data: HomeRootViewModelViewData? = awaitItem().dataOrNull()
+            val data: HomeRootViewData? = awaitItem().dataOrNull()
             assertNotNull(data)
 
             assertFalse(data.quickWorkouts.isEmpty())
@@ -63,7 +63,7 @@ class HomeRootViewModelTest : BaseCoroutineTest() {
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
-            val data: HomeRootViewModelViewData? = awaitItem().dataOrNull()
+            val data: HomeRootViewData? = awaitItem().dataOrNull()
             assertNotNull(data)
 
             assertTrue(data.quickWorkouts.isEmpty())
@@ -87,7 +87,7 @@ class HomeRootViewModelTest : BaseCoroutineTest() {
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
-            val data: HomeRootViewModelViewData? = awaitItem().dataOrNull()
+            val data: HomeRootViewData? = awaitItem().dataOrNull()
             assertNotNull(data)
 
             assertFalse(data.quickWorkouts.isEmpty())
@@ -111,7 +111,7 @@ class HomeRootViewModelTest : BaseCoroutineTest() {
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
-            val data: HomeRootViewModelViewData? = awaitItem().dataOrNull()
+            val data: HomeRootViewData? = awaitItem().dataOrNull()
             assertNotNull(data)
 
             assertTrue(data.quickWorkouts.isEmpty())

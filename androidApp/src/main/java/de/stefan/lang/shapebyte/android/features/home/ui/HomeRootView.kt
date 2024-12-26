@@ -28,8 +28,8 @@ import de.stefan.lang.shapebyte.android.navigation.navigateToQuickWorkouts
 import de.stefan.lang.shapebyte.android.shared.content.ui.ContentView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
+import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModelViewData
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
@@ -79,8 +79,8 @@ fun HomeRootView(
     }
 
     Box(modifier) {
-        val uiStateData: HomeRootViewModelViewData =
-            uiState.dataOrElse { HomeRootViewModelViewData() }
+        val uiStateData: HomeRootViewData =
+            uiState.dataOrElse { HomeRootViewData() }
 
         ContentView(
             modifier = Modifier.fillMaxSize(),
@@ -188,7 +188,7 @@ private fun headerScale(
 @Suppress("MagicNumber")
 fun HomeRootViewPreview() {
     val uiState = UIState.Data(
-        HomeRootViewModelViewData(
+        HomeRootViewData(
             quickWorkouts = List(5) {
                 Workout(
                     id = it,

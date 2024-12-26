@@ -12,7 +12,7 @@ import shared
 // TODO: DPI
 // TODO: must come from shared
 @MainActor
-class AppRootViewModel: ViewModel {
+class AppRootViewModel: ObservableObject {
     @Published var state: UIState = UIState.Loading.shared
 
     // TODO: improve

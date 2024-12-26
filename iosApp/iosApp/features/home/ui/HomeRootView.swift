@@ -9,11 +9,53 @@ import SwiftUI
 import shared
 import PreviewSnapshots
 
-struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
-    @ObservedObject var viewModel: ViewModel
-
+struct HomeRootView: View, Loggable {
     @Env
     private var environment
+
+    @State
+    private var viewModel: HomeRootViewModel
+
+    @State
+    private var viewState: UIState = UIState.Idle()
+
+    var body: some View {
+        Group {
+            switch onEnum(of: viewState) {
+                case .idle:
+                    Text("Loading...") // TODO: loading state
+                case .loading:
+                    Text("Loading...") // TODO: loading state
+                case .content(let content):
+                    contentOrErrorView(content: content)
+            }
+        }.task {
+            for await currState in viewModel.state {
+                self.viewState = currState
+            }
+        }
+        .onAppear { viewModel.update() }
+    }
+
+    init() {
+        self.viewModel = DPI.shared.homeRootViewModel()
+    }
+
+    @ViewBuilder
+    func contentOrErrorView(content: UIState.Content) -> some View {
+        if let viewData: HomeRootViewData = content.viewData() {
+            HomeRootContentView(
+                data: viewData
+            )
+        } else {
+            Text("Something went wrong...") // TODO: error state
+        }
+    }
+}
+
+struct HomeRootContentView: View {
+    let data: HomeRootViewData
+    private let paddingHorizontal: CGFloat = Theme.spacings.small
 
     @State
     private var buildPerformPersistViewSize: CGSize = .zero
@@ -26,8 +68,6 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
         ContentViewAppearance.minimumHeaderHeight
     }
 
-    private let paddingHorizontal: CGFloat = Theme.spacings.small
-
     var body: some View {
         ContentView(
             floatingViewIsEmpty: false,
@@ -38,16 +78,14 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
                 content()
             }
         )
-        .onAppear { viewModel.onViewAppeared() }
-        .ignoresSafeArea(.all)
     }
 
     @ViewBuilder
     private func content() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            quickWorkoutsView(viewModel.quickWorkouts)
+            quickWorkoutsView(data.quickWorkouts)
             Spacer().frame(height: Theme.spacings.small + Theme.spacings.tiny)
-            recentHistoryView(viewModel.recentHistory)
+            recentHistoryView(data.recentHistory)
         }
     }
 
@@ -143,48 +181,36 @@ struct HomeRootView<ViewModel: HomeRootViewDataProviding>: View, Loggable {
 }
 
 struct HomeRootView_Previews: PreviewProvider {
-    class Data: HomeRootViewDataProviding {
-        var state: UIState = UIState.Idle.shared
-
-        func onViewAppeared() { /* NO OP */ }
-        func onViewDisappeared() { /* NO OP */ }
-
-        var currWorkoutScheduleEntry: WorkoutScheduleEntry?
-        var currWorkoutScheduleEntryProgress: CGFloat = 0
-        var recentHistory: [WorkoutHistoryEntry] = []
-        var quickWorkouts: [Workout] = []
-
-        init(currWorkoutScheduleEntry: WorkoutScheduleEntry? = nil,
-             currWorkoutScheduleEntryProgress: CGFloat = 0,
-             recentHistory: [WorkoutHistoryEntry] = [],
-             quickWorkouts: [Workout] = []
-        ) {
-            self.currWorkoutScheduleEntry = currWorkoutScheduleEntry
-            self.currWorkoutScheduleEntryProgress = currWorkoutScheduleEntryProgress
-            self.recentHistory = recentHistory
-            self.quickWorkouts = quickWorkouts
-        }
-    }
-
     static var previews: some View {
         snapshots.previews.previewLayout(.device)
     }
 
-    static var snapshots: PreviewSnapshots<Data> {
+    static var snapshots: PreviewSnapshots<HomeRootViewData> {
         PreviewSnapshots(
             configurations: [
-                .init(name: "Empty", state: Data()),
+                .init(
+                    name: "Empty",
+                    state: HomeRootViewData(
+                        currWorkoutScheduleEntry: nil,
+                        recentHistory: [],
+                        quickWorkouts: []
+                    )
+                ),
                 .init(
                     name: "History only",
-                    state: Data(
+                    state: HomeRootViewData(
+                        currWorkoutScheduleEntry: nil,
                         recentHistory: WorkoutHistoryPreviewDataProvider
                             .shared
-                            .previewData
+                            .previewData,
+                        quickWorkouts: []
                     )
                 ),
                 .init(
                     name: "Quick Workouts only",
-                    state: Data(
+                    state: HomeRootViewData(
+                        currWorkoutScheduleEntry: nil,
+                        recentHistory: [],
                         quickWorkouts: QuickWorkoutsPreviewDataProvider
                             .shared
                             .previewData
@@ -192,7 +218,8 @@ struct HomeRootView_Previews: PreviewProvider {
                 ),
                 .init(
                     name: "All Data",
-                    state: Data(
+                    state: HomeRootViewData(
+                        currWorkoutScheduleEntry: nil,
                         recentHistory: WorkoutHistoryPreviewDataProvider
                             .shared
                             .previewData,
@@ -202,10 +229,10 @@ struct HomeRootView_Previews: PreviewProvider {
                     )
                 )
             ],
-
+            
             configure: { data in
-                HomeRootView(
-                    viewModel: data
+                HomeRootContentView(
+                    data: data
                 ).snapshotSetupFullScreen()
             }
         )

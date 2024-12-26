@@ -111,25 +111,25 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
                         .data(
                             name: "HIIT Workout",
                             teaser: "20 min, legs",
-                            imageName: "Squats"
+                            imageName: "squats"
                         ),
 
                             .data(
                                 name: "HIIT Workout long text",
                                 teaser: "20 min, legs",
-                                imageName: "Squats"
+                                imageName: "squats"
                             ),
 
                             .data(
                                 name: "HIIT Workout",
                                 teaser: "20 min, legs, core, chest",
-                                imageName: "Squats"
+                                imageName: "squats"
                             ),
 
                             .data(
                                 name: "HIIT Workout long text",
                                 teaser: "20 min, legs, core, chest",
-                                imageName: "Squats"
+                                imageName: "squats"
                             ),
 
                             .workout(
@@ -138,7 +138,7 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
                                         id: 1,
                                         name: "Workout",
                                         shortDescription: "legs, core",
-                                        image: ImageAsset(assetName: "Squats"),
+                                        image: ImageAsset(assetName: "squats"),
                                         type: WorkoutTypeTimedInterval(
                                             highDurationSec: 10,
                                             lowDurationSec: 10,

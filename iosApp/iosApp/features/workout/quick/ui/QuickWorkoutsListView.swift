@@ -94,7 +94,7 @@ struct View_Previews: PreviewProvider {
                             id: 2,
                             name: "Workout 2",
                             shortDescription: "Workout 2 desc",
-                            image: ImageAsset(assetName: "Squats"),
+                            image: ImageAsset(assetName: "squats"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
