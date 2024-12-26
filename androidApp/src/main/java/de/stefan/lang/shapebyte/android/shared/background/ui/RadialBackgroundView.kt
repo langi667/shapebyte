@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,19 +23,19 @@ fun RadialBackgroundView(
     modifier: Modifier = Modifier,
     radialBackground: Color? = null,
     contentView: @Composable () -> Unit,
-) = With { dimensions, _, _ ->
-    val radialBG = radialBackground ?: MaterialTheme.colorScheme.background
+) = With { theme ->
+    val radialBG = radialBackground ?: theme.current.colorScheme.background
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.secondary),
+            .background(theme.current.colorScheme.secondary),
     ) {
         topView()
         Arc(
             Modifier
                 .fillMaxWidth()
-                .height((dimensions.medium - dimensions.xTiny).dp),
+                .height((theme.dimensions.medium - theme.dimensions.xTiny).dp),
             color = radialBG,
         )
         Box(

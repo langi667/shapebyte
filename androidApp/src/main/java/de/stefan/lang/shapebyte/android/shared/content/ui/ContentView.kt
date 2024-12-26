@@ -85,10 +85,10 @@ private fun Spacer(item: ContentViewItem.Spacer) {
 }
 
 @Composable
-private fun SectionTitle(item: ContentViewItem.SectionTitle) = With { _, spacings, _ ->
+private fun SectionTitle(item: ContentViewItem.SectionTitle) = With { theme ->
     TitleMedium(
         item.title,
-        modifier = Modifier.padding(horizontal = spacings.small.dp),
+        modifier = Modifier.padding(horizontal = theme.spacings.small.dp),
     )
 }
 

@@ -13,12 +13,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.stefan.lang.shapebyte.android.designsystem.ui.AnimationDuration
 import de.stefan.lang.shapebyte.utils.designsystem.data.Dimension
 import de.stefan.lang.shapebyte.utils.designsystem.data.Spacing
 
 @Composable
 @Suppress("MagicNumber")
-fun ApplicationTheme(
+fun ShapeByteTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
@@ -105,8 +106,11 @@ object LocalDimension {
     }
 }
 
-// TODO:pass in With function
 object LocalAnimationDuration {
-    const val short: Long = 350
-    const val long: Long = 700
+    val current: AnimationDuration by lazy {
+        AnimationDuration(
+            short = 350,
+            long = 700,
+        )
+    }
 }

@@ -3,7 +3,6 @@ package de.stefan.lang.shapebyte.android.shared.progress.ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -19,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 private const val START_ANGLE = 270.0f
 private const val FULL_CIRCLE_DEGREES = 360.0f
@@ -29,14 +29,15 @@ private const val DEFAULT_ROTATION = FULL_CIRCLE_DEGREES - START_ANGLE
 fun GradientProgressIndicatorLarge(
     progress: Float,
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.primary,
-) = With { dimensions, _, _ ->
+    color: Color? = null,
+) = With { theme ->
+    val gradientColor = color ?: theme.current.colorScheme.primary
     GradientProgressIndicator(
         progress = progress,
-        gradientStart = color.copy(alpha = 0.3f),
-        gradientEnd = color,
+        gradientStart = gradientColor.copy(alpha = 0.3f),
+        gradientEnd = gradientColor,
         trackColor = Color.Transparent,
-        strokeWidth = dimensions.tiny.dp,
+        strokeWidth = theme.dimensions.tiny.dp,
         modifier = modifier,
     )
 }
@@ -130,8 +131,10 @@ private fun DrawScope.drawCircularIndicator(
 @Preview
 @Composable
 fun PreviewGradientProgressRing() {
-    GradientProgressIndicatorLarge(
-        progress = 0.5f,
-        modifier = Modifier.size(128.dp),
-    )
+    PreviewContainer {
+        GradientProgressIndicatorLarge(
+            progress = 0.5f,
+            modifier = Modifier.size(128.dp),
+        )
+    }
 }

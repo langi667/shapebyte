@@ -27,7 +27,7 @@ fun RoundedImageButton(
     modifier: Modifier = Modifier,
     appearance: RoundedImageButtonAppearance = RoundedImageButtonAppearance.Medium,
     onClick: (() -> Unit)?,
-) = With { _, _, _ ->
+) = With { _ ->
     Image(
         painter = painterResource(image),
         contentDescription = contentDescription,

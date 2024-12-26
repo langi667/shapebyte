@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,8 +38,8 @@ fun QuickWorkoutsListView(
     quickWorkouts: ImmutableList<Workout>,
     modifier: Modifier = Modifier,
     onSelectWorkout: ((Workout) -> Unit) = {},
-) = With { _, spacings, _ ->
-    val paddingHorizontal = spacings.small.dp
+) = With { theme ->
+    val paddingHorizontal = theme.spacings.small.dp
     val spacerHeight = remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
     val horizontalClipWidth = paddingHorizontal * 2
@@ -72,7 +71,7 @@ fun QuickWorkoutsListView(
         HorizontalClip(
             width = horizontalClipWidth,
             height = spacerHeight.value,
-            color = MaterialTheme.colorScheme.background,
+            color = theme.current.colorScheme.background,
         )
 
         Column(
@@ -82,7 +81,7 @@ fun QuickWorkoutsListView(
             HorizontalClip(
                 width = horizontalClipWidth,
                 height = spacerHeight.value,
-                color = MaterialTheme.colorScheme.background,
+                color = theme.current.colorScheme.background,
                 invert = true,
             )
         }
@@ -131,7 +130,6 @@ fun QuickWorkoutsListViewPreview() {
     PreviewContainer {
         QuickWorkoutsListView(
             quickWorkouts = workouts,
-            // modifier = Modifier.background(Color.LightGray),
         )
     }
 }

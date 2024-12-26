@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
@@ -17,11 +16,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.ApplicationTheme
 import de.stefan.lang.shapebyte.android.R
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.HeadlineMedium
+import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import kotlin.math.max
 import kotlin.math.min
 
@@ -31,26 +30,26 @@ fun HeaderView(
     maxHeight: Dp,
     currentHeight: Dp,
     modifier: Modifier = Modifier,
-) = With { _, spacings, log ->
+) = With { theme ->
     val scaleDivider =
         if (maxHeight.value == minHeight.value) 1f else (maxHeight.value - minHeight.value)
     val scaleRaw = (currentHeight.value - minHeight.value) / scaleDivider
     val scale = max(0f, scaleRaw)
 
-    log.d(
+    theme.logger.d(
         tag = "HeaderView",
         message = "minHeight: $minHeight, maxHeight: $maxHeight, currentHeight: $currentHeight, " +
             "scale: $scale",
     )
 
     val headerProgress = 1f - min(max(scale, 0f), 1f)
-    val contentPadding = spacings.small.dp
+    val contentPadding = theme.spacings.small.dp
 
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(
-                MaterialTheme.colorScheme.secondary
+                theme.current.colorScheme.secondary
                     .copy(alpha = headerProgress),
             ),
     )
@@ -83,8 +82,10 @@ fun HeaderView(
 @Preview
 @Composable
 fun PreviewHeaderView() {
-    ApplicationTheme {
-        Box(modifier = Modifier.background(MaterialTheme.colorScheme.secondary)) {
+    PreviewContainer { theme ->
+        Box(
+            modifier = Modifier.background(theme.current.colorScheme.secondary),
+        ) {
             HeaderView(32.dp, 64.dp, 64.dp)
         }
     }

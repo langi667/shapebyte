@@ -66,9 +66,9 @@ fun HomeRootView(
     uiState: UIState,
     modifier: Modifier = Modifier.fillMaxSize(),
     onSelectQuickWorkout: (Workout) -> Unit = {},
-) = With { _, spacings, _ ->
+) = With { theme ->
     val buildPerformPersistViewDefaultOffset =
-        BuildPerformPersistViewSettings.primaryButtonSize + spacings.tiny.dp
+        BuildPerformPersistViewSettings.primaryButtonSize + theme.spacings.tiny.dp
 
     val buildPerformPersistViewOffset =
         remember { mutableStateOf(buildPerformPersistViewDefaultOffset) }
@@ -98,13 +98,13 @@ fun HomeRootView(
                 buildPerformPersistViewOffset.value -= (scrollOffset * (headerScale.floatValue * 1.5f))
             },
         ) {
-            spacer(spacings.xxLarge.dp + spacings.small.dp)
+            spacer(theme.spacings.xxLarge.dp + theme.spacings.small.dp)
 
             val quickWorkouts = uiStateData.quickWorkouts
 
             if (quickWorkouts.isNotEmpty()) {
                 sectionTitle("Quick Workouts")
-                spacer(spacings.small.dp)
+                spacer(theme.spacings.small.dp)
 
                 data(
                     id = FeatureId.QUICK_WORKOUTS.name,
@@ -117,7 +117,7 @@ fun HomeRootView(
                     )
                 }
 
-                spacer(spacings.medium.dp)
+                spacer(theme.spacings.medium.dp)
             }
 
             val recentHistory = uiStateData.recentHistory
@@ -133,8 +133,8 @@ fun HomeRootView(
                             entry = entry,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = spacings.small.dp)
-                                .padding(horizontal = spacings.small.dp),
+                                .padding(top = theme.spacings.small.dp)
+                                .padding(horizontal = theme.spacings.small.dp),
                         )
                     }
                 }

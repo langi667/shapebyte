@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,16 +43,16 @@ fun WorkoutHistoryEntryView(
     date: String,
     image: ImageAsset,
     modifier: Modifier = Modifier,
-) = With { dimensions, spacings, _ ->
-    val bgShape = MaterialTheme.shapes.extraLarge
-    val itemSpacing = spacings.tiny.dp
-    val imageSize = dimensions.small.dp + spacings.medium.dp
+) = With { theme ->
+    val bgShape = theme.current.shapes.extraLarge
+    val itemSpacing = theme.spacings.tiny.dp
+    val imageSize = theme.dimensions.small.dp + theme.spacings.medium.dp
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.secondary,
+                color = theme.current.colorScheme.secondary,
                 shape = bgShape,
             )
             .padding(itemSpacing)
@@ -79,7 +78,7 @@ fun WorkoutHistoryEntryView(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            Spacer(modifier = Modifier.height(spacings.xTiny.dp))
+            Spacer(modifier = Modifier.height(theme.spacings.xTiny.dp))
             LabelMedium(
                 text = date,
                 maxLines = 1,
@@ -92,9 +91,9 @@ fun WorkoutHistoryEntryView(
 @Preview
 @Composable
 fun WorkoutHistoryEntryViewPreview() {
-    PreviewContainer {
+    PreviewContainer { theme ->
         Column(
-            Modifier.background(MaterialTheme.colorScheme.background),
+            Modifier.background(theme.current.colorScheme.background),
         ) {
             WorkoutHistoryEntryView(
                 title = "HIIT Workout",

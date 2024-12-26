@@ -2,11 +2,10 @@ package de.stefan.lang.shapebyte.android.shared.preview.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import de.stefan.lang.shapebyte.android.ApplicationTheme
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.di.DPI
 import org.koin.android.ext.koin.androidContext
@@ -16,19 +15,20 @@ import org.koin.mp.KoinPlatformTools
 @Composable
 fun PreviewContainer(
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
-) = ApplicationTheme {
+    content: @Composable (theme: ThemeData) -> Unit,
+) {
     StartKoinIfNeeded()
-    Box(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
-        content()
+    With { theme ->
+        Box(modifier = modifier.background(theme.current.colorScheme.background)) {
+            content(theme)
+        }
     }
 }
 
 @Composable
-private fun StartKoinIfNeeded() = With { _, _, log ->
+private fun StartKoinIfNeeded() {
     if (KoinPlatformTools.defaultContext().getOrNull() != null) {
-        log.d("Koin Preview", "Koin already started")
-        return@With
+        return
     }
 
     val context = LocalContext.current

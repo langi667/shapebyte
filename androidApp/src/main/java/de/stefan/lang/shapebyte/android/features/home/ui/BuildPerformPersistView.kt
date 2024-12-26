@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +41,7 @@ object BuildPerformPersistViewSettings {
 @Composable
 fun BuildPerformPersistView(
     modifier: Modifier = Modifier,
-) = With { dimensions, spacings, _ ->
+) = With { theme ->
     val primaryButtonSize = BuildPerformPersistViewSettings.primaryButtonSize
     val secondaryButtonSize = BuildPerformPersistViewSettings.secondaryButtonSize
     val secondaryButtonOffset = BuildPerformPersistViewSettings.secondaryButtonOffset
@@ -52,10 +51,10 @@ fun BuildPerformPersistView(
     Box(contentAlignment = Alignment.Center, modifier = modifier) {
         Box(
             modifier = Modifier
-                .size(dimensions.large.dp)
+                .size(theme.dimensions.large.dp)
                 .clipToBounds()
                 .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.background)
+                .background(theme.current.colorScheme.background)
                 .wrapContentSize(Alignment.Center)
                 .zIndex(LARGE_Z_INDEX),
         ) {
@@ -63,7 +62,7 @@ fun BuildPerformPersistView(
                 imageRes = R.drawable.logo,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(spacings.tiny.dp),
+                    .padding(theme.spacings.tiny.dp),
                 onClick = { /*TODO*/ },
             )
         }
@@ -116,9 +115,9 @@ private fun ImgButton(
 @Preview
 @Composable
 fun BuildPerformPersistViewPreview() {
-    PreviewContainer {
+    PreviewContainer { theme ->
         BuildPerformPersistView(
-            modifier = Modifier.background(MaterialTheme.colorScheme.background),
+            modifier = Modifier.background(theme.current.colorScheme.background),
         )
     }
 }
