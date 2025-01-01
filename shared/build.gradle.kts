@@ -30,6 +30,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
             implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(libs.koin.core)
@@ -62,7 +63,24 @@ android {
             excludes += App.Android.BuildSettings.excludedResourcesList
         }
     }
+
+    sourceSets {
+        defaultConfig {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+    }
 }
+
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation(libs.androidx.junit.ktx)
+
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.kotlin.test)
+    androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation (libs.koin.test)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.junit.jupiter)
 }

@@ -10,14 +10,15 @@ struct ShapeByteApp: App {
     }
 
     init() {
-        // TODO: really need a use case that initializes the App !!!!!!!
-        DPI.shared.setup(
-            coroutineContextProvider: CoroutineContextProvider(),
-            coroutineScopeProviding: CoroutineScopeProvider()
+        let platformDependencies = PlatformDependencyProvider(
+            bundle: Bundle.main,
+            coroutineScopeProviding: CoroutineScopeProvider(),
+            coroutineContextProvider: CoroutineContextProvider()
         )
 
-        KoinInitializerKt.startKoin()
-        DPI.shared.fileAssetLoader().setup(context: Bundle.main)
+        DPI.shared
+            .appInitializerUseCase()
+            .invoke(platformDependencies: platformDependencies)
     }
 
     // TODO: Loading State view here

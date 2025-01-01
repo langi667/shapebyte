@@ -8,6 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -16,8 +17,12 @@ import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
 import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView
 import de.stefan.lang.shapebyte.android.navigation.NavRoute
 import de.stefan.lang.shapebyte.android.navigation.workoutIdOr
+import de.stefan.lang.shapebyte.app.domain.AppInitializationState
+import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity(), Loggable {
@@ -27,7 +32,17 @@ class MainActivity : ComponentActivity(), Loggable {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
-        setContent {
+        lifecycleScope.launch {
+            DPI.appInitializerUseCase().flow.collectLatest {
+                if (it == AppInitializationState.INITIALIZED) {
+                    showMainScreen()
+                }
+            }
+        }
+    }
+
+    private fun showMainScreen() {
+        this.setContent {
             With { theme ->
                 Surface(
                     modifier = Modifier.fillMaxSize(),

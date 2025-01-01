@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.utils
 
+import de.stefan.lang.shapebyte.app.data.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.di.DPI
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -8,12 +9,13 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
 abstract class BaseTest : KoinTest {
-    private val testModules by lazy {
-        DPI.setup(
-            coroutineContextProvider = TestCoroutineContextProvider,
-            coroutineScopeProviding = TestCoroutineScopeProvider,
-        )
+    private val platformDependencyProvider = object : PlatformDependencyProviding {
+        override val coroutineContextProvider = TestCoroutineContextProvider
+        override val coroutineScopeProviding = TestCoroutineScopeProvider
+    }
 
+    private val testModules by lazy {
+        DPI.setup(platformDependencyProvider)
         DPI.testModules
     }
 
