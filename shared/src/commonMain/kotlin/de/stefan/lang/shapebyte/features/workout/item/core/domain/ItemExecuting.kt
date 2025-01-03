@@ -17,6 +17,7 @@ sealed interface ItemExecuting<out STATE_DATA_CLASS, out ITEM_SET_CLASS : ItemSe
 
     val state: StateFlow<ItemExecutionState<STATE_DATA_CLASS>>
     val isRunning: Boolean get() = state.value is ItemExecutionState.Running || state.value is ItemExecutionState.Started
+    val isPaused: Boolean get() = state.value is ItemExecutionState.Paused
 
     val currentSet: ITEM_SET_CLASS? get() = when (val currState = state.value) {
         is ItemExecutionState.Running -> currState.set as ITEM_SET_CLASS
@@ -24,6 +25,7 @@ sealed interface ItemExecuting<out STATE_DATA_CLASS, out ITEM_SET_CLASS : ItemSe
     }
 
     fun start(scope: CoroutineScope): Boolean
+    fun pause(): Boolean
 
     // TODO: maybe pause()
     // TODO: maybe stop/cancel

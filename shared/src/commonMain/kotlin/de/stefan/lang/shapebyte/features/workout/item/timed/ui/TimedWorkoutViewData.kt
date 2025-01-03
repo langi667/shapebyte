@@ -7,18 +7,18 @@ import de.stefan.lang.shapebyte.utils.buttons.ButtonState
 import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
 
 data class TimedWorkoutViewData(
-    val title: String,
-    val remaining: String,
-    val setDuration: Int, // in seconds, duration of the current set, useful for progress spinner
-    val elapsedTotal: String,
-    val remainingTotal: String,
-    val progressTotal: Float,
-    val playButtonState: ButtonState,
-    val pauseButtonState: ButtonState,
-    val stopButtonState: ButtonState,
+    val title: String = "",
+    val remaining: String = "",
+    val setDuration: Int = 0, // in seconds, duration of the current set, useful for progress spinner
+    val elapsedTotal: String = "",
+    val remainingTotal: String = "",
+    val progressTotal: Float = 0.0f,
+    val playButtonState: ButtonState = ButtonState.Hidden,
+    val pauseButtonState: ButtonState = ButtonState.Hidden,
+    val stopButtonState: ButtonState = ButtonState.Hidden,
     val item: Item? = null,
-    val backgroundColor: ColorDescriptor.Themed,
-    val launchState: TimedWorkoutViewModel.LaunchState,
+    val backgroundColor: ColorDescriptor.Themed = ColorDescriptor.Background,
+    val launchState: TimedWorkoutViewModel.LaunchState = TimedWorkoutViewModel.LaunchState.Idle,
 ) {
     // TODO: test
     val playButtonVisible: Boolean

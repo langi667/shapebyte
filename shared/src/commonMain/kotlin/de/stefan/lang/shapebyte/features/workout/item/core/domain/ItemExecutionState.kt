@@ -66,5 +66,7 @@ sealed interface ItemExecutionState<out T> {
     ) : Running<T>
 
     // TODO: maybe paused state
+
+    data class Paused(val item: Item) : ItemExecutionState<Nothing>
     data class Finished(val item: Item) : ItemExecutionState<Nothing>
 }

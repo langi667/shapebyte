@@ -8,12 +8,16 @@ import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.Progress
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.seconds
 
+// TODO: move to Android unit test
 class TimedItemExecutionTest : BaseCoroutineTest() {
     @Test
     fun `initial state`() {
@@ -180,6 +184,74 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
             assertEquals(ItemExecutionState.Finished(item), awaitItem())
             assertFalse(sut.isRunning)
             expectNoEvents()
+        }
+    }
+
+    @Test
+    fun `test pause and restart`() = test {
+        val seconds = 5
+        val pauseAfter = 3
+
+        val item = Exercise("Test")
+        val sut = createSUT(item, seconds)
+
+        assertTrue(sut.start(this))
+        assertTrue(sut.isRunning)
+
+        sut.state.filter {
+            it !is ItemExecutionState.SetRunning<*>
+        }.test {
+            val state = awaitItem()
+            assertEquals(ItemExecutionState.Started(item), state)
+
+            for (i in 0 until pauseAfter) {
+                val setStartedState = awaitItem()
+                assertIs<ItemExecutionState.SetStarted<*>>(setStartedState)
+
+                val setFinishedState = awaitItem()
+                assertIs<ItemExecutionState.SetFinished<*>>(setFinishedState)
+            }
+
+            sut.pause()
+            awaitItem()
+            val pauseItem = awaitItem()
+
+            assertEquals(ItemExecutionState.Paused(item), pauseItem)
+            expectNoEvents()
+        }
+
+        assertTrue(sut.start(this))
+
+        sut.state.filter {
+            it !is ItemExecutionState.SetRunning<*>
+        }.test {
+            awaitItem()
+            for (i in pauseAfter until seconds) {
+                val setStartedState = awaitItem()
+                assertIs<ItemExecutionState.SetStarted<*>>(setStartedState)
+
+                val setFinishedState = awaitItem()
+                assertIs<ItemExecutionState.SetFinished<*>>(setFinishedState)
+            }
+
+            assertEquals(ItemExecutionState.Finished(item), awaitItem())
+            assertFalse(sut.isRunning)
+            expectNoEvents()
+        }
+    }
+
+    @Test
+    fun `pause should return false if not running`() = test {
+        val item = Exercise("Test")
+        val sut = createSUT(item, 1)
+
+        assertFalse(sut.pause())
+        sut.start(this)
+
+        // wait until finished
+        sut.state.filterIsInstance<ItemExecutionState.Finished>().test {
+            awaitItem()
+            assertFalse(sut.pause())
         }
     }
 

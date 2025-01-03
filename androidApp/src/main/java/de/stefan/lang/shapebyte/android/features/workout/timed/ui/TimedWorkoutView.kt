@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.android.features.workout.timed.ui
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
@@ -100,12 +99,7 @@ fun TimedWorkoutView(
     modifier: Modifier = Modifier,
 ) {
     val image: ImageAsset? = data?.exerciseImage
-    val animationDuration = data?.setDuration ?: 0
-    val progressAnimated by animateFloatAsState(
-        targetValue = data?.progressTotal ?: 0.0f,
-        animationSpec = tween(durationMillis = animationDuration, easing = LinearEasing),
-        label = "progressAnimated",
-    )
+    val progressTotal = data?.progressTotal ?: 0.0f
 
     TimedWorkoutView(
         title = data?.title ?: "",
@@ -116,7 +110,7 @@ fun TimedWorkoutView(
         pauseButtonState = data?.pauseButtonState ?: ButtonState.Hidden,
         stopButtonState = data?.stopButtonState ?: ButtonState.Hidden,
         exerciseImage = image,
-        progress = progressAnimated,
+        progress = progressTotal,
         modifier = modifier,
         backgroundColor = data?.backgroundColor?.color(),
     )
@@ -166,7 +160,7 @@ fun TimedWorkoutView(
                     PauseButton(
                         modifier = Modifier
                             .alpha(pauseButtonAlpha),
-                    ) { /* TODO: Pause */ }
+                    ) { pauseButtonState.onClickAction?.invoke() }
 
                     Spacer(Modifier.width(spacingsBetween))
 

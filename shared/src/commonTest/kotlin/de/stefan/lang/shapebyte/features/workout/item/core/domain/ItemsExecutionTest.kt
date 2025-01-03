@@ -34,6 +34,10 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         override fun start(scope: CoroutineScope): Boolean {
             return false
         }
+
+        override fun pause(): Boolean {
+            return false
+        }
     }
 
     @Test
@@ -102,6 +106,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
 
             assertIs<ItemsExecutionState.Finished>(awaitItem())
             expectNoEvents()
+            cancel()
         }
     }
 
@@ -154,7 +159,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         assertEquals(executionsSucceedAfter + executionsSucceedBefore, expectedItems.count())
         assertFalse(expectedItems.contains(ignoredItem))
     }
-
+    // TODO: test pause on timed executions
     // TODO: test for repetitive execution when implemented
 
     private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecution {

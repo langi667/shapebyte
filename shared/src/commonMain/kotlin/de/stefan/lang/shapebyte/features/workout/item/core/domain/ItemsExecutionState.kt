@@ -14,7 +14,8 @@ sealed class ItemsExecutionState {
         val itemCount: Int,
         val itemState: ItemExecutionState.Running<*>,
         val totalProgress: Progress,
-        val nextTotalProgress: Progress,
     ) : Launched(totalProgress)
+
+    data object Paused : ItemsExecutionState()
     data object Finished : ItemsExecutionState()
 }
