@@ -30,7 +30,6 @@ run() {
 
 
 run ci-shared.sh
-
 run ci-android.sh &
 pid_ci_android=$!
 

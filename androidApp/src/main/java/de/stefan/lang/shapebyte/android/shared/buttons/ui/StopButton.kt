@@ -24,7 +24,7 @@ fun StopButton(
 
 @Preview
 @Composable
-private fun StopButtonPreview() {
+fun StopButtonPreview() {
     PreviewContainer {
         StopButton { /* No Op */ }
     }

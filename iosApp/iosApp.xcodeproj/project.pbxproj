@@ -208,37 +208,38 @@
 		1D17A36A2CBEC739003E7FD8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
-				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
+				history/ui/tests/WorkoutHistoryEntryViewSnapshotTests.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTests.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
 		};
 		1D17A36B2CBEC739003E7FD8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
-				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
+				history/ui/tests/WorkoutHistoryEntryViewSnapshotTests.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTests.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
 		};
 		1D17A36C2CBEC739003E7FD8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
-				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
+				history/ui/tests/WorkoutHistoryEntryViewSnapshotTests.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTests.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
 		};
 		1D31BB5B2CBD50C5002F5818 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				core/data/ExtWorkout.swift,
 				data/ExtItemSetTimed.swift,
 				history/data/ExtWorkoutHistoryEntry.swift,
-				history/ui/tests/WorkoutHistoryEntryViewSnapshotTest.swift,
+				history/ui/tests/WorkoutHistoryEntryViewSnapshotTests.swift,
 				history/ui/WorkoutHistoryEntryView.swift,
 				quick/ui/QuickWorkoutEntryView.swift,
 				quick/ui/QuickWorkoutsListView.swift,
-				quick/ui/tests/QuickWorkoutEntryViewSnapshotTest.swift,
+				quick/ui/tests/QuickWorkoutEntryViewSnapshotTests.swift,
 				timed/ui/TimedWorkoutView.swift,
 			);
 			target = 1D45465E2CB80C3100FC6383 /* ShapeByteTests */;
@@ -267,27 +268,27 @@
 		F7037C452D1CACC5009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/PauseButtonSnapshotTest.swift,
-				ui/tests/PlayButtonLargeSnapshotTest.swift,
-				ui/tests/StopButtonSnapshotTest.swift,
+				ui/tests/PauseButtonSnapshotTests.swift,
+				ui/tests/PlayButtonSnapshotTests.swift,
+				ui/tests/StopButtonSnapshotTests.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
 		};
 		F7037C462D1CACC7009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/PauseButtonSnapshotTest.swift,
-				ui/tests/PlayButtonLargeSnapshotTest.swift,
-				ui/tests/StopButtonSnapshotTest.swift,
+				ui/tests/PauseButtonSnapshotTests.swift,
+				ui/tests/PlayButtonSnapshotTests.swift,
+				ui/tests/StopButtonSnapshotTests.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
 		};
 		F7037C472D1CACCA009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/PauseButtonSnapshotTest.swift,
-				ui/tests/PlayButtonLargeSnapshotTest.swift,
-				ui/tests/StopButtonSnapshotTest.swift,
+				ui/tests/PauseButtonSnapshotTests.swift,
+				ui/tests/PlayButtonSnapshotTests.swift,
+				ui/tests/StopButtonSnapshotTests.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
 		};
@@ -318,63 +319,63 @@
 		F7037C6D2D1D5CE3009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/ContentViewSnapshotTest.swift,
+				ui/tests/ContentViewSnapshotTests.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
 		};
 		F7037C6E2D1D5CE5009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/ContentViewSnapshotTest.swift,
+				ui/tests/ContentViewSnapshotTests.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
 		};
 		F7037C6F2D1D5CE6009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/ContentViewSnapshotTest.swift,
+				ui/tests/ContentViewSnapshotTests.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
 		};
 		F7037C812D1D5D30009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/BackgroundViewSnapshotTest.swift,
+				ui/tests/BackgroundViewSnapshotTests.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
 		};
 		F7037C822D1D5D30009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/BackgroundViewSnapshotTest.swift,
+				ui/tests/BackgroundViewSnapshotTests.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
 		};
 		F7037C832D1D5D30009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/BackgroundViewSnapshotTest.swift,
+				ui/tests/BackgroundViewSnapshotTests.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
 		};
 		F7037C922D1D5D5F009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/HeaderViewSnapshotTest.swift,
+				ui/tests/HeaderViewSnapshotTests.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
 		};
 		F7037C932D1D5D5F009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/HeaderViewSnapshotTest.swift,
+				ui/tests/HeaderViewSnapshotTests.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
 		};
 		F7037C942D1D5D5F009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ui/tests/HeaderViewSnapshotTest.swift,
+				ui/tests/HeaderViewSnapshotTests.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
 		};

@@ -320,7 +320,7 @@ private fun ImageAndProgress(
             label = "CrossfadeExerciseImage",
         ) {
             AsyncImage(
-                asset = it,
+                image = it,
                 modifier = Modifier
                     .clip(CircleShape)
                     .size(size),

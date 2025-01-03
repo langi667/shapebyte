@@ -11,15 +11,15 @@ iOSLogI "🗑️ Clear current snapshot folder ..."
 "$script_directory/clear-snapshots-ios.sh"
 
 iOSLogI "📸 Recording snapshots (May take a while! ☕️ - time)..."
-execute_snapshots > /dev/null 2>&1
+execute_snapshots
 
 iOSLogI "📸 Verifying snapshots..."
 execute_snapshots
 
 return_code=$?
 if [ $return_code -eq 0 ]; then
-  iOSLogS "Recording snapshots successful 😊"
+  iOSLogS "Recording & verifying snapshots successful 😊"
 else
-  iOSLogE "Recording snapshots failed, most likely there was an error during verification 😞"
+  iOSLogE "Recording & verifying failed 😞"
   exit $return_code
 fi

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.screenshot)
 }
 
 android {
@@ -62,6 +63,8 @@ android {
             dimension = "environment"
         }
     }
+
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -80,6 +83,7 @@ dependencies {
     implementation(libs.coil.common)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
+    screenshotTestImplementation(libs.compose.ui.tooling)
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.turbine)

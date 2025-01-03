@@ -60,12 +60,7 @@ struct WorkoutHistoryEntryView_Previews: PreviewProvider {
         let entry: WorkoutHistoryEntry =  DPI
             .shared
             .workoutHistoryEntry(
-                scheduleEntry: WorkoutScheduleEntry(
-                    id: "1",
-                    name: "Legs",
-                    date: Date(timeIntervalSince1970: 1_729_360_000).toInstant(),
-                    progress: Progress(progress: 0.7)
-                )
+                scheduleEntry: WorkoutSchedulePreviewDataProvider.shared.workoutScheduleEntry
             )
     }
 

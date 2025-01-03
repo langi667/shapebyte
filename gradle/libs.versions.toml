@@ -29,6 +29,8 @@ mockkVersion = "1.13.14"
 coreKtx = "1.15.0"
 appcompat = "1.6.1"
 material = "1.10.0"
+screenshot = "0.0.1-alpha08"
+
 [libraries]
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -80,3 +82,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }

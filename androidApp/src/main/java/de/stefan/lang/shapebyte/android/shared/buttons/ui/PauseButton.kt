@@ -24,7 +24,7 @@ fun PauseButton(
 
 @Preview
 @Composable
-private fun PauseButtonPreview() {
+fun PauseButtonPreview() {
     PreviewContainer {
         PauseButton { /* No Op */ }
     }

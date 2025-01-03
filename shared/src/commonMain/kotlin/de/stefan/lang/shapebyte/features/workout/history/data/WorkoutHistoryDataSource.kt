@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.history.data
 
+import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import kotlinx.datetime.Instant
 

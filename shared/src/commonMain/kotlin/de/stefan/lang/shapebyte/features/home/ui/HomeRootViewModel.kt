@@ -2,9 +2,9 @@ package de.stefan.lang.shapebyte.features.home.ui
 
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.history.domain.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.shared.loading.data.asResultFlow

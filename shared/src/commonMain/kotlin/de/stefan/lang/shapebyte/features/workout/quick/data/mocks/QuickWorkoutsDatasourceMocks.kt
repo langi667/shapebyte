@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsError
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.utils.assets.ImageAsset
+import de.stefan.lang.shapebyte.utils.image.data.ImageResource
 
 @Suppress("MagicNumber")
 class QuickWorkoutsDatasourceMocks : QuickWorkoutsDatasource {
@@ -14,35 +14,35 @@ class QuickWorkoutsDatasourceMocks : QuickWorkoutsDatasource {
             id = 1,
             name = "Interval",
             shortDescription = "Quick ",
-            image = ImageAsset(assetName = "sprints.png"),
+            image = ImageResource(id = "sprints"),
             type = WorkoutType.Timed.Interval(5, 5, 2),
         ),
         Workout(
             id = 2,
             name = "HIIT Core",
             shortDescription = "20 min, Core, Legs",
-            image = ImageAsset(assetName = "sprints.png"),
+            image = ImageResource(id = "sprints"),
             type = WorkoutType.Timed.Interval(30, 30, 20),
         ),
         Workout(
             id = 3,
             name = "Sets & Reps",
             shortDescription = "3 Sets 6 exercises",
-            image = ImageAsset(assetName = "sprints.png"),
+            image = ImageResource(id = "sprints"),
             type = WorkoutType.Timed.Interval(30, 30, 20),
         ),
         Workout(
             id = 4,
             name = "Warmup",
             shortDescription = "40, min, Interval 15 sec.",
-            image = ImageAsset(assetName = "sprints.png"),
+            image = ImageResource(id = "sprints"),
             type = WorkoutType.Timed.Interval(30, 30, 20),
         ),
         Workout(
             id = 5,
             name = "Cooldown",
             shortDescription = "20, min, Interval 1 Minute",
-            image = ImageAsset(assetName = "sprints.png"),
+            image = ImageResource(id = "sprints"),
             type = WorkoutType.Timed.Interval(30, 30, 20),
         ),
     )

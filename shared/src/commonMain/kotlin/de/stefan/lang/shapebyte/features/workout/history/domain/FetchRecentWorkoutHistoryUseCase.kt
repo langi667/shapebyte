@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.history.domain
 
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
-import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.shared.usecase.BaseFeatureDataUseCase
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding

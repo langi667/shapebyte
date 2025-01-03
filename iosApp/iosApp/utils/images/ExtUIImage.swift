@@ -10,12 +10,12 @@ import SwiftUI
 import shared
 
 extension UIImage {
-    func toImage() -> Image {
+    func toImage() -> SwiftUI.Image {
         Image(uiImage: self)
     }
 }
 
-extension Image {
+extension SwiftUI.Image {
     init(imageAsset: ImageAsset) {
         self.init(imageAsset.fileNameWithoutEnding)
     }

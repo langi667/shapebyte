@@ -21,8 +21,10 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
+import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.utils.assets.ImageAsset
+import de.stefan.lang.shapebyte.features.workout.schedule.ui.preview.WorkoutSchedulePreviewDataProvider
+import de.stefan.lang.shapebyte.utils.image.data.Image
 
 @Composable
 fun WorkoutHistoryEntryView(
@@ -41,7 +43,7 @@ fun WorkoutHistoryEntryView(
 fun WorkoutHistoryEntryView(
     title: String,
     date: String,
-    image: ImageAsset,
+    image: Image,
     modifier: Modifier = Modifier,
 ) = With { theme ->
     val bgShape = theme.current.shapes.extraLarge
@@ -60,7 +62,7 @@ fun WorkoutHistoryEntryView(
 
     ) {
         AsyncImage(
-            asset = image,
+            image = image,
             modifier = Modifier
                 .size(imageSize)
                 .clip(CircleShape),
@@ -96,17 +98,9 @@ fun WorkoutHistoryEntryViewPreview() {
             Modifier.background(theme.current.colorScheme.background),
         ) {
             WorkoutHistoryEntryView(
-                title = "HIIT Workout",
-                date = "12.12.2021",
-                image = ImageAsset("sprints.png"),
-            )
-
-            Spacer(modifier = Modifier.size(8.dp))
-
-            WorkoutHistoryEntryView(
-                title = "HIIT Workout",
-                date = "13.12.2021",
-                image = ImageAsset("sprints.png"),
+                entry = DPI.workoutHistoryEntry(
+                    scheduleEntry = WorkoutSchedulePreviewDataProvider.workoutScheduleEntry,
+                ),
             )
         }
     }
