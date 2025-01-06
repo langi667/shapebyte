@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eE
+
+on_error() {
+  RED='\033[0;31m'
+  NC='\033[0m'
+  echo -e "${RED}Push pre checks failed!!${NC}"
+}
+
+trap 'on_error' ERR
+./scripts/ci.sh

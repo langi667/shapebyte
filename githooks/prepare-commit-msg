@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# An example hook script to prepare the commit log message.
+# Called by "git commit" with the name of the file that has the
+# commit message, followed by the description of the commit
+# message's source.  The hook's purpose is to edit the commit
+# message file.  If the hook fails with a non-zero status,
+# the commit is aborted.
+#
+# To enable this hook, rename this file to "prepare-commit-msg".
+
+# This hook includes three examples. The first one removes the
+# "# Please enter the commit message..." help message.
+#
+# The second includes the output of "git diff --name-status -r"
+# into the message, just before the "git status" output.  It is
+# commented because it doesn't cope with --amend or with squashed
+# commits.
+#
+# The third example adds a Signed-off-by line to the message, that can
+# still be edited.  This is rarely a good idea.
+
+function get_ticket_id {
+    BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+    # Ensure BRANCH_NAME is not empty and is not in a detached HEAD state (i.e. rebase).
+    # SKIP_PREPARE_COMMIT_MSG may be used as an escape hatch to disable this hook,
+    # while still allowing other githooks to run.
+    if [ ! -z "$BRANCH_NAME" ] && [ "$BRANCH_NAME" != "HEAD" ] && [ "$SKIP_PREPARE_COMMIT_MSG" != 1 ]; then
+        PREFIX_PATTERN='[A-Z]{2,10}-[0-9]{1,4}'
+        [[ $BRANCH_NAME =~ $PREFIX_PATTERN ]]
+
+        PREFIX=${BASH_REMATCH[0]}
+        echo $PREFIX
+    fi
+}
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+TRIMMED=$(get_ticket_id)
+
+# Check if the commit message already starts with the ticket ID
+if ! grep -q "^$TRIMMED" "$COMMIT_MSG_FILE"; then
+    sed -i.bak -e "1s/^/$TRIMMED /" "$COMMIT_MSG_FILE"
+fi

@@ -33,3 +33,17 @@ subprojects {
         jvmTarget = App.Android.BuildSettings.javaVersion.toString()
     }
 }
+
+tasks.register<Copy>("installGitHooks") {
+    val gitHooksDir = file(".git/hooks")
+    val githooksSourceDir = file("githooks")
+
+    from(githooksSourceDir)
+    into(gitHooksDir)
+
+    doFirst {
+        if (!gitHooksDir.exists()) {
+            gitHooksDir.mkdirs()
+        }
+    }
+}
