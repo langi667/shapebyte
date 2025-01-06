@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.utils.di
 
+import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
 import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
@@ -31,6 +32,7 @@ interface UtilsModuleProviding {
     fun fileAssetLoader(): FileAssetLoading
     fun coroutineContextProvider(): CoroutineContextProviding
     fun coroutineScopeProvider(): CoroutineScopeProviding
+    fun appInfo(): AppInfo
 }
 
 object UtilsModule :
@@ -60,13 +62,16 @@ object UtilsModule :
 
     private lateinit var coroutineContextProvider: CoroutineContextProviding
     private lateinit var coroutineScopeProviding: CoroutineScopeProviding
+    private lateinit var appInfo: AppInfo
 
     fun initialize(
         coroutineContextProvider: CoroutineContextProviding,
         coroutineScopeProviding: CoroutineScopeProviding,
+        appInfo: AppInfo,
     ) {
         this.coroutineContextProvider = coroutineContextProvider
         this.coroutineScopeProviding = coroutineScopeProviding
+        this.appInfo = appInfo
     }
 
     override fun logger(): Logging = get()
@@ -77,4 +82,5 @@ object UtilsModule :
     override fun fileAssetLoader(): FileAssetLoading = get()
     override fun coroutineContextProvider(): CoroutineContextProviding = get()
     override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
+    override fun appInfo(): AppInfo = appInfo
 }

@@ -101,7 +101,7 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
                     ]
                 )
             ],
-            
+
             configure: { states in
                 VStack(spacing: Theme.spacings.tiny) {
                     ForEach(states) { workout in

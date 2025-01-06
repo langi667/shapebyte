@@ -154,4 +154,3 @@ struct Text_Previews: PreviewProvider {
         )
     }
 }
-

@@ -42,6 +42,7 @@ abstract class BaseDPI :
         UtilsModule.initialize(
             coroutineContextProvider = data.coroutineContextProvider,
             coroutineScopeProviding = data.coroutineScopeProviding,
+            appInfo = data.appInfo,
         )
     }
 

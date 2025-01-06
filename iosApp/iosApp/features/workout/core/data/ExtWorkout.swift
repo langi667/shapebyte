@@ -8,6 +8,6 @@
 
 import shared
 
-extension Workout : @retroactive Identifiable {
+extension Workout: @retroactive Identifiable {
     /* NO OP */
 }
