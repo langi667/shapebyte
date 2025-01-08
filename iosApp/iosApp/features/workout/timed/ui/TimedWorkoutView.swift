@@ -202,12 +202,12 @@ private struct ExerciseView: View {
             withAnimation(.easeInOut(duration: animationDuration)) {
                 self.opacity = newState.isVisible ? 1 : 0
             }
-        }.onChange(of: progress, initial: false) { _, nextProgress in
-            let ticks = 100
-            let currProgress = progressAnimated
-            self.timer.restartWith(interval: setDuration, ticks: ticks) { _ in
-                self.progressAnimated += (nextProgress - currProgress) / Double(ticks)
-            }
+//        }.onChange(of: progress, initial: false) { _, nextProgress in
+//            let ticks = 100
+//            let currProgress = progressAnimated
+//            self.timer.restartWith(interval: setDuration, ticks: ticks) { _ in
+//                self.progressAnimated += (nextProgress - currProgress) / Double(ticks)
+//            }
         }
     }
 }

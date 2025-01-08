@@ -460,7 +460,6 @@
 		F7037C722D1D5D22009D6024 /* background */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7037C812D1D5D30009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C822D1D5D30009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C832D1D5D30009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = background; sourceTree = "<group>"; };
 		F7037C852D1D5D4F009D6024 /* header */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7037C922D1D5D5F009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C932D1D5D5F009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C942D1D5D5F009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = header; sourceTree = "<group>"; };
 		F7037C952D1D5DD5009D6024 /* uistate */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7037C982D1D5E0E009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C992D1D5E0E009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C9A2D1D5E0E009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = uistate; sourceTree = "<group>"; };
-		F7037C9B2D1D5E7A009D6024 /* view */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = view; sourceTree = "<group>"; };
 		F7037C9E2D1D5EBD009D6024 /* testcore */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = testcore; sourceTree = "<group>"; };
 		F7359C4A2CF7783B00A0BD53 /* tests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7359C4B2CF7784100A0BD53 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7359C4C2CF7784100A0BD53 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7359C4D2CF7784100A0BD53 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = tests; sourceTree = "<group>"; };
 		F7864DBE2D09ECEA00F0EDC8 /* buttons */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7037C452D1CACC5009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C462D1CACC7009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037C472D1CACCA009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = buttons; sourceTree = "<group>"; };
@@ -653,7 +652,6 @@
 				F7A136462D0B61A800779207 /* images */,
 				F7037C3A2D1CAC88009D6024 /* shapes */,
 				F7037C9E2D1D5EBD009D6024 /* testcore */,
-				F7037C9B2D1D5E7A009D6024 /* view */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -882,7 +880,6 @@
 				F7037C722D1D5D22009D6024 /* background */,
 				F7037C852D1D5D4F009D6024 /* header */,
 				F7037C952D1D5DD5009D6024 /* uistate */,
-				F7037C9B2D1D5E7A009D6024 /* view */,
 				F7359C4A2CF7783B00A0BD53 /* tests */,
 				F7864DBE2D09ECEA00F0EDC8 /* buttons */,
 				F7A136462D0B61A800779207 /* images */,
@@ -920,7 +917,6 @@
 				F7037C722D1D5D22009D6024 /* background */,
 				F7037C852D1D5D4F009D6024 /* header */,
 				F7037C952D1D5DD5009D6024 /* uistate */,
-				F7037C9B2D1D5E7A009D6024 /* view */,
 				F7359C4A2CF7783B00A0BD53 /* tests */,
 				F7864DBE2D09ECEA00F0EDC8 /* buttons */,
 				F7A136462D0B61A800779207 /* images */,
@@ -956,7 +952,6 @@
 				F7037C722D1D5D22009D6024 /* background */,
 				F7037C852D1D5D4F009D6024 /* header */,
 				F7037C952D1D5DD5009D6024 /* uistate */,
-				F7037C9B2D1D5E7A009D6024 /* view */,
 				F7037C9E2D1D5EBD009D6024 /* testcore */,
 				F7359C4A2CF7783B00A0BD53 /* tests */,
 				F7864DBE2D09ECEA00F0EDC8 /* buttons */,
@@ -998,7 +993,6 @@
 				F7037C722D1D5D22009D6024 /* background */,
 				F7037C852D1D5D4F009D6024 /* header */,
 				F7037C952D1D5DD5009D6024 /* uistate */,
-				F7037C9B2D1D5E7A009D6024 /* view */,
 				F7359C4A2CF7783B00A0BD53 /* tests */,
 				F7864DBE2D09ECEA00F0EDC8 /* buttons */,
 				F7A136462D0B61A800779207 /* images */,
