@@ -33,7 +33,6 @@ import kotlin.time.DurationUnit
 
 // TODO: test pause in launch state
 // TODO: test pause state in general
-
 class TimedWorkoutViewModel(
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilder,
