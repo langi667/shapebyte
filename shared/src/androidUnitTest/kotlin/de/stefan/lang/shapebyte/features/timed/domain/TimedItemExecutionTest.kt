@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.item.timed.domain
+package de.stefan.lang.shapebyte.features.timed.domain
 
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
@@ -6,6 +6,8 @@ import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.Progress
 import kotlinx.coroutines.flow.filter
@@ -15,9 +17,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-// TODO: move to Android unit test
 class TimedItemExecutionTest : BaseCoroutineTest() {
     @Test
     fun `initial state`() {
@@ -42,38 +44,55 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
         assertTrue(sut.isRunning)
 
         sut.state.test {
-            val state = awaitItem()
-            assertEquals(ItemExecutionState.Started(item), state)
+            assertEquals(ItemExecutionState.Started(item), awaitItem())
 
             for (i in 0 until seconds) {
-                var currState = awaitItem()
                 val setDuration = 1.seconds
                 val currSet = sut.sets[i]
+                var totalTimePassed = setDuration * i
+                var totalTimeRemaining = seconds.seconds - totalTimePassed
 
-                var secsPassed = setDuration * i
-                var secsRemaining = seconds.seconds - secsPassed
-
-                val started = ItemExecutionState.SetStarted(
-                    item,
-                    currSet,
-                    Progress.ZERO,
-                    Progress.with(i, seconds),
-                    TimedItemExecutionData(
+                val setStartedState = ItemExecutionState.SetStarted(
+                    item = item,
+                    set = currSet,
+                    progress = Progress.ZERO,
+                    totalProgress = Progress.with(i, seconds),
+                    setData = TimedItemExecutionData(
                         setDuration = setDuration,
                         setTimePassed = 0.seconds,
-                        totalTimePassed = secsPassed,
-                        totalTimeRemaining = secsRemaining,
+                        totalTimePassed = totalTimePassed,
+                        totalTimeRemaining = totalTimeRemaining,
                         totalDuration = seconds.seconds,
                     ),
                 )
 
-                assertEquals(started, currState)
-                currState = awaitItem()
+                assertEquals(setStartedState, awaitItem())
+                val interval = 10
 
-                secsPassed += 1.seconds
-                secsRemaining = seconds.seconds - secsPassed
+                for (currMS in interval .. 1000 step interval) {
+                    val state = awaitItem()
 
-                val finished = ItemExecutionState.SetFinished(
+                    totalTimePassed += interval.milliseconds
+                    totalTimeRemaining -= interval.milliseconds
+
+                    val setRunningState = ItemExecutionState.SetRunning(
+                        item = item,
+                        set = currSet,
+                        progress =  Progress.with(currMS, 1000),
+                        totalProgress = Progress.with(totalTimePassed, seconds.seconds),
+                        setData = TimedItemExecutionData(
+                            setDuration = setDuration,
+                            setTimePassed = currMS.milliseconds,
+                            totalTimePassed = totalTimePassed,
+                            totalTimeRemaining = totalTimeRemaining,
+                            totalDuration = seconds.seconds,
+                        ),
+                    )
+
+                    assertEquals(setRunningState, state)
+                }
+
+                val setFinishedState = ItemExecutionState.SetFinished(
                     item = item,
                     set = currSet,
                     progress = Progress.COMPLETE,
@@ -81,17 +100,18 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     setData = TimedItemExecutionData(
                         setDuration = setDuration,
                         setTimePassed = setDuration,
-                        totalTimePassed = secsPassed,
-                        totalTimeRemaining = secsRemaining,
+                        totalTimePassed = totalTimePassed,
+                        totalTimeRemaining = totalTimeRemaining,
                         totalDuration = seconds.seconds,
                     ),
                 )
 
-                assertEquals(finished, currState)
+                assertEquals(setFinishedState, awaitItem())
             }
 
             assertEquals(ItemExecutionState.Finished(item), awaitItem())
             assertFalse(sut.isRunning)
+
             expectNoEvents()
         }
     }
@@ -133,18 +153,15 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
         assertTrue(sut.isRunning)
 
         sut.state.test {
-            val state = awaitItem()
-            assertEquals(ItemExecutionState.Started(item), state)
+            assertEquals(ItemExecutionState.Started(item), awaitItem())
 
             for (i in 0 until seconds) {
-                var currState = awaitItem()
                 val setDuration = 1.seconds
                 val currSet = sut.sets[i]
+                var totalTimePassed = setDuration * i
+                var totalTimeRemaining = seconds.seconds - totalTimePassed
 
-                var secsPassed = setDuration * i
-                var secsRemaining = seconds.seconds - secsPassed
-
-                val started = ItemExecutionState.SetStarted(
+                val setStartedState = ItemExecutionState.SetStarted(
                     item,
                     currSet,
                     Progress.ZERO,
@@ -152,19 +169,24 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     TimedItemExecutionData(
                         setDuration = setDuration,
                         setTimePassed = 0.seconds,
-                        totalTimePassed = secsPassed,
-                        totalTimeRemaining = secsRemaining,
+                        totalTimePassed = totalTimePassed,
+                        totalTimeRemaining = totalTimeRemaining,
                         totalDuration = seconds.seconds,
                     ),
                 )
 
-                assertEquals(started, currState)
-                currState = awaitItem()
+                assertEquals(setStartedState, awaitItem())
+                val interval = 10
 
-                secsPassed += 1.seconds
-                secsRemaining = seconds.seconds - secsPassed
+                for (currMS in 0 until 1000 step interval) {
+                    val state = awaitItem()
 
-                val finished = ItemExecutionState.SetFinished(
+                    totalTimePassed += interval.milliseconds
+                    totalTimeRemaining -= interval.milliseconds
+                    assertIs<ItemExecutionState.SetRunning<*>>(state)
+                }
+
+                val setFinishedState = ItemExecutionState.SetFinished(
                     item = item,
                     set = currSet,
                     progress = Progress.COMPLETE,
@@ -172,17 +194,18 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                     setData = TimedItemExecutionData(
                         setDuration = setDuration,
                         setTimePassed = setDuration,
-                        totalTimePassed = secsPassed,
-                        totalTimeRemaining = secsRemaining,
+                        totalTimePassed = totalTimePassed,
+                        totalTimeRemaining = totalTimeRemaining,
                         totalDuration = seconds.seconds,
                     ),
                 )
 
-                assertEquals(finished, currState)
+                assertEquals(setFinishedState, awaitItem())
             }
 
             assertEquals(ItemExecutionState.Finished(item), awaitItem())
             assertFalse(sut.isRunning)
+
             expectNoEvents()
         }
     }
@@ -225,10 +248,16 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
         sut.state.filter {
             it !is ItemExecutionState.SetRunning<*>
         }.test {
+            // prev state
             awaitItem()
+
             for (i in pauseAfter until seconds) {
-                val setStartedState = awaitItem()
-                assertIs<ItemExecutionState.SetStarted<*>>(setStartedState)
+                // Continues with a finished state because the set was paused and now resumed
+                // After that started and finished will be posted as usual
+                if (i > pauseAfter) {
+                    val setStartedState = awaitItem()
+                    assertIs<ItemExecutionState.SetStarted<*>>(setStartedState)
+                }
 
                 val setFinishedState = awaitItem()
                 assertIs<ItemExecutionState.SetFinished<*>>(setFinishedState)

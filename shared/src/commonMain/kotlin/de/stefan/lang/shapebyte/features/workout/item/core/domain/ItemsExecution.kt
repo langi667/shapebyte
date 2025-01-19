@@ -27,7 +27,7 @@ class ItemsExecution(
     private val allSets: List<ItemSet> = items.flatMap { it.sets }
     private val setCount: Int = allSets.size
 
-    private var setsFinished: Int = 0
+    private var setsFinished: Int = -1
 
     private var currJob: Job? = null
     private var pauseExecution: Boolean = false
@@ -140,7 +140,7 @@ class ItemsExecution(
     }
 
     private fun handleItemStateRunning(itemState: ItemExecutionState.Running<*>) {
-        (itemState as? ItemExecutionState.SetFinished<*>)?.let {
+        (itemState as? ItemExecutionState.SetStarted<*>)?.let {
             setsFinished += 1
         }
 

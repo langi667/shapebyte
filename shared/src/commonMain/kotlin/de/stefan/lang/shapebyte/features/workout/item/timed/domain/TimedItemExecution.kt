@@ -16,6 +16,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -142,11 +143,12 @@ class TimedItemExecution(
                     return@launch
                 }
 
-                if (setTimePassed + interval >= setMS) {
+                if (setTimePassed + interval > setMS) {
                     break
                 }
 
                 delay(interval)
+                yield()
 
                 setTimePassed += interval
                 val progress = Progress.with(setTimePassed, setMS)
@@ -158,7 +160,7 @@ class TimedItemExecution(
                     setDuration = set.seconds,
                     setTimePassed = setTimePassed,
                     totalTimePassed = totalTimePassed,
-                    totalTimeRemaining = totalTimeRemaining - setTimePassed,
+                    totalTimeRemaining = totalTimeRemaining,
                     totalDuration = totalTime,
                 )
 
@@ -175,7 +177,13 @@ class TimedItemExecution(
                 if (pauseExecution) {
                     return@launch
                 }
-            } while (setTimePassed < setMS)
+            } while (setTimePassed <= setMS)
+
+            val setTimeRemaining = setMS - (setTimePassed + interval)
+
+            if (setTimeRemaining > Duration.ZERO) {
+                delay(setTimeRemaining)
+            }
 
             _state.value = ItemExecutionState.SetFinished(
                 item,
@@ -190,6 +198,7 @@ class TimedItemExecution(
                     totalDuration = totalTime,
                 ),
             )
+            yield()
 
             if (currSetIndex + 1 < sets.size) {
                 currSetIndex += 1

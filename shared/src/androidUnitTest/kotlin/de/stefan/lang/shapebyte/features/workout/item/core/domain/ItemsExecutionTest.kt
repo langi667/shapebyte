@@ -17,6 +17,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class ItemsExecutionTest : BaseCoroutineTest() {
     /**
@@ -63,12 +65,14 @@ class ItemsExecutionTest : BaseCoroutineTest() {
     fun `emits correct states for timed`() = test {
         val executions = 5
         val duration = 3
+        val setCount = executions * duration
 
+        val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
                 DPI.createTimedItemExecution(
                     item = Exercise("Test $it"),
-                    sets = List(duration) { ItemSet.Timed.Seconds(1) },
+                    sets = List(duration) { itemSet },
                 )
             },
         )
@@ -76,37 +80,37 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         sut.start(this)
         sut.state.test {
             assertIs<ItemsExecutionState.Started>(awaitItem())
+            var setsFinished = 0
 
             for (currExecution in 0..<executions) {
-                for (currDuration in 0..<duration) {
-                    var runningState = awaitItem() as ItemsExecutionState.Running
-                    assertEquals(Exercise("Test $currExecution"), runningState.item)
-                    assertEquals(currExecution, runningState.itemIndex)
-                    assertEquals(executions, runningState.itemCount)
+                repeat((0..<duration).count()) {
+                    val interval = 10
+                    val setDurationMS = 1000
 
-                    var totalProgress = Progress(currDuration.toFloat() / duration.toFloat())
-                    val currSet = ItemSet.Timed.Seconds(1)
-                    val itemStateStart = runningState.itemState as ItemExecutionState.SetStarted
+                    // each set. 15 sets which are 1000 ms long. Every 10 ms an update is posted
+                    for (currMS in 0..setDurationMS step interval) {
+                        val runningState = awaitItem() as ItemsExecutionState.Running
+                        val expectedItem = Exercise("Test $currExecution")
+                        val completed = Progress.with(current = setsFinished, total = setCount)
+                        val running =
+                            Progress((1.0f / setCount.toFloat()) * (currMS.toFloat() / setDurationMS.toFloat()))
+                        val totalProgress = completed + running
 
-                    assertEquals(Progress.ZERO, itemStateStart.progress)
-                    assertEquals(totalProgress, itemStateStart.totalProgress)
-                    assertEquals(currSet, itemStateStart.set)
+                        assertEquals(expectedItem, runningState.item)
+                        assertEquals(executions, runningState.itemCount)
+                        assertEquals(currExecution, runningState.itemIndex)
+                        assertEquals(totalProgress, runningState.totalProgress)
 
-                    runningState = awaitItem() as ItemsExecutionState.Running
-                    assertEquals(Exercise("Test $currExecution"), runningState.item)
-
-                    val itemStateFinished = runningState.itemState as ItemExecutionState.SetFinished
-                    totalProgress = Progress((currDuration + 1).toFloat() / duration.toFloat())
-
-                    assertEquals(Progress.COMPLETE, itemStateFinished.progress)
-                    assertEquals(totalProgress, itemStateFinished.totalProgress)
-                    assertEquals(currSet, itemStateFinished.set)
+                        if (runningState.itemState is ItemExecutionState.SetFinished) {
+                            setsFinished += 1
+                        }
+                    }
                 }
             }
 
             assertIs<ItemsExecutionState.Finished>(awaitItem())
+            assertEquals(setCount, setsFinished)
             expectNoEvents()
-            cancel()
         }
     }
 
@@ -159,7 +163,81 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         assertEquals(executionsSucceedAfter + executionsSucceedBefore, expectedItems.count())
         assertFalse(expectedItems.contains(ignoredItem))
     }
-    // TODO: test pause on timed executions
+
+    @Test
+    fun `emits correct states for timed with paused`() = test {
+        val executions = 6
+        val duration = 4
+        val setCount = executions * duration
+
+        val itemSet = ItemSet.Timed.Seconds(1)
+        val sut = createSUT(
+            List(executions) {
+                DPI.createTimedItemExecution(
+                    item = Exercise("Test $it"),
+                    sets = List(duration) { itemSet },
+                )
+            },
+        )
+
+        val interval = 10
+        sut.start(this)
+        var pausedAtState: ItemsExecutionState.Running? = null
+
+        sut.state.test {
+            assertIs<ItemsExecutionState.Started>(awaitItem())
+            var awaitItem = true
+
+            do {
+                val runningState = awaitItem()
+                assertIs<ItemsExecutionState.Running>(runningState)
+                if (runningState.totalProgress.value >= 0.5f && runningState.itemState.progress.value == 0.5f) {
+                    pausedAtState = runningState
+
+                    sut.pause()
+                    awaitItem = false
+                }
+            } while (awaitItem)
+
+            assertIs<ItemsExecutionState.Paused>(awaitItem())
+            expectNoEvents()
+        }
+
+        assertNotNull(pausedAtState)
+
+        // resume
+        sut.start(this)
+        sut.state.test {
+            assertIs<ItemsExecutionState.Paused>(awaitItem())
+            val firstRunningStateAfterPaused = awaitItem() as ItemsExecutionState.Running
+
+            assertEquals(pausedAtState!!.item, firstRunningStateAfterPaused.item)
+            assertEquals(pausedAtState!!.itemIndex, firstRunningStateAfterPaused.itemIndex)
+            assertEquals(pausedAtState!!.itemCount, firstRunningStateAfterPaused.itemCount)
+
+            // continue with larger progress
+            assertTrue(firstRunningStateAfterPaused.totalProgress.value > pausedAtState!!.totalProgress.value)
+
+            // should finish
+            var running = true
+            var prevState: ItemsExecutionState.Running = firstRunningStateAfterPaused
+
+            do {
+                val currState = awaitItem()
+                if (currState is ItemsExecutionState.Finished) {
+                    // last running state, should have complete progress
+                    assertEquals(prevState.totalProgress, Progress.COMPLETE)
+                    running = false
+                } else {
+                    assertIs<ItemsExecutionState.Running>(currState)
+                    prevState = currState
+                }
+            } while (running)
+
+            expectNoEvents()
+        }
+    }
+
     // TODO: test for repetitive execution when implemented
 
     private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecution {
