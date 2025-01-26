@@ -54,7 +54,8 @@ struct TimedWorkoutView: View {
         if let viewData: TimedWorkoutViewData = content.viewData() {
             TimedWorkoutContentView(
                 data: viewData,
-                onPlayClicked: { viewModel.start() }
+                onPlayClicked: { viewModel.start() },
+                onPauseClicked: viewData.pauseButtonState.onClickAction
             )
         } else {
             Text("Something went wrong...") // TODO: error state
@@ -68,6 +69,7 @@ struct TimedWorkoutContentView: View {
 
     let data: TimedWorkoutViewData
     let onPlayClicked: () -> Void
+    let onPauseClicked: (() -> Void)?
 
     @State
     private var timerViewSize: CGSize = .zero
@@ -75,10 +77,12 @@ struct TimedWorkoutContentView: View {
 
     init (
         data: TimedWorkoutViewData,
-        onPlayClicked: @escaping () -> Void = {}
+        onPlayClicked: @escaping () -> Void = {},
+        onPauseClicked: (() -> Void)? = nil
     ) {
         self.data = data
         self.onPlayClicked = onPlayClicked
+        self.onPauseClicked = onPauseClicked
     }
 
     var body: some View {
@@ -100,7 +104,7 @@ struct TimedWorkoutContentView: View {
             }
 
             HStack(alignment: .center) {
-                PauseButton {}
+                PauseButton { self.onPauseClicked?() }
                     .opacity(data.pauseButtonVisible ? 1 : 0)
                     .animation(.easeIn(duration: animationDuration), value: data.pauseButtonVisible)
                     .transition(.scale)
@@ -138,9 +142,6 @@ private struct ExerciseView: View {
     let playButtonState: ButtonState
     let progress: Double
     let setDuration: TimeInterval
-
-    @State
-    private var progressAnimated: CGFloat = 0
     let animationDuration: TimeInterval
 
     @State var opacity: Double = 1
@@ -187,7 +188,7 @@ private struct ExerciseView: View {
 
                 PercentageRing(
                     ringWidth: 6,
-                    percent: progressAnimated * 100,
+                    percent: progress * 100,
                     backgroundColor: .clear,
                     foregroundColors: [Theme.Colors.secondaryColor]
                 )
@@ -202,12 +203,6 @@ private struct ExerciseView: View {
             withAnimation(.easeInOut(duration: animationDuration)) {
                 self.opacity = newState.isVisible ? 1 : 0
             }
-//        }.onChange(of: progress, initial: false) { _, nextProgress in
-//            let ticks = 100
-//            let currProgress = progressAnimated
-//            self.timer.restartWith(interval: setDuration, ticks: ticks) { _ in
-//                self.progressAnimated += (nextProgress - currProgress) / Double(ticks)
-//            }
         }
     }
 }
