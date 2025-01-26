@@ -229,7 +229,7 @@ struct HomeRootView_Previews: PreviewProvider {
                     )
                 )
             ],
-            
+
             configure: { data in
                 HomeRootContentView(
                     data: data

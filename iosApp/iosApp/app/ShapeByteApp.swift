@@ -13,7 +13,8 @@ struct ShapeByteApp: App {
         let platformDependencies = PlatformDependencyProvider(
             bundle: Bundle.main,
             coroutineScopeProviding: CoroutineScopeProvider(),
-            coroutineContextProvider: CoroutineContextProvider()
+            coroutineContextProvider: CoroutineContextProvider(),
+            appInfo: appInfo()
         )
 
         DPI.shared
@@ -38,5 +39,25 @@ struct ShapeByteApp: App {
             Text("Unit Tests running")
                 .titleMedium()
         }
+    }
+
+    private func appInfo() -> AppInfo {
+        let plistReader = InfoPlistReader()
+        let retVal = AppInfo(
+            packageName: plistReader.bundleIdentifier,
+            versionName: plistReader.appVersion,
+            versionCode: Int32(plistReader.buildVersion),
+            debugMode: isDebugBuild()
+        )
+
+        return retVal
+    }
+
+    private func isDebugBuild() -> Bool {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
     }
 }

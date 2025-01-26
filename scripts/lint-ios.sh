@@ -9,7 +9,10 @@ script_directory=$(dirname "$script_path")
 source "$script_directory/core/logging.sh"
 
 lint() {
-     swiftlint "$script_directory/../iosApp"
+  #auto fix first
+  swiftlint --fix "$script_directory/../iosApp"
+  #check if there are still some errors
+  swiftlint "$script_directory/../iosApp"
 }
 
 iOSLogI "📋 Starting lint checks ..."

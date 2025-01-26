@@ -169,7 +169,7 @@ private struct ExerciseView: View {
 
     var body: some View {
         ZStack {
-            PlayButtonLarge(
+            PlayButton(
                 action: {
                     self.playButtonState.onClickAction?()
                 }

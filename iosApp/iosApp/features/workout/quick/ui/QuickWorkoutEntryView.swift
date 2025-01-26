@@ -32,7 +32,7 @@ struct QuickWorkoutEntryView: View {
         self.init(
             name: workout.name,
             teaser: workout.shortDescription,
-            imageName: workout.image.fileNameWithoutEnding,
+            imageName: workout.image.id,
             onClicked: onClicked
         )
     }
@@ -84,86 +84,30 @@ struct QuickWorkoutEntryView: View {
 }
 
 struct QuickWorkoutEntryView_Previews: PreviewProvider {
-    enum State: Identifiable {
-        case data(name: String, teaser: String, imageName: String)
-        case workout(workout: Workout)
-
-        var id: String {
-            switch self {
-            case .data(let name, let teaser, let imageName):
-                return name + teaser + imageName
-            case .workout(let workout):
-                return workout.name + workout.shortDescription + workout.image.assetName
-            }
-        }
-    }
-
     static var previews: some View {
         snapshots.previews.previewLayout(.device)
     }
 
-    static var snapshots: PreviewSnapshots<[State]> {
+    static var snapshots: PreviewSnapshots<[Workout]> {
         PreviewSnapshots(
             configurations: [
                 .init(
                     name: "Default",
                     state: [
-                        .data(
-                            name: "HIIT Workout",
-                            teaser: "20 min, legs",
-                            imageName: "squats"
-                        ),
-
-                            .data(
-                                name: "HIIT Workout long text",
-                                teaser: "20 min, legs",
-                                imageName: "squats"
-                            ),
-
-                            .data(
-                                name: "HIIT Workout",
-                                teaser: "20 min, legs, core, chest",
-                                imageName: "squats"
-                            ),
-
-                            .data(
-                                name: "HIIT Workout long text",
-                                teaser: "20 min, legs, core, chest",
-                                imageName: "squats"
-                            ),
-
-                            .workout(
-                                workout:
-                                    Workout(
-                                        id: 1,
-                                        name: "Workout",
-                                        shortDescription: "legs, core",
-                                        image: ImageAsset(assetName: "squats"),
-                                        type: WorkoutTypeTimedInterval(
-                                            highDurationSec: 10,
-                                            lowDurationSec: 10,
-                                            rounds: 2
-                                        )
-                                    )
-                            )
+                        QuickWorkoutsPreviewDataProvider.shared.hiit,
+                        QuickWorkoutsPreviewDataProvider.shared.hiitLongTitle,
+                        QuickWorkoutsPreviewDataProvider.shared.hiitLongDescription,
+                        QuickWorkoutsPreviewDataProvider.shared.hiitLongTitleAndDesc
                     ]
                 )
             ],
 
             configure: { states in
                 VStack(spacing: Theme.spacings.tiny) {
-                    ForEach(states) { state in
-                        switch state {
-                        case .data(let name, let teaser, let imageName):
-                            QuickWorkoutEntryView(name: name, teaser: teaser, imageName: imageName)
-                                .snapshotSetup()
-                                .background(Theme.Colors.backgroundColor)
-
-                        case .workout(let workout):
-                            QuickWorkoutEntryView(workout: workout)
-                                .snapshotSetup()
-                                .background(Theme.Colors.backgroundColor)
-                        }
+                    ForEach(states) { workout in
+                        QuickWorkoutEntryView(workout: workout)
+                            .snapshotSetup()
+                            .background(Theme.Colors.backgroundColor)
                     }
                 }
             }

@@ -5,9 +5,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
-import de.stefan.lang.shapebyte.app.domain.AppInitializationUseCase
 import de.stefan.lang.shapebyte.app.domain.AppInitializationState
+import de.stefan.lang.shapebyte.app.domain.AppInitializationUseCase
 import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
 import io.mockk.mockkObject
@@ -84,7 +85,13 @@ class AppInitializationUseCaseTest {
         val platformDependencies = PlatformDependencyProvider(
             applicationContext = appContext,
             coroutineScopeProviding = testCoroutineScopeProvider,
-            coroutineContextProvider = testCoroutineContextProvider
+            coroutineContextProvider = testCoroutineContextProvider,
+            appInfo = AppInfo(
+                packageName = "de.stefan.lang.shapebyte",
+                versionName = "1.0",
+                versionCode = 0,
+                debugMode = true
+            )
         )
 
         sut.invoke(platformDependencies)

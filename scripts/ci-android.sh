@@ -41,4 +41,12 @@ if [ $return_code -ne 0 ]; then
   exit $ERROR_ANDROID_INSTRUMENTED_TESTS_FAILED
 fi
 
+### Android snapshot tests ###
+"$script_directory/snapshot_tests-android.sh"
+return_code=$?
+if [ $return_code -ne 0 ]; then
+  # shellcheck disable=SC2086
+  exit $ERROR_ANDROID_SNAPSHOT_TESTS_FAILED
+fi
+
 exit 0

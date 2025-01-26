@@ -9,9 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import de.stefan.lang.shapebyte.android.utils.assets.assetsPath
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
+import de.stefan.lang.shapebyte.utils.image.data.Image
+import de.stefan.lang.shapebyte.utils.image.data.ImageResource
 import java.io.IOException
 
 @Composable
@@ -29,14 +32,26 @@ fun AsyncImage(
 
 @Composable
 fun AsyncImage(
-    asset: ImageAsset?,
+    image: Image?,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
 ) {
-    if (asset == null) {
+    if (image == null) {
         return
     }
 
+    when (image) {
+        is ImageAsset -> ShowImageAsset(image, modifier, contentDescription)
+        is ImageResource -> ShowImageResource(image, modifier, contentDescription)
+    }
+}
+
+@Composable
+private fun ShowImageAsset(
+    asset: ImageAsset,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+) {
     if (LocalInspectionMode.current) {
         loadImageFromAssets(LocalContext.current, asset.subPath)?.let {
             Image(
@@ -52,6 +67,20 @@ fun AsyncImage(
             contentDescription = contentDescription,
         )
     }
+}
+
+@Composable
+private fun ShowImageResource(
+    imageResource: ImageResource,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+) {
+    val resId = ImageMapper.resIdFor(imageResource)
+    Image(
+        painter = painterResource(id = resId),
+        modifier = modifier,
+        contentDescription = contentDescription,
+    )
 }
 
 private fun loadImageFromAssets(context: Context, imageName: String): Bitmap? {

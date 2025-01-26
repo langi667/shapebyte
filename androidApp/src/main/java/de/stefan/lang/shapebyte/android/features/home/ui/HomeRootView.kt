@@ -25,15 +25,15 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.navigation.navigateToQuickWorkouts
-import de.stefan.lang.shapebyte.android.shared.content.ui.ContentView
+import de.stefan.lang.shapebyte.android.shared.contentview.ui.ContentView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
-import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.history.ui.preview.WorkoutHistoryPreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.quick.ui.preview.QuickWorkoutsPreviewDataProvider
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
-import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.getViewModel
 import kotlin.math.max
@@ -189,15 +189,51 @@ private fun headerScale(
 fun HomeRootViewPreview() {
     val uiState = UIState.Data(
         HomeRootViewData(
-            quickWorkouts = List(5) {
-                Workout(
-                    id = it,
-                    name = "HIIT Workout ${it + 1}",
-                    shortDescription = "${20 + it} min. legs, core",
-                    image = ImageAsset("sprints.png"),
-                    type = WorkoutType.Timed.Interval(30, 30, 1),
-                )
-            },
+            quickWorkouts = QuickWorkoutsPreviewDataProvider.previewData,
+            recentHistory = WorkoutHistoryPreviewDataProvider.previewData,
+        ),
+    )
+
+    PreviewContainer {
+        HomeRootView(uiState)
+    }
+}
+
+@Preview
+@Composable
+fun HomeRootViewPreviewEmpty() {
+    val uiState = UIState.Data(
+        HomeRootViewData(
+            quickWorkouts = emptyList(),
+        ),
+    )
+
+    PreviewContainer {
+        HomeRootView(uiState)
+    }
+}
+
+@Preview
+@Composable
+fun HomeRootViewPreviewHistoryOnly() {
+    val uiState = UIState.Data(
+        HomeRootViewData(
+            quickWorkouts = emptyList(),
+            recentHistory = WorkoutHistoryPreviewDataProvider.previewData,
+        ),
+    )
+
+    PreviewContainer {
+        HomeRootView(uiState)
+    }
+}
+
+@Preview
+@Composable
+fun HomeRootViewPreviewQuickWorkoutsOnly() {
+    val uiState = UIState.Data(
+        HomeRootViewData(
+            quickWorkouts = QuickWorkoutsPreviewDataProvider.previewData,
         ),
     )
 

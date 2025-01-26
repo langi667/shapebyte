@@ -2,7 +2,6 @@ package de.stefan.lang.shapebyte.features.workout.di
 
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
-import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks
 import de.stefan.lang.shapebyte.features.workout.history.domain.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
@@ -21,6 +20,7 @@ import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsD
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
+import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
 import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase

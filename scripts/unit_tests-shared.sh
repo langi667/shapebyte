@@ -4,9 +4,11 @@ script_directory=$(dirname "$script_path")
 cd "$script_directory/../" || exit 200
 
 source "$script_directory/core/logging.sh"
+source "$script_directory/core/android-settings.sh"
 
 sharedLogI "👩‍🔬 Start unit tests ..."
-./gradlew :shared:connectedAndroidTest :shared:iosSimulatorArm64Test :shared:testDebugUnitTest
+start_emulator
+./gradlew :shared:connectedAndroidTest :shared:iosSimulatorArm64Test :shared:testDebugUnitTest -Pandroid.testInstrumentationRunnerArguments.emulator=true
 
 return_code=$?
 if [ $return_code -eq 0 ]; then

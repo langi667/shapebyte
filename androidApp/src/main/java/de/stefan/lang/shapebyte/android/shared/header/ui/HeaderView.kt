@@ -81,7 +81,7 @@ fun HeaderView(
 
 @Preview
 @Composable
-fun PreviewHeaderView() {
+fun HeaderViewPreview() {
     PreviewContainer { theme ->
         Box(
             modifier = Modifier.background(theme.current.colorScheme.secondary),

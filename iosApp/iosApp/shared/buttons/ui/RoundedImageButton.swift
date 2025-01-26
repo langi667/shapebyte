@@ -60,4 +60,3 @@ struct RoundedImageButton_Previews: PreviewProvider {
         )
     }
 }
-

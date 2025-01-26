@@ -24,7 +24,7 @@ fun PlayButton(
 
 @Preview
 @Composable
-private fun PlayButtonPreview() {
+fun PlayButtonPreview() {
     PreviewContainer {
         PlayButton { /* No Op */ }
     }
