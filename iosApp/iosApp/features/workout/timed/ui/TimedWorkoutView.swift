@@ -45,7 +45,7 @@ struct TimedWorkoutView: View {
             }
         }
         .onAppear {
-            viewModel.update(workoutId: self.workoutId)
+            viewModel.load(workoutId: self.workoutId)
         }
     }
 
@@ -278,7 +278,7 @@ struct TimedWorkoutView_Previews: PreviewProvider {
                         playButtonState: ButtonState.Visible(onClick: {}),
                         pauseButtonState: ButtonState.Hidden.shared,
                         stopButtonState: ButtonState.Hidden.shared,
-                        item: ExerciseExecutionInfo(
+                        exercise: ExerciseExecutionInfo(
                             exercise: Exercise.companion.None,
                             intervalExerciseInfo: IntervalExerciseInfo.none
                         ),

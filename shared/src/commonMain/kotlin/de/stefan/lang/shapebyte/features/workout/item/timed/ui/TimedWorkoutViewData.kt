@@ -16,7 +16,7 @@ data class TimedWorkoutViewData(
     val playButtonState: ButtonState = ButtonState.Hidden,
     val pauseButtonState: ButtonState = ButtonState.Hidden,
     val stopButtonState: ButtonState = ButtonState.Hidden,
-    val item: Item? = null,
+    val exercise: Item? = null,
     val backgroundColor: ColorDescriptor.Themed = ColorDescriptor.Background,
     val launchState: TimedWorkoutViewModel.LaunchState = TimedWorkoutViewModel.LaunchState.Idle,
 ) {
@@ -31,5 +31,5 @@ data class TimedWorkoutViewData(
         get() = stopButtonState.isVisible
 
     // TODO: Test
-    val exerciseImage: ImageAsset? get() = (item as? ImageContaining)?.imageAsset
+    val exerciseImage: ImageAsset? get() = (exercise as? ImageContaining)?.imageAsset
 }

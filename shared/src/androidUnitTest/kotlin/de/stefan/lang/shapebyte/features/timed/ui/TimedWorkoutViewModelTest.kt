@@ -41,7 +41,7 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
     }
 
     @Test
-    fun `update should update data`() = test {
+    fun `load should load workout data`() = test {
         featureDatasource.addFeatureToggle(
             FeatureToggle(
                 FeatureId.QUICK_WORKOUTS.name,
@@ -52,7 +52,7 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
         val sut = createSUT()
         val workoutId = 1
         val workout = datasource.workouts.firstOrNull { it.id == workoutId }
-        sut.update(1)
+        sut.load(1)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -87,11 +87,10 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
         )
 
         val sut = createSUT()
-
         val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
-        sut.update(workout.id)
+        sut.load(workout.id)
 
         // Initial/ Update state
         sut.state.test {
@@ -142,10 +141,10 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
                     remaining.add(item.data.remainingTotal)
                 }
 
-                val setDuration = if (started) {
-                    1000
-                } else {
+                val setDuration = if (item.data.exercise == null) {
                     0
+                } else {
+                    1000
                 }
 
                 assertEquals(setDuration, item.data.setDuration)
@@ -189,7 +188,7 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
         val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
-        sut.update(workout.id)
+        sut.load(workout.id)
 
         val elapsed = mutableListOf<String>()
         val remaining = mutableListOf<String>()
@@ -218,13 +217,13 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
                     remaining.add(data.remainingTotal)
 
                     if (data.progressTotal >= 0.5f) {
-                        sut.pauseOrStart()
+                        sut.pauseOrStartWorkout()
                         isRunning = false
                     }
                 }
             } while (isRunning)
 
-            // TODO: check why need to be called
+            // TODO: check why still is Running here
             awaitItem()
             val item = awaitItem()
             assertEquals(TimedWorkoutViewModel.LaunchState.Pause, sut.launchState)
@@ -234,7 +233,7 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
         }
 
         // resuming
-        sut.pauseOrStart()
+        sut.pauseOrStartWorkout()
 
         sut.state.test {
             awaitItem()

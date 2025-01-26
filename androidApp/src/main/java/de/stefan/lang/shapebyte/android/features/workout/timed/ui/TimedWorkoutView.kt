@@ -60,7 +60,7 @@ fun TimedWorkoutView(workoutId: Int, modifier: Modifier = Modifier) {
     val viewModel: TimedWorkoutViewModel = getViewModel()
 
     LaunchedEffect("Initial") {
-        viewModel.update(workoutId)
+        viewModel.load(workoutId)
     }
 
     val uiState = viewModel.state.collectAsStateWithLifecycle().value

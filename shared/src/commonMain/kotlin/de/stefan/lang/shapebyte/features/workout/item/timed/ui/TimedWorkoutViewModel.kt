@@ -21,6 +21,7 @@ import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
 import de.stefan.lang.shapebyte.utils.logging.Logging
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -63,20 +64,27 @@ class TimedWorkoutViewModel(
 
     private var remainingTotal: Duration = Duration.ZERO
     private var elapsedTotal: Duration = Duration.ZERO
-    private var workoutExecution: ItemsExecution? = null
+    private var itemsExecution: ItemsExecution? = null
+    private var loadWorkoutJob: Job? = null
 
-    fun update(workoutId: Int) {
+    fun load(workoutId: Int) {
         _state.value = UIState.Loading
 
-        scope.launch {
+        loadWorkoutJob = scope.launch {
             quickWorkoutForIdUseCase
                 .invoke(workoutId)
                 .asResultFlow()
                 .collectLatest {
                     when (it) {
-                        is LoadState.Success -> { handleWorkoutLoaded(it.data) }
-                        is LoadState.Error -> { /* TODO: Handle */ }
+                        is LoadState.Success -> {
+                            handleWorkoutDataLoaded(it.data)
+                        }
+
+                        is LoadState.Error -> {
+                            /* TODO: Handle */
+                        }
                     }
+                    stopLoadingWorkoutData()
                 }
         }
     }
@@ -92,17 +100,22 @@ class TimedWorkoutViewModel(
             return
         }
 
-        workoutExecution = itemsExecutionBuilder.buildWith(workoutNotNull.type)
-        startWorkoutExecution()
+        itemsExecution = itemsExecutionBuilder.buildWith(workoutNotNull.type)
+        startWorkout()
     }
 
-    fun pauseOrStart() {
-        workoutExecution?.pauseOrStart(scope)
+    fun pauseOrStartWorkout() {
+        itemsExecution?.pauseOrStart(scope)
     }
 
-    private fun startWorkoutExecution() {
-        val workoutExecutionNotNull = workoutExecution ?: run {
-            logE("Cannot start, workoutExecution is null")
+    private fun stopLoadingWorkoutData() {
+        loadWorkoutJob?.cancel()
+        loadWorkoutJob = null
+    }
+
+    private fun startWorkout() {
+        val itemsExecutionNotNull = itemsExecution ?: run {
+            logE("Cannot start, ItemsExecution is null")
             return
         }
 
@@ -112,23 +125,27 @@ class TimedWorkoutViewModel(
 
         scope.launch {
             if (prevState == LaunchState.Finished) {
-                createViewData(progress = Progress.ZERO)
+                createViewData(exerciseProgress = Progress.ZERO)
             }
 
-            workoutExecutionNotNull
+            itemsExecutionNotNull
                 .state
                 .collectLatest {
                     when (it) {
+                        is ItemsExecutionState.Started -> {
+                            handleWorkoutStarted()
+                        }
+
                         is ItemsExecutionState.Running -> {
-                            updateWithStateRunning(it)
+                            handleWorkoutRunning(it)
                         }
 
                         is ItemsExecutionState.Paused -> {
-                            updateWithStatePaused()
+                            handleWorkoutPaused()
                         }
 
                         is ItemsExecutionState.Finished -> {
-                            finish()
+                            finishWorkout()
                         }
 
                         else -> {
@@ -138,83 +155,119 @@ class TimedWorkoutViewModel(
                 }
         }
 
-        workoutExecutionNotNull.start(scope)
+        itemsExecutionNotNull.start(scope)
     }
 
-    private fun updateWithStatePaused() {
+    private fun handleWorkoutPaused() {
+        launchState = LaunchState.Pause
         val currState = this._state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
             logW("Cannot perform updateUI, TimedWorkoutViewData is null")
             return
         }
 
-        this.launchState = LaunchState.Pause
-        updateUIStateWithData(currState.copy(launchState = LaunchState.Pause))
+        updateUIStateWithData(currState.copy(launchState = launchState))
     }
 
-    private fun updateWithStateRunning(workoutState: ItemsExecutionState.Running) {
-        val currState = state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
+    private fun handleWorkoutStarted() {
+        updateUIStateWithData(createViewData())
+    }
+
+    private fun handleWorkoutRunning(workoutState: ItemsExecutionState.Running) {
+        launchState = LaunchState.Running
+
+        val currState = this._state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
             logW("Cannot perform updateUI, TimedWorkoutViewData is null")
             return
         }
 
-        launchState = LaunchState.Running
-
-        val nextState = when (val currItemState = workoutState.itemState) {
+        val nextState = when (val currExerciseState = workoutState.itemState) {
             is ItemExecutionState.SetStarted -> {
-                viewDataForExerciseSetStarted(currItemState)
-                // currState.copy(progressTotal = workoutState.totalProgress.value, launchState = launchState)
+                updateWorkoutTimes(currExerciseState)
+
+                viewDataForExerciseSetStarted(
+                    workoutState = workoutState,
+                    exerciseState = currExerciseState,
+                )
             }
 
             is ItemExecutionState.SetRunning -> {
-                currState.copy(progressTotal = workoutState.totalProgress.value, launchState = launchState)
+                viewDataForExerciseSetRunning(
+                    workoutState = workoutState,
+                    exerciseState = currExerciseState,
+                )
             }
 
             is ItemExecutionState.SetFinished -> {
-                viewDataForExerciseSetFinished(currItemState)
+                updateWorkoutTimes(currExerciseState)
+                viewDataForExerciseSetFinished(currExerciseState)
             }
+
             else -> {
                 currState
             }
         }
 
-        _state.value = UIState.Data(nextState)
+        updateUIStateWithData(nextState)
+    }
+
+    private fun updateWorkoutTimes(state: ItemExecutionState.Running<*>) {
+        val setData = state.setData as? TimedItemExecutionData ?: return
+
+        elapsedTotal += setData.setTimePassed
+        remainingTotal -= setData.setTimePassed
     }
 
     private fun viewDataForExerciseSetStarted(
-        itemState: ItemExecutionState.SetStarted<*>,
+        workoutState: ItemsExecutionState.Running,
+        exerciseState: ItemExecutionState.SetStarted<*>,
     ): TimedWorkoutViewData {
-        val data = itemState.setData as? TimedItemExecutionData ?: run {
-            logW("Cannot perform updateUI, TimedItemExecutionData is null")
+        val data = exerciseState.setData as? TimedItemExecutionData ?: run {
+            logW("Cannot perform viewDataForExerciseSetStarted, TimedItemExecutionData is null")
             return TimedWorkoutViewData()
         }
 
         return createViewData(
-            timePassed = data.setTimePassed,
-            setRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
             setDuration = data.setDuration.inWholeMilliseconds.toInt(),
-            item = itemState.item,
-            progress = itemState.totalProgress,
+            exerciseTimeRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
+            exercise = exerciseState.item,
+            exerciseProgress = workoutState.totalProgress,
+        )
+    }
+
+    private fun viewDataForExerciseSetRunning(
+        workoutState: ItemsExecutionState.Running,
+        exerciseState: ItemExecutionState.SetRunning<*>,
+    ): TimedWorkoutViewData {
+        val data = exerciseState.setData as? TimedItemExecutionData ?: run {
+            logW("Cannot perform viewDataForExerciseSetRunning, TimedItemExecutionData is null")
+            return TimedWorkoutViewData()
+        }
+
+        return createViewData(
+            setDuration = data.setDuration.inWholeMilliseconds.toInt(),
+            exerciseTimeRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
+            exercise = exerciseState.item,
+            exerciseProgress = workoutState.totalProgress,
         )
     }
 
     private fun viewDataForExerciseSetFinished(
-        itemState: ItemExecutionState.SetFinished<*>,
+        exerciseState: ItemExecutionState.SetFinished<*>,
     ): TimedWorkoutViewData {
-        val data = itemState.setData as? TimedItemExecutionData ?: run {
-            logW("Cannot perform updateUI, TimedItemExecutionData is null")
+        val data = exerciseState.setData as? TimedItemExecutionData ?: run {
+            logW("Cannot perform viewDataForExerciseSetFinished, TimedItemExecutionData is null")
             return TimedWorkoutViewData()
         }
 
         return createViewData(
-            timePassed = data.setTimePassed,
-            setRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
+            exerciseTimeRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
             setDuration = data.setDuration.inWholeMilliseconds.toInt(),
-            item = itemState.item,
-            progress = itemState.totalProgress,
+            exercise = exerciseState.item,
+            exerciseProgress = exerciseState.totalProgress,
         )
     }
 
-    private fun handleWorkoutLoaded(workout: Workout) {
+    private fun handleWorkoutDataLoaded(workout: Workout) {
         this.workout = workout
 
         updateWorkoutInitialTimes()
@@ -230,7 +283,7 @@ class TimedWorkoutViewModel(
         val workoutType = workoutNotNull.type as? WorkoutType.Timed.Interval ?: run {
             logE(
                 "Unable to perform updateWorkoutInitialTimes, expected workout type to be " +
-                    "WorkoutType.Timed.Interval, but got ${workoutNotNull.type }",
+                    "WorkoutType.Timed.Interval, but got ${workoutNotNull.type}",
             )
             return
         }
@@ -240,23 +293,29 @@ class TimedWorkoutViewModel(
     }
 
     private fun createViewData(
-        timePassed: Duration = Duration.ZERO,
-        setRemaining: Int = 0,
         setDuration: Int = 0,
-        item: Item? = null,
-        progress: Progress = Progress.ZERO,
+        exerciseTimeRemaining: Int = 0,
+        exercise: Item? = null,
+        exerciseProgress: Progress = Progress.ZERO,
     ): TimedWorkoutViewData {
-        elapsedTotal += timePassed
-        remainingTotal -= timePassed
-
         val defaultColor = ColorDescriptor.Background
-        val color = if (item is ExerciseExecutionInfo) {
-            when (item.intervalExerciseInfo) {
-                IntervalExerciseInfo.HIGH -> { ColorDescriptor.Primary }
-                IntervalExerciseInfo.LOW -> { ColorDescriptor.InversePrimary }
-                else -> { defaultColor }
+        val color = if (exercise is ExerciseExecutionInfo) {
+            when (exercise.intervalExerciseInfo) {
+                IntervalExerciseInfo.HIGH -> {
+                    ColorDescriptor.Primary
+                }
+
+                IntervalExerciseInfo.LOW -> {
+                    ColorDescriptor.InversePrimary
+                }
+
+                else -> {
+                    defaultColor
+                }
             }
-        } else { defaultColor }
+        } else {
+            defaultColor
+        }
 
         val remainingSeconds = ceil((remainingTotal).toDouble(DurationUnit.SECONDS)).toInt()
         val elapsedSeconds = ceil(elapsedTotal.toDouble(DurationUnit.SECONDS)).toInt()
@@ -266,14 +325,14 @@ class TimedWorkoutViewModel(
             remainingTotal = dateStringFormatter.formatSecondsToString(remainingSeconds),
             setDuration = setDuration,
             elapsedTotal = dateStringFormatter.formatSecondsToString(elapsedSeconds),
-            remaining = dateStringFormatter.formatSecondsToString(setRemaining),
+            remaining = dateStringFormatter.formatSecondsToString(exerciseTimeRemaining),
             playButtonState = if (isRunning) {
                 ButtonState.Hidden
             } else {
                 ButtonState.Visible { this.start() }
             },
             pauseButtonState = if (isRunning) {
-                ButtonState.Visible { this.pauseOrStart() }
+                ButtonState.Visible { this.pauseOrStartWorkout() }
             } else {
                 ButtonState.Hidden
             },
@@ -282,8 +341,8 @@ class TimedWorkoutViewModel(
             } else {
                 ButtonState.Hidden
             },
-            item = item,
-            progressTotal = progress.value,
+            exercise = exercise,
+            progressTotal = exerciseProgress.value,
             backgroundColor = color,
             launchState = this.launchState,
         )
@@ -293,13 +352,13 @@ class TimedWorkoutViewModel(
         _state.value = UIState.Data(viewData)
     }
 
-    private fun finish() {
+    private fun finishWorkout() {
         launchState = LaunchState.Finished
         remainingTotal = Duration.ZERO
         elapsedTotal = Duration.ZERO
 
         updateUIStateWithData(
-            createViewData(progress = Progress.COMPLETE),
+            createViewData(exerciseProgress = Progress.COMPLETE),
         )
     }
 }
