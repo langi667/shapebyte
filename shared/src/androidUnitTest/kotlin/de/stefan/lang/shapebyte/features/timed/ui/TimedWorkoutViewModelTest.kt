@@ -113,6 +113,9 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
             assertEquals(0f, dataState.data.progressTotal)
             assertFalse(dataState.data.pauseButtonVisible)
             assertFalse(dataState.data.stopButtonVisible)
+            assertTrue(dataState.data.playButtonVisible)
+
+            assertEquals(TimedWorkoutViewModel.LaunchState.Idle, dataState.data.launchState)
 
             assertEquals(workout, sut.workout)
             assertFalse(sut.isRunning)
@@ -150,7 +153,19 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
                 assertEquals(started, item.data.pauseButtonVisible)
             } while (sut.isRunning)
 
-            for (i in 0..workoutType.secondsTotal) {
+            val finishedState = awaitItem() as UIState.Data<*>
+
+            assertIs<UIState.Data<TimedWorkoutViewData>>(finishedState)
+            assertFalse(finishedState.data.pauseButtonVisible)
+            assertFalse(finishedState.data.stopButtonVisible)
+            assertTrue(finishedState.data.playButtonVisible)
+
+            assertFalse(sut.isRunning)
+            assertEquals("00:00", finishedState.data.elapsedTotal)
+            assertEquals("00:00", finishedState.data.remainingTotal)
+            assertEquals(TimedWorkoutViewModel.LaunchState.Finished, finishedState.data.launchState)
+
+            for (i in 0 until workoutType.secondsTotal) {
                 val currElapsed = dateTimeStringFormatter.formatSecondsToString(i)
                 val currRemaining =
                     dateTimeStringFormatter.formatSecondsToString(workoutType.secondsTotal - i)
@@ -158,6 +173,96 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
                 assertEquals(currElapsed, elapsed.distinct()[i])
                 assertEquals(currRemaining, remaining.distinct()[i])
             }
+        }
+    }
+
+    @Test
+    fun `pause must pause correctly`() = test {
+        featureDatasource.addFeatureToggle(
+            FeatureToggle(
+                FeatureId.QUICK_WORKOUTS.name,
+                FeatureToggleState.ENABLED,
+            ),
+        )
+
+        val sut = createSUT()
+        val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
+        val workoutType = workout.type as WorkoutType.Timed.Interval
+
+        sut.update(workout.id)
+
+        val elapsed = mutableListOf<String>()
+        val remaining = mutableListOf<String>()
+
+        // Initial/ Update state. Wait until data is updated
+        sut.state.test {
+            assertEquals(UIState.Loading, awaitItem())
+            val dataState = awaitItem() as UIState.Data<*>
+
+            assertIs<UIState.Data<TimedWorkoutViewData>>(dataState)
+            expectNoEvents()
+        }
+
+        sut.start()
+        assertTrue(sut.isRunning)
+
+        sut.state.test {
+            var isRunning = true
+
+            do {
+                val item = awaitItem()
+                if (item is UIState.Data<*>) {
+                    val data = item.data as TimedWorkoutViewData
+
+                    elapsed.add(data.elapsedTotal)
+                    remaining.add(data.remainingTotal)
+
+                    if (data.progressTotal >= 0.5f) {
+                        sut.pauseOrStart()
+                        isRunning = false
+                    }
+                }
+            } while (isRunning)
+
+            // TODO: check why need to be called
+            awaitItem()
+            val item = awaitItem()
+            assertEquals(TimedWorkoutViewModel.LaunchState.Pause, sut.launchState)
+            assertEquals(TimedWorkoutViewModel.LaunchState.Pause, item.dataOrNull<TimedWorkoutViewData>()?.launchState)
+
+            expectNoEvents()
+        }
+
+        // resuming
+        sut.pauseOrStart()
+
+        sut.state.test {
+            awaitItem()
+            var isRunning = true
+            do {
+                val item = awaitItem()
+
+                assertIs<UIState.Data<TimedWorkoutViewData>>(item)
+                if (item.data.launchState == TimedWorkoutViewModel.LaunchState.Running) {
+                    elapsed.add(item.data.elapsedTotal)
+                    remaining.add(item.data.remainingTotal)
+                }
+                else if (item.data.launchState == TimedWorkoutViewModel.LaunchState.Finished) {
+                    isRunning = false
+                }
+
+            } while (isRunning)
+
+            expectNoEvents()
+        }
+
+        for (i in 0 until workoutType.secondsTotal) {
+            val currElapsed = dateTimeStringFormatter.formatSecondsToString(i)
+            val currRemaining =
+                dateTimeStringFormatter.formatSecondsToString(workoutType.secondsTotal - i)
+
+            assertEquals(currElapsed, elapsed.distinct()[i])
+            assertEquals(currRemaining, remaining.distinct()[i])
         }
     }
 

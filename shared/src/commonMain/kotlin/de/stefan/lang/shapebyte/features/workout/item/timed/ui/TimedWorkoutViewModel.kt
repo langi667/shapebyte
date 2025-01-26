@@ -21,7 +21,6 @@ import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
 import de.stefan.lang.shapebyte.utils.logging.Logging
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -31,8 +30,6 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
-// TODO: test pause in launch state
-// TODO: test pause state in general
 class TimedWorkoutViewModel(
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilder,
@@ -66,7 +63,7 @@ class TimedWorkoutViewModel(
 
     private var remainingTotal: Duration = Duration.ZERO
     private var elapsedTotal: Duration = Duration.ZERO
-    private var itemsExecution: ItemsExecution? = null
+    private var workoutExecution: ItemsExecution? = null
 
     fun update(workoutId: Int) {
         _state.value = UIState.Loading
@@ -80,8 +77,6 @@ class TimedWorkoutViewModel(
                         is LoadState.Success -> { handleWorkoutLoaded(it.data) }
                         is LoadState.Error -> { /* TODO: Handle */ }
                     }
-                    // TODO: this is wrong, the job should be canceled, not the scope !!!
-                    cancel()
                 }
         }
     }
@@ -97,13 +92,17 @@ class TimedWorkoutViewModel(
             return
         }
 
-        itemsExecution = itemsExecutionBuilder.buildWith(workoutNotNull.type)
-        startItemsExecution()
+        workoutExecution = itemsExecutionBuilder.buildWith(workoutNotNull.type)
+        startWorkoutExecution()
     }
 
-    private fun startItemsExecution() {
-        val itemsExecutionNotNull = itemsExecution ?: run {
-            logE("Cannot start, ItemsExecution is null")
+    fun pauseOrStart() {
+        workoutExecution?.pauseOrStart(scope)
+    }
+
+    private fun startWorkoutExecution() {
+        val workoutExecutionNotNull = workoutExecution ?: run {
+            logE("Cannot start, workoutExecution is null")
             return
         }
 
@@ -111,14 +110,12 @@ class TimedWorkoutViewModel(
         launchState = LaunchState.Running
         updateWorkoutInitialTimes()
 
-        logD("Start item execution")
-
         scope.launch {
             if (prevState == LaunchState.Finished) {
                 createViewData(progress = Progress.ZERO)
             }
 
-            itemsExecutionNotNull
+            workoutExecutionNotNull
                 .state
                 .collectLatest {
                     when (it) {
@@ -141,7 +138,7 @@ class TimedWorkoutViewModel(
                 }
         }
 
-        itemsExecutionNotNull.start(scope)
+        workoutExecutionNotNull.start(scope)
     }
 
     private fun updateWithStatePaused() {
@@ -150,26 +147,30 @@ class TimedWorkoutViewModel(
             return
         }
 
+        this.launchState = LaunchState.Pause
         updateUIStateWithData(currState.copy(launchState = LaunchState.Pause))
     }
 
     private fun updateWithStateRunning(workoutState: ItemsExecutionState.Running) {
-        val currState = this._state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
+        val currState = state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
             logW("Cannot perform updateUI, TimedWorkoutViewData is null")
             return
         }
 
+        launchState = LaunchState.Running
+
         val nextState = when (val currItemState = workoutState.itemState) {
             is ItemExecutionState.SetStarted -> {
-                currState.copy(progressTotal = workoutState.totalProgress.value)
+                viewDataForExerciseSetStarted(currItemState)
+                // currState.copy(progressTotal = workoutState.totalProgress.value, launchState = launchState)
             }
 
             is ItemExecutionState.SetRunning -> {
-                currState.copy(progressTotal = workoutState.totalProgress.value)
+                currState.copy(progressTotal = workoutState.totalProgress.value, launchState = launchState)
             }
 
             is ItemExecutionState.SetFinished -> {
-                viewDataForItemSetFinished(currItemState)
+                viewDataForExerciseSetFinished(currItemState)
             }
             else -> {
                 currState
@@ -179,7 +180,24 @@ class TimedWorkoutViewModel(
         _state.value = UIState.Data(nextState)
     }
 
-    private fun viewDataForItemSetFinished(
+    private fun viewDataForExerciseSetStarted(
+        itemState: ItemExecutionState.SetStarted<*>,
+    ): TimedWorkoutViewData {
+        val data = itemState.setData as? TimedItemExecutionData ?: run {
+            logW("Cannot perform updateUI, TimedItemExecutionData is null")
+            return TimedWorkoutViewData()
+        }
+
+        return createViewData(
+            timePassed = data.setTimePassed,
+            setRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
+            setDuration = data.setDuration.inWholeMilliseconds.toInt(),
+            item = itemState.item,
+            progress = itemState.totalProgress,
+        )
+    }
+
+    private fun viewDataForExerciseSetFinished(
         itemState: ItemExecutionState.SetFinished<*>,
     ): TimedWorkoutViewData {
         val data = itemState.setData as? TimedItemExecutionData ?: run {
@@ -230,7 +248,6 @@ class TimedWorkoutViewModel(
     ): TimedWorkoutViewData {
         elapsedTotal += timePassed
         remainingTotal -= timePassed
-        logD("timePassed: ${remainingTotal - timePassed}")
 
         val defaultColor = ColorDescriptor.Background
         val color = if (item is ExerciseExecutionInfo) {
@@ -274,10 +291,6 @@ class TimedWorkoutViewModel(
 
     private fun updateUIStateWithData(viewData: TimedWorkoutViewData) {
         _state.value = UIState.Data(viewData)
-    }
-
-    private fun pauseOrStart() {
-        itemsExecution?.pauseOrStart(scope)
     }
 
     private fun finish() {

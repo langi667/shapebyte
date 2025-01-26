@@ -11,13 +11,6 @@ import de.stefan.lang.shapebyte.utils.image.data.ImageResource
 class QuickWorkoutsDatasourceMocks : QuickWorkoutsDatasource {
     val workouts = listOf(
         Workout(
-            id = 0,
-            name = "Simple test",
-            shortDescription = "Quick ",
-            image = ImageAsset(assetName = "sprints.png"),
-            type = WorkoutType.Timed.Interval(10, 0, 1),
-        ),
-        Workout(
             id = 1,
             name = "Interval",
             shortDescription = "Quick ",
