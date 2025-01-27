@@ -43,6 +43,8 @@ abstract class BaseDPI :
             coroutineContextProvider = data.coroutineContextProvider,
             coroutineScopeProviding = data.coroutineScopeProviding,
             appInfo = data.appInfo,
+            appContextProvider = data.appContextProvider,
+            appResourceProvider = data.appResourceProvider,
         )
     }
 

@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
+import de.stefan.lang.shapebyte.android.shared.resources.mapping.ResourceMapper
 import de.stefan.lang.shapebyte.android.utils.assets.assetsPath
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
 import de.stefan.lang.shapebyte.utils.image.data.Image
@@ -75,7 +76,7 @@ private fun ShowImageResource(
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
 ) {
-    val resId = ImageMapper.resIdFor(imageResource)
+    val resId = ResourceMapper.resIdFor(imageResource)
     Image(
         painter = painterResource(id = resId),
         modifier = modifier,
