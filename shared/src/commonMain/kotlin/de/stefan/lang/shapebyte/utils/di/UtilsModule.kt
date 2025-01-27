@@ -7,7 +7,7 @@ import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
 import de.stefan.lang.shapebyte.utils.audio.AudioPlayer
-import de.stefan.lang.shapebyte.utils.audio.AudioResourceFile
+import de.stefan.lang.shapebyte.utils.audio.AudioResource
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
@@ -40,7 +40,7 @@ interface UtilsModuleProviding {
     fun coroutineContextProvider(): CoroutineContextProviding
     fun coroutineScopeProvider(): CoroutineScopeProviding
     fun appInfo(): AppInfo
-    fun audioPlayer(audioResourceFile: AudioResourceFile): AudioPlayer
+    fun audioPlayer(audioResource: AudioResource): AudioPlayer
 }
 
 object UtilsModule :
@@ -61,7 +61,7 @@ object UtilsModule :
             single<CoroutineContextProviding> { coroutineContextProvider }
             single<CoroutineScopeProviding> { coroutineScopeProvider }
 
-            factory<AudioPlayer> { (file: AudioResourceFile) ->
+            factory<AudioPlayer> { (file: AudioResource) ->
                 AudioPlayer(
                     file = file,
                     appContextProvider = get(),
@@ -112,9 +112,9 @@ object UtilsModule :
     override fun coroutineContextProvider(): CoroutineContextProviding = get()
     override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
     override fun appInfo(): AppInfo = appInfo
-    override fun audioPlayer(audioResourceFile: AudioResourceFile): AudioPlayer = get(
+    override fun audioPlayer(audioResource: AudioResource): AudioPlayer = get(
         parameters = {
-            parametersOf(audioResourceFile)
+            parametersOf(audioResource)
         },
     )
 }

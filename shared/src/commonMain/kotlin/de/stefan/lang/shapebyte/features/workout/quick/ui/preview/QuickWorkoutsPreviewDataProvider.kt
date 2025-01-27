@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.quick.ui.preview
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsDatasourceMocks
-import de.stefan.lang.shapebyte.utils.image.data.ImageResource
+import de.stefan.lang.shapebyte.utils.image.ImageResource
 
 // TODO: consider using mock data from file
 object QuickWorkoutsPreviewDataProvider {

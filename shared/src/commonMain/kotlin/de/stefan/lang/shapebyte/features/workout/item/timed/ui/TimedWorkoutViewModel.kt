@@ -17,7 +17,7 @@ import de.stefan.lang.shapebyte.shared.loading.data.asResultFlow
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.Progress
-import de.stefan.lang.shapebyte.utils.audio.AudioResourceFile
+import de.stefan.lang.shapebyte.utils.audio.AudioResource
 import de.stefan.lang.shapebyte.utils.buttons.ButtonState
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
@@ -117,7 +117,7 @@ class TimedWorkoutViewModel(
 
     private fun startWorkout() {
         // TODO: testcode, remove
-        DPI.audioPlayer(AudioResourceFile("ding")).play()
+        DPI.audioPlayer(AudioResource("ding.mp3")).play()
 
         // ==========
         val itemsExecutionNotNull = itemsExecution ?: run {

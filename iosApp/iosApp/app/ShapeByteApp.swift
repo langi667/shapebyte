@@ -10,11 +10,14 @@ struct ShapeByteApp: App {
     }
 
     init() {
+        // TODO: check if that needs to be launched when using unit tests
         let platformDependencies = PlatformDependencyProvider(
             bundle: Bundle.main,
             coroutineScopeProviding: CoroutineScopeProvider(),
             coroutineContextProvider: CoroutineContextProvider(),
-            appInfo: appInfo()
+            appInfo: appInfo(),
+            appContextProvider: AppContextProvider(appContext: self),
+            appResourceProvider: AppResourceProvider()
         )
 
         DPI.shared

@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsError
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.utils.image.data.ImageResource
+import de.stefan.lang.shapebyte.utils.image.ImageResource
 
 @Suppress("MagicNumber")
 class QuickWorkoutsDatasourceMocks : QuickWorkoutsDatasource {

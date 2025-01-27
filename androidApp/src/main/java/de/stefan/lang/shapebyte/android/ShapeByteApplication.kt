@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.android
 
 import android.app.Application
-import de.stefan.lang.shapebyte.android.utils.audio.AudioMapper
+import de.stefan.lang.shapebyte.android.shared.resources.mapping.AudioMapper
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
@@ -28,7 +28,6 @@ class ShapeByteApplication : Application() {
                     versionCode = BuildConfig.VERSION_CODE,
                     debugMode = BuildConfig.DEBUG,
                 ),
-                audioMapping = AudioMapper,
                 appContextProvider = AppContextProvider(this),
                 appResourceProvider = AppResourceProvider(AudioMapper),
             ),

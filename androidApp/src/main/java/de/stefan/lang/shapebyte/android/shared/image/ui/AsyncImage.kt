@@ -11,11 +11,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
-import de.stefan.lang.shapebyte.android.shared.resources.mapping.ResourceMapper
+import de.stefan.lang.shapebyte.android.shared.resources.mapping.ImageMapper
 import de.stefan.lang.shapebyte.android.utils.assets.assetsPath
 import de.stefan.lang.shapebyte.utils.assets.ImageAsset
-import de.stefan.lang.shapebyte.utils.image.data.Image
-import de.stefan.lang.shapebyte.utils.image.data.ImageResource
+import de.stefan.lang.shapebyte.utils.image.Image
+import de.stefan.lang.shapebyte.utils.image.ImageResource
 import java.io.IOException
 
 @Composable
@@ -76,7 +76,7 @@ private fun ShowImageResource(
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
 ) {
-    val resId = ResourceMapper.resIdFor(imageResource)
+    val resId = ImageMapper.resIdFor(imageResource)
     Image(
         painter = painterResource(id = resId),
         modifier = modifier,

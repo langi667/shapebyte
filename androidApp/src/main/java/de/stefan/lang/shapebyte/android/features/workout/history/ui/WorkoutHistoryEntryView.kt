@@ -24,7 +24,8 @@ import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.ui.preview.WorkoutSchedulePreviewDataProvider
-import de.stefan.lang.shapebyte.utils.image.data.Image
+import de.stefan.lang.shapebyte.utils.image.Image
+import de.stefan.lang.shapebyte.utils.image.ImageResource
 
 @Composable
 fun WorkoutHistoryEntryView(
@@ -43,7 +44,7 @@ fun WorkoutHistoryEntryView(
 fun WorkoutHistoryEntryView(
     title: String,
     date: String,
-    image: Image,
+    image: ImageResource,
     modifier: Modifier = Modifier,
 ) = With { theme ->
     val bgShape = theme.current.shapes.extraLarge

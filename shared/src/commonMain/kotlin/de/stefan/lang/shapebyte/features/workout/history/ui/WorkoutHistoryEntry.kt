@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.history.ui
 
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
-import de.stefan.lang.shapebyte.utils.image.data.ImageResource
+import de.stefan.lang.shapebyte.utils.image.ImageResource
 
 data class WorkoutHistoryEntry(
     val entry: WorkoutScheduleEntry,

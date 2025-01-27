@@ -459,6 +459,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1DA299732CB5B52C00DBFA55 /* workout */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1D17A36A2CBEC739003E7FD8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1D17A36B2CBEC739003E7FD8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1D17A36C2CBEC739003E7FD8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1D31BB5B2CBD50C5002F5818 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = workout; sourceTree = "<group>"; };
+		DEC163062D4846E1004EAA5E /* sounds */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = sounds; sourceTree = "<group>"; };
 		F7037B722D1C5C80009D6024 /* appbar */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7037B7F2D1C9D34009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037B802D1C9D36009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F7037B812D1C9D38009D6024 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = appbar; sourceTree = "<group>"; };
 		F7037BAA2D1CA293009D6024 /* assets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = assets; sourceTree = "<group>"; };
 		F7037C3A2D1CAC88009D6024 /* shapes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = shapes; sourceTree = "<group>"; };
@@ -677,6 +678,7 @@
 		1DC097212C7B51AC0096CAE1 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				DEC163062D4846E1004EAA5E /* sounds */,
 				F769BE932D079274000519F3 /* navigation */,
 				1D27FBFF2CECB06500F7827E /* schemes */,
 				1DC097222C7B51B60096CAE1 /* ui */,
@@ -897,6 +899,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1DA299732CB5B52C00DBFA55 /* workout */,
+				DEC163062D4846E1004EAA5E /* sounds */,
 				F7037B722D1C5C80009D6024 /* appbar */,
 				F7037BAA2D1CA293009D6024 /* assets */,
 				F7037C3A2D1CAC88009D6024 /* shapes */,
@@ -934,6 +937,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1DA299732CB5B52C00DBFA55 /* workout */,
+				DEC163062D4846E1004EAA5E /* sounds */,
 				F7037B722D1C5C80009D6024 /* appbar */,
 				F7037BAA2D1CA293009D6024 /* assets */,
 				F7037C3A2D1CAC88009D6024 /* shapes */,
@@ -1010,6 +1014,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1DA299732CB5B52C00DBFA55 /* workout */,
+				DEC163062D4846E1004EAA5E /* sounds */,
 				F7037B722D1C5C80009D6024 /* appbar */,
 				F7037BAA2D1CA293009D6024 /* assets */,
 				F7037C3A2D1CAC88009D6024 /* shapes */,

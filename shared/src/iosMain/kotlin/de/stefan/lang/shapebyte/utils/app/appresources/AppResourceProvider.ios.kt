@@ -1,4 +1,7 @@
 package de.stefan.lang.shapebyte.utils.app.appresources
 
-actual class AppResourceProvider {
+import platform.Foundation.NSBundle
+
+actual class AppResourceProvider actual constructor() {
+    val mainBundle: NSBundle = NSBundle.mainBundle
 }

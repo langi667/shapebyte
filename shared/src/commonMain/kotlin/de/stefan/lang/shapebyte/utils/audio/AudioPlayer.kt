@@ -6,10 +6,11 @@ import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 
 expect class AudioPlayer(
-    file: AudioResourceFile,
+    file: AudioResource,
     appContextProvider: AppContextProvider,
     appResourceProvider: AppResourceProvider,
     logger: Logging,
 ) : Loggable {
+    override val logger: Logging
     fun play()
 }
