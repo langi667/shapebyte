@@ -40,6 +40,10 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         override fun pause(): Boolean {
             return false
         }
+
+        override fun stop(): Boolean {
+            return false
+        }
     }
 
     @Test
@@ -238,6 +242,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         }
     }
 
+    // TODO: Test stop
     // TODO: test for repetitive execution when implemented
 
     private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecution {

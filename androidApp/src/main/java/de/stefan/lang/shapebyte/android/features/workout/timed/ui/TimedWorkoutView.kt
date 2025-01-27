@@ -177,9 +177,7 @@ fun TimedWorkoutView(
                     StopButton(
                         modifier = Modifier
                             .alpha(stopButtonAlpha),
-                    ) {
-                        // TODO: Stop
-                    }
+                    ) { stopButtonState.onClickAction?.invoke() }
                 }
             }
         }

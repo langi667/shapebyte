@@ -6,6 +6,7 @@ import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
@@ -109,7 +110,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                 assertEquals(setFinishedState, awaitItem())
             }
 
-            assertEquals(ItemExecutionState.Finished(item), awaitItem())
+            assertEquals(ItemExecutionState.Finished(item, true), awaitItem())
             assertFalse(sut.isRunning)
 
             expectNoEvents()
@@ -139,7 +140,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
 
         sut.state.test {
             assertEquals(ItemExecutionState.Started(item), awaitItem())
-            assertEquals(ItemExecutionState.Finished(item), awaitItem())
+            assertEquals(ItemExecutionState.Finished(item, true), awaitItem())
             expectNoEvents()
         }
     }
@@ -203,7 +204,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                 assertEquals(setFinishedState, awaitItem())
             }
 
-            assertEquals(ItemExecutionState.Finished(item), awaitItem())
+            assertEquals(ItemExecutionState.Finished(item, true), awaitItem())
             assertFalse(sut.isRunning)
 
             expectNoEvents()
@@ -263,7 +264,7 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
                 assertIs<ItemExecutionState.SetFinished<*>>(setFinishedState)
             }
 
-            assertEquals(ItemExecutionState.Finished(item), awaitItem())
+            assertEquals(ItemExecutionState.Finished(item, true), awaitItem())
             assertFalse(sut.isRunning)
             expectNoEvents()
         }
@@ -282,6 +283,63 @@ class TimedItemExecutionTest : BaseCoroutineTest() {
             awaitItem()
             assertFalse(sut.pause())
         }
+    }
+
+    @Test
+    fun `stop should emit correct values`() = test {
+        val item = Exercise("Test")
+        val sut = createSUT(item, 3)
+
+        sut.start(this)
+
+        sut.state.test {
+            var finish = false
+            do {
+                when(val currItemState = awaitItem()){
+                    is ItemExecutionState.SetRunning<*> -> {
+                        val data = currItemState.setData as TimedItemExecutionData
+
+                        if (data.totalTimePassed == 1.seconds) {
+                            assertTrue( sut.stop() )
+                        }
+                    }
+
+                    is ItemExecutionState.Finished -> {
+                        finish = true
+                        assertEquals(ItemExecutionState.Finished(item, false), sut.state.value)
+                        expectNoEvents()
+                    }
+
+                    else -> continue
+                }
+
+            } while (!finish)
+            assertEquals(ItemExecutionState.Finished(item, false), sut.state.value)
+        }
+    }
+
+    @Test
+    fun `stop returns false if not started`() = test {
+        val item = Exercise("Test")
+        val sut = createSUT(item, 3)
+
+        assertFalse(sut.stop())
+    }
+
+    @Test
+    fun `stop returns false if finished`() = test {
+        val item = Exercise("Test")
+        val sut = createSUT(item, 4)
+
+        sut.start(this)
+
+        // wait until finished
+        sut.state.filterIsInstance<ItemExecutionState.Finished>().test {
+            awaitItem()
+            assertFalse(sut.stop())
+        }
+
+        assertFalse(sut.stop())
     }
 
     private fun createSUT(item: Item, seconds: Int): TimedItemExecution {

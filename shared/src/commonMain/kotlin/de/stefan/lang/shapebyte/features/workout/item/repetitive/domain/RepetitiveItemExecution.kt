@@ -116,9 +116,14 @@ class RepetitiveItemExecution(
         return false
     }
 
+    override fun stop(): Boolean {
+        // TODO: implement
+        return false
+    }
+
     private fun startSetForIndex(index: UInt) {
         if (index.toInt() >= sets.size) {
-            _state.value = ItemExecutionState.Finished(item)
+            _state.value = ItemExecutionState.Finished(item, true)
             return
         }
 

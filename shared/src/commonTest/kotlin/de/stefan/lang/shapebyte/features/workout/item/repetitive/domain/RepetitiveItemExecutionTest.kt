@@ -60,7 +60,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                     sut.state.value,
                 )
             } else {
-                assertEquals(ItemExecutionState.Finished(item), sut.state.value)
+                assertEquals(ItemExecutionState.Finished(item, true), sut.state.value)
             }
         }
     }
@@ -189,7 +189,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
                     sut.state.value,
                 )
             } else {
-                assertEquals(ItemExecutionState.Finished(item), sut.state.value)
+                assertEquals(ItemExecutionState.Finished(item, true), sut.state.value)
             }
         }
     }
@@ -304,7 +304,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
 
         // increase to 20 reps, means second set and therefor all sets are done
         sut.setInputValue(setRepetition)
-        assertEquals(ItemExecutionState.Finished(item), sut.state.value)
+        assertEquals(ItemExecutionState.Finished(item, true), sut.state.value)
     }
 
     @Test
@@ -320,7 +320,7 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
         val sut = createSUT(item, emptyList())
 
         assertTrue(sut.start(this))
-        assertEquals(ItemExecutionState.Finished(item), sut.state.value)
+        assertEquals(ItemExecutionState.Finished(item, true), sut.state.value)
     }
 
     private fun createSUT(

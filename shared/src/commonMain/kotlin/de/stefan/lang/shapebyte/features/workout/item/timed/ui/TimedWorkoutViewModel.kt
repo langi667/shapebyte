@@ -108,6 +108,10 @@ class TimedWorkoutViewModel(
         itemsExecution?.pauseOrStart(scope)
     }
 
+    fun stop() {
+        itemsExecution?.stop()
+    }
+
     private fun stopLoadingWorkoutData() {
         loadWorkoutJob?.cancel()
         loadWorkoutJob = null
@@ -337,7 +341,7 @@ class TimedWorkoutViewModel(
                 ButtonState.Hidden
             },
             stopButtonState = if (isRunning) {
-                ButtonState.Visible { /* TODO: stop action */ }
+                ButtonState.Visible { this.stop() }
             } else {
                 ButtonState.Hidden
             },

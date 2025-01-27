@@ -88,13 +88,23 @@ class TimedItemExecution(
         return true
     }
 
+    override fun stop(): Boolean {
+        if (!isRunning) {
+            logE("Cannot pause a set that is not running")
+            return false
+        }
+
+        invalidateJob()
+        _state.value = ItemExecutionState.Finished(item, false)
+        return true
+    }
+
     private fun startSets(
         scope: CoroutineScope,
         afterPause: Boolean = false,
         resumeCurrentSet: Duration = Duration.ZERO,
     ) = scope.launch {
         val totalTime = sets.sumSeconds()
-        logI("Starting timed item execution for ${item.name} with ${sets.size} sets and a total duration of $totalTime")
 
         var resumeAt = resumeCurrentSet
         var resumedAfterPause = afterPause
@@ -207,7 +217,7 @@ class TimedItemExecution(
             }
         }
 
-        _state.value = ItemExecutionState.Finished(item)
+        _state.value = ItemExecutionState.Finished(item, true)
     }
 
     private fun invalidateJob() {

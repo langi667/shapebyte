@@ -25,5 +25,5 @@ sealed class ItemsExecutionState {
     ) : Launched(totalProgress)
 
     data object Paused : ItemsExecutionState()
-    data object Finished : ItemsExecutionState()
+    data class Finished(val completed: Boolean) : ItemsExecutionState()
 }

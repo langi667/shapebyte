@@ -65,8 +65,6 @@ sealed interface ItemExecutionState<out T> {
         override val setData: T,
     ) : Running<T>
 
-    // TODO: maybe paused state
-
     data class Paused(val item: Item) : ItemExecutionState<Nothing>
-    data class Finished(val item: Item) : ItemExecutionState<Nothing>
+    data class Finished(val item: Item, val completed: Boolean) : ItemExecutionState<Nothing>
 }

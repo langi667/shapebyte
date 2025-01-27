@@ -26,8 +26,7 @@ sealed interface ItemExecuting<out STATE_DATA_CLASS, out ITEM_SET_CLASS : ItemSe
 
     fun start(scope: CoroutineScope): Boolean
     fun pause(): Boolean
-
-    // TODO: maybe stop/cancel
+    fun stop(): Boolean
 }
 
 interface ItemValueExecuting<

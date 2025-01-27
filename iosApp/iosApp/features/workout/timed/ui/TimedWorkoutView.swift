@@ -55,7 +55,8 @@ struct TimedWorkoutView: View {
             TimedWorkoutContentView(
                 data: viewData,
                 onPlayClicked: { viewModel.start() },
-                onPauseClicked: viewData.pauseButtonState.onClickAction
+                onPauseClicked: viewData.pauseButtonState.onClickAction,
+                onStopClicked: viewData.stopButtonState.onClickAction
             )
         } else {
             Text("Something went wrong...") // TODO: error state
@@ -70,6 +71,7 @@ struct TimedWorkoutContentView: View {
     let data: TimedWorkoutViewData
     let onPlayClicked: () -> Void
     let onPauseClicked: (() -> Void)?
+    let onStopClicked: (() -> Void)?
 
     @State
     private var timerViewSize: CGSize = .zero
@@ -78,11 +80,13 @@ struct TimedWorkoutContentView: View {
     init (
         data: TimedWorkoutViewData,
         onPlayClicked: @escaping () -> Void = {},
-        onPauseClicked: (() -> Void)? = nil
+        onPauseClicked: (() -> Void)? = nil,
+        onStopClicked: (() -> Void)? = nil
     ) {
         self.data = data
         self.onPlayClicked = onPlayClicked
         self.onPauseClicked = onPauseClicked
+        self.onStopClicked = onStopClicked
     }
 
     var body: some View {
@@ -120,7 +124,7 @@ struct TimedWorkoutContentView: View {
                 )
 
                 Spacer().frame(width: Theme.spacings.small)
-                StopButton {}
+                StopButton {  self.onStopClicked?()  }
                     .opacity(data.stopButtonVisible ? 1 : 0)
                     .animation(.easeIn(duration: animationDuration), value: data.stopButtonVisible)
                     .transition(.scale)
