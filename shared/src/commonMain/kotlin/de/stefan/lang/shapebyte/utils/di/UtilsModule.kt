@@ -6,8 +6,9 @@ import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
 import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
-import de.stefan.lang.shapebyte.utils.audio.AudioPlayer
-import de.stefan.lang.shapebyte.utils.audio.AudioResource
+import de.stefan.lang.shapebyte.utils.audio.AudioPlaying
+import de.stefan.lang.shapebyte.utils.audio.impl.AudioPlayer
+import de.stefan.lang.shapebyte.utils.audio.mocks.AudioPlayerMock
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
@@ -29,7 +30,6 @@ import de.stefan.lang.shapebyte.utils.logging.Logging
 import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import de.stefan.lang.shapebyte.utils.os.OperatingSystemInfoProviding
 import org.koin.core.component.get
-import org.koin.core.parameter.parametersOf
 
 interface UtilsModuleProviding {
     fun logger(): Logging
@@ -40,7 +40,7 @@ interface UtilsModuleProviding {
     fun coroutineContextProvider(): CoroutineContextProviding
     fun coroutineScopeProvider(): CoroutineScopeProviding
     fun appInfo(): AppInfo
-    fun audioPlayer(audioResource: AudioResource): AudioPlayer
+    fun audioPlayer(): AudioPlaying
 }
 
 object UtilsModule :
@@ -60,25 +60,24 @@ object UtilsModule :
             single<CoroutineScopeProviding> { coroutineScopeProvider }
             single<CoroutineContextProviding> { coroutineContextProvider }
             single<CoroutineScopeProviding> { coroutineScopeProvider }
-
-            factory<AudioPlayer> { (file: AudioResource) ->
+        },
+        appEnvironmentOnly = {
+            single<FileAssetLoading> { FileAssetLoader(logging = get()) }
+            single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
+            single<Logging> { Logger() }
+            factory<AudioPlaying> {
                 AudioPlayer(
-                    file = file,
                     appContextProvider = get(),
                     appResourceProvider = get(),
                     logger = get(),
                 )
             }
         },
-        appEnvironmentOnly = {
-            single<FileAssetLoading> { FileAssetLoader(logging = get()) }
-            single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
-            single<Logging> { Logger() }
-        },
         testEnvironmentOnly = {
             single<FileAssetLoading> { FileAssetLoaderMock() }
             single<Logging> { SilentLogger() }
             single<DeviceInfoProviding> { DeviceInfoMock() }
+            factory<AudioPlaying> { AudioPlayerMock() }
         },
     ),
     UtilsModuleProviding {
@@ -112,9 +111,5 @@ object UtilsModule :
     override fun coroutineContextProvider(): CoroutineContextProviding = get()
     override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
     override fun appInfo(): AppInfo = appInfo
-    override fun audioPlayer(audioResource: AudioResource): AudioPlayer = get(
-        parameters = {
-            parametersOf(audioResource)
-        },
-    )
+    override fun audioPlayer(): AudioPlaying = get()
 }

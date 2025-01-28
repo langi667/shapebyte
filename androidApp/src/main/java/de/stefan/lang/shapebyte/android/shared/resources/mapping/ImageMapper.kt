@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.android.shared.resources.mapping
 
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.utils.resources.Resource
 import de.stefan.lang.shapebyte.utils.resources.ResourceFile
 import de.stefan.lang.shapebyte.utils.resources.ResourceFileMapping
 
@@ -10,7 +9,7 @@ import de.stefan.lang.shapebyte.utils.resources.ResourceFileMapping
 // TODO: add fallback image to iOS
 // TODO: use DPI
 
-object ImageMapper: ResourceFileMapping {
+object ImageMapper : ResourceFileMapping {
     private val fallbackImage = R.drawable.fallback_img
 
     private val mapping = mapOf(

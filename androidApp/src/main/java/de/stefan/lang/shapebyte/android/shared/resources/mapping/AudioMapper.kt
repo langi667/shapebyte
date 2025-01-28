@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.android.shared.resources.mapping
 
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.utils.resources.Resource
 import de.stefan.lang.shapebyte.utils.resources.ResourceFile
 import de.stefan.lang.shapebyte.utils.resources.ResourceFileMapping
 

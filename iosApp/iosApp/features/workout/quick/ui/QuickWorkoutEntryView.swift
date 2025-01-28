@@ -13,7 +13,7 @@ import PreviewSnapshots
 struct QuickWorkoutEntryView: View {
     let name: String
     let teaser: String
-    let imageName: String
+    let image: shared.ImageResource
     let onClicked: () -> Void
 
     private let cornerRadius = Theme.Shapes.large
@@ -21,10 +21,15 @@ struct QuickWorkoutEntryView: View {
     private let maxViewWidth = Theme.dimensions.xLarge
     private let itemSpacing = Theme.spacings.xTiny
 
-    init(name: String, teaser: String, imageName: String, onClicked: @escaping () -> Void = {}) {
+    init(
+        name: String,
+        teaser: String,
+        image: shared.ImageResource,
+        onClicked: @escaping () -> Void = {}
+    ) {
         self.name = name
         self.teaser = teaser
-        self.imageName = imageName
+        self.image = image
         self.onClicked = onClicked
     }
 
@@ -32,7 +37,7 @@ struct QuickWorkoutEntryView: View {
         self.init(
             name: workout.name,
             teaser: workout.shortDescription,
-            imageName: workout.image.id,
+            image: workout.image,
             onClicked: onClicked
         )
     }
@@ -51,7 +56,7 @@ struct QuickWorkoutEntryView: View {
             text(name, isBold: true)
 
             VStack(alignment: .center) {
-                Image(imageName, bundle: Bundle.main)
+                Image(image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: imageSize, height: imageSize)

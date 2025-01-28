@@ -24,7 +24,6 @@ import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.ui.preview.WorkoutSchedulePreviewDataProvider
-import de.stefan.lang.shapebyte.utils.image.Image
 import de.stefan.lang.shapebyte.utils.image.ImageResource
 
 @Composable

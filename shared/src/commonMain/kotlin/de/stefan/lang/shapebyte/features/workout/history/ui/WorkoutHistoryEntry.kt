@@ -16,5 +16,5 @@ data class WorkoutHistoryEntry(
     }
 
     // TODO: receive from WorkoutScheduleEntry / Workout
-    val image: ImageResource by lazy { ImageResource(id = "sprints") }
+    val image: ImageResource by lazy { ImageResource(id = "sprints.png") }
 }

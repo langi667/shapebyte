@@ -1,16 +1,17 @@
-package de.stefan.lang.shapebyte.utils.audio
+package de.stefan.lang.shapebyte.utils.audio.impl
 
 import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
 import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
+import de.stefan.lang.shapebyte.utils.audio.AudioPlaying
+import de.stefan.lang.shapebyte.utils.audio.AudioResource
 import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 
 expect class AudioPlayer(
-    file: AudioResource,
     appContextProvider: AppContextProvider,
     appResourceProvider: AppResourceProvider,
     logger: Logging,
-) : Loggable {
+) : AudioPlaying, Loggable {
     override val logger: Logging
-    fun play()
+    override fun play(file: AudioResource)
 }

@@ -720,7 +720,7 @@
 			children = (
 				DE4993E02D2C066A0030AC2B /* plist */,
 				F7037B6C2D18A216009D6024 /* timer */,
-				F771CAE02D0A2F280096A873 /* images */,
+				F771CAE02D0A2F280096A873 /* image */,
 				F771CADA2D0A2E2E0096A873 /* colors */,
 				F7359C322CF70B4500A0BD53 /* designsystem */,
 				1D9DEDAC2CF4BB2A002D931B /* device */,
@@ -871,12 +871,12 @@
 			path = colors;
 			sourceTree = "<group>";
 		};
-		F771CAE02D0A2F280096A873 /* images */ = {
+		F771CAE02D0A2F280096A873 /* image */ = {
 			isa = PBXGroup;
 			children = (
 				F771CAE12D0A2F3A0096A873 /* ExtUIImage.swift */,
 			);
-			path = images;
+			path = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

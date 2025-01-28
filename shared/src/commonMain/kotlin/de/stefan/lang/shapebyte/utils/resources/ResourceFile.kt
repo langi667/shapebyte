@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.utils.resources
 
 // TODO: test
-interface ResourceFile: Resource {
+interface ResourceFile : Resource {
     val name: String
         get() = id
 

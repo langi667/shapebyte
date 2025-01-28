@@ -14,7 +14,7 @@ object QuickWorkoutsPreviewDataProvider {
     val hiit = Workout(
         name = "HIIT Workout",
         shortDescription = "20 min. legs, core",
-        image = ImageResource("sprints"),
+        image = ImageResource("sprints.png"),
         id = 1,
         type = WorkoutType.Timed.Interval(0, 0, 0),
     )
@@ -22,7 +22,7 @@ object QuickWorkoutsPreviewDataProvider {
     val hiitLongTitle = Workout(
         name = "very long HIIT Workout title that is too long",
         shortDescription = "20 min. legs, core",
-        image = ImageResource("sprints"),
+        image = ImageResource("sprints.png"),
         id = 2,
         type = WorkoutType.Timed.Interval(0, 0, 0),
     )
@@ -30,7 +30,7 @@ object QuickWorkoutsPreviewDataProvider {
     val hiitLongDescription = Workout(
         name = "HIIT Workout",
         shortDescription = "20 min. legs, core 20 min. legs, core 20 min. legs, core",
-        image = ImageResource("sprints"),
+        image = ImageResource("sprints.png"),
         id = 3,
         type = WorkoutType.Timed.Interval(0, 0, 0),
     )
@@ -39,7 +39,7 @@ object QuickWorkoutsPreviewDataProvider {
         name = "very long HIIT Workout title that is too long",
         shortDescription = "20 min. legs, core 20 min. legs, core 20 min. legs, core 20 min. " +
             "legs, core",
-        image = ImageResource("sprints"),
+        image = ImageResource("sprints.png"),
         id = 4,
         type = WorkoutType.Timed.Interval(0, 0, 0),
     )
