@@ -82,7 +82,7 @@ struct View_Previews: PreviewProvider {
                             id: 1,
                             name: "Workout 1",
                             shortDescription: "Workout 1 desc",
-                            image: ImageAsset(assetName: "sprints"),
+                            image: ImageResource(id: "sprints.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
@@ -94,7 +94,7 @@ struct View_Previews: PreviewProvider {
                             id: 2,
                             name: "Workout 2",
                             shortDescription: "Workout 2 desc",
-                            image: ImageAsset(assetName: "squats"),
+                            image: ImageResource(id: "squats.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
@@ -106,7 +106,7 @@ struct View_Previews: PreviewProvider {
                             id: 3,
                             name: "Workout 3",
                             shortDescription: "Workout 3 desc",
-                            image: ImageAsset(assetName: "Logo"),
+                            image: ImageResource(id: "Logo.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
@@ -118,7 +118,7 @@ struct View_Previews: PreviewProvider {
                             id: 4,
                             name: "Workout 4",
                             shortDescription: "Workout 4 desc",
-                            image: ImageAsset(assetName: "sprints"),
+                            image: ImageResource(id: "sprints.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,

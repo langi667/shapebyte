@@ -13,12 +13,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlin.test.fail
 
 class ItemsExecutionTest : BaseCoroutineTest() {
     /**
@@ -172,7 +174,6 @@ class ItemsExecutionTest : BaseCoroutineTest() {
     fun `emits correct states for timed with paused`() = test {
         val executions = 6
         val duration = 4
-        val setCount = executions * duration
 
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
@@ -184,7 +185,6 @@ class ItemsExecutionTest : BaseCoroutineTest() {
             },
         )
 
-        val interval = 10
         sut.start(this)
         var pausedAtState: ItemsExecutionState.Running? = null
 
@@ -243,6 +243,163 @@ class ItemsExecutionTest : BaseCoroutineTest() {
     }
 
     // TODO: Test stop
+
+
+    @Test
+    fun `stop should return false if not launched`() = test {
+        val executions = 6
+        val duration = 4
+
+        val itemSet = ItemSet.Timed.Seconds(1)
+        val sut = createSUT(
+            List(executions) {
+                DPI.createTimedItemExecution(
+                    item = Exercise("Test $it"),
+                    sets = List(duration) { itemSet },
+                )
+            },
+        )
+        assertFalse(sut.stop())
+    }
+
+    @Test
+    fun `stop should return false if finished`() = test {
+        val executions = 1
+        val duration = 1
+
+        val itemSet = ItemSet.Timed.Seconds(1)
+        val sut = createSUT(
+            List(executions) {
+                DPI.createTimedItemExecution(
+                    item = Exercise("Test $it"),
+                    sets = List(duration) { itemSet },
+                )
+            },
+        )
+
+        sut.start(this)
+
+        sut.state.filterIsInstance<ItemsExecutionState.Finished>().test {
+            awaitItem()
+            assertFalse(sut.stop())
+        }
+    }
+
+    @Test
+    fun `stop should stop execution if started`() = test {
+        val executions = 1
+        val duration = 1
+
+        val itemSet = ItemSet.Timed.Seconds(1)
+        val sut = createSUT(
+            List(executions) {
+                DPI.createTimedItemExecution(
+                    item = Exercise("Test $it"),
+                    sets = List(duration) { itemSet },
+                )
+            },
+        )
+
+        sut.start(this)
+
+        sut.state.test {
+            val state = awaitItem()
+            if (state is ItemsExecutionState.Started) {
+                assertTrue(sut.stop())
+
+                val finishedItem = awaitItem() as ItemsExecutionState.Finished
+                assertFalse(finishedItem.completed)
+            }
+        }
+    }
+
+    @Test
+    fun `stop should stop execution if running`() = test {
+        val executions = 1
+        val duration = 2
+
+        val itemSet = ItemSet.Timed.Seconds(1)
+        val sut = createSUT(
+            List(executions) {
+                DPI.createTimedItemExecution(
+                    item = Exercise("Test $it"),
+                    sets = List(duration) { itemSet },
+                )
+            },
+        )
+
+        sut.start(this)
+        sut.state
+            .filter{  it is ItemsExecutionState.Running || it is ItemsExecutionState.Finished }
+            .test {
+                var runTest = true
+                do {
+                    when(val currState = awaitItem()) {
+                        is ItemsExecutionState.Running -> {
+                            assertTrue(sut.stop())
+                        }
+
+                        is ItemsExecutionState.Finished -> {
+                            runTest = false
+                            assertFalse(currState.completed)
+                            expectNoEvents()
+                        }
+
+                        else -> {
+                            fail("Unexpected state: $currState")
+                        }
+                    }
+                } while (runTest)
+        }
+    }
+
+    @Test
+    fun `stop should stop execution if paused`() = test {
+        val executions = 1
+        val duration = 2
+
+        val itemSet = ItemSet.Timed.Seconds(1)
+        val sut = createSUT(
+            List(executions) {
+                DPI.createTimedItemExecution(
+                    item = Exercise("Test $it"),
+                    sets = List(duration) { itemSet },
+                )
+            },
+        )
+
+        sut.start(this)
+        sut.state
+            .filter {  it is ItemsExecutionState.Paused
+                    || it is ItemsExecutionState.Running
+                    || it is ItemsExecutionState.Finished
+            }.test {
+                var runTest = true
+                do {
+                    when(val currState = awaitItem()) {
+                        is ItemsExecutionState.Running -> {
+                            assertTrue(sut.pause())
+                        }
+
+                        is ItemsExecutionState.Paused -> {
+                            assertTrue(sut.stop())
+                        }
+
+                        is ItemsExecutionState.Finished -> {
+                            runTest = false
+                            assertFalse(currState.completed)
+                            expectNoEvents()
+                        }
+
+                        else -> {
+                            fail("Unexpected state: $currState")
+                        }
+                    }
+                } while (runTest)
+            }
+
+    }
+
     // TODO: test for repetitive execution when implemented
 
     private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecution {

@@ -58,6 +58,7 @@ object WorkoutModule :
                     itemsExecutionBuilder = get(),
                     dateStringFormatter = get(),
                     logger = get(),
+                    audioPlayer = get(),
                     coroutineContextProvider = get(),
                 )
             }

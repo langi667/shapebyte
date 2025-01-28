@@ -6,7 +6,6 @@ import de.stefan.lang.shapebyte.utils.logging.Loggable
 import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -78,8 +77,11 @@ class ItemsExecution(
                 currItem.pause()
                 invalidateJob()
 
+                val totalProgress = (state.value as? ItemsExecutionState.Running)?.totalProgress ?: Progress.ZERO
+
                 pauseExecution = true
-                _state.value = ItemsExecutionState.Paused
+                // TODO: test
+                _state.value = ItemsExecutionState.Paused(totalProgress)
 
                 return true
             }
@@ -87,24 +89,16 @@ class ItemsExecution(
     }
 
     fun stop(): Boolean {
-        if (state.value !is ItemsExecutionState.Running) {
-            logW("Cannot stop a set that is not running")
+        if (state.value !is ItemsExecutionState.Launched) {
+            logW("Cannot stop, items execution is not launched")
             return false
         }
 
-        when (val currItem = currItem()) {
-            null -> {
-                logW("Cannot stop, currItem is null")
-                return false
-            }
-            else -> {
-                currItem.stop()
-                invalidateJob()
+        currItem()?.stop()
+        invalidateJob()
 
-                _state.value = ItemsExecutionState.Finished(false)
-                return true
-            }
-        }
+        _state.value = ItemsExecutionState.Finished(false)
+        return true
     }
 
     fun pauseOrStart(scope: CoroutineScope): Boolean {

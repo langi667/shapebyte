@@ -265,6 +265,62 @@ class TimedWorkoutViewModelTest : BaseCoroutineTest() {
         }
     }
 
+    @Test
+    fun `stop must stop correctly`() = test {
+        featureDatasource.addFeatureToggle(
+            FeatureToggle(
+                FeatureId.QUICK_WORKOUTS.name,
+                FeatureToggleState.ENABLED,
+            ),
+        )
+
+        val sut = createSUT()
+        val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
+
+        sut.load(workout.id)
+
+        val elapsed = mutableListOf<String>()
+        val remaining = mutableListOf<String>()
+
+        // Initial/ Update state. Wait until data is updated
+        sut.state.test {
+            assertEquals(UIState.Loading, awaitItem())
+            val dataState = awaitItem() as UIState.Data<*>
+
+            assertIs<UIState.Data<TimedWorkoutViewData>>(dataState)
+            expectNoEvents()
+        }
+
+        sut.start()
+        assertTrue(sut.isRunning)
+
+        sut.state.test {
+            var isRunning = true
+
+            do {
+                val item = awaitItem()
+                if (item is UIState.Data<*>) {
+                    val data = item.data as TimedWorkoutViewData
+
+                    elapsed.add(data.elapsedTotal)
+                    remaining.add(data.remainingTotal)
+
+                    if (data.progressTotal >= 0.5f) {
+                        sut.stop()
+                        isRunning = false
+                    }
+                }
+            } while (isRunning)
+
+            // TODO: check why still is Running here
+            awaitItem()
+            val item = awaitItem()
+            assertEquals(TimedWorkoutViewModel.LaunchState.Finished, sut.launchState)
+            assertEquals(TimedWorkoutViewModel.LaunchState.Finished, item.dataOrNull<TimedWorkoutViewData>()?.launchState)
+
+            expectNoEvents()
+        }
+    }
     // TODO: test error state if implemented
 
     private fun createSUT(): TimedWorkoutViewModel {

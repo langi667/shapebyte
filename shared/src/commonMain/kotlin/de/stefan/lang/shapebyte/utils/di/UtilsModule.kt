@@ -1,9 +1,14 @@
 package de.stefan.lang.shapebyte.utils.di
 
+import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
 import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
+import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
 import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
+import de.stefan.lang.shapebyte.utils.audio.AudioPlaying
+import de.stefan.lang.shapebyte.utils.audio.impl.AudioPlayer
+import de.stefan.lang.shapebyte.utils.audio.mocks.AudioPlayerMock
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
@@ -14,8 +19,10 @@ import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProvid
 import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.shapebyte.utils.device.devicesize.ScreenSizeProviding
 import de.stefan.lang.shapebyte.utils.device.safearea.SafeAreaDetector
+import de.stefan.lang.shapebyte.utils.di.UtilsModule.appContextProvider
+import de.stefan.lang.shapebyte.utils.di.UtilsModule.appResourceProvider
 import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineContextProvider
-import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineScopeProviding
+import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineScopeProvider
 import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
 import de.stefan.lang.shapebyte.utils.dimension.DimensionProvider
 import de.stefan.lang.shapebyte.utils.logging.Logger
@@ -33,6 +40,7 @@ interface UtilsModuleProviding {
     fun coroutineContextProvider(): CoroutineContextProviding
     fun coroutineScopeProvider(): CoroutineScopeProviding
     fun appInfo(): AppInfo
+    fun audioPlayer(): AudioPlaying
 }
 
 object UtilsModule :
@@ -41,37 +49,57 @@ object UtilsModule :
             single<OperatingSystemInfoProviding> { get<DeviceInfoProviding>() }
             single<ScreenSizeProviding> { get<DeviceInfoProviding>() }
             single<DeviceSizeCategoryProviding> { DeviceSizeCategoryProvider(screenSizeProvider = get()) }
+
             single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
             single<SafeAreaDetector> { SafeAreaDetector(logger = get()) }
+
+            single<AppContextProvider> { appContextProvider }
+            single<AppResourceProvider> { appResourceProvider }
+
+            single<CoroutineScopeProviding> { coroutineScopeProvider }
             single<CoroutineContextProviding> { coroutineContextProvider }
-            single<CoroutineScopeProviding> { coroutineScopeProviding }
+            single<CoroutineScopeProviding> { coroutineScopeProvider }
         },
         appEnvironmentOnly = {
             single<FileAssetLoading> { FileAssetLoader(logging = get()) }
             single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
             single<Logging> { Logger() }
+            factory<AudioPlaying> {
+                AudioPlayer(
+                    appContextProvider = get(),
+                    appResourceProvider = get(),
+                    logger = get(),
+                )
+            }
         },
         testEnvironmentOnly = {
             single<FileAssetLoading> { FileAssetLoaderMock() }
             single<Logging> { SilentLogger() }
             single<DeviceInfoProviding> { DeviceInfoMock() }
+            factory<AudioPlaying> { AudioPlayerMock() }
         },
     ),
     UtilsModuleProviding {
 
     private lateinit var coroutineContextProvider: CoroutineContextProviding
-    private lateinit var coroutineScopeProviding: CoroutineScopeProviding
+    private lateinit var coroutineScopeProvider: CoroutineScopeProviding
     private lateinit var appInfo: AppInfo
+    private lateinit var appContextProvider: AppContextProvider
+    private lateinit var appResourceProvider: AppResourceProvider
 
     fun initialize(
         coroutineContextProvider: CoroutineContextProviding,
         coroutineScopeProviding: CoroutineScopeProviding,
         appInfo: AppInfo,
+        appContextProvider: AppContextProvider,
+        appResourceProvider: AppResourceProvider,
     ) {
         this.coroutineContextProvider = coroutineContextProvider
-        this.coroutineScopeProviding = coroutineScopeProviding
+        this.coroutineScopeProvider = coroutineScopeProviding
         this.appInfo = appInfo
+        this.appContextProvider = appContextProvider
+        this.appResourceProvider = appResourceProvider
     }
 
     override fun logger(): Logging = get()
@@ -83,4 +111,5 @@ object UtilsModule :
     override fun coroutineContextProvider(): CoroutineContextProviding = get()
     override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
     override fun appInfo(): AppInfo = appInfo
+    override fun audioPlayer(): AudioPlaying = get()
 }

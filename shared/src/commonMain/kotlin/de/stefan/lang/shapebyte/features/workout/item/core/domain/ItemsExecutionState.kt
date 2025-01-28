@@ -24,6 +24,6 @@ sealed class ItemsExecutionState {
         val totalProgress: Progress,
     ) : Launched(totalProgress)
 
-    data object Paused : ItemsExecutionState()
+    class Paused(progress: Progress) : Launched(progress = progress)
     data class Finished(val completed: Boolean) : ItemsExecutionState()
 }

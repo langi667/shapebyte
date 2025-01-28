@@ -16,6 +16,8 @@ import de.stefan.lang.shapebyte.shared.loading.data.asResultFlow
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import de.stefan.lang.shapebyte.utils.Progress
+import de.stefan.lang.shapebyte.utils.audio.AudioPlaying
+import de.stefan.lang.shapebyte.utils.audio.AudioResource
 import de.stefan.lang.shapebyte.utils.buttons.ButtonState
 import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
 import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
@@ -35,6 +37,7 @@ class TimedWorkoutViewModel(
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilder,
     private val dateStringFormatter: DateTimeStringFormatter,
+    private val audioPlayer: AudioPlaying,
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
 ) : BaseViewModel(logger, coroutineContextProvider) {
@@ -122,6 +125,8 @@ class TimedWorkoutViewModel(
             logE("Cannot start, ItemsExecution is null")
             return
         }
+
+        audioPlayer.play(AudioResource("ding.mp3"))
 
         val prevState = launchState
         launchState = LaunchState.Running

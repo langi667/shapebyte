@@ -7,7 +7,7 @@ source "$script_directory/core/logging.sh"
 source "$script_directory/core/android-settings.sh"
 
 sharedLogI "👩‍🔬 Start unit tests ..."
-start_emulator
+adb uninstall "de.stefan.lang.shapebyte.android.dev"
 ./gradlew :shared:connectedAndroidTest :shared:iosSimulatorArm64Test :shared:testDebugUnitTest -Pandroid.testInstrumentationRunnerArguments.emulator=true
 
 return_code=$?

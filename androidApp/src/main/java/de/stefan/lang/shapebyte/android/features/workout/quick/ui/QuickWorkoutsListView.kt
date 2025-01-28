@@ -29,7 +29,7 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
-import de.stefan.lang.shapebyte.utils.assets.ImageAsset
+import de.stefan.lang.shapebyte.utils.image.ImageResource
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -121,7 +121,7 @@ fun QuickWorkoutsListViewPreview() {
         Workout(
             name = "Workout ${it + 1}",
             shortDescription = "Short description ${it + 1}",
-            image = ImageAsset("sprints.png"),
+            image = ImageResource("sprints.png"),
             id = 1,
             type = WorkoutType.Timed.Interval(0, 0, 0),
         )
