@@ -1,12 +1,12 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.domain
 
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.coroutines.CoroutineScopeProviding
+import de.stefan.lang.core.logging.Logging
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleRepository
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.shared.usecase.BaseDataUseCase
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
-import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 

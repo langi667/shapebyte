@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.utils
 
+import de.stefan.lang.core.app.AppContextProvider
+import de.stefan.lang.core.resources.impl.AppResourceProvider
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
-import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
-import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
+import de.stefan.lang.core.app.AppInfo
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest

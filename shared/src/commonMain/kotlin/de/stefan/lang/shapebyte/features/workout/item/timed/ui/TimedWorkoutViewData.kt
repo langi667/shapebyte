@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 
+import de.stefan.lang.core.assets.ImageAsset
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ImageContaining
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
-import de.stefan.lang.shapebyte.utils.assets.ImageAsset
-import de.stefan.lang.shapebyte.utils.buttons.ButtonState
+import de.stefan.lang.foundation.ui.buttons.ButtonState
 import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
 
 data class TimedWorkoutViewData(

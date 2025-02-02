@@ -9,7 +9,13 @@ execute_snapshots() {
 }
 
 start_emulator() {
-  andLogI "Start first emulator found for Instrumentation tests"
-  emulator -list-avds | head -n 2 | xargs -I {} emulator -avd {} &
-  adb wait-for-device
+  adb shell getprop | grep -q "emulator"
+
+  if [ $? -eq 0 ]; then
+      andLogI "Emulator already running"
+  else
+     andLogI "Start first emulator found for Instrumentation tests"
+     emulator -list-avds | head -n 2 | xargs -I {} emulator -avd {} &
+     adb wait-for-device
+  fi
 }

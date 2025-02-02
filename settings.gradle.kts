@@ -17,3 +17,9 @@ dependencyResolutionManagement {
 rootProject.name = "ShapeByte"
 include(":androidApp")
 include(":shared")
+include(":shared:core")
+include(":shared:core:test")
+include(":shared:testcore")
+include(":shared:foundation")
+include(":shared:foundation:base")
+include(":shared:foundation:ui")

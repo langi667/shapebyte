@@ -1157,7 +1157,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\"\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "\"$SRCROOT/../scripts/embed-frameworks.sh\"\n\n";
 		};
 		1D3DADB52CBD4DE100185160 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1192,7 +1192,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\"\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "\"$SRCROOT/../scripts/embed-frameworks.sh\"\n";
 		};
 		1D6506952CB971E200246D6B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1227,7 +1227,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\"\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "\"$SRCROOT/../scripts/embed-frameworks.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

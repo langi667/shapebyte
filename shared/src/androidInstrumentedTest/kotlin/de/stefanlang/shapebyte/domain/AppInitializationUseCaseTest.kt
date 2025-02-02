@@ -1,6 +1,5 @@
 package de.stefanlang.shapebyte.domain
 
-
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
@@ -8,11 +7,12 @@ import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.app.domain.AppInitializationState
 import de.stefan.lang.shapebyte.app.domain.AppInitializationUseCase
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
-import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
-import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.core.app.AppContextProvider
+import de.stefan.lang.core.app.AppInfo
+import de.stefan.lang.core.resources.impl.AppResourceProvider
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.coroutines.CoroutineScopeProviding
+import de.stefan.lang.testcore.CoreTest
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
 import io.mockk.verify
@@ -21,14 +21,8 @@ import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Test
 import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
@@ -36,9 +30,7 @@ import kotlin.coroutines.CoroutineContext
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
-class AppInitializationUseCaseTest {
-    //  TODO: remove once BaseCoroutineTest is ported to a separate module, see SB-65
-    private val testDispatcher = StandardTestDispatcher()
+class AppInitializationUseCaseTest: CoreTest() {
 
     @Test
     @DisplayName("test initial state")
@@ -120,20 +112,6 @@ class AppInitializationUseCaseTest {
         }
 
         unmockkObject(DPI)
-    }
-
-    //  TODO: remove once BaseCoroutineTest is ported to a separate module, see SB-65
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
-    }
-
-    //  TODO: remove once BaseCoroutineTest is ported to a separate module, see SB-65
-    fun test(block: suspend CoroutineScope.() -> Unit) {
-        Dispatchers.setMain(testDispatcher)
-        runTest {
-            block()
-        }
     }
 
     private fun createSUT(): AppInitializationUseCase = DPI.appInitializerUseCase()

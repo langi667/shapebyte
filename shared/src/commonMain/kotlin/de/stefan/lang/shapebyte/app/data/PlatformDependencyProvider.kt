@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.app.data
 
-import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
-import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
-import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.core.app.AppContextProvider
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.coroutines.CoroutineScopeProviding
+import de.stefan.lang.core.resources.impl.AppResourceProvider
+import de.stefan.lang.core.app.AppInfo
 
 expect class PlatformDependencyProvider : PlatformDependencyProviding {
     override val coroutineContextProvider: CoroutineContextProviding

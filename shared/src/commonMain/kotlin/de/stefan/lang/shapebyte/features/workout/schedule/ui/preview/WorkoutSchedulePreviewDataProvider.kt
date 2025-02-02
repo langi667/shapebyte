@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.schedule.ui.preview
 
+import de.stefan.lang.core.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.utils.Progress
 import kotlinx.datetime.Instant
 
 @Suppress("MagicNumber")

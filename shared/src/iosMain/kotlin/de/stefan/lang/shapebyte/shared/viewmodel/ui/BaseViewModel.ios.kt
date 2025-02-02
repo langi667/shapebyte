@@ -1,13 +1,11 @@
 package de.stefan.lang.shapebyte.shared.viewmodel.ui
 
-import de.stefan.lang.shapebyte.shared.event.UIEvent
-import de.stefan.lang.shapebyte.shared.event.UIEventTransmitting
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.logging.Loggable
-import de.stefan.lang.shapebyte.utils.logging.Logging
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.logging.Loggable
+import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.foundation.ui.event.UIEvent
+import de.stefan.lang.foundation.ui.event.UIEventTransmitting
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow

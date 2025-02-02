@@ -9,7 +9,5 @@ actual object DPI : BaseDPI() {
         startKoin {
             modules(DPI.modules)
         }
-
-        fileAssetLoader().setup(platformDependencies.bundle)
     }
 }

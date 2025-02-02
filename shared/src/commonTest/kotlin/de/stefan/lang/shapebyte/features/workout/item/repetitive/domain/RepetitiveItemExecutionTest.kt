@@ -1,12 +1,12 @@
 package de.stefan.lang.shapebyte.features.workout.item.repetitive.domain
 
+import de.stefan.lang.core.progress.Progress
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
-import de.stefan.lang.shapebyte.utils.Progress
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

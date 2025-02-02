@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.history.ui
 
+import de.stefan.lang.core.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.utils.BaseTest
-import de.stefan.lang.shapebyte.utils.Progress
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals

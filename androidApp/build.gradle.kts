@@ -70,6 +70,7 @@ android {
 
 dependencies {
     implementation(projects.shared)
+    implementation(projects.shared.core)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
@@ -91,6 +92,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation (libs.koin.test)
     testImplementation(libs.junit)
+    testImplementation(projects.shared.core.test)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)

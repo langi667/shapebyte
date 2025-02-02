@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.utils.assets.FileAsset
-import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
+import de.stefan.lang.core.assets.FileAsset
+import de.stefan.lang.core.assets.FileAssetLoading
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
@@ -33,8 +33,6 @@ class FileAssetLoaderTest {
 
     private fun createSUT(): FileAssetLoading {
         val loader = DPI.fileAssetLoader()
-
-        loader.setup(context)
         return loader
     }
 }

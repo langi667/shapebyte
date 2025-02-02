@@ -11,11 +11,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
+import de.stefan.lang.core.assets.ImageAsset
+import de.stefan.lang.core.image.Image
+import de.stefan.lang.core.image.ImageResource
 import de.stefan.lang.shapebyte.android.shared.resources.mapping.ImageMapper
 import de.stefan.lang.shapebyte.android.utils.assets.assetsPath
-import de.stefan.lang.shapebyte.utils.assets.ImageAsset
-import de.stefan.lang.shapebyte.utils.image.Image
-import de.stefan.lang.shapebyte.utils.image.ImageResource
 import java.io.IOException
 
 @Composable

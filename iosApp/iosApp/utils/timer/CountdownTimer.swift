@@ -13,7 +13,7 @@ class CountdownTimer: Loggable {
     fileprivate(set) var interval: TimeInterval
     fileprivate(set) var ticks: Int
 
-    private var timer: Timer?
+    private var timer: Foundation.Timer?
     private var currTick = 0
 
     init(interval: TimeInterval = 0, ticks: Int = 0) {

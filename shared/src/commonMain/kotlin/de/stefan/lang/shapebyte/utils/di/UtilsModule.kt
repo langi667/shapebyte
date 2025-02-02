@@ -1,93 +1,38 @@
 package de.stefan.lang.shapebyte.utils.di
 
-import de.stefan.lang.shapebyte.utils.app.appcontext.AppContextProvider
-import de.stefan.lang.shapebyte.utils.app.appinfo.AppInfo
-import de.stefan.lang.shapebyte.utils.app.appresources.AppResourceProvider
-import de.stefan.lang.shapebyte.utils.assets.FileAssetLoading
-import de.stefan.lang.shapebyte.utils.assets.impl.FileAssetLoader
-import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
-import de.stefan.lang.shapebyte.utils.audio.AudioPlaying
-import de.stefan.lang.shapebyte.utils.audio.impl.AudioPlayer
-import de.stefan.lang.shapebyte.utils.audio.mocks.AudioPlayerMock
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineScopeProviding
-import de.stefan.lang.shapebyte.utils.datetime.DateTimeStringFormatter
-import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfo
-import de.stefan.lang.shapebyte.utils.device.deviceinfo.DeviceInfoProviding
-import de.stefan.lang.shapebyte.utils.device.deviceinfo.mocks.DeviceInfoMock
-import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProvider
-import de.stefan.lang.shapebyte.utils.device.devicesize.DeviceSizeCategoryProviding
-import de.stefan.lang.shapebyte.utils.device.devicesize.ScreenSizeProviding
-import de.stefan.lang.shapebyte.utils.device.safearea.SafeAreaDetector
-import de.stefan.lang.shapebyte.utils.di.UtilsModule.appContextProvider
-import de.stefan.lang.shapebyte.utils.di.UtilsModule.appResourceProvider
-import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineContextProvider
-import de.stefan.lang.shapebyte.utils.di.UtilsModule.coroutineScopeProvider
-import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
-import de.stefan.lang.shapebyte.utils.dimension.DimensionProvider
-import de.stefan.lang.shapebyte.utils.logging.Logger
-import de.stefan.lang.shapebyte.utils.logging.Logging
-import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
-import de.stefan.lang.shapebyte.utils.os.OperatingSystemInfoProviding
-import org.koin.core.component.get
+import de.stefan.lang.core.CoreModule
+import de.stefan.lang.core.CoreModuleProviding
+import de.stefan.lang.core.app.AppContextProvider
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.coroutines.CoroutineScopeProviding
+import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.resources.impl.AppResourceProvider
+
+import de.stefan.lang.core.app.AppInfo
+
 
 interface UtilsModuleProviding {
-    fun logger(): Logging
-    fun dimensionProvider(): DimensionProvider
-    fun deviceInfoProvider(): DeviceInfoProviding
-    fun dateTimeStringFormatter(): DateTimeStringFormatter
-    fun fileAssetLoader(): FileAssetLoading
-    fun coroutineContextProvider(): CoroutineContextProviding
-    fun coroutineScopeProvider(): CoroutineScopeProviding
     fun appInfo(): AppInfo
-    fun audioPlayer(): AudioPlaying
 }
 
 object UtilsModule :
     DIModuleDeclaration(
         allEnvironments = {
-            single<OperatingSystemInfoProviding> { get<DeviceInfoProviding>() }
-            single<ScreenSizeProviding> { get<DeviceInfoProviding>() }
-            single<DeviceSizeCategoryProviding> { DeviceSizeCategoryProvider(screenSizeProvider = get()) }
+            // TODO: move to Common
 
-            single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
-            single<DateTimeStringFormatter> { DateTimeStringFormatter() }
-            single<SafeAreaDetector> { SafeAreaDetector(logger = get()) }
-
-            single<AppContextProvider> { appContextProvider }
-            single<AppResourceProvider> { appResourceProvider }
-
-            single<CoroutineScopeProviding> { coroutineScopeProvider }
-            single<CoroutineContextProviding> { coroutineContextProvider }
-            single<CoroutineScopeProviding> { coroutineScopeProvider }
         },
         appEnvironmentOnly = {
-            single<FileAssetLoading> { FileAssetLoader(logging = get()) }
-            single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
-            single<Logging> { Logger() }
-            factory<AudioPlaying> {
-                AudioPlayer(
-                    appContextProvider = get(),
-                    appResourceProvider = get(),
-                    logger = get(),
-                )
-            }
         },
         testEnvironmentOnly = {
-            single<FileAssetLoading> { FileAssetLoaderMock() }
-            single<Logging> { SilentLogger() }
-            single<DeviceInfoProviding> { DeviceInfoMock() }
-            factory<AudioPlaying> { AudioPlayerMock() }
         },
     ),
+    CoreModuleProviding by CoreModule,
     UtilsModuleProviding {
 
-    private lateinit var coroutineContextProvider: CoroutineContextProviding
-    private lateinit var coroutineScopeProvider: CoroutineScopeProviding
+    // TODO: move to DPI
     private lateinit var appInfo: AppInfo
-    private lateinit var appContextProvider: AppContextProvider
-    private lateinit var appResourceProvider: AppResourceProvider
 
+    // Move to DPI
     fun initialize(
         coroutineContextProvider: CoroutineContextProviding,
         coroutineScopeProviding: CoroutineScopeProviding,
@@ -95,21 +40,15 @@ object UtilsModule :
         appContextProvider: AppContextProvider,
         appResourceProvider: AppResourceProvider,
     ) {
-        this.coroutineContextProvider = coroutineContextProvider
-        this.coroutineScopeProvider = coroutineScopeProviding
-        this.appInfo = appInfo
-        this.appContextProvider = appContextProvider
-        this.appResourceProvider = appResourceProvider
+        this.appInfo = appInfo // TODO: move to DPI
+
+        CoreModule.initialize(
+            appContextProvider = appContextProvider,
+            appResourceProvider = appResourceProvider,
+            coroutineContextProvider = coroutineContextProvider,
+            coroutineScopeProviding = coroutineScopeProviding,
+        )
     }
 
-    override fun logger(): Logging = get()
-    override fun dimensionProvider(): DimensionProvider = get()
-    override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
-
-    override fun deviceInfoProvider(): DeviceInfoProviding = get()
-    override fun fileAssetLoader(): FileAssetLoading = get()
-    override fun coroutineContextProvider(): CoroutineContextProviding = get()
-    override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
-    override fun appInfo(): AppInfo = appInfo
-    override fun audioPlayer(): AudioPlaying = get()
+    override fun appInfo(): AppInfo = appInfo // TODO: move to DPI
 }

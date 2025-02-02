@@ -1,11 +1,11 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.data.impl
 
+import de.stefan.lang.core.assets.mocks.FileAssetLoaderMock
+import de.stefan.lang.core.logging.mocks.SilentLogger
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.shapebyte.utils.TestCoroutineContextProvider
-import de.stefan.lang.shapebyte.utils.assets.mocks.FileAssetLoaderMock
-import de.stefan.lang.shapebyte.utils.mocks.SilentLogger
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

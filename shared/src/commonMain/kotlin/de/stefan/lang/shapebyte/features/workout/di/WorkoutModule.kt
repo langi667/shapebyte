@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.di
 
+import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks
@@ -24,7 +25,6 @@ import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEn
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.mocks.WorkoutScheduleDatasourceMock
 import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.utils.dicore.DIModuleDeclaration
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 

@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.history.data.mocks
 
+import de.stefan.lang.core.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.utils.Progress
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
 

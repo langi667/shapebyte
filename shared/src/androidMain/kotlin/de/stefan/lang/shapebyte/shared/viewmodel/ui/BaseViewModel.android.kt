@@ -2,11 +2,11 @@ package de.stefan.lang.shapebyte.shared.viewmodel.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.stefan.lang.shapebyte.shared.event.UIEvent
-import de.stefan.lang.shapebyte.shared.event.UIEventTransmitting
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.logging.Loggable
-import de.stefan.lang.shapebyte.utils.logging.Logging
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.logging.Loggable
+import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.foundation.ui.event.UIEvent
+import de.stefan.lang.foundation.ui.event.UIEventTransmitting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

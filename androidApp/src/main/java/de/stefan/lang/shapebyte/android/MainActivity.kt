@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import de.stefan.lang.core.logging.Loggable
+import de.stefan.lang.core.logging.Logging
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
 import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView
@@ -19,8 +21,6 @@ import de.stefan.lang.shapebyte.android.navigation.NavRoute
 import de.stefan.lang.shapebyte.android.navigation.workoutIdOr
 import de.stefan.lang.shapebyte.app.domain.AppInitializationState
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.utils.logging.Loggable
-import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject

@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.domain
 
+import de.stefan.lang.core.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
-import de.stefan.lang.shapebyte.utils.Progress
 
 sealed interface ItemExecutionState<out T> {
     data object Idle : ItemExecutionState<Nothing>

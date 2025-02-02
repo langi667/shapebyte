@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.android.shared.resources.mapping
 
+import de.stefan.lang.core.resources.ResourceFile
+import de.stefan.lang.core.resources.ResourceFileMapping
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.utils.resources.ResourceFile
-import de.stefan.lang.shapebyte.utils.resources.ResourceFileMapping
 
 // TODO: should be auto generated
 object AudioMapper : ResourceFileMapping {

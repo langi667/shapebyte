@@ -25,11 +25,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import de.stefan.lang.core.image.ImageResource
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
-import de.stefan.lang.shapebyte.utils.image.ImageResource
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

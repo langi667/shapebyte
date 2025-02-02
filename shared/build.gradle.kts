@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -22,7 +26,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
         }
     }
 
@@ -37,12 +41,38 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
+
+            api(projects.shared.core)
+            api(projects.shared.foundation.base)
+            api(projects.shared.foundation.ui)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
+
+            implementation(projects.shared.testcore)
+//            implementation(projects.shared.core)
+//            implementation(projects.shared.foundation.core)
+//            implementation(projects.shared.foundation.ui)
+        }
+//        iosMain.dependencies {
+//            implementation(projects.shared.core)
+//            implementation(projects.shared.foundation.core)
+//        }
+
+    }
+
+    targets.withType<KotlinNativeTarget>{
+        binaries.withType<Framework> {
+            isStatic = false
+            export(projects.shared.core)
+            export(projects.shared.foundation.base)
+            export(projects.shared.foundation.ui)
+//
+//            @OptIn(ExperimentalKotlinGradlePluginApi::class)
+//            transitiveExport = true
         }
     }
 }
@@ -83,4 +113,5 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
+    androidTestImplementation(projects.shared.core.test)
 }

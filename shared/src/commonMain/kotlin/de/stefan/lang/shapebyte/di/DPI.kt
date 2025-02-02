@@ -1,5 +1,9 @@
 package de.stefan.lang.shapebyte.di
 
+import de.stefan.lang.core.CoreModule
+import de.stefan.lang.core.CoreModuleProviding
+import de.stefan.lang.foundation.core.FoundationCoreModule
+import de.stefan.lang.foundation.core.FoundationCoreModuleProviding
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.app.domain.AppInitializationUseCase
@@ -19,13 +23,21 @@ abstract class BaseDPI :
     WorkoutModuleProviding by WorkoutModule,
     HomeModuleProviding by HomeModule,
     FeatureTogglesModuleProviding by FeatureTogglesModule,
+    CoreModuleProviding by CoreModule,
+    FoundationCoreModuleProviding by FoundationCoreModule,
     AppInitializationProviding {
-    val modules = UtilsModule.module +
+    val modules =
+        CoreModule.module +
+        FoundationCoreModule.module +
+        UtilsModule.module +
         WorkoutModule.module +
         FeatureTogglesModule.module +
         HomeModule.module
 
-    val testModules = UtilsModule.testModule +
+    val testModules =
+        CoreModule.testModule +
+        FoundationCoreModule.testModule +
+        UtilsModule.testModule +
         WorkoutModule.testModule +
         FeatureTogglesModule.testModule +
         HomeModule.testModule

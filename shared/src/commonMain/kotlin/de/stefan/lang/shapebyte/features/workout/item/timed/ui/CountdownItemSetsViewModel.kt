@@ -1,5 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 
+import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.core.logging.Logging
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.data.None
@@ -7,8 +9,6 @@ import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionS
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
-import de.stefan.lang.shapebyte.utils.coroutines.CoroutineContextProviding
-import de.stefan.lang.shapebyte.utils.logging.Logging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

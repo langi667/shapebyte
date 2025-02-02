@@ -11,8 +11,5 @@ actual object DPI : BaseDPI() {
             androidContext(platformDependencies.applicationContext)
             modules(modules)
         }
-
-        // TODO: refactor using AppContextProvider
-        fileAssetLoader().setup(platformDependencies.applicationContext)
     }
 }

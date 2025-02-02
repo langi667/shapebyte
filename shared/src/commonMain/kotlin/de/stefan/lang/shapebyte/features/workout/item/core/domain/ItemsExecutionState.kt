@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.domain
 
+import de.stefan.lang.core.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
-import de.stefan.lang.shapebyte.utils.Progress
 
 sealed class ItemsExecutionState {
     data object Idle : ItemsExecutionState()
