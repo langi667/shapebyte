@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.shared.usecase
 
-import de.stefan.lang.core.logging.Loggable
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.logging.Loggable
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import de.stefan.lang.shapebyte.shared.loading.data.asDataFlow
 import kotlinx.coroutines.flow.MutableSharedFlow

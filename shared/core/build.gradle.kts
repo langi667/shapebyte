@@ -19,24 +19,28 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.androidx.lifecycle.viewmodel.ktx) // TODO: may not be needed
-            implementation(libs.androidx.lifecycle.viewmodel) // TODO: may not be needed
-            implementation(libs.koin.android)
+            api(libs.koin.android)
+            api(libs.koin.core)
+            api(projects.shared.core.coreUtils)
         }
         commonMain.dependencies {
-            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+            api(libs.koin.core)
+            api(projects.shared.core.coreUtils)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
-            implementation(projects.shared.core.test)
-
+            implementation(projects.shared.core.coreTest)
         }
+
+        iosMain.dependencies {
+            api(libs.koin.core)
+            api(projects.shared.core.coreUtils)
+        }
+
     }
 }
 
@@ -68,12 +72,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     implementation(libs.androidx.junit.ktx)
 
-    androidTestImplementation(libs.mockk.android)
     androidTestImplementation(libs.kotlin.test)
     androidTestImplementation(libs.turbine)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation (libs.koin.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.junit.jupiter)
 }

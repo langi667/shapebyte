@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.app.data
 
-import de.stefan.lang.core.app.AppContextProvider
-import de.stefan.lang.core.app.AppInfo
-import de.stefan.lang.core.resources.impl.AppResourceProvider
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.coroutines.CoroutineScopeProviding
+import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreutils.nativecontext.ContextProvider
+import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
 import platform.Foundation.NSBundle
 
 actual data class PlatformDependencyProvider(
@@ -12,6 +12,6 @@ actual data class PlatformDependencyProvider(
     actual override val coroutineScopeProviding: CoroutineScopeProviding,
     actual override val coroutineContextProvider: CoroutineContextProviding,
     actual override val appInfo: AppInfo,
-    actual override val appContextProvider: AppContextProvider,
+    actual override val appContextProvider: ContextProvider,
     actual override val appResourceProvider: AppResourceProvider,
 ) : PlatformDependencyProviding

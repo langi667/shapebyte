@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.schedule.data.mocks
 
-import de.stefan.lang.core.progress.Progress
+import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleDatasource
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState

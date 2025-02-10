@@ -1,6 +1,6 @@
-package de.stefan.lang.shapebyte.utils
+package de.stefan.lang.testcore
 
-import de.stefan.lang.core.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.TestScope
 import kotlin.coroutines.CoroutineContext

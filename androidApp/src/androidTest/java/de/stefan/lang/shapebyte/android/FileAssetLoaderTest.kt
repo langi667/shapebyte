@@ -3,9 +3,12 @@ package de.stefan.lang.shapebyte.android
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import de.stefan.lang.coreutils.logging.mocks.SilentLogger
+import de.stefan.lang.coreutils.nativecontext.ContextProvider
+import de.stefan.lang.foundationCore.assets.FileAsset
+import de.stefan.lang.foundationCore.assets.FileAssetLoading
+import de.stefan.lang.foundationCore.assets.impl.FileAssetLoader
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.core.assets.FileAsset
-import de.stefan.lang.core.assets.FileAssetLoading
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
@@ -32,7 +35,11 @@ class FileAssetLoaderTest {
     }
 
     private fun createSUT(): FileAssetLoading {
-        val loader = DPI.fileAssetLoader()
+        val loader = FileAssetLoader(
+            appContextProvider = ContextProvider(context),
+            logging = SilentLogger()
+        )
+
         return loader
     }
 }

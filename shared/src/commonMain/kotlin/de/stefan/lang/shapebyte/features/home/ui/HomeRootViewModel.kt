@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.history.domain.FetchRecentWorkoutHistoryUseCase

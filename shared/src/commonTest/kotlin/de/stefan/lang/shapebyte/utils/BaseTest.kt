@@ -1,10 +1,9 @@
 package de.stefan.lang.shapebyte.utils
 
-import de.stefan.lang.core.app.AppContextProvider
-import de.stefan.lang.core.resources.impl.AppResourceProvider
-import de.stefan.lang.shapebyte.app.data.PlatformDependencyProviding
+import de.stefan.lang.shapebyte.app.data.mocks.PackageDependencyProviderMock
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.core.app.AppInfo
+import de.stefan.lang.testcore.TestCoroutineContextProvider
+import de.stefan.lang.testcore.TestCoroutineScopeProvider
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -12,18 +11,10 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
 abstract class BaseTest : KoinTest {
-    private val platformDependencyProvider = object : PlatformDependencyProviding {
-        override val coroutineContextProvider = TestCoroutineContextProvider
-        override val coroutineScopeProviding = TestCoroutineScopeProvider
-        override val appInfo: AppInfo = AppInfo(
-            packageName = "de.stefan.lang.shapebyte",
-            versionName = "1.0",
-            versionCode = 0,
-            debugMode = true,
-        )
-        override val appContextProvider: AppContextProvider = AppContextProvider(Any())
-        override val appResourceProvider: AppResourceProvider = AppResourceProvider()
-    }
+    private val platformDependencyProvider = PackageDependencyProviderMock(
+        coroutineContextProvider = TestCoroutineContextProvider,
+        coroutineScopeProviding = TestCoroutineScopeProvider,
+    )
 
     private val testModules by lazy {
         DPI.setup(platformDependencyProvider)

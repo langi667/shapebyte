@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionS
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
-import de.stefan.lang.core.progress.Progress
+import de.stefan.lang.coreutils.progress.Progress
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlin.test.Test

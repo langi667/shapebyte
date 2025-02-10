@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.data.None

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.schedule.data
 
-import de.stefan.lang.core.progress.Progress
+import de.stefan.lang.coreutils.progress.Progress
 import kotlinx.datetime.Instant
 
 data class WorkoutScheduleEntry(

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.data
 
-import de.stefan.lang.core.assets.ImageAsset
+import de.stefan.lang.foundationCore.assets.ImageAsset
 
 /**
 Represents any kind of workout item, such as exercise, breaks, countdown, cooldown, warm up ...

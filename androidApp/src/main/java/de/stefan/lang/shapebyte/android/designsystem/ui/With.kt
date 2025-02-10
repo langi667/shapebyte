@@ -25,6 +25,7 @@ fun <T> withData(
     val logger = DPI.logger()
 
     val themeData = remember {
+        DPI.appInfo()
         ThemeData(
             current = MaterialTheme,
             dimensions = LocalDimension.current,

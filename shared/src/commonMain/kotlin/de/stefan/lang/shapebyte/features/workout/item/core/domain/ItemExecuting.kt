@@ -2,7 +2,7 @@
 
 package de.stefan.lang.shapebyte.features.workout.item.core.domain
 
-import de.stefan.lang.core.logging.Loggable
+import de.stefan.lang.coreutils.logging.Loggable
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.repetitive.domain.RepetitiveItemExecutionData

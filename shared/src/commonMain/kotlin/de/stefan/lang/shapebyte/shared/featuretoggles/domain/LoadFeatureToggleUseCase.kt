@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.domain
 
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.coroutines.CoroutineScopeProviding
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleRepository
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState

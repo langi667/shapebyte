@@ -2,8 +2,8 @@ package de.stefan.lang.shapebyte.di
 
 import de.stefan.lang.core.CoreModule
 import de.stefan.lang.core.CoreModuleProviding
-import de.stefan.lang.foundation.core.FoundationCoreModule
-import de.stefan.lang.foundation.core.FoundationCoreModuleProviding
+import de.stefan.lang.foundation.FoundationModule
+import de.stefan.lang.foundation.FoundationModuleProviding
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.app.data.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.app.domain.AppInitializationUseCase
@@ -19,28 +19,28 @@ import org.koin.core.component.KoinComponent
 
 abstract class BaseDPI :
     KoinComponent,
+    CoreModuleProviding by CoreModule,
+    FoundationModuleProviding by FoundationModule,
     UtilsModuleProviding by UtilsModule,
     WorkoutModuleProviding by WorkoutModule,
     HomeModuleProviding by HomeModule,
     FeatureTogglesModuleProviding by FeatureTogglesModule,
-    CoreModuleProviding by CoreModule,
-    FoundationCoreModuleProviding by FoundationCoreModule,
     AppInitializationProviding {
     val modules =
         CoreModule.module +
-        FoundationCoreModule.module +
-        UtilsModule.module +
-        WorkoutModule.module +
-        FeatureTogglesModule.module +
-        HomeModule.module
+            FoundationModule.module +
+            UtilsModule.module +
+            WorkoutModule.module +
+            FeatureTogglesModule.module +
+            HomeModule.module
 
     val testModules =
         CoreModule.testModule +
-        FoundationCoreModule.testModule +
-        UtilsModule.testModule +
-        WorkoutModule.testModule +
-        FeatureTogglesModule.testModule +
-        HomeModule.testModule
+            FoundationModule.testModule +
+            UtilsModule.testModule +
+            WorkoutModule.testModule +
+            FeatureTogglesModule.testModule +
+            HomeModule.testModule
 
     private val appInitializationUseCase: AppInitializationUseCase by lazy { AppInitializationUseCase() }
 

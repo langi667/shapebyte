@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.di
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleRepository
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.DefaultFeatureToggleDatasourceImpl

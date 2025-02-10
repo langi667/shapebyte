@@ -7,8 +7,8 @@ import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
-import de.stefan.lang.core.progress.Progress
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.progress.Progress
+import de.stefan.lang.coreutils.logging.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

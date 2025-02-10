@@ -16,7 +16,7 @@ struct ShapeByteApp: App {
             coroutineScopeProviding: CoroutineScopeProvider(),
             coroutineContextProvider: CoroutineContextProvider(),
             appInfo: appInfo(),
-            appContextProvider: AppContextProvider(appContext: self),
+            appContextProvider: ContextProvider(appContext: self),
             appResourceProvider: AppResourceProvider()
         )
 

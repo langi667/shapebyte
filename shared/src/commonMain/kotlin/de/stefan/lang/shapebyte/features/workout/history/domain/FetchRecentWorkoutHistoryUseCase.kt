@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.history.domain
 
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.coroutines.CoroutineScopeProviding
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry

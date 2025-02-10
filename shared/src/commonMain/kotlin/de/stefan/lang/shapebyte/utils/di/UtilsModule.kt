@@ -1,15 +1,13 @@
 package de.stefan.lang.shapebyte.utils.di
 
 import de.stefan.lang.core.CoreModule
-import de.stefan.lang.core.CoreModuleProviding
-import de.stefan.lang.core.app.AppContextProvider
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.coroutines.CoroutineScopeProviding
-import de.stefan.lang.core.di.DIModuleDeclaration
-import de.stefan.lang.core.resources.impl.AppResourceProvider
-
-import de.stefan.lang.core.app.AppInfo
-
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreutils.di.DIModuleDeclaration
+import de.stefan.lang.coreutils.nativecontext.ContextProvider
+import de.stefan.lang.foundationCore.FoundationCoreModule
+import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
 
 interface UtilsModuleProviding {
     fun appInfo(): AppInfo
@@ -19,14 +17,12 @@ object UtilsModule :
     DIModuleDeclaration(
         allEnvironments = {
             // TODO: move to Common
-
         },
         appEnvironmentOnly = {
         },
         testEnvironmentOnly = {
         },
     ),
-    CoreModuleProviding by CoreModule,
     UtilsModuleProviding {
 
     // TODO: move to DPI
@@ -37,16 +33,19 @@ object UtilsModule :
         coroutineContextProvider: CoroutineContextProviding,
         coroutineScopeProviding: CoroutineScopeProviding,
         appInfo: AppInfo,
-        appContextProvider: AppContextProvider,
+        appContextProvider: ContextProvider,
         appResourceProvider: AppResourceProvider,
     ) {
         this.appInfo = appInfo // TODO: move to DPI
 
         CoreModule.initialize(
-            appContextProvider = appContextProvider,
-            appResourceProvider = appResourceProvider,
+            contextProvider = appContextProvider,
             coroutineContextProvider = coroutineContextProvider,
             coroutineScopeProviding = coroutineScopeProviding,
+        )
+
+        FoundationCoreModule.initialize(
+            appResourceProvider = appResourceProvider,
         )
     }
 

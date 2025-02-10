@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.item.repetitive.domain
 
-import de.stefan.lang.core.logging.Logging
-import de.stefan.lang.core.progress.Progress
+import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState

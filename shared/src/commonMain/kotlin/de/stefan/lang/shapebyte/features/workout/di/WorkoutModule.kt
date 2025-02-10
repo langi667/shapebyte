@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.di
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks

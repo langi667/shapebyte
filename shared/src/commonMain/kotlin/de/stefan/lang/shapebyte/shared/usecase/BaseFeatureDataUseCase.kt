@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.shared.usecase
 
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 import kotlinx.coroutines.CoroutineDispatcher

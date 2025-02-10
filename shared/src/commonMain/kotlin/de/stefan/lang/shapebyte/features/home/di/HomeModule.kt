@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.home.di
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import org.koin.core.component.get
 

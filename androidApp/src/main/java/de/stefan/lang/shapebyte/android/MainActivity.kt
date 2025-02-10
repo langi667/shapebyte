@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import de.stefan.lang.core.logging.Loggable
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.logging.Loggable
+import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
 import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView

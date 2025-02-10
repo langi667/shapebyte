@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item.repetitive.domain
 
-import de.stefan.lang.core.progress.Progress
+import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item

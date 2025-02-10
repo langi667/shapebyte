@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.timed.ui
 
 import app.cash.turbine.test
-import de.stefan.lang.foundation.core.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType

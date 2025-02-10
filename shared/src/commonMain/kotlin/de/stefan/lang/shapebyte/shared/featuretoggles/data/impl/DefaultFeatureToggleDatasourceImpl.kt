@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.shared.featuretoggles.data.impl
 
-import de.stefan.lang.core.assets.FileAsset
-import de.stefan.lang.core.assets.FileAssetLoading
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.logging.Loggable
-import de.stefan.lang.core.logging.Logging
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.logging.Loggable
+import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.foundationCore.assets.FileAsset
+import de.stefan.lang.foundationCore.assets.FileAssetLoading
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
 import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.shared.loading.data.LoadState

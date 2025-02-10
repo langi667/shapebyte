@@ -42,9 +42,15 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
+
+            api(projects.shared.core.coreUtils)
+            implementation(projects.shared.core.coreUtils)
+
             api(projects.shared.core)
-            api(projects.shared.foundation.base)
-            api(projects.shared.foundation.ui)
+            api(projects.shared.foundation.foundationCore)
+            api(projects.shared.foundation.foundationUI)
+            api(projects.shared.foundation)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -68,11 +74,11 @@ kotlin {
         binaries.withType<Framework> {
             isStatic = false
             export(projects.shared.core)
-            export(projects.shared.foundation.base)
-            export(projects.shared.foundation.ui)
+            export(projects.shared.foundation.foundationCore)
+            export(projects.shared.foundation.foundationUI)
 //
 //            @OptIn(ExperimentalKotlinGradlePluginApi::class)
-//            transitiveExport = true
+            transitiveExport = true
         }
     }
 }
@@ -113,5 +119,5 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
-    androidTestImplementation(projects.shared.core.test)
+    androidTestImplementation(projects.shared.core.coreTest)
 }

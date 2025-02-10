@@ -18,7 +18,11 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-
+        commonMain.dependencies {
+            implementation(projects.shared.core)
+            implementation(projects.shared.foundation.foundationCore)
+            implementation(projects.shared.foundation.foundationUI)
+        }
     }
 }
 
@@ -44,8 +48,4 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(projects.shared.foundation.base)
 }

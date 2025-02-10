@@ -7,12 +7,12 @@ import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.app.domain.AppInitializationState
 import de.stefan.lang.shapebyte.app.domain.AppInitializationUseCase
 import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.core.app.AppContextProvider
-import de.stefan.lang.core.app.AppInfo
-import de.stefan.lang.core.resources.impl.AppResourceProvider
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
-import de.stefan.lang.core.coroutines.CoroutineScopeProviding
-import de.stefan.lang.testcore.CoreTest
+import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
+import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
 import io.mockk.verify
@@ -86,7 +86,7 @@ class AppInitializationUseCaseTest: CoreTest() {
                 versionCode = 0,
                 debugMode = true
             ),
-            appContextProvider = AppContextProvider(appContext),
+            appContextProvider = ContextProvider(appContext),
             appResourceProvider = AppResourceProvider(null),
         )
 

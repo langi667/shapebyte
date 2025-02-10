@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.core.image.ImageResource
+import de.stefan.lang.foundationCore.image.ImageResource
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage

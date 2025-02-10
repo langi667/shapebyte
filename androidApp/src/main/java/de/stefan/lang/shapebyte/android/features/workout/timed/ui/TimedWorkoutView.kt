@@ -33,7 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import de.stefan.lang.core.assets.ImageAsset
+import de.stefan.lang.foundationCore.assets.ImageAsset
+import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
@@ -52,7 +53,6 @@ import de.stefan.lang.shapebyte.android.shared.progress.ui.GradientProgressIndic
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
-import de.stefan.lang.foundation.ui.buttons.ButtonState
 import org.koin.androidx.compose.getViewModel
 
 @Composable

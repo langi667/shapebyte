@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.data
 
-import de.stefan.lang.core.assets.ImageAsset
+import de.stefan.lang.foundationCore.assets.ImageAsset
 
 data class Exercise(
     override val name: String,

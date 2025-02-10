@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.core.data
 
-import de.stefan.lang.core.image.ImageResource
+import de.stefan.lang.foundationCore.image.ImageResource
 
 data class Workout(
     val id: Int,

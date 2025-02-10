@@ -1,6 +1,6 @@
-package de.stefan.lang.shapebyte.utils
+package de.stefan.lang.testcore
 
-import de.stefan.lang.core.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.StandardTestDispatcher
 

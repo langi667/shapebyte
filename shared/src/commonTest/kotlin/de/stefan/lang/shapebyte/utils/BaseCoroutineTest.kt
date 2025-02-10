@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.utils
 
+import de.stefan.lang.testcore.TestCoroutineContextProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
