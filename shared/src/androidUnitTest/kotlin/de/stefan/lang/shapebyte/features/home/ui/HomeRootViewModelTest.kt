@@ -1,23 +1,27 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.featureToggles.FeatureTogglesModule
+import de.stefan.lang.featureToggles.data.FeatureToggleState
+import de.stefan.lang.featureToggles.data.FeatureToggle
+import de.stefan.lang.featureToggles.data.FeatureToggleDatasource
+import de.stefan.lang.featureToggles.data.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.impl.FeatureToggleDatasourceMock
-import de.stefan.lang.shapebyte.shared.featuretoggles.di.featureToggleDatasourceMock
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
-import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
+
+import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class HomeRootViewModelTest : BaseCoroutineTest() {
+class HomeRootViewModelTest : SharedComponentTest() {
+    // TODO: use mockk instead of manual mock
     private val featureToggleDatasourceMock: FeatureToggleDatasourceMock
-        get() = DPI.featureToggleDatasourceMock
+        get() = FeatureTogglesModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
 
     @Test
     fun `initial state`() = test {
@@ -122,6 +126,6 @@ class HomeRootViewModelTest : BaseCoroutineTest() {
     }
 
     private fun createSUT(): HomeRootViewModel {
-        return DPI.homeRootViewModel()
+        return SharedModule.homeRootViewModel()
     }
 }

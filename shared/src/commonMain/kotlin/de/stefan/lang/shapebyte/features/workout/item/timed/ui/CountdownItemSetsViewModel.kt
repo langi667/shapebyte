@@ -1,14 +1,14 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 
-import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreutils.logging.Logging
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
+import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.data.None
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +36,7 @@ class CountdownItemSetsViewModel(
         // TODO: check if started already
         this.itemSets = itemSets
 
-        val timedHandler = DPI.createTimedItemExecution(None, itemSets)
+        val timedHandler = SharedModule.createTimedItemExecution(None, itemSets)
         timedHandler.start(scope)
 
         scope.launch {

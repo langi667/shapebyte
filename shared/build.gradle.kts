@@ -42,13 +42,15 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-
+            // TODO: check if that is really required
             api(projects.shared.core.coreUtils)
             implementation(projects.shared.core.coreUtils)
-
+            // =================================================
             api(projects.shared.core)
             api(projects.shared.foundation.foundationCore)
             api(projects.shared.foundation.foundationUI)
+            api(projects.shared.foundation.featureToggles)
+
             api(projects.shared.foundation)
 
         }
@@ -57,11 +59,9 @@ kotlin {
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
+            implementation (projects.shared.core.coreTest)
+            implementation (projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
 
-            implementation(projects.shared.testcore)
-//            implementation(projects.shared.core)
-//            implementation(projects.shared.foundation.core)
-//            implementation(projects.shared.foundation.ui)
         }
 //        iosMain.dependencies {
 //            implementation(projects.shared.core)
@@ -120,4 +120,5 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
     androidTestImplementation(projects.shared.core.coreTest)
+    androidTestImplementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
 }

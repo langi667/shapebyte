@@ -3,11 +3,11 @@ package de.stefan.lang.shapebyte.android.designsystem.ui
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.LocalAnimationDuration
 import de.stefan.lang.shapebyte.android.LocalDimension
 import de.stefan.lang.shapebyte.android.LocalSpacing
 import de.stefan.lang.shapebyte.android.ShapeByteTheme
-import de.stefan.lang.shapebyte.di.DPI
 
 @Composable
 fun With(
@@ -22,10 +22,10 @@ fun With(
 fun <T> withData(
     content: @Composable (theme: ThemeData) -> T,
 ): T {
-    val logger = DPI.logger()
+    val logger = SharedModule.logger()
 
     val themeData = remember {
-        DPI.appInfo()
+        SharedModule.appInfo()
         ThemeData(
             current = MaterialTheme,
             dimensions = LocalDimension.current,

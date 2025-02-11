@@ -1,19 +1,19 @@
 package de.stefan.lang.shapebyte.features.workout.item.repetitive.domain
 
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionState
-import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class RepetitiveItemExecutionTest : BaseCoroutineTest() {
+class RepetitiveItemExecutionTest : SharedComponentTest() {
     private val item = Exercise("Test")
 
     @Test
@@ -334,5 +334,5 @@ class RepetitiveItemExecutionTest : BaseCoroutineTest() {
     private fun createSUT(
         item: Item,
         sets: List<ItemSet.Repetition>,
-    ) = DPI.createRepetitiveItemExecution(item, sets)
+    ) = SharedModule.createRepetitiveItemExecution(item, sets)
 }

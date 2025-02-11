@@ -1,12 +1,12 @@
 package de.stefan.lang.shapebyte.features.workout.schedule.domain
 
-import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
-import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
+import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
+import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.usecase.BaseDataUseCase
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleRepository
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.shared.usecase.BaseDataUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

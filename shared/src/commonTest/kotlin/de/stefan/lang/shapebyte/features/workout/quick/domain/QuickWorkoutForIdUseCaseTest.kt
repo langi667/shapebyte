@@ -1,20 +1,29 @@
 package de.stefan.lang.shapebyte.features.workout.quick.domain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.featureToggles.data.FeatureToggle
+import de.stefan.lang.featureToggles.data.FeatureToggleDatasource
+import de.stefan.lang.featureToggles.data.FeatureToggleState
+import de.stefan.lang.featureToggles.data.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
-import de.stefan.lang.shapebyte.shared.featuretoggles.di.featureToggleDatasourceMock
-import de.stefan.lang.shapebyte.shared.featuretoggles.di.quickWorkoutsDatasourceMock
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
+import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
+import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsDatasourceMocks
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class QuickWorkoutForIdUseCaseTest : BaseCoroutineTest() {
-    private val featureToggleDataSource get() = DPI.featureToggleDatasourceMock
-    private val quickWorkoutsDataSource get() = DPI.quickWorkoutsDatasourceMock
+class QuickWorkoutForIdUseCaseTest : SharedComponentTest() {
+
+    // TODO: use mockk instead of manual mock
+    private val featureToggleDataSource: FeatureToggleDatasourceMock
+        get() = SharedModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
+
+    // TODO: use mockk instead of manual mock
+    private val quickWorkoutsDataSource: QuickWorkoutsDatasourceMocks
+        get() = SharedModule.get<QuickWorkoutsDatasource>() as QuickWorkoutsDatasourceMocks
 
     private val validWorkoutId = 1
     private val invalidWorkoutId = -1
@@ -77,5 +86,5 @@ class QuickWorkoutForIdUseCaseTest : BaseCoroutineTest() {
         }
     }
 
-    private fun createSUT(): QuickWorkoutForIdUseCase = DPI.createQuickWorkoutForIdUseCase()
+    private fun createSUT(): QuickWorkoutForIdUseCase = SharedModule.createQuickWorkoutForIdUseCase()
 }

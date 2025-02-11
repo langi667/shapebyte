@@ -25,9 +25,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(projects.shared.core.coreUtils)
+
 
             api(libs.kotlin.test)
             api(libs.turbine)

@@ -22,6 +22,7 @@ kotlin {
             implementation(projects.shared.core)
             implementation(projects.shared.foundation.foundationCore)
             implementation(projects.shared.foundation.foundationUI)
+            implementation(projects.shared.foundation.featureToggles)
         }
     }
 }

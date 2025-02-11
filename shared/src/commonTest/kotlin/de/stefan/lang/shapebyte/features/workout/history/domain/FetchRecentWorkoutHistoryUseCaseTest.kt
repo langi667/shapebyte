@@ -1,20 +1,23 @@
 package de.stefan.lang.shapebyte.features.workout.history.domain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.featureToggles.data.FeatureToggle
+import de.stefan.lang.featureToggles.data.FeatureToggleDatasource
+import de.stefan.lang.featureToggles.data.FeatureToggleState
+import de.stefan.lang.featureToggles.data.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.core.domain.FeatureId
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggle
-import de.stefan.lang.shapebyte.shared.featuretoggles.data.FeatureToggleState
-import de.stefan.lang.shapebyte.shared.featuretoggles.di.featureToggleDatasourceMock
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
 
-class FetchRecentWorkoutHistoryUseCaseTest : BaseCoroutineTest() {
-    private val featureTogglesDCMock get() = DPI.featureToggleDatasourceMock
+class FetchRecentWorkoutHistoryUseCaseTest : SharedComponentTest() {
+    private val featureTogglesDCMock: FeatureToggleDatasourceMock
+        get() = SharedModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
 
     @Test
     fun `emit success if feature toggle is enabled`() = test {
@@ -71,7 +74,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseCoroutineTest() {
     }
 
     private fun createSUT(): FetchRecentWorkoutHistoryUseCase {
-        val retVal = DPI.fetchRecentWorkoutHistoryUseCase()
+        val retVal = SharedModule.fetchRecentWorkoutHistoryUseCase()
         return retVal
     }
 }

@@ -18,11 +18,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.foundationCore.image.ImageResource
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
-import de.stefan.lang.shapebyte.di.DPI
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.ui.preview.WorkoutSchedulePreviewDataProvider
 
@@ -98,7 +98,7 @@ fun WorkoutHistoryEntryViewPreview() {
             Modifier.background(theme.current.colorScheme.background),
         ) {
             WorkoutHistoryEntryView(
-                entry = DPI.workoutHistoryEntry(
+                entry = SharedModule.workoutHistoryEntry(
                     scheduleEntry = WorkoutSchedulePreviewDataProvider.workoutScheduleEntry,
                 ),
             )

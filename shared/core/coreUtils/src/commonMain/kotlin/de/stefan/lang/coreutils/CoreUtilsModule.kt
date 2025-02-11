@@ -1,10 +1,10 @@
 package de.stefan.lang.coreutils
 
+import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
+import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
 import de.stefan.lang.coreutils.CoreUtilsModule.contextProvider
 import de.stefan.lang.coreutils.CoreUtilsModule.coroutineContextProvider
 import de.stefan.lang.coreutils.CoreUtilsModule.coroutineScopeProvider
-import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
-import de.stefan.lang.coreutils.coroutines.CoroutineScopeProviding
 import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.coreutils.logging.impl.Logger

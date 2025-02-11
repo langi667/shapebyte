@@ -1,14 +1,14 @@
 package de.stefan.lang.shapebyte.android
 
 import android.app.Application
-import de.stefan.lang.coreutils.coroutines.CoroutineContextProvider
-import de.stefan.lang.coreutils.coroutines.CoroutineScopeProvider
+import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProvider
+import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProvider
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.foundationCore.platform.PlatformDependencyProvider
 import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.shared.resources.mapping.AudioMapper
-import de.stefan.lang.shapebyte.app.data.PlatformDependencyProvider
-import de.stefan.lang.shapebyte.di.DPI
 
 class ShapeByteApplication : Application() {
     override fun onCreate() {
@@ -17,7 +17,7 @@ class ShapeByteApplication : Application() {
     }
 
     private fun initializeApplication() {
-        DPI.appInitializerUseCase().invoke(
+        SharedModule.sharedInitializationUseCase().invoke(
             PlatformDependencyProvider(
                 applicationContext = this,
                 coroutineScopeProviding = CoroutineScopeProvider(),
@@ -29,7 +29,9 @@ class ShapeByteApplication : Application() {
                     debugMode = BuildConfig.DEBUG,
                 ),
                 appContextProvider = ContextProvider(this),
-                appResourceProvider = AppResourceProvider(AudioMapper),
+                appResourceProvider = AppResourceProvider(
+                    audioMapping = AudioMapper,
+                ),
             ),
         )
     }

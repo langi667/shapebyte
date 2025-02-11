@@ -14,13 +14,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import de.stefan.lang.coreutils.logging.Loggable
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
 import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView
 import de.stefan.lang.shapebyte.android.navigation.NavRoute
 import de.stefan.lang.shapebyte.android.navigation.workoutIdOr
-import de.stefan.lang.shapebyte.app.domain.AppInitializationState
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.initializing.SharedInitializationState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -33,8 +33,8 @@ class MainActivity : ComponentActivity(), Loggable {
         installSplashScreen()
 
         lifecycleScope.launch {
-            DPI.appInitializerUseCase().flow.collectLatest {
-                if (it == AppInitializationState.INITIALIZED) {
+            SharedModule.sharedInitializationUseCase().flow.collectLatest {
+                if (it == SharedInitializationState.INITIALIZED) {
                     showMainScreen()
                 }
             }

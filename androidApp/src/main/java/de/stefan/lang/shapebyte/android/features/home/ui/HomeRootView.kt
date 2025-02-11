@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
@@ -33,7 +34,6 @@ import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.history.ui.preview.WorkoutHistoryPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.quick.ui.preview.QuickWorkoutsPreviewDataProvider
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.getViewModel
 import kotlin.math.max

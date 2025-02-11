@@ -1,8 +1,9 @@
 package de.stefan.lang.shapebyte.shared.usecase
 
 import de.stefan.lang.coreutils.logging.Logging
-import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
+import de.stefan.lang.featureToggles.FeatureTogglesModule
+import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.usecase.BaseDataUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +27,7 @@ open class BaseFeatureDataUseCase<T>(
 ) : BaseDataUseCase<T>(logger) {
 
     private val featureEnabled: Flow<Boolean> by lazy {
-        val featureToggleUseCase = DPI.featureToggleUseCase(featureToggle)
+        val featureToggleUseCase = FeatureTogglesModule.featureToggleUseCase(featureToggle)
         featureToggleUseCase.isEnabled
     }
 

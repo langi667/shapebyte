@@ -1,13 +1,13 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.data
 
-import de.stefan.lang.shapebyte.utils.BaseTest
+import de.stefan.lang.coretest.CoreTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-class ExtListItemSetTimedTest : BaseTest() {
+class ExtListItemSetTimedTest : CoreTest() {
 
     @Test
     fun `should sum correct number of milliseconds`() {

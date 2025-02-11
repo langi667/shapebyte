@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.domain
 
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ExerciseExecutionInfo
@@ -48,9 +48,9 @@ class ItemsExecutionBuilder {
                 }
             }
 
-            DPI.createTimedItemExecution(item, sets)
+            SharedModule.createTimedItemExecution(item, sets)
         }
 
-        return DPI.createItemsExecution(executions)
+        return SharedModule.createItemsExecution(executions)
     }
 }

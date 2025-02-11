@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.quick.data
 
+import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 
 interface QuickWorkoutsDatasource {
     suspend fun fetchQuickWorkouts(): LoadState.Result<List<Workout>>

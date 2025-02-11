@@ -24,6 +24,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(projects.shared.core.coreCoroutines)
         }
 
         commonTest.dependencies {

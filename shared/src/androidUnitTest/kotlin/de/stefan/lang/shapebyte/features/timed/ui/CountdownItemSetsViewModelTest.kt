@@ -1,17 +1,14 @@
 package de.stefan.lang.shapebyte.features.timed.ui
 
-import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.DPI
-import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.CountdownItemSetsViewData
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.CountdownItemSetsViewModel
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
-import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
+import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.time.Duration.Companion.minutes
 
-class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
+class CountdownItemSetsViewModelTest : SharedComponentTest() {
     @Test
     fun `should have correct initial state`() {
         val sut = createSut()
@@ -85,5 +82,5 @@ class CountdownItemSetsViewModelTest : BaseCoroutineTest() {
 //        }
 //    }
 
-    private fun createSut(): CountdownItemSetsViewModel = DPI.countdownItemSetsViewModel()
+    private fun createSut(): CountdownItemSetsViewModel = SharedModule.countdownItemSetsViewModel()
 }

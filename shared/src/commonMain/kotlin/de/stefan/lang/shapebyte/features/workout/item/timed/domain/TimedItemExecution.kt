@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.item.timed.domain
 
 import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.core.data.None
@@ -32,7 +32,7 @@ class TimedItemExecution(
                 ItemSet.Timed.Seconds(1)
             }
 
-            return DPI.createTimedItemExecution(None, sets)
+            return SharedModule.createTimedItemExecution(None, sets)
         }
     }
 

@@ -1,11 +1,11 @@
 package de.stefan.lang.shapebyte.features.workout.quick.data.mocks
 
 import de.stefan.lang.foundationCore.image.ImageResource
+import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsError
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
 
 @Suppress("MagicNumber")
 class QuickWorkoutsDatasourceMocks : QuickWorkoutsDatasource {

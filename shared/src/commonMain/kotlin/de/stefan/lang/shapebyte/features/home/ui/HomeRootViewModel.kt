@@ -1,17 +1,17 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
-import de.stefan.lang.coreutils.coroutines.CoroutineContextProviding
+import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.loadstate.asResultFlow
+import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
+import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.history.domain.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.schedule.domain.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.shared.loading.data.LoadState
-import de.stefan.lang.shapebyte.shared.loading.data.asResultFlow
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.BaseViewModel
-import de.stefan.lang.shapebyte.shared.viewmodel.ui.UIState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

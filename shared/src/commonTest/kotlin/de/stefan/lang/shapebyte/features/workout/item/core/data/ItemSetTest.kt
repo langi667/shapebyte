@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.data
 
-import de.stefan.lang.shapebyte.utils.BaseTest
+import de.stefan.lang.coretest.CoreTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ItemSetTest : BaseTest() {
+class ItemSetTest : CoreTest() {
     @Test
     fun `Seconds should return correct values`() {
         val sut = ItemSet.Timed.Seconds(5)

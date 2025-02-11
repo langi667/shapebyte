@@ -1,14 +1,14 @@
 package de.stefan.lang.shapebyte.features.workout.item.core.domain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Exercise
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
-import de.stefan.lang.shapebyte.utils.BaseCoroutineTest
 import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +22,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
-class ItemsExecutionTest : BaseCoroutineTest() {
+class ItemsExecutionTest : SharedComponentTest() {
     /**
      * To test that if start is failing, the other items in the ItemsExecution are executed
      */
@@ -76,7 +76,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -128,7 +128,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val ignoredItem = Exercise("Fail")
 
         val items = List(executionsSucceedBefore) {
-            DPI.createTimedItemExecution(
+            SharedModule.createTimedItemExecution(
                 item = Exercise("Test $it"),
                 sets = List(duration) { ItemSet.Timed.Seconds(1) },
             )
@@ -136,11 +136,11 @@ class ItemsExecutionTest : BaseCoroutineTest() {
             TimedFailing(
                 item = ignoredItem,
                 sets = List(duration) { ItemSet.Timed.Seconds(1) },
-                DPI.logger(),
+                SharedModule.logger(),
             ),
         ) +
             List(executionsSucceedAfter) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test ${executionsSucceedBefore + it}"),
                     sets = List(duration) { ItemSet.Timed.Seconds(1) },
                 )
@@ -178,7 +178,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -253,7 +253,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -270,7 +270,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -293,7 +293,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -321,7 +321,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -361,7 +361,7 @@ class ItemsExecutionTest : BaseCoroutineTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                DPI.createTimedItemExecution(
+                SharedModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -403,6 +403,6 @@ class ItemsExecutionTest : BaseCoroutineTest() {
     // TODO: test for repetitive execution when implemented
 
     private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecution {
-        return DPI.createItemsExecution(items)
+        return SharedModule.createItemsExecution(items)
     }
 }

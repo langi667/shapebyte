@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.features.workout.core.data
 
-import de.stefan.lang.shapebyte.utils.BaseTest
+import de.stefan.lang.shapebyte.utils.SharedComponentTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class WorkoutTypeTimedIntervalTest : BaseTest() {
+class WorkoutTypeTimedIntervalTest : SharedComponentTest() {
     @Test
     fun `test secondsTotal`() {
         var sut = WorkoutType.Timed.Interval(20, 10, 10)

@@ -8,7 +8,6 @@ import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.assets.FileAsset
 import de.stefan.lang.foundationCore.assets.FileAssetLoading
 import de.stefan.lang.foundationCore.assets.impl.FileAssetLoader
-import de.stefan.lang.shapebyte.di.DPI
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test

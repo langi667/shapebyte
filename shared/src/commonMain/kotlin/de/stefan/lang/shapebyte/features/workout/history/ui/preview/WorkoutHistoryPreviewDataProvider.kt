@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.history.ui.preview
 
-import de.stefan.lang.shapebyte.di.DPI
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.features.workout.history.data.mocks.WorkoutHistoryDataSourceMocks
 import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
 import kotlinx.datetime.Instant
@@ -14,7 +14,7 @@ object WorkoutHistoryPreviewDataProvider {
             Instant.parse("2024-12-24T00:00:00Z"),
             Instant.parse("2024-12-12T00:00:00Z"),
         ).map {
-            DPI.workoutHistoryEntry(it)
+            SharedModule.workoutHistoryEntry(it)
         }
     }
 }
