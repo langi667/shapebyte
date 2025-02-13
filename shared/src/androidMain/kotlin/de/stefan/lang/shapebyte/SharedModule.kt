@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte
 
-import de.stefan.lang.foundationCore.platform.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.di.BaseSharedModule
+import de.stefan.lang.shapebyte.initializing.PlatformDependencyProvider
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
 

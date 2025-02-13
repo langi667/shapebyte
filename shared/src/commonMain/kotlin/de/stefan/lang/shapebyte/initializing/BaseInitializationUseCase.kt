@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.initializing
 
-import de.stefan.lang.foundationCore.platform.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.SharedModule
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow

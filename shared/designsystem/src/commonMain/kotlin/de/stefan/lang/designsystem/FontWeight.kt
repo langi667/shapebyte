@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalObjCName::class)
 
-package de.stefan.lang.shapebyte.utils.designsystem.data
+package de.stefan.lang.designsystem
 
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName

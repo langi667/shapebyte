@@ -25,7 +25,7 @@ struct TimedWorkoutView: View {
         workoutId: Int32
     ) {
         self.workoutId = workoutId
-        self.viewModel = DPI.shared.timedWorkoutViewModel()
+        self.viewModel = SharedModule.shared.timedWorkoutViewModel()
     }
 
     var body: some View {

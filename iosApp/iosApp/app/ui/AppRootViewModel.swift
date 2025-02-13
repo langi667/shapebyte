@@ -19,7 +19,7 @@ class AppRootViewModel: ObservableObject {
     func onViewAppeared() {
 
         Task {
-             let appInitUseCase = DPI.shared.appInitializerUseCase()
+             let appInitUseCase = SharedModule.shared.sharedInitializationUseCase()
             for await appInitState in appInitUseCase.flow where appInitState == .initialized {
                 self.state = UIStateData(data: AppRootViewModelData())
             }

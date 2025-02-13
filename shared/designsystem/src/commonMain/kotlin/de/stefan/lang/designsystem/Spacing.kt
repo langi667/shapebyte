@@ -1,6 +1,6 @@
-package de.stefan.lang.shapebyte.utils.designsystem.data
+package de.stefan.lang.designsystem
 
-data class Dimension(
+data class Spacing(
     val xTiny: Int,
     val tiny: Int,
     val small: Int,

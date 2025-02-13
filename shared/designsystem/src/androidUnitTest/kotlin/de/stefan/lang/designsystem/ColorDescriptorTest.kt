@@ -1,7 +1,5 @@
-package de.stefan.lang.shapebyte.designsystem.data
+package de.stefan.lang.designsystem
 
-import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
-import de.stefan.lang.shapebyte.utils.designsystem.data.colorHexValue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

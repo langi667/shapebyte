@@ -5,7 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
 import de.stefan.lang.coreCoroutinesProvidingTest.TestCoroutineContextProvider
 import de.stefan.lang.coreCoroutinesProvidingTest.TestCoroutineScopeProvider
-import de.stefan.lang.foundationCore.platform.PlatformDependencyProvider
+import de.stefan.lang.shapebyte.initializing.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.initializing.SharedInitializationState
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.shapebyte.SharedModule

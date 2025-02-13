@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
-import de.stefan.lang.foundationCore.platform.mocks.PackageDependencyProviderMock
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.initializing.mocks.PackageDependencyProviderMock
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.mp.KoinPlatformTools

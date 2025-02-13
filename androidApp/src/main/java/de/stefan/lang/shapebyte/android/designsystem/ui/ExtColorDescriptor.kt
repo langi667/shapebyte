@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.android.designsystem.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
+import de.stefan.lang.designsystem.ColorDescriptor
 
 @Composable
 fun ColorDescriptor.Themed.color(): Color = withData { theme ->

@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.initializing
 
 import android.os.StrictMode
-import de.stefan.lang.foundationCore.platform.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.SharedModule
 
 /**

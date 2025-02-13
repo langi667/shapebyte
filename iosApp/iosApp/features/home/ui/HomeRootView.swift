@@ -38,7 +38,7 @@ struct HomeRootView: View, Loggable {
     }
 
     init() {
-        self.viewModel = DPI.shared.homeRootViewModel()
+        self.viewModel = SharedModule.shared.homeRootViewModel()
     }
 
     @ViewBuilder
@@ -164,7 +164,11 @@ struct HomeRootContentView: View {
     }
 
     private func maxBuildPerformPersistViewScale() -> CGFloat {
-        let screenCategory = DPI.shared.dimensionProvider().deviceSizeCategory
+        let screenCategory = SharedModule
+            .shared
+            .dimensionProvider()
+            .deviceSizeCategory
+
         let retVal: CGFloat
 
         switch onEnum(of: screenCategory) {

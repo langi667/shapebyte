@@ -20,7 +20,7 @@ protocol Loggable {
 }
 
 extension Loggable {
-    var logger: any Logging { DPI.shared.logger()}
+    var logger: any Logging { SharedModule.shared.logger()}
     var tag: String { TypeDescriptionUtil.typeName(from: self) }
 
     func logD(message: String) {

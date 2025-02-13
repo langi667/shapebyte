@@ -3,6 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.coreutils.progress.Progress
+import de.stefan.lang.designsystem.ColorDescriptor
 import de.stefan.lang.foundationCore.audio.AudioPlaying
 import de.stefan.lang.foundationCore.audio.AudioResource
 import de.stefan.lang.foundationCore.loadstate.LoadState
@@ -22,7 +23,6 @@ import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.shapebyte.features.workout.quick.domain.QuickWorkoutForIdUseCase
-import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

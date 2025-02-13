@@ -20,8 +20,8 @@ struct ShapeByteApp: App {
             appResourceProvider: AppResourceProvider()
         )
 
-        DPI.shared
-            .appInitializerUseCase()
+        SharedModule.shared
+            .sharedInitializationUseCase()
             .invoke(platformDependencies: platformDependencies)
     }
 

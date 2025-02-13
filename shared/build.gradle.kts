@@ -52,7 +52,7 @@ kotlin {
             api(projects.shared.foundation.featureToggles)
 
             api(projects.shared.foundation)
-
+            api(projects.shared.designsystem)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -76,8 +76,8 @@ kotlin {
             export(projects.shared.core)
             export(projects.shared.foundation.foundationCore)
             export(projects.shared.foundation.foundationUI)
-//
-//            @OptIn(ExperimentalKotlinGradlePluginApi::class)
+            export(projects.shared.designsystem)
+
             transitiveExport = true
         }
     }

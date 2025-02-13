@@ -1,4 +1,4 @@
-package de.stefan.lang.foundationCore.platform
+package de.stefan.lang.shapebyte.initializing
 
 import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding

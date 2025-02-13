@@ -57,7 +57,7 @@ struct WorkoutHistoryEntryView: View {
 
 struct WorkoutHistoryEntryView_Previews: PreviewProvider {
     struct State {
-        let entry: WorkoutHistoryEntry =  DPI
+        let entry: WorkoutHistoryEntry =  SharedModule
             .shared
             .workoutHistoryEntry(
                 scheduleEntry: WorkoutSchedulePreviewDataProvider.shared.workoutScheduleEntry

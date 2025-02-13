@@ -1,14 +1,14 @@
-package de.stefan.lang.foundationCore.platform
+package de.stefan.lang.shapebyte.initializing
 
-import android.content.Context
 import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
-import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
+import platform.Foundation.NSBundle
 
 actual data class PlatformDependencyProvider(
-    val applicationContext: Context,
+    val bundle: NSBundle,
     actual override val coroutineScopeProviding: CoroutineScopeProviding,
     actual override val coroutineContextProvider: CoroutineContextProviding,
     actual override val appInfo: AppInfo,

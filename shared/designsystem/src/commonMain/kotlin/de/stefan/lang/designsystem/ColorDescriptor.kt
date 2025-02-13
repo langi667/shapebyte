@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.utils.designsystem.data
+package de.stefan.lang.designsystem
 
 sealed interface ColorDescriptor {
 

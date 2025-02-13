@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.features.workout.item.timed.ui
 
+import de.stefan.lang.designsystem.ColorDescriptor
 import de.stefan.lang.foundationCore.assets.ImageAsset
 import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.shapebyte.features.workout.item.core.data.ImageContaining
 import de.stefan.lang.shapebyte.features.workout.item.core.data.Item
-import de.stefan.lang.shapebyte.utils.designsystem.data.ColorDescriptor
 
 data class TimedWorkoutViewData(
     val title: String = "",

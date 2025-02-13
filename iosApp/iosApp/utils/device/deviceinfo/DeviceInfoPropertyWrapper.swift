@@ -19,7 +19,7 @@ struct Device {
         if environment.isInPreview || environment.isRunningUnitTests {
             return deviceInfoMock // TODO: this needs to be retrieved by the DPI as well
         } else {
-            return DPI.shared.deviceInfoProvider()
+            return SharedModule.shared.deviceInfoProvider()
         }
     }
 }

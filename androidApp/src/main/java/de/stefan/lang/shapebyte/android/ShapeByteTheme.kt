@@ -13,9 +13,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.stefan.lang.designsystem.Dimension
+import de.stefan.lang.designsystem.Spacing
 import de.stefan.lang.shapebyte.android.designsystem.ui.AnimationDuration
-import de.stefan.lang.shapebyte.utils.designsystem.data.Dimension
-import de.stefan.lang.shapebyte.utils.designsystem.data.Spacing
 
 @Composable
 @Suppress("MagicNumber")
