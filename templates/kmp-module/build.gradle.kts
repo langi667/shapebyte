@@ -29,15 +29,12 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(libs.kotlin.test)
-            implementation(libs.turbine)
-            implementation(libs.kotlinx.coroutines.test)
-            implementation (libs.koin.test)
             implementation(projects.shared.core)
+            implementation(projects.shared.foundation)
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.shared.core.coreTest)
         }
     }
 }

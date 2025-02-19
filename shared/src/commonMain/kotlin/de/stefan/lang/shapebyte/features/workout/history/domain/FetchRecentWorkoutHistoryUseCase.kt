@@ -4,10 +4,10 @@ import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
 import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.foundationCore.loadstate.LoadState
-import de.stefan.lang.shapebyte.features.core.domain.FeatureId
+import de.stefan.lang.shapebyte.featureToggles.FeatureId
+import de.stefan.lang.shapebyte.featureToggles.domain.BaseFeatureDataUseCase
 import de.stefan.lang.shapebyte.features.workout.history.data.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.schedule.data.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.shared.usecase.BaseFeatureDataUseCase
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.datetime.Clock

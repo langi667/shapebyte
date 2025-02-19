@@ -47,12 +47,17 @@ kotlin {
             implementation(projects.shared.core.coreUtils)
             // =================================================
             api(projects.shared.core)
-            api(projects.shared.foundation.foundationCore)
-            api(projects.shared.foundation.foundationUI)
-            api(projects.shared.foundation.featureToggles)
 
             api(projects.shared.foundation)
+            // TODO: check if it ma< be enough to just use foundation
+            api(projects.shared.foundation.foundationCore)
+            api(projects.shared.foundation.foundationUI)
+
+
             api(projects.shared.designsystem)
+
+            api(projects.shared.features)
+            // api(projects.shared.features.featureToggles)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -61,6 +66,7 @@ kotlin {
             implementation (libs.koin.test)
             implementation (projects.shared.core.coreTest)
             implementation (projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
+            implementation (projects.shared.features.featureTest)
 
         }
 //        iosMain.dependencies {
@@ -77,6 +83,8 @@ kotlin {
             export(projects.shared.foundation.foundationCore)
             export(projects.shared.foundation.foundationUI)
             export(projects.shared.designsystem)
+            export(projects.shared.features.featureCore)
+            export(projects.shared.features.featureToggles)
 
             transitiveExport = true
         }
@@ -121,4 +129,5 @@ dependencies {
     androidTestImplementation(libs.junit.jupiter)
     androidTestImplementation(projects.shared.core.coreTest)
     androidTestImplementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
+    androidTestImplementation(projects.shared.features.featureTest)
 }

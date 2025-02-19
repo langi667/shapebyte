@@ -2,16 +2,18 @@ package de.stefan.lang.shapebyte.di
 
 import de.stefan.lang.core.CoreModule
 import de.stefan.lang.core.CoreModuleProviding
+import de.stefan.lang.features.FeaturesModule
+import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundation.FoundationModule
 import de.stefan.lang.foundation.FoundationModuleProviding
-import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.shapebyte.featureCore.FeatureCoreModule
+import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.features.home.di.HomeModule
 import de.stefan.lang.shapebyte.features.home.di.HomeModuleProviding
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.di.WorkoutModuleProviding
-import de.stefan.lang.shapebyte.initializing.PlatformDependencyProvider
-import de.stefan.lang.shapebyte.initializing.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
 
@@ -23,21 +25,25 @@ abstract class BaseSharedModule :
     KoinComponent,
     CoreModuleProviding by CoreModule,
     FoundationModuleProviding by FoundationModule,
+    FeaturesModuleProviding by FeaturesModule,
     WorkoutModuleProviding by WorkoutModule,
     HomeModuleProviding by HomeModule,
     AppInfoProviding,
     SharedInitializationProviding {
     val modules =
+        // TODO: improve thins,maybe using annotation like @MainModule
         CoreModule.module +
             FoundationModule.module +
             WorkoutModule.module +
-            HomeModule.module
+            HomeModule.module +
+            FeaturesModule.module
 
     val testModules =
         CoreModule.testModule +
             FoundationModule.testModule +
             WorkoutModule.testModule +
-            HomeModule.testModule
+            HomeModule.testModule +
+            FeaturesModule.testModule
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }
 
@@ -48,19 +54,10 @@ abstract class BaseSharedModule :
      */
 
     fun setup(
-        data: PlatformDependencyProviding,
+        platformDependencies: PlatformDependencyProviding,
     ) {
-        CoreModule.initialize(
-            contextProvider = data.appContextProvider,
-            coroutineContextProvider = data.coroutineContextProvider,
-            coroutineScopeProviding = data.coroutineScopeProviding,
-        )
-
-        FoundationCoreModule.initialize(
-            appResourceProvider = data.appResourceProvider,
-        )
-
-        this.appInfo = data.appInfo
+        FeatureCoreModule.setup(platformDependencies)
+        this.appInfo = platformDependencies.appInfo
     }
 
     override fun sharedInitializationUseCase(): SharedInitializationUseCase {

@@ -1,5 +1,7 @@
 package de.stefan.lang.shapebyte.initializing
 
+import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
+
 /**
  * Will launch all app dependencies including
  */

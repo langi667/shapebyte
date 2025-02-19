@@ -27,5 +27,12 @@ include(":shared:core:coreCoroutines:coreCoroutinesProvidingTest")
 include(":shared:foundation")
 include(":shared:foundation:foundationCore")
 include(":shared:foundation:foundationUI")
-include(":shared:foundation:featureToggles")
+
 include(":shared:designsystem")
+
+include(":shared:features")
+include(":shared:features:featureCore")
+include(":shared:features:featureTest")
+include(":shared:features:featureToggles")
+
+include(":shared:sharedComponentTest")

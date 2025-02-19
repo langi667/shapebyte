@@ -28,7 +28,7 @@ import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsL
 import de.stefan.lang.shapebyte.android.navigation.navigateToQuickWorkouts
 import de.stefan.lang.shapebyte.android.shared.contentview.ui.ContentView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
-import de.stefan.lang.shapebyte.features.core.domain.FeatureId
+import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.workout.core.data.Workout

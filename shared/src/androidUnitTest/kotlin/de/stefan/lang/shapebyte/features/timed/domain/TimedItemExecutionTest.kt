@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.features.workout.item.core.domain.ItemExecutionS
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import de.stefan.lang.shapebyte.features.BaseTimedItemTest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlin.test.Test
@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-class TimedItemExecutionTest : SharedComponentTest() {
+class TimedItemExecutionTest : BaseTimedItemTest() {
     @Test
     fun `initial state`() {
         val seconds = 5

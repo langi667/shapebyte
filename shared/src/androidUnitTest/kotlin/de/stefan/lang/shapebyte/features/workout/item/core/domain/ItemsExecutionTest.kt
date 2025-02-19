@@ -8,7 +8,7 @@ import de.stefan.lang.shapebyte.features.workout.item.core.data.ItemSet
 import de.stefan.lang.shapebyte.features.workout.item.timed.domain.TimedItemExecutionData
 import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.coreutils.logging.Logging
-import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import de.stefan.lang.shapebyte.features.BaseWorkoutFeatureTest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +22,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
-class ItemsExecutionTest : SharedComponentTest() {
+class ItemsExecutionTest : BaseWorkoutFeatureTest() {
     /**
      * To test that if start is failing, the other items in the ItemsExecution are executed
      */

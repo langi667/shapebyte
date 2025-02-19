@@ -20,9 +20,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.shared.core)
-            implementation(projects.shared.foundation.foundationCore)
-            implementation(projects.shared.foundation.foundationUI)
-            implementation(projects.shared.foundation.featureToggles)
+            api(projects.shared.foundation.foundationCore)
+            api(projects.shared.foundation.foundationUI)
         }
     }
 }

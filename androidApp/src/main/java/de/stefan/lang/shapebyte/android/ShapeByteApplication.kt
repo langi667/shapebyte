@@ -8,7 +8,7 @@ import de.stefan.lang.foundationCore.app.AppInfo
 import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.shared.resources.mapping.AudioMapper
-import de.stefan.lang.shapebyte.initializing.PlatformDependencyProvider
+import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 
 class ShapeByteApplication : Application() {
     override fun onCreate() {

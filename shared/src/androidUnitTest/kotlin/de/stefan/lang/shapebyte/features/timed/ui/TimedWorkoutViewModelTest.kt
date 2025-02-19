@@ -1,20 +1,20 @@
 package de.stefan.lang.shapebyte.features.timed.ui
 
 import app.cash.turbine.test
-import de.stefan.lang.featureToggles.data.FeatureToggle
-import de.stefan.lang.featureToggles.data.FeatureToggleDatasource
-import de.stefan.lang.featureToggles.data.FeatureToggleState
-import de.stefan.lang.featureToggles.data.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggle
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleDatasource
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleState
+import de.stefan.lang.shapebyte.featureToggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.shapebyte.features.core.domain.FeatureId
+import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.item.timed.ui.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.quick.data.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.quick.data.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import de.stefan.lang.shapebyte.features.BaseTimedItemTest
 import org.koin.core.component.get
 
 import kotlin.test.Test
@@ -24,7 +24,7 @@ import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class TimedWorkoutViewModelTest : SharedComponentTest() {
+class TimedWorkoutViewModelTest : BaseTimedItemTest() {
     // TODO: use mockk instead of manual mock
     private val datasource: QuickWorkoutsDatasourceMocks
         get() = SharedModule.get<QuickWorkoutsDatasource>() as QuickWorkoutsDatasourceMocks

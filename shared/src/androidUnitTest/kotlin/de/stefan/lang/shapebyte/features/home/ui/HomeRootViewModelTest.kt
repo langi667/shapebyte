@@ -1,16 +1,18 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
 import app.cash.turbine.test
-import de.stefan.lang.featureToggles.FeatureTogglesModule
-import de.stefan.lang.featureToggles.data.FeatureToggleState
-import de.stefan.lang.featureToggles.data.FeatureToggle
-import de.stefan.lang.featureToggles.data.FeatureToggleDatasource
-import de.stefan.lang.featureToggles.data.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleState
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggle
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleDatasource
+import de.stefan.lang.shapebyte.featureToggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.shapebyte.features.core.domain.FeatureId
+import de.stefan.lang.shapebyte.featureToggles.FeatureId
 
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.shapebyte.utils.SharedComponentTest
+import de.stefan.lang.shapebyte.features.home.BaseHomeFeatureTest
+import de.stefan.lang.shapebyte.features.home.di.HomeModule
+
 import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,7 +20,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class HomeRootViewModelTest : SharedComponentTest() {
+class HomeRootViewModelTest : BaseHomeFeatureTest() {
     // TODO: use mockk instead of manual mock
     private val featureToggleDatasourceMock: FeatureToggleDatasourceMock
         get() = FeatureTogglesModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
@@ -126,6 +128,6 @@ class HomeRootViewModelTest : SharedComponentTest() {
     }
 
     private fun createSUT(): HomeRootViewModel {
-        return SharedModule.homeRootViewModel()
+        return HomeModule.homeRootViewModel()
     }
 }

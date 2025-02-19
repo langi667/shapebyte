@@ -2,6 +2,7 @@ package de.stefan.lang.shapebyte.initializing
 
 import android.os.StrictMode
 import de.stefan.lang.shapebyte.SharedModule
+import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 
 /**
  * Will setup all app dependencies, must be called in the beginning of the app launch
