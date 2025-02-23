@@ -11,7 +11,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class FeatureToggleRepositoryTest : BaseFeatureToggleTest() {
-    private val sut = FeatureTogglesModule.featureToggleRepository
+    private val sut
+        get() = FeatureTogglesModule.featureToggleRepository
 
     private val datasource: FeatureToggleDatasourceMock
         get() = FeatureTogglesModule.featureToggleDatasourceMock

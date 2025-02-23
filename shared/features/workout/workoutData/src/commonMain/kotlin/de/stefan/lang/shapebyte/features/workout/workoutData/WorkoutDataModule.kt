@@ -37,6 +37,6 @@ object WorkoutDataModule :
 
     ),
     WorkoutDataModuleProviding {
-        override fun workoutHistoryRepository(): WorkoutHistoryRepository = get()
-        override fun workoutScheduleRepository(): WorkoutScheduleRepository = get()
+    override fun workoutHistoryRepository(): WorkoutHistoryRepository = get()
+    override fun workoutScheduleRepository(): WorkoutScheduleRepository = get()
 }

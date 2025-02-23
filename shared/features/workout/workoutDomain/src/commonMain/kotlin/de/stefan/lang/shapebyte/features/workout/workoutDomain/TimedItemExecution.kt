@@ -7,7 +7,6 @@ import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
 import de.stefan.lang.shapebyte.features.workout.workoutData.None
 import de.stefan.lang.shapebyte.features.workout.workoutData.sumSeconds
 import de.stefan.lang.shapebyte.features.workout.workoutData.sumSecondsTo
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

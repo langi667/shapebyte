@@ -1,15 +1,14 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import de.stefan.lang.coreutils.di.DIModuleDeclaration
-import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsDatasource
-import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsRepository
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.Item
 import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsDatasource
+import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModuleProviding
+import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutScheduleRepository
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
@@ -43,8 +42,6 @@ object WorkoutDomainModule :
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
             single<CurrentWorkoutScheduleEntryUseCase> {
 
-
-
                 CurrentWorkoutScheduleEntryUseCase(
                     repository = get(),
                     logger = get(),
@@ -57,7 +54,7 @@ object WorkoutDomainModule :
                 TimedItemExecution(
                     item = item,
                     sets = sets,
-                    logger = get()
+                    logger = get(),
                 )
             }
 
@@ -105,8 +102,7 @@ object WorkoutDomainModule :
 
     ),
     WorkoutDomainModuleProviding,
-    WorkoutDataModuleProviding by WorkoutDataModule
-{
+    WorkoutDataModuleProviding by WorkoutDataModule {
     override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase = get()
     override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
     override fun createTimedItemExecution(

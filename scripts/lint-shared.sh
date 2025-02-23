@@ -6,7 +6,7 @@ cd "$script_directory/../" || exit 200
 source "$script_directory/core/logging.sh"
 
 lint() {
-    ./gradlew shared:detekt
+    ./gradlew detekt
 }
 
 lint_check() {

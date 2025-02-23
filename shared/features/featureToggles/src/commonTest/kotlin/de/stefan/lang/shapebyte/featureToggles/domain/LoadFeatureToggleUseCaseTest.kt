@@ -14,7 +14,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class LoadFeatureToggleUseCaseTest : BaseFeatureToggleTest() {
-    private val sut: LoadFeatureToggleUseCase = FeatureTogglesModule.loadFeatureToggleUseCase()
+    private val sut: LoadFeatureToggleUseCase
+        get() = FeatureTogglesModule.loadFeatureToggleUseCase()
 
     private val datasource: FeatureToggleDatasourceMock
         get() = FeatureTogglesModule.featureToggleDatasourceMock

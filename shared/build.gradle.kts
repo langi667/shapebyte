@@ -10,6 +10,10 @@ plugins {
     kotlin("plugin.serialization") version "2.0.0"
 }
 
+tasks.register("allTestDebugUnitTest") {
+    dependsOn(subprojects.mapNotNull { it.tasks.findByName("testDebugUnitTest") })
+}
+
 kotlin {
     androidTarget {
         compilations.all {
@@ -42,21 +46,11 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            // TODO: check if that is really required
-            api(projects.shared.core.coreUtils)
-            implementation(projects.shared.core.coreUtils)
-            // =================================================
+
             api(projects.shared.core)
-
             api(projects.shared.foundation)
-            // TODO: check if it ma< be enough to just use foundation
-            api(projects.shared.foundation.foundationCore)
-            api(projects.shared.foundation.foundationUI)
-
-
             api(projects.shared.designsystem)
             api(projects.shared.features)
-            // api(projects.shared.features.featureToggles)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -66,30 +60,16 @@ kotlin {
             implementation (projects.shared.core.coreTest)
             implementation (projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
             implementation (projects.shared.features.featureTest)
-
         }
-//        iosMain.dependencies {
-//            implementation(projects.shared.core)
-//            implementation(projects.shared.foundation.core)
-//        }
-
     }
 
     targets.withType<KotlinNativeTarget>{
         binaries.withType<Framework> {
             isStatic = false
             export(projects.shared.core)
-            // TODO: check if maybe projects.shared.foundation is enough
-            export(projects.shared.foundation.foundationCore)
-            export(projects.shared.foundation.foundationUI)
-            // =======================================
+            export(projects.shared.foundation)
             export(projects.shared.designsystem)
-            // TODO: check if maybe projects.shared.features is enough
-            export(projects.shared.features.featureCore)
-            export(projects.shared.features.featureToggles)
-            export(projects.shared.features.home)
-            export(projects.shared.features.workout)
-            // ========================================
+            export(projects.shared.features)
 
             transitiveExport = true
         }

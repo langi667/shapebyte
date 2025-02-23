@@ -18,9 +18,8 @@ open class RootDIModule(
 
     constructor(diModules: List<DIModule>) : this(
         providedModule = DIModuleDeclaration(allEnvironments = {}),
-        diModules = diModules
+        diModules = diModules,
     )
-
 }
 
 private fun DIModule.joinModules(modules: List<Module>): Module {

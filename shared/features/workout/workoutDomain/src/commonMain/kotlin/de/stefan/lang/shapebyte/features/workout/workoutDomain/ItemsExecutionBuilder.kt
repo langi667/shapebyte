@@ -6,7 +6,6 @@ import de.stefan.lang.shapebyte.features.workout.workoutData.IntervalExerciseInf
 import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutType
 
-
 class ItemsExecutionBuilder {
     companion object {
         private val DefaultHighIntenseExercise = Exercise("High", "high-intense-exercise.png")

@@ -22,7 +22,7 @@ object FeaturesModule :
             FeatureCoreModule,
             FeatureTogglesModule,
             HomeModule,
-            WorkoutModule
+            WorkoutModule,
         ),
     ),
     FeaturesModuleProviding,

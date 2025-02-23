@@ -2,31 +2,29 @@ package de.stefan.lang.shapebyte.features.home
 
 import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.coreutils.di.RootDIModule
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.FetchRecentWorkoutHistoryUseCase
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.QuickWorkoutsUseCase
 import org.koin.core.component.get
 
 interface HomeModuleProviding {
     fun homeRootViewModel(): HomeRootViewModel
 }
 
-object HomeModule : RootDIModule(
-    DIModuleDeclaration(
-        allEnvironments = {
-            single<HomeRootViewModel> {
-                HomeRootViewModel(
-                    currentWorkoutScheduleEntryUseCase = get(),
-                    recentHistoryUseCase = get(),
-                    quickWorkoutsUseCase = get(),
-                    logger = get(),
-                    coroutineContextProvider = get(),
-                )
-            }
-        },
+object HomeModule :
+    RootDIModule(
+        DIModuleDeclaration(
+            allEnvironments = {
+                single<HomeRootViewModel> {
+                    HomeRootViewModel(
+                        currentWorkoutScheduleEntryUseCase = get(),
+                        recentHistoryUseCase = get(),
+                        quickWorkoutsUseCase = get(),
+                        logger = get(),
+                        coroutineContextProvider = get(),
+                    )
+                }
+            },
+        ),
+        emptyList(),
     ),
-    emptyList()
-), HomeModuleProviding
-{
+    HomeModuleProviding {
     override fun homeRootViewModel(): HomeRootViewModel = get()
 }

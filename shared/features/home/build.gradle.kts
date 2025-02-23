@@ -32,7 +32,6 @@ kotlin {
             implementation(projects.shared.foundation)
             implementation(projects.shared.features.featureCore)
             implementation(projects.shared.features.featureToggles)
-            // TODO: might later be only projects.shared.features.featureWorkout.featureWorkoutData and domain
             implementation(projects.shared.features.workout)
         }
 
