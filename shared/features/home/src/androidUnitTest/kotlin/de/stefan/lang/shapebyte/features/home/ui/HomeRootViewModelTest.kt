@@ -10,6 +10,8 @@ import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.shapebyte.features.home.BaseHomeFeatureTest
 import de.stefan.lang.shapebyte.features.home.HomeModule
+import de.stefan.lang.shapebyte.features.home.HomeRootViewData
+import de.stefan.lang.shapebyte.features.home.HomeRootViewModel
 import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -9,17 +9,21 @@ interface DIModule : KoinComponent {
 }
 
 open class RootDIModule(
-    private val modules: List<DIModule>,
+    providedModule: DIModuleDeclaration = DIModuleDeclaration(allEnvironments = {}),
+    diModules: List<DIModule>,
 ) : DIModule {
-    override val module: Module = this.joinModules(modules.map { it.module })
-    override val testModule: Module = this.joinModules(modules.map { it.testModule })
+    private val allModules = (listOf(providedModule) + diModules)
+    override val module: Module = this.joinModules(allModules.map { it.module })
+    override val testModule: Module = this.joinModules(allModules.map { it.testModule })
+
+    constructor(diModules: List<DIModule>) : this(
+        providedModule = DIModuleDeclaration(allEnvironments = {}),
+        diModules = diModules
+    )
+
 }
 
-fun DIModule.joinModules(vararg modules: Module): Module {
-    return this.joinModules(modules.toList())
-}
-
-fun DIModule.joinModules(modules: List<Module>): Module {
+private fun DIModule.joinModules(modules: List<Module>): Module {
     return Module().apply {
         includes(modules)
     }

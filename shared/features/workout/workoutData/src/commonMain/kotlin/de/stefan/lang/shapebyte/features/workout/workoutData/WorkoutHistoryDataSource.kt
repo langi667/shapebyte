@@ -1,0 +1,11 @@
+package de.stefan.lang.shapebyte.features.workout.workoutData
+
+import de.stefan.lang.foundationCore.loadstate.LoadState
+import kotlinx.datetime.Instant
+
+interface WorkoutHistoryDataSource {
+    suspend fun historyForDates(
+        date: Instant,
+        pastDate: Instant,
+    ): LoadState.Result<List<WorkoutScheduleEntry>>
+}

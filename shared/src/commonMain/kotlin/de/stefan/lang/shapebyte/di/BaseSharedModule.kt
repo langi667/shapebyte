@@ -10,10 +10,6 @@ import de.stefan.lang.foundationCore.app.AppInfo
 import de.stefan.lang.shapebyte.featureCore.FeatureCoreModule
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
-import de.stefan.lang.shapebyte.features.home.HomeModule
-import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
-import de.stefan.lang.shapebyte.features.workout.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.WorkoutModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
 
@@ -26,23 +22,17 @@ abstract class BaseSharedModule :
     CoreModuleProviding by CoreModule,
     FoundationModuleProviding by FoundationModule,
     FeaturesModuleProviding by FeaturesModule,
-    WorkoutModuleProviding by WorkoutModule,
-    HomeModuleProviding by HomeModule,
     AppInfoProviding,
     SharedInitializationProviding {
     val modules =
         // TODO: improve this,maybe using annotation like @MainModule
         CoreModule.module +
             FoundationModule.module +
-            WorkoutModule.module +
-            HomeModule.module +
             FeaturesModule.module
 
     val testModules =
         CoreModule.testModule +
             FoundationModule.testModule +
-            WorkoutModule.testModule +
-            HomeModule.testModule +
             FeaturesModule.testModule
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }

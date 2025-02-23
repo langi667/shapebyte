@@ -23,8 +23,8 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
-import de.stefan.lang.shapebyte.features.workout.history.ui.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.schedule.ui.preview.WorkoutSchedulePreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.preview.WorkoutSchedulePreviewDataProvider
 
 @Composable
 fun WorkoutHistoryEntryView(

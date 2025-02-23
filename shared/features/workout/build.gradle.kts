@@ -34,6 +34,9 @@ kotlin {
             implementation(projects.shared.features.featureCore)
             implementation(projects.shared.features.featureToggles)
 
+            api(projects.shared.features.workout.workoutData)
+            api(projects.shared.features.workout.workoutDomain)
+
         }
 
         commonTest.dependencies {

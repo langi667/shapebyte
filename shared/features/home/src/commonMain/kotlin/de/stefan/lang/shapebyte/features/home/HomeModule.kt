@@ -1,14 +1,17 @@
 package de.stefan.lang.shapebyte.features.home
 
 import de.stefan.lang.coreutils.di.DIModuleDeclaration
-import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
+import de.stefan.lang.coreutils.di.RootDIModule
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.CurrentWorkoutScheduleEntryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.FetchRecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.QuickWorkoutsUseCase
 import org.koin.core.component.get
 
 interface HomeModuleProviding {
     fun homeRootViewModel(): HomeRootViewModel
 }
 
-object HomeModule :
+object HomeModule : RootDIModule(
     DIModuleDeclaration(
         allEnvironments = {
             single<HomeRootViewModel> {
@@ -22,7 +25,8 @@ object HomeModule :
             }
         },
     ),
-
-    HomeModuleProviding {
+    emptyList()
+), HomeModuleProviding
+{
     override fun homeRootViewModel(): HomeRootViewModel = get()
 }

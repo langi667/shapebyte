@@ -29,11 +29,11 @@ import de.stefan.lang.shapebyte.android.navigation.navigateToQuickWorkouts
 import de.stefan.lang.shapebyte.android.shared.contentview.ui.ContentView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
-import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewData
-import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.workout.data.Workout
-import de.stefan.lang.shapebyte.features.workout.history.ui.preview.WorkoutHistoryPreviewDataProvider
-import de.stefan.lang.shapebyte.features.workout.quick.ui.preview.QuickWorkoutsPreviewDataProvider
+import de.stefan.lang.shapebyte.features.home.HomeRootViewData
+import de.stefan.lang.shapebyte.features.home.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.workout.preview.QuickWorkoutsPreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.preview.WorkoutHistoryPreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.workoutData.Workout
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.getViewModel
 import kotlin.math.max
