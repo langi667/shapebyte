@@ -28,6 +28,8 @@ kotlin {
 
             api(projects.shared.features.featureCore)
             api(projects.shared.features.featureToggles)
+            api(projects.shared.features.workout)
+            api(projects.shared.features.home)
         }
 
         commonTest.dependencies {

@@ -31,7 +31,7 @@ import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.ui.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.workout.core.data.Workout
+import de.stefan.lang.shapebyte.features.workout.data.Workout
 import de.stefan.lang.shapebyte.features.workout.history.ui.preview.WorkoutHistoryPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.quick.ui.preview.QuickWorkoutsPreviewDataProvider
 import kotlinx.collections.immutable.toImmutableList

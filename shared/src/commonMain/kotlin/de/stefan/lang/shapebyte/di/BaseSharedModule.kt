@@ -10,10 +10,10 @@ import de.stefan.lang.foundationCore.app.AppInfo
 import de.stefan.lang.shapebyte.featureCore.FeatureCoreModule
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
-import de.stefan.lang.shapebyte.features.home.di.HomeModule
-import de.stefan.lang.shapebyte.features.home.di.HomeModuleProviding
-import de.stefan.lang.shapebyte.features.workout.di.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.di.WorkoutModuleProviding
+import de.stefan.lang.shapebyte.features.home.HomeModule
+import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
+import de.stefan.lang.shapebyte.features.workout.WorkoutModule
+import de.stefan.lang.shapebyte.features.workout.WorkoutModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
 
@@ -31,7 +31,7 @@ abstract class BaseSharedModule :
     AppInfoProviding,
     SharedInitializationProviding {
     val modules =
-        // TODO: improve thins,maybe using annotation like @MainModule
+        // TODO: improve this,maybe using annotation like @MainModule
         CoreModule.module +
             FoundationModule.module +
             WorkoutModule.module +

@@ -1,13 +1,13 @@
-package de.stefan.lang.shapebyte.features
+package de.stefan.lang.shapebyte.features.home
 
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.featuretest.FeatureTest
-import org.koin.core.module.Module
 
-open class BaseWorkoutFeatureTest: FeatureTest() {
-    override val testModules: List<Module> = listOf(
+open class BaseHomeFeatureTest: FeatureTest() {
+    override val testModules = listOf(
         FeatureTogglesModule.testModule,
-        WorkoutModule.testModule
+        WorkoutModule.testModule,
+        HomeModule.testModule
     )
 }

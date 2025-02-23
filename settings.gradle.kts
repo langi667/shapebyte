@@ -33,6 +33,8 @@ include(":shared:designsystem")
 include(":shared:features")
 include(":shared:features:featureCore")
 include(":shared:features:featureTest")
+include(":shared:features:workout")
 include(":shared:features:featureToggles")
+include(":shared:features:home")
 
 include(":shared:sharedComponentTest")

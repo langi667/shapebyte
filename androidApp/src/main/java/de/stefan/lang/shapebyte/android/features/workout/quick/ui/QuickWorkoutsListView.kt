@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import de.stefan.lang.foundationCore.image.ImageResource
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
-import de.stefan.lang.shapebyte.features.workout.core.data.Workout
-import de.stefan.lang.shapebyte.features.workout.core.data.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.data.Workout
+import de.stefan.lang.shapebyte.features.workout.data.WorkoutType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

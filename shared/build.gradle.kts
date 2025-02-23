@@ -55,7 +55,6 @@ kotlin {
 
 
             api(projects.shared.designsystem)
-
             api(projects.shared.features)
             // api(projects.shared.features.featureToggles)
         }
@@ -80,11 +79,17 @@ kotlin {
         binaries.withType<Framework> {
             isStatic = false
             export(projects.shared.core)
+            // TODO: check if maybe projects.shared.foundation is enough
             export(projects.shared.foundation.foundationCore)
             export(projects.shared.foundation.foundationUI)
+            // =======================================
             export(projects.shared.designsystem)
+            // TODO: check if maybe projects.shared.features is enough
             export(projects.shared.features.featureCore)
             export(projects.shared.features.featureToggles)
+            export(projects.shared.features.home)
+            export(projects.shared.features.workout)
+            // ========================================
 
             transitiveExport = true
         }
