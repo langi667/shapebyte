@@ -1,10 +1,3 @@
-//
-//  OverviewView.swift
-//  ShapeByte
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 02.08.24.
-//
-
 import SwiftUI
 import shared
 import PreviewSnapshots

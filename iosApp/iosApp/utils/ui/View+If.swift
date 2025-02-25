@@ -1,11 +1,3 @@
-//
-//  View+If.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 12.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import SwiftUI
 
 extension View {

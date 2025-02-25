@@ -1,10 +1,3 @@
-//
-//  SizeReader.swift
-//  ShapeByte
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 28.07.24.
-//
-
 import SwiftUI
 
 struct SizeReader: ViewModifier {

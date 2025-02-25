@@ -1,11 +1,3 @@
-//
-//  ExtCGFloat.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 24.10.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 import shared
 // TODO: move to shared

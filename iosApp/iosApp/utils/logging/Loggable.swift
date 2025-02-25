@@ -1,11 +1,3 @@
-//
-//  Loggable.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 16.10.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 import shared
 

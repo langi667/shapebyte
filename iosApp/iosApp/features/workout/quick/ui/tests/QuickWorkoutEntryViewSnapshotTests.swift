@@ -1,11 +1,3 @@
-//
-//  QuickWorkoutEntryViewSnapshotTest.swift
-//  ShapeByteTests
-//
-//  Created by Lang, Stefan [RTL Tech] on 17.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Testing
 
 @MainActor

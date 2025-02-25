@@ -1,11 +1,3 @@
-//
-//  FontWeight+Native.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 10.10.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import shared
 import SwiftUI
 

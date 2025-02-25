@@ -1,11 +1,3 @@
-//
-//  HeaderView.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 07.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import SwiftUI
 import PreviewSnapshots
 

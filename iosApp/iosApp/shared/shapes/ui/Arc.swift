@@ -1,10 +1,3 @@
-//
-//  Arc.swift
-//  ShapeByte
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 02.08.24.
-//
-
 import SwiftUI
 
 struct Arc: Shape {

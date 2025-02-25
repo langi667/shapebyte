@@ -1,11 +1,3 @@
-//
-//  EnvironmentInfo.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [RTL Tech] on 21.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 
 struct EnvironmentInfo {

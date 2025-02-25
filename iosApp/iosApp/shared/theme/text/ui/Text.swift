@@ -1,10 +1,3 @@
-//
-//  Label.swift
-//  ShapeByte
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 29.07.24.
-//
-
 import SwiftUI
 
 public extension Text {

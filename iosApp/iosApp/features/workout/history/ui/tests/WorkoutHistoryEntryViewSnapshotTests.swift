@@ -1,11 +1,3 @@
-//
-//  WorkoutHistoryEntryViewSnapshotTest.swift
-//  ShapeByteTests
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 13.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Testing
 import PreviewSnapshotsTesting
 

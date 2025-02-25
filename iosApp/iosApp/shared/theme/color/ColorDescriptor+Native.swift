@@ -1,11 +1,3 @@
-//
-//  ColorDescriptor+Native.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [ShapeByte Tech] on 11.10.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import SwiftUI
 import shared
 
