@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace = "de.stefan.lang.shapebyte.android"
-    compileSdk = 34
+    compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         applicationId = "de.stefan.lang.shapebyte.android"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = Project.Android.BuildSettings.minSdk
+        targetSdk = Project.Android.BuildSettings.targetSdk
         versionCode = 1
         versionName = "1.0"
     }
@@ -21,7 +21,7 @@ android {
     }
     packaging {
         resources {
-            excludes += App.Android.BuildSettings.excludedResourcesList
+            excludes += Project.Android.BuildSettings.excludedResourcesList
         }
     }
     buildTypes {
@@ -31,11 +31,11 @@ android {
 
     }
     compileOptions {
-        sourceCompatibility = App.Android.BuildSettings.javaVersion
-        targetCompatibility = App.Android.BuildSettings.javaVersion
+        sourceCompatibility = Project.Android.BuildSettings.javaVersion
+        targetCompatibility = Project.Android.BuildSettings.javaVersion
     }
     kotlinOptions {
-        jvmTarget = App.Android.BuildSettings.javaVersion.toString()
+        jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
     }
 
     sourceSets {

@@ -30,7 +30,7 @@ subprojects {
     }
 
     tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-        jvmTarget = App.Android.BuildSettings.javaVersion.toString()
+        jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
     }
 }
 

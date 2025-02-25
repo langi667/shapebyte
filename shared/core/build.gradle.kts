@@ -8,7 +8,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = App.Android.BuildSettings.javaVersion.toString()
+                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
             }
         }
     }
@@ -47,18 +47,18 @@ kotlin {
 
 android {
     namespace = "de.stefan.lang.core"
-    compileSdk = 34
+    compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
-        minSdk = 24
+        minSdk = Project.Android.BuildSettings.minSdk
     }
     compileOptions {
-        sourceCompatibility = App.Android.BuildSettings.javaVersion
-        targetCompatibility = App.Android.BuildSettings.javaVersion
+        sourceCompatibility = Project.Android.BuildSettings.javaVersion
+        targetCompatibility = Project.Android.BuildSettings.javaVersion
     }
 
     packaging {
         resources {
-            excludes += App.Android.BuildSettings.excludedResourcesList
+            excludes += Project.Android.BuildSettings.excludedResourcesList
         }
     }
 
@@ -70,7 +70,7 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.junit.ktx)
 
     androidTestImplementation(libs.kotlin.test)
