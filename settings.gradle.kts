@@ -29,6 +29,7 @@ include(":shared:foundation:foundationCore")
 include(":shared:foundation:foundationUI")
 
 include(":shared:designsystem")
+include(":shared:navigation")
 
 include(":shared:features")
 include(":shared:features:featureCore")

@@ -8,6 +8,7 @@ import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.navigation.mocks.NavigationHandlerMock
 import de.stefan.lang.shapebyte.features.home.BaseHomeFeatureTest
 import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.HomeRootViewData
@@ -127,6 +128,8 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
     }
 
     private fun createSUT(): HomeRootViewModel {
-        return HomeModule.homeRootViewModel()
+        return HomeModule.homeRootViewModel(
+            navHandler = NavigationHandlerMock()
+        )
     }
 }

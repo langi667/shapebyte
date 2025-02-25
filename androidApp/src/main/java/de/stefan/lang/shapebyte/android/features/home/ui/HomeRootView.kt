@@ -25,7 +25,7 @@ import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
-import de.stefan.lang.shapebyte.android.navigation.navigateToQuickWorkouts
+import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
 import de.stefan.lang.shapebyte.android.shared.contentview.ui.ContentView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
@@ -36,13 +36,18 @@ import de.stefan.lang.shapebyte.features.workout.preview.WorkoutHistoryPreviewDa
 import de.stefan.lang.shapebyte.features.workout.workoutData.Workout
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 import kotlin.math.max
 
 @Composable
 fun HomeRootView(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel: HomeRootViewModel = getViewModel(),
+    viewModel: HomeRootViewModel = getViewModel(
+        parameters = {
+            parametersOf(NavigationHandler(navController))
+        }
+    ),
 ) {
     LaunchedEffect(key1 = "Update") {
         viewModel.update()
@@ -54,10 +59,7 @@ fun HomeRootView(
         .value
 
     HomeRootView(uiState, modifier.fillMaxSize()) {
-        // TODO: this should be propagated using events from view model
-        // TODO: so inform view model first and let it post an event
-        // TODO: SB-52
-        navController.navigateToQuickWorkouts(it)
+        viewModel.onQuickWorkoutSelected(it)
     }
 }
 

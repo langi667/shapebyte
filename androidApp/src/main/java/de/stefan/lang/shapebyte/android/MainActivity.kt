@@ -25,7 +25,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class MainActivity : ComponentActivity(), Loggable {
+class MainActivity : ComponentActivity(),
+    Loggable
+{
     override val logger: Logging by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,27 +55,34 @@ class MainActivity : ComponentActivity(), Loggable {
             }
         }
     }
-}
 
-@Composable
-fun AppView(modifier: Modifier = Modifier) {
-    val navController = rememberNavController()
-    val startDestination = NavRoute.startDestination.path
+    @Composable
+    fun AppView(modifier: Modifier = Modifier) {
+        val startDestination = NavRoute.startDestination.path
+        val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = startDestination) {
-        NavRoute.entries.forEach {
-            when (it) {
-                NavRoute.HomeRoot -> {
-                    composable(it.path) { HomeRootView(navController, modifier) }
-                }
+        NavHost(
+            navController = navController,
+            startDestination = startDestination
+        ) {
+            NavRoute.entries.forEach {
+                when (it) {
+                    NavRoute.HomeRoot -> {
+                        composable(it.path) {
+                            HomeRootView(navController, modifier)
+                        }
+                    }
 
-                NavRoute.QuickWorkout -> {
-                    composable(it.path) { backStackEntry ->
-                        val itemId = backStackEntry.arguments.workoutIdOr("-1").toInt()
-                        TimedWorkoutView(itemId, modifier.fillMaxSize())
+                    NavRoute.QuickWorkout -> {
+                        composable(it.path) { backStackEntry ->
+                            val itemId = backStackEntry.arguments.workoutIdOr("-1").toInt()
+                            TimedWorkoutView(itemId, navController, modifier.fillMaxSize())
+                        }
                     }
                 }
             }
         }
     }
 }
+
+

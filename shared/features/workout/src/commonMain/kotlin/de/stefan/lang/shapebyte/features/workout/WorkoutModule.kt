@@ -2,6 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.coreutils.di.RootDIModule
+import de.stefan.lang.navigation.NavigationHandling
 import de.stefan.lang.shapebyte.features.workout.workoutData.Item
 import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
@@ -15,7 +16,7 @@ import org.koin.core.parameter.parametersOf
 
 interface WorkoutModuleProviding : WorkoutDataModuleProviding, WorkoutDomainModuleProviding {
     fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
-    fun timedWorkoutViewModel(): TimedWorkoutViewModel
+    fun timedWorkoutViewModel(navHandler: NavigationHandling): TimedWorkoutViewModel
     fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
 }
 
@@ -23,8 +24,9 @@ object WorkoutModule :
     RootDIModule(
         providedModule = DIModuleDeclaration(
             allEnvironments = {
-                single<TimedWorkoutViewModel> {
+                factory<TimedWorkoutViewModel> { (navHandler: NavigationHandling) ->
                     TimedWorkoutViewModel(
+                        navigationHandler = navHandler,
                         quickWorkoutForIdUseCase = get(),
                         itemsExecutionBuilder = get(),
                         dateStringFormatter = get(),
@@ -68,7 +70,11 @@ object WorkoutModule :
     WorkoutDomainModuleProviding by WorkoutDomainModule,
     WorkoutModuleProviding {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
-    override fun timedWorkoutViewModel(): TimedWorkoutViewModel = get()
+    override fun timedWorkoutViewModel(navHandler: NavigationHandling): TimedWorkoutViewModel = get(
+        parameters = {
+            parametersOf(navHandler)
+        }
+    )
     override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         get(
             parameters = {

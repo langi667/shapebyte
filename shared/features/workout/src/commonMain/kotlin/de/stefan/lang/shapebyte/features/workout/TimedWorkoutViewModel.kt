@@ -12,6 +12,9 @@ import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.navigation.NavigationHandling
+import de.stefan.lang.navigation.NavigationRequest
+import de.stefan.lang.navigation.NavigationRequestBack
 import de.stefan.lang.shapebyte.features.workout.workoutData.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.IntervalExerciseInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.Item
@@ -27,6 +30,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
 import kotlin.time.Duration
@@ -34,6 +38,7 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
 class TimedWorkoutViewModel(
+    private val navigationHandler: NavigationHandling,
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilder,
     private val dateStringFormatter: DateTimeStringFormatter,
@@ -47,7 +52,6 @@ class TimedWorkoutViewModel(
         Running,
         Pause,
         Finished,
-
         ;
 
         // TODO: Test
@@ -113,6 +117,11 @@ class TimedWorkoutViewModel(
 
     fun stop() {
         itemsExecution?.stop()
+    }
+
+    fun onCloseClicked() {
+        stop()
+        navigationHandler.handleNavigationRequest(NavigationRequestBack)
     }
 
     private fun stopLoadingWorkoutData() {

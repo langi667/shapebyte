@@ -7,6 +7,7 @@ class NavRouteBuilderTest {
     @Test
     fun `quick workout route should be correct`() {
         val workoutId = 12345
-        assertEquals("quickworkout/$workoutId", NavRouteBuilder.quickWorkoutRoute(workoutId))
+        val navRouteBuilder = NavRouteBuilder()
+        assertEquals("quickworkout/$workoutId", navRouteBuilder.quickWorkoutRoute(workoutId))
     }
 }

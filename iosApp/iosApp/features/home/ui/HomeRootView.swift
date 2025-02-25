@@ -37,8 +37,10 @@ struct HomeRootView: View, Loggable {
         .onAppear { viewModel.update() }
     }
 
-    init() {
-        self.viewModel = SharedModule.shared.homeRootViewModel()
+    init(navHandling: any NavigationHandling) {
+        self.viewModel = SharedModule.shared.homeRootViewModel(
+            navHandler: navHandling
+        )
     }
 
     @ViewBuilder

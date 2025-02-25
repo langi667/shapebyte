@@ -1,23 +1,18 @@
-//
-//  NavigationHandler.swift
-//  iosApp
-//
-//  Created by Stefan Lang on 09.12.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 import Combine
+import shared
 
 // TODO: needs to implement protocol from shared
 // TODO: must come from shared
 enum NavigationDestination: Hashable {
+    case back
     case quickWorkout(workoutId: Int32)
 }
 
 // TODO: Factory
 // TODO: provide by injection, not singleton
-class NavigationHandler: Loggable {
+class NavigationHandler: Loggable, NavigationHandling {
+
     static let shared = NavigationHandler()
 
     private(set) lazy var destinations: AsyncStream<NavigationDestination> = .init { continuation in
@@ -28,6 +23,16 @@ class NavigationHandler: Loggable {
 
     func navigate(to destination: NavigationDestination) {
         continuation?.yield(destination)
+    }
+
+    func handleNavigationRequest(request: any NavigationRequest) {
+        if request is NavigationRequestBack {
+            continuation?.yield(.back)
+        } else if let request = request as? QuickWorkoutNavigationRequest {
+            navigateToQuickWorkout(workoutId: request.workoutId)
+        } else {
+            logE(message: "unhandled request: \(request)")
+        }
     }
 
     func navigateToQuickWorkout(workoutId: Int32) {

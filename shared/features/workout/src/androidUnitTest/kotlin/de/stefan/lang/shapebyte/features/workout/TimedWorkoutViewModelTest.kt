@@ -11,6 +11,7 @@ import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.navigation.mocks.NavigationHandlerMock
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutType
 import org.koin.core.component.get
 
@@ -325,6 +326,8 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
     // TODO: test error state if implemented
 
     private fun createSUT(): TimedWorkoutViewModel {
-        return WorkoutModule.timedWorkoutViewModel()
+        return WorkoutModule.timedWorkoutViewModel(
+            navHandler = NavigationHandlerMock()
+        )
     }
 }

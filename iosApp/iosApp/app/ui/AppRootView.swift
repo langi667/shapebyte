@@ -28,19 +28,27 @@ private struct AppRootNavigationView: View {
 
     var body: some View {
         NavigationStack( path: $navigationPath ) {
-            HomeRootView()
+            HomeRootView(navHandling: NavigationHandler.shared)
 
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
-                case .quickWorkout(let workoutId):
-                        TimedWorkoutView(workoutId: workoutId)
-                            .navigationBarBackButtonHidden()
+                    case .quickWorkout(let workoutId):
+                            TimedWorkoutView(
+                                workoutId: workoutId,
+                                navHandling: NavigationHandler.shared
+                            ).navigationBarBackButtonHidden()
+                    case .back:
+                        EmptyView() // TODO: check !
                 }
             }
         }
         .task {
             for await currDestination in NavigationHandler.shared.destinations {
-                navigationPath.append(currDestination)
+                if currDestination == .back {
+                    navigationPath.removeLast()
+                } else {
+                    navigationPath.append(currDestination)
+                }
             }
         }
     }

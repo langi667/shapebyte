@@ -24,6 +24,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -33,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import de.stefan.lang.foundationCore.assets.ImageAsset
 import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.foundationUI.viewmodel.UIState
@@ -43,6 +45,7 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayL
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelSmall
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.TitleMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.withData
+import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
 import de.stefan.lang.shapebyte.android.shared.background.ui.RadialBackgroundView
 import de.stefan.lang.shapebyte.android.shared.buttons.ui.PauseButton
 import de.stefan.lang.shapebyte.android.shared.buttons.ui.PlayButton
@@ -53,11 +56,21 @@ import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.progress.ui.GradientProgressIndicatorLarge
 import de.stefan.lang.shapebyte.features.workout.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.TimedWorkoutViewModel
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-fun TimedWorkoutView(workoutId: Int, modifier: Modifier = Modifier) {
-    val viewModel: TimedWorkoutViewModel = getViewModel()
+fun TimedWorkoutView(
+    workoutId: Int,
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    val viewModel: TimedWorkoutViewModel = getViewModel(
+        parameters = {
+            parametersOf(NavigationHandler(navController))
+        }
+    )
 
     LaunchedEffect("Initial") {
         viewModel.load(workoutId)
@@ -67,6 +80,7 @@ fun TimedWorkoutView(workoutId: Int, modifier: Modifier = Modifier) {
     TimedWorkoutView(
         state = uiState,
         modifier = modifier,
+        onCloseClicked = { viewModel.onCloseClicked() }
     )
 }
 
@@ -74,6 +88,7 @@ fun TimedWorkoutView(workoutId: Int, modifier: Modifier = Modifier) {
 fun TimedWorkoutView(
     state: UIState,
     modifier: Modifier = Modifier,
+    onCloseClicked: () -> Unit = {},
 ) {
     when (state) {
         is UIState.Loading -> {
@@ -88,6 +103,7 @@ fun TimedWorkoutView(
             TimedWorkoutView(
                 state.data as? TimedWorkoutViewData,
                 modifier,
+                onCloseClicked = onCloseClicked
             )
         }
     }
@@ -97,6 +113,7 @@ fun TimedWorkoutView(
 fun TimedWorkoutView(
     data: TimedWorkoutViewData?,
     modifier: Modifier = Modifier,
+    onCloseClicked: () -> Unit = {},
 ) {
     val image: ImageAsset? = data?.exerciseImage
     val progressTotal = data?.progressTotal ?: 0.0f
@@ -113,6 +130,7 @@ fun TimedWorkoutView(
         progress = progressTotal,
         modifier = modifier,
         backgroundColor = data?.backgroundColor?.color(),
+        onCloseClicked = onCloseClicked,
     )
 }
 
@@ -129,6 +147,7 @@ fun TimedWorkoutView(
     progress: Float,
     modifier: Modifier = Modifier,
     backgroundColor: Color? = null,
+    onCloseClicked: () -> Unit = {},
 ) = With { theme ->
     Box(modifier.fillMaxSize()) {
         RadialBackgroundView(
@@ -139,6 +158,7 @@ fun TimedWorkoutView(
                     remaining = remaining,
                     elapsedTotal = elapsedTotal,
                     remainingTotal = remainingTotal,
+                    onCloseClicked = onCloseClicked,
                 )
             },
         ) {
@@ -191,13 +211,14 @@ private fun TimerView(
     elapsedTotal: String,
     remainingTotal: String,
     modifier: Modifier = Modifier,
+    onCloseClicked: () -> Unit = {},
 ) = With { theme ->
     Column(
         modifier
             .fillMaxWidth()
             .padding(theme.spacings.small.dp),
     ) {
-        AppToolBar(title)
+        AppToolBar(title = title, onCloseClicked = onCloseClicked)
         Spacer(Modifier.height(theme.spacings.large.dp))
         DisplayLarge(
             text = remaining,
@@ -252,6 +273,7 @@ private fun ExerciseView(
 private fun AppToolBar(
     title: String,
     modifier: Modifier = Modifier,
+    onCloseClicked: () -> Unit = {},
 ) = With { theme ->
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -268,9 +290,7 @@ private fun AppToolBar(
             TitleMedium(title, Modifier)
         }
 
-        IconButton({
-            // TODO: handle Click
-        }, modifier = Modifier.size(buttonSize.dp)) {
+        IconButton(onCloseClicked, modifier = Modifier.size(buttonSize.dp)) {
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = "Close Timed View",

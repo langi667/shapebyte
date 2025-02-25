@@ -22,10 +22,13 @@ struct TimedWorkoutView: View {
     let workoutId: Int32
 
     init(
-        workoutId: Int32
+        workoutId: Int32,
+        navHandling: any NavigationHandling
     ) {
         self.workoutId = workoutId
-        self.viewModel = SharedModule.shared.timedWorkoutViewModel()
+        self.viewModel = SharedModule.shared.timedWorkoutViewModel(
+            navHandler: navHandling
+        )
     }
 
     var body: some View {
@@ -36,7 +39,10 @@ struct TimedWorkoutView: View {
             case .loading:
                 Text("Loading...") // TODO: loading state
             case .content(let content):
-                contentOrErrorView(content: content)
+                contentOrErrorView(
+                    content: content,
+                    onBack: viewModel.onCloseClicked
+                )
             }
         }
         .task {
@@ -50,13 +56,17 @@ struct TimedWorkoutView: View {
     }
 
     @ViewBuilder
-    func contentOrErrorView(content: UIState.Content) -> some View {
+    func contentOrErrorView(
+        content: UIState.Content,
+        onBack: @escaping () -> Void = {}
+    ) -> some View {
         if let viewData: TimedWorkoutViewData = content.viewData() {
             TimedWorkoutContentView(
                 data: viewData,
                 onPlayClicked: { viewModel.start() },
                 onPauseClicked: viewData.pauseButtonState.onClickAction,
-                onStopClicked: viewData.stopButtonState.onClickAction
+                onStopClicked: viewData.stopButtonState.onClickAction,
+                onCloseClicked: onBack
             )
         } else {
             Text("Something went wrong...") // TODO: error state
@@ -72,6 +82,7 @@ struct TimedWorkoutContentView: View {
     let onPlayClicked: () -> Void
     let onPauseClicked: (() -> Void)?
     let onStopClicked: (() -> Void)?
+    let onCloseClicked: (() -> Void)?
 
     @State
     private var timerViewSize: CGSize = .zero
@@ -81,12 +92,14 @@ struct TimedWorkoutContentView: View {
         data: TimedWorkoutViewData,
         onPlayClicked: @escaping () -> Void = {},
         onPauseClicked: (() -> Void)? = nil,
-        onStopClicked: (() -> Void)? = nil
+        onStopClicked: (() -> Void)? = nil,
+        onCloseClicked: (() -> Void)? = nil
     ) {
         self.data = data
         self.onPlayClicked = onPlayClicked
         self.onPauseClicked = onPauseClicked
         self.onStopClicked = onStopClicked
+        self.onCloseClicked = onCloseClicked
     }
 
     var body: some View {
@@ -136,7 +149,9 @@ struct TimedWorkoutContentView: View {
                 y: timerViewSize.height + Theme.spacings.large
             )
 
-            AppBar(title: data.title) {}
+            AppBar(title: data.title) {
+                onCloseClicked?()
+            }
         }
     }
 }

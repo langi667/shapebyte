@@ -8,8 +8,10 @@ import de.stefan.lang.foundationUI.event.UIEventTransmitting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.buffer
 
 actual abstract class BaseViewModel actual constructor(
     actual override val logger: Logging,
@@ -20,7 +22,10 @@ actual abstract class BaseViewModel actual constructor(
         context = coroutineContextProvider.mainImmediateDispatcher() + SupervisorJob()
     )
 
-    protected val mutableEventFlow = MutableSharedFlow<UIEvent>()
+    protected actual val mutableEventFlow = MutableSharedFlow<UIEvent>().apply {
+        this.buffer(0, BufferOverflow.DROP_OLDEST)
+    }
+
     actual override val eventFlow: SharedFlow<UIEvent> = mutableEventFlow
 
     fun clear() {
