@@ -25,9 +25,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class MainActivity : ComponentActivity(),
-    Loggable
-{
+class MainActivity :
+    ComponentActivity(),
+    Loggable {
     override val logger: Logging by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity(),
 
         NavHost(
             navController = navController,
-            startDestination = startDestination
+            startDestination = startDestination,
         ) {
             NavRoute.entries.forEach {
                 when (it) {
@@ -84,5 +84,3 @@ class MainActivity : ComponentActivity(),
         }
     }
 }
-
-

@@ -2,19 +2,19 @@ import Foundation
 import Combine
 import shared
 
-// TODO: needs to implement protocol from shared
 // TODO: must come from shared
 enum NavigationDestination: Hashable {
     case back
     case quickWorkout(workoutId: Int32)
 }
 
+protocol NavigationDestinationProviding {
+    var destinations: AsyncStream<NavigationDestination> { get }
+}
+
 // TODO: Factory
 // TODO: provide by injection, not singleton
-class NavigationHandler: Loggable, NavigationHandling {
-
-    static let shared = NavigationHandler()
-
+class NavigationHandlerImpl: Loggable, NavigationHandling, NavigationDestinationProviding {
     private(set) lazy var destinations: AsyncStream<NavigationDestination> = .init { continuation in
         self.continuation = continuation
     }
@@ -28,7 +28,7 @@ class NavigationHandler: Loggable, NavigationHandling {
     func handleNavigationRequest(request: any NavigationRequest) {
         if request is NavigationRequestBack {
             continuation?.yield(.back)
-        } else if let request = request as? QuickWorkoutNavigationRequest {
+        } else if let request = request as? NavigationRequestQuickWorkout {
             navigateToQuickWorkout(workoutId: request.workoutId)
         } else {
             logE(message: "unhandled request: \(request)")
@@ -43,5 +43,5 @@ class NavigationHandler: Loggable, NavigationHandling {
         }
     }
 
-    private init() {}
+    init() {}
 }

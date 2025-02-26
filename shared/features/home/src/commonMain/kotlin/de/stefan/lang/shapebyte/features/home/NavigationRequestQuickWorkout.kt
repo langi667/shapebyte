@@ -2,4 +2,4 @@ package de.stefan.lang.shapebyte.features.home
 
 import de.stefan.lang.navigation.NavigationRequest
 
-data class QuickWorkoutNavigationRequest(val workoutId: Int): NavigationRequest
+data class NavigationRequestQuickWorkout(val workoutId: Int) : NavigationRequest

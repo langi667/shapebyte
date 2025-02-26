@@ -73,7 +73,7 @@ object WorkoutModule :
     override fun timedWorkoutViewModel(navHandler: NavigationHandling): TimedWorkoutViewModel = get(
         parameters = {
             parametersOf(navHandler)
-        }
+        },
     )
     override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         get(

@@ -32,6 +32,6 @@ object HomeModule :
     override fun homeRootViewModel(navHandler: NavigationHandling): HomeRootViewModel = get(
         parameters = {
             parametersOf(navHandler)
-        }
+        },
     )
 }

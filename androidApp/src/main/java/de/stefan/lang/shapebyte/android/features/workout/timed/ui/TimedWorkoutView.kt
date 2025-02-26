@@ -24,7 +24,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -56,7 +55,6 @@ import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.progress.ui.GradientProgressIndicatorLarge
 import de.stefan.lang.shapebyte.features.workout.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.TimedWorkoutViewModel
-import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -64,12 +62,12 @@ import org.koin.core.parameter.parametersOf
 fun TimedWorkoutView(
     workoutId: Int,
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val viewModel: TimedWorkoutViewModel = getViewModel(
         parameters = {
             parametersOf(NavigationHandler(navController))
-        }
+        },
     )
 
     LaunchedEffect("Initial") {
@@ -80,7 +78,7 @@ fun TimedWorkoutView(
     TimedWorkoutView(
         state = uiState,
         modifier = modifier,
-        onCloseClicked = { viewModel.onCloseClicked() }
+        onCloseClick = { viewModel.onCloseClicked() },
     )
 }
 
@@ -88,7 +86,7 @@ fun TimedWorkoutView(
 fun TimedWorkoutView(
     state: UIState,
     modifier: Modifier = Modifier,
-    onCloseClicked: () -> Unit = {},
+    onCloseClick: () -> Unit = {},
 ) {
     when (state) {
         is UIState.Loading -> {
@@ -103,7 +101,7 @@ fun TimedWorkoutView(
             TimedWorkoutView(
                 state.data as? TimedWorkoutViewData,
                 modifier,
-                onCloseClicked = onCloseClicked
+                onCloseClick = onCloseClick,
             )
         }
     }
@@ -113,7 +111,7 @@ fun TimedWorkoutView(
 fun TimedWorkoutView(
     data: TimedWorkoutViewData?,
     modifier: Modifier = Modifier,
-    onCloseClicked: () -> Unit = {},
+    onCloseClick: () -> Unit = {},
 ) {
     val image: ImageAsset? = data?.exerciseImage
     val progressTotal = data?.progressTotal ?: 0.0f
@@ -130,7 +128,7 @@ fun TimedWorkoutView(
         progress = progressTotal,
         modifier = modifier,
         backgroundColor = data?.backgroundColor?.color(),
-        onCloseClicked = onCloseClicked,
+        onCloseClick = onCloseClick,
     )
 }
 
@@ -147,7 +145,7 @@ fun TimedWorkoutView(
     progress: Float,
     modifier: Modifier = Modifier,
     backgroundColor: Color? = null,
-    onCloseClicked: () -> Unit = {},
+    onCloseClick: () -> Unit = {},
 ) = With { theme ->
     Box(modifier.fillMaxSize()) {
         RadialBackgroundView(
@@ -158,7 +156,7 @@ fun TimedWorkoutView(
                     remaining = remaining,
                     elapsedTotal = elapsedTotal,
                     remainingTotal = remainingTotal,
-                    onCloseClicked = onCloseClicked,
+                    onCloseClick = onCloseClick,
                 )
             },
         ) {
@@ -211,14 +209,14 @@ private fun TimerView(
     elapsedTotal: String,
     remainingTotal: String,
     modifier: Modifier = Modifier,
-    onCloseClicked: () -> Unit = {},
+    onCloseClick: () -> Unit = {},
 ) = With { theme ->
     Column(
         modifier
             .fillMaxWidth()
             .padding(theme.spacings.small.dp),
     ) {
-        AppToolBar(title = title, onCloseClicked = onCloseClicked)
+        AppToolBar(title = title, onCloseClick = onCloseClick)
         Spacer(Modifier.height(theme.spacings.large.dp))
         DisplayLarge(
             text = remaining,
@@ -273,7 +271,7 @@ private fun ExerciseView(
 private fun AppToolBar(
     title: String,
     modifier: Modifier = Modifier,
-    onCloseClicked: () -> Unit = {},
+    onCloseClick: () -> Unit = {},
 ) = With { theme ->
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -290,7 +288,7 @@ private fun AppToolBar(
             TitleMedium(title, Modifier)
         }
 
-        IconButton(onCloseClicked, modifier = Modifier.size(buttonSize.dp)) {
+        IconButton(onCloseClick, modifier = Modifier.size(buttonSize.dp)) {
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = "Close Timed View",

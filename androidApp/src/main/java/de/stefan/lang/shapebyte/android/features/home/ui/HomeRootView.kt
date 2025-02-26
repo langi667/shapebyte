@@ -46,7 +46,7 @@ fun HomeRootView(
     viewModel: HomeRootViewModel = getViewModel(
         parameters = {
             parametersOf(NavigationHandler(navController))
-        }
+        },
     ),
 ) {
     LaunchedEffect(key1 = "Update") {

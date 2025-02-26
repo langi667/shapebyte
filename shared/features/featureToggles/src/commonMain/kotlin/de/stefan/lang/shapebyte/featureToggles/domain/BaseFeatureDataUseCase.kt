@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
  * For in case the toggle is disabled, you can emit an error with emitError(error: Throwable).
  */
 open class BaseFeatureDataUseCase<T>(
-    private val featureToggle: String,
+    private val featureToggle: String, // TODO: make optional
     protected val scope: CoroutineScope,
     protected val dispatcher: CoroutineDispatcher,
     logger: Logging,

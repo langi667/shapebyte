@@ -26,16 +26,19 @@ struct AppRootView: View {
 private struct AppRootNavigationView: View {
     @State private var navigationPath = NavigationPath()
 
+    @NavigationHandler
+    private var navigationHandler
+
     var body: some View {
         NavigationStack( path: $navigationPath ) {
-            HomeRootView(navHandling: NavigationHandler.shared)
+            HomeRootView(navHandling: navigationHandler)
 
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
                     case .quickWorkout(let workoutId):
                             TimedWorkoutView(
                                 workoutId: workoutId,
-                                navHandling: NavigationHandler.shared
+                                navHandling: navigationHandler
                             ).navigationBarBackButtonHidden()
                     case .back:
                         EmptyView() // TODO: check !
@@ -43,7 +46,7 @@ private struct AppRootNavigationView: View {
             }
         }
         .task {
-            for await currDestination in NavigationHandler.shared.destinations {
+            for await currDestination in navigationHandler.destinations {
                 if currDestination == .back {
                     navigationPath.removeLast()
                 } else {

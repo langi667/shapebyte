@@ -25,8 +25,4 @@ expect abstract class BaseViewModel(
     override val eventFlow: SharedFlow<UIEvent>
 
     protected val coroutineContextProvider: CoroutineContextProviding
-
-
-
-
 }

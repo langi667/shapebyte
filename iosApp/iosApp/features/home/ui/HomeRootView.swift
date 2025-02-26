@@ -55,6 +55,9 @@ struct HomeRootContentView: View {
     @State
     private var buildPerformPersistViewSize: CGSize = .zero
 
+    @NavigationHandler
+    fileprivate var navHandler
+
     private var headerHeight: CGFloat {
         ContentViewAppearance.headerHeight
     }
@@ -110,7 +113,7 @@ struct HomeRootContentView: View {
                         .padding(.leading, paddingHorizontal)
 
                     QuickWorkoutsListView(quickWorkouts: quickWorkouts) {
-                        NavigationHandler.shared.navigateToQuickWorkout(workoutId: $0.id)
+                        navHandler.handleNavigationRequest(request: NavigationRequestQuickWorkout(workoutId: $0.id))
                     }
                 }
             }

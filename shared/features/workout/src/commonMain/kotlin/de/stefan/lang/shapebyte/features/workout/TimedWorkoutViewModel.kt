@@ -13,7 +13,6 @@ import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationHandling
-import de.stefan.lang.navigation.NavigationRequest
 import de.stefan.lang.navigation.NavigationRequestBack
 import de.stefan.lang.shapebyte.features.workout.workoutData.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.IntervalExerciseInfo
@@ -30,7 +29,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
 import kotlin.time.Duration
