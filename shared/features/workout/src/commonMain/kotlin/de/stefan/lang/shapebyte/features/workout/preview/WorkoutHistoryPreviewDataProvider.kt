@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.preview
 
-import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
+import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryDataSourceMocks
 import kotlinx.datetime.Instant
 

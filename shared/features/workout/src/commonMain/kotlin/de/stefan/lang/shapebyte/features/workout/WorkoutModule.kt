@@ -6,14 +6,14 @@ import de.stefan.lang.navigation.NavigationHandling
 import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
-import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModuleProviding
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModuleProviding
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 

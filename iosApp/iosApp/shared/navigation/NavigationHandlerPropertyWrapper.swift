@@ -3,9 +3,9 @@ import shared
 @MainActor
 @propertyWrapper
 struct NavigationHandler {
-    private var navigationHandler = NavigationHandlerImpl()
+    private static let navigationHandler = NavigationHandlerImpl()
 
     var wrappedValue: NavigationHandling & NavigationDestinationProviding {
-        navigationHandler
+        Self.navigationHandler
     }
 }
