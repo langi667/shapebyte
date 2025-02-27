@@ -2,9 +2,12 @@ package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.shapebyte.features.workout.workoutData.Exercise
-import de.stefan.lang.shapebyte.features.workout.workoutData.Item
-import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.Exercise
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecutionData
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlin.test.Test

@@ -1,9 +1,12 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.shapebyte.features.workout.workoutData.Exercise
-import de.stefan.lang.shapebyte.features.workout.workoutData.Item
-import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.Exercise
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.RepetitiveItemExecutionData
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

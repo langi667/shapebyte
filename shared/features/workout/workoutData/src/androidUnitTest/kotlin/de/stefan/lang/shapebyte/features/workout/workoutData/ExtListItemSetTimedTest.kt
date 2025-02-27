@@ -1,6 +1,10 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData
 
 import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.sumMilliseconds
+import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.sumMillisecondsTo
+import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.sumSeconds
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration

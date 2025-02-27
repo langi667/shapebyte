@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData
 
 import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

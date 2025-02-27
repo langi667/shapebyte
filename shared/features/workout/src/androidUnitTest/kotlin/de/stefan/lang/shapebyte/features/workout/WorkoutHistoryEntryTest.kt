@@ -2,9 +2,8 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.shapebyte.features.workout.BaseWorkoutFeatureTest
-import de.stefan.lang.shapebyte.features.workout.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals

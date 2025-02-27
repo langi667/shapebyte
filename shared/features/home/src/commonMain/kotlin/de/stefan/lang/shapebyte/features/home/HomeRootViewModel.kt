@@ -8,11 +8,11 @@ import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.workoutData.Workout
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.FetchRecentWorkoutHistoryUseCase
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.CurrentWorkoutScheduleEntryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

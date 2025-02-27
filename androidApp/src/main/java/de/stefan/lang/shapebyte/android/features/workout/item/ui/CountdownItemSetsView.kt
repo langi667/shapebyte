@@ -13,8 +13,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge
-import de.stefan.lang.shapebyte.features.workout.CountdownItemSetsViewModel
-import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
+import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
 
 @Composable
 fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modifier = Modifier) {

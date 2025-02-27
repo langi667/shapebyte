@@ -8,9 +8,10 @@ import de.stefan.lang.shapebyte.featureToggles.data.impl.FeatureToggleDatasource
 import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
-import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsDatasource
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
-import de.stefan.lang.shapebyte.features.workout.workoutData.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCase
 import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals

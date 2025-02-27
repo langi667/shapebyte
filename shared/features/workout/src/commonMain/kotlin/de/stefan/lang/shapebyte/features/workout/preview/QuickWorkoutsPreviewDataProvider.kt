@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.preview
 
 import de.stefan.lang.foundationCore.image.ImageResource
-import de.stefan.lang.shapebyte.features.workout.workoutData.Workout
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 
 // TODO: consider using mock data from file

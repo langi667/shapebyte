@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    id("co.touchlab.skie") version "0.8.4"
+    id("co.touchlab.skie") version "0.10.1"
     kotlin("plugin.serialization") version "2.0.0"
 }
 
@@ -73,6 +73,14 @@ kotlin {
             export(projects.shared.features)
 
             transitiveExport = true
+        }
+    }
+
+    targets.configureEach {
+        compilations.configureEach {
+            compileTaskProvider.get().compilerOptions {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
         }
     }
 }

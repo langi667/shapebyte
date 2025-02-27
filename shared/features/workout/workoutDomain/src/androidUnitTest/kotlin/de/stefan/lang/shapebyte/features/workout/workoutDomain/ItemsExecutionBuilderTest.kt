@@ -1,7 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
-import de.stefan.lang.shapebyte.features.workout.workoutData.ItemSet
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecutionBuilder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
