@@ -30,17 +30,20 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation)
+            implementation(projects.shared.features.featureToggles.featureTogglesData)
         }
 
         commonTest.dependencies {
             implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
+            implementation(projects.shared.features.featureTest)
         }
     }
 }
 
 android {
     // TODO: set your module name
-    namespace = "de.stefan.lang.__MODULE_NAME__"
+    namespace = "de.stefan.lang.shapebyte.featureTogglesDomain"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

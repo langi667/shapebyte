@@ -30,6 +30,9 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation.foundationCore)
+
+            api(projects.shared.features.featureToggles.featureTogglesData)
+            api(projects.shared.features.featureToggles.featureTogglesDomain)
         }
 
         commonTest.dependencies {

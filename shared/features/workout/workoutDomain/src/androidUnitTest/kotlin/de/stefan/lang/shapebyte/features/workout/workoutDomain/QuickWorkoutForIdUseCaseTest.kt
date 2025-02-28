@@ -1,13 +1,13 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggle
-import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleDatasource
-import de.stefan.lang.shapebyte.featureToggles.data.FeatureToggleState
-import de.stefan.lang.shapebyte.featureToggles.data.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
+import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsError

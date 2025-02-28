@@ -34,7 +34,11 @@ include(":shared:navigation")
 include(":shared:features")
 include(":shared:features:featureCore")
 include(":shared:features:featureTest")
+
 include(":shared:features:featureToggles")
+include(":shared:features:featureToggles:featureTogglesData")
+include(":shared:features:featureToggles:featureTogglesDomain")
+
 include(":shared:features:home")
 include(":shared:features:workout")
 include(":shared:features:workout:workoutData")

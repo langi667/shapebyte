@@ -5,7 +5,7 @@ import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
 import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
-import de.stefan.lang.shapebyte.featureToggles.domain.BaseFeatureDataUseCase
+import de.stefan.lang.shapebyte.featureTogglesDomain.BaseFeatureDataUseCase
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 import kotlinx.coroutines.SupervisorJob

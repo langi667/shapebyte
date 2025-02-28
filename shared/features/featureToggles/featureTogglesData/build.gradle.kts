@@ -34,13 +34,15 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
+            implementation(projects.shared.features.featureTest)
         }
     }
 }
 
 android {
     // TODO: set your module name
-    namespace = "de.stefan.lang.__MODULE_NAME__"
+    namespace = "de.stefan.lang.shapebyte.featureTogglesData"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
