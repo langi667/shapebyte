@@ -1,11 +1,3 @@
-//
-//  ExtImage.swift
-//  iosApp
-//
-//  Created by Stefan Lang (work)  on 28.01.25.
-//  Copyright © 2025 orgName. All rights reserved.
-//
-
 import SwiftUI
 import shared
 

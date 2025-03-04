@@ -9,7 +9,6 @@ class AppRootViewModel: ObservableObject {
 
     // TODO: improve
     func onViewAppeared() {
-
         Task {
              let appInitUseCase = SharedModule.shared.sharedInitializationUseCase()
             for await appInitState in appInitUseCase.flow where appInitState == .initialized {

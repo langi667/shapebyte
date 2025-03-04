@@ -22,7 +22,6 @@ struct AppRootView: View {
     }
 }
 
-@MainActor
 private struct AppRootNavigationView: View {
     @State private var navigationPath = NavigationPath()
 
