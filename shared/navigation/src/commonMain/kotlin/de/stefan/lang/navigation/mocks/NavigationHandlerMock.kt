@@ -1,9 +1,9 @@
 package de.stefan.lang.navigation.mocks
 
-import de.stefan.lang.navigation.NavigationHandling
+import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.navigation.NavigationRequest
 
-class NavigationHandlerMock : NavigationHandling {
+class NavigationHandlerMock : NavigationRequestHandling {
     override fun handleNavigationRequest(request: NavigationRequest) {
         // no-op
     }

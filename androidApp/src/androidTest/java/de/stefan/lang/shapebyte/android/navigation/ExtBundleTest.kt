@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.android.navigation
 
 import android.os.Bundle
+import de.stefan.lang.navigation.NavigationParams
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
 import org.junit.Test
@@ -10,7 +11,7 @@ class ExtBundleTest {
     fun testWorkoutIdReturnsCorrectId() {
         val workoutId = "id12345"
         val sut = Bundle()
-        sut.putString(NavParams.WorkoutIdParam, workoutId)
+        sut.putString(NavigationParams.workoutIdParam, workoutId)
 
         assertEquals(workoutId, sut.workoutId())
     }
@@ -25,7 +26,7 @@ class ExtBundleTest {
     fun testWorkoutIdOrShouldReturnCorrectId() {
         val workoutId = "id12345"
         val sut = Bundle()
-        sut.putString(NavParams.WorkoutIdParam, workoutId)
+        sut.putString(NavigationParams.workoutIdParam, workoutId)
 
         assertEquals(workoutId, sut.workoutIdOr("fallback"))
     }

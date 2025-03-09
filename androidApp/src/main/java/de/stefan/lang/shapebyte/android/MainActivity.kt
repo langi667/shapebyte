@@ -14,11 +14,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import de.stefan.lang.coreutils.logging.Loggable
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.navigation.NavigationRoute
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
 import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView
-import de.stefan.lang.shapebyte.android.navigation.NavRoute
+import de.stefan.lang.navigation.NavigationTarget
 import de.stefan.lang.shapebyte.android.navigation.workoutIdOr
 import de.stefan.lang.shapebyte.initializing.SharedInitializationState
 import kotlinx.coroutines.flow.collectLatest
@@ -57,24 +58,27 @@ class MainActivity :
     }
 
     @Composable
-    fun AppView(modifier: Modifier = Modifier) {
-        val startDestination = NavRoute.startDestination.path
+    fun AppView(
+        modifier: Modifier = Modifier,
+        startRoute: NavigationRoute = NavigationRoute.Home
+    ) {
+        val startDestination = startRoute.pathFormat
         val navController = rememberNavController()
 
         NavHost(
             navController = navController,
             startDestination = startDestination,
         ) {
-            NavRoute.entries.forEach {
+            NavigationRoute.entries.forEach {
                 when (it) {
-                    NavRoute.HomeRoot -> {
-                        composable(it.path) {
+                    NavigationRoute.Home -> {
+                        composable(it.pathFormat) {
                             HomeRootView(navController, modifier)
                         }
                     }
 
-                    NavRoute.QuickWorkout -> {
-                        composable(it.path) { backStackEntry ->
+                    NavigationRoute.QuickWorkout -> {
+                        composable(it.pathFormat) { backStackEntry ->
                             val itemId = backStackEntry.arguments.workoutIdOr("-1").toInt()
                             TimedWorkoutView(itemId, navController, modifier.fillMaxSize())
                         }

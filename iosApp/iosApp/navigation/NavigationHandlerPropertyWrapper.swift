@@ -5,7 +5,7 @@ import shared
 struct NavigationHandler {
     private static let navigationHandler = NavigationHandlerImpl()
 
-    var wrappedValue: NavigationHandling & NavigationDestinationProviding {
+    var wrappedValue: NavigationHandling {
         Self.navigationHandler
     }
 }

@@ -30,7 +30,7 @@ struct HomeRootView: View, Loggable {
         .onAppear { viewModel.update() }
     }
 
-    init(navHandling: any NavigationHandling) {
+    init(navHandling: any NavigationRequestHandling) {
         self.viewModel = SharedModule.shared.homeRootViewModel(
             navHandler: navHandling
         )
@@ -113,7 +113,11 @@ struct HomeRootContentView: View {
                         .padding(.leading, paddingHorizontal)
 
                     QuickWorkoutsListView(quickWorkouts: quickWorkouts) {
-                        navHandler.handleNavigationRequest(request: NavigationRequestQuickWorkout(workoutId: $0.id))
+                        navHandler.handleNavigationRequest(
+                            request: NavigationRequestBuilder.shared.quickWorkout(
+                                workoutId: $0.id
+                            )
+                        )
                     }
                 }
             }

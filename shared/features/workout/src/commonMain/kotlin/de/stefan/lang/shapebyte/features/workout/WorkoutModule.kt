@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.coreutils.di.DIModuleDeclaration
 import de.stefan.lang.coreutils.di.RootDIModule
-import de.stefan.lang.navigation.NavigationHandling
+import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
@@ -19,7 +19,7 @@ import org.koin.core.parameter.parametersOf
 
 interface WorkoutModuleProviding : WorkoutDataModuleProviding, WorkoutDomainModuleProviding {
     fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
-    fun timedWorkoutViewModel(navHandler: NavigationHandling): TimedWorkoutViewModel
+    fun timedWorkoutViewModel(navHandler: NavigationRequestHandling): TimedWorkoutViewModel
     fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
 }
 
@@ -27,7 +27,7 @@ object WorkoutModule :
     RootDIModule(
         providedModule = DIModuleDeclaration(
             allEnvironments = {
-                factory<TimedWorkoutViewModel> { (navHandler: NavigationHandling) ->
+                factory<TimedWorkoutViewModel> { (navHandler: NavigationRequestHandling) ->
                     TimedWorkoutViewModel(
                         navigationHandler = navHandler,
                         quickWorkoutForIdUseCase = get(),
@@ -73,7 +73,7 @@ object WorkoutModule :
     WorkoutDomainModuleProviding by WorkoutDomainModule,
     WorkoutModuleProviding {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
-    override fun timedWorkoutViewModel(navHandler: NavigationHandling): TimedWorkoutViewModel = get(
+    override fun timedWorkoutViewModel(navHandler: NavigationRequestHandling): TimedWorkoutViewModel = get(
         parameters = {
             parametersOf(navHandler)
         },

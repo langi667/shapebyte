@@ -1,7 +1,11 @@
 package de.stefan.lang.navigation
 
-import de.stefan.lang.foundationUI.event.UIEvent
+sealed class NavigationRequest {
+    data object Back: NavigationRequest()
+    data class NavigateTo(val path: String): NavigationRequest()
+}
 
-interface NavigationRequest : UIEvent
 
-data object NavigationRequestBack : NavigationRequest
+
+
+

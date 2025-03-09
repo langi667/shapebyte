@@ -1,5 +1,5 @@
 package de.stefan.lang.navigation
 
-interface NavigationHandling {
+interface NavigationRequestHandling {
     fun handleNavigationRequest(request: NavigationRequest)
 }

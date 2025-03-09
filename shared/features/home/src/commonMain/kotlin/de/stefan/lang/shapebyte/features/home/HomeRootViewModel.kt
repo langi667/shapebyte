@@ -6,7 +6,9 @@ import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.foundationCore.loadstate.asResultFlow
 import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.navigation.NavigationHandling
+import de.stefan.lang.navigation.NavigationRequestHandling
+import de.stefan.lang.navigation.NavigationRequest
+import de.stefan.lang.navigation.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
@@ -21,7 +23,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class HomeRootViewModel(
-    private val navigationHandler: NavigationHandling,
+    private val navigationHandler: NavigationRequestHandling,
     private val currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase,
     private val recentHistoryUseCase: FetchRecentWorkoutHistoryUseCase,
     private val quickWorkoutsUseCase: QuickWorkoutsUseCase,
@@ -68,7 +70,7 @@ class HomeRootViewModel(
 
     fun onQuickWorkoutSelected(workout: Workout) {
         navigationHandler.handleNavigationRequest(
-            NavigationRequestQuickWorkout(workout.id),
+            NavigationRequestBuilder.quickWorkout(workout.id)
         )
     }
 
