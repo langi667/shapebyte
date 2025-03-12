@@ -3,14 +3,12 @@ package de.stefan.lang.shapebyte.android.navigation
 import androidx.navigation.NavHostController
 import de.stefan.lang.coreutils.logging.Loggable
 import de.stefan.lang.coreutils.logging.Logging
-import de.stefan.lang.navigation.NavigationRouteBuilder
-import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.navigation.NavigationRequest
+import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.SharedModule
 
 class NavigationHandler(
     private val navHostController: NavHostController,
-    private val navigationRouteBuilder: NavigationRouteBuilder = NavigationRouteBuilder(),
     override val logger: Logging = SharedModule.logger(),
 ) : NavigationRequestHandling, Loggable {
 
@@ -18,7 +16,7 @@ class NavigationHandler(
         when (request) {
             is NavigationRequest.Back -> navHostController.navigateUp()
             is NavigationRequest.NavigateTo -> navHostController.navigate(
-                request.path
+                request.path,
             )
             else -> logE("Unknown navigation request: $request")
         }

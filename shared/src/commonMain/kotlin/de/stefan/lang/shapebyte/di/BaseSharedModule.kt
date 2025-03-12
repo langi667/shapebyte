@@ -7,6 +7,8 @@ import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundation.FoundationModule
 import de.stefan.lang.foundation.FoundationModuleProviding
 import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.navigation.NavigationModule
+import de.stefan.lang.navigation.NavigationModuleProviding
 import de.stefan.lang.shapebyte.featureCore.FeatureCoreModule
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
@@ -21,6 +23,7 @@ abstract class BaseSharedModule :
     KoinComponent,
     CoreModuleProviding by CoreModule,
     FoundationModuleProviding by FoundationModule,
+    NavigationModuleProviding by NavigationModule,
     FeaturesModuleProviding by FeaturesModule,
     AppInfoProviding,
     SharedInitializationProviding {
@@ -28,11 +31,13 @@ abstract class BaseSharedModule :
         // TODO: improve this,maybe using annotation like @MainModule
         CoreModule.module +
             FoundationModule.module +
+            NavigationModule.module +
             FeaturesModule.module
 
     val testModules =
         CoreModule.testModule +
             FoundationModule.testModule +
+            NavigationModule.testModule +
             FeaturesModule.testModule
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }

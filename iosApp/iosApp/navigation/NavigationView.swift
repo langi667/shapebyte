@@ -18,13 +18,18 @@ struct NavigationView<T: View>: View {
             startView(navigationHandler)
             .navigationDestination(for: NavigationTarget.self) { destination in
                     switch onEnum(of: destination) {
+
                     case .quickWorkout(let workout):
                         TimedWorkoutView(
                             workoutId: workout.workoutId,
                             navHandling: navigationHandler
                         ).navigationBarBackButtonHidden()
+
+                    case .home:
+                        HomeRootView(navHandling: navigationHandler)
+
                     default:
-                        EmptyView()
+                        Text("Unhandled destination: \(destination)")
                     }
             }
         }

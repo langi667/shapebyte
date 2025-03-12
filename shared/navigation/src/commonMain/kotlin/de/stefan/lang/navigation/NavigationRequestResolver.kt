@@ -1,9 +1,8 @@
 package de.stefan.lang.navigation
 
-object NavigationRequestResolver {
+class NavigationRequestResolver {
     fun resolve(request: NavigationRequest): NavigationTarget {
         return when (request) {
-
             is NavigationRequest.NavigateTo -> {
                 resolveNavigateTo(request)
             }
@@ -14,19 +13,21 @@ object NavigationRequestResolver {
     private fun resolveNavigateTo(navigateTo: NavigationRequest.NavigateTo): NavigationTarget {
         val pathComponents = navigateTo.path.split("/").filter { it.isNotBlank() }
 
-        if (pathComponents.isEmpty()) {
-            throw IllegalArgumentException("Illegal path: ${navigateTo.path}")
-        }
+        require(pathComponents.isNotEmpty())
+        val destination = NavigationRouteId.routeIdForDomain(domain = pathComponents.first())
 
-        val destination = pathComponents.first()
         when (destination) {
-            NavigationRouteId.QUICK_WORKOUT -> {
+            NavigationRouteId.QuickWorkout -> {
                 val workoutId = pathComponents.getOrNull(1)?.toIntOrNull()
                     ?: throw IllegalArgumentException("Illegal path: ${navigateTo.path}")
                 return NavigationTarget.QuickWorkout(workoutId)
             }
+
+            NavigationRouteId.Home -> {
+                return NavigationTarget.Home
+            }
+
             else -> throw IllegalArgumentException("Illegal path: ${navigateTo.path}")
         }
-
     }
 }
