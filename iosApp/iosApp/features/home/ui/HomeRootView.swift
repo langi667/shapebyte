@@ -114,7 +114,7 @@ struct HomeRootContentView: View {
 
                     QuickWorkoutsListView(quickWorkouts: quickWorkouts) {
                         navHandler.handleNavigationRequest(
-                            request: NavigationRequestBuilder.shared.quickWorkout(
+                            request: SharedModule.shared.navigationRequestBuilder().quickWorkout(
                                 workoutId: $0.id
                             )
                         )

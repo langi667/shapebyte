@@ -19,7 +19,7 @@ class NavigationHandlerImpl: Loggable, NavigationHandling {
     }
 
     func handleNavigationRequest(request: NavigationRequest) {
-        let target = NavigationRequestResolver.shared.resolve(request: request)
+        let target = SharedModule.shared.navigationRequestResolver().resolve(request: request)
         continuation?.yield( target)
     }
 

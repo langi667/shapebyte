@@ -22,6 +22,7 @@ object HomeModule :
                         quickWorkoutsUseCase = get(),
                         logger = get(),
                         coroutineContextProvider = get(),
+                        navigationRequestBuilder = get(),
                     )
                 }
             },

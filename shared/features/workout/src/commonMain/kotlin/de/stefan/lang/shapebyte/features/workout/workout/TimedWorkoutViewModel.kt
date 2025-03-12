@@ -12,8 +12,8 @@ import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.navigation.NavigationRequest
+import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.IntervalExerciseInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item

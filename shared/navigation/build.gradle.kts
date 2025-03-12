@@ -29,6 +29,8 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.features.featureTest)
+
         }
     }
 }

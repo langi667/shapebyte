@@ -3,7 +3,6 @@ package de.stefan.lang.coreutils.logging.impl
 import android.util.Log
 import de.stefan.lang.coreutils.logging.Logging
 
-// TODO: rename to Logger if works
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class Logger actual constructor() : Logging {
     actual override fun d(tag: String, message: String) {
