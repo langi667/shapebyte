@@ -226,9 +226,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                     }
                 }
             } while (isRunning)
-
-            // TODO: check why still is Running here
-            awaitItem()
+            
             val item = awaitItem()
             assertEquals(TimedWorkoutViewModel.LaunchState.Pause, sut.launchState)
             assertEquals(TimedWorkoutViewModel.LaunchState.Pause, item.dataOrNull<TimedWorkoutViewData>()?.launchState)
@@ -316,8 +314,6 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                 }
             } while (isRunning)
 
-            // TODO: check why still is Running here
-            awaitItem()
             val item = awaitItem()
             assertEquals(TimedWorkoutViewModel.LaunchState.Finished, sut.launchState)
             assertEquals(TimedWorkoutViewModel.LaunchState.Finished, item.dataOrNull<TimedWorkoutViewData>()?.launchState)
