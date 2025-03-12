@@ -215,7 +215,7 @@ class TimedWorkoutViewModel(
 
             is ItemExecutionState.SetFinished -> {
                 updateWorkoutTimes(currExerciseState)
-                viewDataForExerciseSetFinished(currExerciseState)
+                viewDataForExerciseSetFinished(workoutState, currExerciseState)
             }
 
             else -> {
@@ -268,6 +268,7 @@ class TimedWorkoutViewModel(
     }
 
     private fun viewDataForExerciseSetFinished(
+        workoutState: ItemsExecutionState.Running,
         exerciseState: ItemExecutionState.SetFinished<*>,
     ): TimedWorkoutViewData {
         val data = exerciseState.setData as? TimedItemExecutionData ?: run {
@@ -279,7 +280,7 @@ class TimedWorkoutViewModel(
             exerciseTimeRemaining = ceil(data.totalTimeRemaining.toDouble(DurationUnit.SECONDS)).toInt(),
             setDuration = data.setDuration.inWholeMilliseconds.toInt(),
             exercise = exerciseState.item,
-            exerciseProgress = exerciseState.totalProgress,
+            exerciseProgress = workoutState.totalProgress,
         )
     }
 
