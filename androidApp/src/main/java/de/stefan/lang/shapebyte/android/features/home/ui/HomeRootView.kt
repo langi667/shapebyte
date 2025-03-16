@@ -187,22 +187,6 @@ private fun headerScale(
 
 @Preview
 @Composable
-@Suppress("MagicNumber")
-fun HomeRootViewPreview() {
-    val uiState = UIState.Data(
-        HomeRootViewData(
-            quickWorkouts = QuickWorkoutsPreviewDataProvider.previewData,
-            recentHistory = WorkoutHistoryPreviewDataProvider.previewData,
-        ),
-    )
-
-    PreviewContainer {
-        HomeRootView(uiState)
-    }
-}
-
-@Preview
-@Composable
 fun HomeRootViewPreviewEmpty() {
     val uiState = UIState.Data(
         HomeRootViewData(
@@ -236,6 +220,21 @@ fun HomeRootViewPreviewQuickWorkoutsOnly() {
     val uiState = UIState.Data(
         HomeRootViewData(
             quickWorkouts = QuickWorkoutsPreviewDataProvider.previewData,
+        ),
+    )
+
+    PreviewContainer {
+        HomeRootView(uiState)
+    }
+}
+
+@Preview
+@Composable
+fun HomeRootViewPreview() {
+    val uiState = UIState.Data(
+        HomeRootViewData(
+            quickWorkouts = QuickWorkoutsPreviewDataProvider.previewData,
+            recentHistory = WorkoutHistoryPreviewDataProvider.previewData,
         ),
     )
 

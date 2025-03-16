@@ -1,3 +1,5 @@
+import de.stefan.lang.designsystem.DesignSystemGenerator
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -42,8 +44,11 @@ android {
         defaultConfig {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
-    }
 
+        getByName("main") {
+            kotlin.srcDir("generated/theme/de/stefan/lang/designsystem/theme/")
+        }
+    }
     flavorDimensions += "environment"
 
     productFlavors {
@@ -96,4 +101,20 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
+}
+
+tasks.register("generateDesignSystem") {
+    outputs.dir("$rootDir/androidApp/generated/theme")
+    val outputDir = file(outputs.files.single().absolutePath)
+
+
+    doLast {
+        outputDir.mkdirs()
+        val designSystemGenerator = DesignSystemGenerator()
+        designSystemGenerator.generate(outputDir)
+    }
+}
+
+tasks.named("preBuild") {
+    dependsOn("generateDesignSystem")
 }

@@ -1,4 +1,4 @@
-package de.stefan.lang.designsystem
+package de.stefan.lang.designsystem.font
 
 sealed interface FontDescriptor {
     data class System(

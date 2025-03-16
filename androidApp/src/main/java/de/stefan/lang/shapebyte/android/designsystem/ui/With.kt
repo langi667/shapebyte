@@ -7,7 +7,7 @@ import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.LocalAnimationDuration
 import de.stefan.lang.shapebyte.android.LocalDimension
 import de.stefan.lang.shapebyte.android.LocalSpacing
-import de.stefan.lang.shapebyte.android.ShapeByteTheme
+import de.stefan.lang.designsystem.theme.ShapeByteTheme
 
 @Composable
 fun With(
