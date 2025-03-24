@@ -23,22 +23,10 @@ class DesignSystemGeneratorAndroid {
             )
             .addCode("\n")
             .addCode(typographyCode())
-            // TODO: this must come from Theme Data !
-            .addStatement(" val shapes = Shapes(\n" +
-                    "        small = RoundedCornerShape(4.dp),\n" +
-                    "        medium = RoundedCornerShape(4.dp),\n" +
-                    "        large = RoundedCornerShape(16.dp),\n" +
-                    "        extraLarge = RoundedCornerShape(48.dp),\n" +
-                    "    )\n" +
-                    "\n" +
-                    "    MaterialTheme(\n" +
-                    "        colorScheme = colors,\n" +
-                    "        typography = typography,\n" +
-                    "        shapes = shapes,\n" +
-                    "        content = content,\n" +
-                    "    )")
-
-
+            .addCode("\n")
+            .addCode(shapes())
+            .addCode("\n")
+            .addCode(materialThemeDeclaration())
 
         val fileSpec = FileSpec.builder(packageName, themeName)
             .addImport("androidx.compose.foundation", "isSystemInDarkTheme")
@@ -58,6 +46,20 @@ class DesignSystemGeneratorAndroid {
 
         fileSpec.writeTo(outputDir)
         println("DesignSystem Android Theme generated successfully! to ${outputDir.absolutePath}")
+    }
+
+    private fun materialThemeDeclaration(): CodeBlock  {
+        return CodeBlock
+            .builder()
+            .addStatement(
+                "MaterialTheme(\n" +
+                "  colorScheme = colors,\n" +
+                "  typography = typography,\n" +
+                "  shapes = shapes,\n" +
+                "  content = content,\n" +
+                ")"
+            )
+            .build()
     }
 
     private fun themeFunctionDeclaration(
@@ -153,6 +155,25 @@ class DesignSystemGeneratorAndroid {
         themeData.typography.textStyles.forEach { currTextStyle ->
             builder.addStatement(
                 "${currTextStyle.key} = TextStyle(fontSize = ${currTextStyle.value.fontSize}.sp, fontWeight = FontWeight.${currTextStyle.value.fontWeight.name}),"
+            )
+        }
+
+        builder.unindent()
+        builder.addStatement( ")")
+
+        return builder.build()
+    }
+
+    private fun shapes() : CodeBlock {
+        val builder =  CodeBlock
+            .builder()
+
+        builder.addStatement( "val shapes = Shapes(")
+        builder.indent()
+
+        themeData.shapes.roundedCorners.all().forEach { currRoundedCorner ->
+            builder.addStatement(
+                "${currRoundedCorner.key} = RoundedCornerShape(${currRoundedCorner.value.radius}.dp),"
             )
         }
 

@@ -1,9 +1,13 @@
 package de.stefan.lang.designsystem
+
 import de.stefan.lang.designsystem.color.ColorScheme
 import de.stefan.lang.designsystem.color.Color
 import de.stefan.lang.designsystem.font.FontWeight
 import de.stefan.lang.designsystem.font.TextStyle
 import de.stefan.lang.designsystem.font.Typography
+import de.stefan.lang.designsystem.shapes.RoundedCorners
+import de.stefan.lang.designsystem.shapes.Shape
+import de.stefan.lang.designsystem.shapes.Shapes
 
 object ThemeData {
     val lightColorScheme = ColorScheme(
@@ -40,5 +44,14 @@ object ThemeData {
         labelLarge = TextStyle(fontSize = 16, fontWeight = FontWeight.Bold),
         labelMedium = TextStyle(fontSize = 14, fontWeight = FontWeight.Bold),
         labelSmall = TextStyle(fontSize = 12, fontWeight = FontWeight.Normal),
+    )
+
+    val shapes = Shapes(
+        roundedCorners = RoundedCorners(
+            small = Shape.RoundedCorner(radius = 4),
+            medium = Shape.RoundedCorner(radius = 4),
+            large = Shape.RoundedCorner(radius = 16),
+            extraLarge = Shape.RoundedCorner(radius = 48),
+        )
     )
 }
