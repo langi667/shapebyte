@@ -234,8 +234,6 @@
 				contentview/tests/ContentViewSnapshotTests.swift,
 				header/tests/HeaderViewSnapshotTests.swift,
 				snapshottest/TestTags.swift,
-				theme/font/tests/FontDescriptorNativeTest.swift,
-				theme/font/tests/FontWeightNativeTest.swift,
 				uistate/tests/UIStateTest.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
@@ -251,8 +249,6 @@
 				contentview/tests/ContentViewSnapshotTests.swift,
 				header/tests/HeaderViewSnapshotTests.swift,
 				snapshottest/TestTags.swift,
-				theme/font/tests/FontDescriptorNativeTest.swift,
-				theme/font/tests/FontWeightNativeTest.swift,
 				uistate/tests/UIStateTest.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
@@ -268,8 +264,6 @@
 				contentview/tests/ContentViewSnapshotTests.swift,
 				header/tests/HeaderViewSnapshotTests.swift,
 				snapshottest/TestTags.swift,
-				theme/font/tests/FontDescriptorNativeTest.swift,
-				theme/font/tests/FontWeightNativeTest.swift,
 				uistate/tests/UIStateTest.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
@@ -325,10 +319,6 @@
 				snapshottest/SnapshotSetup.swift,
 				snapshottest/TestTags.swift,
 				"theme/color/ColorDescriptor+Native.swift",
-				"theme/font/FontDescriptor+Native.swift",
-				"theme/font/FontWeight+Native.swift",
-				theme/font/tests/FontDescriptorNativeTest.swift,
-				theme/font/tests/FontWeightNativeTest.swift,
 				theme/Theme.swift,
 				timer/CountdownTimer.swift,
 				uistate/tests/UIStateTest.swift,

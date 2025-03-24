@@ -3,11 +3,11 @@ package de.stefan.lang.shapebyte.android.designsystem.ui
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import de.stefan.lang.designsystem.theme.ShapeByteTheme
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.LocalAnimationDuration
 import de.stefan.lang.shapebyte.android.LocalDimension
 import de.stefan.lang.shapebyte.android.LocalSpacing
-import de.stefan.lang.designsystem.theme.ShapeByteTheme
 
 @Composable
 fun With(
