@@ -11,4 +11,4 @@ xcuserdata
 /.kotlin/*
 
 /androidApp/generated/*
-/iosApp/iosApp/generated/*
+/iosApp/iosApp/generated/theme/*

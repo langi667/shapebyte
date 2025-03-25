@@ -174,8 +174,6 @@
 				workout/data/ExtWorkoutHistoryEntry.swift,
 				workout/ui/QuickWorkoutEntryView.swift,
 				workout/ui/QuickWorkoutsListView.swift,
-				workout/ui/tests/__Snapshots__/QuickWorkoutEntryViewSnapshotTests/quickWorkoutEntryViewSnapshots.Default.png,
-				workout/ui/tests/__Snapshots__/WorkoutHistoryEntryViewSnapshotTests/workoutHistoryEntryViewSnapshots.Default.png,
 				workout/ui/TimedWorkoutView.swift,
 				workout/ui/WorkoutHistoryEntryView.swift,
 			);
@@ -191,8 +189,6 @@
 				workout/data/ExtWorkoutHistoryEntry.swift,
 				workout/ui/QuickWorkoutEntryView.swift,
 				workout/ui/QuickWorkoutsListView.swift,
-				workout/ui/tests/__Snapshots__/QuickWorkoutEntryViewSnapshotTests/quickWorkoutEntryViewSnapshots.Default.png,
-				workout/ui/tests/__Snapshots__/WorkoutHistoryEntryViewSnapshotTests/workoutHistoryEntryViewSnapshots.Default.png,
 				workout/ui/TimedWorkoutView.swift,
 				workout/ui/WorkoutHistoryEntryView.swift,
 			);
@@ -208,20 +204,10 @@
 				workout/data/ExtWorkoutHistoryEntry.swift,
 				workout/ui/QuickWorkoutEntryView.swift,
 				workout/ui/QuickWorkoutsListView.swift,
-				workout/ui/tests/__Snapshots__/QuickWorkoutEntryViewSnapshotTests/quickWorkoutEntryViewSnapshots.Default.png,
-				workout/ui/tests/__Snapshots__/WorkoutHistoryEntryViewSnapshotTests/workoutHistoryEntryViewSnapshots.Default.png,
 				workout/ui/TimedWorkoutView.swift,
 				workout/ui/WorkoutHistoryEntryView.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;
-		};
-		DEADC5A42D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				workout/ui/tests/__Snapshots__/QuickWorkoutEntryViewSnapshotTests/quickWorkoutEntryViewSnapshots.Default.png,
-				workout/ui/tests/__Snapshots__/WorkoutHistoryEntryViewSnapshotTests/workoutHistoryEntryViewSnapshots.Default.png,
-			);
-			target = 1D45465E2CB80C3100FC6383 /* ShapeByteTests */;
 		};
 		DEADC5A72D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -272,41 +258,26 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				appbar/AppBar.swift,
-				"appbar/tests/__Snapshots__/AppBarTest/appBarSnapshots.Long-Title.png",
-				appbar/tests/__Snapshots__/AppBarTest/appBarSnapshots.Title.png,
-				"appbar/tests/__Snapshots__/AppBarTest/appBarSnapshots.Very-Long-Title.png",
 				appbar/tests/AppBarTest.swift,
 				"assets/Image+Assets.swift",
 				background/BackgroundView.swift,
-				background/tests/__Snapshots__/BackgroundViewSnapshotTests/backgroundView_Snapshots.Default.png,
-				background/tests/__Snapshots__/BackgroundViewSnapshotTests/backgroundView_Snapshots.Flat.png,
-				background/tests/__Snapshots__/BackgroundViewSnapshotTests/backgroundView_Snapshots.Plain.png,
-				background/tests/__Snapshots__/BackgroundViewSnapshotTests/backgroundView_Snapshots.TopView.png,
 				background/tests/BackgroundViewSnapshotTests.swift,
 				buttons/PauseButton.swift,
 				buttons/PlayButton.swift,
 				buttons/RoundedImageButton.swift,
 				buttons/RoundedImageButtonAppearance.swift,
 				buttons/StopButton.swift,
-				buttons/tests/__Snapshots__/PauseButtonSnapshotTests/pauseButtonSnapshots.Default.png,
-				buttons/tests/__Snapshots__/PlayButtonSnapshotTests/playButtonSnapshots.Default.png,
-				buttons/tests/__Snapshots__/StopButtonSnapshotTests/stopButtonSnapshots.Default.png,
 				buttons/tests/PauseButtonSnapshotTests.swift,
 				buttons/tests/PlayButtonSnapshotTests.swift,
 				buttons/tests/StopButtonSnapshotTests.swift,
 				colors/ExtUIColor.swift,
 				contentview/ContentView.swift,
 				contentview/ContentViewAppearance.swift,
-				"contentview/tests/__Snapshots__/ContentViewSnapshotTests/contentView_Snapshots.No-Floating-View.png",
-				"contentview/tests/__Snapshots__/ContentViewSnapshotTests/contentView_Snapshots.With-Floating-View.png",
 				contentview/tests/ContentViewSnapshotTests.swift,
 				device/deviceinfo/DeviceInfoPropertyWrapper.swift,
 				device/safearea/ExtSafeArea.swift,
 				device/safearea/SafeAreaPropertyWrapper.swift,
 				header/HeaderView.swift,
-				"header/tests/__Snapshots__/HeaderViewSnapshotTests/testHeaderViewSnapshot.Fully-shrinked.png",
-				"header/tests/__Snapshots__/HeaderViewSnapshotTests/testHeaderViewSnapshot.Half-shrinked.png",
-				"header/tests/__Snapshots__/HeaderViewSnapshotTests/testHeaderViewSnapshot.State-Expanded.png",
 				header/tests/HeaderViewSnapshotTests.swift,
 				images/ExtImage.swift,
 				images/ExtUIImage.swift,
@@ -333,7 +304,7 @@
 		DEADC36F2D76DCCD006E71BD /* designsystem */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC37A2D76DCCD006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC37B2D76DCCD006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC37C2D76DCCD006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = designsystem; sourceTree = "<group>"; };
 		DEADC3942D76DEEA006E71BD /* ui */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ui; sourceTree = "<group>"; };
 		DEADC3C62D76E164006E71BD /* core */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC40F2D76E164006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC4102D76E164006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC4112D76E164006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = core; sourceTree = "<group>"; };
-		DEADC56B2D76E598006E71BD /* features */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC5A12D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A22D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A32D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A42D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = features; sourceTree = "<group>"; };
+		DEADC56B2D76E598006E71BD /* features */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC5A12D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A22D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A32D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = features; sourceTree = "<group>"; };
 		DEADC5A62D76E62B006E71BD /* shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC5A72D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A82D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A92D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5AA2D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = shared; sourceTree = "<group>"; };
 		DEC163062D4846E1004EAA5E /* sounds */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = sounds; sourceTree = "<group>"; };
 		F7100FDF2D9161630000FD87 /* generated */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = generated; sourceTree = "<group>"; };
@@ -617,6 +588,7 @@
 				DEADC36F2D76DCCD006E71BD /* designsystem */,
 				DEADC3C62D76E164006E71BD /* core */,
 				DEADC56B2D76E598006E71BD /* features */,
+				F7100FDF2D9161630000FD87 /* generated */,
 			);
 			name = ShapeByteTests;
 			packageProductDependencies = (
