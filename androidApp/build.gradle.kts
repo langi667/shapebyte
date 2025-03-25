@@ -1,4 +1,5 @@
-import de.stefan.lang.designsystem.DesignSystemGenerator
+import de.stefan.lang.designsystem.DesignSystemGeneratorAndroid
+import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -103,18 +104,30 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
-tasks.register("generateDesignSystem") {
+tasks.register("generateDesignSystemAndroid") {
     outputs.dir("$rootDir/androidApp/generated/theme")
-    val outputDir = file(outputs.files.single().absolutePath)
-
+    val androidThemeFilePath = file(outputs.files.single().absolutePath)
 
     doLast {
-        outputDir.mkdirs()
-        val designSystemGenerator = DesignSystemGenerator()
-        designSystemGenerator.generate(outputDir)
+        androidThemeFilePath.mkdirs()
+        val designSystemGenerator = DesignSystemGeneratorAndroid()
+        designSystemGenerator.generate(androidThemeFilePath)
+    }
+}
+
+tasks.register("generateDesignSystemIOS") {
+    outputs.dir("$rootDir/iosApp/iosApp/generated/theme")
+    val iOSThemeFilePath = file(outputs.files.single().absolutePath)
+
+    doLast {
+        iOSThemeFilePath.mkdirs()
+        val designSystemGenerator = DesignSystemGeneratorIOS()
+        designSystemGenerator.generate(iOSThemeFilePath)
     }
 }
 
 tasks.named("preBuild") {
-    dependsOn("generateDesignSystem")
+    dependsOn("generateDesignSystemAndroid")
+    // TODO: this should be added when iOS build is made
+    dependsOn("generateDesignSystemIOS")
 }

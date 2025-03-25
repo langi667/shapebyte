@@ -7,6 +7,7 @@ compose-material3 = "1.1.2"
 androidx-activityCompose = "1.8.0"
 core-splashscreen = "1.0.1"
 koin = "3.4.3"
+kotlinpoet = "1.15.3"
 kotlinxCollectionsImmutable = "0.3.8"
 kotlinxCoroutinesCore = "1.8.1"
 detekt = "1.23.7"
@@ -15,6 +16,7 @@ kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.6.0"
 mockkCommon = "1.12.0"
 navigationCompose = "2.8.4"
+swiftpoet = "1.6.6"
 turbine = "1.1.0"
 annotationJvm = "1.8.2"
 lifecycleViewmodel = "2.6.1"
@@ -49,6 +51,8 @@ core-splashscreen = { group = "androidx.core", name = "core-splashscreen", versi
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
+kotlinpoet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlinpoet" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesCore" }
@@ -59,6 +63,7 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockkVersion" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockkVersion" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }
 
+swiftpoet = { module = "io.outfoxx:swiftpoet", version.ref = "swiftpoet" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }

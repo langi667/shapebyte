@@ -327,6 +327,13 @@
 			);
 			target = 1D45465E2CB80C3100FC6383 /* ShapeByteTests */;
 		};
+		F7D5D4872D92906000E00426 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				theme/ThemeColors.xcassets,
+			);
+			target = 1D45465E2CB80C3100FC6383 /* ShapeByteTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -337,6 +344,7 @@
 		DEADC56B2D76E598006E71BD /* features */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC5A12D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A22D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A32D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A42D76E599006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = features; sourceTree = "<group>"; };
 		DEADC5A62D76E62B006E71BD /* shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEADC5A72D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A82D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5A92D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, DEADC5AA2D76E696006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = shared; sourceTree = "<group>"; };
 		DEC163062D4846E1004EAA5E /* sounds */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = sounds; sourceTree = "<group>"; };
+		F7100FDF2D9161630000FD87 /* generated */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F7D5D4872D92906000E00426 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = generated; sourceTree = "<group>"; };
 		F7DB9D522D1D62C0003AA64F /* launchscreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = launchscreen; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -516,6 +524,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				F7100FDF2D9161630000FD87 /* generated */,
 				DE5FC3DE2D7EC7FE006584AB /* navigation */,
 				1DC097212C7B51AC0096CAE1 /* app */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
@@ -561,6 +570,7 @@
 				DEADC3C62D76E164006E71BD /* core */,
 				DEADC5A62D76E62B006E71BD /* shared */,
 				DEC163062D4846E1004EAA5E /* sounds */,
+				F7100FDF2D9161630000FD87 /* generated */,
 				F7DB9D522D1D62C0003AA64F /* launchscreen */,
 			);
 			name = Development;
@@ -589,6 +599,7 @@
 				DEADC3C62D76E164006E71BD /* core */,
 				DEADC5A62D76E62B006E71BD /* shared */,
 				DEC163062D4846E1004EAA5E /* sounds */,
+				F7100FDF2D9161630000FD87 /* generated */,
 				F7DB9D522D1D62C0003AA64F /* launchscreen */,
 			);
 			name = Staging;
@@ -644,6 +655,7 @@
 				DEADC3C62D76E164006E71BD /* core */,
 				DEADC5A62D76E62B006E71BD /* shared */,
 				DEC163062D4846E1004EAA5E /* sounds */,
+				F7100FDF2D9161630000FD87 /* generated */,
 				F7DB9D522D1D62C0003AA64F /* launchscreen */,
 			);
 			name = Production;

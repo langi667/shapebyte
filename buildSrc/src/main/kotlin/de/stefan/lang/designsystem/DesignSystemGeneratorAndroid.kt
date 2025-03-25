@@ -3,9 +3,12 @@ package de.stefan.lang.designsystem
 import com.squareup.kotlinpoet.*
 import java.io.File
 import de.stefan.lang.designsystem.color.ColorScheme
+import de.stefan.lang.designsystem.font.TextStylesCollection
 
-class DesignSystemGeneratorAndroid {
 
+// TODO: needs LocalSpacing and LocalDimension
+
+class DesignSystemGeneratorAndroid: DesignSystemGenerating {
     private val composableClass = ClassName("androidx.compose.runtime", "Composable")
     private val composableAnnotation = AnnotationSpec.builder(
         composableClass
@@ -13,7 +16,7 @@ class DesignSystemGeneratorAndroid {
 
     private val themeData: ThemeData = ThemeData
 
-    fun generate(outputDir: File) {
+    override fun generate(outputFile: File) {
         val themeName = "ShapeByteTheme"
         val packageName = "de.stefan.lang.designsystem.theme"
 
@@ -22,7 +25,7 @@ class DesignSystemGeneratorAndroid {
                 colorCode()
             )
             .addCode("\n")
-            .addCode(typographyCode())
+            .addCode(textStyles())
             .addCode("\n")
             .addCode(shapes())
             .addCode("\n")
@@ -44,8 +47,8 @@ class DesignSystemGeneratorAndroid {
             .addFunction(themeBuilder.build())
             .build()
 
-        fileSpec.writeTo(outputDir)
-        println("DesignSystem Android Theme generated successfully! to ${outputDir.absolutePath}")
+        fileSpec.writeTo(outputFile)
+        println("DesignSystem Android Theme generated successfully! to ${outputFile.absolutePath}")
     }
 
     private fun materialThemeDeclaration(): CodeBlock  {
@@ -145,14 +148,19 @@ class DesignSystemGeneratorAndroid {
         return builder.build()
     }
 
-    private fun typographyCode() : CodeBlock {
+    private fun textStyles() : CodeBlock {
         val builder =  CodeBlock
             .builder()
+
+        val textStyles: TextStylesCollection = this.textStylesCollectionFrom(
+            platformSpecific = themeData.android,
+            fallback = themeData,
+        ) ?: return builder.build()
 
         builder.addStatement( "val typography = Typography(")
         builder.indent()
 
-        themeData.typography.textStyles.forEach { currTextStyle ->
+        textStyles.all.forEach { currTextStyle ->
             builder.addStatement(
                 "${currTextStyle.key} = TextStyle(fontSize = ${currTextStyle.value.fontSize}.sp, fontWeight = FontWeight.${currTextStyle.value.fontWeight.name}),"
             )

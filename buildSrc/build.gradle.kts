@@ -1,5 +1,7 @@
 plugins {
     `kotlin-dsl`
+    `version-catalog`
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 repositories {
@@ -7,7 +9,9 @@ repositories {
 }
 
 dependencies {
-    implementation("com.squareup:kotlinpoet:1.15.3") // Or the latest version
-    implementation("com.squareup:kotlinpoet-ksp:1.15.3") // Or the latest version
     implementation(kotlin("script-runtime"))
+    implementation(libs.kotlinpoet)
+    implementation(libs.kotlinpoet.ksp)
+    implementation (libs.swiftpoet)
+    implementation (libs.kotlinx.serialization.json)
 }
