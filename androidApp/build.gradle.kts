@@ -115,19 +115,6 @@ tasks.register("generateDesignSystemAndroid") {
     }
 }
 
-tasks.register("generateDesignSystemIOS") {
-    outputs.dir("$rootDir/iosApp/iosApp/generated/theme")
-    val iOSThemeFilePath = file(outputs.files.single().absolutePath)
-
-    doLast {
-        iOSThemeFilePath.mkdirs()
-        val designSystemGenerator = DesignSystemGeneratorIOS()
-        designSystemGenerator.generate(iOSThemeFilePath)
-    }
-}
-
 tasks.named("preBuild") {
     dependsOn("generateDesignSystemAndroid")
-    // TODO: this should be added when iOS build is made
-    dependsOn("generateDesignSystemIOS")
 }

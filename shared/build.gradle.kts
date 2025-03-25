@@ -1,3 +1,4 @@
+import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -124,4 +125,21 @@ dependencies {
     androidTestImplementation(projects.shared.core.coreTest)
     androidTestImplementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
     androidTestImplementation(projects.shared.features.featureTest)
+}
+
+tasks.register("generateDesignSystemIOS") {
+    outputs.dir("$rootDir/iosApp/iosApp/generated/theme")
+    val iOSThemeFilePath = file(outputs.files.single().absolutePath)
+
+    doLast {
+        iOSThemeFilePath.mkdirs()
+        val designSystemGenerator = DesignSystemGeneratorIOS()
+        designSystemGenerator.generate(iOSThemeFilePath)
+    }
+}
+
+// Configure the dependency on the iOS compilation tasks
+tasks.matching { it.name.contains("embedAndSignAppleFramework") }.configureEach {
+    println("embedAndSignAppleFramework found")
+    dependsOn("generateDesignSystemIOS")
 }

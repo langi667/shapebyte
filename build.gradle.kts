@@ -1,3 +1,5 @@
+import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
+
 plugins {
     //trick: for the same plugin versions in all sub-modules
     alias(libs.plugins.androidApplication).apply(false)
@@ -24,7 +26,8 @@ subprojects {
             "src/androidTest/kotlin/",
             "src/commonMain/kotlin/",
             "src/commonTest/kotlin/",
-            "src/main/java/"
+            "src/main/java/",
+            "buildSrc/src/main/kotlin"
         )
     }
 
