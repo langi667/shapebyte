@@ -1,5 +1,6 @@
 package de.stefan.lang.designsystem
 
+import de.stefan.lang.designsystem.animation.AnimationDurations
 import de.stefan.lang.designsystem.color.ColorScheme
 import de.stefan.lang.designsystem.color.Color
 import de.stefan.lang.designsystem.font.TextStyles
@@ -16,16 +17,15 @@ import de.stefan.lang.designsystem.dimension.Dimension
 import de.stefan.lang.designsystem.platformspecific.PlatformSpecificThemeContent
 
 import de.stefan.lang.designsystem.spacing.Spacing
+import de.stefan.lang.designsystem.animation.AnimationDurationsProviding
 
-interface ThemeContent : TextStylesProviding {
+interface ThemeContent : TextStylesProviding, AnimationDurationsProviding {
     val lightColorScheme: ColorScheme
     val darkColorScheme: ColorScheme
 
     val shapes: Shapes
     val dimensions: Dimension
     val spacings: Spacing
-
-    override val textStyles: TextStyles
 }
 
 object ThemeData : ThemeContent {
@@ -46,8 +46,8 @@ object ThemeData : ThemeContent {
     override val shapes = Shapes(
         roundedCorners = RoundedCorners(
             small = Shape.RoundedCorner(radius = 4),
-            medium = Shape.RoundedCorner(radius = 4),
-            large = Shape.RoundedCorner(radius = 16),
+            medium = Shape.RoundedCorner(radius = 16),
+            large = Shape.RoundedCorner(radius = 32),
             extraLarge = Shape.RoundedCorner(radius = 48),
         )
     )
@@ -75,6 +75,12 @@ object ThemeData : ThemeContent {
     )
 
     override val textStyles: TextStyles = EmptyTextStyles
+
+    override val animationDurations: AnimationDurations = AnimationDurations(
+        short = 0.3,
+        medium = 0.5,
+        long = 0.75,
+    )
 
     val android = PlatformSpecificThemeContent(
         textStyles = Typography(

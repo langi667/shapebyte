@@ -16,7 +16,7 @@ struct QuickWorkoutEntryView: View {
     let image: shared.ImageResource
     let onClicked: () -> Void
 
-    private let cornerRadius = Theme.Shapes.large
+    private let cornerRadius = Theme.Shapes.RoundedCorners.large
     private let imageSize = Theme.dimensions.small + Theme.spacings.medium
     private let maxViewWidth = Theme.dimensions.xLarge
     private let itemSpacing = Theme.spacings.xTiny

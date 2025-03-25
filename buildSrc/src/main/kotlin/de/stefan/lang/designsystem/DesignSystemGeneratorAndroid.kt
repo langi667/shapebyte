@@ -179,7 +179,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         builder.addStatement( "val shapes = Shapes(")
         builder.indent()
 
-        themeData.shapes.roundedCorners.all().forEach { currRoundedCorner ->
+        themeData.shapes.roundedCorners.all.forEach { currRoundedCorner ->
             builder.addStatement(
                 "${currRoundedCorner.key} = RoundedCornerShape(${currRoundedCorner.value.radius}.dp),"
             )

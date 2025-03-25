@@ -1,5 +1,8 @@
 package de.stefan.lang.designsystem.shapes
 
+import de.stefan.lang.designsystem.core.PropertyReader
+import de.stefan.lang.designsystem.font.TextStyle
+import org.gradle.kotlin.dsl.provideDelegate
 import kotlin.reflect.full.declaredMemberProperties
 
 data class RoundedCorners(
@@ -9,23 +12,16 @@ data class RoundedCorners(
     val extraLarge: Shape.RoundedCorner,
 ) {
 
-    fun all(): HashMap<String, Shape.RoundedCorner> {
-        val properties = RoundedCorners::class.declaredMemberProperties
-            .filter { it.returnType.classifier == Shape.RoundedCorner::class }
+    val all: HashMap<String, Shape.RoundedCorner> by lazy {
+        PropertyReader.read<Shape.RoundedCorner, RoundedCorners>(this)
+    }
 
-        val roundedCorners = HashMap<String, Shape.RoundedCorner>()
-
-        properties.forEach { currRoundedCorner ->
-            val roundedCorner = currRoundedCorner.get(this) as? Shape.RoundedCorner
-
-            if (roundedCorner != null ) {
-                roundedCorners[currRoundedCorner.name] = roundedCorner
-            }
-            else {
-                println("Unable to create Rounded Corner from property ${currRoundedCorner.name}")
-            }
-        }
-
-        return roundedCorners
+    val allSorted by lazy {
+        all
+            .entries
+            .sortedWith (
+                compareBy<Map.Entry<String, Shape.RoundedCorner>> { it.value.radius }
+            )
+            .associate { it.key to it.value }
     }
 }

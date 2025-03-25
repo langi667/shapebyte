@@ -1,6 +1,6 @@
 import SwiftUI
 import shared
-
+// TODO: check if needed 
 extension ColorDescriptor {
     var color: Color {
         let color: Color

@@ -6,12 +6,12 @@ class AssetColorSetBuilder {
     private var color: Color?  = null
     private var darkColor: Color? = null
 
-    fun setColor(color: Color): AssetColorSetBuilder {
+    fun setColor(color: Color?): AssetColorSetBuilder {
         this.color = color
         return this
     }
 
-    fun setDarkColor(darkColor: Color): AssetColorSetBuilder {
+    fun setDarkColor(darkColor: Color?): AssetColorSetBuilder {
         this.darkColor = darkColor
         return this
     }

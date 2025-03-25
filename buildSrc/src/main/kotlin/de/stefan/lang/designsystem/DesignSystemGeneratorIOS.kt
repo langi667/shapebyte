@@ -1,8 +1,7 @@
 package de.stefan.lang.designsystem
 
-import de.stefan.lang.designsystem.color.Color
 import de.stefan.lang.designsystem.font.TextStylesCollection
-import de.stefan.lang.designsystem.color.ios.AssetColorSetBuilder
+import de.stefan.lang.designsystem.color.ios.AssetColorSetCreator
 
 import io.outfoxx.swiftpoet.CodeBlock
 import io.outfoxx.swiftpoet.FileSpec
@@ -10,8 +9,7 @@ import io.outfoxx.swiftpoet.Modifier
 import io.outfoxx.swiftpoet.PropertySpec
 import io.outfoxx.swiftpoet.TypeSpec
 import io.outfoxx.swiftpoet.TypeVariableName
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+
 import java.io.File
 
 class DesignSystemGeneratorIOS: DesignSystemGenerating {
@@ -24,29 +22,74 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
             .addProperty(dimensions())
             .addProperty(spacings())
             .addType(textStyles())
-            .build()
+            .addType(colors(outputFile))
+            .addType(shapes())
+
+        animationDurations()?.let {
+            themeClass.addType(it)
+        }
 
         val file = FileSpec.builder("Theme")
-            .addType(themeClass)
+            .addType(themeClass.build())
             .addImport("SwiftUI")
             .addImport("shared")
             .build()
 
         file.writeTo(outputFile)
+    }
 
-        val testColor = AssetColorSetBuilder()
-            .setColor(Color("0xff00ff00"))
-            .setDarkColor(Color("0xff0000ff"))
-            .build()
+    private fun animationDurations(): TypeSpec? {
+        val animationData = animationDurationFrom(themeData.iOS, themeData) ?: return null
 
-        if (testColor != null) {
-            val json = Json { prettyPrint = true } // prettyPrint for formatted JSON
-            val string = json.encodeToString(testColor)
+        val animationDurationClass = TypeSpec
+            .structBuilder("AnimationDuration")
+            .addModifiers(Modifier.PUBLIC)
 
-            val outFile = File("/Users/stefanlang/dev/ShapeByte/iosApp/iosApp/generated/theme/ThemeColors.xcassets/Test.colorset/Contents.json")
-            outFile.writeText(string)
+        animationData.allSorted.forEach {
+            val animationDurationProperty = PropertySpec.builder(
+                it.key,
+                TypeVariableName("TimeInterval")
+            )
+
+            val animationDurationPropertyInitializer = CodeBlock.builder().add("${it.value}")
+            animationDurationProperty.initializer(animationDurationPropertyInitializer.build())
+            animationDurationProperty.addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+
+            animationDurationClass.addProperty(animationDurationProperty.build())
         }
 
+
+        return animationDurationClass.build()
+    }
+
+    private fun shapes(): TypeSpec {
+        val shapesClass = TypeSpec
+            .structBuilder("Shapes")
+            .addModifiers(Modifier.PUBLIC)
+
+        val roundedCornersClass = TypeSpec
+            .structBuilder("RoundedCorners")
+            .addModifiers(Modifier.PUBLIC)
+
+
+        themeData.shapes.roundedCorners.allSorted.forEach {
+            val roundedCornerProperty = PropertySpec.builder(
+                it.key,
+                TypeVariableName("Double")
+            )
+
+            val roundedCornerPropertyInitializer = CodeBlock
+                .builder()
+                .add("${it.value.radius}")
+                .build()
+
+            roundedCornerProperty.initializer(roundedCornerPropertyInitializer)
+            roundedCornerProperty.addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+            roundedCornersClass.addProperty(roundedCornerProperty.build())
+        }
+
+        shapesClass.addType(roundedCornersClass.build())
+        return shapesClass.build()
     }
 
     private fun dimensions(): PropertySpec {
@@ -180,73 +223,61 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
 
         return fontsClass.build()
     }
+
+    private fun colors(outDir: File) : TypeSpec {
+        val createdColors = generateColors(outDir)
+        return createColorClass(createdColors)
+    }
+
+    private fun createColorClass(colorNames: List<String>): TypeSpec {
+        val colorsClass = TypeSpec
+            .structBuilder("Colors")
+            .addModifiers(Modifier.PUBLIC)
+
+        colorNames.forEach { colorName ->
+            val colorPropertyName = colorName.replaceFirstChar { it.lowercaseChar() }
+            val colorProperty = PropertySpec.builder(
+                colorPropertyName,
+                    TypeVariableName("Color")
+                )
+
+            val colorPropertyInitializer = CodeBlock
+                .builder()
+                .add("Color(\"$colorName\")")
+                .build()
+
+            colorProperty.initializer(colorPropertyInitializer)
+            colorProperty.addModifiers(Modifier.STATIC)
+            colorsClass.addProperty(colorProperty.build())
+        }
+
+        return colorsClass.build()
+    }
+
+    private fun generateColors(outDir: File): List<String> {
+        val colors = mutableListOf<String>()
+        val assetFileName = "ThemeColors.xcassets"
+        val assetFilePath = "${outDir.absolutePath}/$assetFileName"
+
+        File(assetFilePath).mkdirs()
+
+        themeData.lightColorScheme.all.forEach { currColorEntry ->
+            val color = currColorEntry.value
+            val iOSName = currColorEntry
+                .key
+                .replaceFirstChar { it.uppercaseChar() }
+                .plus("Color")
+
+            val darkModeColor = themeData.darkColorScheme.get(currColorEntry.key)
+            AssetColorSetCreator()
+                .setColor(color)
+                .setDarkColor(darkModeColor)
+                .create(assetFilePath, iOSName)
+
+            colors.add(iOSName)
+
+        }
+
+        return colors
+    }
 }
-
-
-/*
-public struct Theme {
-    public static let spacings = Spacing(
-        xTiny: 4,
-        tiny: 8,
-        small: 16,
-        medium: 32,
-        large: 48,
-        xLarge: 64,
-        xxLarge: 84,
-        xxxLarge: 128
-    )
-
-    public static let dimensions = Dimension(
-        xTiny: 16,
-        tiny: 24,
-        small: 36,
-        medium: 72,
-        large: 128,
-        xLarge: 192,
-        xxLarge: 256,
-        xxxLarge: 320
-    )
-
-    public struct Fonts {
-        static let displayLarge: Font = Font.system(size: 76, weight: .black)
-        static let displayMedium: Font = Font.system(size: 45, weight: .bold)
-        static let displaySmall: Font = Font.system(size: 40, weight: .bold)
-
-        static let headlineLarge: Font = Font.system(size: 36, weight: .black)
-        static let headlineMedium: Font = Font.system(size: 34, weight: .bold)
-        static let headlineSmall: Font = Font.system(size: 32, weight: .medium)
-
-        static let titleLarge: Font = Font.system(size: 28, weight: .bold)
-        static let titleMedium: Font = Font.system(size: 24, weight: .bold)
-        static let titleSmall: Font = Font.system(size: 21, weight: .bold)
-
-        static let bodyLarge: Font = Font.system(size: 20, weight: .regular)
-        static let bodyMedium: Font = Font.system(size: 19, weight: .regular)
-        static let bodySmall: Font = Font.system(size: 18, weight: .regular)
-
-        static let labelLarge: Font = Font.system(size: 16, weight: .bold)
-        static let labelmedium: Font = Font.system(size: 14, weight: .bold)
-        static let labelSmall: Font = Font.system(size: 14, weight: .semibold)
-    }
-
-    public struct Colors {
-        static let backgroundColor: Color = Color("BackgroundColor")
-        static let primaryColor: Color = Color("PrimaryColor")
-        static let secondaryColor: Color = Color("SecondaryColor")
-        static let inversePrimaryColor: Color = Color("InversePrimaryColor")
-    }
-
-    public struct Shapes {
-        static let small: CGFloat = 4.0
-        static let medium: CGFloat = 16.0
-        static let large: CGFloat = 32
-        static let xLarge: CGFloat = 48
-    }
-
-    // TODO: also add to Android
-    public struct AnimationDuration {
-        static let short: TimeInterval = 0.3
-        static let medium: TimeInterval = 0.5
-        static let long: TimeInterval = 0.75
-    }
-}*/

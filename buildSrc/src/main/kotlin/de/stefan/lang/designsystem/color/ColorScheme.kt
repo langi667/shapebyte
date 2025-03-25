@@ -1,4 +1,6 @@
 package de.stefan.lang.designsystem.color
+import de.stefan.lang.designsystem.core.PropertyReader
+import org.gradle.kotlin.dsl.provideDelegate
 import kotlin.reflect.full.declaredMemberProperties
 
 data class ColorScheme(
@@ -7,23 +9,16 @@ data class ColorScheme(
     val background: Color,
     val inversePrimary: Color,
 ) {
-    val colors: Map<String, String>
-        get() {
-            val properties = ColorScheme::class.declaredMemberProperties
-                .filter { it.returnType.classifier == Color::class }
+    val all: Map<String, Color> by lazy {
+        val colors: Map<String, Color> = PropertyReader.read(this)
+        colors
+    }
 
-            val colors = HashMap<String,String>()
-            properties.forEach { currColorProperty ->
-                val color = currColorProperty.get(this) as? Color
+    val colors: Map<String, String> by lazy {
+        all.mapValues { it.value.hex }
+    }
 
-                if (color != null ) {
-                    colors[currColorProperty.name] = color.hex
-                }
-                else {
-                    println("Unable to create color from Property ${currColorProperty.name}")
-                }
-            }
-
-            return colors
-        }
+    fun get(key: String): Color? {
+        return all[key]
+    }
 }
