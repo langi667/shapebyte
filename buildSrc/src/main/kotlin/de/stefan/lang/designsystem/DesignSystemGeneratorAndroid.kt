@@ -4,9 +4,7 @@ import com.squareup.kotlinpoet.*
 import java.io.File
 import de.stefan.lang.designsystem.color.ColorScheme
 import de.stefan.lang.designsystem.font.TextStylesCollection
-
-
-// TODO: needs LocalSpacing and LocalDimension
+import de.stefan.lang.designsystem.platformspecific.Platform
 
 class DesignSystemGeneratorAndroid: DesignSystemGenerating {
     private val composableClass = ClassName("androidx.compose.runtime", "Composable")
@@ -14,7 +12,10 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         composableClass
     ).build()
 
-    private val themeData: ThemeData = ThemeData
+    private val themeDataProvider: ThemeDataProvider = ThemeDataProvider(
+        Platform.Android,
+        ThemeData()
+    )
 
     override fun generate(outputFile: File) {
         val themeName = "ShapeByteTheme"
@@ -97,7 +98,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
             .add(
                 codeBlock = colorSchemeCode(
                     name = "darkColorScheme",
-                    colorScheme = themeData.darkColorScheme
+                    colorScheme = themeDataProvider.darkColorScheme
                 )
             )
             .add("\n")
@@ -105,7 +106,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
             .add(
                 codeBlock = colorSchemeCode(
                     name = "lightColorScheme",
-                    colorScheme = themeData.lightColorScheme
+                    colorScheme = themeDataProvider.lightColorScheme
                 )
             )
             .add("\n")
@@ -152,10 +153,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         val builder =  CodeBlock
             .builder()
 
-        val textStyles: TextStylesCollection = this.textStylesCollectionFrom(
-            platformSpecific = themeData.android,
-            fallback = themeData,
-        ) ?: return builder.build()
+        val textStyles = themeDataProvider.textStyles as TextStylesCollection
 
         builder.addStatement( "val typography = Typography(")
         builder.indent()
@@ -179,7 +177,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         builder.addStatement( "val shapes = Shapes(")
         builder.indent()
 
-        themeData.shapes.roundedCorners.all.forEach { currRoundedCorner ->
+        themeDataProvider.shapes.roundedCorners.all.forEach { currRoundedCorner ->
             builder.addStatement(
                 "${currRoundedCorner.key} = RoundedCornerShape(${currRoundedCorner.value.radius}.dp),"
             )

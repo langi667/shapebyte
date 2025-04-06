@@ -2,6 +2,7 @@ package de.stefan.lang.designsystem
 
 import de.stefan.lang.designsystem.color.ios.AssetColorSetCreator
 import de.stefan.lang.designsystem.font.TextStylesCollection
+import de.stefan.lang.designsystem.platformspecific.Platform
 
 import io.outfoxx.swiftpoet.CodeBlock
 import io.outfoxx.swiftpoet.FileSpec
@@ -13,7 +14,10 @@ import io.outfoxx.swiftpoet.TypeVariableName
 import java.io.File
 
 class DesignSystemGeneratorIOS : DesignSystemGenerating {
-    private val themeData: ThemeData = ThemeData
+    private val themeDataProvider: ThemeDataProvider = ThemeDataProvider(
+        Platform.iOS,
+        ThemeData()
+    )
 
     override fun generate(outputFile: File) {
         val themeClass = TypeSpec
@@ -59,7 +63,7 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
 
     private fun animationDurationsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
-        val animationDurations = themeData.animationDurations.allSorted
+        val animationDurations = themeDataProvider.animationDurations.allSorted
         for((index, animationDuration) in animationDurations.entries.withIndex()) {
             retVal.add("\n")
             retVal.add("${animationDuration.key}: ${animationDuration.value}")
@@ -96,7 +100,7 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
 
     private fun roundedCornerShapesInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
-        val roundedCorners = themeData.shapes.roundedCorners.allSorted
+        val roundedCorners = themeDataProvider.shapes.roundedCorners.allSorted
 
         for((index, roundedCornerShape) in roundedCorners.entries.withIndex()) {
             retVal.add("\n")
@@ -136,28 +140,28 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
     private fun dimensionsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
         retVal.add("\n")
-        retVal.add("xTiny: ${themeData.dimensions.xTiny},")
+        retVal.add("xTiny: ${themeDataProvider.dimensions.xTiny},")
         retVal.add("\n")
 
-        retVal.add("tiny: ${themeData.dimensions.tiny},")
+        retVal.add("tiny: ${themeDataProvider.dimensions.tiny},")
         retVal.add("\n")
 
-        retVal.add("small: ${themeData.dimensions.small},")
+        retVal.add("small: ${themeDataProvider.dimensions.small},")
         retVal.add("\n")
 
-        retVal.add("medium: ${themeData.dimensions.medium},")
+        retVal.add("medium: ${themeDataProvider.dimensions.medium},")
         retVal.add("\n")
 
-        retVal.add("large: ${themeData.dimensions.large},")
+        retVal.add("large: ${themeDataProvider.dimensions.large},")
         retVal.add("\n")
 
-        retVal.add("xLarge: ${themeData.dimensions.xLarge},")
+        retVal.add("xLarge: ${themeDataProvider.dimensions.xLarge},")
         retVal.add("\n")
 
-        retVal.add("xxLarge: ${themeData.dimensions.xxLarge},")
+        retVal.add("xxLarge: ${themeDataProvider.dimensions.xxLarge},")
         retVal.add("\n")
 
-        retVal.add("xxxLarge: ${themeData.dimensions.xxxLarge}")
+        retVal.add("xxxLarge: ${themeDataProvider.dimensions.xxxLarge}")
 
         return retVal.build()
     }
@@ -186,28 +190,28 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
     private fun spacingsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
         retVal.add("\n")
-        retVal.add("xTiny: ${themeData.spacings.xTiny},")
+        retVal.add("xTiny: ${themeDataProvider.spacings.xTiny},")
         retVal.add("\n")
 
-        retVal.add("tiny: ${themeData.spacings.tiny},")
+        retVal.add("tiny: ${themeDataProvider.spacings.tiny},")
         retVal.add("\n")
 
-        retVal.add("small: ${themeData.spacings.small},")
+        retVal.add("small: ${themeDataProvider.spacings.small},")
         retVal.add("\n")
 
-        retVal.add("medium: ${themeData.spacings.medium},")
+        retVal.add("medium: ${themeDataProvider.spacings.medium},")
         retVal.add("\n")
 
-        retVal.add("large: ${themeData.spacings.large},")
+        retVal.add("large: ${themeDataProvider.spacings.large},")
         retVal.add("\n")
 
-        retVal.add("xLarge: ${themeData.spacings.xLarge},")
+        retVal.add("xLarge: ${themeDataProvider.spacings.xLarge},")
         retVal.add("\n")
 
-        retVal.add("xxLarge: ${themeData.spacings.xxLarge},")
+        retVal.add("xxLarge: ${themeDataProvider.spacings.xxLarge},")
         retVal.add("\n")
 
-        retVal.add("xxxLarge: ${themeData.spacings.xxxLarge}")
+        retVal.add("xxxLarge: ${themeDataProvider.spacings.xxxLarge}")
         retVal.add("\n")
 
         return retVal.build()
@@ -235,11 +239,7 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
 
     private fun fontsInitializerArgs(): CodeBlock {
         val codeBlock = CodeBlock.builder()
-        val textStyles: TextStylesCollection = this.textStylesCollectionFrom(
-            platformSpecific = themeData.iOS,
-            fallback = themeData,
-        ) ?: return codeBlock.build()
-
+        val textStyles: TextStylesCollection = themeDataProvider.textStyles as TextStylesCollection
         val allTextStyles = textStyles.all
 
         for ((index, textStyle) in allTextStyles.entries.withIndex()) {
@@ -288,14 +288,14 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
 
         File(assetFilePath).mkdirs()
 
-        themeData.lightColorScheme.all.forEach { currColorEntry ->
+        themeDataProvider.lightColorScheme.all.forEach { currColorEntry ->
             val color = currColorEntry.value
             val iOSName = currColorEntry
                 .key
                 .replaceFirstChar { it.uppercaseChar() }
                 .plus("Color")
 
-            val darkModeColor = themeData.darkColorScheme.get(currColorEntry.key)
+            val darkModeColor = themeDataProvider.darkColorScheme.get(currColorEntry.key)
             AssetColorSetCreator()
                 .setColor(color)
                 .setDarkColor(darkModeColor)

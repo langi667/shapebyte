@@ -1,6 +1,7 @@
 package de.stefan.lang.designsystem
 
 import de.stefan.lang.designsystem.animation.AnimationDurations
+import de.stefan.lang.designsystem.color.ColorSchemeProviding
 import de.stefan.lang.designsystem.color.ColorScheme
 import de.stefan.lang.designsystem.color.Color
 import de.stefan.lang.designsystem.font.TextStyles
@@ -9,26 +10,28 @@ import de.stefan.lang.designsystem.font.TextStylesProviding
 import de.stefan.lang.designsystem.font.TextStyle
 import de.stefan.lang.designsystem.font.Typography
 import de.stefan.lang.designsystem.font.FontWeight
-
 import de.stefan.lang.designsystem.shapes.RoundedCorners
 import de.stefan.lang.designsystem.shapes.Shape
 import de.stefan.lang.designsystem.shapes.Shapes
+import de.stefan.lang.designsystem.shapes.ShapesProviding
 import de.stefan.lang.designsystem.dimension.Dimensions
+import de.stefan.lang.designsystem.dimension.DimensionsProviding
+import de.stefan.lang.designsystem.platformspecific.Platform
 import de.stefan.lang.designsystem.platformspecific.PlatformSpecificThemeContent
-
 import de.stefan.lang.designsystem.spacing.Spacings
+import de.stefan.lang.designsystem.spacing.SpacingsProviding
 import de.stefan.lang.designsystem.animation.AnimationDurationsProviding
 
-interface ThemeContent : TextStylesProviding, AnimationDurationsProviding {
-    val lightColorScheme: ColorScheme
-    val darkColorScheme: ColorScheme
+interface ThemeContent :
+    TextStylesProviding,
+    AnimationDurationsProviding,
+    ColorSchemeProviding,
+    ShapesProviding,
+    DimensionsProviding,
+    SpacingsProviding
 
-    val shapes: Shapes
-    val dimensions: Dimensions
-    val spacings: Spacings
-}
-
-object ThemeData : ThemeContent {
+// TODO: parse from YAML or JSON
+class ThemeData : ThemeContent {
     override val lightColorScheme = ColorScheme(
         primary = Color("0xFFDC584D"),
         secondary = Color("0xFF68BBC1"),
@@ -83,6 +86,7 @@ object ThemeData : ThemeContent {
     )
 
     val android = PlatformSpecificThemeContent(
+        platform = Platform.Android,
         textStyles = Typography(
             displayLarge = TextStyle(fontSize = 76, fontWeight = FontWeight.Black),
             displayMedium = TextStyle(fontSize = 45, fontWeight = FontWeight.Bold),
@@ -107,6 +111,7 @@ object ThemeData : ThemeContent {
     )
 
     val iOS = PlatformSpecificThemeContent(
+        platform = Platform.iOS,
         textStyles = Typography(
             displayLarge = TextStyle(fontSize = 76, fontWeight = FontWeight.Black),
             displayMedium = TextStyle(fontSize = 45, fontWeight = FontWeight.Bold),
@@ -129,5 +134,4 @@ object ThemeData : ThemeContent {
             labelSmall = TextStyle(fontSize = 12, fontWeight = FontWeight.Normal),
         )
     )
-
 }
