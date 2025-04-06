@@ -1,11 +1,3 @@
-//
-//  SpacingTest.swift
-//  ShapeByteTests
-//
-//  Created by Stefan Lang on 27.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Testing
 import shared
 
@@ -13,7 +5,7 @@ struct SpacingTest {
 
     @Test
     func initWithInt() async throws {
-        let sut = Spacing(
+        let sut = Spacings(
             xTiny: 1,
             tiny: 2,
             small: 3,
@@ -38,7 +30,7 @@ struct SpacingTest {
 
     @Test
     func initWithSharedSpacing() async throws {
-        let sharedSpacing = shared.Spacing(
+        let sharedSpacing = shared.Spacings(
             xTiny: 1,
             tiny: 2,
             small: 3,
@@ -49,7 +41,7 @@ struct SpacingTest {
             xxxLarge: 8
         )
 
-        let sut = Spacing(sharedSpacing)
+        let sut = Spacings(sharedSpacing)
 
         #expect(sut.xTiny == 1)
         #expect(sut.tiny == 2)

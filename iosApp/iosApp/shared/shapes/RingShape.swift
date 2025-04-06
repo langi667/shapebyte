@@ -1,11 +1,3 @@
-//
-//  RingShape.swift
-//  iosApp
-//
-//  Created by Stefan Lang on 25.12.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import SwiftUI
 
 // https://liquidcoder.com/swiftui-ring-animation/

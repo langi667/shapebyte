@@ -1,11 +1,3 @@
-//
-//  AppBarTest.swift
-//  ShapeByteTests
-//
-//  Created by Stefan Lang on 25.12.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Testing
 
 @MainActor

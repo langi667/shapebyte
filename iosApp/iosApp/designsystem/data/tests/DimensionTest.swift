@@ -1,11 +1,3 @@
-//
-//  DimensionTest.swift
-//  ShapeByteTests
-//
-//  Created by Stefan Lang on 27.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Testing
 import shared
 
@@ -13,7 +5,7 @@ struct DimensionTest {
 
     @Test
     func initWithInt() async throws {
-        let sut = Dimension(
+        let sut = Dimensions(
             xTiny: 1,
             tiny: 2,
             small: 3,
@@ -38,7 +30,7 @@ struct DimensionTest {
 
     @Test
     func initWithSharedSpacing() async throws {
-        let sharedDimension = shared.Dimension(
+        let sharedDimension = shared.Dimensions(
             xTiny: 1,
             tiny: 2,
             small: 3,
@@ -49,7 +41,7 @@ struct DimensionTest {
             xxxLarge: 8
         )
 
-        let sut = Dimension(sharedDimension)
+        let sut = Dimensions(sharedDimension)
 
         #expect(sut.xTiny == 1)
         #expect(sut.tiny == 2)

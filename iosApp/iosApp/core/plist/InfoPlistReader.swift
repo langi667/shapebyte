@@ -1,11 +1,3 @@
-//
-//  File.swift
-//  iosApp
-//
-//  Created by Stefan Lang (work)  on 06.01.25.
-//  Copyright © 2025 orgName. All rights reserved.
-//
-
 import Foundation
 
 class InfoPlistReader {

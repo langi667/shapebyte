@@ -1,11 +1,3 @@
-//
-//  TimedWorkoutView.swift
-//  iosApp
-//
-//  Created by Stefan Lang on 09.12.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import SwiftUI
 import PreviewSnapshots
 import shared

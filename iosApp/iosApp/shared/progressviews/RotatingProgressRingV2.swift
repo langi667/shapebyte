@@ -1,11 +1,3 @@
-//
-//  RotatingProgressRingV2.swift
-//  iosApp
-//
-//  Created by Stefan Lang on 20.12.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 // https://gist.github.com/frankfka/2517d69da68ef041e3257d5cfd27fe5d
 import SwiftUI
 
