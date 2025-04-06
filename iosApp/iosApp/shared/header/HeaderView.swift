@@ -18,7 +18,7 @@ struct HeaderView: View {
         headerHeight: CGFloat = 128,
         minimumHeaderHeight: CGFloat = 102,
         offsetY: CGFloat = 0,
-        overlayColor: Color = Theme.Colors.secondaryColor,
+        overlayColor: Color = Theme.colors.secondary,
         overlayOpacity: CGFloat = 1,
         scale: CGFloat = 1,
         imageScale: CGFloat = 1,
@@ -84,7 +84,7 @@ struct HeaderView_Previews: PreviewProvider {
 
         init(
             headerHeight: CGFloat = 128,
-            overlayColor: Color = Theme.Colors.secondaryColor,
+            overlayColor: Color = Theme.colors.secondary,
             overlayOpacity: CGFloat = 0,
             scale: CGFloat = 1,
             imageScale: CGFloat = 1

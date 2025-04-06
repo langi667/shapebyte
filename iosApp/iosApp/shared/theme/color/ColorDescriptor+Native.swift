@@ -22,13 +22,13 @@ extension ColorDescriptor {
         switch onEnum(of: themedColor) {
 
         case .background:
-            return Theme.Colors.backgroundColor
+            return Theme.colors.background
         case .inversePrimary:
-            return Theme.Colors.inversePrimaryColor
+            return Theme.colors.inversePrimary
         case .primary:
-            return Theme.Colors.primaryColor
+            return Theme.colors.primary
         case .secondary:
-            return Theme.Colors.secondaryColor
+            return Theme.colors.secondary
         }
     }
 }

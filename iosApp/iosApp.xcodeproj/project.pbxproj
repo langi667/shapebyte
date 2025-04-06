@@ -110,8 +110,12 @@
 		DEADC37A2D76DCCD006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				data/Dimension.swift,
-				data/Spacing.swift,
+				data/AnimationDurations.swift,
+				data/Colors.swift,
+				data/Dimensions.swift,
+				data/Fonts.swift,
+				data/RoundedCornerShapes.swift,
+				data/Spacings.swift,
 				ui/Text.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
@@ -119,8 +123,12 @@
 		DEADC37B2D76DCCD006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				data/Dimension.swift,
-				data/Spacing.swift,
+				data/AnimationDurations.swift,
+				data/Colors.swift,
+				data/Dimensions.swift,
+				data/Fonts.swift,
+				data/RoundedCornerShapes.swift,
+				data/Spacings.swift,
 				ui/Text.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
@@ -128,8 +136,12 @@
 		DEADC37C2D76DCCD006E71BD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				data/Dimension.swift,
-				data/Spacing.swift,
+				data/AnimationDurations.swift,
+				data/Colors.swift,
+				data/Dimensions.swift,
+				data/Fonts.swift,
+				data/RoundedCornerShapes.swift,
+				data/Spacings.swift,
 				ui/Text.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;

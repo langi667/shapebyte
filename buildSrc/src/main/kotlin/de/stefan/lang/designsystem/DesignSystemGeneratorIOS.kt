@@ -1,7 +1,7 @@
 package de.stefan.lang.designsystem
 
-import de.stefan.lang.designsystem.font.TextStylesCollection
 import de.stefan.lang.designsystem.color.ios.AssetColorSetCreator
+import de.stefan.lang.designsystem.font.TextStylesCollection
 
 import io.outfoxx.swiftpoet.CodeBlock
 import io.outfoxx.swiftpoet.FileSpec
@@ -12,7 +12,7 @@ import io.outfoxx.swiftpoet.TypeVariableName
 
 import java.io.File
 
-class DesignSystemGeneratorIOS: DesignSystemGenerating {
+class DesignSystemGeneratorIOS : DesignSystemGenerating {
     private val themeData: ThemeData = ThemeData
 
     override fun generate(outputFile: File) {
@@ -21,13 +21,10 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
             .addModifiers(Modifier.PUBLIC)
             .addProperty(dimensions())
             .addProperty(spacings())
-            .addType(textStyles())
-            .addType(colors(outputFile))
-            .addType(shapes())
-
-        animationDurations()?.let {
-            themeClass.addType(it)
-        }
+            .addProperty(fonts())
+            .addProperty(colors(outputFile))
+            .addProperty(roundedCornerShapes())
+            .addProperty(animationDurations())
 
         val file = FileSpec.builder("Theme")
             .addType(themeClass.build())
@@ -38,71 +35,93 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
         file.writeTo(outputFile)
     }
 
-    private fun animationDurations(): TypeSpec? {
-        val animationData = animationDurationFrom(themeData.iOS, themeData) ?: return null
+    private fun animationDurations(): PropertySpec {
+        val typeName = "AnimationDurations"
+        val animationDurationsProperty = PropertySpec.builder(
+            "animationDurations",
+            TypeVariableName(name = typeName)
+        ).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
 
-        val animationDurationClass = TypeSpec
-            .structBuilder("AnimationDuration")
-            .addModifiers(Modifier.PUBLIC)
+        val animationDurationsInitializer = CodeBlock
+            .builder()
+            .add("$typeName(")
+            .add(animationDurationsInitializerArgs())
+            .add("\n")
+            .add(")")
+            .add("\n")
+            .build()
 
-        animationData.allSorted.forEach {
-            val animationDurationProperty = PropertySpec.builder(
-                it.key,
-                TypeVariableName("TimeInterval")
-            )
+        animationDurationsProperty.initializer(animationDurationsInitializer)
 
-            val animationDurationPropertyInitializer = CodeBlock.builder().add("${it.value}")
-            animationDurationProperty.initializer(animationDurationPropertyInitializer.build())
-            animationDurationProperty.addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-
-            animationDurationClass.addProperty(animationDurationProperty.build())
-        }
-
-
-        return animationDurationClass.build()
+        return animationDurationsProperty
+            .build()
     }
 
-    private fun shapes(): TypeSpec {
-        val shapesClass = TypeSpec
-            .structBuilder("Shapes")
-            .addModifiers(Modifier.PUBLIC)
+    private fun animationDurationsInitializerArgs(): CodeBlock {
+        val retVal = CodeBlock.builder()
+        val animationDurations = themeData.animationDurations.allSorted
+        for((index, animationDuration) in animationDurations.entries.withIndex()) {
+            retVal.add("\n")
+            retVal.add("${animationDuration.key}: ${animationDuration.value}")
 
-        val roundedCornersClass = TypeSpec
-            .structBuilder("RoundedCorners")
-            .addModifiers(Modifier.PUBLIC)
-
-
-        themeData.shapes.roundedCorners.allSorted.forEach {
-            val roundedCornerProperty = PropertySpec.builder(
-                it.key,
-                TypeVariableName("Double")
-            )
-
-            val roundedCornerPropertyInitializer = CodeBlock
-                .builder()
-                .add("${it.value.radius}")
-                .build()
-
-            roundedCornerProperty.initializer(roundedCornerPropertyInitializer)
-            roundedCornerProperty.addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-            roundedCornersClass.addProperty(roundedCornerProperty.build())
+            if (index < animationDurations.size - 1) {
+                retVal.add(",")
+            }
         }
 
-        shapesClass.addType(roundedCornersClass.build())
-        return shapesClass.build()
+        return retVal.build()
+    }
+
+    private fun roundedCornerShapes(): PropertySpec {
+        val typeName = "RoundedCornerShapes"
+        val roundedCornerShapesProperty = PropertySpec.builder(
+            "roundedCornerShapes",
+            TypeVariableName(name = typeName)
+        ).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+
+        val roundedCornerShapesInitializer = CodeBlock
+            .builder()
+            .add("$typeName(")
+            .add(roundedCornerShapesInitializerArgs())
+            .add("\n")
+            .add(")")
+            .add("\n")
+            .build()
+
+        roundedCornerShapesProperty.initializer(roundedCornerShapesInitializer)
+
+        return roundedCornerShapesProperty
+            .build()
+    }
+
+    private fun roundedCornerShapesInitializerArgs(): CodeBlock {
+        val retVal = CodeBlock.builder()
+        val roundedCorners = themeData.shapes.roundedCorners.allSorted
+
+        for((index, roundedCornerShape) in roundedCorners.entries.withIndex()) {
+            retVal.add("\n")
+            retVal.add("${roundedCornerShape.key}: ${roundedCornerShape.value.radius}")
+
+            if (index < roundedCorners.size - 1) {
+                retVal.add(",")
+            }
+        }
+
+        return retVal.build()
     }
 
     private fun dimensions(): PropertySpec {
+        val typeName = "Dimensions"
         val dimensionsProperty = PropertySpec.builder(
             "dimensions",
-            TypeVariableName("Dimension")
+            TypeVariableName(name = typeName)
         )
-        .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+            .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
 
         val dimensionInitializer = CodeBlock
             .builder()
-            .add("Dimension(")
-            .add(dimensionProperties())
+            .add("$typeName(")
+            .add(dimensionsInitializerArgs())
             .add("\n")
             .add(")")
             .add("\n")
@@ -114,7 +133,7 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
             .build()
     }
 
-    private fun dimensionProperties(): CodeBlock {
+    private fun dimensionsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
         retVal.add("\n")
         retVal.add("xTiny: ${themeData.dimensions.xTiny},")
@@ -144,18 +163,18 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
     }
 
     private fun spacings(): PropertySpec {
+        val typeName = "Spacings"
         val spacingsProperty = PropertySpec.builder(
             "spacings",
-            TypeVariableName("Spacing")
-        )
-            .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+            TypeVariableName(typeName)
+        ).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
 
         val spacingInitializer = CodeBlock
             .builder()
-            .add("Spacing(")
-            .add(spacingProperties())
-            .add("\n")
+            .add("$typeName(")
+            .add(spacingsInitializerArgs())
             .add(")")
+            .add("\n")
             .build()
 
         spacingsProperty.initializer(spacingInitializer)
@@ -164,7 +183,7 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
             .build()
     }
 
-    private fun spacingProperties(): CodeBlock {
+    private fun spacingsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
         retVal.add("\n")
         retVal.add("xTiny: ${themeData.spacings.xTiny},")
@@ -189,69 +208,77 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
         retVal.add("\n")
 
         retVal.add("xxxLarge: ${themeData.spacings.xxxLarge}")
+        retVal.add("\n")
 
         return retVal.build()
     }
 
-    private fun textStyles(): TypeSpec {
-        val fontsClass = TypeSpec
-            .structBuilder("Fonts")
-            .addModifiers(Modifier.PUBLIC)
+    private fun fonts(): PropertySpec {
+        val typeName = "Fonts"
+        val fontsProperty = PropertySpec.builder(
+            "fonts",
+            TypeVariableName(typeName)
+        ).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
 
+        val fontsInitializer = CodeBlock
+            .builder()
+            .add("$typeName(")
+            .add(fontsInitializerArgs())
+            .add("\n")
+            .add(")")
+            .add("\n")
+            .build()
+
+        fontsProperty.initializer(fontsInitializer)
+        return fontsProperty.build()
+    }
+
+    private fun fontsInitializerArgs(): CodeBlock {
+        val codeBlock = CodeBlock.builder()
         val textStyles: TextStylesCollection = this.textStylesCollectionFrom(
             platformSpecific = themeData.iOS,
             fallback = themeData,
-        ) ?: return fontsClass.build()
+        ) ?: return codeBlock.build()
 
-        textStyles
-            .all
-            .forEach {
-            val fontProperty = PropertySpec.builder(
-                it.key,
-                TypeVariableName("Font")
-            )
+        val allTextStyles = textStyles.all
 
-            val fontPropertyInitializer = CodeBlock
-                .builder()
-                .add("Font.system(size: ${it.value.fontSize}, weight: .${it.value.fontWeight.iOSName})")
-                .build()
+        for ((index, textStyle) in allTextStyles.entries.withIndex()) {
+            var codeBlockStr =
+                "\n${textStyle.key}: Font.system(size: ${textStyle.value.fontSize}, weight: .${textStyle.value.fontWeight.iOSName})"
 
-            fontProperty.initializer(fontPropertyInitializer)
-            fontProperty.addModifiers(Modifier.STATIC)
-            fontsClass.addProperty(fontProperty.build())
+            if (index < allTextStyles.size - 1) {
+                codeBlockStr += ","
+            }
+
+            codeBlock.add(codeBlockStr)
         }
 
-        return fontsClass.build()
+        return codeBlock.build()
     }
 
-    private fun colors(outDir: File) : TypeSpec {
+    private fun colors(outDir: File): PropertySpec {
         val createdColors = generateColors(outDir)
-        return createColorClass(createdColors)
+        return createColorProperty(createdColors)
     }
 
-    private fun createColorClass(colorNames: List<String>): TypeSpec {
-        val colorsClass = TypeSpec
-            .structBuilder("Colors")
-            .addModifiers(Modifier.PUBLIC)
+    private fun createColorProperty(colorNames: List<String>): PropertySpec {
+        val typeName = "Colors"
+        val colorsProperty = PropertySpec.builder(
+            "colors",
+            TypeVariableName(typeName)
+        ).addModifiers(Modifier.PUBLIC, Modifier.STATIC)
 
-        colorNames.forEach { colorName ->
-            val colorPropertyName = colorName.replaceFirstChar { it.lowercaseChar() }
-            val colorProperty = PropertySpec.builder(
-                colorPropertyName,
-                    TypeVariableName("Color")
-                )
+        val colorsInitializer = CodeBlock
+            .builder()
+            .add("$typeName(")
+            .add(colorsInitializerArgs())
+            .add("\n")
+            .add(")")
+            .add("\n")
+            .build()
 
-            val colorPropertyInitializer = CodeBlock
-                .builder()
-                .add("Color(\"$colorName\")")
-                .build()
-
-            colorProperty.initializer(colorPropertyInitializer)
-            colorProperty.addModifiers(Modifier.STATIC)
-            colorsClass.addProperty(colorProperty.build())
-        }
-
-        return colorsClass.build()
+        colorsProperty.initializer(colorsInitializer)
+        return colorsProperty.build()
     }
 
     private fun generateColors(outDir: File): List<String> {
@@ -279,5 +306,29 @@ class DesignSystemGeneratorIOS: DesignSystemGenerating {
         }
 
         return colors
+    }
+
+    private fun colorsInitializerArgs(): CodeBlock {
+        val codeBlock = CodeBlock.builder()
+
+        val colorsOrderedByConstructorArgs = listOf(
+            "primary",
+            "secondary",
+            "background",
+            "inversePrimary"
+        )
+
+        for ((index, colorName) in colorsOrderedByConstructorArgs.withIndex()) {
+            val assetName = colorName.replaceFirstChar { it.uppercaseChar() } + "Color"
+            var colorCodeStr = "\n$colorName: Color(\"$assetName\")"
+
+            if (index < colorsOrderedByConstructorArgs.size - 1) {
+                colorCodeStr += ","
+            }
+
+            codeBlock.add(colorCodeStr)
+        }
+
+        return codeBlock.build()
     }
 }

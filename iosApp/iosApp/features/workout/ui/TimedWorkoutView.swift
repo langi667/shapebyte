@@ -86,7 +86,7 @@ struct TimedWorkoutContentView: View {
 
     @State
     private var timerViewSize: CGSize = .zero
-    let animationDuration: TimeInterval = Theme.AnimationDuration.short
+    let animationDuration: TimeInterval = Theme.animationDurations.short
 
     init (
         data: TimedWorkoutViewData,
@@ -177,7 +177,7 @@ private struct ExerciseView: View {
         playButtonState: ButtonState,
         progress: Double,
         setDuration: TimeInterval,
-        animationDuration: TimeInterval = Theme.AnimationDuration.short
+        animationDuration: TimeInterval = Theme.animationDurations.short
     ) {
         self.image = image
         self.playButtonState = playButtonState
@@ -209,7 +209,7 @@ private struct ExerciseView: View {
                     ringWidth: 6,
                     percent: progress * 100,
                     backgroundColor: .clear,
-                    foregroundColors: [Theme.Colors.secondaryColor]
+                    foregroundColors: [Theme.colors.secondary]
                 )
 
             }.opacity(1 - opacity)

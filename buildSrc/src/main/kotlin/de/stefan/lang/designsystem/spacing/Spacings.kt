@@ -1,6 +1,6 @@
 package de.stefan.lang.designsystem.spacing
 
-data class Spacing(
+data class Spacings(
     val xTiny: Int,
     val tiny: Int,
     val small: Int,

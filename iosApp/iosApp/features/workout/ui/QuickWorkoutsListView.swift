@@ -47,8 +47,8 @@ struct QuickWorkoutsListView: View {
                 LinearGradient(
                     gradient: Gradient(
                         colors: [
-                            Theme.Colors.backgroundColor,
-                            Theme.Colors.backgroundColor.opacity(0)
+                            Theme.colors.background,
+                            Theme.colors.background.opacity(0)
                         ]
                     ),
                     startPoint: .leading,
@@ -124,7 +124,7 @@ struct View_Previews: PreviewProvider {
             configure: { workouts in
                 QuickWorkoutsListView(quickWorkouts: workouts, onWorkoutSelected: {_ in })
                     .snapshotSetup()
-                    .background(Theme.Colors.backgroundColor)
+                    .background(Theme.colors.background)
             }
         )
     }

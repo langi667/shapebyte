@@ -161,8 +161,8 @@ struct PercentageRing_Previews: PreviewProvider {
                     PercentageRing(
                         ringWidth: data.ringWidth,
                         percent: data.percent,
-                        backgroundColor: Theme.Colors.backgroundColor,
-                        foregroundColors: [Theme.Colors.secondaryColor]
+                        backgroundColor: Theme.colors.background,
+                        foregroundColors: [Theme.colors.secondary]
                     ).padding()
                 }.snapshotSetupFullScreen()
             }

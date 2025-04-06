@@ -2,7 +2,7 @@ package de.stefan.lang.designsystem.dimension
 
 import de.stefan.lang.designsystem.core.PropertyReader
 
-data class Dimension(
+data class Dimensions(
     val xTiny: Int,
     val tiny: Int,
     val small: Int,
@@ -12,5 +12,5 @@ data class Dimension(
     val xxLarge: Int,
     val xxxLarge: Int,
 ) {
-    fun all(): HashMap<String, Int> = PropertyReader.read<Int, Dimension>(this)
+    fun all(): HashMap<String, Int> = PropertyReader.read<Int, Dimensions>(this)
 }

@@ -1,6 +1,6 @@
 package de.stefan.lang.designsystem
 
-data class Dimension(
+data class Dimensions(
     val xTiny: Int,
     val tiny: Int,
     val small: Int,

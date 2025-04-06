@@ -1,11 +1,3 @@
-//
-//  QuickWorkoutView.swift
-//  iosApp
-//
-//  Created by Lang, Stefan [RTL Tech] on 14.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import SwiftUI
 import shared
 import PreviewSnapshots
@@ -16,7 +8,7 @@ struct QuickWorkoutEntryView: View {
     let image: shared.ImageResource
     let onClicked: () -> Void
 
-    private let cornerRadius = Theme.Shapes.RoundedCorners.large
+    private let cornerRadius = Theme.roundedCornerShapes.large
     private let imageSize = Theme.dimensions.small + Theme.spacings.medium
     private let maxViewWidth = Theme.dimensions.xLarge
     private let itemSpacing = Theme.spacings.xTiny
@@ -70,7 +62,7 @@ struct QuickWorkoutEntryView: View {
             RoundedRectangle(
                 cornerRadius: cornerRadius
             )
-            .strokeBorder(Theme.Colors.secondaryColor)
+            .strokeBorder(Theme.colors.secondary)
         }
     }
 
@@ -112,7 +104,7 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
                     ForEach(states) { workout in
                         QuickWorkoutEntryView(workout: workout)
                             .snapshotSetup()
-                            .background(Theme.Colors.backgroundColor)
+                            .background(Theme.colors.background)
                     }
                 }
             }

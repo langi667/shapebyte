@@ -19,8 +19,8 @@ struct BackgroundView: View {
         topOffset: CGFloat = Self.defaultTopOffset,
         radialOffset: CGFloat = Self.defaultRadialOffset,
         screenSize: CGSize = .zero,
-        secondaryColor: Color = Theme.Colors.secondaryColor,
-        radialColor: Color = Theme.Colors.backgroundColor
+        secondaryColor: Color = Theme.colors.secondary,
+        radialColor: Color = Theme.colors.background
     ) {
         self.init(
             radialOffset: radialOffset,
@@ -35,8 +35,8 @@ struct BackgroundView: View {
     init(
         radialOffset: CGFloat = Self.defaultRadialOffset,
         screenSize: CGSize = .zero,
-        secondaryColor: Color = Theme.Colors.secondaryColor,
-        radialColor: Color = Theme.Colors.backgroundColor,
+        secondaryColor: Color = Theme.colors.secondary,
+        radialColor: Color = Theme.colors.background,
         topView: @escaping () -> AnyView
     ) {
         self.topView = topView

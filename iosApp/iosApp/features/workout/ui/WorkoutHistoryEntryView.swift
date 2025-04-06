@@ -3,7 +3,7 @@ import shared
 import PreviewSnapshots
 
 struct WorkoutHistoryEntryView: View {
-    private let cornerRadius = Theme.Shapes.RoundedCorners.extraLarge
+    private let cornerRadius = Theme.roundedCornerShapes.extraLarge
 
     private let title: String
     private let date: String
@@ -38,7 +38,7 @@ struct WorkoutHistoryEntryView: View {
                 RoundedRectangle(
                     cornerRadius: cornerRadius
                 )
-                .strokeBorder(Theme.Colors.secondaryColor)
+                .strokeBorder(Theme.colors.secondary)
             }
     }
 
@@ -69,7 +69,7 @@ struct WorkoutHistoryEntryView_Previews: PreviewProvider {
 
             configure: { state in
                 WorkoutHistoryEntryView(entry: state.entry)
-                    .background(Theme.Colors.backgroundColor)
+                    .background(Theme.colors.background)
                     .snapshotSetup()
             }
         )

@@ -28,7 +28,7 @@ struct ContentView<Content: View>: View {
     @State private var headerScale: CGFloat = .zero
     @State private var headerImageScale: CGFloat = .zero
 
-    private let headerOverlayColor: Color = Theme.Colors.secondaryColor
+    private let headerOverlayColor: Color = Theme.colors.secondary
     private let floatingViewIsEmpty: Bool
 
     private var headerHeight: CGFloat {

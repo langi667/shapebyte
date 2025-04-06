@@ -13,10 +13,10 @@ import de.stefan.lang.designsystem.font.FontWeight
 import de.stefan.lang.designsystem.shapes.RoundedCorners
 import de.stefan.lang.designsystem.shapes.Shape
 import de.stefan.lang.designsystem.shapes.Shapes
-import de.stefan.lang.designsystem.dimension.Dimension
+import de.stefan.lang.designsystem.dimension.Dimensions
 import de.stefan.lang.designsystem.platformspecific.PlatformSpecificThemeContent
 
-import de.stefan.lang.designsystem.spacing.Spacing
+import de.stefan.lang.designsystem.spacing.Spacings
 import de.stefan.lang.designsystem.animation.AnimationDurationsProviding
 
 interface ThemeContent : TextStylesProviding, AnimationDurationsProviding {
@@ -24,8 +24,8 @@ interface ThemeContent : TextStylesProviding, AnimationDurationsProviding {
     val darkColorScheme: ColorScheme
 
     val shapes: Shapes
-    val dimensions: Dimension
-    val spacings: Spacing
+    val dimensions: Dimensions
+    val spacings: Spacings
 }
 
 object ThemeData : ThemeContent {
@@ -52,7 +52,7 @@ object ThemeData : ThemeContent {
         )
     )
 
-    override val dimensions: Dimension = Dimension(
+    override val dimensions: Dimensions = Dimensions(
         xTiny = 16,
         tiny = 24,
         small = 36,
@@ -63,7 +63,7 @@ object ThemeData : ThemeContent {
         xxxLarge = 320,
     )
 
-    override val spacings: Spacing = Spacing(
+    override val spacings: Spacings = Spacings(
         xTiny = 4,
         tiny = 8,
         small = 16,

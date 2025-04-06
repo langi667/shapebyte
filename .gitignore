@@ -9,6 +9,6 @@ captures
 local.properties
 xcuserdata
 /.kotlin/*
-
+.run
 /androidApp/generated/*
 /iosApp/iosApp/generated/theme/*

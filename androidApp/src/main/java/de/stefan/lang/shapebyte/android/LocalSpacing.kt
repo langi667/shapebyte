@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.android
 
-import de.stefan.lang.designsystem.Spacing
+import de.stefan.lang.designsystem.Spacings
 
 object LocalSpacing {
-    val current: Spacing by lazy {
-        Spacing(
+    val current: Spacings by lazy {
+        Spacings(
             xTiny = 4,
             tiny = 8,
             small = 16,

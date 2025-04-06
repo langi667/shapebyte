@@ -1,15 +1,7 @@
-//
-//  Dimension.swift
-//  iosApp
-//
-//  Created by Stefan Lang on 27.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 import shared
 
-public class Dimension {
+public class Dimensions {
     let xTiny: CGFloat
     let tiny: CGFloat
     let small: CGFloat
@@ -19,7 +11,7 @@ public class Dimension {
     let xxLarge: CGFloat
     let xxxLarge: CGFloat
 
-    init(_ sharedDimension: shared.Dimension) {
+    init(_ sharedDimension: shared.Dimensions) {
         xTiny = sharedDimension.xTiny.cgFloat
         tiny = sharedDimension.tiny.cgFloat
         small = sharedDimension.small.cgFloat

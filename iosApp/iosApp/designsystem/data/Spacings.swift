@@ -1,15 +1,7 @@
-//
-//  Spacing.swift
-//  iosApp
-//
-//  Created by Stefan Lang on 27.11.24.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 import shared
 
-public class Spacing {
+public class Spacings {
     let xTiny: CGFloat
     let tiny: CGFloat
     let small: CGFloat
@@ -19,7 +11,7 @@ public class Spacing {
     let xxLarge: CGFloat
     let xxxLarge: CGFloat
 
-    init(_ sharedSpacing: shared.Spacing) {
+    init(_ sharedSpacing: shared.Spacings) {
         xTiny = sharedSpacing.xTiny.cgFloat
         tiny = sharedSpacing.tiny.cgFloat
         small = sharedSpacing.small.cgFloat
