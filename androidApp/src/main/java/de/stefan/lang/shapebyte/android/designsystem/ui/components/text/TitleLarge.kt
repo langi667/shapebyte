@@ -3,6 +3,7 @@ package de.stefan.lang.shapebyte.android.designsystem.ui.components.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,11 +22,11 @@ fun TitleLarge(
     fontWeight: FontWeight? = null,
     maxLines: Int = 1,
     overflow: TextOverflow = TextOverflow.Ellipsis,
-) = With { theme ->
+) = MaterialTheme {
     Text(
         modifier = modifier,
         text = text,
-        style = theme.current.typography.titleLarge,
+        style = MaterialTheme.typography.titleLarge,
         fontWeight = fontWeight,
         color = color,
         maxLines = maxLines,
