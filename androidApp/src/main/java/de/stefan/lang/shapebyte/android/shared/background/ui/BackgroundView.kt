@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.zIndex
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.shared.header.ui.HeaderView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.shapes.ui.Arc
@@ -57,13 +57,13 @@ fun <T> BackgroundView(
     contentType: (item: T) -> Any? = { null },
     itemContent: @Composable LazyItemScope.(item: T) -> Unit,
 ) {
-    val defaultArcHeight = remember { ThemeData.dimensions.small.dp * 1.5f }
+    val defaultArcHeight = remember { ThemeAdditions.dimensions.small.dp * 1.5f }
     val arcHeight = remember { mutableStateOf(defaultArcHeight) }
 
     val viewSize = remember { mutableStateOf(DpSize.Zero) }
     val density = LocalDensity.current
 
-    val maximumHeaderHeight = ThemeData.dimensions.large.dp
+    val maximumHeaderHeight = ThemeAdditions.dimensions.large.dp
     val minimumHeaderHeight = maximumHeaderHeight / 2
 
     val scrollOffset = remember { mutableStateOf(0.dp) }

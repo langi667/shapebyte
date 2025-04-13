@@ -27,15 +27,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 private const val LARGE_Z_INDEX = 1000f
 
 object BuildPerformPersistViewSettings {
-    val primaryButtonSize = ThemeData.dimensions.large.dp
-    val secondaryButtonSize = ThemeData.dimensions.medium.dp
-    val secondaryButtonOffset = ThemeData.dimensions.xTiny.dp
+    val primaryButtonSize = ThemeAdditions.dimensions.large.dp
+    val secondaryButtonSize = ThemeAdditions.dimensions.medium.dp
+    val secondaryButtonOffset = ThemeAdditions.dimensions.xTiny.dp
 }
 
 @Composable
@@ -51,7 +51,7 @@ fun BuildPerformPersistView(
     Box(contentAlignment = Alignment.Center, modifier = modifier) {
         Box(
             modifier = Modifier
-                .size(ThemeData.dimensions.large.dp)
+                .size(ThemeAdditions.dimensions.large.dp)
                 .clipToBounds()
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.background)
@@ -62,7 +62,7 @@ fun BuildPerformPersistView(
                 imageRes = R.drawable.logo,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(ThemeData.spacings.tiny.dp),
+                    .padding(ThemeAdditions.spacings.tiny.dp),
                 onClick = { /*TODO*/ },
             )
         }

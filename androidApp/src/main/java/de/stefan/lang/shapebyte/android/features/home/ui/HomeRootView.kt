@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
@@ -70,7 +70,7 @@ fun HomeRootView(
     onSelectQuickWorkout: (Workout) -> Unit = {},
 ) {
     val buildPerformPersistViewDefaultOffset =
-        BuildPerformPersistViewSettings.primaryButtonSize + ThemeData.spacings.tiny.dp
+        BuildPerformPersistViewSettings.primaryButtonSize + ThemeAdditions.spacings.tiny.dp
 
     val buildPerformPersistViewOffset =
         remember { mutableStateOf(buildPerformPersistViewDefaultOffset) }
@@ -100,13 +100,13 @@ fun HomeRootView(
                 buildPerformPersistViewOffset.value -= (scrollOffset * (headerScale.floatValue * 1.5f))
             },
         ) {
-            spacer(ThemeData.spacings.xxLarge.dp + ThemeData.spacings.small.dp)
+            spacer(ThemeAdditions.spacings.xxLarge.dp + ThemeAdditions.spacings.small.dp)
 
             val quickWorkouts = uiStateData.quickWorkouts
 
             if (quickWorkouts.isNotEmpty()) {
                 sectionTitle("Quick Workouts")
-                spacer(ThemeData.spacings.small.dp)
+                spacer(ThemeAdditions.spacings.small.dp)
 
                 data(
                     id = FeatureId.QUICK_WORKOUTS.name,
@@ -119,7 +119,7 @@ fun HomeRootView(
                     )
                 }
 
-                spacer(ThemeData.spacings.medium.dp)
+                spacer(ThemeAdditions.spacings.medium.dp)
             }
 
             val recentHistory = uiStateData.recentHistory
@@ -135,8 +135,8 @@ fun HomeRootView(
                             entry = entry,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = ThemeData.spacings.small.dp)
-                                .padding(horizontal = ThemeData.spacings.small.dp),
+                                .padding(top = ThemeAdditions.spacings.small.dp)
+                                .padding(horizontal = ThemeAdditions.spacings.small.dp),
                         )
                     }
                 }

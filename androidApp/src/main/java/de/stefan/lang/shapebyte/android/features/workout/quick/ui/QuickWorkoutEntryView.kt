@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
@@ -32,9 +32,9 @@ fun QuickWorkoutEntryView(
     onClick: () -> Unit = {},
 ) { 
     val bgShape = MaterialTheme.shapes.large
-    val imageSize = ThemeData.dimensions.small.dp + ThemeData.spacings.medium.dp
-    val maxViewWidth = ThemeData.dimensions.xLarge.dp
-    val itemSpacing = ThemeData.spacings.xTiny.dp
+    val imageSize = ThemeAdditions.dimensions.small.dp + ThemeAdditions.spacings.medium.dp
+    val maxViewWidth = ThemeAdditions.dimensions.xLarge.dp
+    val itemSpacing = ThemeAdditions.spacings.xTiny.dp
 
     Row(
         modifier = modifier
@@ -46,12 +46,12 @@ fun QuickWorkoutEntryView(
             .width(maxViewWidth)
             .clip(bgShape)
             .clickable(true) {
-                ThemeData.logger.d("QuickWorkoutEntryView", "workout clicked: $workout")
+                ThemeAdditions.logger.d("QuickWorkoutEntryView", "workout clicked: $workout")
                 onClick()
             },
         horizontalArrangement = Arrangement.Center,
     ) {
-        Spacer(modifier = Modifier.size(ThemeData.spacings.tiny.dp))
+        Spacer(modifier = Modifier.size(ThemeAdditions.spacings.tiny.dp))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -78,7 +78,7 @@ fun QuickWorkoutEntryView(
             Spacer(modifier = Modifier.size(itemSpacing))
         }
 
-        Spacer(modifier = Modifier.size(ThemeData.spacings.tiny.dp))
+        Spacer(modifier = Modifier.size(ThemeAdditions.spacings.tiny.dp))
     }
 }
 

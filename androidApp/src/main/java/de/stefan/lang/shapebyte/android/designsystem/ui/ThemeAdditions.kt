@@ -5,7 +5,7 @@ import de.stefan.lang.designsystem.Dimensions
 import de.stefan.lang.designsystem.Spacings
 import de.stefan.lang.shapebyte.SharedModule
 
-data object ThemeData {
+data object ThemeAdditions {
     val logger: Logging = SharedModule.logger()
     val animationDurations: AnimationDuration = AnimationDuration(short = 350, long = 700)
 

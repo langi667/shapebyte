@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.foundationCore.image.ImageResource
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
@@ -40,7 +40,7 @@ fun QuickWorkoutsListView(
     modifier: Modifier = Modifier,
     onSelectWorkout: ((Workout) -> Unit) = {},
 ) {
-    val paddingHorizontal = ThemeData.spacings.small.dp
+    val paddingHorizontal = ThemeAdditions.spacings.small.dp
     val spacerHeight = remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
     val horizontalClipWidth = paddingHorizontal * 2

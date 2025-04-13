@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.foundationCore.image.ImageResource
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
@@ -48,8 +48,8 @@ fun WorkoutHistoryEntryView(
     modifier: Modifier = Modifier,
 ) {
     val bgShape = MaterialTheme.shapes.extraLarge
-    val itemSpacing = ThemeData.spacings.tiny.dp
-    val imageSize = ThemeData.dimensions.small.dp + ThemeData.spacings.medium.dp
+    val itemSpacing = ThemeAdditions.spacings.tiny.dp
+    val imageSize = ThemeAdditions.dimensions.small.dp + ThemeAdditions.spacings.medium.dp
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -81,7 +81,7 @@ fun WorkoutHistoryEntryView(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            Spacer(modifier = Modifier.height(ThemeData.spacings.xTiny.dp))
+            Spacer(modifier = Modifier.height(ThemeAdditions.spacings.xTiny.dp))
             LabelMedium(
                 text = date,
                 maxLines = 1,

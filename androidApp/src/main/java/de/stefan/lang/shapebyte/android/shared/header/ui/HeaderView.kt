@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.HeadlineMedium
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
@@ -37,14 +37,14 @@ fun HeaderView(
     val scaleRaw = (currentHeight.value - minHeight.value) / scaleDivider
     val scale = max(0f, scaleRaw)
 
-    ThemeData.logger.d(
+    ThemeAdditions.logger.d(
         tag = "HeaderView",
         message = "minHeight: $minHeight, maxHeight: $maxHeight, currentHeight: $currentHeight, " +
             "scale: $scale",
     )
 
     val headerProgress = 1f - min(max(scale, 0f), 1f)
-    val contentPadding = ThemeData.spacings.small.dp
+    val contentPadding = ThemeAdditions.spacings.small.dp
 
     Box(
         modifier = modifier

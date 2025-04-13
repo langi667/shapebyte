@@ -18,6 +18,14 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
     )
 
     override fun generate(outputFile: File) {
+        generateTheme(outputFile)
+
+        println("DesignSystem Android Theme generated successfully! to ${outputFile.absolutePath}")
+    }
+
+
+
+    private fun generateTheme(outputFile: File) {
         val themeName = "ShapeByteTheme"
         val packageName = "de.stefan.lang.designsystem.theme"
 
@@ -49,7 +57,6 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
             .build()
 
         fileSpec.writeTo(outputFile)
-        println("DesignSystem Android Theme generated successfully! to ${outputFile.absolutePath}")
     }
 
     private fun materialThemeDeclaration(): CodeBlock  {

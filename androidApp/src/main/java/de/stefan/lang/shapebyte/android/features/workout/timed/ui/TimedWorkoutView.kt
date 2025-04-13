@@ -38,7 +38,7 @@ import androidx.navigation.NavHostController
 import de.stefan.lang.foundationCore.assets.ImageAsset
 import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge
@@ -163,7 +163,7 @@ fun TimedWorkoutView(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .offset(y = -ThemeData.spacings.tiny.dp),
+                    .offset(y = -ThemeAdditions.spacings.tiny.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -173,7 +173,7 @@ fun TimedWorkoutView(
                 ) {
                     val pauseButtonAlpha =
                         fadeAnimation(pauseButtonState.isVisible, "pauseButtonAlpha")
-                    val spacingsBetween = ThemeData.spacings.small.dp
+                    val spacingsBetween = ThemeAdditions.spacings.small.dp
 
                     PauseButton(
                         modifier = Modifier
@@ -214,17 +214,17 @@ private fun TimerView(
     Column(
         modifier
             .fillMaxWidth()
-            .padding(ThemeData.spacings.small.dp),
+            .padding(ThemeAdditions.spacings.small.dp),
     ) {
         AppToolBar(title = title, onCloseClick = onCloseClick)
-        Spacer(Modifier.height(ThemeData.spacings.large.dp))
+        Spacer(Modifier.height(ThemeAdditions.spacings.large.dp))
         DisplayLarge(
             text = remaining,
             modifier = Modifier.fillMaxWidth(),
             textAlignment = TextAlign.Center,
         )
 
-        Spacer(Modifier.height(ThemeData.spacings.small.dp))
+        Spacer(Modifier.height(ThemeAdditions.spacings.small.dp))
 
         Row(Modifier.fillMaxWidth()) {
             Column {
@@ -242,7 +242,7 @@ private fun TimerView(
             }
         }
 
-        Spacer(Modifier.height(ThemeData.spacings.small.dp))
+        Spacer(Modifier.height(ThemeAdditions.spacings.small.dp))
     }
 }
 
@@ -277,7 +277,7 @@ private fun AppToolBar(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        val buttonSize = ThemeData.dimensions.small
+        val buttonSize = ThemeAdditions.dimensions.small
         Spacer(Modifier.size(buttonSize.dp))
         Box(
             Modifier
@@ -303,7 +303,7 @@ private fun fadeAnimation(
     fadeIn: Boolean,
     label: String,
 ): Float {
-    val animationDuration = ThemeData.animationDurations.short.toInt()
+    val animationDuration = ThemeAdditions.animationDurations.short.toInt()
     val alphaAnimation by animateFloatAsState(
         targetValue = if (fadeIn) 1f else 0f,
         animationSpec = tween(durationMillis = animationDuration),
