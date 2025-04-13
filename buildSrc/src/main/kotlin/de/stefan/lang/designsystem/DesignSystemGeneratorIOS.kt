@@ -5,6 +5,8 @@ import de.stefan.lang.designsystem.font.TextStylesCollection
 import de.stefan.lang.designsystem.platformspecific.Platform
 
 import io.outfoxx.swiftpoet.CodeBlock
+import io.outfoxx.swiftpoet.DeclaredTypeName
+import io.outfoxx.swiftpoet.ExtensionSpec
 import io.outfoxx.swiftpoet.FileSpec
 import io.outfoxx.swiftpoet.Modifier
 import io.outfoxx.swiftpoet.PropertySpec
@@ -20,23 +22,170 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
     )
 
     override fun generate(outputFile: File) {
+        val colors = generateColors(outputFile)
+        val themeClass = themeClass(colors)
+
+        val dimensionExtension = dimensionsExtension()
+        val fontsExtension = fontsExtension()
+        val colorsExtension = colorsExtension(colors)
+        val roundedCornerShapesExtension = roundedCornerShapesExtension()
+        val animationDurationExtension = animationDurationExtension()
+
+        val file = FileSpec.builder("Theme")
+            .addType(themeClass)
+            .addExtension(dimensionExtension)
+            .addExtension(spacingsExtension("Double"))
+            .addExtension(spacingsExtension("CGFloat"))
+            .addExtension(fontsExtension)
+            .addExtension(colorsExtension)
+            .addExtension(roundedCornerShapesExtension)
+            .addExtension(animationDurationExtension)
+
+            .addImport("SwiftUI")
+            .addImport("shared")
+            .build()
+
+        file.writeTo(outputFile)
+    }
+
+    private fun dimensionsExtension(): ExtensionSpec {
+        val dimensionsExtension = ExtensionSpec.builder(
+            extendedType = DeclaredTypeName.qualifiedTypeName(".Double")
+        )
+
+        themeDataProvider.dimensions.allSorted.forEach { currEntry ->
+            val propertyName = "dimension" + currEntry.key.replaceFirstChar { it.uppercaseChar() }
+            val initializer = CodeBlock.builder().add( "Theme.dimensions.${currEntry.key}" ).build()
+            val property = PropertySpec
+                .builder(
+                    name = propertyName,
+                    type = TypeVariableName(
+                        name = "Double")
+                )
+                .addModifiers(Modifier.STATIC)
+                .initializer( initializer )
+
+            dimensionsExtension.addProperty( property.build() )
+        }
+
+        dimensionsExtension.addModifiers(Modifier.PUBLIC)
+        return  dimensionsExtension.build()
+    }
+
+    private fun colorsExtension(generatedColors: List<String>): ExtensionSpec {
+        val colorExtension = ExtensionSpec.builder(
+            extendedType = DeclaredTypeName.qualifiedTypeName("SwiftUI.Color")
+        )
+
+        val colorProperties = colorPropertiesSorted(generatedColors)
+        colorProperties.forEach { currColor ->
+            val propertyName = "SB" + currColor.replaceFirstChar { it.uppercaseChar() }
+            val initializer = CodeBlock.builder().add( "Theme.colors.$currColor")
+
+            val property = PropertySpec
+                .builder(
+                    name = propertyName,
+                    type = TypeVariableName(
+                        name = "SwiftUI.Color")
+                )
+                .addModifiers(Modifier.STATIC)
+                .initializer( initializer.build() )
+
+            colorExtension.addProperty(property.build())
+        }
+
+        return colorExtension.build()
+    }
+
+    private fun roundedCornerShapesExtension(): ExtensionSpec {
+        val roundedCornerShapeExtension = ExtensionSpec.builder(
+            extendedType = DeclaredTypeName.qualifiedTypeName(".Double")
+        )
+
+        themeDataProvider.shapes.roundedCorners.allSorted.forEach { currRoundedCorner ->
+            val propertyName = "roundedCornerShape${currRoundedCorner.key.replaceFirstChar { it.uppercaseChar() }}"
+            val initializer = CodeBlock.builder().add( "Theme.roundedCornerShapes.${currRoundedCorner.key}")
+
+            val property = PropertySpec
+                .builder(
+                    name = propertyName,
+                    type = TypeVariableName(
+                        name = "Double")
+                )
+                .addModifiers(Modifier.STATIC)
+                .initializer( initializer.build() )
+            roundedCornerShapeExtension.addProperty(property.build())
+        }
+
+        roundedCornerShapeExtension.addModifiers(Modifier.PUBLIC)
+        return  roundedCornerShapeExtension.build()
+    }
+
+
+    private fun fontsExtension(): ExtensionSpec {
+        val fontsExtension = ExtensionSpec.builder(
+            extendedType = DeclaredTypeName.qualifiedTypeName("SwiftUI.Font")
+        )
+
+        val textStyles: TextStylesCollection = themeDataProvider.textStyles as TextStylesCollection
+        val allTextStyles = textStyles.all
+
+        allTextStyles.entries.forEach { currTextStyle ->
+            val propertyName = "SB" + currTextStyle.key.replaceFirstChar { it.uppercaseChar() }
+            val initializer = CodeBlock.builder().add( "Theme.fonts.${currTextStyle.key}")
+
+            val property = PropertySpec
+                .builder(
+                    name = propertyName,
+                    type = TypeVariableName(
+                        name = "SwiftUI.Font")
+                )
+                .addModifiers(Modifier.STATIC)
+                .initializer( initializer.build() )
+
+            fontsExtension.addProperty(property.build())
+        }
+
+        fontsExtension.addModifiers(Modifier.PUBLIC)
+        return  fontsExtension.build()
+    }
+
+    private fun spacingsExtension(baseType: String = "Double"): ExtensionSpec {
+        val spacingsExtension = ExtensionSpec.builder(
+            extendedType = DeclaredTypeName.qualifiedTypeName(".$baseType")
+        )
+
+        themeDataProvider.spacings.allSorted.forEach { currEntry ->
+            val propertyName = "spacing" + currEntry.key.replaceFirstChar { it.uppercaseChar() }
+            val initializer = CodeBlock.builder().add( "Theme.spacings.${currEntry.key}" ).build()
+            val property = PropertySpec
+                .builder(
+                    name = propertyName,
+                    type = TypeVariableName(
+                        name = baseType)
+                )
+                .addModifiers(Modifier.STATIC)
+                .initializer( initializer )
+
+            spacingsExtension.addProperty( property.build() )
+        }
+
+        spacingsExtension.addModifiers(Modifier.PUBLIC)
+        return  spacingsExtension.build()
+    }
+
+    private fun themeClass(generatedColors: List<String>): TypeSpec {
         val themeClass = TypeSpec
             .structBuilder("Theme")
             .addModifiers(Modifier.PUBLIC)
             .addProperty(dimensions())
             .addProperty(spacings())
             .addProperty(fonts())
-            .addProperty(colors(outputFile))
+            .addProperty(colors(generatedColors))
             .addProperty(roundedCornerShapes())
             .addProperty(animationDurations())
 
-        val file = FileSpec.builder("Theme")
-            .addType(themeClass.build())
-            .addImport("SwiftUI")
-            .addImport("shared")
-            .build()
-
-        file.writeTo(outputFile)
+        return themeClass.build()
     }
 
     private fun animationDurations(): PropertySpec {
@@ -52,7 +201,6 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
             .add(animationDurationsInitializerArgs())
             .add("\n")
             .add(")")
-            .add("\n")
             .build()
 
         animationDurationsProperty.initializer(animationDurationsInitializer)
@@ -74,6 +222,30 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
         }
 
         return retVal.build()
+    }
+
+    private fun animationDurationExtension(): ExtensionSpec {
+        val animationDurationExtension = ExtensionSpec.builder(
+            extendedType = DeclaredTypeName.qualifiedTypeName(".Double")
+        )
+
+        themeDataProvider.animationDurations.allSorted.forEach { currEntry ->
+            val propertyName = "animationDuration" + currEntry.key.replaceFirstChar { it.uppercaseChar() }
+            val initializer = CodeBlock.builder().add( "Theme.animationDurations.${currEntry.key}" ).build()
+            val property = PropertySpec
+                .builder(
+                    name = propertyName,
+                    type = TypeVariableName(
+                        name = "Double")
+                )
+                .addModifiers(Modifier.STATIC)
+                .initializer( initializer )
+
+            animationDurationExtension.addProperty( property.build() )
+        }
+
+        animationDurationExtension.addModifiers(Modifier.PUBLIC)
+        return  animationDurationExtension.build()
     }
 
     private fun roundedCornerShapes(): PropertySpec {
@@ -126,7 +298,6 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
             .builder()
             .add("$typeName(")
             .add(dimensionsInitializerArgs())
-            .add("\n")
             .add(")")
             .add("\n")
             .build()
@@ -140,28 +311,15 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
     private fun dimensionsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
         retVal.add("\n")
-        retVal.add("xTiny: ${themeDataProvider.dimensions.xTiny},")
-        retVal.add("\n")
 
-        retVal.add("tiny: ${themeDataProvider.dimensions.tiny},")
-        retVal.add("\n")
+        for ((index, currDimension) in themeDataProvider.dimensions.allSorted.entries.withIndex()) {
+            retVal.add("${currDimension.key}: ${currDimension.value}")
+            if (index < themeDataProvider.dimensions.allSorted.size - 1) {
+                retVal.add(",")
+            }
 
-        retVal.add("small: ${themeDataProvider.dimensions.small},")
-        retVal.add("\n")
-
-        retVal.add("medium: ${themeDataProvider.dimensions.medium},")
-        retVal.add("\n")
-
-        retVal.add("large: ${themeDataProvider.dimensions.large},")
-        retVal.add("\n")
-
-        retVal.add("xLarge: ${themeDataProvider.dimensions.xLarge},")
-        retVal.add("\n")
-
-        retVal.add("xxLarge: ${themeDataProvider.dimensions.xxLarge},")
-        retVal.add("\n")
-
-        retVal.add("xxxLarge: ${themeDataProvider.dimensions.xxxLarge}")
+            retVal.add("\n")
+        }
 
         return retVal.build()
     }
@@ -190,29 +348,15 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
     private fun spacingsInitializerArgs(): CodeBlock {
         val retVal = CodeBlock.builder()
         retVal.add("\n")
-        retVal.add("xTiny: ${themeDataProvider.spacings.xTiny},")
-        retVal.add("\n")
 
-        retVal.add("tiny: ${themeDataProvider.spacings.tiny},")
-        retVal.add("\n")
+        for ((index, currSpacing) in themeDataProvider.spacings.allSorted.entries.withIndex()) {
+            retVal.add("${currSpacing.key}: ${currSpacing.value}")
+            if (index < themeDataProvider.spacings.allSorted.size - 1) {
+                retVal.add(",")
+            }
 
-        retVal.add("small: ${themeDataProvider.spacings.small},")
-        retVal.add("\n")
-
-        retVal.add("medium: ${themeDataProvider.spacings.medium},")
-        retVal.add("\n")
-
-        retVal.add("large: ${themeDataProvider.spacings.large},")
-        retVal.add("\n")
-
-        retVal.add("xLarge: ${themeDataProvider.spacings.xLarge},")
-        retVal.add("\n")
-
-        retVal.add("xxLarge: ${themeDataProvider.spacings.xxLarge},")
-        retVal.add("\n")
-
-        retVal.add("xxxLarge: ${themeDataProvider.spacings.xxxLarge}")
-        retVal.add("\n")
+            retVal.add("\n")
+        }
 
         return retVal.build()
     }
@@ -256,12 +400,7 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
         return codeBlock.build()
     }
 
-    private fun colors(outDir: File): PropertySpec {
-        val createdColors = generateColors(outDir)
-        return createColorProperty(createdColors)
-    }
-
-    private fun createColorProperty(colorNames: List<String>): PropertySpec {
+    private fun colors(colorNames: List<String>): PropertySpec {
         val typeName = "Colors"
         val colorsProperty = PropertySpec.builder(
             "colors",
@@ -271,7 +410,7 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
         val colorsInitializer = CodeBlock
             .builder()
             .add("$typeName(")
-            .add(colorsInitializerArgs())
+            .add(colorsInitializerArgs(colorNames))
             .add("\n")
             .add(")")
             .add("\n")
@@ -308,21 +447,17 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
         return colors
     }
 
-    private fun colorsInitializerArgs(): CodeBlock {
+    private fun colorsInitializerArgs(colors: List<String>): CodeBlock {
+        println("Color: $colors")
         val codeBlock = CodeBlock.builder()
+        val colorProperties = colorPropertiesSorted(colors)
 
-        val colorsOrderedByConstructorArgs = listOf(
-            "primary",
-            "secondary",
-            "background",
-            "inversePrimary"
-        )
-
-        for ((index, colorName) in colorsOrderedByConstructorArgs.withIndex()) {
+        for ((index, colorName) in colorProperties.withIndex()) {
+            val colorProperty = colorName.replaceFirstChar { it.lowercase() }.replace("Color", "")
             val assetName = colorName.replaceFirstChar { it.uppercaseChar() } + "Color"
-            var colorCodeStr = "\n$colorName: Color(\"$assetName\")"
+            var colorCodeStr = "\n$colorProperty: Color(\"$assetName\")"
 
-            if (index < colorsOrderedByConstructorArgs.size - 1) {
+            if (index < colors.size - 1) {
                 colorCodeStr += ","
             }
 
@@ -331,4 +466,8 @@ class DesignSystemGeneratorIOS : DesignSystemGenerating {
 
         return codeBlock.build()
     }
+
+    private fun colorPropertiesSorted(generatedColors: List<String>) = generatedColors
+            .map { it.replaceFirstChar { it.lowercase() }.replace("Color", "") }
+            .sorted()
 }

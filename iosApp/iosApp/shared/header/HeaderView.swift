@@ -3,26 +3,26 @@ import PreviewSnapshots
 
 struct HeaderView: View {
     let overlayColor: Color
-    let overlayOpacity: CGFloat
-    let scale: CGFloat
+    let overlayOpacity: Double
+    let scale: Double
 
-    let imageScale: CGFloat
-    let headerHeight: CGFloat
-    let minimumHeaderHeight: CGFloat
+    let imageScale: Double
+    let headerHeight: Double
+    let minimumHeaderHeight: Double
 
-    let offsetY: CGFloat
-    let contentPaddingVertical: CGFloat
-    let contentPaddingHorizontal: CGFloat = Theme.spacings.small
+    let offsetY: Double
+    let contentPaddingVertical: Double
+    let contentPaddingHorizontal: Double = .spacingSmall
 
     init(
-        headerHeight: CGFloat = 128,
-        minimumHeaderHeight: CGFloat = 102,
-        offsetY: CGFloat = 0,
-        overlayColor: Color = Theme.colors.secondary,
-        overlayOpacity: CGFloat = 1,
-        scale: CGFloat = 1,
-        imageScale: CGFloat = 1,
-        contentPaddingVertical: CGFloat = 20
+        headerHeight: Double = 128,
+        minimumHeaderHeight: Double = 102,
+        offsetY: Double = 0,
+        overlayColor: Color = .SBSecondary,
+        overlayOpacity: Double = 1,
+        scale: Double = 1,
+        imageScale: Double = 1,
+        contentPaddingVertical: Double = 20
     ) {
         self.headerHeight = headerHeight
         self.minimumHeaderHeight = minimumHeaderHeight
@@ -59,8 +59,8 @@ struct HeaderView: View {
 
                     Image("Logo")
                         .resizable()
-                        .frame(width: Theme.spacings.xLarge * imageScale,
-                               height: Theme.spacings.xLarge * imageScale)
+                        .frame(width: .spacingXLarge * imageScale,
+                               height: .spacingXLarge * imageScale)
                         .clipShape(Circle())
 
                 }.padding(.horizontal, contentPaddingHorizontal)
@@ -76,18 +76,18 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
     struct Data {
-        let headerHeight: CGFloat
+        let headerHeight: Double
         let overlayColor: Color
-        let overlayOpacity: CGFloat
-        let scale: CGFloat
-        let imageScale: CGFloat
+        let overlayOpacity: Double
+        let scale: Double
+        let imageScale: Double
 
         init(
-            headerHeight: CGFloat = 128,
-            overlayColor: Color = Theme.colors.secondary,
-            overlayOpacity: CGFloat = 0,
-            scale: CGFloat = 1,
-            imageScale: CGFloat = 1
+            headerHeight: Double = 128,
+            overlayColor: Color = .SBSecondary,
+            overlayOpacity: Double = 0,
+            scale: Double = 1,
+            imageScale: Double = 1
         ) {
             self.headerHeight = headerHeight
             self.overlayColor = overlayColor

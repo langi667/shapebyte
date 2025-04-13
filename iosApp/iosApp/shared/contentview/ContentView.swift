@@ -7,9 +7,9 @@ struct ContentView<Content: View>: View {
     let contentView: () -> Content
 
     @ViewBuilder
-    let floatingView: (_ scrollOffset: CGFloat) -> AnyView
+    let floatingView: (_ scrollOffset: Double) -> AnyView
 
-    private let defaultRadialOffset: CGFloat = Theme.spacings.xxxLarge
+    private let defaultRadialOffset: Double = .spacingXxxLarge
 
     @SafeAreaInfo
     private var safeAreaInsets: EdgeInsets
@@ -17,34 +17,34 @@ struct ContentView<Content: View>: View {
     @Env
     private var environment
 
-    @State private var offsetY: CGFloat = 0
+    @State private var offsetY: Double = 0
     @State private var scrollViewSize: CGSize = .zero
 
-    @State private var radialOffset: CGFloat
+    @State private var radialOffset: Double
     @State private var pendingExerciseSize: CGSize = .zero
-    @State private var headerProgress: CGFloat = .zero
+    @State private var headerProgress: Double = .zero
 
-    @State private var headerOverlayOpacity: CGFloat = .zero
-    @State private var headerScale: CGFloat = .zero
-    @State private var headerImageScale: CGFloat = .zero
+    @State private var headerOverlayOpacity: Double = .zero
+    @State private var headerScale: Double = .zero
+    @State private var headerImageScale: Double = .zero
 
-    private let headerOverlayColor: Color = Theme.colors.secondary
+    private let headerOverlayColor: Color = .SBSecondary
     private let floatingViewIsEmpty: Bool
 
-    private var headerHeight: CGFloat {
+    private var headerHeight: Double {
         ContentViewAppearance.headerHeight
     }
 
-    private var minimumHeaderHeight: CGFloat {
+    private var minimumHeaderHeight: Double {
         ContentViewAppearance.minimumHeaderHeight
     }
 
-    private let viewTopOffset: CGFloat = 8
-    private let paddingHorizontal: CGFloat = Theme.spacings.small
+    private let viewTopOffset: Double = 8
+    private let paddingHorizontal: Double = .spacingSmall
 
     init(
         floatingViewIsEmpty: Bool,
-        floatingView: @escaping (_ scrollOffset: CGFloat) -> AnyView,
+        floatingView: @escaping (_ scrollOffset: Double) -> AnyView,
         contentView: @escaping () -> Content
     ) {
         self.floatingViewIsEmpty = floatingViewIsEmpty
@@ -57,7 +57,7 @@ struct ContentView<Content: View>: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             BackgroundView(
-                topOffset: Theme.spacings.xxLarge.toDimensionMax(),
+                topOffset: .spacingXxLarge.toDimensionMax(),
                 radialOffset: radialOffset.toDimensionMax()
             )
 
@@ -79,7 +79,7 @@ struct ContentView<Content: View>: View {
                 ZStack {
                     self.contentView()
                 }
-                .offset(y: floatingViewIsEmpty ? Theme.spacings.xLarge : 0.0)
+                .offset(y: floatingViewIsEmpty ? .spacingXLarge : 0.0)
             }
             .scrollIndicators(.hidden)
             .sizeReader(size: $scrollViewSize)

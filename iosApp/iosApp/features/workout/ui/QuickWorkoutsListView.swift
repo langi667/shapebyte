@@ -4,8 +4,8 @@ import PreviewSnapshots
 
 struct QuickWorkoutsListView: View {
     let quickWorkouts: [Workout]
-    let paddingHorizontal: CGFloat = Theme.spacings.small
-    let horizontalClipWidth: CGFloat = Theme.spacings.small * 1.5
+    let paddingHorizontal: CGFloat = .spacingSmall
+    let horizontalClipWidth: CGFloat = .spacingSmall * 1.5
     let onWorkoutSelected: (Workout) -> Void
 
     var body: some View {

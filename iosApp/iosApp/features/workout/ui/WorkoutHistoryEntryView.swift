@@ -3,11 +3,11 @@ import shared
 import PreviewSnapshots
 
 struct WorkoutHistoryEntryView: View {
-    private let cornerRadius = Theme.roundedCornerShapes.extraLarge
+    private let cornerRadius: Double = .roundedCornerShapeExtraLarge
 
     private let title: String
     private let date: String
-    private let imageSize = Theme.dimensions.medium
+    private let imageSize: Double = .dimensionMedium
 
     var body: some View {
         HStack {
@@ -21,14 +21,14 @@ struct WorkoutHistoryEntryView: View {
                     .labelMedium()
                     .foregroundStyle(Color.white)
 
-                Spacer().frame(height: Theme.spacings.tiny)
+                Spacer().frame(height: .spacingTiny)
                 Text(date)
                     .labelSmall()
                     .foregroundStyle(Color.white)
             }
 
             Spacer()
-        }.padding(Theme.spacings.tiny)
+        }.padding(.spacingTiny)
             .clipShape(
                 RoundedRectangle(
                     cornerRadius: cornerRadius
@@ -38,7 +38,7 @@ struct WorkoutHistoryEntryView: View {
                 RoundedRectangle(
                     cornerRadius: cornerRadius
                 )
-                .strokeBorder(Theme.colors.secondary)
+                .strokeBorder(Color.SBSecondary)
             }
     }
 

@@ -5,15 +5,15 @@ enum RoundedImageButtonAppearance: CaseIterable {
     case medium
     case large
 
-    var size: CGFloat {
-        let retVal: CGFloat
+    var size: Double {
+        let retVal: Double
         switch self {
         case .small:
-            retVal = Theme.dimensions.medium - Theme.dimensions.xTiny
+            retVal = .dimensionMedium - .dimensionXTiny
         case .medium:
-            retVal = Theme.dimensions.medium
+                retVal = .dimensionMedium
         case .large:
-            retVal = Theme.dimensions.xLarge
+                retVal = .dimensionXLarge
         }
 
         return retVal

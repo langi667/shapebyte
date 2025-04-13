@@ -6,11 +6,11 @@ import PreviewSnapshots
 struct ContentViewAppearance {
     @SafeAreaInfo static var safeAreaInsets
 
-    static var headerHeight: CGFloat {
-        (Theme.dimensions.large + safeAreaInsets.top / 2).toDimensionMax()
+    static var headerHeight: Double {
+        (.dimensionLarge + safeAreaInsets.top / 2).toDimensionMax()
     }
 
-    static var minimumHeaderHeight: CGFloat {
+    static var minimumHeaderHeight: Double {
         headerHeight * 0.6
     }
 }

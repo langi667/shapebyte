@@ -8,10 +8,10 @@ struct QuickWorkoutEntryView: View {
     let image: shared.ImageResource
     let onClicked: () -> Void
 
-    private let cornerRadius = Theme.roundedCornerShapes.large
-    private let imageSize = Theme.dimensions.small + Theme.spacings.medium
-    private let maxViewWidth = Theme.dimensions.xLarge
-    private let itemSpacing = Theme.spacings.xTiny
+    private let cornerRadius: Double = .roundedCornerShapeLarge
+    private let imageSize: Double = .dimensionSmall + .spacingMedium
+    private let maxViewWidth: Double = .dimensionXLarge
+    private let itemSpacing: Double = .spacingXTiny
 
     init(
         name: String,
@@ -76,7 +76,7 @@ struct QuickWorkoutEntryView: View {
             .foregroundStyle(Color.white)
             .lineLimit(1)
             .truncationMode(.tail)
-            .frame(width: maxViewWidth -  2 * Theme.dimensions.tiny)
+            .frame(width: maxViewWidth -  2 * .dimensionTiny)
     }
 }
 
@@ -100,7 +100,7 @@ struct QuickWorkoutEntryView_Previews: PreviewProvider {
             ],
 
             configure: { states in
-                VStack(spacing: Theme.spacings.tiny) {
+                VStack(spacing: .spacingTiny) {
                     ForEach(states) { workout in
                         QuickWorkoutEntryView(workout: workout)
                             .snapshotSetup()

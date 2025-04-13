@@ -78,7 +78,7 @@ struct TimedWorkoutContentView: View {
 
     @State
     private var timerViewSize: CGSize = .zero
-    let animationDuration: TimeInterval = Theme.animationDurations.short
+    let animationDuration: TimeInterval = .animationDurationShort
 
     init (
         data: TimedWorkoutViewData,
@@ -107,7 +107,7 @@ struct TimedWorkoutContentView: View {
                         remainingTotal: self.data.remainingTotal
                     )
                     .padding(.top, safeAreaInfo.top)
-                    .padding(.horizontal, Theme.spacings.small)
+                    .padding(.horizontal, .spacingSmall)
                     .sizeReader(size: $timerViewSize)
                 )
             }
@@ -118,7 +118,7 @@ struct TimedWorkoutContentView: View {
                     .animation(.easeIn(duration: animationDuration), value: data.pauseButtonVisible)
                     .transition(.scale)
 
-                Spacer().frame(width: Theme.spacings.small)
+                Spacer().frame(width: .spacingSmall)
 
                 ExerciseView(
                     image: data.exerciseImage,
@@ -128,7 +128,7 @@ struct TimedWorkoutContentView: View {
                     animationDuration: animationDuration
                 )
 
-                Spacer().frame(width: Theme.spacings.small)
+                Spacer().frame(width: .spacingSmall)
                 StopButton {  self.onStopClicked?()  }
                     .opacity(data.stopButtonVisible ? 1 : 0)
                     .animation(.easeIn(duration: animationDuration), value: data.stopButtonVisible)
@@ -138,7 +138,7 @@ struct TimedWorkoutContentView: View {
             .offset(
                 // TODO: + Theme.spacings. can be removed once Arc is fixed
                 // See: SB-63
-                y: timerViewSize.height + Theme.spacings.large
+                y: timerViewSize.height + .spacingLarge
             )
 
             AppBar(title: data.title) {
@@ -169,7 +169,7 @@ private struct ExerciseView: View {
         playButtonState: ButtonState,
         progress: Double,
         setDuration: TimeInterval,
-        animationDuration: TimeInterval = Theme.animationDurations.short
+        animationDuration: TimeInterval = .animationDurationShort
     ) {
         self.image = image
         self.playButtonState = playButtonState
@@ -201,7 +201,7 @@ private struct ExerciseView: View {
                     ringWidth: 6,
                     percent: progress * 100,
                     backgroundColor: .clear,
-                    foregroundColors: [Theme.colors.secondary]
+                    foregroundColors: [.SBSecondary]
                 )
 
             }.opacity(1 - opacity)
@@ -226,12 +226,12 @@ private struct TimerView: View, Loggable {
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            Spacer().frame(height: Theme.spacings.large)
+            Spacer().frame(height: .spacingLarge)
             Text(remaining)
                 .displayLarge()
                 .frame(maxWidth: .infinity)
 
-            Spacer().frame(height: Theme.spacings.small)
+            Spacer().frame(height: .spacingSmall)
             HStack(alignment: .top) {
                 TimeLabel(
                     text: elapsedTotal,

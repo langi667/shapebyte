@@ -2,13 +2,13 @@ import SwiftUI
 import PreviewSnapshots
 
 struct BackgroundView: View {
-    static let defaultRadialOffset = Theme.spacings.xxxLarge.toDimension(max: Theme.spacings.xxxLarge)
-    static let defaultTopOffset = Theme.spacings.xxxLarge.toDimension(max: Theme.spacings.xxxLarge)
+    static let defaultRadialOffset: Double = .spacingXxxLarge.toDimension(max: .spacingXxxLarge)
+    static let defaultTopOffset: Double = .spacingXxxLarge.toDimension(max: .spacingXxxLarge)
 
     @ViewBuilder
     private let topView: () -> AnyView
 
-    var radialOffset: CGFloat
+    var radialOffset: Double
 
     @State private var screenSize: CGSize
 
@@ -16,11 +16,11 @@ struct BackgroundView: View {
     var radialColor: Color
 
     init(
-        topOffset: CGFloat = Self.defaultTopOffset,
-        radialOffset: CGFloat = Self.defaultRadialOffset,
+        topOffset: Double = Self.defaultTopOffset,
+        radialOffset: Double = Self.defaultRadialOffset,
         screenSize: CGSize = .zero,
-        secondaryColor: Color = Theme.colors.secondary,
-        radialColor: Color = Theme.colors.background
+        secondaryColor: Color = .SBSecondary,
+        radialColor: Color = .SBBackground
     ) {
         self.init(
             radialOffset: radialOffset,
@@ -33,10 +33,10 @@ struct BackgroundView: View {
     }
 
     init(
-        radialOffset: CGFloat = Self.defaultRadialOffset,
+        radialOffset: Double = Self.defaultRadialOffset,
         screenSize: CGSize = .zero,
-        secondaryColor: Color = Theme.colors.secondary,
-        radialColor: Color = Theme.colors.background,
+        secondaryColor: Color = .SBSecondary,
+        radialColor: Color = .SBBackground,
         topView: @escaping () -> AnyView
     ) {
         self.topView = topView
@@ -68,8 +68,8 @@ struct BackgroundView: View {
 
 struct BackgroundView_Previews: PreviewProvider {
     enum State {
-        case topOffset(topOffset: CGFloat, radialOffset: CGFloat)
-        case topView(radialOffset: CGFloat)
+        case topOffset(topOffset: Double, radialOffset: Double)
+        case topView(radialOffset: Double)
     }
 
     static var previews: some View {

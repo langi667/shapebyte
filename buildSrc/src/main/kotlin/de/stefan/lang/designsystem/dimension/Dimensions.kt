@@ -1,6 +1,8 @@
 package de.stefan.lang.designsystem.dimension
 
 import de.stefan.lang.designsystem.core.PropertyReader
+import de.stefan.lang.designsystem.shapes.Shape
+import org.gradle.kotlin.dsl.provideDelegate
 
 data class Dimensions(
     val xTiny: Int,
@@ -12,5 +14,14 @@ data class Dimensions(
     val xxLarge: Int,
     val xxxLarge: Int,
 ) {
-    fun all(): HashMap<String, Int> = PropertyReader.read<Int, Dimensions>(this)
+    val all by lazy  { PropertyReader.read<Int, Dimensions>(this) }
+
+    val allSorted by lazy {
+        all
+            .entries
+            .sortedWith (
+                compareBy<Map.Entry<String, Int>> { it.value }
+            )
+            .associate { it.key to it.value }
+    }
 }

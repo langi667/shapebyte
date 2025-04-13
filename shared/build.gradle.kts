@@ -140,6 +140,5 @@ tasks.register("generateDesignSystemIOS") {
 
 // Configure the dependency on the iOS compilation tasks
 tasks.matching { it.name.contains("embedAndSignAppleFramework") }.configureEach {
-    println("embedAndSignAppleFramework found")
     dependsOn("generateDesignSystemIOS")
 }

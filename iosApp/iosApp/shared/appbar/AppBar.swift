@@ -5,11 +5,11 @@ struct AppBar: View {
     let spacingTrailing: Double
     let onClose: () -> Void
 
-    private let closeButtonSize: Double = Theme.dimensions.medium
+    private let closeButtonSize: Double = .dimensionMedium
 
     init(
         title: String,
-        spacingTrailing: Double = Theme.dimensions.tiny,
+        spacingTrailing: Double = .dimensionTiny,
         onClose: @escaping () -> Void = {}
     ) {
         self.title = title
@@ -39,7 +39,7 @@ struct AppBar: View {
                 ) {
                     Text("X")
                         .bodyLarge()
-                        .padding(.top, Theme.spacings.xTiny)
+                        .padding(.top, .spacingXTiny)
                         .padding(.trailing, spacingTrailing)
                 }
             }
