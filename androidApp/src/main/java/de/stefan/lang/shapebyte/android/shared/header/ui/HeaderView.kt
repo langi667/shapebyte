@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
@@ -17,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.HeadlineMedium
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
@@ -30,61 +31,61 @@ fun HeaderView(
     maxHeight: Dp,
     currentHeight: Dp,
     modifier: Modifier = Modifier,
-) = With { theme ->
+) {
     val scaleDivider =
         if (maxHeight.value == minHeight.value) 1f else (maxHeight.value - minHeight.value)
     val scaleRaw = (currentHeight.value - minHeight.value) / scaleDivider
     val scale = max(0f, scaleRaw)
 
-    theme.logger.d(
+    ThemeData.logger.d(
         tag = "HeaderView",
         message = "minHeight: $minHeight, maxHeight: $maxHeight, currentHeight: $currentHeight, " +
             "scale: $scale",
     )
 
     val headerProgress = 1f - min(max(scale, 0f), 1f)
-    val contentPadding = theme.spacings.small.dp
+    val contentPadding = ThemeData.spacings.small.dp
 
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(
-                theme.current.colorScheme.secondary
+                MaterialTheme.colorScheme.secondary
                     .copy(alpha = headerProgress),
             ),
-    )
-
-    Row(
-        modifier = Modifier
-            .padding(contentPadding),
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .graphicsLayer(
-                    scaleX = scale,
-                    scaleY = scale,
-                    transformOrigin = TransformOrigin(0f, 0f),
-                ),
+                .padding(contentPadding),
         ) {
-            BodyMedium(text = "Welcome back")
-            HeadlineMedium(text = "Stefan")
+            Column(
+                modifier = Modifier
+                    .graphicsLayer(
+                        scaleX = scale,
+                        scaleY = scale,
+                        transformOrigin = TransformOrigin(0f, 0f),
+                    ),
+            ) {
+                BodyMedium(text = "Welcome back")
+                HeadlineMedium(text = "Stefan")
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Description of the image",
+            )
         }
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Description of the image",
-        )
     }
 }
 
 @Preview
 @Composable
 fun HeaderViewPreview() {
-    PreviewContainer { theme ->
+    PreviewContainer {
         Box(
-            modifier = Modifier.background(theme.current.colorScheme.secondary),
+            modifier = Modifier.background(MaterialTheme.colorScheme.secondary),
         ) {
             HeaderView(32.dp, 64.dp, 64.dp)
         }

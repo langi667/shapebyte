@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 @Composable
@@ -38,14 +37,12 @@ fun TitleMedium(
 @Composable
 fun TitleMediumPreview() {
     PreviewContainer {
-        With { theme ->
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .background(theme.current.colorScheme.primary),
-            ) {
-                TitleMedium(text = "TitleMedium")
-            }
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary),
+        ) {
+            TitleMedium(text = "TitleMedium")
         }
     }
 }

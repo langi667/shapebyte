@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 @Composable
@@ -29,11 +28,11 @@ fun HeadlineMedium(
 @Preview
 @Composable
 fun HeadlineMediumPreview() {
-    PreviewContainer { theme ->
+    PreviewContainer {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(theme.current.colorScheme.primary),
+                .background(MaterialTheme.colorScheme.primary),
         ) {
             HeadlineMedium(text = "HeadlineMedium")
         }

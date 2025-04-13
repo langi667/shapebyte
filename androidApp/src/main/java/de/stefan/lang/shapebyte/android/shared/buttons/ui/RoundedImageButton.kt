@@ -17,7 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 @Composable
@@ -27,7 +26,7 @@ fun RoundedImageButton(
     modifier: Modifier = Modifier,
     appearance: RoundedImageButtonAppearance = RoundedImageButtonAppearance.Medium,
     onClick: (() -> Unit)?,
-) = With { _ ->
+) {
     Image(
         painter = painterResource(image),
         contentDescription = contentDescription,

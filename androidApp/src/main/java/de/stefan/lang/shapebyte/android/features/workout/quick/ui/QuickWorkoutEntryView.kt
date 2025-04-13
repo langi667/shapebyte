@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMedium
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
@@ -29,28 +30,28 @@ fun QuickWorkoutEntryView(
     workout: Workout,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-) = With { theme ->
-    val bgShape = theme.current.shapes.large
-    val imageSize = theme.dimensions.small.dp + theme.spacings.medium.dp
-    val maxViewWidth = theme.dimensions.xLarge.dp
-    val itemSpacing = theme.spacings.xTiny.dp
+) { 
+    val bgShape = MaterialTheme.shapes.large
+    val imageSize = ThemeData.dimensions.small.dp + ThemeData.spacings.medium.dp
+    val maxViewWidth = ThemeData.dimensions.xLarge.dp
+    val itemSpacing = ThemeData.spacings.xTiny.dp
 
     Row(
         modifier = modifier
             .border(
                 width = 1.dp,
-                color = theme.current.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.secondary,
                 shape = bgShape,
             )
             .width(maxViewWidth)
             .clip(bgShape)
             .clickable(true) {
-                theme.logger.d("QuickWorkoutEntryView", "workout clicked: $workout")
+                ThemeData.logger.d("QuickWorkoutEntryView", "workout clicked: $workout")
                 onClick()
             },
         horizontalArrangement = Arrangement.Center,
     ) {
-        Spacer(modifier = Modifier.size(theme.spacings.tiny.dp))
+        Spacer(modifier = Modifier.size(ThemeData.spacings.tiny.dp))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -77,15 +78,15 @@ fun QuickWorkoutEntryView(
             Spacer(modifier = Modifier.size(itemSpacing))
         }
 
-        Spacer(modifier = Modifier.size(theme.spacings.tiny.dp))
+        Spacer(modifier = Modifier.size(ThemeData.spacings.tiny.dp))
     }
 }
 
 @Preview
 @Composable
 fun QuickWorkoutEntryViewPreview() {
-    PreviewContainer { theme ->
-        Column(modifier = Modifier.background(theme.current.colorScheme.background)) {
+    PreviewContainer {
+        Column(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
             QuickWorkoutEntryView(
                 workout = QuickWorkoutsPreviewDataProvider.hiit,
             )

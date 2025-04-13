@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.TitleMedium
 import de.stefan.lang.shapebyte.android.shared.background.ui.BackgroundView
 import de.stefan.lang.shapebyte.android.shared.header.ui.HeaderView
@@ -85,10 +85,10 @@ private fun Spacer(item: ContentViewItem.Spacer) {
 }
 
 @Composable
-private fun SectionTitle(item: ContentViewItem.SectionTitle) = With { theme ->
+private fun SectionTitle(item: ContentViewItem.SectionTitle) {
     TitleMedium(
         item.title,
-        modifier = Modifier.padding(horizontal = theme.spacings.small.dp),
+        modifier = Modifier.padding(horizontal = ThemeData.spacings.small.dp),
     )
 }
 

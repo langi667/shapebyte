@@ -3,6 +3,7 @@ package de.stefan.lang.shapebyte.android.shared.progress.ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -17,7 +18,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 private const val START_ANGLE = 270.0f
@@ -30,14 +31,14 @@ fun GradientProgressIndicatorLarge(
     progress: Float,
     modifier: Modifier = Modifier,
     color: Color? = null,
-) = With { theme ->
-    val gradientColor = color ?: theme.current.colorScheme.primary
+) {
+    val gradientColor = color ?: MaterialTheme.colorScheme.primary
     GradientProgressIndicator(
         progress = progress,
         gradientStart = gradientColor.copy(alpha = 0.3f),
         gradientEnd = gradientColor,
         trackColor = Color.Transparent,
-        strokeWidth = theme.dimensions.tiny.dp,
+        strokeWidth = ThemeData.dimensions.tiny.dp,
         modifier = modifier,
     )
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,7 +28,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.zIndex
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.shared.header.ui.HeaderView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.shapes.ui.Arc
@@ -55,14 +56,14 @@ fun <T> BackgroundView(
     key: ((index: Int, item: T) -> Any)? = null,
     contentType: (item: T) -> Any? = { null },
     itemContent: @Composable LazyItemScope.(item: T) -> Unit,
-) = With { theme ->
-    val defaultArcHeight = remember { theme.dimensions.small.dp * 1.5f }
+) {
+    val defaultArcHeight = remember { ThemeData.dimensions.small.dp * 1.5f }
     val arcHeight = remember { mutableStateOf(defaultArcHeight) }
 
     val viewSize = remember { mutableStateOf(DpSize.Zero) }
     val density = LocalDensity.current
 
-    val maximumHeaderHeight = theme.dimensions.large.dp
+    val maximumHeaderHeight = ThemeData.dimensions.large.dp
     val minimumHeaderHeight = maximumHeaderHeight / 2
 
     val scrollOffset = remember { mutableStateOf(0.dp) }
@@ -111,7 +112,7 @@ fun <T> BackgroundView(
                     .fillMaxWidth(),
                 height = animatedArcHeight,
                 width = viewSize.value.width,
-                color = theme.current.colorScheme.background,
+                color = MaterialTheme.colorScheme.background,
             )
         } else {
             items.getOrNull(index - bgViewItems.size)?.let {
@@ -141,7 +142,7 @@ fun <T> BackgroundView(
             .fillMaxSize()
             .background(
                 brush = Brush.linearGradient(
-                    colors = listOf(theme.current.colorScheme.secondary, Color.White),
+                    colors = listOf(MaterialTheme.colorScheme.secondary, Color.White),
                 ),
             ),
     ) {
@@ -169,7 +170,7 @@ fun <T> BackgroundView(
                         (maximumHeaderHeight + animatedArcHeight - scrollOffset.value),
                     ),
                 )
-                .background(theme.current.colorScheme.background),
+                .background(MaterialTheme.colorScheme.background),
         ) {}
 
         // whole scroll view which is all over the screen

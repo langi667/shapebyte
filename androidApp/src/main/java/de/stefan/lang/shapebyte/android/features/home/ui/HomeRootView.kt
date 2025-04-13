@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
@@ -68,9 +68,9 @@ fun HomeRootView(
     uiState: UIState,
     modifier: Modifier = Modifier.fillMaxSize(),
     onSelectQuickWorkout: (Workout) -> Unit = {},
-) = With { theme ->
+) {
     val buildPerformPersistViewDefaultOffset =
-        BuildPerformPersistViewSettings.primaryButtonSize + theme.spacings.tiny.dp
+        BuildPerformPersistViewSettings.primaryButtonSize + ThemeData.spacings.tiny.dp
 
     val buildPerformPersistViewOffset =
         remember { mutableStateOf(buildPerformPersistViewDefaultOffset) }
@@ -100,13 +100,13 @@ fun HomeRootView(
                 buildPerformPersistViewOffset.value -= (scrollOffset * (headerScale.floatValue * 1.5f))
             },
         ) {
-            spacer(theme.spacings.xxLarge.dp + theme.spacings.small.dp)
+            spacer(ThemeData.spacings.xxLarge.dp + ThemeData.spacings.small.dp)
 
             val quickWorkouts = uiStateData.quickWorkouts
 
             if (quickWorkouts.isNotEmpty()) {
                 sectionTitle("Quick Workouts")
-                spacer(theme.spacings.small.dp)
+                spacer(ThemeData.spacings.small.dp)
 
                 data(
                     id = FeatureId.QUICK_WORKOUTS.name,
@@ -119,7 +119,7 @@ fun HomeRootView(
                     )
                 }
 
-                spacer(theme.spacings.medium.dp)
+                spacer(ThemeData.spacings.medium.dp)
             }
 
             val recentHistory = uiStateData.recentHistory
@@ -135,8 +135,8 @@ fun HomeRootView(
                             entry = entry,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = theme.spacings.small.dp)
-                                .padding(horizontal = theme.spacings.small.dp),
+                                .padding(top = ThemeData.spacings.small.dp)
+                                .padding(horizontal = ThemeData.spacings.small.dp),
                         )
                     }
                 }

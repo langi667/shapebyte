@@ -2,10 +2,10 @@ package de.stefan.lang.shapebyte.android.shared.buttons.ui
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.LocalDimension
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 
 enum class RoundedImageButtonAppearance(val size: Dp) {
-    Small((LocalDimension.current.medium - LocalDimension.current.xTiny).dp),
-    Medium(LocalDimension.current.medium.dp),
-    Large(LocalDimension.current.xLarge.dp),
+    Small((ThemeData.dimensions.medium - ThemeData.dimensions.xTiny).dp),
+    Medium(ThemeData.dimensions.medium.dp),
+    Large(ThemeData.dimensions.xLarge.dp),
 }

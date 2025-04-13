@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,13 +38,12 @@ import androidx.navigation.NavHostController
 import de.stefan.lang.foundationCore.assets.ImageAsset
 import de.stefan.lang.foundationUI.buttons.ButtonState
 import de.stefan.lang.foundationUI.viewmodel.UIState
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
+import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelSmall
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.TitleMedium
-import de.stefan.lang.shapebyte.android.designsystem.ui.withData
 import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
 import de.stefan.lang.shapebyte.android.shared.background.ui.RadialBackgroundView
 import de.stefan.lang.shapebyte.android.shared.buttons.ui.PauseButton
@@ -146,7 +146,7 @@ fun TimedWorkoutView(
     modifier: Modifier = Modifier,
     backgroundColor: Color? = null,
     onCloseClick: () -> Unit = {},
-) = With { theme ->
+) { 
     Box(modifier.fillMaxSize()) {
         RadialBackgroundView(
             radialBackground = backgroundColor,
@@ -163,7 +163,7 @@ fun TimedWorkoutView(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .offset(y = -theme.spacings.tiny.dp),
+                    .offset(y = -ThemeData.spacings.tiny.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -173,7 +173,7 @@ fun TimedWorkoutView(
                 ) {
                     val pauseButtonAlpha =
                         fadeAnimation(pauseButtonState.isVisible, "pauseButtonAlpha")
-                    val spacingsBetween = theme.spacings.small.dp
+                    val spacingsBetween = ThemeData.spacings.small.dp
 
                     PauseButton(
                         modifier = Modifier
@@ -210,21 +210,21 @@ private fun TimerView(
     remainingTotal: String,
     modifier: Modifier = Modifier,
     onCloseClick: () -> Unit = {},
-) = With { theme ->
+) {
     Column(
         modifier
             .fillMaxWidth()
-            .padding(theme.spacings.small.dp),
+            .padding(ThemeData.spacings.small.dp),
     ) {
         AppToolBar(title = title, onCloseClick = onCloseClick)
-        Spacer(Modifier.height(theme.spacings.large.dp))
+        Spacer(Modifier.height(ThemeData.spacings.large.dp))
         DisplayLarge(
             text = remaining,
             modifier = Modifier.fillMaxWidth(),
             textAlignment = TextAlign.Center,
         )
 
-        Spacer(Modifier.height(theme.spacings.small.dp))
+        Spacer(Modifier.height(ThemeData.spacings.small.dp))
 
         Row(Modifier.fillMaxWidth()) {
             Column {
@@ -242,7 +242,7 @@ private fun TimerView(
             }
         }
 
-        Spacer(Modifier.height(theme.spacings.small.dp))
+        Spacer(Modifier.height(ThemeData.spacings.small.dp))
     }
 }
 
@@ -272,12 +272,12 @@ private fun AppToolBar(
     title: String,
     modifier: Modifier = Modifier,
     onCloseClick: () -> Unit = {},
-) = With { theme ->
+) {
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        val buttonSize = theme.dimensions.small
+        val buttonSize = ThemeData.dimensions.small
         Spacer(Modifier.size(buttonSize.dp))
         Box(
             Modifier
@@ -302,15 +302,15 @@ private fun AppToolBar(
 private fun fadeAnimation(
     fadeIn: Boolean,
     label: String,
-): Float = withData { theme ->
-    val animationDuration = theme.animationDurations.short.toInt()
+): Float {
+    val animationDuration = ThemeData.animationDurations.short.toInt()
     val alphaAnimation by animateFloatAsState(
         targetValue = if (fadeIn) 1f else 0f,
         animationSpec = tween(durationMillis = animationDuration),
         label = label,
     )
 
-    alphaAnimation
+    return alphaAnimation
 }
 
 @Composable
@@ -318,9 +318,8 @@ private fun ImageAndProgress(
     progress: Float,
     image: ImageAsset?,
     modifier: Modifier = Modifier,
-) = With { theme ->
+) {
     val size = RoundedImageButtonAppearance.Large.size
-
     Box(
         modifier = modifier
             .requiredSize(size),
@@ -341,7 +340,7 @@ private fun ImageAndProgress(
             progress = progress,
             modifier = Modifier
                 .size(size),
-            color = theme.current.colorScheme.background,
+            color = MaterialTheme.colorScheme.background,
         )
     }
 }
@@ -369,7 +368,7 @@ fun PreviewTimedWorkoutView_Initial() {
 @Composable
 @Preview
 fun PreviewTimedWorkoutView_Running() {
-    PreviewContainer { theme ->
+    PreviewContainer {
         TimedWorkoutView(
             title = "Test",
             remaining = "00:15",
@@ -380,7 +379,7 @@ fun PreviewTimedWorkoutView_Running() {
             stopButtonState = ButtonState.Visible(),
             progress = 0.5f,
             exerciseImage = ImageAsset("logo.png"),
-            backgroundColor = theme.current.colorScheme.primary,
+            backgroundColor = MaterialTheme.colorScheme.primary,
         )
     }
 }

@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 @Composable
@@ -37,11 +36,11 @@ fun LabelSmall(
 @Preview
 @Composable
 fun LabelSmallPreview() {
-    PreviewContainer { theme ->
+    PreviewContainer {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(theme.current.colorScheme.primary),
+                .background(MaterialTheme.colorScheme.primary),
         ) {
             LabelSmall(text = "LabelSmall")
         }

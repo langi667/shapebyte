@@ -3,6 +3,7 @@ package de.stefan.lang.shapebyte.android.shared.shapes.ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -11,7 +12,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 @Composable
@@ -20,8 +20,8 @@ fun Arc(
     width: Dp = 50.dp,
     height: Dp = 20.dp,
     color: Color? = null,
-) = With { theme ->
-    val pathColor = color ?: theme.current.colorScheme.primary
+) {
+    val pathColor = color ?: MaterialTheme.colorScheme.primary
 
     Canvas(
         modifier = modifier

@@ -2,13 +2,13 @@ package de.stefan.lang.shapebyte.android.shared.preview.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
+import de.stefan.lang.designsystem.theme.ShapeByteTheme
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeData
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.mocks.PackageDependencyProviderMock
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -17,12 +17,12 @@ import org.koin.mp.KoinPlatformTools
 @Composable
 fun PreviewContainer(
     modifier: Modifier = Modifier,
-    content: @Composable (theme: ThemeData) -> Unit,
+    content: @Composable () -> Unit,
 ) {
     StartKoinIfNeeded()
-    With { theme ->
-        Box(modifier = modifier.background(theme.current.colorScheme.background)) {
-            content(theme)
+    ShapeByteTheme {
+        Box(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
+            content()
         }
     }
 }

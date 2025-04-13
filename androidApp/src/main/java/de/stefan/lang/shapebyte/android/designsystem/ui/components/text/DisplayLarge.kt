@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import de.stefan.lang.shapebyte.android.designsystem.ui.With
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 @Composable
@@ -32,11 +31,11 @@ fun DisplayLarge(
 @Preview
 @Composable
 fun DisplayLargePreview() {
-    PreviewContainer { theme ->
+    PreviewContainer {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(theme.current.colorScheme.primary),
+                .background(MaterialTheme.colorScheme.primary),
         ) {
             DisplayLarge(text = "DisplayLarge")
         }
