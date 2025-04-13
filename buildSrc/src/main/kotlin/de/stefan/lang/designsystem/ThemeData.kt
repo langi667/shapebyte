@@ -81,12 +81,15 @@ class ThemeData : ThemeContent {
 
     override val animationDurations: AnimationDurations = AnimationDurations(
         short = 0.3,
-        medium = 0.5,
         long = 0.75,
     )
 
     val android = PlatformSpecificThemeContent(
         platform = Platform.Android,
+        animationDurations = AnimationDurations(
+            short = 300.0,
+            long = 750.0,
+        ),
         textStyles = Typography(
             displayLarge = TextStyle(fontSize = 76, fontWeight = FontWeight.Black),
             displayMedium = TextStyle(fontSize = 45, fontWeight = FontWeight.Bold),

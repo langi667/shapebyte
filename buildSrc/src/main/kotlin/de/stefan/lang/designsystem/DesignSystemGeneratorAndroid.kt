@@ -1,198 +1,110 @@
 package de.stefan.lang.designsystem
 
 import com.squareup.kotlinpoet.*
-import java.io.File
-import de.stefan.lang.designsystem.color.ColorScheme
-import de.stefan.lang.designsystem.font.TextStylesCollection
 import de.stefan.lang.designsystem.platformspecific.Platform
+import java.io.File
 
 class DesignSystemGeneratorAndroid: DesignSystemGenerating {
-    private val composableClass = ClassName("androidx.compose.runtime", "Composable")
-    private val composableAnnotation = AnnotationSpec.builder(
-        composableClass
-    ).build()
-
     private val themeDataProvider: ThemeDataProvider = ThemeDataProvider(
         Platform.Android,
         ThemeData()
     )
 
     override fun generate(outputFile: File) {
-        generateTheme(outputFile)
-
+        DesignSystemThemeGeneratorAndroid().generate(outputFile)
+        generateThemeAdditions(outputFile)
         println("DesignSystem Android Theme generated successfully! to ${outputFile.absolutePath}")
     }
 
-
-
-    private fun generateTheme(outputFile: File) {
-        val themeName = "ShapeByteTheme"
+    private fun generateThemeAdditions(outputFile: File) {
+        val objectName = "ThemeAdditions"
         val packageName = "de.stefan.lang.designsystem.theme"
 
-        val themeBuilder = themeFunctionDeclaration(themeName)
-            .addCode(
-                colorCode()
-            )
-            .addCode("\n")
-            .addCode(textStyles())
-            .addCode("\n")
-            .addCode(shapes())
-            .addCode("\n")
-            .addCode(materialThemeDeclaration())
+        val themeAdditions = TypeSpec.objectBuilder(objectName)
+            .addProperty(loggerProperty())
+            .addProperty(animationDurationsProperty())
+            .addProperty(dimensionsProperty())
+            .addProperty(spacingsProperty())
+            .build()
 
-        val fileSpec = FileSpec.builder(packageName, themeName)
-            .addImport("androidx.compose.foundation", "isSystemInDarkTheme")
-            .addImport("androidx.compose.material3", "darkColorScheme")
-            .addImport("androidx.compose.material3", "lightColorScheme")
-            .addImport("androidx.compose.material3", "Typography")
-            .addImport("androidx.compose.ui.text", "TextStyle")
-            .addImport("androidx.compose.ui.unit", "sp")
-            .addImport("androidx.compose.ui.text.font", "FontWeight")
-            .addImport("androidx.compose.material3", "Shapes")
-            .addImport("androidx.compose.foundation.shape", "RoundedCornerShape")
-            .addImport("androidx.compose.ui.unit", "dp")
-            .addImport("androidx.compose.material3", "MaterialTheme")
-            .addImport("androidx.compose.ui.graphics", "Color")
-            .addFunction(themeBuilder.build())
+        val fileSpec = FileSpec.builder(packageName, objectName)
+            .addType(themeAdditions)
+            .addImport("de.stefan.lang.coreutils.logging", "Logging")
+            .addImport("de.stefan.lang.designsystem", "Dimensions")
+            .addImport("de.stefan.lang.designsystem", "Spacings")
+            .addImport("de.stefan.lang.shapebyte", "SharedModule")
             .build()
 
         fileSpec.writeTo(outputFile)
     }
 
-    private fun materialThemeDeclaration(): CodeBlock  {
-        return CodeBlock
-            .builder()
-            .addStatement(
-                "MaterialTheme(\n" +
-                "  colorScheme = colors,\n" +
-                "  typography = typography,\n" +
-                "  shapes = shapes,\n" +
-                "  content = content,\n" +
-                ")"
-            )
-            .build()
-    }
-
-    private fun themeFunctionDeclaration(
-        themeName: String,
-    ): FunSpec.Builder{
-        val composableLambdaType = LambdaTypeName.get(
-            returnType = UNIT
-        ).copy(
-            annotations = listOf(AnnotationSpec.builder(composableClass).build())
+    private fun loggerProperty(): PropertySpec {
+        return PropertySpec.builder(
+            "logger",
+            ClassName("de.stefan.lang.coreutils.logging", "Logging")
         )
-
-        return FunSpec.builder(themeName)
-            .addParameter(
-                ParameterSpec.builder("darkTheme", Boolean::class)
-                    .defaultValue("isSystemInDarkTheme()")
-                    .build()
-            )
-            .addParameter(ParameterSpec.builder("content", composableLambdaType)
-                .build())
-            .addAnnotation(composableAnnotation)
-            .addAnnotation(
-                AnnotationSpec.builder(Suppress::class)
-                    .addMember("%S", "MagicNumber")
-                    .build()
-            )
-    }
-
-    private fun colorCode(): CodeBlock {
-        return CodeBlock
-            .builder()
-            .beginControlFlow("val colors = if (darkTheme)")
-            .add(
-                codeBlock = colorSchemeCode(
-                    name = "darkColorScheme",
-                    colorScheme = themeDataProvider.darkColorScheme
-                )
-            )
-            .add("\n")
-            .nextControlFlow("else")
-            .add(
-                codeBlock = colorSchemeCode(
-                    name = "lightColorScheme",
-                    colorScheme = themeDataProvider.lightColorScheme
-                )
-            )
-            .add("\n")
-            .unindent()
-            .endControlFlow()
-            .build()
-    }
-
-    private fun colorSchemeCode(
-        name: String,
-        colorScheme: ColorScheme
-    ): CodeBlock {
-        val colorSchemeCall = CodeBlock
-            .builder()
-            .add(
-                CodeBlock
-                    .builder()
-                    .indent()
-                    .addStatement("$name(")
-                    .indent()
-                    .add(colorSchemeToStatement(colorScheme))
-                    .unindent()
-                    .add(")")
-                    .build()
-            )
+            .initializer("SharedModule.logger()")
             .build()
 
-        return colorSchemeCall
     }
 
-    private fun colorSchemeToStatement(colorScheme: ColorScheme): CodeBlock {
-        val builder = CodeBlock.builder()
-
-        colorScheme.colors.forEach {
-            builder.addStatement(
-                "${it.key} = Color(${it.value}),"
-            )
+    private fun animationDurationsProperty(): PropertySpec {
+        var initializer = "AnimationDuration("
+        themeDataProvider.animationDurations.allSorted.forEach {
+            initializer +=
+                "\n${it.key} = ${it.value.toInt()},"
         }
 
-        return builder.build()
+        initializer += "\n)"
+
+        val property = PropertySpec.builder(
+            name = "animationDurations",
+            type = ClassName(
+                packageName = "de.stefan.lang.shapebyte.android.designsystem.ui", "AnimationDuration")
+        )
+            .initializer(initializer)
+            .build()
+
+        return property
     }
 
-    private fun textStyles() : CodeBlock {
-        val builder =  CodeBlock
-            .builder()
-
-        val textStyles = themeDataProvider.textStyles as TextStylesCollection
-
-        builder.addStatement( "val typography = Typography(")
-        builder.indent()
-
-        textStyles.all.forEach { currTextStyle ->
-            builder.addStatement(
-                "${currTextStyle.key} = TextStyle(fontSize = ${currTextStyle.value.fontSize}.sp, fontWeight = FontWeight.${currTextStyle.value.fontWeight.name}),"
-            )
+    private fun dimensionsProperty(): PropertySpec {
+        var initializer = "Dimensions("
+        themeDataProvider.dimensions.allSorted.forEach {
+            initializer +=
+                "\n${it.key} = ${it.value},"
         }
 
-        builder.unindent()
-        builder.addStatement( ")")
+        initializer += "\n)"
 
-        return builder.build()
+        val property = PropertySpec.builder(
+            name = "dimensions",
+            type = ClassName(
+                packageName = "de.stefan.lang.designsystem", "Dimensions")
+        )
+            .initializer(initializer)
+            .build()
+
+        return property
     }
 
-    private fun shapes() : CodeBlock {
-        val builder =  CodeBlock
-            .builder()
-
-        builder.addStatement( "val shapes = Shapes(")
-        builder.indent()
-
-        themeDataProvider.shapes.roundedCorners.all.forEach { currRoundedCorner ->
-            builder.addStatement(
-                "${currRoundedCorner.key} = RoundedCornerShape(${currRoundedCorner.value.radius}.dp),"
-            )
+    private fun spacingsProperty(): PropertySpec {
+        var initializer = "Spacings("
+        themeDataProvider.spacings.allSorted.forEach {
+            initializer +=
+                "\n${it.key} = ${it.value},"
         }
 
-        builder.unindent()
-        builder.addStatement( ")")
+        initializer += "\n)"
 
-        return builder.build()
+        val property = PropertySpec.builder(
+            name = "spacings",
+            type = ClassName(
+                packageName = "de.stefan.lang.designsystem", "Spacings")
+        )
+            .initializer(initializer)
+            .build()
+
+        return property
     }
 }

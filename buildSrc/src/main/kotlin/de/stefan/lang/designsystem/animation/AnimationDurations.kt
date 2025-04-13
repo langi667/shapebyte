@@ -6,7 +6,6 @@ import org.gradle.kotlin.dsl.provideDelegate
 
 data class AnimationDurations(
     val short: Double,
-    val medium: Double,
     val long: Double,
 ) {
     val all: Map<String, Double> by lazy {

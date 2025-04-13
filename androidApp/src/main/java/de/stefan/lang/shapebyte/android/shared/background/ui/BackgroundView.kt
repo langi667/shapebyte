@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.zIndex
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
+import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.shapebyte.android.shared.header.ui.HeaderView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.shapes.ui.Arc

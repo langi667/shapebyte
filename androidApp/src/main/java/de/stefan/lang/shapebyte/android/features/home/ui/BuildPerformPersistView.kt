@@ -26,8 +26,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.shapebyte.android.R
-import de.stefan.lang.shapebyte.android.designsystem.ui.ThemeAdditions
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 
 private const val LARGE_Z_INDEX = 1000f
