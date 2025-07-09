@@ -28,7 +28,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.shared.core)
-            implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.core.test)
             implementation(projects.shared.core.coroutines.coroutinesProvidingTest)
 
             implementation(projects.shared.foundation)
@@ -36,7 +36,7 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.core.test)
         }
     }
 }

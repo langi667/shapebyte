@@ -21,12 +21,12 @@ kotlin {
         androidMain.dependencies {
             api(libs.koin.android)
             api(libs.koin.core)
-            api(projects.shared.core.coreUtils)
+            api(projects.shared.core.utils)
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             api(libs.koin.core)
-            api(projects.shared.core.coreUtils)
+            api(projects.shared.core.utils)
             api(projects.shared.core.coroutines)
         }
         commonTest.dependencies {
@@ -34,12 +34,12 @@ kotlin {
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
-            implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.core.test)
         }
 
         iosMain.dependencies {
             api(libs.koin.core)
-            api(projects.shared.core.coreUtils)
+            api(projects.shared.core.utils)
         }
 
     }

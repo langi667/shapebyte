@@ -24,7 +24,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.koin.core)
 
-            api(projects.shared.core.coreUtils)
+            api(projects.shared.core.utils)
 
             api(projects.shared.features.featureCore)
             api(projects.shared.features.featureToggles)
@@ -33,7 +33,7 @@ kotlin {
         }
 
         commonTest.dependencies {
-            // implementation(projects.shared.core.coreTest)
+            // implementation(projects.shared.core.test)
         }
     }
 }

@@ -28,13 +28,13 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.coreTest)
+            implementation(projects.shared.core.test)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.core.coreutils"
+    namespace = "de.stefan.lang.core.utils"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

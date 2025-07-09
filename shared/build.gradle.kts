@@ -59,7 +59,7 @@ kotlin {
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
-            implementation (projects.shared.core.coreTest)
+            implementation (projects.shared.core.test)
             implementation (projects.shared.core.coroutines.coroutinesProvidingTest)
             implementation (projects.shared.features.featureTest)
         }
@@ -122,7 +122,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
-    androidTestImplementation(projects.shared.core.coreTest)
+    androidTestImplementation(projects.shared.core.test)
     androidTestImplementation(projects.shared.core.coroutines.coroutinesProvidingTest)
     androidTestImplementation(projects.shared.features.featureTest)
 }

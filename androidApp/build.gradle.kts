@@ -98,7 +98,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation (libs.koin.test)
     testImplementation(libs.junit)
-    testImplementation(projects.shared.core.coreTest)
+    testImplementation(projects.shared.core.test)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
