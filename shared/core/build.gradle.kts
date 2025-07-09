@@ -27,7 +27,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             api(libs.koin.core)
             api(projects.shared.core.coreUtils)
-            api(projects.shared.core.coreCoroutines)
+            api(projects.shared.core.coroutines)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

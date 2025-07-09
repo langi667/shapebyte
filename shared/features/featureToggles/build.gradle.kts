@@ -37,7 +37,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.coreTest)
-            implementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
+            implementation(projects.shared.core.coroutines.coroutinesProvidingTest)
             implementation(projects.shared.features.featureTest)
         }
     }
@@ -70,5 +70,5 @@ android {
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.junit.ktx)
-    testImplementation(project(":shared:core:coreCoroutines"))
+    testImplementation(project(":shared:core:coroutines"))
 }

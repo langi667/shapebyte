@@ -19,21 +19,21 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
+            api(projects.shared.core.coroutines.coroutinesProviding)
         }
 
         commonTest.dependencies {
-            implementation(libs.kotlinx.coroutines.test)
+
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.coreCoroutinesProviding"
+    namespace = "de.stefan.lang.coreCoroutines"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

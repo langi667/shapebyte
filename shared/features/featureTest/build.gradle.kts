@@ -29,7 +29,7 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.core.coreTest)
-            implementation(projects.shared.core.coreCoroutines.coreCoroutinesProvidingTest)
+            implementation(projects.shared.core.coroutines.coroutinesProvidingTest)
 
             implementation(projects.shared.foundation)
             implementation(projects.shared.features.featureCore)
