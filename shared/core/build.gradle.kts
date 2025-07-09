@@ -25,7 +25,10 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
+
             api(libs.koin.core)
+            api(projects.shared.core.di)
+
             api(projects.shared.core.utils)
             api(projects.shared.core.coroutines)
         }

@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.workout
 
-import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreutils.logging.Logging
 import de.stefan.lang.coreutils.progress.Progress
+import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.designsystem.ColorDescriptor
 import de.stefan.lang.foundationCore.audio.AudioPlaying
 import de.stefan.lang.foundationCore.audio.AudioResource

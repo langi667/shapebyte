@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.featureToggles
 
-import de.stefan.lang.coreutils.di.RootDIModule
+import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureTogglesDataModule
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureTogglesDataModuleProviding
 import de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule

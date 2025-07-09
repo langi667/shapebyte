@@ -3,8 +3,6 @@ package de.stefanlang.shapebyte.domain
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
-import de.stefan.lang.coreCoroutinesProvidingTest.TestCoroutineContextProvider
-import de.stefan.lang.coreCoroutinesProvidingTest.TestCoroutineScopeProvider
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.initializing.SharedInitializationState
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
@@ -23,10 +21,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Test
 import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class SharedInitializationUseCaseTest: CoreTest() {
+
+    //override val autostartKoin: Boolean = false
 
     @Test
     @DisplayName("test initial state")
@@ -59,8 +60,6 @@ class SharedInitializationUseCaseTest: CoreTest() {
 
         val platformDependencies = PlatformDependencyProvider(
             applicationContext = appContext,
-            coroutineScopeProviding = TestCoroutineScopeProvider,
-            coroutineContextProvider = TestCoroutineContextProvider,
             appInfo = AppInfo(
                 packageName = "de.stefan.lang.shapebyte",
                 versionName = "1.0",
@@ -71,6 +70,7 @@ class SharedInitializationUseCaseTest: CoreTest() {
             appResourceProvider = AppResourceProvider(null),
         )
 
+        stopKoin() // needs to be called because koin from the test case is already running
         sut.invoke(platformDependencies)
 
         sut.flow.test {

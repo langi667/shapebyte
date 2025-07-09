@@ -18,26 +18,26 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-        }
         commonMain.dependencies {
+            api(projects.shared.core.coroutines.api)
+
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            api(projects.shared.core.coroutines.coroutinesProviding)
-        }
-
-        commonTest.dependencies {
-
+            implementation(projects.shared.core.coroutines.impl)
+            implementation(projects.shared.core.coroutines.test)
+            implementation(projects.shared.core.di)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.coreCoroutines"
+    namespace = "de.stefan.lang.coroutines"
     compileSdk = Project.Android.BuildSettings.targetSdk
+
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
     }
+
     compileOptions {
         sourceCompatibility = Project.Android.BuildSettings.javaVersion
         targetCompatibility = Project.Android.BuildSettings.javaVersion
@@ -48,25 +48,4 @@ android {
             excludes += Project.Android.BuildSettings.excludedResourcesList
         }
     }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
-    }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-
-    // TODO: check if needed
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation (libs.koin.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.junit.jupiter)
 }

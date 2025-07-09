@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.home
 
-import de.stefan.lang.coreutils.di.DIModuleDeclaration
-import de.stefan.lang.coreutils.di.RootDIModule
+import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.navigation.NavigationRequestHandling
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
-import de.stefan.lang.coreutils.di.DIModuleDeclaration
+import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModuleProviding
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item

@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.featuretest.FeatureTest
 
 open class BaseHomeFeatureTest: FeatureTest() {
-    override val testModules = listOf(
+    override val testModules = super.testModules + listOf(
         FeatureTogglesModule.testModule,
         NavigationModule.testModule,
         WorkoutModule.testModule,

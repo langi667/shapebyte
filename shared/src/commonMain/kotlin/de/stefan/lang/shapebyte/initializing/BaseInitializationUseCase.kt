@@ -1,5 +1,6 @@
 package de.stefan.lang.shapebyte.initializing
 
+import de.stefan.lang.core.CoreModule
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
 import kotlinx.coroutines.SupervisorJob
@@ -26,12 +27,14 @@ abstract class BaseInitializationUseCase {
         }
 
         stateFlow.value = SharedInitializationState.INITIALIZING
-        val dispatcher = platformDependencies.coroutineContextProvider.defaultDispatcher()
-        val scope = platformDependencies.coroutineScopeProviding.createCoroutineScope(
-            context = SupervisorJob(),
-        )
         // needs to be performed directly on the main thread to have the DPI ready
         initializeDependencyGraph(platformDependencies)
+
+        val dispatcher = CoreModule.coroutineContextProvider().defaultDispatcher()
+        val scope = CoreModule.coroutineScopeProvider().createCoroutineScope(
+            context = SupervisorJob(),
+        )
+
         scope.launch(dispatcher) {
             initializeShared(platformDependencies)
         }

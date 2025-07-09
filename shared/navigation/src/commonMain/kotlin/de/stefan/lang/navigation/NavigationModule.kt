@@ -1,6 +1,6 @@
 package de.stefan.lang.navigation
 
-import de.stefan.lang.coreutils.di.DIModuleDeclaration
+import de.stefan.lang.core.di.DIModuleDeclaration
 import org.koin.core.component.get
 
 interface NavigationModuleProviding {

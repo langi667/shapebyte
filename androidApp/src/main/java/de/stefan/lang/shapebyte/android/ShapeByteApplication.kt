@@ -1,8 +1,6 @@
 package de.stefan.lang.shapebyte.android
 
 import android.app.Application
-import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProvider
-import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProvider
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.app.AppInfo
 import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
@@ -20,8 +18,6 @@ class ShapeByteApplication : Application() {
         SharedModule.sharedInitializationUseCase().invoke(
             PlatformDependencyProvider(
                 applicationContext = this,
-                coroutineScopeProviding = CoroutineScopeProvider(),
-                coroutineContextProvider = CoroutineContextProvider(),
                 appInfo = AppInfo(
                     versionName = BuildConfig.VERSION_NAME,
                     packageName = BuildConfig.APPLICATION_ID,

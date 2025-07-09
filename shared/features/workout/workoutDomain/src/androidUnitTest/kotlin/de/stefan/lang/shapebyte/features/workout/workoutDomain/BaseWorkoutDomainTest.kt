@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.featuretest.FeatureTest
 import org.koin.core.module.Module
 
 open class BaseWorkoutDomainTest: FeatureTest() {
-    override val testModules: List<Module> = listOf(
+    override val testModules: List<Module> = super.testModules + listOf(
         FeatureTogglesModule.testModule,
         WorkoutDataModule.testModule,
         WorkoutDomainModule.testModule

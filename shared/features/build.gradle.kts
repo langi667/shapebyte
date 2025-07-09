@@ -23,6 +23,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.koin.core)
+            implementation(projects.shared.core.di)
 
             api(projects.shared.core.utils)
 

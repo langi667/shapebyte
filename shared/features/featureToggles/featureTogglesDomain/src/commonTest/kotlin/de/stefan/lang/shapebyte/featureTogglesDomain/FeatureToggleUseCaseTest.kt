@@ -28,7 +28,6 @@ class FeatureToggleUseCaseTest : BaseFeatureToggleDomainTest() {
             val item = awaitItem() as LoadState.Error
             assertNull(item.dataOrNull())
             assertIs<FeatureToggleError.NotFound>(item.errorOrNull())
-
             expectNoEvents()
         }
     }

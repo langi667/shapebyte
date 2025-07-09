@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.coreCoroutinesProvidingTest.TestCoroutineContextProvider
+import de.stefan.lang.core.CoreModule
 import de.stefan.lang.coreutils.logging.mocks.SilentLogger
 import de.stefan.lang.foundationCore.assets.mocks.FileAssetLoaderMock
 import de.stefan.lang.foundationCore.loadstate.LoadState
@@ -61,7 +61,7 @@ class DefaultFeatureToggleDatasourceImplTest : BaseFeatureToggleDataTest() {
         return DefaultFeatureToggleDatasourceImpl(
             logger = SilentLogger(),
             assetLoader = loader,
-            coroutineContextProviding = TestCoroutineContextProvider,
+            coroutineContextProviding = CoreModule.coroutineContextProvider(),
         )
     }
 }

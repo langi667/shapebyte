@@ -1,6 +1,6 @@
 package de.stefan.lang.foundationCore
 
-import de.stefan.lang.coreutils.di.DIModuleDeclaration
+import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
 import de.stefan.lang.foundationCore.assets.FileAssetLoading
 import de.stefan.lang.foundationCore.assets.impl.FileAssetLoader

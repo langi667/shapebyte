@@ -26,6 +26,9 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
 
+            implementation(projects.shared.core.di)
+            implementation(projects.shared.core.coroutines.test)
+            implementation(projects.shared.core.coroutines)
 
             api(libs.kotlin.test)
             api(libs.turbine)

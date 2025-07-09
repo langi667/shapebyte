@@ -18,11 +18,15 @@ rootProject.name = "ShapeByte"
 include(":androidApp")
 include(":shared")
 include(":shared:core")
+include(":shared:core:di")
+
 include(":shared:core:utils")
+include(":shared:core:utils:api")
 include(":shared:core:test")
 include(":shared:core:coroutines")
-include(":shared:core:coroutines:coroutinesProviding")
-include(":shared:core:coroutines:coroutinesProvidingTest")
+include(":shared:core:coroutines:api")
+include(":shared:core:coroutines:impl")
+include(":shared:core:coroutines:test")
 
 include(":shared:foundation")
 include(":shared:foundation:foundationCore")

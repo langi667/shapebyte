@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData
 
-import de.stefan.lang.coreutils.di.DIModuleDeclaration
+import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryDataSourceMocks

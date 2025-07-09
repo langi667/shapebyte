@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.workout
 
-import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
-import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coroutines.api.CoroutineContextProviding
+import de.stefan.lang.coroutines.api.CoroutineScopeProviding
 import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.foundationCore.usecase.BaseDataUseCase
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry

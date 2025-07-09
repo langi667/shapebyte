@@ -13,8 +13,6 @@ struct ShapeByteApp: App {
         // TODO: check if that needs to be launched when using unit tests
         let platformDependencies = PlatformDependencyProvider(
             bundle: Bundle.main,
-            coroutineScopeProviding: CoroutineScopeProvider(),
-            coroutineContextProvider: CoroutineContextProvider(),
             appInfo: appInfo(),
             appContextProvider: ContextProvider(appContext: self),
             appResourceProvider: AppResourceProvider()

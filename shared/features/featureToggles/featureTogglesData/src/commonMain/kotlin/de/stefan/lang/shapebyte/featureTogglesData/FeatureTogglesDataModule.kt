@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
-import de.stefan.lang.coreutils.di.DIModuleDeclaration
+import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.shapebyte.featureTogglesData.impl.DefaultFeatureToggleDatasourceImpl
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
 import org.koin.core.component.get

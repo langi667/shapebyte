@@ -1,8 +1,8 @@
 package de.stefan.lang.foundationUI.viewmodel
 
-import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreutils.logging.Loggable
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationUI.event.UIEvent
 import de.stefan.lang.foundationUI.event.UIEventTransmitting
 import kotlinx.coroutines.CoroutineScope

@@ -1,29 +1,26 @@
 package de.stefan.lang.core
 
-import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
-import de.stefan.lang.coreCoroutinesProviding.CoroutineScopeProviding
+import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.CoreUtilsModuleProviding
-import de.stefan.lang.coreutils.di.RootDIModule
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
+import de.stefan.lang.coroutines.CoroutinesModule
+import de.stefan.lang.coroutines.CoroutinesModuleProviding
 
-interface CoreModuleProviding : CoreUtilsModuleProviding
+interface CoreModuleProviding : CoreUtilsModuleProviding, CoroutinesModuleProviding
 
 object CoreModule :
     RootDIModule(
-        listOf(CoreUtilsModule),
+        listOf(CoreUtilsModule, CoroutinesModule),
     ),
     CoreModuleProviding,
-    CoreUtilsModuleProviding by CoreUtilsModule {
+    CoreUtilsModuleProviding by CoreUtilsModule,
+    CoroutinesModuleProviding by CoroutinesModule {
 
     fun initialize(
-        coroutineContextProvider: CoroutineContextProviding,
-        coroutineScopeProviding: CoroutineScopeProviding,
         contextProvider: ContextProvider,
     ) {
         CoreUtilsModule.initialize(
-            coroutineContextProvider,
-            coroutineScopeProviding,
             contextProvider,
         )
     }

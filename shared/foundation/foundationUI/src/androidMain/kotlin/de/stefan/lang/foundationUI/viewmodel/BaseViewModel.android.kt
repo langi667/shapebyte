@@ -2,9 +2,9 @@ package de.stefan.lang.foundationUI.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.stefan.lang.coreCoroutinesProviding.CoroutineContextProviding
 import de.stefan.lang.coreutils.logging.Loggable
 import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationUI.event.UIEvent
 import de.stefan.lang.foundationUI.event.UIEventTransmitting
 import kotlinx.coroutines.CoroutineScope
