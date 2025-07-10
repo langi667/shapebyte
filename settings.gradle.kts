@@ -43,7 +43,6 @@ include(":shared:designsystem")
 include(":shared:designsystem:api")
 
 include(":shared:features")
-include(":shared:features:featureCore")
 include(":shared:features:featureTest")
 include(":shared:features:navigation")
 include(":shared:features:featureToggles")

@@ -31,11 +31,9 @@ kotlin {
             implementation(projects.shared.core)
             implementation(projects.shared.foundation)
             implementation(projects.shared.designsystem)
-            implementation(projects.shared.features.featureCore)
             implementation(projects.shared.features.featureToggles)
 
             implementation(projects.shared.features.workout.workoutData)
-
         }
 
         commonTest.dependencies {

@@ -6,12 +6,11 @@ import de.stefan.lang.features.FeaturesModule
 import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundation.FoundationModule
 import de.stefan.lang.foundation.FoundationModuleProviding
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
+import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.navigation.NavigationModule
 import de.stefan.lang.navigation.NavigationModuleProviding
-import de.stefan.lang.shapebyte.featureCore.FeatureCoreModule
-import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
-import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
 
@@ -51,7 +50,14 @@ abstract class BaseSharedModule :
     fun setup(
         platformDependencies: PlatformDependencyProviding,
     ) {
-        FeatureCoreModule.setup(platformDependencies)
+        CoreModule.initialize(
+            contextProvider = platformDependencies.appContextProvider,
+        )
+
+        FoundationCoreModule.initialize(
+            appResourceProvider = platformDependencies.appResourceProvider,
+        )
+
         this.appInfo = platformDependencies.appInfo
     }
 
@@ -63,5 +69,5 @@ abstract class BaseSharedModule :
         return appInfo
     }
 
-    abstract fun start(platformDependencies: PlatformDependencyProvider)
+    abstract fun start(platformDependencies: PlatformDependencyProviding)
 }

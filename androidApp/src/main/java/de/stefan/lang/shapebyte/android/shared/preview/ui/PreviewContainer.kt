@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
 import de.stefan.lang.designsystem.theme.ShapeByteTheme
+import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviderMock
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.shapebyte.featureCore.platformdependencies.mocks.PackageDependencyProviderMock
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.mp.KoinPlatformTools
@@ -34,7 +34,7 @@ private fun StartKoinIfNeeded() {
     }
 
     val context = LocalContext.current
-    val platformDependencyProvider = PackageDependencyProviderMock(
+    val platformDependencyProvider = PlatformDependencyProviderMock(
         appContextProvider = ContextProvider(context),
     )
 

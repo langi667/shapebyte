@@ -1,11 +1,10 @@
-package de.stefan.lang.shapebyte.featureCore.platformdependencies.mocks
+package de.stefan.lang.foundationCore.api.platformdependencies
 
 import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
-import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
 
-class PackageDependencyProviderMock(
+class PlatformDependencyProviderMock(
     override val appContextProvider: ContextProvider = ContextProvider(Any()),
 ) : PlatformDependencyProviding {
     override val appInfo: AppInfo = AppInfo(

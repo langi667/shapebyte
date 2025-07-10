@@ -3,7 +3,7 @@ package de.stefanlang.shapebyte.domain
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.initializing.SharedInitializationState
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.shapebyte.SharedModule

@@ -33,7 +33,7 @@ kotlin {
             implementation(projects.shared.designsystem)
             implementation(projects.shared.features.navigation)
 
-            implementation(projects.shared.features.featureCore)
+
             implementation(projects.shared.features.featureToggles)
 
             api(projects.shared.features.workout.workoutData)

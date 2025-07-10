@@ -30,7 +30,6 @@ kotlin {
             implementation(projects.shared.core)
             implementation(projects.shared.core.test)
             implementation(projects.shared.foundation)
-            implementation(projects.shared.features.featureCore)
         }
 
         commonTest.dependencies {
