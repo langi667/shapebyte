@@ -1,6 +1,6 @@
 package de.stefan.lang.foundationCore.device.safearea
-import de.stefan.lang.coreutils.logging.Loggable
-import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coreutils.api.Loggable
+import de.stefan.lang.coreutils.api.Logging
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import kotlinx.coroutines.delay

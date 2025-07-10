@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.workoutDomain
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet

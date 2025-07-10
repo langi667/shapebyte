@@ -1,4 +1,4 @@
-package de.stefan.lang.coreutils.logging
+package de.stefan.lang.coreutils.api
 
 interface Logging {
     fun d(tag: String, message: String)

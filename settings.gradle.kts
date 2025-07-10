@@ -22,6 +22,9 @@ include(":shared:core:di")
 
 include(":shared:core:utils")
 include(":shared:core:utils:api")
+include(":shared:core:utils:impl")
+include(":shared:core:utils:test")
+
 include(":shared:core:test")
 include(":shared:core:coroutines")
 include(":shared:core:coroutines:api")

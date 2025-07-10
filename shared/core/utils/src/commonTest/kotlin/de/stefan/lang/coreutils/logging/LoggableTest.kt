@@ -1,6 +1,8 @@
 package de.stefan.lang.coreutils.logging
 
-import de.stefan.lang.coreutils.logging.mocks.RecordingLogger
+import de.stefan.lang.coreutils.api.Loggable
+import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.test.RecordingLogger
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

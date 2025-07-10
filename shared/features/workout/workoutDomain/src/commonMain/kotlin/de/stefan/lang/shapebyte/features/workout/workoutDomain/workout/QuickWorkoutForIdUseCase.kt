@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain.workout
 
-import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.coroutines.api.CoroutineScopeProviding
 import de.stefan.lang.foundationCore.loadstate.LoadState

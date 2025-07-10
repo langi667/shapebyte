@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationCore.assets.impl
 
-import de.stefan.lang.coreutils.logging.Loggable
-import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coreutils.api.Loggable
+import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.assets.FileAsset
 import de.stefan.lang.foundationCore.assets.FileAssetLoading

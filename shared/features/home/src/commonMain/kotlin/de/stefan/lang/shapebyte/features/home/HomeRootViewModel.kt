@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.home
 
-import de.stefan.lang.coreutils.logging.Logging
+import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.foundationCore.loadstate.asResultFlow
