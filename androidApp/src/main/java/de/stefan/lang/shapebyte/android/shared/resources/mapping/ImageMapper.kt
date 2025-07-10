@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.android.shared.resources.mapping
 
-import de.stefan.lang.foundationCore.resources.ResourceFile
-import de.stefan.lang.foundationCore.resources.ResourceFileMapping
+import de.stefan.lang.foundationCore.api.resources.ResourceFile
+import de.stefan.lang.foundationCore.api.resources.ResourceFileMapping
 import de.stefan.lang.shapebyte.android.R
 
 // TODO: generate automatically

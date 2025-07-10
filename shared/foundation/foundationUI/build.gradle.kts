@@ -33,7 +33,7 @@ kotlin {
             implementation (libs.koin.test)
 
             implementation(projects.shared.core)
-            implementation(projects.shared.foundation.foundationCore)
+            implementation(projects.shared.foundation.core)
         }
 
         commonTest.dependencies {
@@ -70,7 +70,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.junit.ktx)
     implementation(projects.shared.core)
-    implementation(projects.shared.foundation.foundationCore)
+    implementation(projects.shared.foundation.core)
 
     // TODO: check if needed
     androidTestImplementation(libs.mockk.android)

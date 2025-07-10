@@ -20,7 +20,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.shared.core)
-            api(projects.shared.foundation.foundationCore)
+            api(projects.shared.foundation.core)
             api(projects.shared.foundation.foundationUI)
         }
     }

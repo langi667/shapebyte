@@ -32,7 +32,10 @@ include(":shared:core:coroutines:impl")
 include(":shared:core:coroutines:test")
 
 include(":shared:foundation")
-include(":shared:foundation:foundationCore")
+include(":shared:foundation:core")
+include(":shared:foundation:core:api")
+include(":shared:foundation:core:impl")
+include(":shared:foundation:core:test")
 include(":shared:foundation:foundationUI")
 
 include(":shared:designsystem")
