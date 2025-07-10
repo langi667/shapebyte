@@ -2,9 +2,9 @@ package de.stefan.lang.coreutils
 
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.coreutils.CoreUtilsModule.contextProvider
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
 import de.stefan.lang.coreutils.impl.Logger
-import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.coreutils.test.SilentLogger
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.coroutines.CoroutinesModuleProviding

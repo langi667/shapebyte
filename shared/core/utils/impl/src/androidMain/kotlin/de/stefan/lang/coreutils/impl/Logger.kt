@@ -1,7 +1,7 @@
 package de.stefan.lang.coreutils.impl
 
 import android.util.Log
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Logging
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class Logger actual constructor() : Logging {

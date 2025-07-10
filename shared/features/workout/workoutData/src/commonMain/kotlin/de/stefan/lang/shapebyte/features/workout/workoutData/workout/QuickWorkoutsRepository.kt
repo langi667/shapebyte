@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData.workout
 
-import de.stefan.lang.coreutils.api.Loggable
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Loggable
+import de.stefan.lang.coreutils.api.logging.Logging
 
 // TODO: Test
 class QuickWorkoutsRepository(

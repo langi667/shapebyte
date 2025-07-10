@@ -1,6 +1,6 @@
 package de.stefan.lang.coreutils.test
 
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Logging
 
 class SilentLogger : Logging {
     override fun d(tag: String, message: String) { /* No op */ }

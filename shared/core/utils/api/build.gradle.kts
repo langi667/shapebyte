@@ -21,6 +21,15 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
         }
+
+        commonTest.dependencies {
+            implementation(projects.shared.core.test)
+            implementation(projects.shared.core.utils.test)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.koin.android)
+        }
     }
 }
 

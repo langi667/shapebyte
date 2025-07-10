@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.countdown
 
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState

@@ -41,7 +41,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
     private fun loggerProperty(): PropertySpec {
         return PropertySpec.builder(
             "logger",
-            ClassName("de.stefan.lang.coreutils.api", "Logging")
+            ClassName("de.stefan.lang.coreutils.api.logging", "Logging")
         )
             .initializer("SharedModule.logger()")
             .build()

@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationCore.impl.safearea
 
-import de.stefan.lang.coreutils.api.Loggable
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Loggable
+import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.foundationCore.api.safearea.SafeArea
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf

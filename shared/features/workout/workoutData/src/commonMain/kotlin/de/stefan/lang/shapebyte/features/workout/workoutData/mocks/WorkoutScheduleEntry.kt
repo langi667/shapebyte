@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData.mocks
 
-import de.stefan.lang.coreutils.progress.Progress
+import de.stefan.lang.coreutils.api.progress.Progress
 import kotlinx.datetime.Instant
 
 data class WorkoutScheduleEntry(

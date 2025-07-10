@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
-import de.stefan.lang.coreutils.api.Loggable
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Loggable
+import de.stefan.lang.coreutils.api.logging.Logging
 
 class FeatureToggleRepository(
     override val logger: Logging,

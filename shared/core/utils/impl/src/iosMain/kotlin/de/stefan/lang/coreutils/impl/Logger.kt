@@ -1,6 +1,6 @@
 package de.stefan.lang.coreutils.impl
 
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Logging
 import platform.Foundation.NSLog
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")

@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationCore.api.usecase
 
-import de.stefan.lang.coreutils.api.Loggable
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Loggable
+import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asDataFlow
 import kotlinx.coroutines.flow.MutableSharedFlow

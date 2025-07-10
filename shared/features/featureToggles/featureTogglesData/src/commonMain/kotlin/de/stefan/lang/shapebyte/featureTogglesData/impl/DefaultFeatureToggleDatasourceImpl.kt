@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.coreutils.api.Loggable
-import de.stefan.lang.coreutils.api.Logging
+import de.stefan.lang.coreutils.api.logging.Loggable
+import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.assets.FileAsset
 import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
