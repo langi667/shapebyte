@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
 import de.stefan.lang.core.CoreModule
-import de.stefan.lang.foundationCore.assets.mocks.FileAssetLoaderMock
 import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.test.assets.FileAssetLoaderMock
 import de.stefan.lang.shapebyte.featureTogglesData.BaseFeatureToggleDataTest
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 import kotlin.test.Test

@@ -3,10 +3,8 @@ package de.stefan.lang.foundationCore
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
 import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
-import de.stefan.lang.foundationCore.impl.assets.FileAssetLoader
-import de.stefan.lang.foundationCore.audio.AudioPlaying
-import de.stefan.lang.foundationCore.audio.impl.AudioPlayer
-import de.stefan.lang.foundationCore.audio.mocks.AudioPlayerMock
+import de.stefan.lang.foundationCore.api.audio.AudioPlaying
+import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 import de.stefan.lang.foundationCore.device.deviceinfo.DeviceInfo
 import de.stefan.lang.foundationCore.device.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.device.deviceinfo.mocks.DeviceInfoMock
@@ -14,10 +12,12 @@ import de.stefan.lang.foundationCore.device.devicesize.DeviceSizeCategoryProvide
 import de.stefan.lang.foundationCore.device.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.foundationCore.device.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundationCore.device.safearea.SafeAreaDetector
+import de.stefan.lang.foundationCore.impl.assets.FileAssetLoader
+import de.stefan.lang.foundationCore.impl.audio.AudioPlayer
 import de.stefan.lang.foundationCore.os.OperatingSystemInfoProviding
-import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
 import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.foundationCore.test.assets.mocks.FileAssetLoaderMock
+import de.stefan.lang.foundationCore.test.assets.FileAssetLoaderMock
+import de.stefan.lang.foundationCore.test.audio.AudioPlayerMock
 import org.koin.core.component.get
 
 interface FoundationCoreModuleProviding {

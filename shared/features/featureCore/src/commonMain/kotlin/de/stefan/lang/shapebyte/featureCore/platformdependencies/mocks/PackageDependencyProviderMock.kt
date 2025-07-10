@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.featureCore.platformdependencies.mocks
 
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
-import de.stefan.lang.foundationCore.app.AppInfo
-import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
+import de.stefan.lang.foundationCore.api.app.AppInfo
+import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDependencyProviding
 
 class PackageDependencyProviderMock(

@@ -4,8 +4,8 @@ import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coreutils.progress.Progress
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.designsystem.ColorDescriptor
-import de.stefan.lang.foundationCore.audio.AudioPlaying
-import de.stefan.lang.foundationCore.audio.AudioResource
+import de.stefan.lang.foundationCore.api.audio.AudioPlaying
+import de.stefan.lang.foundationCore.api.audio.AudioResource
 import de.stefan.lang.foundationCore.loadstate.LoadState
 import de.stefan.lang.foundationCore.loadstate.asResultFlow
 import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter

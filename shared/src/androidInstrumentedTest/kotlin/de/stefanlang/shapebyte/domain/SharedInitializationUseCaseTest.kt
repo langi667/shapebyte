@@ -7,10 +7,10 @@ import de.stefan.lang.shapebyte.featureCore.platformdependencies.PlatformDepende
 import de.stefan.lang.shapebyte.initializing.SharedInitializationState
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.foundationCore.app.AppInfo
-import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
+import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
+import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
 import io.mockk.verify
@@ -67,7 +67,9 @@ class SharedInitializationUseCaseTest: CoreTest() {
                 debugMode = true
             ),
             appContextProvider = ContextProvider(appContext),
-            appResourceProvider = AppResourceProvider(null),
+            appResourceProvider = AppResourceProvider(
+                null
+            ),
         )
 
         stopKoin() // needs to be called because koin from the test case is already running

@@ -2,8 +2,8 @@ package de.stefan.lang.shapebyte.featureCore.platformdependencies
 
 import android.content.Context
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
-import de.stefan.lang.foundationCore.app.AppInfo
-import de.stefan.lang.foundationCore.resources.impl.AppResourceProvider
+import de.stefan.lang.foundationCore.api.app.AppInfo
+import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 
 actual data class PlatformDependencyProvider(
     val applicationContext: Context,

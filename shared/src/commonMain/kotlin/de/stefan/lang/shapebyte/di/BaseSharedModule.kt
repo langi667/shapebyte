@@ -6,7 +6,7 @@ import de.stefan.lang.features.FeaturesModule
 import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundation.FoundationModule
 import de.stefan.lang.foundation.FoundationModuleProviding
-import de.stefan.lang.foundationCore.app.AppInfo
+import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.navigation.NavigationModule
 import de.stefan.lang.navigation.NavigationModuleProviding
 import de.stefan.lang.shapebyte.featureCore.FeatureCoreModule

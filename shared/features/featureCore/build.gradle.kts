@@ -21,6 +21,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.koin.android)
+            implementation(projects.shared.foundation.core)
         }
         commonMain.dependencies {
             implementation(libs.koin.core)
