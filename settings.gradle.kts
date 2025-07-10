@@ -42,12 +42,10 @@ include(":shared:foundation:ui:api")
 include(":shared:designsystem")
 include(":shared:designsystem:api")
 
-include(":shared:navigation")
-
 include(":shared:features")
 include(":shared:features:featureCore")
 include(":shared:features:featureTest")
-
+include(":shared:features:navigation")
 include(":shared:features:featureToggles")
 include(":shared:features:featureToggles:featureTogglesData")
 include(":shared:features:featureToggles:featureTogglesDomain")

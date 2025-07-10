@@ -50,8 +50,6 @@ kotlin {
             api(projects.shared.core)
             api(projects.shared.foundation)
             api(projects.shared.designsystem)
-            api(projects.shared.navigation)
-
             api(projects.shared.features)
         }
         commonTest.dependencies {

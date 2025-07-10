@@ -31,6 +31,8 @@ kotlin {
             api(projects.shared.features.featureToggles)
             api(projects.shared.features.workout)
             api(projects.shared.features.home)
+            api(projects.shared.features.navigation)
+
         }
 
         commonTest.dependencies {

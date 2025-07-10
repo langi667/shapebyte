@@ -30,8 +30,8 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation)
-            implementation(projects.shared.navigation)
 
+            implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.featureCore)
             implementation(projects.shared.features.featureToggles)
             implementation(projects.shared.features.workout)
