@@ -19,18 +19,18 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            // TODO: check if required !!!!
             api(libs.koin.android)
             api(libs.koin.core)
             api(projects.shared.core.utils)
         }
+
         commonMain.dependencies {
-            implementation(libs.kotlinx.coroutines.core)
-
-            api(libs.koin.core)
             api(projects.shared.core.di)
-
             api(projects.shared.core.utils)
             api(projects.shared.core.coroutines)
+
+            implementation(libs.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -41,10 +41,10 @@ kotlin {
         }
 
         iosMain.dependencies {
+            // TODO: check if required !!!!
             api(libs.koin.core)
             api(projects.shared.core.utils)
         }
-
     }
 }
 

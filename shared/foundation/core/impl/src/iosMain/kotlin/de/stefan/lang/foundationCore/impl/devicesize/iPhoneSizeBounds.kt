@@ -1,4 +1,4 @@
-package de.stefan.lang.foundationCore.device.devicesize
+package de.stefan.lang.foundationCore.impl.devicesize
 
 import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
 import de.stefan.lang.foundationCore.api.devicesize.Size

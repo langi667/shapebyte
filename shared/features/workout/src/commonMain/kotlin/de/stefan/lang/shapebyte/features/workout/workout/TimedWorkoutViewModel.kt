@@ -9,9 +9,9 @@ import de.stefan.lang.foundationCore.api.audio.AudioResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.foundationUI.buttons.ButtonState
-import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
-import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.foundationUi.api.buttons.ButtonState
+import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
+import de.stefan.lang.foundationUi.api.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationRequest
 import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.ExerciseExecutionInfo

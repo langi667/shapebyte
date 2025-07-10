@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
 import app.cash.turbine.test
+import de.stefan.lang.foundationUi.api.viewmodel.UIState
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
-import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.navigation.mocks.NavigationHandlerMock
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource

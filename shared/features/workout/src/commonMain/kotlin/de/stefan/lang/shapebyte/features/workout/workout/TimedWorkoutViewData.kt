@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.workout
 
 import de.stefan.lang.designsystem.ColorDescriptor
 import de.stefan.lang.foundationCore.api.assets.ImageAsset
-import de.stefan.lang.foundationUI.buttons.ButtonState
+import de.stefan.lang.foundationUi.api.buttons.ButtonState
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.ImageContaining
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
 

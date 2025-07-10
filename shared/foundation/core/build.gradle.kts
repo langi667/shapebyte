@@ -25,7 +25,6 @@ kotlin {
 
         commonMain.dependencies {
             api(projects.shared.foundation.core.api)
-
             implementation(libs.koin.core)
 
             implementation(projects.shared.foundation.core.impl)

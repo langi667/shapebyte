@@ -42,6 +42,14 @@ kotlin {
             implementation(projects.shared.foundation.core.test)
         }
 
+        iosTest.dependencies {
+            implementation(projects.shared.core.test)
+
+            implementation(projects.shared.foundation.core)
+            implementation(projects.shared.foundation.core.test)
+            implementation(projects.shared.foundation.core.impl)
+        }
+
     }
 }
 

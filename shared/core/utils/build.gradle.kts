@@ -18,7 +18,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-
         commonMain.dependencies {
             api(projects.shared.core.utils.api)
 
@@ -53,19 +52,4 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-
-    // TODO: check if needed
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation (libs.koin.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.junit.jupiter)
 }

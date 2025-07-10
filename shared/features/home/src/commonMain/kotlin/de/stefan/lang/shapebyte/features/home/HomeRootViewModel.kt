@@ -4,8 +4,8 @@ import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
-import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
-import de.stefan.lang.foundationUI.viewmodel.UIState
+import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
+import de.stefan.lang.foundationUi.api.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationRequestBuilder
 import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule

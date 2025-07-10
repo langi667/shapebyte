@@ -4,7 +4,6 @@ import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
 import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.foundationCore.api.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundationCore.api.devicesize.Size
-import de.stefan.lang.foundationCore.device.devicesize.iPhoneSizeBounds
 
 actual class DeviceSizeCategoryProvider actual constructor(
     actual override val screenSizeProvider: ScreenSizeProviding
