@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.android
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import de.stefan.lang.coreutils.logging.mocks.SilentLogger
+import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.assets.FileAsset
 import de.stefan.lang.foundationCore.assets.FileAssetLoading
@@ -36,7 +36,7 @@ class FileAssetLoaderTest {
     private fun createSUT(): FileAssetLoading {
         val loader = FileAssetLoader(
             appContextProvider = ContextProvider(context),
-            logging = SilentLogger()
+            logging = CoreUtilsModule.logger()
         )
 
         return loader
