@@ -30,8 +30,8 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         val fileSpec = FileSpec.builder(packageName, objectName)
             .addType(themeAdditions)
             //.addImport("de.stefan.lang.coreutils.api", "Logging")
-            .addImport("de.stefan.lang.designsystem", "Dimensions")
-            .addImport("de.stefan.lang.designsystem", "Spacings")
+            .addImport("de.stefan.lang.designsystem.api.core", "Dimensions")
+            .addImport("de.stefan.lang.designsystem.api.core", "Spacings")
             .addImport("de.stefan.lang.shapebyte", "SharedModule")
             .build()
 
@@ -80,7 +80,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         val property = PropertySpec.builder(
             name = "dimensions",
             type = ClassName(
-                packageName = "de.stefan.lang.designsystem", "Dimensions")
+                packageName = "de.stefan.lang.designsystem.api.core", "Dimensions")
         )
             .initializer(initializer)
             .build()
@@ -100,7 +100,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         val property = PropertySpec.builder(
             name = "spacings",
             type = ClassName(
-                packageName = "de.stefan.lang.designsystem", "Spacings")
+                packageName = "de.stefan.lang.designsystem.api.core", "Spacings")
         )
             .initializer(initializer)
             .build()

@@ -1,4 +1,4 @@
-package de.stefan.lang.designsystem
+package de.stefan.lang.designsystem.api.core
 
 sealed interface ColorDescriptor {
 

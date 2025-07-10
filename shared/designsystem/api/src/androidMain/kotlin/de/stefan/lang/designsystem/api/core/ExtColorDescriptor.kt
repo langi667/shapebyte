@@ -1,4 +1,4 @@
-package de.stefan.lang.designsystem
+package de.stefan.lang.designsystem.api.core
 
 // TODO: test
 val ColorDescriptor.colorHexValue: Long

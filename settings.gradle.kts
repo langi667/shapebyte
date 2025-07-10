@@ -40,6 +40,8 @@ include(":shared:foundation:ui")
 include(":shared:foundation:ui:api")
 
 include(":shared:designsystem")
+include(":shared:designsystem:api")
+
 include(":shared:navigation")
 
 include(":shared:features")

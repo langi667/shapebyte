@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -18,18 +17,32 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets {
+    sourceSets  {
         commonMain.dependencies {
-            api(projects.shared.designsystem.api)
-
-            implementation(projects.shared.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.shared.foundation.core)
         }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+
+            implementation (projects.shared.core.test)
+        }
+
+        androidUnitTest.dependencies {
+            implementation(projects.shared.core.test)
+            implementation(libs.junit.jupiter)
+            implementation(projects.shared.foundation.core)
+            implementation(projects.shared.foundation.core.test)
+        }
+
     }
 }
 
 android {
-    namespace = "de.stefan.lang.designsystem"
+    namespace = "de.stefan.lang.designsystem.api"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -50,19 +63,4 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-
-    // TODO: check if needed
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation (libs.koin.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.junit.jupiter)
 }
