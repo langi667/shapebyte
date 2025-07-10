@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.workout
 
 import de.stefan.lang.foundationCore.api.image.ImageResource
-import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 
 data class WorkoutHistoryEntry(

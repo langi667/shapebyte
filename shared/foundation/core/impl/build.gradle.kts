@@ -34,6 +34,14 @@ kotlin {
             implementation(libs.androidx.test.espresso.core)
             implementation(libs.junit.jupiter)
         }
+
+        androidUnitTest.dependencies {
+            implementation(projects.shared.core.test)
+            implementation(libs.junit.jupiter)
+            implementation(projects.shared.foundation.core)
+            implementation(projects.shared.foundation.core.test)
+        }
+
     }
 }
 

@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import app.cash.turbine.test
-import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle

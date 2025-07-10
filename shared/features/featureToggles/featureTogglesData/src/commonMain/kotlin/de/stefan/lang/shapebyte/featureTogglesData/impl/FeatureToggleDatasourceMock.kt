@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.featureTogglesData.impl
 
 import de.stefan.lang.coreutils.api.Loggable
 import de.stefan.lang.coreutils.api.Logging
-import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 

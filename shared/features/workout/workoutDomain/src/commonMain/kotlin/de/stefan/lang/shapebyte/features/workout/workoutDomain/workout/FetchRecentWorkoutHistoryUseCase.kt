@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.workoutDomain.workout
 import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.coroutines.api.CoroutineScopeProviding
-import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.featureTogglesDomain.BaseFeatureDataUseCase
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryRepository

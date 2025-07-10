@@ -2,8 +2,8 @@ package de.stefan.lang.shapebyte.features.home
 
 import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
-import de.stefan.lang.foundationCore.loadstate.LoadState
-import de.stefan.lang.foundationCore.loadstate.asResultFlow
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.foundationUI.viewmodel.BaseViewModel
 import de.stefan.lang.foundationUI.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationRequestBuilder

@@ -1,8 +1,8 @@
 package de.stefan.lang.foundationUI.dimension
 
-import de.stefan.lang.foundationCore.device.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundationCore.device.devicesize.DeviceSizeCategoryProviding
-import de.stefan.lang.foundationCore.device.devicesize.Size
+import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
+import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategoryProviding
+import de.stefan.lang.foundationCore.api.devicesize.Size
 import kotlin.math.min
 
 class DimensionProvider(

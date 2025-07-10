@@ -24,30 +24,19 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.coroutines.core)
-
-
             api(projects.shared.foundation.core.api)
+
+            implementation(libs.koin.core)
+
             implementation(projects.shared.foundation.core.impl)
             implementation(projects.shared.foundation.core.test)
             implementation(projects.shared.core)
-        }
-
-        iosMain.dependencies {
-            implementation(projects.shared.core)
-        }
-
-        commonTest.dependencies {
-            implementation(projects.shared.core.test)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.foundation.core.test"
+    namespace = "de.stefan.lang.foundation.core"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

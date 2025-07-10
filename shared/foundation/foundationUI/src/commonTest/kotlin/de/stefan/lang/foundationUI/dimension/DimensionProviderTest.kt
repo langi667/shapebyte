@@ -1,9 +1,9 @@
 package de.stefan.lang.foundationUI.dimension
 
-import de.stefan.lang.foundationCore.device.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundationCore.device.devicesize.Size
-import de.stefan.lang.foundationCore.device.devicesize.mocks.DeviceSizeCategoryProviderMock
-import de.stefan.lang.foundationCore.device.devicesize.mocks.ScreenSizeProviderMock
+import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
+import de.stefan.lang.foundationCore.api.devicesize.Size
+import de.stefan.lang.foundationCore.test.devicesize.DeviceSizeCategoryProviderMock
+import de.stefan.lang.foundationCore.test.devicesize.ScreenSizeProviderMock
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

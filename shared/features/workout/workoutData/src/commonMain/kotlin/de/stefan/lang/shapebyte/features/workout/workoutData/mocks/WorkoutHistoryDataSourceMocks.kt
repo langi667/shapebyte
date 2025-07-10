@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData.mocks
 
 import de.stefan.lang.coreutils.progress.Progress
-import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
 

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
-import de.stefan.lang.foundationCore.loadstate.asResultFlow
+import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

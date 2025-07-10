@@ -28,7 +28,7 @@ kotlin {
 }
 
 android {
-    namespace = "de.stefan.lang.core.utils.test"
+    namespace = "de.stefan.lang.foundation.core.test"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

@@ -3,8 +3,8 @@ package de.stefan.lang.shapebyte.featureTogglesDomain
 import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.coroutines.api.CoroutineScopeProviding
-import de.stefan.lang.foundationCore.loadstate.LoadState
-import de.stefan.lang.foundationCore.usecase.BaseDataUseCase
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.usecase.BaseDataUseCase
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
 import kotlinx.coroutines.flow.Flow

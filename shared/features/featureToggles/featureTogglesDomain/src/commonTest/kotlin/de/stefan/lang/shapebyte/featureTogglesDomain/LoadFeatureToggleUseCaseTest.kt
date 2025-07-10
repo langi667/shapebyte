@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
 import app.cash.turbine.test
-import de.stefan.lang.foundationCore.loadstate.asResultFlow
+import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureTogglesDataModule

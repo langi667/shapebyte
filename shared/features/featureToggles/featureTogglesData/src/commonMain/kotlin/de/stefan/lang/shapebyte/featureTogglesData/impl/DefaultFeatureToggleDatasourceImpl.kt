@@ -5,7 +5,7 @@ import de.stefan.lang.coreutils.api.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.assets.FileAsset
 import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
-import de.stefan.lang.foundationCore.loadstate.LoadState
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 import kotlinx.coroutines.withContext

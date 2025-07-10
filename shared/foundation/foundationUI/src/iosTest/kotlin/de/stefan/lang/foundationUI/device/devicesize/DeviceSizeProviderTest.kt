@@ -1,9 +1,8 @@
 package de.stefan.lang.foundationUI.device.devicesize
 
-import de.stefan.lang.foundationCore.device.devicesize.DeviceSizeCategoryProvider
-import de.stefan.lang.foundationCore.device.devicesize.Size
+import de.stefan.lang.foundationCore.api.devicesize.Size
 import de.stefan.lang.foundationCore.device.devicesize.iPhoneSizeBounds
-import de.stefan.lang.foundationCore.device.devicesize.mocks.ScreenSizeProviderMock
+import de.stefan.lang.foundationCore.test.devicesize.ScreenSizeProviderMock
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

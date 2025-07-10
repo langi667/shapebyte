@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import app.cash.turbine.test
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundationCore.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.featureToggles.FeatureId
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
