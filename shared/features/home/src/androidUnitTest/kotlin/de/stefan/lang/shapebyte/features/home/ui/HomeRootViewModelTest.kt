@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.home.ui
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationUi.api.viewmodel.UIState
@@ -23,7 +23,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class HomeRootViewModelTest : BaseHomeFeatureTest() {
-    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
+    private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
     @Test
     fun `initial state`() = test {
@@ -119,10 +119,10 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
         val recentHistoryFT = FeatureToggle(FeatureId.RECENT_HISTORY.name, recentHistoryState)
         val quickWorkoutsFT = FeatureToggle(FeatureId.QUICK_WORKOUTS.name, quickWorkoutsState)
 
-        every { featureToggleLoading.invoke(FeatureId.RECENT_HISTORY.name) } returns flowOf(
+        every { loadFeatureToggleUseCase.invoke(FeatureId.RECENT_HISTORY.name) } returns flowOf(
             LoadState.Success(recentHistoryFT),
         )
-        every { featureToggleLoading.invoke(FeatureId.QUICK_WORKOUTS.name) } returns flowOf(
+        every { loadFeatureToggleUseCase.invoke(FeatureId.QUICK_WORKOUTS.name) } returns flowOf(
             LoadState.Success(quickWorkoutsFT),
         )
 
@@ -134,12 +134,12 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
                 logger = get(),
                 coroutineContextProviding = get(),
                 coroutineScopeProviding = get(),
-                featureToggleLoading = featureToggleLoading,
+                loadFeatureToggleUseCase = loadFeatureToggleUseCase,
             ),
             quickWorkoutsUseCase = QuickWorkoutsUseCase(
                 repository = get(),
                 logger = get(),
-                featureToggleLoading = featureToggleLoading,
+                loadFeatureToggleUseCase = loadFeatureToggleUseCase,
                 scopeProvider = get(),
                 dispatcherProvider = get(),
             ),

@@ -24,12 +24,12 @@ open class BaseFeatureDataUseCase<T>(
     val featureToggle: String, // TODO: make optional
     protected val scope: CoroutineScope,
     protected val dispatcher: CoroutineDispatcher,
-    private val featureToggleLoading: FeatureToggleLoading,
+    private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     logger: Logging,
 ) : BaseDataUseCase<T>(logger) {
 
     private val featureEnabled: Flow<Boolean> by lazy {
-        featureToggleLoading.invoke(featureToggle)
+        loadFeatureToggleUseCase.invoke(featureToggle)
             .asDataFlow()
             .map {
                 it.isEnabled

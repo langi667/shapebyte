@@ -4,9 +4,9 @@ import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.coroutines.api.CoroutineScopeProviding
 import de.stefan.lang.featureToggles.api.BaseFeatureDataUseCase
-import de.stefan.lang.featureToggles.api.FeatureToggleLoading
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsError
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
@@ -18,13 +18,13 @@ class QuickWorkoutForIdUseCase(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
     coroutineScopeProvider: CoroutineScopeProviding,
-    featureToggleLoading: FeatureToggleLoading,
+    loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
 ) : BaseFeatureDataUseCase<Workout>(
     featureToggle = FeatureId.QUICK_WORKOUTS.name,
     logger = logger,
     scope = coroutineScopeProvider.createCoroutineScope(SupervisorJob()),
     dispatcher = coroutineContextProvider.iODispatcher(),
-    featureToggleLoading = featureToggleLoading,
+    loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
     operator fun invoke(id: Int): SharedFlow<LoadState<Workout>> {
         return super.invoke(

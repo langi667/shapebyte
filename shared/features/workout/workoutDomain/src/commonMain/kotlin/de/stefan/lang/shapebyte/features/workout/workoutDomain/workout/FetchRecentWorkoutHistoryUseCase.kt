@@ -4,9 +4,9 @@ import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.coroutines.api.CoroutineScopeProviding
 import de.stefan.lang.featureToggles.api.BaseFeatureDataUseCase
-import de.stefan.lang.featureToggles.api.FeatureToggleLoading
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 import kotlinx.coroutines.SupervisorJob
@@ -20,13 +20,13 @@ class FetchRecentWorkoutHistoryUseCase(
     logger: Logging,
     coroutineContextProviding: CoroutineContextProviding,
     coroutineScopeProviding: CoroutineScopeProviding,
-    featureToggleLoading: FeatureToggleLoading,
+    loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
 ) : BaseFeatureDataUseCase<List<WorkoutScheduleEntry>>(
     featureToggle = FeatureId.RECENT_HISTORY.name,
     logger = logger,
     dispatcher = coroutineContextProviding.iODispatcher(),
     scope = coroutineScopeProviding.createCoroutineScope(SupervisorJob()),
-    featureToggleLoading = featureToggleLoading,
+    loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
     operator fun invoke(
         today: Instant = Clock.System.now(),

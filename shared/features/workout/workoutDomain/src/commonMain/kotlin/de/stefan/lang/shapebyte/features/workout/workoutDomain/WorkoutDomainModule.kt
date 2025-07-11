@@ -46,7 +46,7 @@ object WorkoutDomainModule :
                     logger = get(),
                     coroutineContextProviding = get(),
                     coroutineScopeProviding = get(),
-                    featureToggleLoading = get(),
+                    loadFeatureToggleUseCase = get(),
                 )
             }
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
@@ -87,7 +87,7 @@ object WorkoutDomainModule :
                     logger = get(),
                     scopeProvider = get(),
                     dispatcherProvider = get(),
-                    featureToggleLoading = get(),
+                    loadFeatureToggleUseCase = get(),
                 )
             }
 
@@ -97,7 +97,7 @@ object WorkoutDomainModule :
                     logger = get(),
                     coroutineContextProvider = get(),
                     coroutineScopeProvider = get(),
-                    featureToggleLoading = get(),
+                    loadFeatureToggleUseCase = get(),
                 )
             }
 

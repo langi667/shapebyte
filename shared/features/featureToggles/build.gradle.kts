@@ -32,7 +32,7 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation.core)
-            implementation(projects.shared.features.featureToggles.featureTogglesDomain)
+            implementation(projects.shared.features.featureToggles.domain)
         }
 
         commonTest.dependencies {
@@ -64,10 +64,4 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-    testImplementation(project(":shared:core:coroutines"))
 }

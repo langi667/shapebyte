@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
@@ -22,7 +22,7 @@ import kotlin.test.assertEquals
 
 class QuickWorkoutForIdUseCaseTest : BaseWorkoutDomainTest() {
     private val repository: QuickWorkoutsRepository = mockk(relaxed = true)
-    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
+    private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
     private val validWorkoutId = 1
     private val invalidWorkoutId = -1
@@ -119,7 +119,7 @@ class QuickWorkoutForIdUseCaseTest : BaseWorkoutDomainTest() {
             FeatureToggleState.DISABLED
         }
 
-        every { featureToggleLoading.invoke(any()) } returns flowOf(
+        every { loadFeatureToggleUseCase.invoke(any()) } returns flowOf(
             LoadState.Success(
                 FeatureToggle(
                     FeatureId.QUICK_WORKOUTS.name,
@@ -150,7 +150,7 @@ class QuickWorkoutForIdUseCaseTest : BaseWorkoutDomainTest() {
             logger = WorkoutDomainModule.get(),
             coroutineContextProvider = WorkoutDomainModule.get(),
             coroutineScopeProvider = WorkoutDomainModule.get(),
-            featureToggleLoading = featureToggleLoading,
+            loadFeatureToggleUseCase = loadFeatureToggleUseCase,
         )
     }
 }

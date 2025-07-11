@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
@@ -85,7 +85,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         }
     }
 
-    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
+    private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
     @Test
     fun `test initial state`() = test {
@@ -365,7 +365,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
             FeatureToggleState.DISABLED
         }
 
-        every { featureToggleLoading.invoke(any()) } returns flowOf(
+        every { loadFeatureToggleUseCase.invoke(any()) } returns flowOf(
             LoadState.Success(
                 FeatureToggle(
                     FeatureId.RECENT_HISTORY.name,
@@ -381,7 +381,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                 logger = get(),
                 coroutineContextProvider = get(),
                 coroutineScopeProvider = get(),
-                featureToggleLoading = featureToggleLoading,
+                loadFeatureToggleUseCase = loadFeatureToggleUseCase,
             ),
             itemsExecutionBuilder = get(),
             dateStringFormatter = get(),

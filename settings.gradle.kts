@@ -49,7 +49,7 @@ include(":shared:features:featureToggles")
 include(":shared:features:featureToggles:api")
 
 include(":shared:features:featureToggles:data")
-include(":shared:features:featureToggles:featureTogglesDomain")
+include(":shared:features:featureToggles:domain")
 
 include(":shared:features:home")
 include(":shared:features:workout")

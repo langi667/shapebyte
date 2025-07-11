@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.workoutDomain
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.api.progress.Progress
 import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.featureToggles.api.FeatureId
@@ -25,7 +25,7 @@ import kotlin.test.assertIs
 class FetchRecentWorkoutHistoryUseCaseTest : BaseWorkoutDomainTest() {
 
     private val repository: WorkoutHistoryRepository = mockk(relaxed = true)
-    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
+    private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
     @Test
     fun `emit success if feature toggle is enabled`() = test {
@@ -64,7 +64,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseWorkoutDomainTest() {
             FeatureToggleState.DISABLED
         }
 
-        every { featureToggleLoading.invoke(any()) } returns flowOf(
+        every { loadFeatureToggleUseCase.invoke(any()) } returns flowOf(
             LoadState.Success(
                 FeatureToggle(
                     FeatureId.RECENT_HISTORY.name,
@@ -91,7 +91,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseWorkoutDomainTest() {
             logger = get(),
             coroutineContextProviding = get(),
             coroutineScopeProviding = get(),
-            featureToggleLoading = featureToggleLoading,
+            loadFeatureToggleUseCase = loadFeatureToggleUseCase,
         )
         return retVal
     }
