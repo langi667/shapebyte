@@ -33,6 +33,11 @@ kotlin {
             implementation(libs.androidx.test.ext.junit)
             implementation(libs.androidx.test.espresso.core)
             implementation(libs.junit.jupiter)
+            implementation(libs.mockk.android)
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
+            implementation (libs.koin.test)
+
         }
 
         androidUnitTest.dependencies {

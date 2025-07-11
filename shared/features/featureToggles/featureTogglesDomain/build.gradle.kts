@@ -30,12 +30,21 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation)
-            implementation(projects.shared.features.featureToggles.featureTogglesData)
+            implementation(projects.shared.features.featureToggles.api)
+            implementation(projects.shared.features.featureToggles.data)
         }
 
         commonTest.dependencies {
             implementation(projects.shared.core.test)
-            implementation(projects.shared.features.featureTest)
+            implementation(projects.shared.features.test)
+        }
+
+        androidUnitTest.dependencies {
+            implementation(libs.mockk.android)
+            implementation(projects.shared.core.test)
+            implementation(libs.junit.jupiter)
+            implementation(projects.shared.foundation.core)
+            implementation(projects.shared.foundation.core.test)
         }
     }
 }

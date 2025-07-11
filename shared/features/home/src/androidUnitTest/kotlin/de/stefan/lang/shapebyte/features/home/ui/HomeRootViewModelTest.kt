@@ -1,18 +1,20 @@
 package de.stefan.lang.shapebyte.features.home.ui
 
 import app.cash.turbine.test
+import de.stefan.lang.featureToggles.api.FeatureToggle
+import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationUi.api.viewmodel.UIState
-import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
-import de.stefan.lang.shapebyte.featureToggles.FeatureId
-import de.stefan.lang.navigation.mocks.NavigationHandlerMock
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
-import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.shapebyte.features.home.BaseHomeFeatureTest
-import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCase
+import io.mockk.every
+import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -21,9 +23,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class HomeRootViewModelTest : BaseHomeFeatureTest() {
-    // TODO: use mockk instead of manual mock
-    private val featureToggleDatasourceMock: FeatureToggleDatasourceMock
-        get() = FeatureTogglesModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
+    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
 
     @Test
     fun `initial state`() = test {
@@ -33,13 +33,6 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
 
     @Test
     fun `update should update state`() = test {
-        featureToggleDatasourceMock.setFeatureToggles(
-            listOf(
-                FeatureToggle(FeatureId.RECENT_HISTORY.name, FeatureToggleState.ENABLED),
-                FeatureToggle(FeatureId.QUICK_WORKOUTS.name, FeatureToggleState.ENABLED),
-            ),
-        )
-
         val sut = createSUT()
         sut.update()
 
@@ -55,16 +48,14 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
         }
     }
 
+
     @Test
     fun `state should be empty if feature toggles are disabled `() = test {
-        featureToggleDatasourceMock.setFeatureToggles(
-            listOf(
-                FeatureToggle(FeatureId.RECENT_HISTORY.name, FeatureToggleState.DISABLED),
-                FeatureToggle(FeatureId.QUICK_WORKOUTS.name, FeatureToggleState.DISABLED),
-            ),
+        val sut = createSUT(
+            recentHistoryState = FeatureToggleState.DISABLED,
+            quickWorkoutsState = FeatureToggleState.DISABLED
         )
 
-        val sut = createSUT()
         sut.update()
 
         sut.state.test {
@@ -81,14 +72,10 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
 
     @Test
     fun `state contains no history if feature is disabled`() = test {
-        featureToggleDatasourceMock.setFeatureToggles(
-            listOf(
-                FeatureToggle(FeatureId.RECENT_HISTORY.name, FeatureToggleState.DISABLED),
-                FeatureToggle(FeatureId.QUICK_WORKOUTS.name, FeatureToggleState.ENABLED),
-            ),
+        val sut = createSUT(
+            recentHistoryState = FeatureToggleState.DISABLED,
+            quickWorkoutsState = FeatureToggleState.ENABLED
         )
-
-        val sut = createSUT()
         sut.update()
 
         sut.state.test {
@@ -103,16 +90,13 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
         }
     }
 
+
     @Test
     fun `state contains no quick workouts if feature is disabled`() = test {
-        featureToggleDatasourceMock.setFeatureToggles(
-            listOf(
-                FeatureToggle(FeatureId.RECENT_HISTORY.name, FeatureToggleState.ENABLED),
-                FeatureToggle(FeatureId.QUICK_WORKOUTS.name, FeatureToggleState.DISABLED),
-            ),
+        val sut = createSUT(
+            recentHistoryState = FeatureToggleState.ENABLED,
+            quickWorkoutsState = FeatureToggleState.DISABLED
         )
-
-        val sut = createSUT()
         sut.update()
 
         sut.state.test {
@@ -127,9 +111,41 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
         }
     }
 
-    private fun createSUT(): HomeRootViewModel {
-        return HomeModule.homeRootViewModel(
-            navHandler = NavigationHandlerMock()
+    private fun createSUT(
+        recentHistoryState: FeatureToggleState = FeatureToggleState.ENABLED,
+        quickWorkoutsState: FeatureToggleState = FeatureToggleState.ENABLED,
+    ): HomeRootViewModel {
+
+        val recentHistoryFT = FeatureToggle(FeatureId.RECENT_HISTORY.name, recentHistoryState)
+        val quickWorkoutsFT = FeatureToggle(FeatureId.QUICK_WORKOUTS.name, quickWorkoutsState)
+
+        every { featureToggleLoading.invoke(FeatureId.RECENT_HISTORY.name) } returns flowOf(
+            LoadState.Success(recentHistoryFT),
+        )
+        every { featureToggleLoading.invoke(FeatureId.QUICK_WORKOUTS.name) } returns flowOf(
+            LoadState.Success(quickWorkoutsFT),
+        )
+
+        return HomeRootViewModel(
+            navigationHandler = mockk(relaxed = true),
+            currentWorkoutScheduleEntryUseCase = get(),
+            recentHistoryUseCase = FetchRecentWorkoutHistoryUseCase(
+                repository = get(),
+                logger = get(),
+                coroutineContextProviding = get(),
+                coroutineScopeProviding = get(),
+                featureToggleLoading = featureToggleLoading,
+            ),
+            quickWorkoutsUseCase = QuickWorkoutsUseCase(
+                repository = get(),
+                logger = get(),
+                featureToggleLoading = featureToggleLoading,
+                scopeProvider = get(),
+                dispatcherProvider = get(),
+            ),
+            navigationRequestBuilder = get(),
+            logger = get(),
+            coroutineContextProvider = get(),
         )
     }
 }

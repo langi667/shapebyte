@@ -1,22 +1,26 @@
 package de.stefan.lang.shapebyte.features.workout
 
 import app.cash.turbine.test
-import de.stefan.lang.foundationCore.FoundationCoreModule
+import de.stefan.lang.featureToggles.api.FeatureToggle
+import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.foundationCore.api.image.ImageResource
+import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUi.api.viewmodel.UIState
-import de.stefan.lang.shapebyte.featureToggles.FeatureId
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
-import de.stefan.lang.navigation.mocks.NavigationHandlerMock
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
-import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutForIdUseCase
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
-
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -25,16 +29,63 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
-    // TODO: use mockk instead of manual mock
-    private val datasource: QuickWorkoutsDatasourceMocks
-        get() = WorkoutModule.get<QuickWorkoutsDatasource>() as QuickWorkoutsDatasourceMocks
+    private val dateTimeStringFormatter: DateTimeStringFormatter by lazy {
+        get()
+    }
 
-    // TODO: use mockk instead of manual mock
-    private val featureDatasource: FeatureToggleDatasourceMock
-        get() = WorkoutModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
+    private val workouts = listOf(
+        Workout(
+            id = 1,
+            name = "Interval",
+            shortDescription = "Quick ",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(5, 5, 2),
+        ),
+        Workout(
+            id = 2,
+            name = "HIIT Core",
+            shortDescription = "20 min, Core, Legs",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+        Workout(
+            id = 3,
+            name = "Sets & Reps",
+            shortDescription = "3 Sets 6 exercises",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+        Workout(
+            id = 4,
+            name = "Warmup",
+            shortDescription = "40, min, Interval 15 sec.",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+        Workout(
+            id = 5,
+            name = "Cooldown",
+            shortDescription = "20, min, Interval 1 Minute",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+    )
 
-    private val dateTimeStringFormatter: DateTimeStringFormatter
-        get() = FoundationCoreModule.dateTimeStringFormatter()
+    private val repository: QuickWorkoutsRepository = mockk(relaxed = true) {
+        coEvery { fetchQuickWorkouts() } returns LoadState.Success(workouts)
+        coEvery { workoutForId(any()) } coAnswers {
+            val workoutIdArg = invocation.args[0] as Int
+            val workout = workouts.firstOrNull { it.id == workoutIdArg }
+
+            if (workout == null) {
+                LoadState.Error(QuickWorkoutsError.WorkoutDoesNotExist(workoutIdArg))
+            } else {
+                LoadState.Success(workout)
+            }
+        }
+    }
+
+    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
 
     @Test
     fun `test initial state`() = test {
@@ -44,19 +95,14 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         assertFalse(sut.isRunning)
     }
 
+
     @Test
     fun `load should load workout data`() = test {
-        featureDatasource.addFeatureToggle(
-            FeatureToggle(
-                FeatureId.QUICK_WORKOUTS.name,
-                FeatureToggleState.ENABLED,
-            ),
-        )
-
         val sut = createSUT()
         val workoutId = 1
-        val workout = datasource.workouts.firstOrNull { it.id == workoutId }
-        sut.load(1)
+        val workout = workouts.first { it.id == workoutId }
+
+        sut.load(workoutId)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -70,6 +116,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         }
     }
 
+
     @Test
     fun `start should do nothing if update was not called`() = test {
         val sut = createSUT()
@@ -81,17 +128,11 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         }
     }
 
+
     @Test
     fun `start should run the workout till finished`() = test {
-        featureDatasource.addFeatureToggle(
-            FeatureToggle(
-                FeatureId.QUICK_WORKOUTS.name,
-                FeatureToggleState.ENABLED,
-            ),
-        )
-
         val sut = createSUT()
-        val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
+        val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
         sut.load(workout.id)
@@ -179,17 +220,11 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         }
     }
 
+
     @Test
     fun `pause must pause correctly`() = test {
-        featureDatasource.addFeatureToggle(
-            FeatureToggle(
-                FeatureId.QUICK_WORKOUTS.name,
-                FeatureToggleState.ENABLED,
-            ),
-        )
-
         val sut = createSUT()
-        val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
+        val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
         sut.load(workout.id)
@@ -226,10 +261,13 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                     }
                 }
             } while (isRunning)
-            
+
             val item = awaitItem()
             assertEquals(TimedWorkoutViewModel.LaunchState.Pause, sut.launchState)
-            assertEquals(TimedWorkoutViewModel.LaunchState.Pause, item.dataOrNull<TimedWorkoutViewData>()?.launchState)
+            assertEquals(
+                TimedWorkoutViewModel.LaunchState.Pause,
+                item.dataOrNull<TimedWorkoutViewData>()?.launchState
+            )
 
             expectNoEvents()
         }
@@ -247,8 +285,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                 if (item.data.launchState == TimedWorkoutViewModel.LaunchState.Running) {
                     elapsed.add(item.data.elapsedTotal)
                     remaining.add(item.data.remainingTotal)
-                }
-                else if (item.data.launchState == TimedWorkoutViewModel.LaunchState.Finished) {
+                } else if (item.data.launchState == TimedWorkoutViewModel.LaunchState.Finished) {
                     isRunning = false
                 }
 
@@ -269,15 +306,8 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
 
     @Test
     fun `stop must stop correctly`() = test {
-        featureDatasource.addFeatureToggle(
-            FeatureToggle(
-                FeatureId.QUICK_WORKOUTS.name,
-                FeatureToggleState.ENABLED,
-            ),
-        )
-
         val sut = createSUT()
-        val workout = datasource.workouts.first { it.type is WorkoutType.Timed.Interval }
+        val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
 
         sut.load(workout.id)
 
@@ -316,16 +346,48 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
 
             val item = awaitItem()
             assertEquals(TimedWorkoutViewModel.LaunchState.Finished, sut.launchState)
-            assertEquals(TimedWorkoutViewModel.LaunchState.Finished, item.dataOrNull<TimedWorkoutViewData>()?.launchState)
+            assertEquals(
+                TimedWorkoutViewModel.LaunchState.Finished,
+                item.dataOrNull<TimedWorkoutViewData>()?.launchState
+            )
 
             expectNoEvents()
         }
     }
     // TODO: test error state if implemented
 
-    private fun createSUT(): TimedWorkoutViewModel {
-        return WorkoutModule.timedWorkoutViewModel(
-            navHandler = NavigationHandlerMock()
+    private fun createSUT(
+        featureToggleEnabled: Boolean = true
+    ): TimedWorkoutViewModel {
+        val ffState = if (featureToggleEnabled) {
+            FeatureToggleState.ENABLED
+        } else {
+            FeatureToggleState.DISABLED
+        }
+
+        every { featureToggleLoading.invoke(any()) } returns flowOf(
+            LoadState.Success(
+                FeatureToggle(
+                    FeatureId.RECENT_HISTORY.name,
+                    ffState
+                )
+            )
+        )
+
+        return TimedWorkoutViewModel(
+            navigationHandler = mockk(relaxed = true),
+            quickWorkoutForIdUseCase = QuickWorkoutForIdUseCase(
+                repository = repository,
+                logger = get(),
+                coroutineContextProvider = get(),
+                coroutineScopeProvider = get(),
+                featureToggleLoading = featureToggleLoading,
+            ),
+            itemsExecutionBuilder = get(),
+            dateStringFormatter = get(),
+            logger = get(),
+            audioPlayer = get(),
+            coroutineContextProvider = get(),
         )
     }
 }

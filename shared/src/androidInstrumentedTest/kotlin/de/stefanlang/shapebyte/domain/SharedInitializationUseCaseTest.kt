@@ -23,12 +23,8 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class SharedInitializationUseCaseTest: CoreTest() {
-
-    //override val autostartKoin: Boolean = false
-
     @Test
     @DisplayName("test initial state")
     fun initialState() = test {

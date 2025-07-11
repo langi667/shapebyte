@@ -1,85 +1,126 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import app.cash.turbine.test
+import de.stefan.lang.featureToggles.api.FeatureToggle
+import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.shapebyte.featureToggles.FeatureId
-import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
-import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
+import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCase
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class QuickWorkoutsUseCaseTest : BaseWorkoutDomainTest() {
-    private val featureTogglesDCMock: FeatureToggleDatasourceMock
-        get() = FeatureTogglesModule.get<FeatureToggleDatasource>() as FeatureToggleDatasourceMock
+    private val quickWorkoutsRepository: QuickWorkoutsRepository = mockk(relaxed = true)
+    private val featureToggleLoading: FeatureToggleLoading = mockk(relaxed = true)
 
-    private val quickWorkoutsDatasourceMock: QuickWorkoutsDatasourceMocks
-        get() = WorkoutDomainModule.get<QuickWorkoutsDatasource>() as QuickWorkoutsDatasourceMocks
+    private val workouts = listOf(
+        Workout(
+            id = 1,
+            name = "Interval",
+            shortDescription = "Quick ",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(5, 5, 2),
+        ),
+        Workout(
+            id = 2,
+            name = "HIIT Core",
+            shortDescription = "20 min, Core, Legs",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+        Workout(
+            id = 3,
+            name = "Sets & Reps",
+            shortDescription = "3 Sets 6 exercises",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+        Workout(
+            id = 4,
+            name = "Warmup",
+            shortDescription = "40, min, Interval 15 sec.",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+        Workout(
+            id = 5,
+            name = "Cooldown",
+            shortDescription = "20, min, Interval 1 Minute",
+            image = ImageResource(id = "sprints.png"),
+            type = WorkoutType.Timed.Interval(30, 30, 20),
+        ),
+    )
 
     @Test
     fun `emit Success if Feature Toggle is enabled`() = test {
-        featureTogglesDCMock.setFeatureToggles(
-            listOf(
-                FeatureToggle(FeatureId.QUICK_WORKOUTS.name, FeatureToggleState.ENABLED),
-            ),
-        )
-
         val sut = createSUT()
+
         sut.invoke().test {
             var item = awaitItem()
             assertIs<LoadState.Loading>(item)
 
             item = awaitItem()
             val successState = item as LoadState.Success
-            assertEquals(quickWorkoutsDatasourceMock.workouts, successState.data)
+            assertEquals(workouts, successState.data)
             expectNoEvents()
         }
     }
 
     @Test
     fun `emit failure if Feature Toggle is disabled`() = test {
-        featureTogglesDCMock.setFeatureToggles(
-            listOf(
-                FeatureToggle(FeatureId.QUICK_WORKOUTS.name, FeatureToggleState.DISABLED),
-            ),
+        val sut = createSUT(isToggleEnabled = false)
+        sut.invoke().test {
+            val item = awaitItem()
+            assertIs<LoadState.Loading>(item)
+
+            val failure = awaitItem() as LoadState.Error
+            assertEquals(QuickWorkoutsError.FeatureDisabled, failure.reason)
+            expectNoEvents()
+        }
+    }
+
+    private fun createSUT(
+        isToggleEnabled: Boolean = true,
+        workouts: List<Workout> = this.workouts
+    ): QuickWorkoutsUseCase {
+
+        val ffState = if (isToggleEnabled) {
+            FeatureToggleState.ENABLED
+        } else {
+            FeatureToggleState.DISABLED
+        }
+
+        every { featureToggleLoading.invoke(any()) } returns flowOf(
+            LoadState.Success(
+                FeatureToggle(
+                    FeatureId.QUICK_WORKOUTS.name,
+                    ffState
+                )
+            )
         )
 
-        val sut = createSUT()
-        sut.invoke().test {
-            val item = awaitItem()
-            assertIs<LoadState.Loading>(item)
+        coEvery { quickWorkoutsRepository.fetchQuickWorkouts() } returns LoadState.Success(workouts)
 
-            val failure = awaitItem() as LoadState.Error
-            assertEquals(QuickWorkoutsError.FeatureDisabled, failure.reason)
-            expectNoEvents()
-        }
-    }
+        val retVal = QuickWorkoutsUseCase(
+            repository =  quickWorkoutsRepository,
+            scopeProvider = WorkoutDomainModule.get(),
+            dispatcherProvider = WorkoutDomainModule.get(),
+            logger = WorkoutDomainModule.get(),
+            featureToggleLoading = featureToggleLoading,
+        )
 
-    @Test
-    fun `emit failure if Feature Toggle is not set`() = test {
-        featureTogglesDCMock.setFeatureToggles(emptyList())
-
-        val sut = createSUT()
-        sut.invoke().test {
-            val item = awaitItem()
-            assertIs<LoadState.Loading>(item)
-
-            val failure = awaitItem() as LoadState.Error
-            assertEquals(QuickWorkoutsError.FeatureDisabled, failure.reason)
-            expectNoEvents()
-        }
-    }
-
-    private fun createSUT(): QuickWorkoutsUseCase {
-        val retVal = WorkoutDomainModule.quickWorkoutsUseCase()
         return retVal
     }
 }

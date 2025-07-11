@@ -22,6 +22,10 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.koin.android)
         }
+
+        androidUnitTest.dependencies {
+            implementation(libs.mockk.android)
+        }
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
@@ -38,7 +42,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.test)
-            implementation(projects.shared.features.featureTest)
+            implementation(projects.shared.features.test)
         }
     }
 }
@@ -81,5 +85,5 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
-    androidTestImplementation(projects.shared.features.featureTest)
+    androidTestImplementation(projects.shared.features.test)
 }

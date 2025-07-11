@@ -23,6 +23,8 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
+            api(projects.shared.features.featureToggles.api)
+
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
@@ -30,14 +32,12 @@ kotlin {
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation.core)
-
-            api(projects.shared.features.featureToggles.featureTogglesData)
-            api(projects.shared.features.featureToggles.featureTogglesDomain)
+            implementation(projects.shared.features.featureToggles.featureTogglesDomain)
         }
 
         commonTest.dependencies {
             implementation(projects.shared.core.test)
-            implementation(projects.shared.features.featureTest)
+            implementation(projects.shared.features.test)
         }
     }
 }

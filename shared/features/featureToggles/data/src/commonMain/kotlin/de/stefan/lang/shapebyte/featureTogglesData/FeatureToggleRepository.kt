@@ -1,0 +1,11 @@
+package de.stefan.lang.shapebyte.featureTogglesData
+
+import de.stefan.lang.coreutils.api.logging.Loggable
+import de.stefan.lang.coreutils.api.logging.Logging
+
+class FeatureToggleRepository(
+    override val logger: Logging,
+    internal val dataSource: FeatureToggleDatasource,
+) : Loggable {
+    suspend fun fetchFeatureToggle(identifier: String) = dataSource.fetchFeatureToggle(identifier)
+}

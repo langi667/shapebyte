@@ -1,9 +1,10 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
 import app.cash.turbine.test
+import de.stefan.lang.featureToggles.api.FeatureToggle
+import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.featureToggles.api.FeatureToggleUseCase
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureTogglesDataModule
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleError

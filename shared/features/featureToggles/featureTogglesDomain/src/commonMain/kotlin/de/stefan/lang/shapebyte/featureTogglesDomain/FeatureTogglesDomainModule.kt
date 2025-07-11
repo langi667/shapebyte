@@ -1,49 +1,60 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
 import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.featureToggles.api.FeatureToggleLoading
+import de.stefan.lang.featureToggles.api.FeatureToggleUseCase
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureTogglesDataModule
 import de.stefan.lang.shapebyte.featureTogglesData.impl.DefaultFeatureToggleDatasourceImpl
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.shapebyte.featureTogglesDomain.impl.LoadFeatureToggleUseCase
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 interface FeatureTogglesDomainModuleProviding {
-    fun loadFeatureToggleUseCase(): LoadFeatureToggleUseCase
+    fun featureTogglesLoader(): FeatureToggleLoading
     fun featureToggleUseCase(featureId: String): FeatureToggleUseCase
 }
 
 object FeatureTogglesDomainModule :
-    DIModuleDeclaration(
-        allEnvironments = {
-            factory<FeatureToggleUseCase> { (featureId: String) ->
-                FeatureToggleUseCase(
-                    featureId = featureId,
-                    loadFeatureToggleUseCase = get(),
-                )
-            }
-            factory<LoadFeatureToggleUseCase> {
-                LoadFeatureToggleUseCase(
-                    logger = get(),
-                    repository = get(),
-                    coroutineScopeProviding = get(),
-                    coroutineContextProviding = get(),
-                )
-            }
-        },
-        appEnvironmentOnly = {
-            single<FeatureToggleDatasource> {
-                DefaultFeatureToggleDatasourceImpl(
-                    logger = get(),
-                    assetLoader = get(),
-                    coroutineContextProviding = get(),
-                )
-            }
-        },
-        testEnvironmentOnly = {
-            single<FeatureToggleDatasource> { FeatureToggleDatasourceMock(logger = get()) }
-        },
+    RootDIModule(
+        providedModule = DIModuleDeclaration(
+            allEnvironments = {
+                factory<FeatureToggleUseCase> { (featureId: String) ->
+                    FeatureToggleUseCase(
+                        featureId = featureId,
+                        featureTogglesLoader = get(),
+                    )
+                }
+                factory<FeatureToggleLoading> {
+                    LoadFeatureToggleUseCase(
+                        logger = get(),
+                        repository = get(),
+                        coroutineScopeProviding = get(),
+                        coroutineContextProviding = get(),
+                    )
+                }
+            },
+            appEnvironmentOnly = {
+                single<FeatureToggleDatasource> {
+                    DefaultFeatureToggleDatasourceImpl(
+                        logger = get(),
+                        assetLoader = get(),
+                        coroutineContextProviding = get(),
+                    )
+                }
+            },
+            testEnvironmentOnly = {
+                single<FeatureToggleDatasource> { FeatureToggleDatasourceMock(logger = get()) }
+            },
+        ),
+        diModules = listOf(
+            FeatureTogglesDataModule,
+        ),
     ),
     FeatureTogglesDomainModuleProviding {
-    override fun loadFeatureToggleUseCase(): LoadFeatureToggleUseCase = get()
-    override fun featureToggleUseCase(featureId: String): FeatureToggleUseCase = get(parameters = { parametersOf(featureId) })
+    override fun featureTogglesLoader(): FeatureToggleLoading = get()
+    override fun featureToggleUseCase(featureId: String): FeatureToggleUseCase =
+        get(parameters = { parametersOf(featureId) })
 }

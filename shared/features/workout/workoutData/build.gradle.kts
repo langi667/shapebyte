@@ -36,7 +36,11 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.test)
-            implementation(projects.shared.features.featureTest)
+            implementation(projects.shared.features.test)
+        }
+
+        androidUnitTest.dependencies {
+            implementation(libs.mockk.android)
         }
     }
 }

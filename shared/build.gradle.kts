@@ -58,7 +58,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
             implementation (projects.shared.core.test)
-            implementation (projects.shared.features.featureTest)
+            implementation (projects.shared.features.test)
         }
     }
 
@@ -120,7 +120,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
     androidTestImplementation(projects.shared.core.test)
-    androidTestImplementation(projects.shared.features.featureTest)
+    androidTestImplementation(projects.shared.features.test)
 }
 
 tasks.register("generateDesignSystemIOS") {

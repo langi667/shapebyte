@@ -32,7 +32,7 @@ interface WorkoutDomainModuleProviding {
     ): RepetitiveItemExecution
 
     fun quickWorkoutsUseCase(): QuickWorkoutsUseCase
-    fun createQuickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase
+    fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase
     fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution
     fun itemsExecutionBuilder(): ItemsExecutionBuilder
 }
@@ -46,6 +46,7 @@ object WorkoutDomainModule :
                     logger = get(),
                     coroutineContextProviding = get(),
                     coroutineScopeProviding = get(),
+                    featureToggleLoading = get(),
                 )
             }
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
@@ -86,6 +87,7 @@ object WorkoutDomainModule :
                     logger = get(),
                     scopeProvider = get(),
                     dispatcherProvider = get(),
+                    featureToggleLoading = get(),
                 )
             }
 
@@ -95,6 +97,7 @@ object WorkoutDomainModule :
                     logger = get(),
                     coroutineContextProvider = get(),
                     coroutineScopeProvider = get(),
+                    featureToggleLoading = get(),
                 )
             }
 
@@ -134,7 +137,7 @@ object WorkoutDomainModule :
     )
 
     override fun quickWorkoutsUseCase(): QuickWorkoutsUseCase = get()
-    override fun createQuickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = get()
+    override fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = get()
 
     override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
         parameters = {
