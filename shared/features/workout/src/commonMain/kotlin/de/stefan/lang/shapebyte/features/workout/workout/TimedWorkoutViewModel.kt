@@ -10,8 +10,9 @@ import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUi.api.buttons.ButtonState
+import de.stefan.lang.foundationUi.api.intent.UIIntent
+import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
-import de.stefan.lang.foundationUi.api.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationRequest
 import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.ExerciseExecutionInfo
@@ -72,6 +73,11 @@ class TimedWorkoutViewModel(
     private var itemsExecution: ItemsExecution? = null
     private var loadWorkoutJob: Job? = null
 
+    override fun intent(intent: UIIntent) {
+        // TODO: Implement intent
+    }
+
+    // TODO: map to Intent
     fun load(workoutId: Int) {
         _state.value = UIState.Loading
 

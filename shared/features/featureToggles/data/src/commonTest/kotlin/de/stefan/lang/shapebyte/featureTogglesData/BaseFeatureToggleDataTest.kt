@@ -7,7 +7,7 @@ import org.koin.core.module.Module
 open class BaseFeatureToggleDataTest : FeatureTest() {
     override val testModules: List<Module>
         get() = super.testModules + listOf(
-            CoreModule.testModule,
-            FeatureTogglesDataModule.testModule,
+            CoreModule.testModules,
+            FeatureTogglesDataModule.testModules,
         )
 }

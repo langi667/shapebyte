@@ -1,4 +1,4 @@
-package de.stefan.lang.foundationUi.api.viewmodel
+package de.stefan.lang.foundationUi.api.state
 
 sealed class UIState {
     data object Idle : UIState()

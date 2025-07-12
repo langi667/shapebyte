@@ -27,7 +27,7 @@ struct HomeRootView: View, Loggable {
                 self.viewState = currState
             }
         }
-        .onAppear { viewModel.update() }
+        .onAppear { viewModel.intent(intent: HomeRootUIIntent.Update() ) }
     }
 
     init(navHandling: any NavigationRequestHandling) {

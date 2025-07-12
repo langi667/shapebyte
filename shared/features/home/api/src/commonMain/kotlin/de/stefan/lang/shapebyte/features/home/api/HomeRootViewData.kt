@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.home
+package de.stefan.lang.shapebyte.features.home.api
 
 import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry

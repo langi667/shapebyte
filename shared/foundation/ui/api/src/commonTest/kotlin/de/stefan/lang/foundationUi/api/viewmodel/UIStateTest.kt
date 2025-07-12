@@ -1,6 +1,7 @@
 package de.stefan.lang.foundationUi.api.viewmodel
 
 import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.foundationUi.api.state.UIState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

@@ -263,7 +263,6 @@ private struct TimeLabel: View {
     }
 }
 
-// TODO: snapshot tests
 struct TimedWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         snapshots.previews.previewLayout(.device)

@@ -38,7 +38,7 @@ import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundationCore.api.assets.ImageAsset
 import de.stefan.lang.foundationUi.api.buttons.ButtonState
-import de.stefan.lang.foundationUi.api.viewmodel.UIState
+import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge

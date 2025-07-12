@@ -78,6 +78,7 @@ object WorkoutModule :
             parametersOf(navHandler)
         },
     )
+
     override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         get(
             parameters = {

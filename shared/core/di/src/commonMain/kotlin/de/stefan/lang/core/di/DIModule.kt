@@ -5,7 +5,7 @@ import org.koin.core.module.Module
 
 interface DIModule : KoinComponent {
     val module: Module
-    val testModule: Module
+    val testModules: Module
 }
 
 open class RootDIModule(
@@ -14,7 +14,7 @@ open class RootDIModule(
 ) : DIModule {
     private val allModules = (listOf(providedModule) + diModules)
     override val module: Module = this.joinModules(allModules.map { it.module })
-    override val testModule: Module = this.joinModules(allModules.map { it.testModule })
+    override val testModules: Module = this.joinModules(allModules.map { it.testModules })
 
     constructor(diModules: List<DIModule>) : this(
         providedModule = DIModuleDeclaration(allEnvironments = {}),

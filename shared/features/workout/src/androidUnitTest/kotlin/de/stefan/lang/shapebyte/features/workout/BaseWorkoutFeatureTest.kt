@@ -6,7 +6,7 @@ import org.koin.core.module.Module
 
 open class BaseWorkoutFeatureTest: FeatureTest() {
     override val testModules: List<Module> = super.testModules + listOf(
-        FeatureTogglesModule.testModule,
-        WorkoutModule.testModule
+        FeatureTogglesModule.testModules,
+        WorkoutModule.testModules
     )
 }

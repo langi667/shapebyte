@@ -5,6 +5,9 @@ import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationUi.api.event.UIEvent
 import de.stefan.lang.foundationUi.api.event.UIEventTransmitting
+import de.stefan.lang.foundationUi.api.intent.UIIntentHandling
+import de.stefan.lang.foundationUi.api.state.UIState
+import de.stefan.lang.foundationUi.api.state.UIStateProviding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -14,7 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 expect abstract class BaseViewModel(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
-) : Loggable, UIStateProvider, UIEventTransmitting {
+) : Loggable, UIStateProviding, UIEventTransmitting, UIIntentHandling {
     val scope: CoroutineScope
 
     override val logger: Logging

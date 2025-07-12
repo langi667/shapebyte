@@ -1,7 +1,7 @@
-package de.stefan.lang.foundationUi.api.viewmodel
+package de.stefan.lang.foundationUi.api.state
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface UIStateProvider {
+interface UIStateProviding {
     val state: StateFlow<UIState>
 }

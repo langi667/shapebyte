@@ -2,8 +2,9 @@ package de.stefan.lang.shapebyte.features.workout.countdown
 
 import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
+import de.stefan.lang.foundationUi.api.intent.UIIntent
+import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
-import de.stefan.lang.foundationUi.api.viewmodel.UIState
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.None
@@ -14,12 +15,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-// TODO: there is an ItemSetsViewModel in original code, check if needed later
 class CountdownItemSetsViewModel(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
 ) : BaseViewModel(logger, coroutineContextProvider) {
-    companion object {
+    companion object Companion {
         private const val TIMER_OFFSET = 100L
     }
 
@@ -32,7 +32,19 @@ class CountdownItemSetsViewModel(
     override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>> = _state
     private var itemSets: List<ItemSet.Timed.Seconds>? = null
 
-    fun start(itemSets: List<ItemSet.Timed.Seconds>) {
+    override fun intent(intent: UIIntent) {
+        when (intent) {
+            is CountdownItemSetsUIIntent.Start -> {
+                start(intent.itemSets)
+            }
+            else -> {
+                logE("Unhandled intent $intent")
+            }
+        }
+    }
+
+    // TODO: map to intent
+    private fun start(itemSets: List<ItemSet.Timed.Seconds>) {
         // TODO: check if started already
         this.itemSets = itemSets
 

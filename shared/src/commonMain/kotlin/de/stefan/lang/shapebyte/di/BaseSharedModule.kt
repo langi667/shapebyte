@@ -34,10 +34,10 @@ abstract class BaseSharedModule :
             FeaturesModule.module
 
     val testModules =
-        CoreModule.testModule +
-            FoundationModule.testModule +
-            NavigationModule.testModule +
-            FeaturesModule.testModule
+        CoreModule.testModules +
+            FoundationModule.testModules +
+            NavigationModule.testModules +
+            FeaturesModule.testModules
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }
 

@@ -19,7 +19,7 @@ import org.koin.test.KoinTest
 @RunWith(AndroidJUnit4::class)
 class FileAssetLoaderTest: CoreTest(), KoinTest {
     override val testModules: List<Module> = listOf(
-        CoreModule.testModule,
+        CoreModule.testModules,
     )
 
     private val context: Context = InstrumentationRegistry.getInstrumentation().context

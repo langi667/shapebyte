@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -18,40 +17,39 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
-
-        androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
-        }
+    sourceSets  {
         commonMain.dependencies {
-            api(projects.shared.features.home.api)
-
-            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.koin.core)
 
             implementation(projects.shared.core)
             implementation(projects.shared.foundation)
-
-            implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.featureToggles)
+            implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.workout)
+
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
-            implementation(projects.shared.features.test)
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+
+            implementation (projects.shared.core.test)
+            implementation (projects.shared.foundation.core.test)
+            implementation (projects.shared.foundation.core.test)
+        }
+
+        androidUnitTest.dependencies {
+            implementation (projects.shared.features.test)
         }
     }
 }
 
 android {
-    // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.home"
+    namespace = "de.stefan.lang.shapebyte.features.home.api"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

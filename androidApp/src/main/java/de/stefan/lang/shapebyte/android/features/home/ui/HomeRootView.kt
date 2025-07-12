@@ -23,14 +23,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.featureToggles.api.FeatureId
-import de.stefan.lang.foundationUi.api.viewmodel.UIState
+import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
 import de.stefan.lang.shapebyte.android.shared.contentview.ui.ContentView
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
-import de.stefan.lang.shapebyte.features.home.HomeRootViewData
-import de.stefan.lang.shapebyte.features.home.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.home.api.HomeRootUIIntent
+import de.stefan.lang.shapebyte.features.home.api.HomeRootViewData
+import de.stefan.lang.shapebyte.features.home.api.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.workout.preview.QuickWorkoutsPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.preview.WorkoutHistoryPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
@@ -50,7 +51,7 @@ fun HomeRootView(
     ),
 ) {
     LaunchedEffect(key1 = "Update") {
-        viewModel.update()
+        viewModel.intent(HomeRootUIIntent.Update)
     }
 
     val uiState = viewModel
@@ -59,7 +60,7 @@ fun HomeRootView(
         .value
 
     HomeRootView(uiState, modifier.fillMaxSize()) {
-        viewModel.onQuickWorkoutSelected(it)
+        viewModel.intent(HomeRootUIIntent.QuickWorkoutSelected(it))
     }
 }
 

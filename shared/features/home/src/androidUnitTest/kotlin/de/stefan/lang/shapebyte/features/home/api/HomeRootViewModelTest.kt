@@ -1,29 +1,32 @@
-package de.stefan.lang.shapebyte.features.home.ui
+package de.stefan.lang.shapebyte.features.home.api
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.foundationUi.api.viewmodel.UIState
+import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.featureToggles.api.FeatureId
-import de.stefan.lang.shapebyte.features.home.BaseHomeFeatureTest
-import de.stefan.lang.shapebyte.features.home.HomeRootViewData
-import de.stefan.lang.shapebyte.features.home.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.featuretest.FeatureTest
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
+import org.koin.core.module.Module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class HomeRootViewModelTest : BaseHomeFeatureTest() {
+class HomeRootViewModelTest : FeatureTest() {
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
+
+    override val testModules: List<Module>
+        get() = super.testModules + HomeModule.testModules
 
     @Test
     fun `initial state`() = test {
@@ -34,7 +37,7 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
     @Test
     fun `update should update state`() = test {
         val sut = createSUT()
-        sut.update()
+        sut.intent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -56,7 +59,7 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
             quickWorkoutsState = FeatureToggleState.DISABLED
         )
 
-        sut.update()
+        sut.intent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -76,7 +79,7 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
             recentHistoryState = FeatureToggleState.DISABLED,
             quickWorkoutsState = FeatureToggleState.ENABLED
         )
-        sut.update()
+        sut.intent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -97,7 +100,8 @@ class HomeRootViewModelTest : BaseHomeFeatureTest() {
             recentHistoryState = FeatureToggleState.ENABLED,
             quickWorkoutsState = FeatureToggleState.DISABLED
         )
-        sut.update()
+
+        sut.intent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())

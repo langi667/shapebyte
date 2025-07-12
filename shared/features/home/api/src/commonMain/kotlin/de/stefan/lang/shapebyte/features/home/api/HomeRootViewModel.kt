@@ -1,11 +1,12 @@
-package de.stefan.lang.shapebyte.features.home
+package de.stefan.lang.shapebyte.features.home.api
 
 import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
+import de.stefan.lang.foundationUi.api.intent.UIIntent
+import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
-import de.stefan.lang.foundationUi.api.viewmodel.UIState
 import de.stefan.lang.navigation.NavigationRequestBuilder
 import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
@@ -60,7 +61,15 @@ class HomeRootViewModel(
         }
     }
 
-    fun update() {
+    override fun intent(intent: UIIntent) {
+        requireNotNull(intent is HomeRootUIIntent)
+        when (intent) {
+            is HomeRootUIIntent.Update -> update()
+            is HomeRootUIIntent.QuickWorkoutSelected -> onQuickWorkoutSelected(intent.workout)
+        }
+    }
+
+    private fun update() {
         _state.value = UIState.Loading // TODO: maybe refresh state, if data is available
 
         recentHistoryUseCase.invoke()
@@ -68,7 +77,7 @@ class HomeRootViewModel(
         quickWorkoutsUseCase.invoke()
     }
 
-    fun onQuickWorkoutSelected(workout: Workout) {
+    private fun onQuickWorkoutSelected(workout: Workout) {
         navigationHandler.handleNavigationRequest(
             navigationRequestBuilder.quickWorkout(workout.id),
         )

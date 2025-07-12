@@ -8,7 +8,7 @@ import org.koin.test.KoinTest
 
 abstract class FeatureTest : CoreTest(), KoinTest {
     override val testModules: List<Module> = listOf(
-        CoreModule.testModule,
-        FoundationModule.testModule,
+        CoreModule.testModules,
+        FoundationModule.testModules,
     )
 }

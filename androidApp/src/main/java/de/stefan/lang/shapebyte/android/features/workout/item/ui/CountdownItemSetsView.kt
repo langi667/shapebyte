@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge
+import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsUIIntent
 import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
 
@@ -33,13 +34,15 @@ fun CountdownItemSetsView(viewModel: CountdownItemSetsViewModel, modifier: Modif
     )
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.start(
-            listOf(
-                ItemSet.Timed.Seconds(1),
-                ItemSet.Timed.Seconds(1),
-                ItemSet.Timed.Seconds(1),
-                ItemSet.Timed.Seconds(1),
-                ItemSet.Timed.Seconds(1),
+        viewModel.intent(
+            CountdownItemSetsUIIntent.Start(
+                listOf(
+                    ItemSet.Timed.Seconds(1),
+                    ItemSet.Timed.Seconds(1),
+                    ItemSet.Timed.Seconds(1),
+                    ItemSet.Timed.Seconds(1),
+                    ItemSet.Timed.Seconds(1),
+                ),
             ),
         )
     }

@@ -52,6 +52,8 @@ include(":shared:features:featureToggles:data")
 include(":shared:features:featureToggles:domain")
 
 include(":shared:features:home")
+include(":shared:features:home:api")
+
 include(":shared:features:workout")
 include(":shared:features:workout:workoutData")
 include(":shared:features:workout:workoutDomain")

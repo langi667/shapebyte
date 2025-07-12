@@ -15,7 +15,7 @@ open class DIModuleDeclaration(
         appEnvironmentOnly()
     }
 
-    override val testModule: Module = module {
+    override val testModules: Module = module {
         allEnvironments()
         testEnvironmentOnly()
     }
