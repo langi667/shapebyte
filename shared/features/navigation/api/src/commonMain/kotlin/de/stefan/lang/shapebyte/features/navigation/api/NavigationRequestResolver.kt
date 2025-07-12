@@ -1,4 +1,4 @@
-package de.stefan.lang.navigation
+package de.stefan.lang.shapebyte.features.navigation.api
 
 class NavigationRequestResolver {
     fun resolve(request: NavigationRequest): NavigationTarget {

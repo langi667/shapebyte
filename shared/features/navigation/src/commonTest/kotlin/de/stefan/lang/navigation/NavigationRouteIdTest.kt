@@ -1,5 +1,6 @@
 package de.stefan.lang.navigation
 
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRouteId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

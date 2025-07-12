@@ -13,8 +13,8 @@ import de.stefan.lang.foundationUi.api.buttons.ButtonState
 import de.stefan.lang.foundationUi.api.intent.UIIntent
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
-import de.stefan.lang.navigation.NavigationRequest
-import de.stefan.lang.navigation.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequest
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.exercise.IntervalExerciseInfo
 import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item

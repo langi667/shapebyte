@@ -45,6 +45,8 @@ include(":shared:designsystem:api")
 include(":shared:features")
 include(":shared:features:test")
 include(":shared:features:navigation")
+include(":shared:features:navigation:api")
+
 include(":shared:features:featureToggles")
 include(":shared:features:featureToggles:api")
 

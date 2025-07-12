@@ -7,8 +7,8 @@ import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.foundationUi.api.intent.UIIntent
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
-import de.stefan.lang.navigation.NavigationRequestBuilder
-import de.stefan.lang.navigation.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestBuilder
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout

@@ -1,6 +1,6 @@
-package de.stefan.lang.navigation
+package de.stefan.lang.shapebyte.features.navigation.api
 
-import de.stefan.lang.navigation.NavigationParams.workoutIdParam
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationParams.workoutIdParam
 
 class NavigationRequestBuilder {
     fun quickWorkout(workoutId: Int): NavigationRequest.NavigateTo {

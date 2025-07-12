@@ -3,9 +3,9 @@ package de.stefan.lang.shapebyte.android.navigation
 import androidx.navigation.NavHostController
 import de.stefan.lang.coreutils.api.logging.Loggable
 import de.stefan.lang.coreutils.api.logging.Logging
-import de.stefan.lang.navigation.NavigationRequest
-import de.stefan.lang.navigation.NavigationRequestHandling
 import de.stefan.lang.shapebyte.SharedModule
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequest
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 
 class NavigationHandler(
     private val navHostController: NavHostController,

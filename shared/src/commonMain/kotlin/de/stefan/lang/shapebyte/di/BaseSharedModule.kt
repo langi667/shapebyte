@@ -9,8 +9,8 @@ import de.stefan.lang.foundation.FoundationModuleProviding
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
-import de.stefan.lang.navigation.NavigationModule
-import de.stefan.lang.navigation.NavigationModuleProviding
+import de.stefan.lang.shapebyte.features.navigation.NavigationModule
+import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
 

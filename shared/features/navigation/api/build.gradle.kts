@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -18,27 +17,34 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
+    sourceSets  {
         commonMain.dependencies {
-            api(projects.shared.features.navigation.api)
-
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
+
             implementation(projects.shared.core)
-            implementation(projects.shared.foundation)
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
-            //implementation(projects.shared.features.test)
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+
+            implementation (projects.shared.core.test)
+            implementation (projects.shared.foundation.core.test)
+            implementation (projects.shared.foundation.core.test)
+        }
+
+        androidUnitTest.dependencies {
+            implementation (projects.shared.features.test)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.navigation"
+    namespace = "de.stefan.lang.shapebyte.features.navigation.api"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

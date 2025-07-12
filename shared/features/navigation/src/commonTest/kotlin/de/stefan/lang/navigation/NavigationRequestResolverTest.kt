@@ -1,5 +1,10 @@
 package de.stefan.lang.navigation
 
+import de.stefan.lang.shapebyte.features.navigation.NavigationModule
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequest
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestResolver
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationRoute
+import de.stefan.lang.shapebyte.features.navigation.api.NavigationTarget
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
