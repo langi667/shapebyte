@@ -20,7 +20,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.shared.features.navigation.api)
+            api(projects.features.navigation.api)
 
             implementation(libs.koin.core)
             implementation(projects.core)

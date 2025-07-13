@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.android.navigation
 
 import android.os.Bundle
-import de.stefan.lang.shapebyte.features.navigation.api.NavigationParams
 
 fun Bundle?.workoutId(): String? = this?.getString(de.stefan.lang.shapebyte.features.navigation.api.NavigationParams.workoutIdParam)
 fun Bundle?.workoutIdOr(fallback: String): String = this?.workoutId() ?: fallback

@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -23,38 +22,23 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
-            api(projects.shared.features.workout.api)
-
             implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+            implementation(projects.core.di)
 
-            implementation(projects.shared.features.workout.api)
-            implementation(projects.shared.features.workout.data)
-            implementation(projects.shared.features.workout.domain)
-            implementation(projects.shared.features.workout.presentation)
-
-            implementation(projects.core)
-            implementation(projects.foundation)
-            implementation(projects.designsystem)
-            implementation(projects.shared.features.navigation)
-            implementation(projects.shared.features.featureToggles)
-        }
-
-        androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
-        }
-
-        commonTest.dependencies {
-            implementation(projects.core.test)
+            api(projects.core.utils)
+            api(projects.features.featureToggles)
+            api(projects.features.workout)
+            api(projects.features.home)
+            api(projects.features.navigation)
         }
     }
 }
 
+dependencies {
+}
+
 android {
-    // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.workout"
+    namespace = "de.stefan.lang.features"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -77,3 +61,6 @@ android {
     }
 }
 
+tasks.register("allTestDebugUnitTest") {
+    dependsOn(subprojects.mapNotNull { it.tasks.findByName("testDebugUnitTest") })
+}

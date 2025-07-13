@@ -13,6 +13,7 @@ adb uninstall "de.stefan.lang.shapebyte.android.dev"
 ./gradlew :foundation:allTestDebugUnitTest :foundation:connectedAndroidTest :foundation:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
 ./gradlew :designsystem:allTestDebugUnitTest :designsystem:connectedAndroidTest :designsystem:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
 ./gradlew :shared:allTestDebugUnitTest :shared:connectedAndroidTest :shared:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
+./gradlew :features:allTestDebugUnitTest :shared:connectedAndroidTest :shared:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
 
 return_code=$?
 if [ $return_code -eq 0 ]; then

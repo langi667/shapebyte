@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -18,36 +17,38 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
+    sourceSets  {
         commonMain.dependencies {
-            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.koin.core)
 
+            implementation(projects.features.home.api)
             implementation(projects.core)
             implementation(projects.foundation)
-            implementation(projects.designsystem)
-            implementation(projects.shared.features.featureToggles)
-            implementation(projects.shared.features.workout.api)
+            implementation(projects.features.featureToggles)
+            implementation(projects.features.navigation)
+            implementation(projects.features.workout.api)
         }
 
         commonTest.dependencies {
-            implementation(projects.core.test)
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+
+            implementation (projects.core.test)
+            implementation (projects.foundation.core.test)
+            implementation (projects.foundation.core.test)
         }
 
         androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
         }
     }
 }
 
 android {
-    // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.workout.workouData"
+    namespace = "de.stefan.lang.shapebyte.features.home.presentation"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

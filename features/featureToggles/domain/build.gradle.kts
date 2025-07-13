@@ -22,13 +22,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.koin.android)
         }
-
-        androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
-        }
         commonMain.dependencies {
-            api(projects.shared.features.home.api)
-
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
@@ -36,24 +30,26 @@ kotlin {
 
             implementation(projects.core)
             implementation(projects.foundation)
-
-            implementation(projects.shared.features.navigation)
-            implementation(projects.shared.features.featureToggles)
-            implementation(projects.shared.features.workout)
-            implementation(projects.shared.features.home.presentation)
+            implementation(projects.features.featureToggles.api)
+            implementation(projects.features.featureToggles.data)
         }
 
         commonTest.dependencies {
             implementation(projects.core.test)
-            implementation(projects.shared.features.workout.data)
-            implementation(projects.shared.features.workout.domain)
+        }
+
+        androidUnitTest.dependencies {
+            implementation(libs.mockk.android)
+            implementation(projects.core.test)
+            implementation(libs.junit.jupiter)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.test)
         }
     }
 }
 
 android {
-    // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.home"
+    namespace = "de.stefan.lang.shapebyte.featureTogglesDomain"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

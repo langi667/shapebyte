@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -21,28 +22,38 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.koin.android)
         }
-        commonMain.dependencies {
-            implementation(libs.koin.core)
-            implementation(projects.core.di)
 
-            api(projects.core.utils)
-            api(projects.shared.features.featureToggles)
-            api(projects.shared.features.workout)
-            api(projects.shared.features.home)
-            api(projects.shared.features.navigation)
+        androidUnitTest.dependencies {
+            implementation(libs.mockk.android)
+        }
+        commonMain.dependencies {
+            api(projects.features.home.api)
+
+            implementation(libs.koin.core)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.serialization.json)
+
+            implementation(projects.core)
+            implementation(projects.foundation)
+
+            implementation(projects.features.navigation)
+            implementation(projects.features.featureToggles)
+            implementation(projects.features.workout)
+            implementation(projects.features.home.presentation)
         }
 
         commonTest.dependencies {
-            // implementation(projects.core.test)
+            implementation(projects.core.test)
+            implementation(projects.features.workout.data)
+            implementation(projects.features.workout.domain)
         }
     }
 }
 
-dependencies {
-}
-
 android {
-    namespace = "de.stefan.lang.features"
+    // TODO: set your module name
+    namespace = "de.stefan.lang.shapebyte.features.home"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

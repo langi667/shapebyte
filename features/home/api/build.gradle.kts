@@ -25,10 +25,9 @@ kotlin {
 
             implementation(projects.core)
             implementation(projects.foundation)
-            implementation(projects.designsystem)
-
-            implementation(projects.shared.features.featureToggles)
-            implementation(projects.shared.features.navigation)
+            implementation(projects.features.featureToggles)
+            implementation(projects.features.navigation)
+            implementation(projects.features.workout)
         }
 
         commonTest.dependencies {
@@ -43,12 +42,13 @@ kotlin {
         }
 
         androidUnitTest.dependencies {
+
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.features.workout.api"
+    namespace = "de.stefan.lang.shapebyte.features.home.api"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

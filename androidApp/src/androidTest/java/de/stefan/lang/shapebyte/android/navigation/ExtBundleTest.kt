@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.android.navigation
 
 import android.os.Bundle
-import de.stefan.lang.shapebyte.features.navigation.api.NavigationParams
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
 import org.junit.Test

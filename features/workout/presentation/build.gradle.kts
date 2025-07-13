@@ -23,12 +23,13 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
 
-            implementation(projects.shared.features.home.api)
             implementation(projects.core)
             implementation(projects.foundation)
-            implementation(projects.shared.features.featureToggles)
-            implementation(projects.shared.features.navigation)
-            implementation(projects.shared.features.workout.api)
+            implementation(projects.designsystem)
+            implementation(projects.features.featureToggles)
+            implementation(projects.features.navigation)
+            implementation(projects.features.workout.api)
+            implementation(projects.features.workout.domain)
         }
 
         commonTest.dependencies {
@@ -43,12 +44,13 @@ kotlin {
         }
 
         androidUnitTest.dependencies {
+
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.features.home.presentation"
+    namespace = "de.stefan.lang.shapebyte.features.workout.presentation"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

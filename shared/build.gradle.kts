@@ -64,7 +64,7 @@ kotlin {
             api(projects.core)
             api(projects.foundation)
             api(projects.designsystem)
-            api(projects.shared.features)
+            api(projects.features)
         }
 
         commonTest.dependencies {
@@ -82,7 +82,7 @@ kotlin {
             export(projects.core)
             export(projects.foundation)
             export(projects.designsystem)
-            export(projects.shared.features)
+            export(projects.features)
 
             transitiveExport = true
         }
