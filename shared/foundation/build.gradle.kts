@@ -23,7 +23,7 @@ kotlin {
             api(projects.shared.foundation.ui)
 
             implementation(libs.koin.core)
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation.core)
             implementation(projects.shared.foundation.ui)
         }

@@ -23,7 +23,7 @@ kotlin {
         }
 
         androidUnitTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
             implementation(libs.junit.jupiter)
             implementation(projects.shared.foundation.core)
             implementation(projects.shared.foundation.core.test)

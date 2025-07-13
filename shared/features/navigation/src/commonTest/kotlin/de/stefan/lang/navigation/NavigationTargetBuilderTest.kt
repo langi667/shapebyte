@@ -1,8 +1,7 @@
-package de.stefan.lang.shapebyte.android.navigation
+package de.stefan.lang.navigation
 
-import de.stefan.lang.shapebyte.features.navigation.api.NavigationRouteBuilder
-import junit.framework.TestCase.assertEquals
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class NavigationTargetBuilderTest {
     @Test

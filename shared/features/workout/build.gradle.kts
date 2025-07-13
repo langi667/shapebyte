@@ -35,7 +35,7 @@ kotlin {
             implementation(projects.shared.features.workout.domain)
             implementation(projects.shared.features.workout.presentation)
 
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation)
             implementation(projects.shared.designsystem)
             implementation(projects.shared.features.navigation)
@@ -47,7 +47,7 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
         }
     }
 }

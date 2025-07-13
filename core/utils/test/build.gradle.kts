@@ -19,7 +19,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.shared.core.utils.api)
+            implementation(projects.core.utils.api)
             implementation(libs.kotlinx.coroutines.core)
         }
     }

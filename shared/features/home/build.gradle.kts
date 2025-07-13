@@ -34,7 +34,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation)
 
             implementation(projects.shared.features.navigation)
@@ -44,7 +44,7 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
             implementation(projects.shared.features.workout.data)
             implementation(projects.shared.features.workout.domain)
         }

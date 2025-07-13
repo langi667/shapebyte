@@ -24,7 +24,7 @@ kotlin {
             implementation(libs.koin.core)
 
             implementation(projects.shared.features.home.api)
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation)
             implementation(projects.shared.features.featureToggles)
             implementation(projects.shared.features.navigation)
@@ -37,7 +37,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
 
-            implementation (projects.shared.core.test)
+            implementation (projects.core.test)
             implementation (projects.shared.foundation.core.test)
             implementation (projects.shared.foundation.core.test)
         }

@@ -25,13 +25,13 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation)
             implementation(projects.shared.features.featureToggles.api)
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
             implementation(projects.shared.foundation.core.test)
         }
     }

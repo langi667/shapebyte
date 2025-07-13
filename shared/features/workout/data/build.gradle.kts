@@ -28,7 +28,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation)
             implementation(projects.shared.designsystem)
             implementation(projects.shared.features.featureToggles)
@@ -36,7 +36,7 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
         }
 
         androidUnitTest.dependencies {

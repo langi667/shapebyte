@@ -23,12 +23,12 @@ kotlin {
             api(projects.shared.features.navigation.api)
 
             implementation(libs.koin.core)
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation)
         }
 
         commonTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
         }
     }
 }

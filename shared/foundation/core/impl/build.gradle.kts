@@ -21,12 +21,12 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation(projects.shared.core)
+            implementation(projects.core)
             implementation(projects.shared.foundation.core.api)
         }
 
         androidInstrumentedTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
             implementation(projects.shared.foundation.core)
             implementation(projects.shared.foundation.core.test)
 
@@ -41,14 +41,14 @@ kotlin {
         }
 
         androidUnitTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
             implementation(libs.junit.jupiter)
             implementation(projects.shared.foundation.core)
             implementation(projects.shared.foundation.core.test)
         }
 
         iosTest.dependencies {
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
 
             implementation(projects.shared.foundation.core)
             implementation(projects.shared.foundation.core.test)

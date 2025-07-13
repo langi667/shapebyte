@@ -19,19 +19,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.shared.core.utils.api)
-
-            implementation(libs.koin.core)
-            implementation(projects.shared.core.di)
-            implementation(projects.shared.core.coroutines)
-            implementation(projects.shared.core.utils.impl)
-            implementation(projects.shared.core.utils.test)
+            implementation(projects.core.utils.api)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.core.utils"
+    namespace = "de.stefan.lang.core.utils.impl"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

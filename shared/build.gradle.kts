@@ -49,7 +49,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
             implementation (libs.junit.jupiter)
-            implementation(projects.shared.core.test)
+            implementation(projects.core.test)
 
             implementation(libs.androidx.test.ext.junit)
             implementation(libs.androidx.test.espresso.core)
@@ -61,7 +61,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            api(projects.shared.core)
+            api(projects.core)
             api(projects.shared.foundation)
             api(projects.shared.designsystem)
             api(projects.shared.features)
@@ -72,14 +72,14 @@ kotlin {
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
-            implementation (projects.shared.core.test)
+            implementation (projects.core.test)
         }
     }
 
     targets.withType<KotlinNativeTarget>{
         binaries.withType<Framework> {
             isStatic = false
-            export(projects.shared.core)
+            export(projects.core)
             export(projects.shared.foundation)
             export(projects.shared.designsystem)
             export(projects.shared.features)

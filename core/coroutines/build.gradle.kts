@@ -19,26 +19,25 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.core.coroutines.api)
+
+            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-        }
-
-        commonTest.dependencies {
-            implementation(projects.shared.core.test)
-            implementation(projects.shared.core.utils.test)
-        }
-
-        androidMain.dependencies {
-            implementation(libs.koin.android)
+            implementation(projects.core.coroutines.impl)
+            implementation(projects.core.coroutines.test)
+            implementation(projects.core.di)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.core.utils.api"
+    namespace = "de.stefan.lang.coroutines"
     compileSdk = Project.Android.BuildSettings.targetSdk
+
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
     }
+
     compileOptions {
         sourceCompatibility = Project.Android.BuildSettings.javaVersion
         targetCompatibility = Project.Android.BuildSettings.javaVersion
@@ -47,12 +46,6 @@ android {
     packaging {
         resources {
             excludes += Project.Android.BuildSettings.excludedResourcesList
-        }
-    }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }
