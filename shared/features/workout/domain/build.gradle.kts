@@ -39,7 +39,6 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.test)
-            implementation(projects.shared.features.test)
         }
 
         androidUnitTest.dependencies {
@@ -71,19 +70,4 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-
-    // TODO: check if needed
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation (libs.koin.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.junit.jupiter)
 }

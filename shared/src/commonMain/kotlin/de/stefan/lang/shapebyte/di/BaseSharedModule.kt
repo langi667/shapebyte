@@ -5,14 +5,15 @@ import de.stefan.lang.core.CoreModuleProviding
 import de.stefan.lang.features.FeaturesModule
 import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundation.FoundationModule
-import de.stefan.lang.foundation.FoundationModuleProviding
-import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
+import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
+import de.stefan.lang.foundationUi.api.dimension.DimensionProvider
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 interface AppInfoProviding {
     fun appInfo(): AppInfo
@@ -21,7 +22,6 @@ interface AppInfoProviding {
 abstract class BaseSharedModule :
     KoinComponent,
     CoreModuleProviding by CoreModule,
-    FoundationModuleProviding by FoundationModule,
     NavigationModuleProviding by NavigationModule,
     FeaturesModuleProviding by FeaturesModule,
     AppInfoProviding,
@@ -54,11 +54,19 @@ abstract class BaseSharedModule :
             contextProvider = platformDependencies.appContextProvider,
         )
 
-        FoundationCoreModule.initialize(
+        FoundationModule.initialize(
             appResourceProvider = platformDependencies.appResourceProvider,
         )
 
         this.appInfo = platformDependencies.appInfo
+    }
+
+    fun deviceInfoProvider(): DeviceInfoProviding {
+        return get()
+    }
+
+    fun dimensionProvider(): DimensionProvider {
+        return get()
     }
 
     override fun sharedInitializationUseCase(): SharedInitializationUseCase {

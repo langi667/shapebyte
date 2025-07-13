@@ -36,10 +36,6 @@ kotlin {
             implementation (projects.shared.foundation.core.test)
             implementation (projects.shared.foundation.core.test)
         }
-
-        androidUnitTest.dependencies {
-            implementation (projects.shared.features.test)
-        }
     }
 }
 

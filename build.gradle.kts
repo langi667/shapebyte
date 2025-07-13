@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.compose.compiler).apply(false)
     alias(libs.plugins.detekt)
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
+    alias(libs.plugins.dependencyAnalysis)
 }
 
 dependencies {
@@ -18,6 +19,8 @@ dependencies {
 
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "com.autonomousapps.dependency-analysis")
+
     detekt {
         buildUponDefaultConfig = true
         config.from(file("${rootProject.projectDir}/config/detekt/config.yml"))

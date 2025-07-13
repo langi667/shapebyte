@@ -42,7 +42,7 @@ kotlin {
         }
 
         androidUnitTest.dependencies {
-            implementation (projects.shared.features.test)
+
         }
     }
 }

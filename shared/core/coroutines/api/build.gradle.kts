@@ -25,7 +25,7 @@ kotlin {
 }
 
 android {
-    namespace = "de.stefan.lang.coroutinesProviding"
+    namespace = "de.stefan.lang.core.coroutines.api"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

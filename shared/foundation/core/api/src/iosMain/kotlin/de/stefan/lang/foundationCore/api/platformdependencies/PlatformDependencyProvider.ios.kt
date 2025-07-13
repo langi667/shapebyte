@@ -7,9 +7,9 @@ import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 
 import platform.Foundation.NSBundle
 
-data class PlatformDependencyProvider(
+actual class PlatformDependencyProvider(
     val bundle: NSBundle,
-    override val appInfo: AppInfo,
-    override val appContextProvider: ContextProvider,
-    override val appResourceProvider: AppResourceProvider,
+    actual override val appInfo: AppInfo,
+    actual override val appContextProvider: ContextProvider,
+    actual override val appResourceProvider: AppResourceProvider,
 ) : PlatformDependencyProviding

@@ -19,10 +19,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
-
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
@@ -37,14 +33,11 @@ kotlin {
         commonTest.dependencies {
             implementation(projects.shared.core.test)
             implementation(projects.shared.foundation.core.test)
-
-            implementation(projects.shared.features.test)
         }
     }
 }
 
 android {
-    // TODO: set your module name
     namespace = "de.stefan.lang.shapebyte.featureToggles.data"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {

@@ -1,34 +1,40 @@
 package de.stefan.lang.shapebyte.features.home.api
 
 import app.cash.turbine.test
+import de.stefan.lang.core.CoreModule
+import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.foundation.FoundationModule
 import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.presentation.HomeRootViewModelImpl
-import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCaseImpl
-import de.stefan.lang.shapebyte.featuretest.FeatureTest
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
 import org.koin.core.module.Module
+import org.koin.test.KoinTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class HomeRootViewModelTest : FeatureTest() {
+class HomeRootViewModelTest : CoreTest(), KoinTest {
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
     override val testModules: List<Module>
-        get() = super.testModules + HomeModule.testModules
+        get() = super.testModules + listOf(
+            CoreModule.testModules,
+            FoundationModule.testModules,
+            HomeModule.testModules
+        )
 
     @Test
     fun `initial state`() = test {

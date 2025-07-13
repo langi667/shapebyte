@@ -18,13 +18,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-            // TODO: check if required !!!!
-            api(libs.koin.android)
-            api(libs.koin.core)
-            api(projects.shared.core.utils)
-        }
-
         commonMain.dependencies {
             api(projects.shared.core.di)
             api(projects.shared.core.utils)
@@ -39,12 +32,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
             implementation(projects.shared.core.test)
-        }
-
-        iosMain.dependencies {
-            // TODO: check if required !!!!
-            api(libs.koin.core)
-            api(projects.shared.core.utils)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
@@ -71,14 +59,4 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation (libs.koin.test)
 }

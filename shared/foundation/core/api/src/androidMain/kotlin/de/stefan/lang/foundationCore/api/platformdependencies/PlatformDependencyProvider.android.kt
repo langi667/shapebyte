@@ -5,9 +5,9 @@ import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 
-data class PlatformDependencyProvider(
+actual class PlatformDependencyProvider(
     val applicationContext: Context,
-    override val appInfo: AppInfo,
-    override val appContextProvider: ContextProvider,
-    override val appResourceProvider: AppResourceProvider,
+    actual override val appInfo: AppInfo,
+    actual override val appContextProvider: ContextProvider,
+    actual override val appResourceProvider: AppResourceProvider,
 ) : PlatformDependencyProviding

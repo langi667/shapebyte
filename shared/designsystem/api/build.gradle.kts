@@ -22,15 +22,6 @@ kotlin {
             implementation(projects.shared.foundation.core)
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(libs.turbine)
-            implementation(libs.kotlinx.coroutines.test)
-            implementation (libs.koin.test)
-
-            implementation (projects.shared.core.test)
-        }
-
         androidUnitTest.dependencies {
             implementation(projects.shared.core.test)
             implementation(libs.junit.jupiter)

@@ -1,5 +1,7 @@
+
 import de.stefan.lang.designsystem.DesignSystemGeneratorAndroid
 import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
+import java.util.Locale
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -72,6 +74,30 @@ android {
     }
 
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
+
+    applicationVariants.all {
+        val variant = this
+
+        val variantNameCapitalized = variant.name.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        }
+
+        val compileKotlinTaskName = "compile${variantNameCapitalized}Kotlin"
+
+        tasks.named(compileKotlinTaskName) {
+            dependsOn(tasks.named("generateDesignSystemAndroid"))
+        }
+
+        val explodeCodeSourceTaskName = "explodeCodeSource${variantNameCapitalized}"
+        
+        tasks.configureEach {
+            if (name == explodeCodeSourceTaskName) {
+                dependsOn(tasks.named("generateDesignSystemAndroid"))
+            }
+        }
+    }
 }
 
 dependencies {
@@ -88,33 +114,38 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.kotlinx.collections.immutable)
-    implementation(libs.coil.common)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
     screenshotTestImplementation(libs.compose.ui.tooling)
 
-    testImplementation(libs.kotlin.test)
-    testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation (libs.koin.test)
     testImplementation(libs.junit)
-    testImplementation(projects.shared.core.test)
-
     androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
+
+
 tasks.register("generateDesignSystemAndroid") {
-    outputs.dir("$rootDir/androidApp/generated/theme")
-    val androidThemeFilePath = file(outputs.files.single().absolutePath)
+    group = "generation"
+    description = "Generates Android design system theme files."
+    val generatedThemeDir = project.layout.buildDirectory.dir("generated/custom_theme_sources")
+    outputs.dir(generatedThemeDir)
 
     doLast {
-        androidThemeFilePath.mkdirs()
+        val outputDirFile = generatedThemeDir.get().asFile
+        outputDirFile.mkdirs()
+
         val designSystemGenerator = DesignSystemGeneratorAndroid()
-        designSystemGenerator.generate(androidThemeFilePath)
+        designSystemGenerator.generate(outputDirFile)
     }
 }
 
-tasks.named("preBuild") {
-    dependsOn("generateDesignSystemAndroid")
+android {
+    // ...
+    sourceSets {
+        getByName("main") {
+            kotlin.srcDir(project.layout.buildDirectory.dir("generated/custom_theme_sources"))
+        }
+    }
+    // ...
 }

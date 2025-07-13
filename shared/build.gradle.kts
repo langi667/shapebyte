@@ -40,25 +40,39 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.koin.android)
         }
+
+        androidInstrumentedTest.dependencies {
+            implementation(libs.mockk.android)
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+            implementation (libs.junit.jupiter)
+            implementation(projects.shared.core.test)
+
+            implementation(libs.androidx.junit.ktx)
+            implementation(libs.androidx.test.ext.junit)
+            implementation(libs.androidx.test.espresso.core)
+        }
+
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-
             api(projects.shared.core)
             api(projects.shared.foundation)
             api(projects.shared.designsystem)
             api(projects.shared.features)
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
             implementation (libs.koin.test)
             implementation (projects.shared.core.test)
-            implementation (projects.shared.features.test)
         }
     }
 
@@ -105,22 +119,6 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
-}
-
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.junit.ktx)
-
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation (libs.koin.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.junit.jupiter)
-    androidTestImplementation(projects.shared.core.test)
-    androidTestImplementation(projects.shared.features.test)
 }
 
 tasks.register("generateDesignSystemIOS") {

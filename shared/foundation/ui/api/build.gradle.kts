@@ -18,6 +18,9 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets  {
+        androidMain.dependencies {
+            api(libs.koin.android)
+        }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)

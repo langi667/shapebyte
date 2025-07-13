@@ -12,3 +12,4 @@ xcuserdata
 .run
 /androidApp/generated/*
 /iosApp/iosApp/generated/theme/*
+projectHealth.txt
