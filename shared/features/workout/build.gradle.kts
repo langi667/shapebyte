@@ -36,7 +36,7 @@ kotlin {
             implementation(projects.shared.features.workout.presentation)
 
             implementation(projects.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.foundation)
             implementation(projects.shared.designsystem)
             implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.featureToggles)

@@ -25,7 +25,7 @@ kotlin {
 
             implementation(projects.shared.features.home.api)
             implementation(projects.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.foundation)
             implementation(projects.shared.features.featureToggles)
             implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.workout.api)
@@ -38,8 +38,8 @@ kotlin {
             implementation (libs.koin.test)
 
             implementation (projects.core.test)
-            implementation (projects.shared.foundation.core.test)
-            implementation (projects.shared.foundation.core.test)
+            implementation (projects.foundation.core.test)
+            implementation (projects.foundation.core.test)
         }
 
         androidUnitTest.dependencies {

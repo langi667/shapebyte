@@ -19,14 +19,14 @@ kotlin {
 
     sourceSets  {
         commonMain.dependencies {
-            implementation(projects.shared.foundation.core)
+            implementation(projects.foundation.core)
         }
 
         androidUnitTest.dependencies {
             implementation(projects.core.test)
             implementation(libs.junit.jupiter)
-            implementation(projects.shared.foundation.core)
-            implementation(projects.shared.foundation.core.test)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.test)
         }
 
     }

@@ -62,7 +62,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             api(projects.core)
-            api(projects.shared.foundation)
+            api(projects.foundation)
             api(projects.shared.designsystem)
             api(projects.shared.features)
         }
@@ -80,7 +80,7 @@ kotlin {
         binaries.withType<Framework> {
             isStatic = false
             export(projects.core)
-            export(projects.shared.foundation)
+            export(projects.foundation)
             export(projects.shared.designsystem)
             export(projects.shared.features)
 

@@ -31,7 +31,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.core)
-            implementation(projects.shared.foundation.core)
+            implementation(projects.foundation.core)
             implementation(projects.shared.features.featureToggles.domain)
         }
 

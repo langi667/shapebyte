@@ -17,27 +17,49 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets  {
+    sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
+
             implementation(projects.core)
+            implementation(projects.foundation.core.api)
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(libs.turbine)
-            implementation(libs.kotlinx.coroutines.test)
+        androidInstrumentedTest.dependencies {
+            implementation(projects.core.test)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.test)
+
+            implementation(libs.androidx.test.ext.junit)
+            implementation(libs.androidx.test.espresso.core)
+            implementation(libs.junit.jupiter)
+            implementation(libs.mockk.android)
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
             implementation (libs.koin.test)
 
-            implementation (projects.core.test)
-            implementation (projects.shared.foundation.core.test)
         }
+
+        androidUnitTest.dependencies {
+            implementation(projects.core.test)
+            implementation(libs.junit.jupiter)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.test)
+        }
+
+        iosTest.dependencies {
+            implementation(projects.core.test)
+
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.test)
+            implementation(projects.foundation.core.impl)
+        }
+
     }
 }
 
 android {
-    namespace = "de.stefan.lang.foundation.core.api"
+    namespace = "de.stefan.lang.foundation.core.impl"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

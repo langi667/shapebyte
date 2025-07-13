@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte
 
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.di.BaseSharedModule
 import org.koin.core.context.startKoin

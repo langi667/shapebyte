@@ -29,7 +29,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.foundation)
             implementation(projects.shared.designsystem)
             implementation(projects.shared.features.featureToggles)
 

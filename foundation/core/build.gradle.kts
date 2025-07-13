@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -18,20 +19,23 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        commonMain.dependencies {
-            api(projects.shared.foundation.core)
-            api(projects.shared.foundation.ui)
-
-            implementation(libs.koin.core)
+        androidMain.dependencies {
             implementation(projects.core)
-            implementation(projects.shared.foundation.core)
-            implementation(projects.shared.foundation.ui)
+        }
+
+        commonMain.dependencies {
+            api(projects.foundation.core.api)
+            implementation(libs.koin.core)
+
+            implementation(projects.foundation.core.impl)
+            implementation(projects.foundation.core.test)
+            implementation(projects.core)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.foundation"
+    namespace = "de.stefan.lang.foundation.core"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

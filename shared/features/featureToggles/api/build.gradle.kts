@@ -22,7 +22,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(projects.core)
-            implementation(projects.shared.foundation.core)
+            implementation(projects.foundation.core)
         }
 
         commonTest.dependencies {
@@ -32,7 +32,7 @@ kotlin {
             implementation (libs.koin.test)
 
             implementation (projects.core.test)
-            implementation (projects.shared.foundation.core.test)
+            implementation (projects.foundation.core.test)
         }
     }
 }

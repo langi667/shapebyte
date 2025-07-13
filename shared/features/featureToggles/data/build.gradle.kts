@@ -26,13 +26,13 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.foundation)
             implementation(projects.shared.features.featureToggles.api)
         }
 
         commonTest.dependencies {
             implementation(projects.core.test)
-            implementation(projects.shared.foundation.core.test)
+            implementation(projects.foundation.core.test)
         }
     }
 }

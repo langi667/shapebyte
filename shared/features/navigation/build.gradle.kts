@@ -24,7 +24,7 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(projects.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.foundation)
         }
 
         commonTest.dependencies {

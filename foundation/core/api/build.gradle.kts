@@ -21,13 +21,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.koin.core)
-
             implementation(projects.core)
-            implementation(projects.foundation)
-            implementation(projects.shared.features.featureToggles)
-            implementation(projects.shared.features.navigation)
-            implementation(projects.shared.features.workout)
         }
 
         commonTest.dependencies {
@@ -38,17 +32,12 @@ kotlin {
 
             implementation (projects.core.test)
             implementation (projects.foundation.core.test)
-            implementation (projects.foundation.core.test)
-        }
-
-        androidUnitTest.dependencies {
-
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.features.home.api"
+    namespace = "de.stefan.lang.foundation.core.api"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

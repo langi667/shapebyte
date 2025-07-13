@@ -29,7 +29,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.core)
-            implementation(projects.shared.foundation)
+            implementation(projects.foundation)
             implementation(projects.shared.features.featureToggles.api)
             implementation(projects.shared.features.featureToggles.data)
         }
@@ -42,8 +42,8 @@ kotlin {
             implementation(libs.mockk.android)
             implementation(projects.core.test)
             implementation(libs.junit.jupiter)
-            implementation(projects.shared.foundation.core)
-            implementation(projects.shared.foundation.core.test)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.test)
         }
     }
 }
