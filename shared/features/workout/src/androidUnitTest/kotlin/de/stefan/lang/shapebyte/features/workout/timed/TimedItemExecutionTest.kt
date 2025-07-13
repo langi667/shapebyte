@@ -1,10 +1,12 @@
-package de.stefan.lang.shapebyte.features.workout.workoutDomain
+package de.stefan.lang.shapebyte.features.workout.timed
 
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.api.progress.Progress
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecutionData
@@ -18,7 +20,7 @@ import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-class TimedItemExecutionTest : BaseWorkoutDomainTest() {
+class TimedItemExecutionTest : WorkoutFeatureTest() {
     @Test
     fun `initial state`() {
         val seconds = 5

@@ -29,7 +29,7 @@ object HomeModule :
                         logger = get(),
                         coroutineContextProvider = get(),
                         navigationRequestBuilder = get(),
-                        workoutHistoryEntryFactory = { WorkoutModule.workoutHistoryEntry(it) }
+                        dateTimeStringFormatter = get(),
                     )
                 }
             },

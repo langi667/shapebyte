@@ -1,10 +1,10 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain.item
 
+import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.api.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.api.exercise.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.api.exercise.IntervalExerciseInfo
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 
 class ItemsExecutionBuilder {

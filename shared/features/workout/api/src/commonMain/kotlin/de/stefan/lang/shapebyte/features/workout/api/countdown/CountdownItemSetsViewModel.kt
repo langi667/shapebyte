@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 abstract class CountdownItemSetsViewModel(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
-): BaseViewModel(logger, coroutineContextProvider) {
+) : BaseViewModel(logger, coroutineContextProvider) {
     abstract override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>>
     abstract fun intent(intent: CountdownItemSetsUIIntent)
 }

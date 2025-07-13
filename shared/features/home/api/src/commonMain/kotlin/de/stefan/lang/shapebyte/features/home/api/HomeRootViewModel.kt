@@ -7,6 +7,6 @@ import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
 abstract class HomeRootViewModel(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
-): BaseViewModel(logger, coroutineContextProvider) {
+) : BaseViewModel(logger, coroutineContextProvider) {
     abstract fun intent(intent: HomeRootUIIntent)
 }

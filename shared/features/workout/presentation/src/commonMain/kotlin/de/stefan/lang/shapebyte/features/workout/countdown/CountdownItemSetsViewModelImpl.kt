@@ -3,7 +3,6 @@ package de.stefan.lang.shapebyte.features.workout.countdown
 import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationUi.api.state.UIState
-import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsUIIntent
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsViewData
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsViewModel
@@ -21,7 +20,7 @@ import kotlinx.coroutines.launch
 class CountdownItemSetsViewModelImpl(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
-    private val timedHandlerFactory: (item: Item, sets: List<ItemSet.Timed.Seconds>) -> TimedItemExecution
+    private val timedHandlerFactory: (item: Item, sets: List<ItemSet.Timed.Seconds>) -> TimedItemExecution,
 ) : CountdownItemSetsViewModel(logger, coroutineContextProvider) {
     companion object Companion {
         private const val TIMER_OFFSET = 100L

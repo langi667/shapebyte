@@ -5,7 +5,7 @@ import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.usecase.BaseDataUseCase
 import kotlinx.coroutines.flow.Flow
 
-abstract class CurrentWorkoutScheduleEntryUseCase(logger: Logging):
-    BaseDataUseCase<WorkoutScheduleEntry?>(logger)  {
+abstract class CurrentWorkoutScheduleEntryUseCase(logger: Logging) :
+    BaseDataUseCase<WorkoutScheduleEntry?>(logger) {
     abstract operator fun invoke(): Flow<LoadState<WorkoutScheduleEntry?>>
 }

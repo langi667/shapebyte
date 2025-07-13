@@ -4,7 +4,7 @@ import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.featuretest.FeatureTest
 import org.koin.core.module.Module
 
-open class BaseWorkoutFeatureTest: FeatureTest() {
+open class WorkoutFeatureTest: FeatureTest() {
     override val testModules: List<Module> = super.testModules + listOf(
         FeatureTogglesModule.testModules,
         WorkoutModule.testModules

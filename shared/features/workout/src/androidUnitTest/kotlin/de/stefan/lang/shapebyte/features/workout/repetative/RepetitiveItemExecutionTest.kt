@@ -1,9 +1,11 @@
-package de.stefan.lang.shapebyte.features.workout.workoutDomain
+package de.stefan.lang.shapebyte.features.workout.repetative
 
 import de.stefan.lang.coreutils.api.progress.Progress
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.RepetitiveItemExecution
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.RepetitiveItemExecutionData
@@ -13,7 +15,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class RepetitiveItemExecutionTest : BaseWorkoutDomainTest() {
+class RepetitiveItemExecutionTest : WorkoutFeatureTest() {
     private val item = Exercise("Test")
 
     @Test

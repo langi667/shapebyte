@@ -10,7 +10,6 @@ import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutSchedu
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
-
 import org.koin.core.component.get
 
 object WorkoutDataModule :
@@ -37,4 +36,3 @@ object WorkoutDataModule :
             single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock }
         },
     )
-

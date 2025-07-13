@@ -1,12 +1,14 @@
-package de.stefan.lang.shapebyte.features.workout.workoutDomain
+package de.stefan.lang.shapebyte.features.workout.item
 
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.api.progress.Progress
 import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecuting
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecution
@@ -26,7 +28,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
-class ItemsExecutionTest : BaseWorkoutDomainTest() {
+class ItemsExecutionTest : WorkoutFeatureTest() {
     /**
      * To test that if start is failing, the other items in the ItemsExecution are executed
      */

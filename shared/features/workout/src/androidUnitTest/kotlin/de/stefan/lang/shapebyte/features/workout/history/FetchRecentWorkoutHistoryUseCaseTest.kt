@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.workoutDomain
+package de.stefan.lang.shapebyte.features.workout.history
 
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.api.progress.Progress
@@ -7,9 +7,11 @@ import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
+import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryRepository
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.HistoryError
 import io.mockk.coEvery
 import io.mockk.every
@@ -22,7 +24,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
 
-class FetchRecentWorkoutHistoryUseCaseTest : BaseWorkoutDomainTest() {
+class FetchRecentWorkoutHistoryUseCaseTest : WorkoutFeatureTest() {
 
     private val repository: WorkoutHistoryRepository = mockk(relaxed = true)
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
@@ -86,7 +88,7 @@ class FetchRecentWorkoutHistoryUseCaseTest : BaseWorkoutDomainTest() {
             LoadState.Success(list)
         }
 
-        val retVal = FetchRecentWorkoutHistoryUseCase(
+        val retVal = FetchRecentWorkoutHistoryUseCaseImpl(
             repository = repository,
             logger = get(),
             coroutineContextProviding = get(),

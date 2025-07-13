@@ -13,14 +13,14 @@ import de.stefan.lang.foundationUi.api.buttons.ButtonState
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequest
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
-import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutForIdUseCase
-import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.api.Workout
-import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.api.exercise.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.api.exercise.IntervalExerciseInfo
+import de.stefan.lang.shapebyte.features.workout.api.item.Item
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutUIIntent
+import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecution
@@ -64,14 +64,13 @@ class TimedWorkoutViewModelImpl(
     private var loadWorkoutJob: Job? = null
 
     override fun intent(intent: TimedWorkoutUIIntent) {
-       when (intent) {
-           is TimedWorkoutUIIntent.Load -> load(intent.workoutId)
-           is TimedWorkoutUIIntent.Start -> start()
-           is TimedWorkoutUIIntent.PauseOrStartWorkout -> pauseOrStartWorkout()
-           is TimedWorkoutUIIntent.Stop -> stop()
-           is TimedWorkoutUIIntent.OnCloseClicked -> onCloseClicked()
-
-       }
+        when (intent) {
+            is TimedWorkoutUIIntent.Load -> load(intent.workoutId)
+            is TimedWorkoutUIIntent.Start -> start()
+            is TimedWorkoutUIIntent.PauseOrStartWorkout -> pauseOrStartWorkout()
+            is TimedWorkoutUIIntent.Stop -> stop()
+            is TimedWorkoutUIIntent.OnCloseClicked -> onCloseClicked()
+        }
     }
 
     // TODO: map to Intent

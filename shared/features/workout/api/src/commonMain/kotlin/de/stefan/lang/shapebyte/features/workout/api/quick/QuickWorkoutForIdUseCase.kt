@@ -16,7 +16,7 @@ abstract class QuickWorkoutForIdUseCase(
     coroutineContextProvider: CoroutineContextProviding,
     coroutineScopeProvider: CoroutineScopeProviding,
     loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
-): BaseFeatureDataUseCase<Workout>(
+) : BaseFeatureDataUseCase<Workout>(
     featureToggle = FeatureId.QUICK_WORKOUTS.name,
     logger = logger,
     scope = coroutineScopeProvider.createCoroutineScope(SupervisorJob()),

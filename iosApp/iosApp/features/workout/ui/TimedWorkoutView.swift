@@ -33,7 +33,7 @@ struct TimedWorkoutView: View {
             case .content(let content):
                 contentOrErrorView(
                     content: content,
-                    onBack: viewModel.onCloseClicked
+                    onBack: {viewModel.intent(intent: TimedWorkoutUIIntent.OnCloseClicked()) }
                 )
             }
         }
@@ -43,7 +43,7 @@ struct TimedWorkoutView: View {
             }
         }
         .onAppear {
-            viewModel.load(workoutId: self.workoutId)
+            viewModel.intent(intent: TimedWorkoutUIIntent.Load(workoutId: self.workoutId))
         }
     }
 
@@ -55,7 +55,7 @@ struct TimedWorkoutView: View {
         if let viewData: TimedWorkoutViewData = content.viewData() {
             TimedWorkoutContentView(
                 data: viewData,
-                onPlayClicked: { viewModel.start() },
+                onPlayClicked: { viewModel.intent(intent: TimedWorkoutUIIntent.Start() ) },
                 onPauseClicked: viewData.pauseButtonState.onClickAction,
                 onStopClicked: viewData.stopButtonState.onClickAction,
                 onCloseClicked: onBack

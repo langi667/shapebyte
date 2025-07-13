@@ -46,6 +46,8 @@ kotlin {
         commonTest.dependencies {
             implementation(projects.shared.core.test)
             implementation(projects.shared.features.test)
+            implementation(projects.shared.features.workout.data)
+            implementation(projects.shared.features.workout.domain)
         }
     }
 }

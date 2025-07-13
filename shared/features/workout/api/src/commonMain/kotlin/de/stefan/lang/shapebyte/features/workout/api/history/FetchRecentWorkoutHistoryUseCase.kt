@@ -10,6 +10,7 @@ import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 abstract class FetchRecentWorkoutHistoryUseCase(
@@ -17,12 +18,15 @@ abstract class FetchRecentWorkoutHistoryUseCase(
     coroutineContextProviding: CoroutineContextProviding,
     coroutineScopeProviding: CoroutineScopeProviding,
     loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
-): BaseFeatureDataUseCase<List<WorkoutScheduleEntry>> (
+) : BaseFeatureDataUseCase<List<WorkoutScheduleEntry>> (
     featureToggle = FeatureId.RECENT_HISTORY.name,
     logger = logger,
     dispatcher = coroutineContextProviding.iODispatcher(),
     scope = coroutineScopeProviding.createCoroutineScope(SupervisorJob()),
     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
-     abstract operator fun invoke(today: Instant): SharedFlow<LoadState<List<WorkoutScheduleEntry>>>
+    abstract operator fun invoke(today: Instant): SharedFlow<LoadState<List<WorkoutScheduleEntry>>>
+    operator fun invoke(): SharedFlow<LoadState<List<WorkoutScheduleEntry>>> = invoke(
+        today = Clock.System.now(),
+    )
 }

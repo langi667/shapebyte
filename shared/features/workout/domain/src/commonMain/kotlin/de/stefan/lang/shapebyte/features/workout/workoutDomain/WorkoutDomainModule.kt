@@ -1,13 +1,12 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
 import de.stefan.lang.core.di.DIModuleDeclaration
-import de.stefan.lang.shapebyte.features.workout.api.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
-import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsUseCase
-
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutForIdUseCase
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.api.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource

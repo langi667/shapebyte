@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout
+package de.stefan.lang.shapebyte.features.workout.timed
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
@@ -9,12 +9,16 @@ import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
+import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewData
-import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
-import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsError
-import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsRepository
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutForIdUseCase
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutUIIntent
+import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewModel
+import de.stefan.lang.shapebyte.features.workout.presentation.timed.TimedWorkoutViewModelImpl
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutForIdUseCaseImpl
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -27,7 +31,7 @@ import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
+class TimedWorkoutViewModelTest : WorkoutFeatureTest() {
     private val dateTimeStringFormatter: DateTimeStringFormatter by lazy {
         get()
     }
@@ -101,7 +105,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         val workoutId = 1
         val workout = workouts.first { it.id == workoutId }
 
-        sut.load(workoutId)
+        sut.intent(TimedWorkoutUIIntent.Load(workoutId))
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -119,7 +123,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
     @Test
     fun `start should do nothing if update was not called`() = test {
         val sut = createSUT()
-        sut.start()
+        sut.intent(TimedWorkoutUIIntent.Start)
 
         sut.state.test {
             assertEquals(UIState.Idle, awaitItem())
@@ -134,7 +138,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
-        sut.load(workout.id)
+        sut.intent(TimedWorkoutUIIntent.Load(workout.id))
 
         // Initial/ Update state
         sut.state.test {
@@ -166,7 +170,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
             expectNoEvents()
         }
 
-        sut.start()
+        sut.intent(TimedWorkoutUIIntent.Start)
         assertTrue(sut.isRunning)
 
         sut.state.test {
@@ -226,7 +230,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
-        sut.load(workout.id)
+        sut.intent(TimedWorkoutUIIntent.Load(workout.id))
 
         val elapsed = mutableListOf<String>()
         val remaining = mutableListOf<String>()
@@ -240,7 +244,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
             expectNoEvents()
         }
 
-        sut.start()
+        sut.intent(TimedWorkoutUIIntent.Start)
         assertTrue(sut.isRunning)
 
         sut.state.test {
@@ -255,7 +259,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                     remaining.add(data.remainingTotal)
 
                     if (data.progressTotal >= 0.5f) {
-                        sut.pauseOrStartWorkout()
+                        sut.intent(TimedWorkoutUIIntent.PauseOrStartWorkout)
                         isRunning = false
                     }
                 }
@@ -272,7 +276,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         }
 
         // resuming
-        sut.pauseOrStartWorkout()
+        sut.intent(TimedWorkoutUIIntent.PauseOrStartWorkout)
 
         sut.state.test {
             awaitItem()
@@ -308,7 +312,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
         val sut = createSUT()
         val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
 
-        sut.load(workout.id)
+        sut.intent(TimedWorkoutUIIntent.Load(workout.id))
 
         val elapsed = mutableListOf<String>()
         val remaining = mutableListOf<String>()
@@ -322,7 +326,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
             expectNoEvents()
         }
 
-        sut.start()
+        sut.intent(TimedWorkoutUIIntent.Start)
         assertTrue(sut.isRunning)
 
         sut.state.test {
@@ -337,7 +341,7 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
                     remaining.add(data.remainingTotal)
 
                     if (data.progressTotal >= 0.5f) {
-                        sut.stop()
+                        sut.intent(TimedWorkoutUIIntent.Stop)
                         isRunning = false
                     }
                 }
@@ -373,9 +377,9 @@ class TimedWorkoutViewModelTest : BaseWorkoutFeatureTest() {
             )
         )
 
-        return TimedWorkoutViewModel(
+        return TimedWorkoutViewModelImpl(
             navigationHandler = mockk(relaxed = true),
-            quickWorkoutForIdUseCase = QuickWorkoutForIdUseCase(
+            quickWorkoutForIdUseCase = QuickWorkoutForIdUseCaseImpl(
                 repository = repository,
                 logger = get(),
                 coroutineContextProvider = get(),

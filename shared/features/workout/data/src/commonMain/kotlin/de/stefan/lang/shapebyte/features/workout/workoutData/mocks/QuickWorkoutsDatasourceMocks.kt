@@ -2,9 +2,9 @@ package de.stefan.lang.shapebyte.features.workout.workoutData.mocks
 
 import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsError
 import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsError
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsDatasource
 
 @Suppress("MagicNumber")

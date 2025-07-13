@@ -5,14 +5,14 @@ import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule.createTimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsViewModel
-import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.presentation.timed.TimedWorkoutViewModelImpl
+import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
 import org.koin.core.component.get
@@ -45,7 +45,7 @@ object WorkoutModule :
                     CountdownItemSetsViewModelImpl(
                         logger = get(),
                         coroutineContextProvider = get(),
-                        timedHandlerFactory = { item, sets -> createTimedItemExecution(item, sets) }
+                        timedHandlerFactory = { item, sets -> createTimedItemExecution(item, sets) },
                     )
                 }
                 factory<WorkoutHistoryEntry> { (entry: WorkoutScheduleEntry) ->
@@ -88,6 +88,6 @@ object WorkoutModule :
         )
 
     override fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution {
-        return WorkoutDomainModule.createTimedItemExecution(item,sets)
+        return WorkoutDomainModule.createTimedItemExecution(item, sets)
     }
 }

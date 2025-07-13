@@ -4,18 +4,19 @@ import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
+import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.shapebyte.features.home.api.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.api.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.api.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
-import de.stefan.lang.shapebyte.features.workout.api.schedule.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
-import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.api.Workout
-import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.api.schedule.CurrentWorkoutScheduleEntryUseCase
+import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,10 +31,10 @@ class HomeRootViewModelImpl(
     private val recentHistoryUseCase: FetchRecentWorkoutHistoryUseCase,
     private val quickWorkoutsUseCase: QuickWorkoutsUseCase,
     private val navigationRequestBuilder: NavigationRequestBuilder,
-    private val workoutHistoryEntryFactory: (WorkoutScheduleEntry) -> WorkoutHistoryEntry,
+    private val dateTimeStringFormatter: DateTimeStringFormatter,
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
-) : HomeRootViewModel(logger, coroutineContextProvider){
+) : HomeRootViewModel(logger, coroutineContextProvider) {
 
     private val _state: MutableStateFlow<UIState> = MutableStateFlow(
         UIState.Idle,
@@ -95,7 +96,7 @@ class HomeRootViewModelImpl(
                 }
             }
             .map { entries ->
-                entries.map { entry -> workoutHistoryEntryFactory(entry) }
+                entries.map { entry -> WorkoutHistoryEntry(entry, dateTimeStringFormatter) }
             }
 
     private fun mapCurrentWorkoutScheduleEntry(flow: Flow<LoadState<WorkoutScheduleEntry?>>) =

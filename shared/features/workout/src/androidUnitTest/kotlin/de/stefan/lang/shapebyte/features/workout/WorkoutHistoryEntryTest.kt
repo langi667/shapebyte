@@ -3,12 +3,12 @@ package de.stefan.lang.shapebyte.features.workout
 import de.stefan.lang.coreutils.api.progress.Progress
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class WorkoutHistoryEntryTest : BaseWorkoutFeatureTest() {
+class WorkoutHistoryEntryTest : WorkoutFeatureTest() {
     @Test
     fun `forwarded entries from WorkoutScheduleEntry should be correct `() {
         val entry = WorkoutScheduleEntry(

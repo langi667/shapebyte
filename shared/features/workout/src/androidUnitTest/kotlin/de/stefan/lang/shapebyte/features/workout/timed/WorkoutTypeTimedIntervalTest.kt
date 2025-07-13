@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.workoutData
+package de.stefan.lang.shapebyte.features.workout.timed
 
 import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType

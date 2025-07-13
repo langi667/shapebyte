@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.workoutDomain
+package de.stefan.lang.shapebyte.features.workout.quick
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
@@ -7,10 +7,14 @@ import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
+import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
-import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsError
-import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsError
 import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCaseImpl
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -20,7 +24,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
-class QuickWorkoutsUseCaseTest : BaseWorkoutDomainTest() {
+class QuickWorkoutsUseCaseTest : WorkoutFeatureTest() {
     private val quickWorkoutsRepository: QuickWorkoutsRepository = mockk(relaxed = true)
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
@@ -112,7 +116,7 @@ class QuickWorkoutsUseCaseTest : BaseWorkoutDomainTest() {
 
         coEvery { quickWorkoutsRepository.fetchQuickWorkouts() } returns LoadState.Success(workouts)
 
-        val retVal = QuickWorkoutsUseCase(
+        val retVal = QuickWorkoutsUseCaseImpl(
             repository =  quickWorkoutsRepository,
             scopeProvider = WorkoutDomainModule.get(),
             dispatcherProvider = WorkoutDomainModule.get(),

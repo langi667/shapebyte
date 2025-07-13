@@ -8,8 +8,10 @@ import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.shapebyte.features.home.HomeModule
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCase
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCase
+import de.stefan.lang.shapebyte.features.home.presentation.HomeRootViewModelImpl
+import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCaseImpl
 import de.stefan.lang.shapebyte.featuretest.FeatureTest
 import io.mockk.every
 import io.mockk.mockk
@@ -130,17 +132,17 @@ class HomeRootViewModelTest : FeatureTest() {
             LoadState.Success(quickWorkoutsFT),
         )
 
-        return HomeRootViewModel(
+        return HomeRootViewModelImpl(
             navigationHandler = mockk(relaxed = true),
             currentWorkoutScheduleEntryUseCase = get(),
-            recentHistoryUseCase = FetchRecentWorkoutHistoryUseCase(
+            recentHistoryUseCase = FetchRecentWorkoutHistoryUseCaseImpl(
                 repository = get(),
                 logger = get(),
                 coroutineContextProviding = get(),
                 coroutineScopeProviding = get(),
                 loadFeatureToggleUseCase = loadFeatureToggleUseCase,
             ),
-            quickWorkoutsUseCase = QuickWorkoutsUseCase(
+            quickWorkoutsUseCase = QuickWorkoutsUseCaseImpl(
                 repository = get(),
                 logger = get(),
                 loadFeatureToggleUseCase = loadFeatureToggleUseCase,
@@ -150,6 +152,7 @@ class HomeRootViewModelTest : FeatureTest() {
             navigationRequestBuilder = get(),
             logger = get(),
             coroutineContextProvider = get(),
+            dateTimeStringFormatter = get()
         )
     }
 }

@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.workout.workoutDomain
+package de.stefan.lang.shapebyte.features.workout.quick
 
 import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
@@ -7,10 +7,14 @@ import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
+import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
-import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsError
-import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsRepository
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutForIdUseCase
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutForIdUseCase
+import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutForIdUseCaseImpl
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -19,7 +23,7 @@ import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class QuickWorkoutForIdUseCaseTest : BaseWorkoutDomainTest() {
+class QuickWorkoutForIdUseCaseTest : WorkoutFeatureTest() {
     private val repository: QuickWorkoutsRepository = mockk(relaxed = true)
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
@@ -144,7 +148,7 @@ class QuickWorkoutForIdUseCaseTest : BaseWorkoutDomainTest() {
             }
         }
 
-        return QuickWorkoutForIdUseCase(
+        return QuickWorkoutForIdUseCaseImpl(
             repository = repository,
             logger = WorkoutDomainModule.get(),
             coroutineContextProvider = WorkoutDomainModule.get(),
