@@ -19,9 +19,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
         commonMain.dependencies {
             api(projects.shared.features.navigation.api)
 
@@ -32,7 +29,6 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.shared.core.test)
-            //implementation(projects.shared.features.test)
         }
     }
 }

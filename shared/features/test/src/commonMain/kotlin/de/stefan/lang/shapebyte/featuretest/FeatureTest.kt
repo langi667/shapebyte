@@ -6,6 +6,7 @@ import de.stefan.lang.foundation.FoundationModule
 import org.koin.core.module.Module
 import org.koin.test.KoinTest
 
+// TODO: remove
 abstract class FeatureTest : CoreTest(), KoinTest {
     override val testModules: List<Module> = listOf(
         CoreModule.testModules,

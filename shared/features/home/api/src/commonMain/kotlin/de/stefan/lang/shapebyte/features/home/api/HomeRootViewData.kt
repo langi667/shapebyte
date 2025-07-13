@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.home.api
 
-import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.api.Workout
+import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 
 data class HomeRootViewData(
     val currWorkoutScheduleEntry: WorkoutScheduleEntry? = null,

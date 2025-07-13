@@ -23,7 +23,7 @@ import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.LabelMed
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.features.workout.preview.QuickWorkoutsPreviewDataProvider
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.api.Workout
 
 @Composable
 fun QuickWorkoutEntryView(

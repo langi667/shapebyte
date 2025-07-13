@@ -40,6 +40,7 @@ kotlin {
             implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.featureToggles)
             implementation(projects.shared.features.workout)
+            implementation(projects.shared.features.home.presentation)
         }
 
         commonTest.dependencies {

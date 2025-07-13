@@ -55,10 +55,13 @@ include(":shared:features:featureToggles:domain")
 
 include(":shared:features:home")
 include(":shared:features:home:api")
+include(":shared:features:home:presentation")
 
 include(":shared:features:workout")
-include(":shared:features:workout:workoutData")
-include(":shared:features:workout:workoutDomain")
+include(":shared:features:workout:api")
+include(":shared:features:workout:data")
+include(":shared:features:workout:domain")
+include(":shared:features:workout:presentation")
 
 
 include(":shared:sharedComponentTest")

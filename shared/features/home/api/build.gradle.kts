@@ -28,7 +28,6 @@ kotlin {
             implementation(projects.shared.features.featureToggles)
             implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.workout)
-
         }
 
         commonTest.dependencies {

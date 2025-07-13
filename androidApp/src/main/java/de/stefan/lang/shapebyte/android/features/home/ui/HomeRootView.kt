@@ -34,7 +34,7 @@ import de.stefan.lang.shapebyte.features.home.api.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.api.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.workout.preview.QuickWorkoutsPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.preview.WorkoutHistoryPreviewDataProvider
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.api.Workout
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf

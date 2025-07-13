@@ -9,12 +9,11 @@ import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationUi.api.state.UIState
 import de.stefan.lang.featureToggles.api.FeatureId
-import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewData
+import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewModel
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutType
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsError
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
-import de.stefan.lang.shapebyte.features.workout.workoutData.workout.Workout
+import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsError
+import de.stefan.lang.shapebyte.features.workout.api.Workout.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutForIdUseCase
 import io.mockk.coEvery
 import io.mockk.every

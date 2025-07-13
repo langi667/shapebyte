@@ -23,22 +23,23 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
+            api(projects.shared.features.workout.api)
+
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
+            implementation(projects.shared.features.workout.api)
+            implementation(projects.shared.features.workout.data)
+            implementation(projects.shared.features.workout.domain)
+            implementation(projects.shared.features.workout.presentation)
+
             implementation(projects.shared.core)
             implementation(projects.shared.foundation)
             implementation(projects.shared.designsystem)
             implementation(projects.shared.features.navigation)
-
-
             implementation(projects.shared.features.featureToggles)
-
-            api(projects.shared.features.workout.workoutData)
-            api(projects.shared.features.workout.workoutDomain)
-
         }
 
         androidUnitTest.dependencies {

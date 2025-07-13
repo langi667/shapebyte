@@ -3,24 +3,26 @@ package de.stefan.lang.shapebyte.features.workout
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
-import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModel
-import de.stefan.lang.shapebyte.features.workout.workout.TimedWorkoutViewModel
-import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.WorkoutModule.createTimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsViewModel
+import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModule
-import de.stefan.lang.shapebyte.features.workout.workoutData.WorkoutDataModuleProviding
-import de.stefan.lang.shapebyte.features.workout.workoutData.item.Item
-import de.stefan.lang.shapebyte.features.workout.workoutData.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
+import de.stefan.lang.shapebyte.features.workout.api.item.Item
+import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewModel
+import de.stefan.lang.shapebyte.features.workout.countdown.CountdownItemSetsViewModelImpl
+import de.stefan.lang.shapebyte.features.workout.presentation.timed.TimedWorkoutViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModuleProviding
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
-interface WorkoutModuleProviding : WorkoutDataModuleProviding, WorkoutDomainModuleProviding {
+interface WorkoutModuleProviding {
     fun countdownItemSetsViewModel(): CountdownItemSetsViewModel
     fun timedWorkoutViewModel(navHandler: NavigationRequestHandling): TimedWorkoutViewModel
     fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
+    fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution
 }
 
 object WorkoutModule :
@@ -28,7 +30,7 @@ object WorkoutModule :
         providedModule = DIModuleDeclaration(
             allEnvironments = {
                 factory<TimedWorkoutViewModel> { (navHandler: NavigationRequestHandling) ->
-                    TimedWorkoutViewModel(
+                    TimedWorkoutViewModelImpl(
                         navigationHandler = navHandler,
                         quickWorkoutForIdUseCase = get(),
                         itemsExecutionBuilder = get(),
@@ -40,9 +42,10 @@ object WorkoutModule :
                 }
 
                 factory {
-                    CountdownItemSetsViewModel(
+                    CountdownItemSetsViewModelImpl(
                         logger = get(),
                         coroutineContextProvider = get(),
+                        timedHandlerFactory = { item, sets -> createTimedItemExecution(item, sets) }
                     )
                 }
                 factory<WorkoutHistoryEntry> { (entry: WorkoutScheduleEntry) ->
@@ -69,8 +72,6 @@ object WorkoutModule :
             WorkoutDomainModule,
         ),
     ),
-    WorkoutDataModuleProviding by WorkoutDataModule,
-    WorkoutDomainModuleProviding by WorkoutDomainModule,
     WorkoutModuleProviding {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
     override fun timedWorkoutViewModel(navHandler: NavigationRequestHandling): TimedWorkoutViewModel = get(
@@ -85,4 +86,8 @@ object WorkoutModule :
                 parametersOf(scheduleEntry)
             },
         )
+
+    override fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution {
+        return WorkoutDomainModule.createTimedItemExecution(item,sets)
+    }
 }

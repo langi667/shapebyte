@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.coreutils.api.progress.Progress
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.shapebyte.features.workout.workout.WorkoutHistoryEntry
+import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutScheduleEntry
 import kotlinx.datetime.Instant
 import kotlin.test.Test
