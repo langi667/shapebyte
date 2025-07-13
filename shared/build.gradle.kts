@@ -39,6 +39,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.koin.android)
+            implementation(libs.androidx.junit.ktx)
         }
 
         androidInstrumentedTest.dependencies {
@@ -50,7 +51,6 @@ kotlin {
             implementation (libs.junit.jupiter)
             implementation(projects.shared.core.test)
 
-            implementation(libs.androidx.junit.ktx)
             implementation(libs.androidx.test.ext.junit)
             implementation(libs.androidx.test.espresso.core)
         }
