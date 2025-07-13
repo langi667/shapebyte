@@ -7,7 +7,7 @@ import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.image.ImageResource
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.foundationUi.api.state.UIState
+import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.Workout

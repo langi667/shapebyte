@@ -5,7 +5,7 @@ import de.stefan.lang.coroutines.api.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.foundationUi.api.state.UIState
+import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.shapebyte.features.home.api.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.api.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.api.HomeRootViewModel

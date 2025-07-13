@@ -8,7 +8,7 @@ import de.stefan.lang.foundation.FoundationModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
-import de.stefan.lang.foundationUi.api.dimension.DimensionProvider
+import de.stefan.lang.foundationPresentation.api.dimension.DimensionProvider
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase

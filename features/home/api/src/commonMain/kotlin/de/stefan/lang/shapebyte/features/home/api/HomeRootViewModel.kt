@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.home.api
 
 import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.coroutines.api.CoroutineContextProviding
-import de.stefan.lang.foundationUi.api.viewmodel.BaseViewModel
+import de.stefan.lang.foundationPresentation.api.viewmodel.BaseViewModel
 
 abstract class HomeRootViewModel(
     logger: Logging,

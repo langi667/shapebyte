@@ -23,7 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.featureToggles.api.FeatureId
-import de.stefan.lang.foundationUi.api.state.UIState
+import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
