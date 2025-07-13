@@ -39,8 +39,8 @@ include(":foundation:core:test")
 include(":foundation:ui")
 include(":foundation:ui:api")
 
-include(":shared:designsystem")
-include(":shared:designsystem:api")
+include(":designsystem")
+include(":designsystem:api")
 
 include(":shared:features")
 include(":shared:features:navigation")

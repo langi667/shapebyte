@@ -53,3 +53,7 @@ android {
         }
     }
 }
+
+tasks.register("allTestDebugUnitTest") {
+    dependsOn(subprojects.mapNotNull { it.tasks.findByName("testDebugUnitTest") })
+}

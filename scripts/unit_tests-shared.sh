@@ -9,6 +9,9 @@ source "$script_directory/core/android-settings.sh"
 sharedLogI "👩‍🔬 Start unit tests ..."
 start_emulator
 adb uninstall "de.stefan.lang.shapebyte.android.dev"
+./gradlew :core:allTestDebugUnitTest :core:connectedAndroidTest :core:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
+./gradlew :foundation:allTestDebugUnitTest :foundation:connectedAndroidTest :foundation:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
+./gradlew :designsystem:allTestDebugUnitTest :designsystem:connectedAndroidTest :designsystem:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
 ./gradlew :shared:allTestDebugUnitTest :shared:connectedAndroidTest :shared:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
 
 return_code=$?

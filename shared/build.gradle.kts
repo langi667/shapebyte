@@ -63,7 +63,7 @@ kotlin {
 
             api(projects.core)
             api(projects.foundation)
-            api(projects.shared.designsystem)
+            api(projects.designsystem)
             api(projects.shared.features)
         }
 
@@ -81,7 +81,7 @@ kotlin {
             isStatic = false
             export(projects.core)
             export(projects.foundation)
-            export(projects.shared.designsystem)
+            export(projects.designsystem)
             export(projects.shared.features)
 
             transitiveExport = true

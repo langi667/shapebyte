@@ -37,7 +37,7 @@ kotlin {
 
             implementation(projects.core)
             implementation(projects.foundation)
-            implementation(projects.shared.designsystem)
+            implementation(projects.designsystem)
             implementation(projects.shared.features.navigation)
             implementation(projects.shared.features.featureToggles)
         }

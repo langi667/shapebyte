@@ -20,7 +20,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.shared.designsystem.api)
+            api(projects.designsystem.api)
 
             implementation(projects.core)
             implementation(projects.foundation)
@@ -50,4 +50,8 @@ android {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
+}
+
+tasks.register("allTestDebugUnitTest") {
+    dependsOn(subprojects.mapNotNull { it.tasks.findByName("testDebugUnitTest") })
 }
