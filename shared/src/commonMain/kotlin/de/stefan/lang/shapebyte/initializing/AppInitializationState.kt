@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.initializing
 
-enum class SharedInitializationState {
+enum class AppInitializationState {
     UNINITIALIZED,
     INITIALIZING,
     INITIALIZED,

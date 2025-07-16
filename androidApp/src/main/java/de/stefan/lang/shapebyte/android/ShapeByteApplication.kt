@@ -15,7 +15,7 @@ class ShapeByteApplication : Application() {
     }
 
     private fun initializeApplication() {
-        SharedModule.sharedInitializationUseCase().invoke(
+        SharedModule.start(
             PlatformDependencyProvider(
                 applicationContext = this,
                 appInfo = AppInfo(

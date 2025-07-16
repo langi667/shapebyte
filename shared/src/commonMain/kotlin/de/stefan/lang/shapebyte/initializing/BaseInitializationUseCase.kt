@@ -1,19 +1,20 @@
 package de.stefan.lang.shapebyte.initializing
 
 import de.stefan.lang.core.CoreModule
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.SharedModule
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.koin.core.module.Module
 
 abstract class BaseInitializationUseCase {
-    val flow: Flow<SharedInitializationState> get() = stateFlow
-    protected val stateFlow = MutableStateFlow(SharedInitializationState.UNINITIALIZED)
+    val flow: Flow<AppInitializationState> get() = stateFlow
+    protected val stateFlow = MutableStateFlow(AppInitializationState.UNINITIALIZED)
 
-    val state: SharedInitializationState get() = stateFlow.value
-    val isInitialized: Boolean get() = state == SharedInitializationState.INITIALIZED
+    val state: AppInitializationState get() = stateFlow.value
+    val isInitialized: Boolean get() = state == AppInitializationState.INITIALIZED
 
     /**
      * Performs the app initialization by setting up the dependency graph and other components
@@ -21,14 +22,17 @@ abstract class BaseInitializationUseCase {
      * @param platformDependencies The platform specific dependencies, such as context on Android,
      * main bundle on iOS or navigation handler ...
      */
-    fun invoke(platformDependencies: PlatformDependencyProvider): Flow<SharedInitializationState> {
-        if (stateFlow.value != SharedInitializationState.UNINITIALIZED) {
+    fun invoke(
+        platformDependencies: PlatformDependencyProviding,
+        modules: List<Module>,
+    ): Flow<AppInitializationState> {
+        if (stateFlow.value != AppInitializationState.UNINITIALIZED) {
             return stateFlow
         }
 
-        stateFlow.value = SharedInitializationState.INITIALIZING
+        stateFlow.value = AppInitializationState.INITIALIZING
         // needs to be performed directly on the main thread to have the DPI ready
-        initializeDependencyGraph(platformDependencies)
+        initializeDependencyGraph(platformDependencies, modules)
 
         val dispatcher = CoreModule.coroutineContextProvider().defaultDispatcher()
         val scope = CoreModule.coroutineScopeProvider().createCoroutineScope(
@@ -36,7 +40,7 @@ abstract class BaseInitializationUseCase {
         )
 
         scope.launch(dispatcher) {
-            initializeShared(platformDependencies)
+            initializeShared(platformDependencies, modules = modules)
         }
 
         return stateFlow
@@ -49,11 +53,10 @@ abstract class BaseInitializationUseCase {
      * @param platformDependencies The platform specific dependencies, such as context on Android,
      * main bundle on iOS or navigation handler ...
      */
-    private fun initializeDependencyGraph(
-        platformDependencies: PlatformDependencyProvider,
-    ) {
-        SharedModule.start(platformDependencies)
-    }
+    protected abstract fun initializeDependencyGraph(
+        platformDependencies: PlatformDependencyProviding,
+        modules: List<Module>,
+    )
 
     /**
      * Use this method to initialize all application dependencies. The dependency injection graph is
@@ -64,8 +67,10 @@ abstract class BaseInitializationUseCase {
      * main bundle on iOS or navigation handler ...
      */
     protected abstract suspend fun initializeShared(
-        platformDependencies: PlatformDependencyProvider,
+        platformDependencies: PlatformDependencyProviding,
+        modules: List<Module>,
     )
 
+    // TODO: solve differently, no references to SharedModule
     protected fun readDeviceInfos() = SharedModule.deviceInfoProvider().readDeviceInfos()
 }

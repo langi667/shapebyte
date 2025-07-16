@@ -14,7 +14,7 @@ import de.stefan.lang.coreutils.api.logging.Logging
 import de.stefan.lang.designsystem.theme.ShapeByteTheme
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.navigation.NavigationView
-import de.stefan.lang.shapebyte.initializing.SharedInitializationState
+import de.stefan.lang.shapebyte.initializing.AppInitializationState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -30,7 +30,7 @@ class MainActivity :
 
         lifecycleScope.launch {
             SharedModule.sharedInitializationUseCase().flow.collectLatest {
-                if (it == SharedInitializationState.INITIALIZED) {
+                if (it == AppInitializationState.INITIALIZED) {
                     showMainScreen()
                 }
             }

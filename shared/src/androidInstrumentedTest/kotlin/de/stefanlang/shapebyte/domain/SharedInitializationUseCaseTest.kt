@@ -4,13 +4,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
-import de.stefan.lang.shapebyte.initializing.SharedInitializationState
+import de.stefan.lang.shapebyte.initializing.AppInitializationState
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
+import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
 import io.mockk.verify
@@ -28,11 +29,11 @@ class SharedInitializationUseCaseTest: CoreTest() {
     @DisplayName("test initial state")
     fun initialState() = test {
         val sut = createSUT()
-        assertEquals(SharedInitializationState.UNINITIALIZED, sut.state)
+        assertEquals(AppInitializationState.UNINITIALIZED, sut.state)
         assertFalse(sut.isInitialized)
 
         sut.flow.test {
-            assertEquals(SharedInitializationState.UNINITIALIZED, awaitItem())
+            assertEquals(AppInitializationState.UNINITIALIZED, awaitItem())
             expectNoEvents()
         }
     }
@@ -43,11 +44,20 @@ class SharedInitializationUseCaseTest: CoreTest() {
         val sut = createSUT()
 
         mockkObject(SharedModule)
-        assertEquals(SharedInitializationState.UNINITIALIZED, sut.state)
+        val appInfo = AppInfo(
+            packageName = "de.stefan.lang.shapebyte",
+            versionName = "1.0",
+            versionCode = 0,
+            debugMode = false // Hack: if true, it would start strict mode, maybe add a mode flag, like: Test, ...
+        )
+
+        every {SharedModule.appInfo()} returns appInfo
+
+        assertEquals(AppInitializationState.UNINITIALIZED, sut.state)
         assertFalse(sut.isInitialized)
 
         sut.flow.test {
-            assertEquals(SharedInitializationState.UNINITIALIZED, awaitItem())
+            assertEquals(AppInitializationState.UNINITIALIZED, awaitItem())
             expectNoEvents()
         }
 
@@ -55,12 +65,7 @@ class SharedInitializationUseCaseTest: CoreTest() {
 
         val platformDependencies = PlatformDependencyProvider(
             applicationContext = appContext,
-            appInfo = AppInfo(
-                packageName = "de.stefan.lang.shapebyte",
-                versionName = "1.0",
-                versionCode = 0,
-                debugMode = true
-            ),
+            appInfo = appInfo,
             appContextProvider = ContextProvider(appContext),
             appResourceProvider = AppResourceProvider(
                 null
@@ -68,24 +73,23 @@ class SharedInitializationUseCaseTest: CoreTest() {
         )
 
         stopKoin() // needs to be called because koin from the test case is already running
-        sut.invoke(platformDependencies)
+        sut.invoke(platformDependencies, SharedModule.testModules)
 
         sut.flow.test {
-            assertEquals(SharedInitializationState.INITIALIZING, awaitItem())
-            assertEquals(SharedInitializationState.INITIALIZED, awaitItem())
+            assertEquals(AppInitializationState.INITIALIZING, awaitItem())
+            assertEquals(AppInitializationState.INITIALIZED, awaitItem())
             expectNoEvents()
         }
 
-        verify(exactly = 1) { SharedModule.start(platformDependencies) }
         verify(exactly = 1) { SharedModule.deviceInfoProvider() }
 
         assertTrue(sut.isInitialized)
 
         // second call of invoke should emit INITIALIZED immediately
-        sut.invoke(platformDependencies)
+        sut.invoke(platformDependencies, SharedModule.testModules)
 
         sut.flow.test {
-            assertEquals(SharedInitializationState.INITIALIZED, awaitItem())
+            assertEquals(AppInitializationState.INITIALIZED, awaitItem())
             expectNoEvents()
         }
 

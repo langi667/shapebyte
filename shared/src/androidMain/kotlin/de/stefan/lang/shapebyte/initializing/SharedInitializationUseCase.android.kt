@@ -2,17 +2,36 @@ package de.stefan.lang.shapebyte.initializing
 
 import android.os.StrictMode
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.SharedModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.GlobalContext
+import org.koin.core.module.Module
 
 /**
  * Will setup all app dependencies, must be called in the beginning of the app launch
  */
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class SharedInitializationUseCase : BaseInitializationUseCase() {
-    actual override suspend fun initializeShared(platformDependencies: PlatformDependencyProvider) {
+    actual override suspend fun initializeShared(
+        platformDependencies: PlatformDependencyProviding,
+        modules: List<Module>,
+    ) {
         setupStrictMode()
         readDeviceInfos().collect {
-            stateFlow.value = SharedInitializationState.INITIALIZED
+            stateFlow.value = AppInitializationState.INITIALIZED
+        }
+    }
+
+    actual override fun initializeDependencyGraph(
+        platformDependencies: PlatformDependencyProviding,
+        modules: List<Module>,
+    ) {
+        val platformDependenciesAndroid = requireNotNull(platformDependencies as? PlatformDependencyProvider)
+
+        GlobalContext.startKoin {
+            androidContext(platformDependenciesAndroid.applicationContext)
+            modules(modules)
         }
     }
 

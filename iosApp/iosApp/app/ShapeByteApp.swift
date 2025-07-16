@@ -18,9 +18,9 @@ struct ShapeByteApp: App {
             appResourceProvider: AppResourceProvider()
         )
 
-        SharedModule.shared
-            .sharedInitializationUseCase()
-            .invoke(platformDependencies: platformDependencies)
+        SharedModule
+            .shared
+            .start(platformDependencies: platformDependencies)
     }
 
     // TODO: Loading State view here
