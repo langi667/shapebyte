@@ -28,13 +28,16 @@ kotlin {
         }
         commonMain.dependencies {
             api(projects.features.home.api)
+            implementation(projects.core.di)
+            implementation(projects.core.utils)
+            implementation(projects.core.coroutines)
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.core)
+            
             implementation(projects.foundation)
 
             implementation(projects.features.navigation)

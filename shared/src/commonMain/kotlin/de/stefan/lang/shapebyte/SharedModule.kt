@@ -1,7 +1,8 @@
 package de.stefan.lang.shapebyte
 
-import de.stefan.lang.core.CoreModule
-import de.stefan.lang.core.CoreModuleProviding
+import de.stefan.lang.coreutils.CoreUtilsModule
+import de.stefan.lang.coreutils.CoreUtilsModuleProviding
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.features.FeaturesModule
 import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundation.FoundationModule
@@ -22,20 +23,22 @@ interface AppInfoProviding {
 
 object SharedModule :
     KoinComponent,
-    CoreModuleProviding by CoreModule,
+    CoreUtilsModuleProviding by CoreUtilsModule,
     NavigationModuleProviding by NavigationModule,
     FeaturesModuleProviding by FeaturesModule,
     AppInfoProviding,
     SharedInitializationProviding {
 
     val modules =
-        CoreModule.module +
-        FoundationModule.module +
-        NavigationModule.module +
-        FeaturesModule.module
+        CoroutinesModule.module +
+            CoreUtilsModule.module +
+            FoundationModule.module +
+            NavigationModule.module +
+            FeaturesModule.module
 
     val testModules =
-        CoreModule.testModules +
+        CoroutinesModule.testModules +
+            CoreUtilsModule.testModules +
             FoundationModule.testModules +
             NavigationModule.testModules +
             FeaturesModule.testModules
@@ -51,7 +54,7 @@ object SharedModule :
     fun setup(
         platformDependencies: PlatformDependencyProviding,
     ) {
-        CoreModule.initialize(
+        CoreUtilsModule.initialize(
             contextProvider = platformDependencies.appContextProvider,
         )
 

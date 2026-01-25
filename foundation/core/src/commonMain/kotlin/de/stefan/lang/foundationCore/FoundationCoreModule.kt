@@ -10,14 +10,14 @@ import de.stefan.lang.foundationCore.api.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundationCore.api.os.OperatingSystemInfoProviding
 import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
+import de.stefan.lang.foundationCore.fake.audio.FakeAudioPlayer
+import de.stefan.lang.foundationCore.fake.deviceinfo.FakeDeviceInfo
 import de.stefan.lang.foundationCore.impl.assets.FileAssetLoader
 import de.stefan.lang.foundationCore.impl.audio.AudioPlayer
 import de.stefan.lang.foundationCore.impl.deviceinfo.DeviceInfo
 import de.stefan.lang.foundationCore.impl.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundationCore.impl.safearea.SafeAreaDetector
-import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
-import de.stefan.lang.foundationCore.fake.audio.FakeAudioPlayer
-import de.stefan.lang.foundationCore.fake.deviceinfo.FakeDeviceInfo
 import org.koin.core.component.get
 
 interface FoundationCoreModuleProviding {
@@ -42,7 +42,8 @@ object FoundationCoreModule :
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
         },
         appEnvironmentOnly = {
-            single<FileAssetLoading> { FileAssetLoader(logging = get(), appContextProvider = get())
+            single<FileAssetLoading> {
+                FileAssetLoader(logging = get(), appContextProvider = get())
             }
 
             single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }

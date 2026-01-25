@@ -21,7 +21,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation(projects.core)
+            
             implementation(projects.foundation.core.api)
         }
     }

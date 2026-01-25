@@ -22,8 +22,10 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
-
-            implementation(projects.core)
+            implementation(projects.core.di)
+            implementation(projects.core.utils)
+            implementation(projects.core.coroutines)
+            
             implementation(projects.foundation)
             implementation(projects.designsystem)
 

@@ -25,7 +25,10 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.core)
+            implementation(projects.core.utils)
+            implementation(projects.core.di)
+            implementation(projects.core.coroutines)
+            
             implementation(projects.foundation)
             implementation(projects.features.featureToggles.api)
         }

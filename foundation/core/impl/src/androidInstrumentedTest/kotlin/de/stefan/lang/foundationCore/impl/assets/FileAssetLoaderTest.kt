@@ -3,9 +3,10 @@ package de.stefan.lang.foundationCore.impl.assets
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import de.stefan.lang.core.CoreModule
 import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundationCore.api.assets.FileAsset
 import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
 import junit.framework.TestCase.assertEquals
@@ -19,7 +20,8 @@ import org.koin.test.KoinTest
 @RunWith(AndroidJUnit4::class)
 class FileAssetLoaderTest: CoreTest(), KoinTest {
     override val testModules: List<Module> = listOf(
-        CoreModule.testModules,
+        CoreUtilsModule.testModules,
+        CoroutinesModule.testModules
     )
 
     private val context: Context = InstrumentationRegistry.getInstrumentation().context

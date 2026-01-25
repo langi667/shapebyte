@@ -19,11 +19,14 @@ kotlin {
 
     sourceSets  {
         commonMain.dependencies {
+            implementation(projects.core.di)
+            implementation(projects.core.utils)
+            implementation(projects.core.coroutines)
+
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
 
-            implementation(projects.core)
             implementation(projects.foundation)
             implementation(projects.designsystem)
             implementation(projects.features.featureToggles)

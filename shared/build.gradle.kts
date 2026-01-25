@@ -56,15 +56,20 @@ kotlin {
         }
 
         commonMain.dependencies {
+
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            api(projects.core)
+            api(projects.core.utils)
+
             api(projects.foundation)
             api(projects.designsystem)
             api(projects.features)
+            implementation(projects.core.di)
+            implementation(projects.core.coroutines)
+
         }
 
         commonTest.dependencies {
@@ -79,7 +84,7 @@ kotlin {
     targets.withType<KotlinNativeTarget>{
         binaries.withType<Framework> {
             isStatic = false
-            export(projects.core)
+            export(projects.core.utils)
             export(projects.foundation)
             export(projects.designsystem)
             export(projects.features)

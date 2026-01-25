@@ -23,7 +23,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
 
-            implementation(projects.core)
+            
         }
 
         commonTest.dependencies {

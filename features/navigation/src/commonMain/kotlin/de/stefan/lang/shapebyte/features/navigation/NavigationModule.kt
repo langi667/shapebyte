@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.navigation
 
-import de.stefan.lang.core.CoreModule
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.foundation.FoundationModule
@@ -23,7 +22,8 @@ object NavigationModule :
         ),
         diModules = listOf(
             FoundationModule,
-            CoreModule,
+            // TODO: checlk, could lead to crashes
+            // CoreModule,
         ),
     ),
     NavigationModuleProviding {

@@ -20,7 +20,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(projects.core)
+            
         }
 
         commonMain.dependencies {

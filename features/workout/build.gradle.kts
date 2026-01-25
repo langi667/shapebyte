@@ -24,6 +24,10 @@ kotlin {
         }
         commonMain.dependencies {
             api(projects.features.workout.api)
+            implementation(projects.core.di)
+            implementation(projects.core.coroutines)
+            implementation(projects.core.utils)
+
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
@@ -35,7 +39,7 @@ kotlin {
             implementation(projects.features.workout.domain)
             implementation(projects.features.workout.presentation)
 
-            implementation(projects.core)
+            
             implementation(projects.foundation)
             implementation(projects.designsystem)
             implementation(projects.features.navigation)

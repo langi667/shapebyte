@@ -28,7 +28,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.core)
+            
             implementation(projects.foundation)
         }
 

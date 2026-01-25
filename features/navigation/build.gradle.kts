@@ -22,8 +22,8 @@ kotlin {
         commonMain.dependencies {
             api(projects.features.navigation.api)
 
+            implementation(projects.core.di)
             implementation(libs.koin.core)
-            implementation(projects.core)
             implementation(projects.foundation)
         }
 

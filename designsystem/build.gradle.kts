@@ -22,7 +22,7 @@ kotlin {
         commonMain.dependencies {
             api(projects.designsystem.api)
 
-            implementation(projects.core)
+            
             implementation(projects.foundation)
         }
     }
