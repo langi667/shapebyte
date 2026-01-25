@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.designsystem.theme.ShapeByteTheme
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviderMock
+import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviderMock
 import de.stefan.lang.shapebyte.SharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

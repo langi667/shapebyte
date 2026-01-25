@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.featureTogglesData.impl
 import de.stefan.lang.coreutils.contract.logging.Loggable
 import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 
 class FeatureToggleDatasourceMock(

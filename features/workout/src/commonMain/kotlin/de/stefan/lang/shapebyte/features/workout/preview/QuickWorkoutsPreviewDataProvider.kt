@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.preview
 
-import de.stefan.lang.foundationCore.api.image.ImageResource
+import de.stefan.lang.foundation.core.contract.image.ImageResource
 import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks

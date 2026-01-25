@@ -11,9 +11,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
-import de.stefan.lang.foundationCore.api.assets.ImageAsset
-import de.stefan.lang.foundationCore.api.image.Image
-import de.stefan.lang.foundationCore.api.image.ImageResource
+import de.stefan.lang.foundation.core.contract.assets.ImageAsset
+import de.stefan.lang.foundation.core.contract.image.Image
+import de.stefan.lang.foundation.core.contract.image.ImageResource
 import de.stefan.lang.shapebyte.android.shared.resources.mapping.ImageMapper
 import de.stefan.lang.shapebyte.android.utils.assets.assetsPath
 import java.io.IOException

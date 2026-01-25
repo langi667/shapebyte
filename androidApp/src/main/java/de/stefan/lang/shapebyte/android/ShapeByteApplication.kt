@@ -2,9 +2,9 @@ package de.stefan.lang.shapebyte.android
 
 import android.app.Application
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
-import de.stefan.lang.foundationCore.api.app.AppInfo
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
-import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
+import de.stefan.lang.foundation.core.contract.app.AppInfo
+import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.shared.resources.mapping.AudioMapper
 

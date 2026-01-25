@@ -9,7 +9,7 @@ import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.foundationUI.FoundationUIModule
 import de.stefan.lang.shapebyte.features.home.HomeModule

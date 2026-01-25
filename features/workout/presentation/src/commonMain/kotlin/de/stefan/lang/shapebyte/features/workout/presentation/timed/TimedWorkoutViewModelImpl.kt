@@ -4,11 +4,11 @@ import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.designsystem.api.ColorDescriptor
-import de.stefan.lang.foundationCore.api.audio.AudioPlaying
-import de.stefan.lang.foundationCore.api.audio.AudioResource
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
-import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
+import de.stefan.lang.foundation.core.contract.audio.AudioResource
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
+import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationPresentation.api.buttons.ButtonState
 import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequest

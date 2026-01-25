@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.api.timed
 
 import de.stefan.lang.designsystem.api.ColorDescriptor
-import de.stefan.lang.foundationCore.api.assets.ImageAsset
+import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 import de.stefan.lang.foundationPresentation.api.buttons.ButtonState
 import de.stefan.lang.shapebyte.features.workout.api.item.ImageContaining
 import de.stefan.lang.shapebyte.features.workout.api.item.Item

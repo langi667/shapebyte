@@ -2,9 +2,9 @@ package de.stefan.lang.shapebyte.features.home.presentation
 
 import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
-import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
+import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.shapebyte.features.home.api.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.api.HomeRootViewData

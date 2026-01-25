@@ -7,8 +7,8 @@ import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.coroutines.CoroutinesModule
-import de.stefan.lang.foundationCore.api.assets.FileAsset
-import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
+import de.stefan.lang.foundation.core.contract.assets.FileAsset
+import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test

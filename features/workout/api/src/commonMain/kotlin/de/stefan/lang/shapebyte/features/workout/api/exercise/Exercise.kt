@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.api.exercise
 
-import de.stefan.lang.foundationCore.api.assets.ImageAsset
+import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 import de.stefan.lang.shapebyte.features.workout.api.item.ImageContaining
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 

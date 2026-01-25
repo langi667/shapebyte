@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationCore.fake.assets
 
-import de.stefan.lang.foundationCore.api.assets.FileAsset
-import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
+import de.stefan.lang.foundation.core.contract.assets.FileAsset
+import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 
 class FakeFileAssetLoader : FileAssetLoading {
     private val mockedContent = mutableMapOf<FileAsset, String>()

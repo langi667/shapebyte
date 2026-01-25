@@ -27,7 +27,7 @@ include(":core:coroutines")
 
 include(":foundation")
 include(":foundation:core")
-include(":foundation:core:api")
+include(":foundation:core:contract")
 include(":foundation:core:impl")
 include(":foundation:core:fake")
 include(":foundation:presentation")

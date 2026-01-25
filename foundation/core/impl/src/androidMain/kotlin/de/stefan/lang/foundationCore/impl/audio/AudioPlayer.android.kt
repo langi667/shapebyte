@@ -5,10 +5,10 @@ import android.media.MediaPlayer
 import de.stefan.lang.coreutils.contract.logging.Loggable
 import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
-import de.stefan.lang.foundationCore.api.audio.AudioPlaying
-import de.stefan.lang.foundationCore.api.audio.AudioResource
-import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
-import de.stefan.lang.foundationCore.api.resources.ResourceFileMapping
+import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
+import de.stefan.lang.foundation.core.contract.audio.AudioResource
+import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
+import de.stefan.lang.foundation.core.contract.resources.ResourceFileMapping
 
 actual class AudioPlayer actual constructor(
     private val appContextProvider: ContextProvider,

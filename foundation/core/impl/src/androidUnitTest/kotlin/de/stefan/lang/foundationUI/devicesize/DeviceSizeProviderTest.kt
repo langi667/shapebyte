@@ -1,6 +1,6 @@
 package de.stefan.lang.foundationUI.devicesize
 
-import de.stefan.lang.foundationCore.api.devicesize.Size
+import de.stefan.lang.foundation.core.contract.devicesize.Size
 import de.stefan.lang.foundationCore.fake.devicesize.FakeScreenSizeProvider
 import de.stefan.lang.foundationCore.impl.devicesize.AndroidSizeBounds
 import de.stefan.lang.foundationCore.impl.devicesize.DeviceSizeCategoryProvider

@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.featureTogglesData.impl
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.featureToggles.api.FeatureToggleState
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
 import de.stefan.lang.shapebyte.featureTogglesData.BaseFeatureToggleDataTest
 import kotlin.test.Test

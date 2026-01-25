@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.featureToggles.api.FeatureToggleUseCase
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleError

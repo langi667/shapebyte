@@ -2,14 +2,14 @@ package de.stefan.lang.foundationCore
 
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
-import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
-import de.stefan.lang.foundationCore.api.audio.AudioPlaying
-import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
-import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategoryProviding
-import de.stefan.lang.foundationCore.api.devicesize.ScreenSizeProviding
-import de.stefan.lang.foundationCore.api.os.OperatingSystemInfoProviding
-import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
-import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
+import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
+import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProviding
+import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
+import de.stefan.lang.foundation.core.contract.os.OperatingSystemInfoProviding
+import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
+import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
 import de.stefan.lang.foundationCore.fake.audio.FakeAudioPlayer
 import de.stefan.lang.foundationCore.fake.deviceinfo.FakeDeviceInfo

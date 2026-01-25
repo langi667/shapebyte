@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationCore.impl.devicesize
 
-import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundationCore.api.devicesize.Size
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategory
+import de.stefan.lang.foundation.core.contract.devicesize.Size
 
 enum class AndroidSizeBounds(val category: DeviceSizeCategory) {
     XSmall(DeviceSizeCategory.XSmall(size = Size(width = 240f, height = 480f))),

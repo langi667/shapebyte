@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
-import de.stefan.lang.foundationCore.api.assets.ImageAsset
+import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 import de.stefan.lang.foundationPresentation.api.buttons.ButtonState
 import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.shapebyte.android.designsystem.ui.color

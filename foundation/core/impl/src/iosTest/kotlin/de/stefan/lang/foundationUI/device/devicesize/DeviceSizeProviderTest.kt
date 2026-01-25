@@ -1,6 +1,6 @@
 package de.stefan.lang.foundationUI.device.devicesize
 
-import de.stefan.lang.foundationCore.api.devicesize.Size
+import de.stefan.lang.foundation.core.contract.devicesize.Size
 import de.stefan.lang.foundationCore.impl.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundationCore.impl.devicesize.iPhoneSizeBounds
 import de.stefan.lang.foundationCore.fake.devicesize.FakeScreenSizeProvider

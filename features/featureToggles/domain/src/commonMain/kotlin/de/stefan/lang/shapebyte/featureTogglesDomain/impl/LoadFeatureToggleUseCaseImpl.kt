@@ -5,8 +5,8 @@ import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.foundationCore.api.usecase.BaseDataUseCase
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.usecase.BaseDataUseCase
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

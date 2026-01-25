@@ -3,14 +3,14 @@ package de.stefanlang.shapebyte.domain
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.shapebyte.initializing.AppInitializationState
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.shapebyte.SharedModule
-import de.stefan.lang.foundationCore.api.app.AppInfo
+import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
-import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
+import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject

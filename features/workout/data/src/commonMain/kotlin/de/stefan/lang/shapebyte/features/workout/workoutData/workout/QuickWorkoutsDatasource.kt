@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData.workout
 
-import de.stefan.lang.foundationCore.api.loadstate.LoadState
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.api.Workout
 
 interface QuickWorkoutsDatasource {

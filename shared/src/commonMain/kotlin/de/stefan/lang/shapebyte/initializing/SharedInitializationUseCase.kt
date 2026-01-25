@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.initializing
 
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
+import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
 import org.koin.core.module.Module
 
 /**

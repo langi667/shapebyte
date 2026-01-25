@@ -1,9 +1,9 @@
 package de.stefan.lang.foundationCore.impl.devicesize
 
-import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategoryProviding
-import de.stefan.lang.foundationCore.api.devicesize.ScreenSizeProviding
-import de.stefan.lang.foundationCore.api.devicesize.Size
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategory
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProviding
+import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
+import de.stefan.lang.foundation.core.contract.devicesize.Size
 
 actual class DeviceSizeCategoryProvider actual constructor(
     actual override val screenSizeProvider: ScreenSizeProviding,

@@ -1,10 +1,10 @@
 package de.stefan.lang.foundationCore.impl.deviceinfo
 
-import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
+import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.impl.safearea.SafeAreaDetector
-import de.stefan.lang.foundationCore.api.os.OperatingSystem
-import de.stefan.lang.foundationCore.api.devicesize.Size
-import de.stefan.lang.foundationCore.api.safearea.SafeArea
+import de.stefan.lang.foundation.core.contract.os.OperatingSystem
+import de.stefan.lang.foundation.core.contract.devicesize.Size
+import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import kotlinx.coroutines.flow.Flow

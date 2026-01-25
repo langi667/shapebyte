@@ -2,10 +2,10 @@ package de.stefan.lang.foundationCore.impl.deviceinfo
 
 import android.content.res.Resources
 import android.util.DisplayMetrics
-import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
-import de.stefan.lang.foundationCore.api.devicesize.Size
-import de.stefan.lang.foundationCore.api.os.OperatingSystem
-import de.stefan.lang.foundationCore.api.safearea.SafeArea
+import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
+import de.stefan.lang.foundation.core.contract.devicesize.Size
+import de.stefan.lang.foundation.core.contract.os.OperatingSystem
+import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import de.stefan.lang.foundationCore.impl.safearea.SafeAreaDetector
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

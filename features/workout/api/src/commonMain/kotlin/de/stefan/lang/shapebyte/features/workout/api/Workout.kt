@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.api
 
-import de.stefan.lang.foundationCore.api.image.ImageResource
+import de.stefan.lang.foundation.core.contract.image.ImageResource
 
 data class Workout(
     val id: Int,

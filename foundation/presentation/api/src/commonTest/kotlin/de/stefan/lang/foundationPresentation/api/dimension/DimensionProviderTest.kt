@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationPresentation.api.dimension
 
-import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundationCore.api.devicesize.Size
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategory
+import de.stefan.lang.foundation.core.contract.devicesize.Size
 import de.stefan.lang.foundationCore.fake.devicesize.FakeDeviceSizeCategoryProvider
 import de.stefan.lang.foundationCore.fake.devicesize.FakeScreenSizeProvider
 import kotlin.test.Test

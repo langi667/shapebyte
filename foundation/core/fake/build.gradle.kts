@@ -22,7 +22,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
 
             
-            implementation(projects.foundation.core.api)
+            implementation(projects.foundation.core.contract)
         }
     }
 }

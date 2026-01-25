@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.initializing
 
 import android.os.StrictMode
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
-import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
+import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProvider
+import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.shapebyte.SharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
