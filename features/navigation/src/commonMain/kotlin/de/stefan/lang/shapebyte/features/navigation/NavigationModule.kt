@@ -24,8 +24,6 @@ object NavigationModule :
         diModules = listOf(
             FoundationCoreModule,
             FoundationUIModule,
-            // TODO: checlk, could lead to crashes
-            // CoreModule,
         ),
     ),
     NavigationModuleProviding {

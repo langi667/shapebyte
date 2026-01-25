@@ -67,7 +67,10 @@ kotlin {
             api(projects.foundation.core)
             api(projects.foundation.presentation)
             api(projects.designsystem)
-            api(projects.features)
+            api(projects.features.featureToggles)
+            api(projects.features.home)
+            api(projects.features.workout)
+            api(projects.features.navigation)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
 
@@ -89,7 +92,10 @@ kotlin {
             export(projects.foundation.core)
             export(projects.foundation.presentation)
             export(projects.designsystem)
-            export(projects.features)
+            export(projects.features.featureToggles)
+            export(projects.features.home)
+            export(projects.features.workout)
+            export(projects.features.navigation)
 
             transitiveExport = true
         }

@@ -3,17 +3,21 @@ package de.stefan.lang.shapebyte
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.CoreUtilsModuleProviding
 import de.stefan.lang.coroutines.CoroutinesModule
-import de.stefan.lang.features.FeaturesModule
-import de.stefan.lang.features.FeaturesModuleProviding
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.foundationPresentation.api.dimension.DimensionProvider
 import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
+import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModuleProviding
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
+import de.stefan.lang.shapebyte.features.home.HomeModule
+import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
+import de.stefan.lang.shapebyte.features.workout.WorkoutModule
+import de.stefan.lang.shapebyte.features.workout.WorkoutModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -26,7 +30,9 @@ object SharedModule :
     KoinComponent,
     CoreUtilsModuleProviding by CoreUtilsModule,
     NavigationModuleProviding by NavigationModule,
-    FeaturesModuleProviding by FeaturesModule,
+    FeatureTogglesModuleProviding by FeatureTogglesModule,
+    HomeModuleProviding by HomeModule,
+    WorkoutModuleProviding by WorkoutModule,
     AppInfoProviding,
     SharedInitializationProviding {
 
@@ -36,7 +42,9 @@ object SharedModule :
             FoundationCoreModule.module +
             FoundationUIModule.module +
             NavigationModule.module +
-            FeaturesModule.module
+            FeatureTogglesModule.module +
+            HomeModule.module +
+            WorkoutModule.module
 
     val testModules =
         CoroutinesModule.testModules +
@@ -44,7 +52,9 @@ object SharedModule :
             FoundationCoreModule.testModules +
             FoundationUIModule.testModules +
             NavigationModule.testModules +
-            FeaturesModule.testModules
+            FeatureTogglesModule.testModules +
+            HomeModule.testModules +
+            WorkoutModule.testModules
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }
 
