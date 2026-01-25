@@ -6,6 +6,7 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -20,11 +21,15 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.designsystem.api)
+            api(projects.foundation.core)
+            api(projects.foundation.presentation)
+        }
 
-            
+        androidUnitTest.dependencies {
+            implementation(projects.core.test)
+            implementation(libs.junit.jupiter)
             implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
+            implementation(projects.foundation.core.fake)
         }
     }
 }

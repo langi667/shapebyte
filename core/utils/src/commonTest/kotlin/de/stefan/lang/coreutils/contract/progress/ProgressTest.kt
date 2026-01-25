@@ -1,6 +1,5 @@
 package de.stefan.lang.coreutils.contract.progress
 
-import de.stefan.lang.coreutils.contract.progress.Progress
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

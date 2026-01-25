@@ -3,8 +3,8 @@ import shared
 
 struct LoggableTest {
     class TestClass: Loggable {
-        var logger: any Logging = RecordingLogger()
-        var recLogger: RecordingLogger? { logger as? RecordingLogger }
+        let logger: any Logging = shared.CoreUtilsModule.shared.recordingLogger()
+        var recLogger: RecordingLogging? { logger as? RecordingLogging }
     }
 
     private let sut = TestClass()
@@ -21,35 +21,35 @@ struct LoggableTest {
         let msg = "Log Debug"
         sut.logD(message: msg)
 
-        #expect(sut.tag == sut.recLogger?.latestRecord?.tag)
-        #expect(msg == sut.recLogger?.latestRecord?.message)
-        #expect("d" == sut.recLogger?.latestRecord?.level)
+        #expect(sut.tag == sut.recLogger?.latestRecordLog?.tag)
+        #expect(msg == sut.recLogger?.latestRecordLog?.message)
+        #expect("d" == sut.recLogger?.latestRecordLog?.level)
     }
 
     @Test func logITest() async throws {
         let msg = "Log Info"
         sut.logI(message: msg)
 
-        #expect(sut.tag == sut.recLogger?.latestRecord?.tag)
-        #expect(msg == sut.recLogger?.latestRecord?.message)
-        #expect("i" == sut.recLogger?.latestRecord?.level)
+        #expect(sut.tag == sut.recLogger?.latestRecordLog?.tag)
+        #expect(msg == sut.recLogger?.latestRecordLog?.message)
+        #expect("i" == sut.recLogger?.latestRecordLog?.level)
     }
 
     @Test func logWTest() async throws {
         let msg = "Log Warning"
         sut.logW(message: msg)
 
-        #expect(sut.tag == sut.recLogger?.latestRecord?.tag)
-        #expect(msg == sut.recLogger?.latestRecord?.message)
-        #expect("w" == sut.recLogger?.latestRecord?.level)
+        #expect(sut.tag == sut.recLogger?.latestRecordLog?.tag)
+        #expect(msg == sut.recLogger?.latestRecordLog?.message)
+        #expect("w" == sut.recLogger?.latestRecordLog?.level)
     }
 
     @Test func logETest() async throws {
         let msg = "Log Error"
         sut.logE(message: msg)
 
-        #expect(sut.tag == sut.recLogger?.latestRecord?.tag)
-        #expect(msg == sut.recLogger?.latestRecord?.message)
-        #expect("e" == sut.recLogger?.latestRecord?.level)
+        #expect(sut.tag == sut.recLogger?.latestRecordLog?.tag)
+        #expect(msg == sut.recLogger?.latestRecordLog?.message)
+        #expect("e" == sut.recLogger?.latestRecordLog?.level)
     }
 }

@@ -35,7 +35,6 @@ include(":foundation:presentation")
 include(":foundation:presentation:api")
 
 include(":designsystem")
-include(":designsystem:api")
 
 include(":features")
 include(":features:navigation")

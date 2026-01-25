@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.android.designsystem.ui
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import de.stefan.lang.designsystem.api.core.ColorDescriptor
+import de.stefan.lang.designsystem.api.ColorDescriptor
 
 @Composable
 fun ColorDescriptor.Themed.color(): Color = when (this) {

@@ -1,15 +1,14 @@
 package de.stefan.lang.coreutils.contract.logging
 
-import de.stefan.lang.coreutils.contract.logging.Loggable
-import de.stefan.lang.coreutils.contract.logging.Logging
-import de.stefan.lang.coreutils.test.RecordingLogger
+import de.stefan.lang.coreutils.implementation.recording.RecordingLogger
+import de.stefan.lang.coreutils.implementation.silent.SilentLogger
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LoggableTest {
     class TestLoggable : Loggable {
-        override val logger: Logging = RecordingLogger()
-        val currentRecord: RecordingLogger.Record? get() = (logger as RecordingLogger).latestRecord
+        override val logger: RecordingLogging = RecordingLogger(SilentLogger())
+        val currentRecordLog: RecordLog? get() = logger.latestRecordLog
     }
 
     private val expectedTag = "TestLoggable"
@@ -26,7 +25,7 @@ class LoggableTest {
         val sut = TestLoggable()
         sut.logD(message)
 
-        assertEquals(RecordingLogger.Record(expectedTag, "d", message), sut.currentRecord)
+        assertEquals(RecordLog(expectedTag, "d", message), sut.currentRecordLog)
     }
 
     @Test
@@ -34,7 +33,7 @@ class LoggableTest {
         val sut = TestLoggable()
         sut.logI(message)
 
-        assertEquals(RecordingLogger.Record(expectedTag, "i", message), sut.currentRecord)
+        assertEquals(RecordLog(expectedTag, "i", message), sut.currentRecordLog)
     }
 
     @Test
@@ -42,7 +41,7 @@ class LoggableTest {
         val sut = TestLoggable()
         sut.logW(message)
 
-        assertEquals(RecordingLogger.Record(expectedTag, "w", message), sut.currentRecord)
+        assertEquals(RecordLog(expectedTag, "w", message), sut.currentRecordLog)
     }
 
     @Test
@@ -50,6 +49,6 @@ class LoggableTest {
         val sut = TestLoggable()
         sut.logE(message)
 
-        assertEquals(RecordingLogger.Record(expectedTag, "e", message), sut.currentRecord)
+        assertEquals(RecordLog(expectedTag, "e", message), sut.currentRecordLog)
     }
 }
