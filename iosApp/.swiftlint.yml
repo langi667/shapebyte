@@ -3,6 +3,8 @@
 excluded:
   - build
   - build/*
+  - DerivedData
+  - DerivedData/*
 
 type_name:
   excluded:

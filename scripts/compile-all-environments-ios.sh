@@ -5,13 +5,14 @@ cd "$script_directory/../" || exit 200
 
 source "$script_directory/core/logging.sh"
 source "$script_directory/core/error_codes.sh"
+source "$script_directory/core/ios-settings.sh"
 
 ios_project_dir="$script_directory/../iosApp"
 
 compile() {
   local scheme=$1
   iOSLogS "📲 Compiling scheme $scheme ..."
-  xcodebuild -project "$ios_project_dir/iosApp.xcodeproj" -scheme "$scheme" -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+  xcodebuild -project "$ios_project_dir/iosApp.xcodeproj" -scheme "$scheme" -configuration Debug -destination "platform=iOS Simulator,name=$IOS_SIM_DEVICE,OS=$IOS_SIM_OS"
   return_code=$?
 
   if [ $return_code -ne 0 ]; then
