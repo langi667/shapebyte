@@ -27,7 +27,7 @@ kotlin {
             api(projects.foundation.core.contract)
             implementation(libs.koin.core)
 
-            implementation(projects.foundation.core.impl)
+            implementation(projects.foundation.core.implementation)
             implementation(projects.foundation.core.fake)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)

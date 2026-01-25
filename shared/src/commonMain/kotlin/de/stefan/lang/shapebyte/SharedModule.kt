@@ -3,10 +3,10 @@ package de.stefan.lang.shapebyte
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.CoreUtilsModuleProviding
 import de.stefan.lang.coroutines.CoroutinesModule
-import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationPresentation.api.dimension.DimensionProvider
 import de.stefan.lang.foundationUI.FoundationUIModule
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
