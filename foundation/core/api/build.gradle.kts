@@ -21,7 +21,9 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
-            implementation(projects.core)
+            implementation(projects.core.di)
+            implementation(projects.core.coroutines)
+            implementation(projects.core.utils)
         }
 
         commonTest.dependencies {

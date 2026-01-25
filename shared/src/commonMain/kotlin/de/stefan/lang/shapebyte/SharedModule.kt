@@ -29,11 +29,10 @@ object SharedModule :
     SharedInitializationProviding {
 
     val modules =
-        // TODO: improve this,maybe using annotation like @MainModule
         CoreModule.module +
-            FoundationModule.module +
-            NavigationModule.module +
-            FeaturesModule.module
+        FoundationModule.module +
+        NavigationModule.module +
+        FeaturesModule.module
 
     val testModules =
         CoreModule.testModules +

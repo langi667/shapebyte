@@ -29,7 +29,10 @@ kotlin {
 
             implementation(projects.foundation.core.impl)
             implementation(projects.foundation.core.fake)
-            implementation(projects.core)
+            implementation(projects.core.di)
+            implementation(projects.core.coroutines)
+            implementation(projects.core.utils)
+
         }
     }
 }

@@ -22,7 +22,9 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(projects.core)
-            implementation(projects.foundation.core)
+            implementation(projects.core.di)
+            implementation(projects.core.utils)
+            implementation(projects.core.coroutines)
         }
 
         commonTest.dependencies {
