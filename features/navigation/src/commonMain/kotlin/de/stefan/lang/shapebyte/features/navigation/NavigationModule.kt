@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.features.navigation
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestResolver
 import org.koin.core.component.get
@@ -23,7 +23,7 @@ object NavigationModule :
         ),
         diModules = listOf(
             FoundationCoreModule,
-            FoundationUIModule,
+            FoundationPresentationModule,
         ),
     ),
     NavigationModuleProviding {

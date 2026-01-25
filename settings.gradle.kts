@@ -32,7 +32,6 @@ include(":foundation:core:implementation")
 include(":foundation:core:fake")
 include(":foundation:presentation")
 include(":foundation:presentation")
-include(":foundation:presentation:api")
 
 include(":designsystem")
 
@@ -47,7 +46,6 @@ include(":features:featureToggles:data")
 include(":features:featureToggles:domain")
 
 include(":features:home")
-include(":features:home:api")
 include(":features:home:presentation")
 
 include(":features:workout")

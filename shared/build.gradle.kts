@@ -69,6 +69,8 @@ kotlin {
             api(projects.designsystem)
             api(projects.features.featureToggles)
             api(projects.features.home)
+            api(projects.features.home.presentation)
+
             api(projects.features.workout)
             api(projects.features.navigation)
             implementation(projects.core.di)

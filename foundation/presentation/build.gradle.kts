@@ -18,13 +18,30 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        commonMain.dependencies {
+        androidMain.dependencies {
+            api(libs.koin.android)
+        }
 
-            api(projects.foundation.presentation.api)
+        commonMain.dependencies {
             implementation(projects.core.di)
 
             implementation(libs.koin.core)
             implementation(projects.foundation.core)
+
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.datetime)
+            implementation(projects.core.utils)
+            implementation(projects.core.coroutines)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+
+            implementation (projects.core.test)
+            implementation (projects.foundation.core.fake)
         }
     }
 }

@@ -37,8 +37,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundation.core.contract.assets.ImageAsset
-import de.stefan.lang.foundationPresentation.api.buttons.ButtonState
-import de.stefan.lang.foundationPresentation.api.state.UIState
+import de.stefan.lang.foundation.presentation.contract.buttons.ButtonState
+import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge

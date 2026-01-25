@@ -4,7 +4,7 @@ import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import org.koin.core.module.Module
 import org.koin.test.KoinTest
@@ -14,7 +14,7 @@ open class WorkoutFeatureTest: CoreTest(), KoinTest {
         CoreUtilsModule.testModules,
         CoroutinesModule.testModules,
         FoundationCoreModule.testModules,
-        FoundationUIModule.testModules,
+        FoundationPresentationModule.testModules,
         FeatureTogglesModule.testModules,
         WorkoutModule.testModules
     )

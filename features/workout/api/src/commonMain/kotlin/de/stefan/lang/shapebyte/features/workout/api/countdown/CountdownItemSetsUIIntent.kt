@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.api.countdown
 
-import de.stefan.lang.foundationPresentation.api.intent.UIIntent
+import de.stefan.lang.foundation.presentation.contract.intent.UIIntent
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
 
 sealed class CountdownItemSetsUIIntent : UIIntent {

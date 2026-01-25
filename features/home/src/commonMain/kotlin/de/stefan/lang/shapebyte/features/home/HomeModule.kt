@@ -3,10 +3,10 @@ package de.stefan.lang.shapebyte.features.home
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
-import de.stefan.lang.shapebyte.features.home.api.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.home.presentation.HomeRootViewModelImpl
+import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
@@ -39,7 +39,7 @@ object HomeModule :
             FeatureTogglesModule,
             WorkoutModule,
             FoundationCoreModule,
-            FoundationUIModule,
+            FoundationPresentationModule,
             FeatureTogglesModule,
             NavigationModule,
         ),

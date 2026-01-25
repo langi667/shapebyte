@@ -5,6 +5,7 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -26,8 +27,6 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
 
-            implementation(projects.features.home.api)
-            
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
             implementation(projects.features.featureToggles)

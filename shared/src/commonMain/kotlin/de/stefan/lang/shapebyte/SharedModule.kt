@@ -7,8 +7,8 @@ import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundationPresentation.api.dimension.DimensionProvider
-import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
+import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModuleProviding
@@ -40,7 +40,7 @@ object SharedModule :
         CoroutinesModule.module +
             CoreUtilsModule.module +
             FoundationCoreModule.module +
-            FoundationUIModule.module +
+            FoundationPresentationModule.module +
             NavigationModule.module +
             FeatureTogglesModule.module +
             HomeModule.module +
@@ -50,7 +50,7 @@ object SharedModule :
         CoroutinesModule.testModules +
             CoreUtilsModule.testModules +
             FoundationCoreModule.testModules +
-            FoundationUIModule.testModules +
+            FoundationPresentationModule.testModules +
             NavigationModule.testModules +
             FeatureTogglesModule.testModules +
             HomeModule.testModules +

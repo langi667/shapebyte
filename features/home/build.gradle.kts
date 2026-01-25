@@ -27,7 +27,6 @@ kotlin {
             implementation(libs.mockk.android)
         }
         commonMain.dependencies {
-            api(projects.features.home.api)
             implementation(projects.core.di)
             implementation(projects.core.utils)
             implementation(projects.core.coroutines)

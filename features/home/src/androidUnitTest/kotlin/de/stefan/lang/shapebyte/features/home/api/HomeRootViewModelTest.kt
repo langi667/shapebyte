@@ -10,10 +10,13 @@ import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
-import de.stefan.lang.foundationPresentation.api.state.UIState
-import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.foundation.presentation.contract.state.UIState
+import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.shapebyte.features.home.HomeModule
-import de.stefan.lang.shapebyte.features.home.presentation.HomeRootViewModelImpl
+import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
+import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
+import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
+import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCaseImpl
 import io.mockk.every
@@ -36,7 +39,7 @@ class HomeRootViewModelTest : CoreTest(), KoinTest {
             CoreUtilsModule.testModules,
             CoroutinesModule.testModules,
             FoundationCoreModule.testModules,
-            FoundationUIModule.testModules,
+            FoundationPresentationModule.testModules,
             HomeModule.testModules
         )
 

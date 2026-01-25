@@ -9,8 +9,8 @@ import de.stefan.lang.foundation.core.contract.audio.AudioResource
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.foundationPresentation.api.buttons.ButtonState
-import de.stefan.lang.foundationPresentation.api.state.UIState
+import de.stefan.lang.foundation.presentation.contract.buttons.ButtonState
+import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequest
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.api.Workout
