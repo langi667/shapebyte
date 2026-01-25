@@ -1,8 +1,9 @@
 package de.stefan.lang.shapebyte.features.home.api
 
 import app.cash.turbine.test
-import de.stefan.lang.core.CoreModule
 import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.coreutils.CoreUtilsModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
@@ -32,7 +33,8 @@ class HomeRootViewModelTest : CoreTest(), KoinTest {
 
     override val testModules: List<Module>
         get() = super.testModules + listOf(
-            CoreModule.testModules,
+            CoreUtilsModule.testModules,
+            CoroutinesModule.testModules,
             FoundationCoreModule.testModules,
             FoundationUIModule.testModules,
             HomeModule.testModules

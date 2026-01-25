@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.core.CoreModule
+import de.stefan.lang.coreutils.CoreUtilsModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
@@ -59,9 +60,9 @@ class DefaultFeatureToggleDatasourceImplTest : BaseFeatureToggleDataTest() {
         )
 
         return DefaultFeatureToggleDatasourceImpl(
-            logger = CoreModule.logger(),
+            logger = CoreUtilsModule.logger(),
             assetLoader = loader,
-            coroutineContextProviding = CoreModule.coroutineContextProvider(),
+            coroutineContextProviding = CoroutinesModule.coroutineContextProvider(),
         )
     }
 }

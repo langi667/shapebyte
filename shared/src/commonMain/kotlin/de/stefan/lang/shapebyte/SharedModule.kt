@@ -9,9 +9,9 @@ import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.foundationPresentation.api.dimension.DimensionProvider
 import de.stefan.lang.foundationUI.FoundationUIModule
+import de.stefan.lang.shapebyte.di.SharedInitializationProviding
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModuleProviding
-import de.stefan.lang.shapebyte.di.SharedInitializationProviding
 import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
