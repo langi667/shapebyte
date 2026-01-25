@@ -31,7 +31,8 @@ kotlin {
             implementation(projects.core.utils)
             implementation(projects.core.coroutines)
 
-            implementation(projects.foundation)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
             implementation(projects.features.featureToggles.api)
             implementation(projects.features.featureToggles.data)
         }

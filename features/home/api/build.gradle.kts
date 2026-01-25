@@ -26,7 +26,8 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
 
-            implementation(projects.foundation)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
             implementation(projects.features.featureToggles)
             implementation(projects.features.navigation)
             implementation(projects.features.workout)

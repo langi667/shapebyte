@@ -38,7 +38,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             
-            implementation(projects.foundation)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
 
             implementation(projects.features.navigation)
             implementation(projects.features.featureToggles)

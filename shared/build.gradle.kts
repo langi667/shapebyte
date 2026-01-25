@@ -64,7 +64,8 @@ kotlin {
 
             api(projects.core.utils)
 
-            api(projects.foundation)
+            api(projects.foundation.core)
+            api(projects.foundation.presentation)
             api(projects.designsystem)
             api(projects.features)
             implementation(projects.core.di)
@@ -85,7 +86,8 @@ kotlin {
         binaries.withType<Framework> {
             isStatic = false
             export(projects.core.utils)
-            export(projects.foundation)
+            export(projects.foundation.core)
+            export(projects.foundation.presentation)
             export(projects.designsystem)
             export(projects.features)
 

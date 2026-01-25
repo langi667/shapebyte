@@ -6,10 +6,11 @@ import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationPresentation.api.state.UIState
-import de.stefan.lang.featureToggles.api.FeatureId
-import de.stefan.lang.foundation.FoundationModule
+import de.stefan.lang.foundationUI.FoundationUIModule
 import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.presentation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
@@ -32,7 +33,8 @@ class HomeRootViewModelTest : CoreTest(), KoinTest {
     override val testModules: List<Module>
         get() = super.testModules + listOf(
             CoreModule.testModules,
-            FoundationModule.testModules,
+            FoundationCoreModule.testModules,
+            FoundationUIModule.testModules,
             HomeModule.testModules
         )
 

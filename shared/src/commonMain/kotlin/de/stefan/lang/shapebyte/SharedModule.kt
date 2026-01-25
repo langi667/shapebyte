@@ -5,11 +5,12 @@ import de.stefan.lang.coreutils.CoreUtilsModuleProviding
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.features.FeaturesModule
 import de.stefan.lang.features.FeaturesModuleProviding
-import de.stefan.lang.foundation.FoundationModule
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.foundationPresentation.api.dimension.DimensionProvider
+import de.stefan.lang.foundationUI.FoundationUIModule
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
@@ -32,14 +33,16 @@ object SharedModule :
     val modules =
         CoroutinesModule.module +
             CoreUtilsModule.module +
-            FoundationModule.module +
+            FoundationCoreModule.module +
+            FoundationUIModule.module +
             NavigationModule.module +
             FeaturesModule.module
 
     val testModules =
         CoroutinesModule.testModules +
             CoreUtilsModule.testModules +
-            FoundationModule.testModules +
+            FoundationCoreModule.testModules +
+            FoundationUIModule.testModules +
             NavigationModule.testModules +
             FeaturesModule.testModules
 
@@ -58,7 +61,7 @@ object SharedModule :
             contextProvider = platformDependencies.appContextProvider,
         )
 
-        FoundationModule.initialize(
+        FoundationCoreModule.initialize(
             appResourceProvider = platformDependencies.appResourceProvider,
         )
 

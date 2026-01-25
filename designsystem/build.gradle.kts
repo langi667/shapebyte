@@ -23,7 +23,8 @@ kotlin {
             api(projects.designsystem.api)
 
             
-            implementation(projects.foundation)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
         }
     }
 }

@@ -29,7 +29,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             
-            implementation(projects.foundation)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
         }
 
         commonTest.dependencies {

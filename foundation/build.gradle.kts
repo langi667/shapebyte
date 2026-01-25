@@ -19,13 +19,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.foundation.core)
-            api(projects.foundation.presentation)
-
-            implementation(libs.koin.core)
-            implementation(projects.core.di)
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
         }
     }
 }

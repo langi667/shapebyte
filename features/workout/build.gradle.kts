@@ -40,7 +40,8 @@ kotlin {
             implementation(projects.features.workout.presentation)
 
             
-            implementation(projects.foundation)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
             implementation(projects.designsystem)
             implementation(projects.features.navigation)
             implementation(projects.features.featureToggles)
@@ -80,4 +81,3 @@ android {
         }
     }
 }
-
