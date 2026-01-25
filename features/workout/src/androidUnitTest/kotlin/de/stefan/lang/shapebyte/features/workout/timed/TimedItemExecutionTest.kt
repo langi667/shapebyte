@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.timed
 
 import app.cash.turbine.test
-import de.stefan.lang.coreutils.api.progress.Progress
+import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.api.item.Item

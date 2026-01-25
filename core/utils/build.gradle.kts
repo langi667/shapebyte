@@ -5,6 +5,8 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -19,13 +21,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.utils.api)
-
             implementation(libs.koin.core)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
-            implementation(projects.core.utils.impl)
-            implementation(projects.core.utils.test)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.coretest.CoreTest
-import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
+import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.api.resources.AppResourceProvider
 import io.mockk.every
 import io.mockk.mockkObject

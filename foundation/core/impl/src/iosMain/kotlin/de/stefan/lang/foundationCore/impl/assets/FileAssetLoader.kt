@@ -1,8 +1,8 @@
 package de.stefan.lang.foundationCore.impl.assets
 
-import de.stefan.lang.coreutils.api.logging.Loggable
-import de.stefan.lang.coreutils.api.logging.Logging
-import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
+import de.stefan.lang.coreutils.contract.logging.Loggable
+import de.stefan.lang.coreutils.contract.logging.Logging
+import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.api.assets.FileAsset
 import de.stefan.lang.foundationCore.api.assets.FileAssetLoading
 import kotlinx.cinterop.ExperimentalForeignApi

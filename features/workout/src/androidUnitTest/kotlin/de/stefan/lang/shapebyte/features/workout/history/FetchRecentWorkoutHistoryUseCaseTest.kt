@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.history
 
 import app.cash.turbine.test
-import de.stefan.lang.coreutils.api.progress.Progress
+import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.FeatureToggleState

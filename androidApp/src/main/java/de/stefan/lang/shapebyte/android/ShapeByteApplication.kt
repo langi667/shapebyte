@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.android
 
 import android.app.Application
-import de.stefan.lang.coreutils.api.nativecontext.ContextProvider
+import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.foundationCore.api.app.AppInfo
 import de.stefan.lang.foundationCore.api.platformdependencies.PlatformDependencyProvider
 import de.stefan.lang.foundationCore.api.resources.AppResourceProvider

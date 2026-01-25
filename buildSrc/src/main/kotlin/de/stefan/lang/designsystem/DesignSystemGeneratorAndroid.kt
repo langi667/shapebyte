@@ -29,7 +29,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
 
         val fileSpec = FileSpec.builder(packageName, objectName)
             .addType(themeAdditions)
-            //.addImport("de.stefan.lang.coreutils.api", "Logging")
+            //.addImport("de.stefan.lang.coreutils.contract", "Logging")
             .addImport("de.stefan.lang.designsystem.api.core", "Dimensions")
             .addImport("de.stefan.lang.designsystem.api.core", "Spacings")
             .addImport("de.stefan.lang.shapebyte", "SharedModule")
@@ -41,7 +41,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
     private fun loggerProperty(): PropertySpec {
         return PropertySpec.builder(
             "logger",
-            ClassName("de.stefan.lang.coreutils.api.logging", "Logging")
+            ClassName("de.stefan.lang.coreutils.contract.logging", "Logging")
         )
             .initializer("SharedModule.logger()")
             .build()

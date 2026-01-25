@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import de.stefan.lang.coreutils.api.logging.Loggable
-import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.coreutils.contract.logging.Loggable
+import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.designsystem.theme.ShapeByteTheme
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.navigation.NavigationView

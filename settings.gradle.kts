@@ -21,9 +21,6 @@ include(":core")
 include(":core:di")
 
 include(":core:utils")
-include(":core:utils:api")
-include(":core:utils:impl")
-include(":core:utils:test")
 
 include(":core:test")
 include(":core:coroutines")

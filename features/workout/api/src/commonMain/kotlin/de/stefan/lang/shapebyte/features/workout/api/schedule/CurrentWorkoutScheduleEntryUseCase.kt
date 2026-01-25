@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.api.schedule
 
-import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.usecase.BaseDataUseCase
 import kotlinx.coroutines.flow.Flow

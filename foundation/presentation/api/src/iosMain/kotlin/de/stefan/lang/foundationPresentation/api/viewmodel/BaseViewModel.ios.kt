@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationPresentation.api.viewmodel
 
-import de.stefan.lang.coreutils.api.logging.Loggable
-import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.coreutils.contract.logging.Loggable
+import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundationPresentation.api.event.UIEvent
 import de.stefan.lang.foundationPresentation.api.event.UIEventTransmitting

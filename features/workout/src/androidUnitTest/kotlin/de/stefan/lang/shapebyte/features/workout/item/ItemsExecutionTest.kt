@@ -2,8 +2,8 @@ package de.stefan.lang.shapebyte.features.workout.item
 
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.CoreUtilsModule
-import de.stefan.lang.coreutils.api.progress.Progress
-import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.coreutils.contract.progress.Progress
+import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.api.item.Item

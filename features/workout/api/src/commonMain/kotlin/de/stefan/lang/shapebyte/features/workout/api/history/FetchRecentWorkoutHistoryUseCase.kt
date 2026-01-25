@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.api.history
 
-import de.stefan.lang.coreutils.api.logging.Logging
+import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
 import de.stefan.lang.featureToggles.api.BaseFeatureDataUseCase
