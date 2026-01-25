@@ -27,9 +27,6 @@ include(":core:utils:test")
 
 include(":core:test")
 include(":core:coroutines")
-include(":core:coroutines:api")
-include(":core:coroutines:impl")
-include(":core:coroutines:test")
 
 include(":foundation")
 include(":foundation:core")

@@ -27,7 +27,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
 
             implementation(projects.core.di)
-            implementation(projects.core.coroutines.test)
             implementation(projects.core.coroutines)
 
             api(libs.kotlin.test)

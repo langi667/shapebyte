@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.home.presentation
 
 import de.stefan.lang.coreutils.api.logging.Logging
-import de.stefan.lang.coroutines.api.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
 import de.stefan.lang.foundationCore.api.loadstate.asResultFlow
 import de.stefan.lang.foundationCore.api.stringformatter.DateTimeStringFormatter

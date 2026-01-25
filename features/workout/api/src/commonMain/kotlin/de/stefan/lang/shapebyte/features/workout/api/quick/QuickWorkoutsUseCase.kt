@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.api.quick
 
 import de.stefan.lang.coreutils.api.logging.Logging
-import de.stefan.lang.coroutines.api.CoroutineContextProviding
-import de.stefan.lang.coroutines.api.CoroutineScopeProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
 import de.stefan.lang.featureToggles.api.BaseFeatureDataUseCase
 import de.stefan.lang.featureToggles.api.FeatureId
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase

@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.countdown
 
 import de.stefan.lang.coreutils.api.logging.Logging
-import de.stefan.lang.coroutines.api.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundationPresentation.api.state.UIState
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsUIIntent
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsViewData

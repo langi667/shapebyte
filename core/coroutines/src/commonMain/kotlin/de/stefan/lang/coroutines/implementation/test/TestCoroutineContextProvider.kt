@@ -1,10 +1,10 @@
-package de.stefan.lang.coreCoroutinesProvidingTest
+package de.stefan.lang.coroutines.implementation.test
 
-import de.stefan.lang.coroutines.api.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.StandardTestDispatcher
 
-object TestCoroutineContextProvider : CoroutineContextProviding {
+internal object TestCoroutineContextProvider : CoroutineContextProviding {
     private val testDispatcher = StandardTestDispatcher()
 
     override fun mainDispatcher(): CoroutineDispatcher = testDispatcher
