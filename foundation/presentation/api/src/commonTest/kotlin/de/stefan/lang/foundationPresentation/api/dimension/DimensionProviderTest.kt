@@ -2,8 +2,8 @@ package de.stefan.lang.foundationPresentation.api.dimension
 
 import de.stefan.lang.foundationCore.api.devicesize.DeviceSizeCategory
 import de.stefan.lang.foundationCore.api.devicesize.Size
-import de.stefan.lang.foundationCore.test.devicesize.DeviceSizeCategoryProviderMock
-import de.stefan.lang.foundationCore.test.devicesize.ScreenSizeProviderMock
+import de.stefan.lang.foundationCore.fake.devicesize.FakeDeviceSizeCategoryProvider
+import de.stefan.lang.foundationCore.fake.devicesize.FakeScreenSizeProvider
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -68,8 +68,8 @@ class DimensionProviderTest {
         screenSize: Size,
         deviceSizeCategory: DeviceSizeCategory,
     ): DimensionProvider {
-        val deviceSizeCategoryProvider = DeviceSizeCategoryProviderMock(
-            ScreenSizeProviderMock(screenSize),
+        val deviceSizeCategoryProvider = FakeDeviceSizeCategoryProvider(
+            FakeScreenSizeProvider(screenSize),
             deviceSizeCategory,
             sizeCategories,
         )

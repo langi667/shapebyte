@@ -28,7 +28,7 @@ kotlin {
         androidInstrumentedTest.dependencies {
             implementation(projects.core.test)
             implementation(projects.foundation.core)
-            implementation(projects.foundation.core.test)
+            implementation(projects.foundation.core.fake)
 
             implementation(libs.androidx.test.ext.junit)
             implementation(libs.androidx.test.espresso.core)
@@ -44,14 +44,14 @@ kotlin {
             implementation(projects.core.test)
             implementation(libs.junit.jupiter)
             implementation(projects.foundation.core)
-            implementation(projects.foundation.core.test)
+            implementation(projects.foundation.core.fake)
         }
 
         iosTest.dependencies {
             implementation(projects.core.test)
 
             implementation(projects.foundation.core)
-            implementation(projects.foundation.core.test)
+            implementation(projects.foundation.core.fake)
             implementation(projects.foundation.core.impl)
         }
 

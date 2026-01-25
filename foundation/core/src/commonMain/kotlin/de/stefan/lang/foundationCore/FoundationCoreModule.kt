@@ -15,9 +15,9 @@ import de.stefan.lang.foundationCore.impl.audio.AudioPlayer
 import de.stefan.lang.foundationCore.impl.deviceinfo.DeviceInfo
 import de.stefan.lang.foundationCore.impl.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundationCore.impl.safearea.SafeAreaDetector
-import de.stefan.lang.foundationCore.test.assets.FileAssetLoaderMock
-import de.stefan.lang.foundationCore.test.audio.AudioPlayerMock
-import de.stefan.lang.foundationCore.test.deviceinfo.DeviceInfoMock
+import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
+import de.stefan.lang.foundationCore.fake.audio.FakeAudioPlayer
+import de.stefan.lang.foundationCore.fake.deviceinfo.FakeDeviceInfo
 import org.koin.core.component.get
 
 interface FoundationCoreModuleProviding {
@@ -42,8 +42,7 @@ object FoundationCoreModule :
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
         },
         appEnvironmentOnly = {
-            single<FileAssetLoading> {
-                FileAssetLoader(logging = get(), appContextProvider = get())
+            single<FileAssetLoading> { FileAssetLoader(logging = get(), appContextProvider = get())
             }
 
             single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
@@ -57,9 +56,9 @@ object FoundationCoreModule :
             }
         },
         testEnvironmentOnly = {
-            single<FileAssetLoading> { FileAssetLoaderMock() }
-            factory<AudioPlaying> { AudioPlayerMock() }
-            single<DeviceInfoProviding> { DeviceInfoMock() }
+            single<FileAssetLoading> { FakeFileAssetLoader() }
+            factory<AudioPlaying> { FakeAudioPlayer() }
+            single<DeviceInfoProviding> { FakeDeviceInfo() }
         },
     ),
     FoundationCoreModuleProviding {

@@ -35,7 +35,7 @@ kotlin {
             implementation (libs.koin.test)
 
             implementation (projects.core.test)
-            implementation (projects.foundation.core.test)
+            implementation (projects.foundation.core.fake)
         }
     }
 }

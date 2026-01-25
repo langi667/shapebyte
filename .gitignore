@@ -13,3 +13,4 @@ xcuserdata
 /androidApp/generated/*
 /iosApp/iosApp/generated/theme/*
 projectHealth.txt
+iosApp/DerivedData/*

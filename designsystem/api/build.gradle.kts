@@ -26,7 +26,7 @@ kotlin {
             implementation(projects.core.test)
             implementation(libs.junit.jupiter)
             implementation(projects.foundation.core)
-            implementation(projects.foundation.core.test)
+            implementation(projects.foundation.core.fake)
         }
 
     }

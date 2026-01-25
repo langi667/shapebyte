@@ -32,7 +32,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.core.test)
-            implementation(projects.foundation.core.test)
+            implementation(projects.foundation.core.fake)
         }
     }
 }

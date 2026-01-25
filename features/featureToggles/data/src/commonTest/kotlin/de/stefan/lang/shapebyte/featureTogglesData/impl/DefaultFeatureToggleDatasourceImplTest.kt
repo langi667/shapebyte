@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.featureTogglesData.impl
 import de.stefan.lang.core.CoreModule
 import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.foundationCore.api.loadstate.LoadState
-import de.stefan.lang.foundationCore.test.assets.FileAssetLoaderMock
+import de.stefan.lang.foundationCore.fake.assets.FakeFileAssetLoader
 import de.stefan.lang.shapebyte.featureTogglesData.BaseFeatureToggleDataTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -52,7 +52,7 @@ class DefaultFeatureToggleDatasourceImplTest : BaseFeatureToggleDataTest() {
     }
 
     private fun createSUT(defaultMockContent: String): DefaultFeatureToggleDatasourceImpl {
-        val loader = FileAssetLoaderMock()
+        val loader = FakeFileAssetLoader()
         loader.mockFileContent(
             DefaultFeatureToggleDatasourceImpl.defaultAssetFile,
             defaultMockContent,
