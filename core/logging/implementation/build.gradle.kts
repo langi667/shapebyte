@@ -23,7 +23,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.utils.logging.contract)
+            api(projects.core.logging.contract)
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)

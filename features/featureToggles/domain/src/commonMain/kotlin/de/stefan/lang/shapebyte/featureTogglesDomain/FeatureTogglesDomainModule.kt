@@ -20,7 +20,7 @@ interface FeatureTogglesDomainModuleProviding {
 
 object FeatureTogglesDomainModule :
     RootDIModule(
-        providedModule = DIModuleDeclaration(
+        providedInstances = DIModuleDeclaration(
             allEnvironments = {
                 factory<FeatureToggleUseCase> { (featureId: String) ->
                     FeatureToggleUseCaseImpl(
@@ -50,7 +50,7 @@ object FeatureTogglesDomainModule :
                 single<FeatureToggleDatasource> { FeatureToggleDatasourceMock(logger = get()) }
             },
         ),
-        diModules = listOf(
+        dependencies = listOf(
             FeatureTogglesDataModule,
         ),
     ),

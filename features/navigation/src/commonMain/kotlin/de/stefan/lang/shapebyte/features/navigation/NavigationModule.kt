@@ -15,13 +15,13 @@ interface NavigationModuleProviding {
 
 object NavigationModule :
     RootDIModule(
-        providedModule = DIModuleDeclaration(
+        providedInstances = DIModuleDeclaration(
             allEnvironments = {
                 single { NavigationRequestBuilder() }
                 single { NavigationRequestResolver() }
             },
         ),
-        diModules = listOf(
+        dependencies = listOf(
             FoundationCoreModule,
             FoundationPresentationModule,
         ),

@@ -23,10 +23,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.utils.logging.contract)
-            implementation(projects.core.utils.logging.implementation)
-            implementation(projects.core.utils.logging.fake)
-            implementation(projects.core.di)
+            api(projects.core.logging.contract)
+            implementation(projects.core.logging.implementation)
 
             implementation(libs.koin.core)
         }
@@ -34,7 +32,7 @@ kotlin {
 }
 
 android {
-    namespace = "de.stefan.lang.utils.logging"
+    namespace = "de.stefan.lang.utils.logging.fake"
     compileSdk = Project.Android.BuildSettings.targetSdk
 
     defaultConfig {

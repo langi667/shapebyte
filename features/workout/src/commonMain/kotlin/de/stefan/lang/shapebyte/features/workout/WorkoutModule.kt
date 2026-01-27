@@ -27,7 +27,7 @@ interface WorkoutModuleProviding {
 
 object WorkoutModule :
     RootDIModule(
-        providedModule = DIModuleDeclaration(
+        providedInstances = DIModuleDeclaration(
             allEnvironments = {
                 factory<TimedWorkoutViewModel> { (navHandler: NavigationRequestHandling) ->
                     TimedWorkoutViewModelImpl(
@@ -67,7 +67,7 @@ object WorkoutModule :
             },
         ),
 
-        diModules = listOf(
+        dependencies = listOf(
             WorkoutDataModule,
             WorkoutDomainModule,
         ),

@@ -9,7 +9,7 @@ source "$script_directory/core/android-settings.sh"
 sharedLogI "👩‍🔬 Start unit tests ..."
 start_emulator
 adb uninstall "de.stefan.lang.shapebyte.android.dev"
-./gradlew :shared:allTestDebugUnitTest :shared:connectedAndroidTest :shared:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
+./gradlew test :shared:connectedAndroidTest :shared:iosSimulatorArm64Test -Pandroid.testInstrumentationRunnerArguments.emulator=true
 
 return_code=$?
 if [ $return_code -eq 0 ]; then

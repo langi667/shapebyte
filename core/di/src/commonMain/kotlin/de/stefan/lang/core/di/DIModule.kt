@@ -8,17 +8,20 @@ interface DIModule : KoinComponent {
     val testModules: Module
 }
 
+/**
+ * Aggregates local bindings ([providedInstances]) with other [dependencies] into a single module and test module.
+ */
 open class RootDIModule(
-    providedModule: DIModuleDeclaration = DIModuleDeclaration(allEnvironments = {}),
-    diModules: List<DIModule>,
+    providedInstances: DIModuleDeclaration = DIModuleDeclaration(allEnvironments = {}),
+    dependencies: List<DIModule>,
 ) : DIModule {
-    private val allModules = (listOf(providedModule) + diModules)
+    private val allModules = listOf(providedInstances) + dependencies
     override val module: Module = this.joinModules(allModules.map { it.module })
     override val testModules: Module = this.joinModules(allModules.map { it.testModules })
 
-    constructor(diModules: List<DIModule>) : this(
-        providedModule = DIModuleDeclaration(allEnvironments = {}),
-        diModules = diModules,
+    constructor(dependencies: List<DIModule>) : this(
+        providedInstances = DIModuleDeclaration(allEnvironments = {}),
+        dependencies = dependencies,
     )
 }
 

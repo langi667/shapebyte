@@ -10,6 +10,7 @@ import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRo
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
+import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
@@ -19,7 +20,7 @@ interface HomeModuleProviding {
 
 object HomeModule :
     RootDIModule(
-        DIModuleDeclaration(
+        providedInstances = DIModuleDeclaration(
             allEnvironments = {
                 single<HomeRootViewModel> { (navHandler: NavigationRequestHandling) ->
                     HomeRootViewModelImpl(
@@ -35,7 +36,8 @@ object HomeModule :
                 }
             },
         ),
-        diModules = listOf(
+        dependencies = listOf(
+            LoggingModule,
             FeatureTogglesModule,
             WorkoutModule,
             FoundationCoreModule,
