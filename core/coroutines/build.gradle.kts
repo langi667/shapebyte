@@ -10,7 +10,9 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
+                jvmTarget =
+                    Project.Android.BuildSettings.javaVersion
+                        .toString()
             }
         }
     }
@@ -22,6 +24,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(libs.kotlinx.coroutines.core)
+            api(projects.core.coroutines.contract)
+            implementation(projects.core.coroutines.implementation)
+            implementation(projects.core.coroutines.test)
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.test)

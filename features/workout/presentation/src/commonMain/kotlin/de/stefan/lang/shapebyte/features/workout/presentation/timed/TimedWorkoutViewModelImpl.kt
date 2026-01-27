@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.presentation.timed
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.designsystem.api.ColorDescriptor
@@ -27,6 +26,7 @@ import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecuti
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecutionBuilder
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecutionData
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

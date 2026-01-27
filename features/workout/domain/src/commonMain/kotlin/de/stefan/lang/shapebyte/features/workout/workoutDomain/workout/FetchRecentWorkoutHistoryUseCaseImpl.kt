@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain.workout
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
@@ -8,6 +7,7 @@ import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryRepository
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days

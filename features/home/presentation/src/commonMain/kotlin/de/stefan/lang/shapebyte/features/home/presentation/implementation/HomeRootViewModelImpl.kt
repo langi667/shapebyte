@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.home.presentation.implementation
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
@@ -17,6 +16,7 @@ import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.api.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

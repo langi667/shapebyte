@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain.item
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.api.exercise.sumSeconds
 import de.stefan.lang.shapebyte.features.workout.api.exercise.sumSecondsTo
@@ -8,6 +7,7 @@ import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.api.item.None
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

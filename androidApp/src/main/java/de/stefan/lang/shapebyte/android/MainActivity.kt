@@ -9,12 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import de.stefan.lang.coreutils.contract.logging.Loggable
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.designsystem.theme.ShapeByteTheme
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.navigation.NavigationView
 import de.stefan.lang.shapebyte.initializing.AppInitializationState
+import de.stefan.lang.utils.logging.contract.Loggable
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject

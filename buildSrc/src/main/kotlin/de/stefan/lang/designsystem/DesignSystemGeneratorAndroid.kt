@@ -38,10 +38,11 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         fileSpec.writeTo(outputFile)
     }
 
+
     private fun loggerProperty(): PropertySpec {
         return PropertySpec.builder(
             "logger",
-            ClassName("de.stefan.lang.coreutils.contract.logging", "Logging")
+            ClassName("de.stefan.lang.utils.logging.contract", "Logging")
         )
             .initializer("SharedModule.logger()")
             .build()

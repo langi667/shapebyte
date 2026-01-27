@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.api.countdown
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.foundation.presentation.contract.viewmodel.BaseViewModel
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class CountdownItemSetsViewModel(

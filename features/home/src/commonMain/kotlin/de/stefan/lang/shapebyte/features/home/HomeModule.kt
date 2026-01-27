@@ -2,8 +2,8 @@ package de.stefan.lang.shapebyte.features.home
 
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.core.di.RootDIModule
-import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl

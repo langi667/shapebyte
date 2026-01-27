@@ -2,9 +2,9 @@
 
 package de.stefan.lang.shapebyte.features.workout.workoutDomain.item
 
-import de.stefan.lang.coreutils.contract.logging.Loggable
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.utils.logging.contract.Loggable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 

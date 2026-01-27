@@ -17,8 +17,11 @@ import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRo
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.workout.WorkoutModule
+import de.stefan.lang.shapebyte.features.workout.workoutDomain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCaseImpl
+import de.stefan.lang.utils.logging.LoggingModule
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -38,6 +41,7 @@ class HomeRootViewModelTest : CoreTest(), KoinTest {
         get() = super.testModules + listOf(
             CoreUtilsModule.testModules,
             CoroutinesModule.testModules,
+            LoggingModule.testModules,
             FoundationCoreModule.testModules,
             FoundationPresentationModule.testModules,
             HomeModule.testModules

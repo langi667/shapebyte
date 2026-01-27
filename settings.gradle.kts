@@ -21,9 +21,16 @@ include(":core")
 include(":core:di")
 
 include(":core:utils")
+include(":core:utils:logging")
+include(":core:utils:logging:contract")
+include(":core:utils:logging:implementation")
+include(":core:utils:logging:fake")
 
 include(":core:test")
 include(":core:coroutines")
+include(":core:coroutines:contract")
+include(":core:coroutines:implementation")
+include(":core:coroutines:test")
 
 include(":foundation")
 include(":foundation:core")
@@ -53,6 +60,5 @@ include(":features:workout:api")
 include(":features:workout:data")
 include(":features:workout:domain")
 include(":features:workout:presentation")
-
 
 include(":shared:sharedComponentTest")

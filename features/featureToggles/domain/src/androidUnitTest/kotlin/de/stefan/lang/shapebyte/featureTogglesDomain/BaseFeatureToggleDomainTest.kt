@@ -6,6 +6,7 @@ import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureTogglesDataModule
+import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.module.Module
 import org.koin.test.KoinTest
 
@@ -14,6 +15,7 @@ open class BaseFeatureToggleDomainTest : CoreTest(), KoinTest {
         get() = super.testModules + listOf(
             CoreUtilsModule.testModules,
             CoroutinesModule.testModules,
+            LoggingModule.testModules,
             FoundationCoreModule.testModules,
             FoundationPresentationModule.testModules,
             FeatureTogglesDataModule.testModules,

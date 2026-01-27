@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain.item
 
-import de.stefan.lang.coreutils.contract.logging.Loggable
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
+import de.stefan.lang.utils.logging.contract.Loggable
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

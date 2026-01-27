@@ -1,14 +1,13 @@
 package de.stefan.lang.shapebyte
 
 import de.stefan.lang.coreutils.CoreUtilsModule
-import de.stefan.lang.coreutils.CoreUtilsModuleProviding
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
-import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
+import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModuleProviding
@@ -19,6 +18,8 @@ import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.WorkoutModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
+import de.stefan.lang.utils.logging.LoggingModule
+import de.stefan.lang.utils.logging.contract.LoggingContract
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -28,7 +29,7 @@ interface AppInfoProviding {
 
 object SharedModule :
     KoinComponent,
-    CoreUtilsModuleProviding by CoreUtilsModule,
+    LoggingContract by LoggingModule,
     NavigationModuleProviding by NavigationModule,
     FeatureTogglesModuleProviding by FeatureTogglesModule,
     HomeModuleProviding by HomeModule,
@@ -38,6 +39,7 @@ object SharedModule :
 
     val modules =
         CoroutinesModule.module +
+            LoggingModule.module +
             CoreUtilsModule.module +
             FoundationCoreModule.module +
             FoundationPresentationModule.module +

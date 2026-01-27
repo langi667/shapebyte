@@ -1,6 +1,6 @@
 package de.stefan.lang.foundation.core.implementation.safearea
-import de.stefan.lang.coreutils.contract.logging.Loggable
-import de.stefan.lang.coreutils.contract.logging.Logging
+import de.stefan.lang.utils.logging.contract.Loggable
+import de.stefan.lang.utils.logging.contract.Logging
 import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents

@@ -21,9 +21,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.core.utils.logging)
             implementation(libs.koin.core)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
+            implementation(projects.core.utils.logging)
         }
 
         commonTest.dependencies {

@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.home.presentation.contract
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundation.presentation.contract.viewmodel.BaseViewModel
+import de.stefan.lang.utils.logging.contract.Logging
 
 public abstract class HomeRootViewModel(
     logger: Logging,

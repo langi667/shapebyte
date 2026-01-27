@@ -1,13 +1,13 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.coreutils.contract.logging.Loggable
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.featureToggles.api.FeatureToggle
 import de.stefan.lang.foundation.core.contract.assets.FileAsset
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
+import de.stefan.lang.utils.logging.contract.Loggable
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.withContext
 
 class DefaultFeatureToggleDatasourceImpl(

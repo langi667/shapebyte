@@ -1,7 +1,7 @@
 package de.stefan.lang.foundation.presentation.contract.viewmodel
 
-import de.stefan.lang.coreutils.contract.logging.Loggable
-import de.stefan.lang.coreutils.contract.logging.Logging
+import de.stefan.lang.utils.logging.contract.Loggable
+import de.stefan.lang.utils.logging.contract.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundation.presentation.contract.event.UIEvent
 import de.stefan.lang.foundation.presentation.contract.event.UIEventTransmitting

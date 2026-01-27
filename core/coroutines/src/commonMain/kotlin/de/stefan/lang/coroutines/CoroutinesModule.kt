@@ -3,16 +3,12 @@ package de.stefan.lang.coroutines
 import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
+import de.stefan.lang.coroutines.contract.CoroutinesContract
 import de.stefan.lang.coroutines.implementation.CoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.CoroutineScopeProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
 import org.koin.core.component.get
-
-public interface CoroutinesModuleProviding {
-    public fun coroutineScopeProvider(): CoroutineScopeProviding
-    public fun coroutineContextProvider(): CoroutineContextProviding
-}
 
 public object CoroutinesModule :
     DIModuleDeclaration(
@@ -30,7 +26,7 @@ public object CoroutinesModule :
             }
         },
     ),
-    CoroutinesModuleProviding {
+    CoroutinesContract {
     public override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
     public override fun coroutineContextProvider(): CoroutineContextProviding = get()
 }

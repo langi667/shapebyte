@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.countdown
 
-import de.stefan.lang.coreutils.contract.logging.Logging
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsUIIntent
@@ -12,6 +11,7 @@ import de.stefan.lang.shapebyte.features.workout.api.item.None
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecutionData
+import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
