@@ -2,6 +2,7 @@ package de.stefan.lang.core.di
 
 import org.koin.core.component.KoinComponent
 import org.koin.core.module.Module
+import org.koin.dsl.ModuleDeclaration
 
 interface DIModule : KoinComponent {
     val module: Module
@@ -21,6 +22,20 @@ open class RootDIModule(
 
     constructor(dependencies: List<DIModule>) : this(
         providedInstances = DIModuleDeclaration(allEnvironments = {}),
+        dependencies = dependencies,
+    )
+
+    constructor(
+        allEnvironments: ModuleDeclaration = {},
+        appEnvironmentOnly: ModuleDeclaration = {},
+        testEnvironmentOnly: ModuleDeclaration = {},
+        dependencies: List<DIModule> = emptyList(),
+    ) : this(
+        providedInstances = DIModuleDeclaration(
+            allEnvironments = allEnvironments,
+            appEnvironmentOnly = appEnvironmentOnly,
+            testEnvironmentOnly = testEnvironmentOnly,
+        ),
         dependencies = dependencies,
     )
 }

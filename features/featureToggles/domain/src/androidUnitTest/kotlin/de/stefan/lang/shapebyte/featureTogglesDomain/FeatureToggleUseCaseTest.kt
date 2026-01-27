@@ -40,8 +40,6 @@ class FeatureToggleUseCaseTest : BaseFeatureToggleDomainTest() {
         )
     }
 
-
-
     @Test
     fun `should return null if toggle is not set`() = test {
        coEvery { datasource.fetchFeatureToggle(any()) } returns LoadState.Error(FeatureToggleError.NotFound(""))

@@ -15,6 +15,7 @@ import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecuti
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecuting
 import de.stefan.lang.shapebyte.features.workout.workoutDomain.item.TimedItemExecutionData
+import de.stefan.lang.utils.logging.LoggingModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -142,7 +143,7 @@ class ItemsExecutionTest : WorkoutFeatureTest() {
             TimedFailing(
                 item = ignoredItem,
                 sets = List(duration) { ItemSet.Timed.Seconds(1) },
-                CoreUtilsModule.logger(),
+                LoggingModule.logger(),
             ),
         ) +
             List(executionsSucceedAfter) {

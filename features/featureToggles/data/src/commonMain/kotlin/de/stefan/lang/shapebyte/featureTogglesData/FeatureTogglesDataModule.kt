@@ -1,8 +1,9 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.shapebyte.featureTogglesData.impl.DefaultFeatureToggleDatasourceImpl
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
+import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
 
 interface FeatureTogglesDataModuleProviding {
@@ -10,7 +11,7 @@ interface FeatureTogglesDataModuleProviding {
 }
 
 object FeatureTogglesDataModule :
-    DIModuleDeclaration(
+    RootDIModule(
         allEnvironments = {
             single<FeatureToggleRepository> { FeatureToggleRepository(logger = get(), dataSource = get()) }
         },
@@ -26,6 +27,7 @@ object FeatureTogglesDataModule :
         testEnvironmentOnly = {
             single<FeatureToggleDatasource> { FeatureToggleDatasourceMock(logger = get()) }
         },
+        dependencies = listOf(LoggingModule),
     ),
     FeatureTogglesDataModuleProviding {
     override fun featureToggleRepository(): FeatureToggleRepository = get()

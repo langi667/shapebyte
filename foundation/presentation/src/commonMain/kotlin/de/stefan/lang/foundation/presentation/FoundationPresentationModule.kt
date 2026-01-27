@@ -1,7 +1,8 @@
 package de.stefan.lang.foundation.presentation
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import org.koin.core.component.get
 
 interface FoundationPresentationModuleProviding {
@@ -9,7 +10,7 @@ interface FoundationPresentationModuleProviding {
 }
 
 object FoundationPresentationModule :
-    DIModuleDeclaration(
+    RootDIModule(
         allEnvironments = {
             single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
         },
@@ -17,6 +18,7 @@ object FoundationPresentationModule :
         },
         testEnvironmentOnly = {
         },
+        dependencies = listOf(FoundationCoreModule),
     ),
     FoundationPresentationModuleProviding {
 

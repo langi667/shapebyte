@@ -10,6 +10,7 @@ import de.stefan.lang.shapebyte.featureTogglesData.impl.DefaultFeatureToggleData
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.shapebyte.featureTogglesDomain.impl.FeatureToggleUseCaseImpl
 import de.stefan.lang.shapebyte.featureTogglesDomain.impl.LoadFeatureToggleUseCaseImpl
+import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
@@ -51,6 +52,7 @@ object FeatureTogglesDomainModule :
             },
         ),
         dependencies = listOf(
+            LoggingModule,
             FeatureTogglesDataModule,
         ),
     ),

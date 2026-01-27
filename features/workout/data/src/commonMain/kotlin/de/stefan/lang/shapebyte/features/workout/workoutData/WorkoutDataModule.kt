@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.workoutData
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.QuickWorkoutsDatasourceMocks
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.workoutData.mocks.WorkoutHistoryDataSourceMocks
@@ -12,7 +13,7 @@ import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkou
 import de.stefan.lang.shapebyte.features.workout.workoutData.workout.QuickWorkoutsRepository
 
 object WorkoutDataModule :
-    DIModuleDeclaration(
+    RootDIModule(
         allEnvironments = {
             single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
@@ -34,4 +35,5 @@ object WorkoutDataModule :
             single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceMocks }
             single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceMock }
         },
+        dependencies = listOf(FoundationCoreModule),
     )

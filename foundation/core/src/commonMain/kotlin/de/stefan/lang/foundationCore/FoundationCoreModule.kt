@@ -1,6 +1,7 @@
 package de.stefan.lang.foundationCore
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
@@ -18,6 +19,7 @@ import de.stefan.lang.foundation.core.implementation.deviceinfo.DeviceInfo
 import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
+import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
 
 interface FoundationCoreModuleProviding {
@@ -28,7 +30,7 @@ interface FoundationCoreModuleProviding {
 }
 
 object FoundationCoreModule :
-    DIModuleDeclaration(
+    RootDIModule(
         allEnvironments = {
             single<OperatingSystemInfoProviding> { get<DeviceInfoProviding>() }
             single<ScreenSizeProviding> { get<DeviceInfoProviding>() }
@@ -61,6 +63,10 @@ object FoundationCoreModule :
             factory<AudioPlaying> { FakeAudioPlayer() }
             single<DeviceInfoProviding> { FakeDeviceInfo() }
         },
+        dependencies = listOf(
+            CoroutinesModule,
+            LoggingModule,
+        ),
     ),
     FoundationCoreModuleProviding {
     private lateinit var appResourceProvider: AppResourceProvider

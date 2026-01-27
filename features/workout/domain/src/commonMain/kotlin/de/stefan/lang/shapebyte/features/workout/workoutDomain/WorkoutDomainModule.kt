@@ -1,6 +1,8 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
-import de.stefan.lang.core.di.DIModuleDeclaration
+import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.foundation.presentation.FoundationPresentationModule
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.item.Item
 import de.stefan.lang.shapebyte.features.workout.api.item.ItemSet
@@ -40,7 +42,7 @@ interface WorkoutDomainModuleProviding {
 }
 
 object WorkoutDomainModule :
-    DIModuleDeclaration(
+    RootDIModule(
         allEnvironments = {
             single<FetchRecentWorkoutHistoryUseCase> {
                 FetchRecentWorkoutHistoryUseCaseImpl(
@@ -113,7 +115,10 @@ object WorkoutDomainModule :
         },
         testEnvironmentOnly = {
         },
-
+        dependencies = listOf(
+            FoundationCoreModule,
+            FoundationPresentationModule,
+        ),
     ),
     WorkoutDomainModuleProviding {
     override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase = get()

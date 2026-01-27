@@ -12,12 +12,6 @@ import org.koin.test.KoinTest
 
 open class WorkoutFeatureTest: CoreTest(), KoinTest {
     override val testModules: List<Module> = super.testModules + listOf(
-        CoreUtilsModule.testModules,
-        CoroutinesModule.testModules,
-        LoggingModule.testModules,
-        FoundationCoreModule.testModules,
-        FoundationPresentationModule.testModules,
-        FeatureTogglesModule.testModules,
         WorkoutModule.testModules
     )
 }

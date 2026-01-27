@@ -39,11 +39,6 @@ class HomeRootViewModelTest : CoreTest(), KoinTest {
 
     override val testModules: List<Module>
         get() = super.testModules + listOf(
-            CoreUtilsModule.testModules,
-            CoroutinesModule.testModules,
-            LoggingModule.testModules,
-            FoundationCoreModule.testModules,
-            FoundationPresentationModule.testModules,
             HomeModule.testModules
         )
 
