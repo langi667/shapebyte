@@ -28,6 +28,7 @@ kotlin {
             
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
+            implementation(projects.foundation.presentation.contract)
             implementation(projects.designsystem)
 
             implementation(projects.features.featureToggles)

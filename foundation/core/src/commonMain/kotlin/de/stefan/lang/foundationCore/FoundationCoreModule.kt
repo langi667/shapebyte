@@ -2,6 +2,7 @@ package de.stefan.lang.foundationCore
 
 import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.coroutines.CoroutinesModule
+import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
@@ -21,13 +22,6 @@ import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
 import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
-
-interface FoundationCoreModuleProviding {
-    fun dateTimeStringFormatter(): DateTimeStringFormatter
-    fun fileAssetLoader(): FileAssetLoading
-    fun audioPlayer(): AudioPlaying
-    fun deviceInfoProvider(): DeviceInfoProviding
-}
 
 object FoundationCoreModule :
     RootDIModule(
@@ -68,7 +62,7 @@ object FoundationCoreModule :
             LoggingModule,
         ),
     ),
-    FoundationCoreModuleProviding {
+    FoundationCoreContract {
     private lateinit var appResourceProvider: AppResourceProvider
 
     fun initialize(appResourceProvider: AppResourceProvider) {

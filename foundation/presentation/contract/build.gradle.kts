@@ -5,6 +5,8 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -19,16 +21,29 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.foundation.presentation.contract)
-            implementation(projects.core.di)
-            implementation(libs.koin.core)
-            implementation(projects.foundation.core)
+            api(projects.foundation.core.contract)
+            api(projects.core.logging.contract)
+            api(projects.core.coroutines.contract)
+
+            implementation(libs.kotlinx.coroutines.core)
+        }
+
+        androidMain.dependencies {
+            api(libs.androidx.lifecycle.viewmodel)
+            api(libs.androidx.lifecycle.viewmodel.ktx)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(projects.core.test)
+            implementation(projects.foundation.core.fake)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.foundation.ui"
+    namespace = "de.stefan.lang.foundation.presentation.contract"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -41,12 +56,6 @@ android {
     packaging {
         resources {
             excludes += Project.Android.BuildSettings.excludedResourcesList
-        }
-    }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }

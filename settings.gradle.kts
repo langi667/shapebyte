@@ -38,7 +38,7 @@ include(":foundation:core:contract")
 include(":foundation:core:implementation")
 include(":foundation:core:fake")
 include(":foundation:presentation")
-include(":foundation:presentation")
+include(":foundation:presentation:contract")
 
 include(":designsystem")
 

@@ -1,5 +1,6 @@
 package de.stefan.lang.foundation.presentation
 
+import de.stefan.lang.core.di.DIModuleDeclaration
 import de.stefan.lang.core.di.RootDIModule
 import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
 import de.stefan.lang.foundationCore.FoundationCoreModule
@@ -11,13 +12,11 @@ interface FoundationPresentationModuleProviding {
 
 object FoundationPresentationModule :
     RootDIModule(
-        allEnvironments = {
-            single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
-        },
-        appEnvironmentOnly = {
-        },
-        testEnvironmentOnly = {
-        },
+        providedInstances = DIModuleDeclaration(
+            allEnvironments = {
+                single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
+            },
+        ),
         dependencies = listOf(FoundationCoreModule),
     ),
     FoundationPresentationModuleProviding {
