@@ -4,11 +4,11 @@ import org.koin.core.module.Module
 import org.koin.dsl.ModuleDeclaration
 import org.koin.dsl.module
 
-open class DIModuleDeclaration(
+open class ModuleBindings(
     allEnvironments: ModuleDeclaration,
     appEnvironmentOnly: ModuleDeclaration = {},
     testEnvironmentOnly: ModuleDeclaration = {},
-) : DIModule {
+) : FeatureGraph {
 
     override val module: Module = module {
         allEnvironments()

@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
-import de.stefan.lang.core.di.DIModuleDeclaration
-import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.core.di.ModuleBindings
+import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.featureToggles.api.FeatureToggleUseCase
 import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
@@ -20,8 +20,8 @@ interface FeatureTogglesDomainModuleProviding {
 }
 
 object FeatureTogglesDomainModule :
-    RootDIModule(
-        providedInstances = DIModuleDeclaration(
+    RootModule(
+        bindings = ModuleBindings(
             allEnvironments = {
                 factory<FeatureToggleUseCase> { (featureId: String) ->
                     FeatureToggleUseCaseImpl(

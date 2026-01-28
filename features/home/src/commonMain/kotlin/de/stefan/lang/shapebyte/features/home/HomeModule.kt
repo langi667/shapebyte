@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.home
 
-import de.stefan.lang.core.di.DIModuleDeclaration
-import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.core.di.ModuleBindings
+import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
@@ -19,8 +19,8 @@ interface HomeModuleProviding {
 }
 
 object HomeModule :
-    RootDIModule(
-        providedInstances = DIModuleDeclaration(
+    RootModule(
+        bindings = ModuleBindings(
             allEnvironments = {
                 single<HomeRootViewModel> { (navHandler: NavigationRequestHandling) ->
                     HomeRootViewModelImpl(

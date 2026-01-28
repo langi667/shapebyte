@@ -1,6 +1,6 @@
 package de.stefan.lang.foundationCore
 
-import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
@@ -24,7 +24,7 @@ import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
 
 object FoundationCoreModule :
-    RootDIModule(
+    RootModule(
         allEnvironments = {
             single<OperatingSystemInfoProviding> { get<DeviceInfoProviding>() }
             single<ScreenSizeProviding> { get<DeviceInfoProviding>() }

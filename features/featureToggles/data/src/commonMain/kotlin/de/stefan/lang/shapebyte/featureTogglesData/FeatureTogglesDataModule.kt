@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
-import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.shapebyte.featureTogglesData.impl.DefaultFeatureToggleDatasourceImpl
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
 import de.stefan.lang.utils.logging.LoggingModule
@@ -11,7 +11,7 @@ interface FeatureTogglesDataModuleProviding {
 }
 
 object FeatureTogglesDataModule :
-    RootDIModule(
+    RootModule(
         allEnvironments = {
             single<FeatureToggleRepository> { FeatureToggleRepository(logger = get(), dataSource = get()) }
         },

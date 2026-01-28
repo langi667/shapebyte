@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.workoutDomain
 
-import de.stefan.lang.core.di.RootDIModule
+import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
@@ -42,7 +42,7 @@ interface WorkoutDomainModuleProviding {
 }
 
 object WorkoutDomainModule :
-    RootDIModule(
+    RootModule(
         allEnvironments = {
             single<FetchRecentWorkoutHistoryUseCase> {
                 FetchRecentWorkoutHistoryUseCaseImpl(
