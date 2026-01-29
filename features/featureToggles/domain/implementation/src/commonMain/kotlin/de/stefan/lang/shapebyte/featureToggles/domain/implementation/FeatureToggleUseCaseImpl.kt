@@ -1,9 +1,9 @@
-package de.stefan.lang.shapebyte.featureTogglesDomain.impl
+package de.stefan.lang.shapebyte.featureToggles.domain.implementation
 
+import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureToggleUseCase
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
-import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

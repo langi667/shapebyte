@@ -122,7 +122,7 @@ fun QuickWorkoutsListViewPreview() {
         Workout(
             name = "Workout ${it + 1}",
             shortDescription = "Short description ${it + 1}",
-            image = ImageResource("sprints.png"),
+            image = ImageResource("Sprints.png"),
             id = 1,
             type = WorkoutType.Timed.Interval(0, 0, 0),
         )

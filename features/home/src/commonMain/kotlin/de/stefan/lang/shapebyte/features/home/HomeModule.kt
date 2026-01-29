@@ -4,7 +4,7 @@ import de.stefan.lang.core.di.ModuleBindings
 import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
+import de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
@@ -38,11 +38,10 @@ object HomeModule :
         ),
         dependencies = listOf(
             LoggingModule,
-            FeatureTogglesModule,
             WorkoutModule,
             FoundationCoreModule,
             FoundationPresentationModule,
-            FeatureTogglesModule,
+            FeatureTogglesDomainModule,
             NavigationModule,
         ),
     ),

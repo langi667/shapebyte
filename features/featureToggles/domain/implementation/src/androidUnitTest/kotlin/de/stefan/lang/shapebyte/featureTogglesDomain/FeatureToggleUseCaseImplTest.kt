@@ -8,8 +8,8 @@ import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleError
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureToggleUseCase
-import de.stefan.lang.shapebyte.featureTogglesDomain.impl.FeatureToggleUseCaseImpl
-import de.stefan.lang.shapebyte.featureTogglesDomain.impl.LoadFeatureToggleUseCaseImpl
+import de.stefan.lang.shapebyte.featureToggles.domain.implementation.FeatureToggleUseCaseImpl
+import de.stefan.lang.shapebyte.featureToggles.domain.implementation.LoadFeatureToggleUseCaseImpl
 import io.mockk.coEvery
 import kotlin.test.Test
 import kotlin.test.assertFalse
@@ -20,12 +20,12 @@ import kotlin.test.assertTrue
 import io.mockk.mockk
 import org.koin.core.component.get
 
-class FeatureToggleUseCaseTest : BaseFeatureToggleDomainTest() {
+class FeatureToggleUseCaseImplTest : BaseFeatureToggleDomainTest() {
     private val feature = "QUICK_WORKOUTS"
 
     private val datasource: FeatureToggleDatasource = mockk(relaxed = true)
 
-    private val sut: FeatureToggleUseCase by lazy {
+    private val sut: FeatureToggleUseCaseImpl by lazy {
         FeatureToggleUseCaseImpl(
             featureId = feature,
             loadFeatureToggleUseCase = LoadFeatureToggleUseCaseImpl(

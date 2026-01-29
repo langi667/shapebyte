@@ -56,7 +56,6 @@ kotlin {
         }
 
         commonMain.dependencies {
-
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
@@ -69,7 +68,7 @@ kotlin {
             api(projects.designsystem)
             api(projects.features.featureToggles)
             api(projects.features.featureToggles.data)
-            api(projects.features.featureToggles.domain.contract)
+            api(projects.features.featureToggles.domain)
 
             api(projects.features.home)
             api(projects.features.home.presentation)
@@ -97,7 +96,7 @@ kotlin {
             export(projects.foundation.core)
             export(projects.foundation.presentation)
             export(projects.designsystem)
-            export(projects.features.featureToggles)
+            export(projects.features.featureToggles.domain)
             export(projects.features.home)
             export(projects.features.workout)
             export(projects.features.navigation)

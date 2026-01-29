@@ -50,6 +50,7 @@ include(":features:featureToggles")
 include(":features:featureToggles:data")
 include(":features:featureToggles:domain")
 include(":features:featureToggles:domain:contract")
+include(":features:featureToggles:domain:implementation")
 
 include(":features:home")
 include(":features:home:presentation")

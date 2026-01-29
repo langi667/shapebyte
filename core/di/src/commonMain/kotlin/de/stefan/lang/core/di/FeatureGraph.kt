@@ -7,4 +7,3 @@ interface FeatureGraph : KoinComponent {
     val module: Module
     val testModules: Module
 }
-

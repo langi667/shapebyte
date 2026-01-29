@@ -9,8 +9,8 @@ import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
-import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModule
-import de.stefan.lang.shapebyte.featureToggles.FeatureTogglesModuleProviding
+import de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule
+import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureTogglesDomainContract
 import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
@@ -31,7 +31,7 @@ object SharedModule :
     KoinComponent,
     LoggingContract by LoggingModule,
     NavigationModuleProviding by NavigationModule,
-    FeatureTogglesModuleProviding by FeatureTogglesModule,
+    FeatureTogglesDomainContract by FeatureTogglesDomainModule,
     HomeModuleProviding by HomeModule,
     WorkoutModuleProviding by WorkoutModule,
     AppInfoProviding,
@@ -44,7 +44,7 @@ object SharedModule :
             FoundationCoreModule.module +
             FoundationPresentationModule.module +
             NavigationModule.module +
-            FeatureTogglesModule.module +
+            FeatureTogglesDomainModule.module +
             HomeModule.module +
             WorkoutModule.module
 
@@ -54,7 +54,7 @@ object SharedModule :
             FoundationCoreModule.testModules +
             FoundationPresentationModule.testModules +
             NavigationModule.testModules +
-            FeatureTogglesModule.testModules +
+            FeatureTogglesDomainModule.testModules +
             HomeModule.testModules +
             WorkoutModule.testModules
 

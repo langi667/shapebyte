@@ -13,7 +13,7 @@ object ImageMapper : ResourceFileMapping {
     private val fallbackImage = R.drawable.fallback_img
 
     private val mapping = mapOf(
-        "sprints.png" to R.drawable.sprints,
+        "Sprints.png" to R.drawable.sprints,
         // TODO: add more images
     )
 

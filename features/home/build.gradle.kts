@@ -42,7 +42,8 @@ kotlin {
             implementation(projects.foundation.presentation)
 
             implementation(projects.features.navigation)
-            implementation(projects.features.featureToggles)
+            implementation(projects.features.featureToggles.data)
+            implementation(projects.features.featureToggles.domain)
             implementation(projects.features.workout)
             implementation(projects.features.home.presentation)
         }

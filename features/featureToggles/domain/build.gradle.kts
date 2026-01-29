@@ -24,6 +24,7 @@ kotlin {
         }
         commonMain.dependencies {
             api(projects.features.featureToggles.domain.contract)
+            implementation(projects.features.featureToggles.domain.implementation)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
@@ -41,13 +42,6 @@ kotlin {
             implementation(projects.core.test)
         }
 
-        androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
-            implementation(projects.core.test)
-            implementation(libs.junit.jupiter)
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.core.fake)
-        }
     }
 }
 

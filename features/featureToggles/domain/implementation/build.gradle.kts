@@ -23,45 +23,33 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
-            api(projects.features.workout.api)
-            implementation(projects.core.di)
-            implementation(projects.core.coroutines)
-            implementation(projects.core.utils)
-
-
-            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+            implementation(projects.core.coroutines)
+            implementation(projects.core.logging)
+            implementation(projects.core.di)
 
-            implementation(projects.features.featureToggles.data)
-            implementation(projects.features.workout.api)
-            implementation(projects.features.workout.data)
-            implementation(projects.features.workout.domain)
-            implementation(projects.features.workout.presentation)
-
-            
             implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.designsystem)
-            implementation(projects.features.navigation)
-            implementation(projects.features.featureToggles)
-        }
-
-        androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
+            implementation(projects.core.logging.contract)
             implementation(projects.features.featureToggles.domain.contract)
+            implementation(projects.features.featureToggles.data)
         }
 
         commonTest.dependencies {
             implementation(projects.core.test)
         }
+
+        androidUnitTest.dependencies {
+            implementation(libs.mockk.android)
+            implementation(projects.core.test)
+            implementation(libs.junit.jupiter)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.fake)
+        }
     }
 }
 
 android {
-    // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.workout"
+    namespace = "de.stefan.lang.shapebyte.featureToggles.domain.implementation"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

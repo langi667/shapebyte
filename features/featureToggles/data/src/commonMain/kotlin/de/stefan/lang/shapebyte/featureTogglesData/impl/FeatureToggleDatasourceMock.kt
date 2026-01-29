@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logging

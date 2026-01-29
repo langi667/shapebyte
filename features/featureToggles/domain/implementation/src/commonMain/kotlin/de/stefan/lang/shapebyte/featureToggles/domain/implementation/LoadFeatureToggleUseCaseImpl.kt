@@ -1,17 +1,17 @@
-package de.stefan.lang.shapebyte.featureTogglesDomain.impl
+package de.stefan.lang.shapebyte.featureToggles.domain.implementation
 
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.usecase.BaseDataUseCase
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
+import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-internal class LoadFeatureToggleUseCaseImpl(
+public class LoadFeatureToggleUseCaseImpl(
     private val repository: FeatureToggleRepository,
     override val logger: Logging,
     coroutineScopeProviding: CoroutineScopeProviding,

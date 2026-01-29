@@ -74,7 +74,7 @@ struct View_Previews: PreviewProvider {
                             id: 1,
                             name: "Workout 1",
                             shortDescription: "Workout 1 desc",
-                            image: ImageResource(id: "sprints.png"),
+                            image: ImageResource(id: "Sprints.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
@@ -86,7 +86,7 @@ struct View_Previews: PreviewProvider {
                             id: 2,
                             name: "Workout 2",
                             shortDescription: "Workout 2 desc",
-                            image: ImageResource(id: "squats.png"),
+                            image: ImageResource(id: "Squats.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
@@ -110,7 +110,7 @@ struct View_Previews: PreviewProvider {
                             id: 4,
                             name: "Workout 4",
                             shortDescription: "Workout 4 desc",
-                            image: ImageResource(id: "sprints.png"),
+                            image: ImageResource(id: "Sprints.png"),
                             type: WorkoutTypeTimedInterval(
                                 highDurationSec: 10,
                                 lowDurationSec: 10,
