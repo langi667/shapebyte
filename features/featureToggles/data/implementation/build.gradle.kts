@@ -20,30 +20,25 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.features.featureToggles.data.contract)
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-
-            implementation(projects.core.utils)
+            implementation(projects.features.featureToggles.data.contract)
             implementation(projects.core.di)
-            implementation(projects.core.coroutines)
-            
             implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.features.featureToggles.data.implementation)
+            implementation(projects.core.logging)
+            implementation(projects.core.coroutines)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
         }
 
         commonTest.dependencies {
             implementation(projects.core.test)
             implementation(projects.foundation.core.fake)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.featureToggles.data"
+    namespace = "de.stefan.lang.shapebyte.featureToggles.data.implementation"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -56,12 +51,6 @@ android {
     packaging {
         resources {
             excludes += Project.Android.BuildSettings.excludedResourcesList
-        }
-    }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }

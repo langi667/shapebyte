@@ -1,4 +1,4 @@
-package de.stefan.lang.shapebyte.features.navigation.contract.impl
+package de.stefan.lang.shapebyte.features.navigation.implementation
 
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationParams.workoutIdParam
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequest

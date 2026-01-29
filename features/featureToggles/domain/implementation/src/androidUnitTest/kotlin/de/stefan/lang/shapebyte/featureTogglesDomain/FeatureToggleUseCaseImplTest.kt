@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleRepository
-import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleError
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleError
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureToggleUseCase
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.FeatureToggleUseCaseImpl
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.LoadFeatureToggleUseCaseImpl

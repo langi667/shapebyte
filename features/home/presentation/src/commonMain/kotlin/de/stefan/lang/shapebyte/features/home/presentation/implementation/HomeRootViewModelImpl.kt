@@ -8,8 +8,8 @@ import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry

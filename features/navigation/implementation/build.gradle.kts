@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -18,32 +17,29 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets {
+    sourceSets  {
         commonMain.dependencies {
-            api(projects.features.featureToggles.data.contract)
-            implementation(libs.koin.core)
+            implementation(projects.features.navigation.contract)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-
-            implementation(projects.core.utils)
-            implementation(projects.core.di)
-            implementation(projects.core.coroutines)
-            
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.features.featureToggles.data.implementation)
+            implementation(libs.koin.core)
         }
 
         commonTest.dependencies {
-            implementation(projects.core.test)
-            implementation(projects.foundation.core.fake)
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+
+            implementation (projects.core.test)
+            implementation (projects.foundation.core.fake)
+            implementation (projects.foundation.core.fake)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.featureToggles.data"
+    namespace = "de.stefan.lang.shapebyte.features.navigation.contract"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

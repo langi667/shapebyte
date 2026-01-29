@@ -7,7 +7,7 @@ import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleRepository
-import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleError
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleError
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.LoadFeatureToggleUseCaseImpl
 import io.mockk.coEvery
 import io.mockk.mockk

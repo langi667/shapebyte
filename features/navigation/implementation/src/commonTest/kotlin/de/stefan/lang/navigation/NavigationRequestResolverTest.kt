@@ -3,7 +3,7 @@ package de.stefan.lang.navigation
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequest
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRoute
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationTarget
-import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestResolver
+import de.stefan.lang.shapebyte.features.navigation.implementation.NavigationRequestResolver
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

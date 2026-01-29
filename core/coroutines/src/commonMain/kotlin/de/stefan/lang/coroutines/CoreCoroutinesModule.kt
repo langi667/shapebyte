@@ -1,9 +1,9 @@
 package de.stefan.lang.coroutines
 
 import de.stefan.lang.core.di.ModuleBindings
+import de.stefan.lang.coroutines.contract.CoreCoroutinesContract
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
-import de.stefan.lang.coroutines.contract.CoreCoroutinesContract
 import de.stefan.lang.coroutines.implementation.CoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.CoroutineScopeProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvider
