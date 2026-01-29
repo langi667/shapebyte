@@ -10,7 +10,7 @@ class ExtBundleTest {
     fun testWorkoutIdReturnsCorrectId() {
         val workoutId = "id12345"
         val sut = Bundle()
-        sut.putString(de.stefan.lang.shapebyte.features.navigation.api.NavigationParams.workoutIdParam, workoutId)
+        sut.putString(de.stefan.lang.shapebyte.features.navigation.contract.NavigationParams.workoutIdParam, workoutId)
 
         assertEquals(workoutId, sut.workoutId())
     }
@@ -25,7 +25,7 @@ class ExtBundleTest {
     fun testWorkoutIdOrShouldReturnCorrectId() {
         val workoutId = "id12345"
         val sut = Bundle()
-        sut.putString(de.stefan.lang.shapebyte.features.navigation.api.NavigationParams.workoutIdParam, workoutId)
+        sut.putString(de.stefan.lang.shapebyte.features.navigation.contract.NavigationParams.workoutIdParam, workoutId)
 
         assertEquals(workoutId, sut.workoutIdOr("fallback"))
     }

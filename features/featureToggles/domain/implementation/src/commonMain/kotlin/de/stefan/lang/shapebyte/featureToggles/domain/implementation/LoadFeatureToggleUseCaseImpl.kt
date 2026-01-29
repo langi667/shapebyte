@@ -4,8 +4,8 @@ import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.usecase.BaseDataUseCase
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.flow.Flow

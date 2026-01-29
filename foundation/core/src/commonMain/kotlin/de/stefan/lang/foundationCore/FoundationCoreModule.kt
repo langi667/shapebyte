@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationCore
 
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.coroutines.CoroutinesModule
+import de.stefan.lang.coroutines.CoreCoroutinesModule
 import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
@@ -58,7 +58,7 @@ object FoundationCoreModule :
             single<DeviceInfoProviding> { FakeDeviceInfo() }
         },
         dependencies = listOf(
-            CoroutinesModule,
+            CoreCoroutinesModule,
             LoggingModule,
         ),
     ),

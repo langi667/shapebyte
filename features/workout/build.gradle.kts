@@ -45,11 +45,13 @@ kotlin {
             implementation(projects.foundation.presentation)
             implementation(projects.designsystem)
             implementation(projects.features.navigation)
+            implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles)
         }
 
         androidUnitTest.dependencies {
             implementation(libs.mockk.android)
+            implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
         }
 

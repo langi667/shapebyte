@@ -1,14 +1,14 @@
 package de.stefan.lang.shapebyte.features.workout.timed
 
 import app.cash.turbine.test
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.image.ImageResource
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundation.presentation.contract.state.UIState
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureId
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
 import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewData

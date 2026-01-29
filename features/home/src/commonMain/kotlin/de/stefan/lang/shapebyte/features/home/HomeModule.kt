@@ -8,7 +8,7 @@ import de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
-import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get

@@ -4,8 +4,8 @@ import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.foundation.core.contract.assets.FileAsset
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.withContext

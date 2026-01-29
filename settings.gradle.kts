@@ -44,10 +44,11 @@ include(":designsystem")
 
 include(":features")
 include(":features:navigation")
-include(":features:navigation:api")
+include(":features:navigation:contract")
 
 include(":features:featureToggles")
 include(":features:featureToggles:data")
+include(":features:featureToggles:data:contract")
 include(":features:featureToggles:domain")
 include(":features:featureToggles:domain:contract")
 include(":features:featureToggles:domain:implementation")

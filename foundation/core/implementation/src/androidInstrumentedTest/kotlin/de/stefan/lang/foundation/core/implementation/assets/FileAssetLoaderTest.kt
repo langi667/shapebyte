@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import de.stefan.lang.coretest.CoreTest
-import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
-import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.assets.FileAsset
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.utils.logging.LoggingModule

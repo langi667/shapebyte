@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
 import de.stefan.lang.shapebyte.featureTogglesData.BaseFeatureToggleDataTest
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
-import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
+import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

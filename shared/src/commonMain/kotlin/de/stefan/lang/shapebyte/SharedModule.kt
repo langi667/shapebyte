@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte
 
 import de.stefan.lang.coreutils.CoreUtilsModule
-import de.stefan.lang.coroutines.CoroutinesModule
+import de.stefan.lang.coroutines.CoreCoroutinesModule
 import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
@@ -14,7 +14,7 @@ import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureTogglesDoma
 import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
-import de.stefan.lang.shapebyte.features.navigation.NavigationModuleProviding
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationModuleContract
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
 import de.stefan.lang.shapebyte.features.workout.WorkoutModuleProviding
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
@@ -30,7 +30,7 @@ interface AppInfoProviding {
 object SharedModule :
     KoinComponent,
     LoggingContract by LoggingModule,
-    NavigationModuleProviding by NavigationModule,
+    NavigationModuleContract by NavigationModule,
     FeatureTogglesDomainContract by FeatureTogglesDomainModule,
     HomeModuleProviding by HomeModule,
     WorkoutModuleProviding by WorkoutModule,
@@ -38,7 +38,7 @@ object SharedModule :
     SharedInitializationProviding {
 
     val modules =
-        CoroutinesModule.module +
+        CoreCoroutinesModule.module +
             LoggingModule.module +
             CoreUtilsModule.module +
             FoundationCoreModule.module +
@@ -49,7 +49,7 @@ object SharedModule :
             WorkoutModule.module
 
     val testModules =
-        CoroutinesModule.testModules +
+        CoreCoroutinesModule.testModules +
             CoreUtilsModule.testModules +
             FoundationCoreModule.testModules +
             FoundationPresentationModule.testModules +

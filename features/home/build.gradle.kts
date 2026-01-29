@@ -25,6 +25,7 @@ kotlin {
 
         androidUnitTest.dependencies {
             implementation(libs.mockk.android)
+            implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
         }
         commonMain.dependencies {

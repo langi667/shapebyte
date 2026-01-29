@@ -20,6 +20,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.features.featureToggles.data.contract)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)

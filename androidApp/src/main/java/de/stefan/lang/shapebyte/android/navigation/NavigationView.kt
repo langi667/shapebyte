@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import de.stefan.lang.shapebyte.android.features.home.ui.HomeRootView
 import de.stefan.lang.shapebyte.android.features.workout.timed.ui.TimedWorkoutView
-import de.stefan.lang.shapebyte.features.navigation.api.NavigationRoute
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRoute
 
 @Composable
 fun NavigationView(

@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.core.di.ModuleBindings
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.shapebyte.features.navigation.api.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule.createTimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.api.countdown.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.api.history.WorkoutHistoryEntry

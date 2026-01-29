@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
 import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.shapebyte.featureToggles.data.FeatureTogglesDataModule
 import org.koin.core.module.Module
 import org.koin.test.KoinTest
 

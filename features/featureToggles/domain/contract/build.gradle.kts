@@ -24,7 +24,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(projects.core.logging)
             implementation(projects.foundation.core.contract)
-            implementation(projects.features.featureToggles.data)
+            api(projects.features.featureToggles.data.contract)
         }
 
         commonTest.dependencies {
