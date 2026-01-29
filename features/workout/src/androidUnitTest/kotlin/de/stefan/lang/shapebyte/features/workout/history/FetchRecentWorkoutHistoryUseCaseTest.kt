@@ -2,11 +2,11 @@ package de.stefan.lang.shapebyte.features.workout.history
 
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.contract.progress.Progress
-import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
-import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
+import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
-import de.stefan.lang.featureToggles.api.FeatureId
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureId
 import de.stefan.lang.shapebyte.features.workout.WorkoutFeatureTest
 import de.stefan.lang.shapebyte.features.workout.api.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.api.schedule.WorkoutScheduleEntry

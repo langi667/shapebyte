@@ -47,10 +47,9 @@ include(":features:navigation")
 include(":features:navigation:api")
 
 include(":features:featureToggles")
-include(":features:featureToggles:api")
-
 include(":features:featureToggles:data")
 include(":features:featureToggles:domain")
+include(":features:featureToggles:domain:contract")
 
 include(":features:home")
 include(":features:home:presentation")

@@ -1,4 +1,4 @@
-package de.stefan.lang.featureToggles.api
+package de.stefan.lang.shapebyte.featureTogglesDomain.contract
 
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asDataFlow
@@ -6,6 +6,7 @@ import de.stefan.lang.foundation.core.contract.usecase.BaseDataUseCase
 import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -20,8 +21,8 @@ import kotlinx.coroutines.launch
  *
  * For in case the toggle is disabled, you can emit an error with emitError(error: Throwable).
  */
-open class BaseFeatureDataUseCase<T>(
-    val featureToggle: String, // TODO: make optional
+public open class BaseFeatureDataUseCase<T>(
+    public val featureToggle: String, // TODO: make optional
     protected val scope: CoroutineScope,
     protected val dispatcher: CoroutineDispatcher,
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
@@ -46,7 +47,7 @@ open class BaseFeatureDataUseCase<T>(
      * @param onEnabled the block is called if the feature is enabled. Create and return data here.
      * For example, call the repository and return the result.
      */
-    operator fun invoke(
+    public operator fun invoke(
         onDisabled: () -> Throwable,
         onEnabled: suspend () -> LoadState.Result<T>,
     ): SharedFlow<LoadState<T>> {
@@ -69,7 +70,7 @@ open class BaseFeatureDataUseCase<T>(
     protected fun collectFromFeatureToggle(
         scope: CoroutineScope,
         block: suspend (Boolean) -> Unit,
-    ) = scope.launch {
+    ): Job = scope.launch {
         featureEnabled.collectLatest { isEnabled ->
             block(isEnabled)
         }

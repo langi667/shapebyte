@@ -1,4 +1,4 @@
-package de.stefan.lang.featureToggles.api
+package de.stefan.lang.shapebyte.featureTogglesData
 
 data class FeatureToggle(
     val identifier: String,

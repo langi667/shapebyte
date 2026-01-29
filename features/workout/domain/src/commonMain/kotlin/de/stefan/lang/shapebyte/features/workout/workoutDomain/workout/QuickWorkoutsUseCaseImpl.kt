@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.workoutDomain.workout
 
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
 import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
-import de.stefan.lang.featureToggles.api.LoadFeatureToggleUseCase
+import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.api.quick.QuickWorkoutsError

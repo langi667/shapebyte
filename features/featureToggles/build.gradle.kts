@@ -23,7 +23,6 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
-            api(projects.features.featureToggles.api)
             implementation(projects.core.di)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)

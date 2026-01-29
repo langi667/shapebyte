@@ -1,4 +1,4 @@
-package de.stefan.lang.featureToggles.api
+package de.stefan.lang.shapebyte.featureTogglesData
 
 // TODO: that should be defined in the referring feature modules,
 //  not here

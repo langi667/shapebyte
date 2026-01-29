@@ -68,6 +68,9 @@ kotlin {
             api(projects.foundation.presentation)
             api(projects.designsystem)
             api(projects.features.featureToggles)
+            api(projects.features.featureToggles.data)
+            api(projects.features.featureToggles.domain.contract)
+
             api(projects.features.home)
             api(projects.features.home.presentation)
 

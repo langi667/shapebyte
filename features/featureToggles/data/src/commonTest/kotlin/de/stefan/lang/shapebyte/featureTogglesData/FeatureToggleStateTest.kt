@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
-import de.stefan.lang.featureToggles.api.FeatureToggleState
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

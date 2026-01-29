@@ -1,13 +1,13 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
 import app.cash.turbine.test
-import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleState
-import de.stefan.lang.featureToggles.api.FeatureToggleUseCase
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleError
+import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureToggleUseCase
 import de.stefan.lang.shapebyte.featureTogglesDomain.impl.FeatureToggleUseCaseImpl
 import de.stefan.lang.shapebyte.featureTogglesDomain.impl.LoadFeatureToggleUseCaseImpl
 import io.mockk.coEvery

@@ -5,6 +5,8 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -17,31 +19,22 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets  {
+    sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            
-            implementation(projects.foundation.core)
-            implementation(projects.core.di)
-            implementation(projects.core.utils)
-            implementation(projects.core.coroutines)
+            implementation(projects.core.logging)
+            implementation(projects.foundation.core.contract)
+            implementation(projects.features.featureToggles.data)
         }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-            implementation(libs.turbine)
-            implementation(libs.kotlinx.coroutines.test)
-            implementation (libs.koin.test)
-
-            implementation (projects.core.test)
-            implementation (projects.foundation.core.fake)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.featuretoggles.api"
+    namespace = "de.stefan.lang.shapebyte.featureTogglesDomain.contract"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -54,12 +47,6 @@ android {
     packaging {
         resources {
             excludes += Project.Android.BuildSettings.excludedResourcesList
-        }
-    }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }

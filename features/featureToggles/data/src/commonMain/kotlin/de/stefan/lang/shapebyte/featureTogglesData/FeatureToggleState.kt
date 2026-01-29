@@ -1,4 +1,4 @@
-package de.stefan.lang.featureToggles.api
+package de.stefan.lang.shapebyte.featureTogglesData
 
 enum class FeatureToggleState {
     ENABLED,

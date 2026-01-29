@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 
 class FeatureToggleMapper {
     fun map(dataList: List<FeatureToggleData>): List<FeatureToggle> = dataList

@@ -23,6 +23,7 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
+            api(projects.features.featureToggles.domain.contract)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
@@ -33,7 +34,6 @@ kotlin {
 
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
-            implementation(projects.features.featureToggles.api)
             implementation(projects.features.featureToggles.data)
         }
 

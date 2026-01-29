@@ -1,7 +1,5 @@
 package de.stefan.lang.shapebyte.featureTogglesData
 
-import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleState
 import de.stefan.lang.shapebyte.featureTogglesData.impl.FeatureToggleDatasourceMock
 import kotlin.test.AfterTest
 import kotlin.test.Test

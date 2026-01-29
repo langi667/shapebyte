@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
-import de.stefan.lang.featureToggles.api.FeatureToggle
-import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggle
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 import de.stefan.lang.shapebyte.featureTogglesData.BaseFeatureToggleDataTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

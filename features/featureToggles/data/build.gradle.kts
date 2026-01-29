@@ -31,7 +31,6 @@ kotlin {
             
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
-            implementation(projects.features.featureToggles.api)
         }
 
         commonTest.dependencies {

@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesData.impl
 
 import de.stefan.lang.coroutines.CoroutinesModule
-import de.stefan.lang.featureToggles.api.FeatureToggleState
+import de.stefan.lang.shapebyte.featureTogglesData.FeatureToggleState
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.fake.assets.FakeFileAssetLoader
 import de.stefan.lang.shapebyte.featureTogglesData.BaseFeatureToggleDataTest
