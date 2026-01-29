@@ -1,9 +1,13 @@
+import de.stefan.lang.build.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
     kotlin("plugin.serialization") version "2.0.0"
 }
+
+configureDi(moduleClassName = "de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule")
 
 kotlin {
     androidTarget {
@@ -24,7 +28,10 @@ kotlin {
         }
         commonMain.dependencies {
             api(projects.features.featureToggles.domain.contract)
+
             implementation(projects.features.featureToggles.domain.implementation)
+
+            implementation(projects.core.logging)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
@@ -32,9 +39,6 @@ kotlin {
             implementation(projects.core.di)
             implementation(projects.core.utils)
             implementation(projects.core.coroutines)
-
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
             implementation(projects.features.featureToggles.data)
         }
 

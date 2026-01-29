@@ -48,7 +48,7 @@ object FoundationCoreModule :
                 AudioPlayer(
                     appContextProvider = get(),
                     appResourceProvider = get(),
-                    logger = get(),
+                    logger = LoggingModule.logger(),
                 )
             }
         },

@@ -28,7 +28,7 @@ object HomeModule :
                         currentWorkoutScheduleEntryUseCase = get(),
                         recentHistoryUseCase = get(),
                         quickWorkoutsUseCase = get(),
-                        logger = get(),
+                        logger = LoggingModule.logger(),
                         coroutineContextProvider = get(),
                         navigationRequestBuilder = get(),
                         dateTimeStringFormatter = get(),

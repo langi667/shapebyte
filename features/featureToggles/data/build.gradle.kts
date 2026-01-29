@@ -1,3 +1,5 @@
+import de.stefan.lang.build.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -65,3 +67,5 @@ android {
         }
     }
 }
+
+configureDi(moduleClassName = "de.stefan.lang.shapebyte.featureToggles.data.FeatureTogglesDataModule")

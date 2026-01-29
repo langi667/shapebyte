@@ -1,8 +1,12 @@
+import de.stefan.lang.build.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
 }
+
+configureDi(moduleClassName = "de.stefan.lang.utils.logging.LoggingModule")
 
 kotlin {
     explicitApi()
