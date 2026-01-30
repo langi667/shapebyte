@@ -32,7 +32,6 @@ kotlin {
             implementation(projects.designsystem)
 
             implementation(projects.features.featureToggles.data.contract)
-            implementation(projects.features.featureToggles.data)
             implementation(projects.features.featureToggles.domain.contract)
             implementation(projects.features.navigation)
         }

@@ -8,7 +8,7 @@ plugins {
 
 configureDi(
     moduleClassName = "de.stefan.lang.shapebyte.features.home.presentation.HomePresentationModule",
-    transitive = false,
+    transitive = true,
 )
 
 kotlin {
