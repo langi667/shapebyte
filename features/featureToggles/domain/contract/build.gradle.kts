@@ -24,6 +24,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(projects.core.logging)
             implementation(projects.foundation.core.contract)
+
             api(projects.features.featureToggles.data.contract)
         }
 

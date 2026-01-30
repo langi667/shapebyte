@@ -1,4 +1,4 @@
-import de.stefan.lang.build.di.configureDi
+import de.stefan.lang.di.configureDi
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)

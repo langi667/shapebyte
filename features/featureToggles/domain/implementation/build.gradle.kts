@@ -29,7 +29,7 @@ kotlin {
             implementation(projects.core.di)
 
             implementation(projects.foundation.core)
-            implementation(projects.core.logging.contract)
+            implementation(projects.core.logging)
             implementation(projects.features.featureToggles.domain.contract)
             implementation(projects.features.featureToggles.data)
         }

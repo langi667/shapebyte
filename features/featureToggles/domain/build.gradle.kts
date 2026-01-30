@@ -1,4 +1,4 @@
-import de.stefan.lang.build.di.configureDi
+import de.stefan.lang.di.configureDi
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,7 +7,10 @@ plugins {
     kotlin("plugin.serialization") version "2.0.0"
 }
 
-configureDi(moduleClassName = "de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule")
+configureDi(
+    moduleClassName = "de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule",
+    transitive = true,
+)
 
 kotlin {
     androidTarget {
@@ -28,9 +31,7 @@ kotlin {
         }
         commonMain.dependencies {
             api(projects.features.featureToggles.domain.contract)
-
             implementation(projects.features.featureToggles.domain.implementation)
-
             implementation(projects.core.logging)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)

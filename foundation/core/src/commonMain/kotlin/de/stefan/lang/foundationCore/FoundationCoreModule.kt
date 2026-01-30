@@ -32,7 +32,7 @@ object FoundationCoreModule :
             single<AppResourceProvider> { appResourceProvider }
 
             single<SafeAreaDetector> {
-                SafeAreaDetector(logger = get())
+                SafeAreaDetector(logger = LoggingModule.logger())
             }
 
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }

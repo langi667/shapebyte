@@ -5,6 +5,8 @@ import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationModuleContract
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestBuilding
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestResolving
 import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestResolver
 import org.koin.core.component.get
@@ -22,6 +24,6 @@ object NavigationModule :
         ),
     ),
     NavigationModuleContract {
-    override fun navigationRequestBuilder(): NavigationRequestBuilder = get()
-    override fun navigationRequestResolver(): NavigationRequestResolver = get()
+    override fun navigationRequestBuilder(): NavigationRequestBuilding = get()
+    override fun navigationRequestResolver(): NavigationRequestResolving = get()
 }
