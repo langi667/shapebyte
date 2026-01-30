@@ -88,10 +88,9 @@ private fun Project.nameFromPath(): String =
         .joinToString(".")
 
 private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: Boolean): List<String> {
-    val configurationNames = listOf(
-        "commonMainApi",
-        "commonMainImplementation",
-    )
+    val apiConfigurations = listOf("commonMainApi")
+    val implementationConfigurations = listOf("commonMainImplementation")
+    val configurationNames = apiConfigurations + implementationConfigurations
     val exclusions = excludes.toSet()
     if (!transitive) {
         val result = linkedSetOf<String>()
@@ -113,34 +112,50 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
     val result = linkedSetOf<String>()
     val visited = mutableSetOf<Project>()
 
-    fun visit(project: Project) {
-        this@resolveDiModuleClasses.evaluationDependsOn(project.path)
-        if (!visited.add(project)) return
+    fun addModuleIfPresent(project: Project): Boolean {
         val extension = project.extensions.findByType(DiModuleExtension::class.java)
         val moduleClass = extension?.moduleClass?.orNull
         if (moduleClass != null) {
             result += moduleClass
-            return
+            return true
         }
-        configurationNames.forEach { configName ->
+        return false
+    }
+
+    fun visitApi(project: Project) {
+        this@resolveDiModuleClasses.evaluationDependsOn(project.path)
+        if (!visited.add(project)) return
+        if (addModuleIfPresent(project)) return
+        apiConfigurations.forEach { configName ->
             val configuration = project.configurations.findByName(configName) ?: return@forEach
             configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
                 val depProject = dependency.dependencyProject
                 val depPath = depProject.path
                 if (!exclusions.contains(depPath)) {
-                    visit(depProject)
+                    visitApi(depProject)
                 }
             }
         }
     }
 
-    configurationNames.forEach { configName ->
+    implementationConfigurations.forEach { configName ->
         val configuration = configurations.findByName(configName) ?: return@forEach
         configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
             val depProject = dependency.dependencyProject
             val depPath = depProject.path
             if (!exclusions.contains(depPath)) {
-                visit(depProject)
+                addModuleIfPresent(depProject)
+            }
+        }
+    }
+
+    apiConfigurations.forEach { configName ->
+        val configuration = configurations.findByName(configName) ?: return@forEach
+        configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
+            val depProject = dependency.dependencyProject
+            val depPath = depProject.path
+            if (!exclusions.contains(depPath)) {
+                visitApi(depProject)
             }
         }
     }
