@@ -21,11 +21,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.features.workout.api)
-            api(projects.foundation.presentation.contract)
-            api(projects.core.logging.contract)
-            api(projects.core.coroutines.contract)
-            api(projects.features.navigation.contract)
+
+            implementation(projects.foundation.presentation.contract)
+            implementation(projects.core.logging.contract)
+            implementation(projects.core.coroutines.contract)
+            implementation(projects.features.navigation.contract)
+
+            implementation(projects.features.workout.data)
         }
 
         commonTest.dependencies {

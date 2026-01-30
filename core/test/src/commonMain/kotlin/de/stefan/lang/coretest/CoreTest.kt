@@ -52,4 +52,6 @@ abstract class CoreTest {
             block()
         }
     }
+
+    companion object
 }

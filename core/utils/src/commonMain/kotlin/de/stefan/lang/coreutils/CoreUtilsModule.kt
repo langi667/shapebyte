@@ -6,7 +6,7 @@ import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 
 public object CoreUtilsModule :
     RootModule(
-        allEnvironments = {
+        globalBindings = {
             single<ContextProvider> { contextProvider }
         },
     ) {

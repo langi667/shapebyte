@@ -9,7 +9,9 @@ struct NavigationView<T: View>: View {
 
     let startView: (NavigationHandling) -> T
 
-    init(startView: @escaping (NavigationHandling) -> T) {
+    init(
+        startView: @escaping (NavigationHandling) -> T
+    ) {
         self.startView = startView
     }
 

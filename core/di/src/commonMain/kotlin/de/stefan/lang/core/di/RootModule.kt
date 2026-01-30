@@ -18,7 +18,7 @@ open class RootModule(
     dependencies: List<FeatureGraph>,
 ) : FeatureGraph {
     private val allModules = listOf(bindings) + dependencies
-    override val module: Module = this.joinModules(allModules.map { it.module })
+    override val productionModules: Module = this.joinModules(allModules.map { it.productionModules })
     override val testModules: Module = this.joinModules(allModules.map { it.testModules })
 
     constructor(dependencies: List<FeatureGraph>) : this(
@@ -27,15 +27,15 @@ open class RootModule(
     )
 
     constructor(
-        allEnvironments: ModuleDeclaration = {},
-        appEnvironmentOnly: ModuleDeclaration = {},
-        testEnvironmentOnly: ModuleDeclaration = {},
+        globalBindings: ModuleDeclaration = {},
+        productionBindings: ModuleDeclaration = {},
+        testBindings: ModuleDeclaration = {},
         dependencies: List<FeatureGraph> = emptyList(),
     ) : this(
         bindings = ModuleBindings(
-            allEnvironments = allEnvironments,
-            appEnvironmentOnly = appEnvironmentOnly,
-            testEnvironmentOnly = testEnvironmentOnly,
+            allEnvironments = globalBindings,
+            appEnvironmentOnly = productionBindings,
+            testEnvironmentOnly = testBindings,
         ),
         dependencies = dependencies,
     )

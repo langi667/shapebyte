@@ -61,7 +61,6 @@ include(":features:home:presentation:contract")
 include(":features:home:presentation:implementation")
 
 include(":features:workout")
-include(":features:workout:api")
 include(":features:workout:data")
 include(":features:workout:domain")
 include(":features:workout:presentation")

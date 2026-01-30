@@ -15,8 +15,10 @@ import de.stefan.lang.shapebyte.features.home.presentation.HomePresentationModul
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomePresentationContract
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationModuleContract
-import de.stefan.lang.shapebyte.features.workout.WorkoutModule
-import de.stefan.lang.shapebyte.features.workout.WorkoutModuleProviding
+import de.stefan.lang.shapebyte.features.workout.WorkoutPresentationModule
+import de.stefan.lang.shapebyte.features.workout.contract.WorkoutPresentationContract
+import de.stefan.lang.shapebyte.features.workout.data.WorkoutDataModule
+import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutDataContract
 import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
 import de.stefan.lang.utils.logging.LoggingModule
 import de.stefan.lang.utils.logging.contract.LoggingContract
@@ -33,20 +35,22 @@ object SharedModule :
     NavigationModuleContract by NavigationModule,
     FeatureTogglesDomainContract by FeatureTogglesDomainModule,
     HomePresentationContract by HomePresentationModule,
-    WorkoutModuleProviding by WorkoutModule,
+    WorkoutDataContract by WorkoutDataModule,
+    WorkoutPresentationContract by WorkoutPresentationModule,
     AppInfoProviding,
     SharedInitializationProviding {
 
     val modules =
-        CoreCoroutinesModule.module +
-            LoggingModule.module +
-            CoreUtilsModule.module +
-            FoundationCoreModule.module +
-            FoundationPresentationModule.module +
-            NavigationModule.module +
-            FeatureTogglesDomainModule.module +
-            HomePresentationModule.module +
-            WorkoutModule.module
+        CoreCoroutinesModule.productionModules +
+            LoggingModule.productionModules +
+            CoreUtilsModule.productionModules +
+            FoundationCoreModule.productionModules +
+            FoundationPresentationModule.productionModules +
+            NavigationModule.productionModules +
+            FeatureTogglesDomainModule.productionModules +
+            HomePresentationModule.productionModules +
+            WorkoutDataModule.productionModules +
+            WorkoutPresentationModule.productionModules
 
     val testModules =
         CoreCoroutinesModule.testModules +
@@ -56,7 +60,8 @@ object SharedModule :
             NavigationModule.testModules +
             FeatureTogglesDomainModule.testModules +
             HomePresentationModule.testModules +
-            WorkoutModule.testModules
+            WorkoutDataModule.testModules +
+            WorkoutPresentationModule.testModules
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }
 

@@ -29,8 +29,8 @@ import androidx.compose.ui.unit.dp
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundation.core.contract.image.ImageResource
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
-import de.stefan.lang.shapebyte.features.workout.api.Workout
-import de.stefan.lang.shapebyte.features.workout.api.WorkoutType
+import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
+import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

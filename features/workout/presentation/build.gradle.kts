@@ -32,7 +32,7 @@ kotlin {
             implementation(projects.designsystem)
             implementation(projects.features.featureToggles.domain.contract)
             implementation(projects.features.navigation)
-            implementation(projects.features.workout.api)
+            implementation(projects.features.workout.data)
             implementation(projects.features.workout.domain)
         }
 
@@ -48,7 +48,10 @@ kotlin {
         }
 
         androidUnitTest.dependencies {
-
+            implementation(libs.mockk.android)
+            implementation(projects.core.test)
+            implementation(projects.features.featureToggles.data.contract)
+            implementation(projects.features.featureToggles.domain.contract)
         }
     }
 }

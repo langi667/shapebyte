@@ -12,16 +12,16 @@ import org.koin.core.component.get
 
 public object LoggingModule :
     RootModule(
-        allEnvironments = {
+        globalBindings = {
             factory<RecordingLogging> { RecordingLogger(get()) }
         },
-        appEnvironmentOnly = {
+        productionBindings = {
             single<Logging> { Logger() }
         },
-        testEnvironmentOnly = {
+        testBindings = {
             single<Logging> { SilentLogger() }
         },
-        dependencies = GeneratedDependencies.modules
+        dependencies = GeneratedDependencies.modules,
     ),
     LoggingContract {
     public override fun logger(): Logging = get()

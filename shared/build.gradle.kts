@@ -70,7 +70,10 @@ kotlin {
             api(projects.features.featureToggles.domain)
 
             api(projects.features.home.presentation)
-            api(projects.features.workout)
+            api(projects.features.workout.data)
+            api(projects.features.workout.presentation)
+
+
             api(projects.features.navigation)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
@@ -95,7 +98,7 @@ kotlin {
             export(projects.designsystem)
             export(projects.features.featureToggles.domain)
             export(projects.features.home.presentation)
-            export(projects.features.workout)
+            export(projects.features.workout.presentation)
             export(projects.features.navigation)
 
             transitiveExport = true

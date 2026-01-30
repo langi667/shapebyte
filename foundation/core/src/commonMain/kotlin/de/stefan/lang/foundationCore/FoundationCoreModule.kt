@@ -25,7 +25,7 @@ import org.koin.core.component.get
 
 object FoundationCoreModule :
     RootModule(
-        allEnvironments = {
+        globalBindings = {
             single<OperatingSystemInfoProviding> { get<DeviceInfoProviding>() }
             single<ScreenSizeProviding> { get<DeviceInfoProviding>() }
             single<DeviceSizeCategoryProviding> { DeviceSizeCategoryProvider(screenSizeProvider = get()) }
@@ -37,7 +37,7 @@ object FoundationCoreModule :
 
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
         },
-        appEnvironmentOnly = {
+        productionBindings = {
             single<FileAssetLoading> {
                 FileAssetLoader(logging = get(), appContextProvider = get())
             }
@@ -52,7 +52,7 @@ object FoundationCoreModule :
                 )
             }
         },
-        testEnvironmentOnly = {
+        testBindings = {
             single<FileAssetLoading> { FakeFileAssetLoader() }
             factory<AudioPlaying> { FakeAudioPlayer() }
             single<DeviceInfoProviding> { FakeDeviceInfo() }

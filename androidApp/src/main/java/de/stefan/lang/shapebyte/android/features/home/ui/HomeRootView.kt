@@ -33,9 +33,9 @@ import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.workout.api.Workout
-import de.stefan.lang.shapebyte.features.workout.preview.QuickWorkoutsPreviewDataProvider
-import de.stefan.lang.shapebyte.features.workout.preview.WorkoutHistoryPreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.contract.preview.QuickWorkoutsPreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.contract.preview.WorkoutHistoryPreviewDataProvider
+import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
 import kotlinx.collections.immutable.toImmutableList
 import kotlin.math.max
 

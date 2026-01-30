@@ -30,7 +30,7 @@ kotlin {
             implementation(projects.core.coroutines.contract)
             implementation(projects.core.logging.contract)
             implementation(projects.features.navigation.contract)
-            implementation(projects.features.workout.api)
+            implementation(projects.features.workout.data)
             implementation(projects.features.workout.domain)
 
             implementation(projects.features.featureToggles.domain.contract)

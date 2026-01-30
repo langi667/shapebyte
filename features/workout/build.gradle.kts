@@ -23,7 +23,6 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
-            api(projects.features.workout.api)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
             implementation(projects.core.utils)
@@ -35,7 +34,6 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.features.featureToggles.data)
-            implementation(projects.features.workout.api)
             implementation(projects.features.workout.data)
             implementation(projects.features.workout.domain)
             implementation(projects.features.workout.presentation)

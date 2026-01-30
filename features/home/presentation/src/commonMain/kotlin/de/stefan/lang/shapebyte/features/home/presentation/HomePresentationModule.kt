@@ -11,7 +11,7 @@ import org.koin.core.parameter.parametersOf
 
 public object HomePresentationModule :
     RootModule(
-        allEnvironments = {
+        globalBindings = {
             factory<HomeRootViewModel> { (navHandler: NavigationRequestHandling) ->
                 HomeRootViewModelImpl(
                     logger = get(),

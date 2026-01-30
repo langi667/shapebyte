@@ -53,9 +53,9 @@ import de.stefan.lang.shapebyte.android.shared.buttons.ui.StopButton
 import de.stefan.lang.shapebyte.android.shared.image.ui.AsyncImage
 import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.android.shared.progress.ui.GradientProgressIndicatorLarge
-import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutUIIntent
-import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewData
-import de.stefan.lang.shapebyte.features.workout.api.timed.TimedWorkoutViewModel
+import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutUIIntent
+import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewData
+import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 

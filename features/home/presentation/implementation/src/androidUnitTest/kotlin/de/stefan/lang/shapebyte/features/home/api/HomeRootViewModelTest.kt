@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.features.home.api
 
 import app.cash.turbine.test
-import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.presentation.contract.state.UIState
@@ -12,13 +11,12 @@ import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRo
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.FetchRecentWorkoutHistoryUseCaseImpl
-import de.stefan.lang.shapebyte.features.workout.workoutDomain.workout.QuickWorkoutsUseCaseImpl
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.history.FetchRecentWorkoutHistoryUseCaseImpl
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutsUseCaseImpl
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
-import org.koin.core.module.Module
 import org.koin.test.KoinTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

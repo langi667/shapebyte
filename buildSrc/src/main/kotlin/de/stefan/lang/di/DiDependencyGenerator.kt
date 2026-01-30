@@ -92,6 +92,12 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
     val implementationConfigurations = listOf("commonMainImplementation")
     val configurationNames = apiConfigurations + implementationConfigurations
     val exclusions = excludes.toSet()
+    fun ensureEvaluated(project: Project) {
+        if (project != this@resolveDiModuleClasses) {
+            this@resolveDiModuleClasses.evaluationDependsOn(project.path)
+        }
+    }
+
     if (!transitive) {
         val result = linkedSetOf<String>()
         configurationNames.forEach { configName ->
@@ -100,6 +106,7 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
                 val depProject = dependency.dependencyProject
                 val depPath = depProject.path
                 if (!exclusions.contains(depPath)) {
+                    ensureEvaluated(depProject)
                     depProject.extensions.findByType(DiModuleExtension::class.java)?.moduleClass?.orNull?.let {
                         result += it
                     }
@@ -113,6 +120,7 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
     val visited = mutableSetOf<Project>()
 
     fun addModuleIfPresent(project: Project): Boolean {
+        ensureEvaluated(project)
         val extension = project.extensions.findByType(DiModuleExtension::class.java)
         val moduleClass = extension?.moduleClass?.orNull
         if (moduleClass != null) {

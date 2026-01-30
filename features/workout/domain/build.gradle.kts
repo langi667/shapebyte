@@ -1,9 +1,16 @@
+import de.stefan.lang.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
     kotlin("plugin.serialization") version "2.0.0"
 }
+
+configureDi(
+    moduleClassName = "de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule",
+    transitive = true,
+)
 
 kotlin {
     androidTarget {
@@ -37,7 +44,6 @@ kotlin {
             implementation(projects.designsystem)
             implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
-            implementation(projects.features.workout.api)
             implementation(projects.features.workout.data)
         }
 
@@ -47,13 +53,16 @@ kotlin {
 
         androidUnitTest.dependencies {
             implementation(libs.mockk.android)
+            implementation(projects.core.test)
+            implementation(projects.features.featureToggles.data.contract)
+            implementation(projects.features.featureToggles.domain.contract)
         }
     }
 }
 
 android {
     // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.workout.workoutDomain"
+    namespace = "de.stefan.lang.shapebyte.features.workout.domain"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
