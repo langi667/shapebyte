@@ -57,6 +57,8 @@ include(":features:featureToggles:domain:implementation")
 
 include(":features:home")
 include(":features:home:presentation")
+include(":features:home:presentation:contract")
+include(":features:home:presentation:implementation")
 
 include(":features:workout")
 include(":features:workout:api")

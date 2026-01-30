@@ -18,28 +18,7 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
-        commonMain.dependencies {
-            api(projects.features.featureToggles.domain.contract)
-            api(projects.features.featureToggles.data.contract)
-            implementation(projects.core.di)
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-
-            
-            implementation(projects.foundation.core)
-            implementation(projects.features.featureToggles.domain)
-        }
-
-        commonTest.dependencies {
-            implementation(projects.core.test)
-        }
-    }
+    sourceSets {}
 }
 
 android {

@@ -8,7 +8,6 @@ import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
-import de.stefan.lang.shapebyte.features.home.HomeModule
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
@@ -27,13 +26,8 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class HomeRootViewModelTest : CoreTest(), KoinTest {
+class HomeRootViewModelTest : BaseTest(), KoinTest {
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
-
-    override val testModules: List<Module>
-        get() = super.testModules + listOf(
-            HomeModule.testModules
-        )
 
     @Test
     fun `initial state`() = test {
@@ -99,7 +93,6 @@ class HomeRootViewModelTest : CoreTest(), KoinTest {
             expectNoEvents()
         }
     }
-
 
     @Test
     fun `state contains no quick workouts if feature is disabled`() = test {

@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundation.presentation.contract.state.UIState
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView
 import de.stefan.lang.shapebyte.android.navigation.NavigationHandler
@@ -36,18 +37,14 @@ import de.stefan.lang.shapebyte.features.workout.api.Workout
 import de.stefan.lang.shapebyte.features.workout.preview.QuickWorkoutsPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.preview.WorkoutHistoryPreviewDataProvider
 import kotlinx.collections.immutable.toImmutableList
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 import kotlin.math.max
 
 @Composable
 fun HomeRootView(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel: HomeRootViewModel = getViewModel(
-        parameters = {
-            parametersOf(NavigationHandler(navController))
-        },
+    viewModel: HomeRootViewModel = SharedModule.homeRootViewModel(
+        NavigationHandler(navController),
     ),
 ) {
     LaunchedEffect(key1 = "Update") {

@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -19,33 +18,33 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
         commonMain.dependencies {
-            api(projects.features.workout.api)
+            implementation(projects.features.home.presentation.contract)
             implementation(projects.core.di)
-            implementation(projects.core.coroutines)
-            implementation(projects.core.utils)
+            implementation(projects.features.navigation)
+            implementation(projects.features.featureToggles.domain)
+            implementation(projects.core.logging)
 
+            implementation(projects.foundation.core.contract)
+            implementation(projects.foundation.presentation.contract)
+            implementation(projects.core.coroutines.contract)
+            implementation(projects.core.logging.contract)
+            implementation(projects.features.navigation.contract)
+            implementation(projects.features.workout.api)
+            implementation(projects.features.workout.domain)
 
-            implementation(libs.koin.core)
+            implementation(projects.features.featureToggles.domain.contract)
+
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+        }
 
-            implementation(projects.features.featureToggles.data)
-            implementation(projects.features.workout.api)
+        commonTest.dependencies {
+            // TODO: this must be solve differently, the test accesses implementation classes, there should be a test module passing these
             implementation(projects.features.workout.data)
             implementation(projects.features.workout.domain)
-            implementation(projects.features.workout.presentation)
-
-            
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.designsystem)
-            implementation(projects.features.navigation)
-            implementation(projects.features.featureToggles.data.contract)
+            implementation(libs.kotlin.test)
+            implementation(projects.core.test)
         }
 
         androidUnitTest.dependencies {
@@ -53,16 +52,11 @@ kotlin {
             implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
         }
-
-        commonTest.dependencies {
-            implementation(projects.core.test)
-        }
     }
 }
 
 android {
-    // TODO: set your module name
-    namespace = "de.stefan.lang.shapebyte.features.workout"
+    namespace = "de.stefan.lang.shapebyte.features.home.presentation.implementation"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -75,12 +69,6 @@ android {
     packaging {
         resources {
             excludes += Project.Android.BuildSettings.excludedResourcesList
-        }
-    }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }

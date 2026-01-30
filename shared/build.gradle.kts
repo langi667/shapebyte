@@ -66,13 +66,10 @@ kotlin {
             api(projects.foundation.core)
             api(projects.foundation.presentation)
             api(projects.designsystem)
-            api(projects.features.featureToggles)
             api(projects.features.featureToggles.data)
             api(projects.features.featureToggles.domain)
 
-            api(projects.features.home)
             api(projects.features.home.presentation)
-
             api(projects.features.workout)
             api(projects.features.navigation)
             implementation(projects.core.di)
@@ -97,7 +94,7 @@ kotlin {
             export(projects.foundation.presentation)
             export(projects.designsystem)
             export(projects.features.featureToggles.domain)
-            export(projects.features.home)
+            export(projects.features.home.presentation)
             export(projects.features.workout)
             export(projects.features.navigation)
 

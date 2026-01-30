@@ -14,8 +14,8 @@ object NavigationModule :
     RootModule(
         bindings = ModuleBindings(
             allEnvironments = {
-                single { NavigationRequestBuilder() }
-                single { NavigationRequestResolver() }
+                single<NavigationRequestBuilding> { NavigationRequestBuilder() }
+                single<NavigationRequestResolving> { NavigationRequestResolver() }
             },
         ),
         dependencies = listOf(

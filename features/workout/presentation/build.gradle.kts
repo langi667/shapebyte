@@ -30,7 +30,6 @@ kotlin {
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
             implementation(projects.designsystem)
-            implementation(projects.features.featureToggles)
             implementation(projects.features.featureToggles.domain.contract)
             implementation(projects.features.navigation)
             implementation(projects.features.workout.api)

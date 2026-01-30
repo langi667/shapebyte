@@ -38,7 +38,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            
+
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
 
@@ -46,6 +46,7 @@ kotlin {
             implementation(projects.features.featureToggles.data)
             implementation(projects.features.featureToggles.domain)
             implementation(projects.features.workout)
+            api(projects.features.home.presentation.contract)
             implementation(projects.features.home.presentation)
         }
 

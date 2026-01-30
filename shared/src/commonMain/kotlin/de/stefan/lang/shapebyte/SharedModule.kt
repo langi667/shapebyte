@@ -11,8 +11,8 @@ import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.di.SharedInitializationProviding
 import de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureTogglesDomainContract
-import de.stefan.lang.shapebyte.features.home.HomeModule
-import de.stefan.lang.shapebyte.features.home.HomeModuleProviding
+import de.stefan.lang.shapebyte.features.home.presentation.HomePresentationModule
+import de.stefan.lang.shapebyte.features.home.presentation.contract.HomePresentationContract
 import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationModuleContract
 import de.stefan.lang.shapebyte.features.workout.WorkoutModule
@@ -32,7 +32,7 @@ object SharedModule :
     LoggingContract by LoggingModule,
     NavigationModuleContract by NavigationModule,
     FeatureTogglesDomainContract by FeatureTogglesDomainModule,
-    HomeModuleProviding by HomeModule,
+    HomePresentationContract by HomePresentationModule,
     WorkoutModuleProviding by WorkoutModule,
     AppInfoProviding,
     SharedInitializationProviding {
@@ -45,7 +45,7 @@ object SharedModule :
             FoundationPresentationModule.module +
             NavigationModule.module +
             FeatureTogglesDomainModule.module +
-            HomeModule.module +
+            HomePresentationModule.module +
             WorkoutModule.module
 
     val testModules =
@@ -55,7 +55,7 @@ object SharedModule :
             FoundationPresentationModule.testModules +
             NavigationModule.testModules +
             FeatureTogglesDomainModule.testModules +
-            HomeModule.testModules +
+            HomePresentationModule.testModules +
             WorkoutModule.testModules
 
     private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }

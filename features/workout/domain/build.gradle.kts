@@ -37,8 +37,6 @@ kotlin {
             implementation(projects.designsystem)
             implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
-            implementation(projects.features.featureToggles)
-
             implementation(projects.features.workout.api)
             implementation(projects.features.workout.data)
         }

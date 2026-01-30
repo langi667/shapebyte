@@ -5,6 +5,8 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -18,19 +20,22 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-        }
         commonMain.dependencies {
+            api(projects.features.workout.api)
+            api(projects.foundation.presentation.contract)
+            api(projects.core.logging.contract)
+            api(projects.core.coroutines.contract)
+            api(projects.features.navigation.contract)
+        }
 
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
-dependencies {
-}
-
 android {
-    namespace = "de.stefan.lang.features"
+    namespace = "de.stefan.lang.shapebyte.features.home.presentation.contract"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk
@@ -45,14 +50,4 @@ android {
             excludes += Project.Android.BuildSettings.excludedResourcesList
         }
     }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
-    }
-}
-
-tasks.register("allTestDebugUnitTest") {
-    dependsOn(subprojects.mapNotNull { it.tasks.findByName("testDebugUnitTest") })
 }

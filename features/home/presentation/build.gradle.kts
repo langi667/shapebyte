@@ -1,8 +1,15 @@
+import de.stefan.lang.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
 }
+
+configureDi(
+    moduleClassName = "de.stefan.lang.shapebyte.features.home.presentation.HomePresentationModule",
+    transitive = false,
+)
 
 kotlin {
     explicitApi()
@@ -20,19 +27,15 @@ kotlin {
 
     sourceSets  {
         commonMain.dependencies {
+            api(projects.features.home.presentation.contract)
             implementation(projects.core.di)
-            implementation(projects.core.utils)
+            implementation(projects.core.logging)
             implementation(projects.core.coroutines)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.koin.core)
 
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.features.featureToggles)
-            implementation(projects.features.featureToggles.domain.contract)
-            implementation(projects.features.navigation)
-            implementation(projects.features.workout.api)
+            implementation(projects.features.home.presentation.implementation)
+            implementation (projects.features.featureToggles.domain)
+            implementation (projects.features.navigation)
+
         }
 
         commonTest.dependencies {
@@ -42,7 +45,6 @@ kotlin {
             implementation (libs.koin.test)
 
             implementation (projects.core.test)
-            implementation (projects.foundation.core.fake)
             implementation (projects.foundation.core.fake)
         }
 
