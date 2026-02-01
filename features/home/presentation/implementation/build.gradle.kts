@@ -25,7 +25,7 @@ kotlin {
             implementation(projects.features.featureToggles.domain)
             implementation(projects.core.logging)
 
-            implementation(projects.foundation.core.contract)
+            implementation(projects.foundation.core)
             implementation(projects.foundation.presentation.contract)
             implementation(projects.core.coroutines.contract)
             implementation(projects.core.logging.contract)
@@ -43,6 +43,7 @@ kotlin {
             // TODO: this must be solve differently, the test accesses implementation classes, there should be a test module passing these
             implementation(projects.features.workout.data)
             implementation(projects.features.workout.domain)
+
             implementation(libs.kotlin.test)
             implementation(projects.core.test)
         }

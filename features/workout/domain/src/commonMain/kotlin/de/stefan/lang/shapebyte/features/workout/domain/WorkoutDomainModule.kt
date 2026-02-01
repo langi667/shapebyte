@@ -3,10 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.domain
 import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsDatasource
-import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleRepository
-import de.stefan.lang.shapebyte.features.workout.data.fixture.QuickWorkoutsDatasourceFixture
 import de.stefan.lang.shapebyte.features.workout.domain.contract.WorkoutDomainContract
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution

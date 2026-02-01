@@ -40,7 +40,6 @@ object WorkoutDataModule :
                     logger = get(),
                 )
             }
-
         },
         productionBindings = {
             single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceFixture } // TODO: change once implemented !!!

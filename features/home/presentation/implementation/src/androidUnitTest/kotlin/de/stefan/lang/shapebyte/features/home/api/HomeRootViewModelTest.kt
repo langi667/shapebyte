@@ -1,9 +1,11 @@
-package de.stefan.lang.shapebyte.features.home.api
+ package de.stefan.lang.shapebyte.features.home.api
 
 import app.cash.turbine.test
+import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.presentation.contract.state.UIState
+import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
@@ -17,6 +19,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.get
+import org.koin.core.module.Module
 import org.koin.test.KoinTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,6 +28,10 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class HomeRootViewModelTest : BaseTest(), KoinTest {
+
+    override val testModules: List<Module>
+        get() = FoundationCoreModule.testModules + super.testModules
+
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 
     @Test
