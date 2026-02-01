@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 configureDi(
@@ -26,42 +25,26 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
         commonMain.dependencies {
-            implementation(projects.core.di)
-            implementation(projects.core.utils)
-            implementation(projects.core.coroutines)
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
+            api(projects.features.workout.domain.contract)
+            implementation(projects.features.workout.domain.implementation)
+            implementation(projects.features.workout.data)
 
-            
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.designsystem)
+            implementation(projects.core.di)
+            implementation(projects.core.logging)
+            implementation(projects.core.coroutines)
             implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
-            implementation(projects.features.workout.data)
+
         }
 
         commonTest.dependencies {
             implementation(projects.core.test)
         }
-
-        androidUnitTest.dependencies {
-            implementation(libs.mockk.android)
-            implementation(projects.core.test)
-            implementation(projects.features.featureToggles.data.contract)
-            implementation(projects.features.featureToggles.domain.contract)
-        }
     }
 }
 
 android {
-    // TODO: set your module name
     namespace = "de.stefan.lang.shapebyte.features.workout.domain"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
@@ -75,12 +58,6 @@ android {
     packaging {
         resources {
             excludes += Project.Android.BuildSettings.excludedResourcesList
-        }
-    }
-
-    sourceSets {
-        defaultConfig {
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 }

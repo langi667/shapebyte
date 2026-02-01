@@ -57,4 +57,10 @@ object WorkoutDataModule :
             entry = scheduleEntry,
             dateStringFormatter = FoundationCoreModule.dateTimeStringFormatter(),
         )
+
+    override fun workoutHistoryRepository(): WorkoutHistoryRepository = get()
+
+    override fun workoutScheduleRepository(): WorkoutScheduleRepository = get()
+
+    override fun quickWorkoutsRepository(): QuickWorkoutsRepository = get()
 }

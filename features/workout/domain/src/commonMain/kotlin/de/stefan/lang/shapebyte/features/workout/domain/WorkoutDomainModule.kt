@@ -1,20 +1,23 @@
 package de.stefan.lang.shapebyte.features.workout.domain
 
 import de.stefan.lang.core.di.RootModule
+import de.stefan.lang.shapebyte.features.workout.data.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleRepository
 import de.stefan.lang.shapebyte.features.workout.domain.contract.WorkoutDomainContract
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecuting
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilder
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecution
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilding
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecution
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.history.FetchRecentWorkoutHistoryUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutForIdUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutsUseCaseImpl
@@ -27,18 +30,16 @@ object WorkoutDomainModule :
         globalBindings = {
             single<FetchRecentWorkoutHistoryUseCase> {
                 FetchRecentWorkoutHistoryUseCaseImpl(
-                    repository = get(),
+                    repository = WorkoutDataModule.workoutHistoryRepository(),
                     logger = get(),
                     coroutineContextProviding = get(),
                     coroutineScopeProviding = get(),
                     loadFeatureToggleUseCase = get(),
                 )
             }
-            single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
             single<CurrentWorkoutScheduleEntryUseCase> {
-
                 CurrentWorkoutScheduleEntryUseCaseImpl(
-                    repository = get(),
+                    repository = WorkoutDataModule.workoutScheduleRepository(),
                     logger = get(),
                     coroutineContextProviding = get(),
                     coroutineScopeProviding = get(),
@@ -59,7 +60,7 @@ object WorkoutDomainModule :
 
             single<QuickWorkoutsUseCase> {
                 QuickWorkoutsUseCaseImpl(
-                    repository = get(),
+                    repository = WorkoutDataModule.quickWorkoutsRepository(),
                     logger = get(),
                     scopeProvider = get(),
                     dispatcherProvider = get(),
@@ -69,7 +70,7 @@ object WorkoutDomainModule :
 
             factory<QuickWorkoutForIdUseCase> {
                 QuickWorkoutForIdUseCaseImpl(
-                    repository = get(),
+                    repository = WorkoutDataModule.quickWorkoutsRepository(),
                     logger = get(),
                     coroutineContextProvider = get(),
                     coroutineScopeProvider = get(),
@@ -77,11 +78,15 @@ object WorkoutDomainModule :
                 )
             }
 
-            factory<ItemsExecution> { (items: List<ItemExecuting<*, *>>) ->
+            factory<ItemsExecuting> { (items: List<ItemExecuting<*, *>>) ->
                 ItemsExecution(items, get())
             }
 
-            single<ItemsExecutionBuilder> { ItemsExecutionBuilder() }
+            single<ItemsExecutionBuilding> {
+                ItemsExecutionBuilder(
+                    logger = get(),
+                )
+            }
         },
         productionBindings = {
         },
@@ -95,7 +100,7 @@ object WorkoutDomainModule :
     override fun createTimedItemExecution(
         item: Item,
         sets: List<ItemSet.Timed.Seconds>,
-    ): TimedItemExecution =
+    ): TimedItemExecuting =
         get(
             parameters = {
                 parametersOf(item, sets)
@@ -114,11 +119,11 @@ object WorkoutDomainModule :
     override fun quickWorkoutsUseCase(): QuickWorkoutsUseCase = get()
     override fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = get()
 
-    override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
+    override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecuting = get(
         parameters = {
             parametersOf(items)
         },
     )
 
-    override fun itemsExecutionBuilder(): ItemsExecutionBuilder = get()
+    override fun itemsExecutionBuilder(): ItemsExecutionBuilding = get()
 }

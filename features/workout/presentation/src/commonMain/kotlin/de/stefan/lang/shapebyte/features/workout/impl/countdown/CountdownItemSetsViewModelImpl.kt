@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.None
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
 import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.delay
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class CountdownItemSetsViewModelImpl(
     logger: Logging,
     coroutineContextProvider: CoroutineContextProviding,
-    private val timedHandlerFactory: (item: Item, sets: List<ItemSet.Timed.Seconds>) -> TimedItemExecution,
+    private val timedHandlerFactory: (item: Item, sets: List<ItemSet.Timed.Seconds>) -> TimedItemExecuting,
 ) : CountdownItemSetsViewModel(logger, coroutineContextProvider) {
     companion object Companion {
         private const val TIMER_OFFSET = 100L

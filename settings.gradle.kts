@@ -62,7 +62,13 @@ include(":features:home:presentation:implementation")
 
 include(":features:workout")
 include(":features:workout:data")
+include(":features:workout:data:contract")
+include(":features:workout:data:implementation")
+include(":features:workout:data:fixture")
 include(":features:workout:domain")
+include(":features:workout:domain:contract")
+include(":features:workout:domain:implementation")
+include(":features:workout:domain:test")
 include(":features:workout:presentation")
 
 include(":shared:sharedComponentTest")

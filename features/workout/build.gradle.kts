@@ -34,11 +34,6 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.features.featureToggles.data)
-            implementation(projects.features.workout.data)
-            implementation(projects.features.workout.domain)
-            implementation(projects.features.workout.presentation)
-
-            
             implementation(projects.foundation.core)
             implementation(projects.foundation.presentation)
             implementation(projects.designsystem)

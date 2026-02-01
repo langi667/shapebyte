@@ -45,15 +45,16 @@ kotlin {
             implementation(projects.features.navigation)
             implementation(projects.features.featureToggles.data)
             implementation(projects.features.featureToggles.domain)
-            implementation(projects.features.workout)
             api(projects.features.home.presentation.contract)
             implementation(projects.features.home.presentation)
+            implementation(projects.features.workout.domain)
         }
 
         commonTest.dependencies {
             implementation(projects.core.test)
             implementation(projects.features.workout.data)
-            implementation(projects.features.workout.domain)
+            implementation(projects.features.workout.data.contract)
+
         }
     }
 }

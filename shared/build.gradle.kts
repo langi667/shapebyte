@@ -71,6 +71,7 @@ kotlin {
 
             api(projects.features.home.presentation)
             api(projects.features.workout.data)
+            api(projects.features.workout.data.contract)
             api(projects.features.workout.presentation)
 
 
@@ -99,6 +100,7 @@ kotlin {
             export(projects.features.featureToggles.domain)
             export(projects.features.home.presentation)
             export(projects.features.workout.presentation)
+            export(projects.features.workout.data.contract)
             export(projects.features.navigation)
 
             transitiveExport = true

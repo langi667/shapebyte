@@ -37,6 +37,7 @@ kotlin {
             implementation (projects.features.featureToggles.domain)
             implementation (projects.features.navigation)
             implementation (projects.features.workout.data)
+            implementation(projects.features.workout.data.contract)
             implementation (projects.features.workout.domain)
         }
 

@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHa
 import de.stefan.lang.shapebyte.features.workout.contract.WorkoutPresentationContract
 import de.stefan.lang.shapebyte.features.workout.contract.countdown.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
-import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule.createTimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.impl.countdown.CountdownItemSetsViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.impl.timed.TimedWorkoutViewModelImpl
 import org.koin.core.component.get
@@ -32,7 +32,7 @@ object WorkoutPresentationModule :
                     coroutineContextProvider = get(),
                     timedHandlerFactory = {
                             item, sets ->
-                        createTimedItemExecution(item, sets)
+                        WorkoutDomainModule.createTimedItemExecution(item, sets)
                     },
                 )
             }
