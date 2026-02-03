@@ -21,7 +21,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.features.workout.data.contract)
-
+            implementation(projects.core.utils)
+            implementation(projects.core.di)
             implementation(libs.kotlinx.datetime)
         }
 

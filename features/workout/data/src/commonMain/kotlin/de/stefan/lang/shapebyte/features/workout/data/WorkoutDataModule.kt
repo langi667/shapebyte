@@ -27,7 +27,7 @@ object WorkoutDataModule :
             single<QuickWorkoutsRepository> {
                 QuickWorkoutsRepository(
                     dataSource = get(),
-                    logger = get(),
+                    logger = Dependencies.logger(),
                 )
             }
 
@@ -36,7 +36,7 @@ object WorkoutDataModule :
             single<QuickWorkoutsRepository> {
                 QuickWorkoutsRepository(
                     dataSource = get(),
-                    logger = get(),
+                    logger = Dependencies.logger(),
                 )
             }
         },

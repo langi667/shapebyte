@@ -61,7 +61,7 @@ class DefaultFeatureToggleDatasourceImplTest : BaseFeatureToggleDataTest() {
         return DefaultFeatureToggleDatasourceImpl(
             logger = LoggingModule.logger(),
             assetLoader = loader,
-            coroutineContextProviding = CoroutinesModule.coroutineContextProvider(),
+            coroutineContextProvider = CoroutinesModule.coroutineContextProvider(),
         )
     }
 }

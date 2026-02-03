@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
 import app.cash.turbine.test
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
@@ -9,6 +10,7 @@ import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDataso
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleError
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.LoadFeatureToggleUseCaseImpl
+import de.stefan.lang.utils.logging.LoggingModule
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.koin.core.component.get
@@ -28,12 +30,12 @@ class LoadFeatureToggleUseCaseImplTest : BaseFeatureToggleDomainTest() {
     private val sut: LoadFeatureToggleUseCaseImpl
         get() = LoadFeatureToggleUseCaseImpl(
             repository = FeatureToggleRepository(
-                logger = get(),
+                logger = LoggingModule.logger(),
                 dataSource = datasource,
             ),
-            logger = get(),
-            coroutineScopeProviding = get(),
-            coroutineContextProviding = get(),
+            logger = LoggingModule.logger(),
+            coroutineScopeProvider = CoroutinesModule.coroutineScopeProvider(),
+            coroutineContextProvider = CoroutinesModule.coroutineContextProvider(),
         )
 
     @Test

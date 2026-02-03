@@ -21,14 +21,18 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.foundation.core.contract)
-            api(projects.core.utils)
-            api(projects.core.logging.contract)
+            implementation(projects.core.utils)
+            implementation(projects.core.di)
 
-            api(libs.kotlinx.datetime)
+            implementation(projects.core.logging.contract)
+            implementation(libs.kotlinx.datetime)
         }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(projects.core.logging)
+            implementation(projects.foundation.core)
+            implementation(projects.core.test)
         }
     }
 }

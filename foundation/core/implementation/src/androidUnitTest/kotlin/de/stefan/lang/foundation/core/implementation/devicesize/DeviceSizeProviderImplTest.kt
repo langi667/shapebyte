@@ -1,17 +1,15 @@
-package de.stefan.lang.foundationUI.device.devicesize
+package de.stefan.lang.foundation.core.implementation.devicesize
 
 import de.stefan.lang.foundation.core.contract.devicesize.Size
-import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
-import de.stefan.lang.foundation.core.implementation.devicesize.iPhoneSizeBounds
 import de.stefan.lang.foundation.core.fake.devicesize.ScreenSizeProviderFake
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class DeviceSizeProviderTest {
+class DeviceSizeProviderImplTest {
     @Test
     fun `screen category should be xSmall`() {
-        val sut = createSUT(iPhoneSizeBounds.xSmall.category.size)
+        val sut = createSUT(AndroidSizeBounds.XSmall.category.size)
         assertTrue(sut.sizeCategory.isXSmall)
         assertFalse(sut.sizeCategory.isSmall)
         assertFalse(sut.sizeCategory.isMedium)
@@ -22,8 +20,8 @@ class DeviceSizeProviderTest {
     fun `screen category should be xSmall with in between`() {
         val sut = createSUT(
             Size(
-                width = iPhoneSizeBounds.xSmall.category.size.width,
-                height = iPhoneSizeBounds.xSmall.category.size.height - 10
+                width = AndroidSizeBounds.XSmall.category.size.width,
+                height = AndroidSizeBounds.XSmall.category.size.height - 10
             )
         )
 
@@ -35,7 +33,7 @@ class DeviceSizeProviderTest {
 
     @Test
     fun `screen category should be small`() {
-        val sut = createSUT(iPhoneSizeBounds.small.category.size)
+        val sut = createSUT(AndroidSizeBounds.Small.category.size)
 
         assertFalse(sut.sizeCategory.isXSmall)
         assertTrue(sut.sizeCategory.isSmall)
@@ -47,8 +45,8 @@ class DeviceSizeProviderTest {
     fun `screen category should be small with in between`() {
         val sut = createSUT(
             Size(
-                width = iPhoneSizeBounds.small.category.size.width,
-                height = iPhoneSizeBounds.small.category.size.height - 10
+                width = AndroidSizeBounds.Small.category.size.width,
+                height = AndroidSizeBounds.Small.category.size.height - 10
             )
         )
 
@@ -60,7 +58,7 @@ class DeviceSizeProviderTest {
 
     @Test
     fun `screen category should be medium`() {
-        val sut = createSUT(iPhoneSizeBounds.medium.category.size)
+        val sut = createSUT(AndroidSizeBounds.Medium.category.size)
 
         assertFalse(sut.sizeCategory.isXSmall)
         assertFalse(sut.sizeCategory.isSmall)
@@ -72,8 +70,8 @@ class DeviceSizeProviderTest {
     fun `screen category should be medium with in between`() {
         val sut = createSUT(
             Size(
-                width = iPhoneSizeBounds.medium.category.size.width,
-                height = iPhoneSizeBounds.medium.category.size.height - 10
+                width = AndroidSizeBounds.Medium.category.size.width,
+                height = AndroidSizeBounds.Medium.category.size.height - 10
             )
         )
 
@@ -85,7 +83,7 @@ class DeviceSizeProviderTest {
 
     @Test
     fun `screen category should be large`() {
-        val sut = createSUT(iPhoneSizeBounds.large.category.size)
+        val sut = createSUT(AndroidSizeBounds.Large.category.size)
 
         assertFalse(sut.sizeCategory.isXSmall)
         assertFalse(sut.sizeCategory.isSmall)
@@ -97,8 +95,8 @@ class DeviceSizeProviderTest {
     fun `screen category should be large with in between`() {
         val sut = createSUT(
             Size(
-                width = iPhoneSizeBounds.large.category.size.width,
-                height = iPhoneSizeBounds.large.category.size.height - 10
+                width = AndroidSizeBounds.Large.category.size.width,
+                height = AndroidSizeBounds.Large.category.size.height - 10
             )
         )
 
@@ -112,8 +110,8 @@ class DeviceSizeProviderTest {
     fun `screen category should be large when height is larger than defined large height`() {
         val sut = createSUT(
             Size(
-                width = iPhoneSizeBounds.large.category.size.width,
-                height = iPhoneSizeBounds.large.category.size.height + 100
+                width = AndroidSizeBounds.Large.category.size.width,
+                height = AndroidSizeBounds.Large.category.size.height + 100
             )
         )
 
@@ -123,6 +121,8 @@ class DeviceSizeProviderTest {
         assertTrue(sut.sizeCategory.isLarge)
     }
 
-    private fun createSUT(size: Size): DeviceSizeCategoryProvider =
-        DeviceSizeCategoryProvider(ScreenSizeProviderFake(size))
+    private fun createSUT(size: Size): DeviceSizeCategoryProviderImpl {
+        val screenSizeProvider = ScreenSizeProviderFake(size)
+        return DeviceSizeCategoryProviderImpl(screenSizeProvider)
+    }
 }

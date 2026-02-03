@@ -31,6 +31,8 @@ kotlin {
             implementation(projects.features.workout.data.implementation)
 
             implementation(projects.core.di)
+            implementation(projects.core.logging)
+
             implementation(projects.foundation.core)
             implementation(libs.koin.core)
         }

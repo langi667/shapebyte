@@ -25,8 +25,8 @@ object FeatureTogglesDomainModule :
                     LoadFeatureToggleUseCaseImpl(
                         logger = Dependencies.logger(),
                         repository = Dependencies.featureToggleRepository(),
-                        coroutineScopeProviding = Dependencies.coroutineScopeProvider(),
-                        coroutineContextProviding = Dependencies.coroutineContextProvider(),
+                        coroutineScopeProvider = Dependencies.coroutineScopeProvider(),
+                        coroutineContextProvider = Dependencies.coroutineContextProvider(),
                     )
                 }
             },

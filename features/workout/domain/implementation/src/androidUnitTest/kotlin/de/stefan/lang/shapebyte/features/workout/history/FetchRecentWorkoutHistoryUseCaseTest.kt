@@ -91,8 +91,8 @@ internal class FetchRecentWorkoutHistoryUseCaseTest : BaseTest() {
         val retVal = FetchRecentWorkoutHistoryUseCaseImpl(
             repository = repository,
             logger = get(),
-            coroutineContextProviding = get(),
-            coroutineScopeProviding = get(),
+            coroutineContextProvider = get(),
+            coroutineScopeProvider = get(),
             loadFeatureToggleUseCase = loadFeatureToggleUseCase,
         )
         return retVal

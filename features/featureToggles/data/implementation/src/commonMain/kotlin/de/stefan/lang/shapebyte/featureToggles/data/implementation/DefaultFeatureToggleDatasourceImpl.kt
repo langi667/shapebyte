@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 class DefaultFeatureToggleDatasourceImpl(
     override val logger: Logger,
     private val assetLoader: FileAssetLoader,
-    coroutineContextProviding: CoroutineContextProvider,
+    coroutineContextProvider: CoroutineContextProvider,
 ) : FeatureToggleDatasource, Loggable {
 
     companion object {
@@ -25,7 +25,7 @@ class DefaultFeatureToggleDatasourceImpl(
     }
 
     private val defaultFeatureToggles: List<FeatureToggle> by lazy { readDefaultFeatureToggles() }
-    private val dispatcher = coroutineContextProviding.iODispatcher()
+    private val dispatcher = coroutineContextProvider.iODispatcher()
 
     override suspend fun fetchFeatureToggle(
         identifier: String,

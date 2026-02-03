@@ -1,14 +1,18 @@
 package de.stefan.lang.shapebyte.features.workout.history
 
+import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.contract.progress.Progress
+import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
+import de.stefan.lang.foundationCore.FoundationCoreModule
+import de.stefan.lang.shapebyte.features.workout.BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class WorkoutHistoryEntryTest  {
+class WorkoutHistoryEntryTest: BaseTest()  {
     @Test
     fun `forwarded entries from WorkoutScheduleEntry should be correct `() {
         val entry = WorkoutScheduleEntry(
@@ -20,7 +24,7 @@ class WorkoutHistoryEntryTest  {
 
         val result = WorkoutHistoryEntry(
             entry = entry,
-            dateStringFormatter = DateTimeStringFormatter(),
+            dateStringFormatter = FoundationCoreModule.dateTimeStringFormatter(),
         )
 
         assertEquals(result.entry, entry)

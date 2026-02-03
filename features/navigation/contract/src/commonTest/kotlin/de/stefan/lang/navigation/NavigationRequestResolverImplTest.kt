@@ -3,11 +3,11 @@ package de.stefan.lang.navigation
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequest
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRoute
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationTarget
-import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestResolver
+import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestResolverImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class NavigationRequestResolverTest : BaseNavigationTest() {
+class NavigationRequestResolverImplTest : BaseNavigationTest() {
     @Test
     fun resolveBack() {
         val result = createSUT().resolve(NavigationRequest.Back)
@@ -20,7 +20,7 @@ class NavigationRequestResolverTest : BaseNavigationTest() {
         assertEquals(NavigationTarget.Home, result)
     }
 
-    private fun createSUT(): NavigationRequestResolver {
-        return NavigationRequestResolver()
+    private fun createSUT(): NavigationRequestResolverImpl {
+        return NavigationRequestResolverImpl()
     }
 }

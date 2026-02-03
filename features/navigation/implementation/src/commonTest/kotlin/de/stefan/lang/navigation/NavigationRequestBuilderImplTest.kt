@@ -2,11 +2,11 @@ package de.stefan.lang.navigation
 
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequest
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRoute
-import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestBuilder
+import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestBuilderImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class NavigationRequestBuilderTest : BaseNavigationTest() {
+class NavigationRequestBuilderImplTest : BaseNavigationTest() {
     @Test
     fun testQuickWorkout() {
         val workoutId = 1
@@ -30,7 +30,7 @@ class NavigationRequestBuilderTest : BaseNavigationTest() {
         )
     }
 
-    private fun createSUT(): NavigationRequestBuilder {
-        return NavigationRequestBuilder()
+    private fun createSUT(): NavigationRequestBuilderImpl {
+        return NavigationRequestBuilderImpl()
     }
 }

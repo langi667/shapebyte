@@ -40,12 +40,13 @@ kotlin {
             implementation(projects.core.coroutines)
             implementation(projects.core.utils)
             implementation(projects.core.logging)
+            implementation (libs.kotlinx.datetime)
         }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation (libs.koin.test)
-            implementation (libs.kotlinx.datetime)
+
 
             implementation (projects.core.test)
         }

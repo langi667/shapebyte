@@ -24,7 +24,7 @@ object FeatureTogglesDataModule :
                 DefaultFeatureToggleDatasourceImpl(
                     logger = Dependencies.logger(),
                     assetLoader = Dependencies.fileAssetLoader(),
-                    coroutineContextProviding = Dependencies.coroutineContextProvider(),
+                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
                 )
             }
         },

@@ -34,8 +34,8 @@ object WorkoutDomainModule :
                 FetchRecentWorkoutHistoryUseCaseImpl(
                     repository = Dependencies.workoutHistoryRepository(),
                     logger = Dependencies.logger(),
-                    coroutineContextProviding = Dependencies.coroutineContextProvider(),
-                    coroutineScopeProviding = Dependencies.coroutineScopeProvider(),
+                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
+                    coroutineScopeProvider = Dependencies.coroutineScopeProvider(),
                     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
                 )
             }
@@ -43,8 +43,8 @@ object WorkoutDomainModule :
                 CurrentWorkoutScheduleEntryUseCaseImpl(
                     repository = Dependencies.workoutScheduleRepository(),
                     logger = Dependencies.logger(),
-                    coroutineContextProviding = Dependencies.coroutineContextProvider(),
-                    coroutineScopeProviding = Dependencies.coroutineScopeProvider(),
+                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
+                    coroutineScopeProvider = Dependencies.coroutineScopeProvider(),
                 )
             }
 
