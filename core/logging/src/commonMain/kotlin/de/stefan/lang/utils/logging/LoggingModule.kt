@@ -1,6 +1,5 @@
 package de.stefan.lang.utils.logging
 
-import de.stefan.lang.shapebyte.core.logging.generated.Dependencies
 import de.stefan.lang.shapebyte.core.logging.generated.Module
 import de.stefan.lang.utils.logging.contract.Logger
 import de.stefan.lang.utils.logging.contract.LoggingContract

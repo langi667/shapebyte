@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import de.stefan.lang.designsystem.theme.ShapeByteTheme
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.navigation.NavigationView
-import de.stefan.lang.shapebyte.initializing.AppInitializationState
+import de.stefan.lang.shapebyte.shared.initializing.AppInitializationState
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.collectLatest

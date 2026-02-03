@@ -20,7 +20,9 @@ include(":shared")
 include(":core")
 include(":core:di")
 
+include(":core:utils:contract")
 include(":core:utils")
+
 include(":core:logging")
 include(":core:logging:contract")
 include(":core:logging:implementation")
@@ -76,3 +78,6 @@ include(":features:workout:presentation:implementation")
 include(":features:workout:presentation:test")
 
 include(":shared:sharedComponentTest")
+include(":shared:contract")
+include(":shared:implementation")
+

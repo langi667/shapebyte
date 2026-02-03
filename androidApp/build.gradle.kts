@@ -102,6 +102,8 @@ android {
 
 dependencies {
     implementation(projects.shared)
+    implementation(projects.core.di)
+
     implementation(projects.features.workout.data.contract)
 
     implementation(libs.compose.ui)

@@ -36,6 +36,6 @@ interface ItemValueExecuting<
     fun setInputValue(value: ITEM_SET_WITH_INPUT_VALUE)
 }
 
-interface TimedItemExecuting : ItemExecuting<TimedItemExecutionData, ItemSet.Timed.Seconds>
-interface RepetitiveItemExecuting :
+interface TimedItemExecution : ItemExecuting<TimedItemExecutionData, ItemSet.Timed.Seconds>
+interface RepetitiveItemExecution :
     ItemValueExecuting<RepetitiveItemExecutionData, ItemSet.Repetition, UInt>

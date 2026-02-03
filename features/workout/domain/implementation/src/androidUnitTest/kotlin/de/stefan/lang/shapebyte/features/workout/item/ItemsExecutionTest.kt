@@ -8,11 +8,12 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionState
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionImpl
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecutionImpl
 import de.stefan.lang.utils.logging.LoggingModule
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineScope
@@ -36,7 +37,7 @@ internal class ItemsExecutionTest : BaseTest() {
         override val item: Item,
         override val sets: List<ItemSet.Timed.Seconds>,
         override val logger: Logger,
-    ) : TimedItemExecuting {
+    ) : TimedItemExecution {
 
         override val state: StateFlow<ItemExecutionState<TimedItemExecutionData>> =
             MutableStateFlow(ItemExecutionState.Idle)
@@ -82,9 +83,11 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+                TimedItemExecutionImpl(
                     item = Exercise("Test $it"),
-                    sets = List(duration) { itemSet })
+                    sets = List(duration) { itemSet },
+                    logger = LoggingModule.logger()
+                )
             },
         )
 
@@ -133,7 +136,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val ignoredItem = Exercise("Fail")
 
         val items = List(executionsSucceedBefore) {
-            ImplementationModule.createTimedItemExecution(
+           createTimedItemExecution(
                 item = Exercise("Test $it"),
                 sets = List(duration) { ItemSet.Timed.Seconds(1) },
             )
@@ -145,7 +148,7 @@ internal class ItemsExecutionTest : BaseTest() {
             ),
         ) +
                 List(executionsSucceedAfter) {
-                    ImplementationModule.createTimedItemExecution(
+                   createTimedItemExecution(
                         item = Exercise("Test ${executionsSucceedBefore + it}"),
                         sets = List(duration) { ItemSet.Timed.Seconds(1) },
                     )
@@ -183,7 +186,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+               createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -259,7 +262,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+               createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -276,7 +279,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+               createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -299,7 +302,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+               createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -327,7 +330,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+                createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -367,7 +370,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                ImplementationModule.createTimedItemExecution(
+                createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -409,7 +412,15 @@ internal class ItemsExecutionTest : BaseTest() {
 
     // TODO: test for repetitive execution when implemented
 
-    private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecuting {
-        return ImplementationModule.createItemsExecution(items)
+    private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecutionImpl {
+        return ItemsExecutionImpl(items, LoggingModule.logger())
+    }
+
+    private fun createTimedItemExecution(item: Exercise, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution {
+        return TimedItemExecutionImpl(
+            item = item,
+            sets = sets,
+            logger = LoggingModule.logger(),
+        )
     }
 }

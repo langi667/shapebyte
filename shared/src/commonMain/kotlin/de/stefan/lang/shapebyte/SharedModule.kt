@@ -1,69 +1,50 @@
 package de.stefan.lang.shapebyte
 
 import de.stefan.lang.coreutils.CoreUtilsModule
-import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.app.AppInfo
+import de.stefan.lang.foundation.core.contract.app.AppInfoProvider
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProvider
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
-import de.stefan.lang.foundation.presentation.FoundationPresentationModule
-import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
+import de.stefan.lang.foundation.presentation.contract.FoundationPresentationContract
 import de.stefan.lang.foundationCore.FoundationCoreModule
-import de.stefan.lang.shapebyte.di.SharedInitializationProviding
-import de.stefan.lang.shapebyte.featureTogglesDomain.FeatureTogglesDomainModule
-import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureTogglesDomainContract
-import de.stefan.lang.shapebyte.features.home.presentation.HomePresentationModule
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomePresentationContract
-import de.stefan.lang.shapebyte.features.navigation.NavigationModule
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationModuleContract
-import de.stefan.lang.shapebyte.features.workout.WorkoutPresentationModule
 import de.stefan.lang.shapebyte.features.workout.contract.WorkoutPresentationContract
-import de.stefan.lang.shapebyte.features.workout.data.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutDataContract
-import de.stefan.lang.shapebyte.initializing.SharedInitializationUseCase
-import de.stefan.lang.utils.logging.LoggingModule
+import de.stefan.lang.shapebyte.shared.SharedModuleContract
+import de.stefan.lang.shapebyte.shared.generated.Dependencies
+import de.stefan.lang.shapebyte.shared.generated.Module
+import de.stefan.lang.shapebyte.shared.initializing.InitializationUseCase
+import de.stefan.lang.shapebyte.shared.initializing.SharedInitializationUseCase
 import de.stefan.lang.utils.logging.contract.LoggingContract
-import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-
-interface AppInfoProviding {
-    fun appInfo(): AppInfo
-}
+import org.koin.core.module.Module as KoinModule
 
 object SharedModule :
-    KoinComponent,
-    LoggingContract by LoggingModule,
-    NavigationModuleContract by NavigationModule,
-    FeatureTogglesDomainContract by FeatureTogglesDomainModule,
-    HomePresentationContract by HomePresentationModule,
-    WorkoutDataContract by WorkoutDataModule,
-    WorkoutPresentationContract by WorkoutPresentationModule,
-    AppInfoProviding,
-    SharedInitializationProviding {
+    Module(),
+    SharedModuleContract,
+    AppInfoProvider,
+    LoggingContract by Dependencies,
+    HomePresentationContract by Dependencies,
+    WorkoutDataContract by Dependencies,
+    WorkoutPresentationContract by Dependencies,
+    NavigationModuleContract by Dependencies,
+    FoundationPresentationContract by Dependencies {
 
-    val modules =
-        CoroutinesModule.productionModules +
-            LoggingModule.productionModules +
-            CoreUtilsModule.productionModules +
-            FoundationCoreModule.productionModules +
-            FoundationPresentationModule.productionModules +
-            NavigationModule.productionModules +
-            FeatureTogglesDomainModule.productionModules +
-            HomePresentationModule.productionModules +
-            WorkoutDataModule.productionModules +
-            WorkoutPresentationModule.productionModules
+    val productionModules: List<KoinModule>
+        get() = Dependencies.modules.map { it.productionDiModule }
 
-    val testModules =
-        CoroutinesModule.testModules +
-            CoreUtilsModule.testModules +
-            FoundationCoreModule.testModules +
-            FoundationPresentationModule.testModules +
-            NavigationModule.testModules +
-            FeatureTogglesDomainModule.testModules +
-            HomePresentationModule.testModules +
-            WorkoutDataModule.testModules +
-            WorkoutPresentationModule.testModules
+    val testModules: List<KoinModule>
+        get() = Dependencies.modules.map { it.testDiModule }
 
-    private val sharedInitializationUseCase: SharedInitializationUseCase by lazy { SharedInitializationUseCase() }
+    private val sharedInitializationUseCase: InitializationUseCase by lazy {
+        SharedInitializationUseCase(
+            coroutineContextProvider = { Dependencies.coroutineContextProvider() },
+            coroutineScopeProvider = { Dependencies.coroutineScopeProvider() },
+            deviceInfoProvider = { Dependencies.deviceInfoProvider() },
+            appInfoProvider = { this },
+        )
+    }
 
     private lateinit var appInfo: AppInfo
 
@@ -89,11 +70,7 @@ object SharedModule :
         return get()
     }
 
-    fun dimensionProvider(): DimensionProvider {
-        return get()
-    }
-
-    override fun sharedInitializationUseCase(): SharedInitializationUseCase {
+    override fun sharedInitializationUseCase(): InitializationUseCase {
         return sharedInitializationUseCase
     }
 
@@ -104,6 +81,9 @@ object SharedModule :
     fun start(platformDependencies: PlatformDependencyProviding) {
         setup(platformDependencies)
 
-        sharedInitializationUseCase().invoke(platformDependencies, modules = modules)
+        sharedInitializationUseCase().invoke(
+            platformDependencies,
+            modules = productionModules,
+        )
     }
 }

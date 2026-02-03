@@ -5,9 +5,9 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.ExerciseExecutionInfo
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.IntervalExerciseInfo
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilding
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecutionImpl
 import de.stefan.lang.utils.logging.contract.Logger
 
 class ItemsExecutionBuilder(
@@ -18,7 +18,7 @@ class ItemsExecutionBuilder(
         private val DefaultLowIntenseExercise = Exercise("Low", "low-intense-exercise.png")
     }
 
-    override fun buildWith(workoutType: WorkoutType): ItemsExecuting {
+    override fun buildWith(workoutType: WorkoutType): ItemsExecution {
         when (workoutType) {
             is WorkoutType.Timed.Interval -> {
                 return buildWithTimedInterval(workoutType)
@@ -26,7 +26,7 @@ class ItemsExecutionBuilder(
         }
     }
 
-    private fun buildWithTimedInterval(workoutType: WorkoutType.Timed.Interval): ItemsExecuting {
+    private fun buildWithTimedInterval(workoutType: WorkoutType.Timed.Interval): ItemsExecution {
         val executions = List(workoutType.rounds * 2) {
             val currRound = it + 1
 
@@ -53,13 +53,13 @@ class ItemsExecutionBuilder(
                 }
             }
 
-            TimedItemExecution(
+            TimedItemExecutionImpl(
                 item,
                 sets = sets,
                 logger = logger,
             )
         }
 
-        return ItemsExecution(executions, logger)
+        return ItemsExecutionImpl(executions, logger)
     }
 }

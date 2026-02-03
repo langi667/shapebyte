@@ -1,8 +1,15 @@
+import de.stefan.lang.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
 }
+
+configureDi(
+    moduleClassName = "de.stefan.lang.coreutils.CoreUtilsModule",
+    transitive = true,
+)
 
 kotlin {
     explicitApi()
@@ -21,6 +28,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.core.utils.contract)
             implementation(projects.core.logging)
             implementation(libs.koin.core)
             implementation(projects.core.di)

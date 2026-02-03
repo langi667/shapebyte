@@ -10,12 +10,12 @@ open class ModuleBindings(
     testEnvironmentOnly: ModuleDeclaration = {},
 ) : FeatureGraph {
 
-    override val productionModules: Module = module {
+    override val productionDiModule: Module = module {
         allEnvironments()
         productionEnvironmentOnly()
     }
 
-    override val testModules: Module = module {
+    override val testDiModule: Module = module {
         allEnvironments()
         testEnvironmentOnly()
     }

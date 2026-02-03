@@ -8,7 +8,7 @@ import org.koin.test.KoinTest
 
 open class BaseTest : CoreTest(), KoinTest {
     override val testModules: List<Module> = super.testModules + listOf(
-        FoundationCoreModule.testModules,
-        LoggingModule.testModules,
+        FoundationCoreModule.testDiModule,
+        LoggingModule.testDiModule,
     )
 }

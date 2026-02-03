@@ -6,20 +6,20 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.domain.contract.WorkoutDomainContract
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecuting
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilding
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecuting
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.generated.Dependencies
 import de.stefan.lang.shapebyte.features.workout.domain.generated.Module
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecution
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecutionImpl
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.history.FetchRecentWorkoutHistoryUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutForIdUseCaseImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutsUseCaseImpl
@@ -48,12 +48,20 @@ object WorkoutDomainModule :
                 )
             }
 
-            factory<TimedItemExecuting> { (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
-                ImplementationModule.createTimedItemExecution(item, sets)
+            factory<TimedItemExecution> { (item: Item, sets: List<ItemSet.Timed.Seconds>) ->
+                TimedItemExecutionImpl(
+                    item = item,
+                    sets = sets,
+                    logger = Dependencies.logger(),
+                )
             }
 
-            factory<RepetitiveItemExecuting> { (item: Item, sets: List<ItemSet.Repetition>) ->
-                ImplementationModule.createRepetitiveItemExecution(item, sets)
+            factory<RepetitiveItemExecution> { (item: Item, sets: List<ItemSet.Repetition>) ->
+                RepetitiveItemExecutionImpl(
+                    item = item,
+                    sets = sets,
+                    logger = Dependencies.logger(),
+                )
             }
 
             single<QuickWorkoutsUseCase> { (featureTogglesUseCase: LoadFeatureToggleUseCase) ->
@@ -76,8 +84,8 @@ object WorkoutDomainModule :
                 )
             }
 
-            factory<ItemsExecuting> { (items: List<ItemExecuting<*, *>>) ->
-                ItemsExecution(items, Dependencies.logger())
+            factory<ItemsExecution> { (items: List<ItemExecuting<*, *>>) ->
+                ItemsExecutionImpl(items, Dependencies.logger())
             }
 
             single<ItemsExecutionBuilding> {
@@ -103,7 +111,7 @@ object WorkoutDomainModule :
     override fun createTimedItemExecution(
         item: Item,
         sets: List<ItemSet.Timed.Seconds>,
-    ): TimedItemExecuting =
+    ): TimedItemExecution =
         get(
             parameters = {
                 parametersOf(item, sets)
@@ -113,7 +121,7 @@ object WorkoutDomainModule :
     override fun createRepetitiveItemExecution(
         item: Item,
         sets: List<ItemSet.Repetition>,
-    ): RepetitiveItemExecution = get(
+    ): RepetitiveItemExecutionImpl = get(
         parameters = {
             parametersOf(item, sets)
         },
@@ -125,7 +133,7 @@ object WorkoutDomainModule :
         loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     ): QuickWorkoutsUseCase = get(parameters = { parametersOf(loadFeatureToggleUseCase) })
 
-    override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecuting = get(
+    override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
         parameters = {
             parametersOf(items)
         },

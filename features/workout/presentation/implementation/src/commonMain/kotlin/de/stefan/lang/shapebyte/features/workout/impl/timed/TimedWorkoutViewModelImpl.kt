@@ -21,7 +21,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.IntervalExerciseInfo
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilding
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
@@ -60,7 +60,7 @@ class TimedWorkoutViewModelImpl(
 
     private var remainingTotal: Duration = Duration.Companion.ZERO
     private var elapsedTotal: Duration = Duration.Companion.ZERO
-    private var itemsExecution: ItemsExecuting? = null
+    private var itemsExecution: ItemsExecution? = null
     private var loadWorkoutJob: Job? = null
 
     override fun intent(intent: TimedWorkoutUIIntent) {

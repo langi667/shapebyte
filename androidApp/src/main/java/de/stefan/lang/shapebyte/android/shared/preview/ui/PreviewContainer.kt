@@ -42,6 +42,6 @@ private fun StartKoinIfNeeded() {
 
     startKoin {
         androidContext(context)
-        modules(SharedModule.testModules)
+        modules(SharedModule.testDiModule)
     }
 }

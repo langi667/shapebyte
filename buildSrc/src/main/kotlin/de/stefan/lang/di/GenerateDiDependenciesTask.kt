@@ -20,6 +20,13 @@ abstract class GenerateDiDependenciesTask : DefaultTask() {
     @get:Input
     abstract val moduleDependencies: ListProperty<ModuleDependency>
 
+    @get:Input
+    abstract val rootAggregator: Property<Boolean>
+
+    init {
+        rootAggregator.convention(false)
+    }
+
     @get:OutputDirectory
     abstract val outputDir: DirectoryProperty
 
@@ -37,12 +44,13 @@ abstract class GenerateDiDependenciesTask : DefaultTask() {
     private fun renderFile(modules: List<ModuleDependency>): String {
         val pkg = packageName.get()
         val klass = className.get()
+        val skipDelegations = false
         val moduleImports = modules.map { it.moduleClass }.toSet().sorted()
         val contractImports = modules.map { it.contractClass }.toSet().sorted()
         val modulesList = modules.joinToString(separator = ",\n") {
             "        ${simpleName(it.moduleClass)}"
         }
-        val delegations = modules.map {
+        val delegations = if (skipDelegations) emptyList() else modules.map {
             "${simpleName(it.contractClass)} by ${simpleName(it.moduleClass)}"
         }
         val implementsClause = if (delegations.isEmpty()) {

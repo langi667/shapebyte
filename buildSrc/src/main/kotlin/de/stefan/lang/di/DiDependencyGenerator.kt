@@ -17,6 +17,7 @@ fun Project.configureDiDependencies(
     className: String = "Dependencies",
     excludes: List<String> = emptyList(),
     transitive: Boolean = false,
+    isRootAggregator: Boolean = false,
 ) {
     val generatedDir = layout.buildDirectory.dir("generated/di/$className")
     val taskName = "generate${className}".replace(Regex("[^A-Za-z0-9]"), "")
@@ -25,6 +26,7 @@ fun Project.configureDiDependencies(
             this.packageName.set(packageName)
             this.className.set(className)
             outputDir.set(generatedDir)
+            this.rootAggregator.set(isRootAggregator)
             notCompatibleWithConfigurationCache("Generates DI dependency sources by inspecting project configurations")
         }
 
@@ -49,17 +51,21 @@ fun Project.configureDi(
     excludes: List<String> = emptyList(),
     transitive: Boolean = false,
     contractClassName: String? = null,
+    isRootAggregator: Boolean = false,
 ) {
     val resolvedContractClass = contractClassName ?: inferContractClass(moduleClassName)
+    val aggregatorFlag = isRootAggregator
     diModule {
         moduleClass.set(moduleClassName)
         contractClass.set(resolvedContractClass)
+        this.isRootAggregator.set(aggregatorFlag)
     }
     configureDiDependencies(
         packageName = packageName,
         className = className,
         excludes = excludes,
         transitive = transitive,
+        isRootAggregator = aggregatorFlag,
     )
 }
 

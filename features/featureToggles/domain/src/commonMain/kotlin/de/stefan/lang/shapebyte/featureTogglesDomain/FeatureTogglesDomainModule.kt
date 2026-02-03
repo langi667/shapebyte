@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.featureTogglesDomain
 
-import de.stefan.lang.core.di.ModuleBindings
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.FeatureToggleUseCaseImpl
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.LoadFeatureToggleUseCaseImpl
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.FeatureToggleUseCase

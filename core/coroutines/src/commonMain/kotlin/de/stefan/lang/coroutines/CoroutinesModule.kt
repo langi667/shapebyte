@@ -7,7 +7,6 @@ import de.stefan.lang.coroutines.implementation.CoroutineContextProviderImpl
 import de.stefan.lang.coroutines.implementation.CoroutineScopeProviderImpl
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
-import de.stefan.lang.shapebyte.core.coroutines.generated.Dependencies
 import de.stefan.lang.shapebyte.core.coroutines.generated.Module
 import org.koin.core.component.get
 

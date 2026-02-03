@@ -1,0 +1,82 @@
+plugins {
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.detekt)
+}
+
+kotlin {
+    explicitApi()
+
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
+            }
+        }
+    }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(projects.core.coroutines.contract)
+            implementation(projects.foundation.core.contract)
+            implementation(projects.core.di)
+            implementation(projects.shared.contract)
+
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.koin.core)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(projects.core.di)
+
+        }
+        androidMain.dependencies {
+            implementation(libs.koin.android)
+        }
+        androidInstrumentedTest.dependencies {
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.fake)
+
+            implementation(libs.mockk.android)
+            implementation(libs.kotlin.test)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation (libs.koin.test)
+            implementation (libs.junit.jupiter)
+            implementation(projects.core.test)
+            implementation(projects.core.coroutines)
+            implementation(projects.core.utils.contract)
+
+            implementation(libs.androidx.test.ext.junit)
+            implementation(libs.androidx.test.espresso.core)
+        }
+    }
+}
+
+android {
+    namespace = "de.stefan.lang.shapebyte.shared.contract"
+    compileSdk = Project.Android.BuildSettings.targetSdk
+    defaultConfig {
+        minSdk = Project.Android.BuildSettings.minSdk
+    }
+    compileOptions {
+        sourceCompatibility = Project.Android.BuildSettings.javaVersion
+        targetCompatibility = Project.Android.BuildSettings.javaVersion
+    }
+
+    packaging {
+        resources {
+            excludes += Project.Android.BuildSettings.excludedResourcesList
+        }
+    }
+
+    sourceSets {
+        defaultConfig {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+    }
+}

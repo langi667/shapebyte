@@ -1,4 +1,5 @@
 import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
+import de.stefan.lang.di.configureDi
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -9,6 +10,11 @@ plugins {
     id("co.touchlab.skie") version "0.10.1"
     kotlin("plugin.serialization") version "2.0.0"
 }
+
+configureDi(
+    moduleClassName = "de.stefan.lang.shapebyte.SharedModule",
+    transitive = true,
+)
 
 tasks.register("allTestDebugUnitTest") {
     dependsOn(subprojects.mapNotNull { it.tasks.findByName("testDebugUnitTest") })
@@ -42,25 +48,13 @@ kotlin {
             implementation(libs.androidx.junit.ktx)
         }
 
-        androidInstrumentedTest.dependencies {
-            implementation(libs.mockk.android)
-            implementation(libs.kotlin.test)
-            implementation(libs.turbine)
-            implementation(libs.kotlinx.coroutines.test)
-            implementation (libs.koin.test)
-            implementation (libs.junit.jupiter)
-            implementation(projects.core.test)
-
-            implementation(libs.androidx.test.ext.junit)
-            implementation(libs.androidx.test.espresso.core)
-        }
-
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
+            api(projects.shared.contract)
             api(projects.core.utils)
             api(projects.core.logging)
 
@@ -79,6 +73,8 @@ kotlin {
             api(projects.features.navigation)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
+            implementation(projects.shared.implementation)
+
         }
 
         commonTest.dependencies {
@@ -94,6 +90,7 @@ kotlin {
         binaries.withType<Framework> {
             isStatic = false
             export(projects.core.utils)
+            export(projects.shared.contract)
             export(projects.foundation.core)
             export(projects.foundation.presentation)
             export(projects.designsystem)

@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 class FeatureToggleRepositoryTest : CoreTest(), KoinTest {
 
     override val testModules: List<Module> = listOf(
-        LoggingModule.testModules,
+        LoggingModule.testDiModule,
     )
 
     private val datasource = FeatureToggleDatasourceFake()

@@ -14,7 +14,7 @@ object FoundationPresentationModule :
                     deviceSizeCategoryProvider = Dependencies.deviceSizeCategoryProvider(),
                 )
             }
-        }
+        },
     ),
     FoundationPresentationContract {
 

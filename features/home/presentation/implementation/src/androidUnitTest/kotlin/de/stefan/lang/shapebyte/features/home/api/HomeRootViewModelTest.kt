@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 class HomeRootViewModelTest : BaseTest(), KoinTest {
 
     override val testModules: List<Module>
-        get() = FoundationCoreModule.testModules + super.testModules
+        get() = FoundationCoreModule.testDiModule + super.testModules
 
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase = mockk(relaxed = true)
 

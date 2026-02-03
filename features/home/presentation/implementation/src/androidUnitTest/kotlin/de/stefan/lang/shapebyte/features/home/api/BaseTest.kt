@@ -14,11 +14,11 @@ import org.koin.test.KoinTest
 open class BaseTest: CoreTest(), KoinTest {
     override val testModules: List<Module>
         get() = super.testModules +
-                LoggingModule.testModules +
-                NavigationModule.testModules +
-                FeatureTogglesDomainModule.testModules +
-                WorkoutDataModule.testModules +
-                WorkoutDomainModule.testModules
+                LoggingModule.testDiModule +
+                NavigationModule.testDiModule +
+                FeatureTogglesDomainModule.testDiModule +
+                WorkoutDataModule.testDiModule +
+                WorkoutDomainModule.testDiModule
 
 
 

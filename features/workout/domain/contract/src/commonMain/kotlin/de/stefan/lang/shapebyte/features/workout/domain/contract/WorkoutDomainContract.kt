@@ -5,10 +5,10 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsRepository
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecuting
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilding
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecuting
-import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
@@ -18,11 +18,11 @@ interface WorkoutDomainContract {
     fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase
     fun fetchRecentWorkoutHistoryUseCase(loadFeatureToggleUseCase: LoadFeatureToggleUseCase): FetchRecentWorkoutHistoryUseCase
     fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
-    fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecuting
+    fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution
     fun createRepetitiveItemExecution(
         item: Item,
         sets: List<ItemSet.Repetition>,
-    ): RepetitiveItemExecuting
+    ): RepetitiveItemExecution
 
     fun quickWorkoutsUseCase(loadFeatureToggleUseCase: LoadFeatureToggleUseCase): QuickWorkoutsUseCase
     fun quickWorkoutsUseCase(): QuickWorkoutsUseCase
@@ -32,6 +32,6 @@ interface WorkoutDomainContract {
         loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     ): QuickWorkoutForIdUseCase
 
-    fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecuting
+    fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution
     fun itemsExecutionBuilder(): ItemsExecutionBuilding
 }

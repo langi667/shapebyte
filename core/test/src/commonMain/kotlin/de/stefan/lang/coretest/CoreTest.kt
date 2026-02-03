@@ -23,7 +23,7 @@ abstract class CoreTest {
     }
 
     private val requiredModules: List<Module> = listOf(
-        CoroutinesModule.testModules,
+        CoroutinesModule.testDiModule,
     )
 
     protected open val autostartKoin: Boolean = true

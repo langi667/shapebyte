@@ -6,9 +6,9 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecution
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecutionData
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
 import de.stefan.lang.utils.logging.LoggingModule
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -330,7 +330,7 @@ internal class RepetitiveItemExecutionTest : BaseTest() {
     private fun createSUT(
         item: Item,
         numberOfSets: Int,
-    ): RepetitiveItemExecution {
+    ): RepetitiveItemExecutionImpl {
         val sets = List(numberOfSets) { ItemSet.Repetition() }
         return createSUT(item, sets)
     }
@@ -338,5 +338,5 @@ internal class RepetitiveItemExecutionTest : BaseTest() {
     private fun createSUT(
         item: Item,
         sets: List<ItemSet.Repetition>,
-    ) = ImplementationModule.createRepetitiveItemExecution(item, sets)
+    ) = RepetitiveItemExecutionImpl(item, sets, LoggingModule.logger())
 }

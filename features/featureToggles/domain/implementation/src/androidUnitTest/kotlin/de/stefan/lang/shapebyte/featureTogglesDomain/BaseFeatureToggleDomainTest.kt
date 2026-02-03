@@ -8,6 +8,6 @@ import org.koin.test.KoinTest
 open class BaseFeatureToggleDomainTest : CoreTest(), KoinTest {
     override val testModules: List<Module>
         get() = super.testModules + listOf(
-            LoggingModule.testModules,
+            LoggingModule.testDiModule,
         )
 }
