@@ -10,9 +10,9 @@ import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.os.OperatingSystemInfoProviding
 import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
-import de.stefan.lang.foundation.core.fake.assets.FakeFileAssetLoader
-import de.stefan.lang.foundation.core.fake.audio.FakeAudioPlayer
-import de.stefan.lang.foundation.core.fake.deviceinfo.FakeDeviceInfo
+import de.stefan.lang.foundation.core.fake.assets.FileAssetLoaderFake
+import de.stefan.lang.foundation.core.fake.audio.AudioPlayerFake
+import de.stefan.lang.foundation.core.fake.deviceinfo.DeviceInfoFake
 import de.stefan.lang.foundation.core.implementation.assets.FileAssetLoader
 import de.stefan.lang.foundation.core.implementation.audio.AudioPlayer
 import de.stefan.lang.foundation.core.implementation.deviceinfo.DeviceInfo
@@ -52,9 +52,9 @@ object FoundationCoreModule :
             }
         },
         testBindings = {
-            single<FileAssetLoading> { FakeFileAssetLoader() }
-            factory<AudioPlaying> { FakeAudioPlayer() }
-            single<DeviceInfoProviding> { FakeDeviceInfo() }
+            single<FileAssetLoading> { FileAssetLoaderFake() }
+            factory<AudioPlaying> { AudioPlayerFake() }
+            single<DeviceInfoProviding> { DeviceInfoFake() }
         },
         dependencies = Dependencies.modules,
     ),

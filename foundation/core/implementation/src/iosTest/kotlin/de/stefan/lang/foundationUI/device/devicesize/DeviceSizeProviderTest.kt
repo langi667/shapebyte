@@ -3,7 +3,7 @@ package de.stefan.lang.foundationUI.device.devicesize
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.implementation.devicesize.iPhoneSizeBounds
-import de.stefan.lang.foundation.core.fake.devicesize.FakeScreenSizeProvider
+import de.stefan.lang.foundation.core.fake.devicesize.ScreenSizeProviderFake
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -124,5 +124,5 @@ class DeviceSizeProviderTest {
     }
 
     private fun createSUT(size: Size): DeviceSizeCategoryProvider =
-        DeviceSizeCategoryProvider(FakeScreenSizeProvider(size))
+        DeviceSizeCategoryProvider(ScreenSizeProviderFake(size))
 }

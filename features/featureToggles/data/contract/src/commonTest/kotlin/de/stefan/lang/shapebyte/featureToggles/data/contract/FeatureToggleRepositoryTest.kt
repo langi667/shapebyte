@@ -14,7 +14,7 @@ class FeatureToggleRepositoryTest : CoreTest(), KoinTest {
         LoggingModule.testModules,
     )
 
-    private val datasource = FakeFeatureToggleDatasource()
+    private val datasource = FeatureToggleDatasourceFake()
 
     private val sut by lazy {
         FeatureToggleRepository(
@@ -47,7 +47,7 @@ class FeatureToggleRepositoryTest : CoreTest(), KoinTest {
         test { block() }
     }
 
-    private class FakeFeatureToggleDatasource : FeatureToggleDatasource {
+    private class FeatureToggleDatasourceFake : FeatureToggleDatasource {
         private val toggles = mutableListOf<FeatureToggle>()
 
         override suspend fun fetchFeatureToggle(identifier: String): LoadState.Result<FeatureToggle> {

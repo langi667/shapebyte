@@ -5,7 +5,7 @@ import shared
 @MainActor
 struct Device {
     @Env private var environment
-    private let fakeDeviceInfo = FakeDeviceInfo()
+    private let fakeDeviceInfo = DeviceInfoFake()
 
     var wrappedValue: DeviceInfoProviding {
         if environment.isInPreview || environment.isRunningUnitTests {

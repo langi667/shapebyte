@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.featureToggles.data.implementation
 
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
-import de.stefan.lang.foundation.core.fake.assets.FakeFileAssetLoader
+import de.stefan.lang.foundation.core.fake.assets.FileAssetLoaderFake
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
 import de.stefan.lang.utils.logging.LoggingModule
 import kotlin.test.Test
@@ -52,7 +52,7 @@ class DefaultFeatureToggleDatasourceImplTest : BaseFeatureToggleDataTest() {
     }
 
     private fun createSUT(defaultMockContent: String): DefaultFeatureToggleDatasourceImpl {
-        val loader = FakeFileAssetLoader()
+        val loader = FileAssetLoaderFake()
         loader.addFile(
             DefaultFeatureToggleDatasourceImpl.defaultAssetFile,
             defaultMockContent,

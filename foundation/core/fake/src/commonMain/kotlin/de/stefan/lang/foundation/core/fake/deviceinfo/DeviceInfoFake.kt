@@ -6,7 +6,7 @@ import de.stefan.lang.foundation.core.contract.os.OperatingSystem
 import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import kotlinx.coroutines.flow.Flow
 
-expect class FakeDeviceInfo() : DeviceInfoProviding {
+expect class DeviceInfoFake() : DeviceInfoProviding {
     override fun readDeviceInfos(): Flow<DeviceInfoProviding>
     override val screenSize: Size
     override val operatingSystem: OperatingSystem

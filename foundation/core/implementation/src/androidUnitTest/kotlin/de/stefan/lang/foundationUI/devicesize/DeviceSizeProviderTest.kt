@@ -1,7 +1,7 @@
 package de.stefan.lang.foundationUI.devicesize
 
 import de.stefan.lang.foundation.core.contract.devicesize.Size
-import de.stefan.lang.foundation.core.fake.devicesize.FakeScreenSizeProvider
+import de.stefan.lang.foundation.core.fake.devicesize.ScreenSizeProviderFake
 import de.stefan.lang.foundation.core.implementation.devicesize.AndroidSizeBounds
 import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
 
@@ -125,7 +125,7 @@ class DeviceSizeProviderTest {
     }
 
     private fun createSUT(size: Size): DeviceSizeCategoryProvider {
-        val screenSizeProvider = FakeScreenSizeProvider(size)
+        val screenSizeProvider = ScreenSizeProviderFake(size)
         return DeviceSizeCategoryProvider(screenSizeProvider)
     }
 }
