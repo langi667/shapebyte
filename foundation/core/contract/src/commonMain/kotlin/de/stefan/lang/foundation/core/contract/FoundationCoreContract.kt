@@ -3,6 +3,7 @@ package de.stefan.lang.foundation.core.contract
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProviding
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 
 interface FoundationCoreContract {
@@ -10,4 +11,5 @@ interface FoundationCoreContract {
     fun fileAssetLoader(): FileAssetLoading
     fun audioPlayer(): AudioPlaying
     fun deviceInfoProvider(): DeviceInfoProviding
+    fun deviceSizeCategoryProvider(): DeviceSizeCategoryProviding
 }

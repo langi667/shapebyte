@@ -31,6 +31,7 @@ kotlin {
             implementation(projects.features.workout.presentation.implementation)
             implementation(projects.features.workout.data.contract)
             implementation(projects.features.workout.domain)
+            implementation(projects.foundation.core)
 
             implementation(projects.core.di)
             implementation(projects.core.logging)

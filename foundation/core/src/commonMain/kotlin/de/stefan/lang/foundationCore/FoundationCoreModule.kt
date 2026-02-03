@@ -19,8 +19,7 @@ import de.stefan.lang.foundation.core.implementation.deviceinfo.DeviceInfo
 import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
-import de.stefan.lang.shapebyte.foundation.core.generated.GeneratedDependencies
-import de.stefan.lang.utils.logging.LoggingModule
+import de.stefan.lang.shapebyte.foundation.core.generated.Dependencies
 import org.koin.core.component.get
 
 object FoundationCoreModule :
@@ -32,14 +31,14 @@ object FoundationCoreModule :
             single<AppResourceProvider> { appResourceProvider }
 
             single<SafeAreaDetector> {
-                SafeAreaDetector(logger = LoggingModule.logger())
+                SafeAreaDetector(logger = Dependencies.logger())
             }
 
             single<DateTimeStringFormatter> { DateTimeStringFormatter() }
         },
         productionBindings = {
             single<FileAssetLoading> {
-                FileAssetLoader(logging = get(), appContextProvider = get())
+                FileAssetLoader(logging = Dependencies.logger(), appContextProvider = get())
             }
 
             single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
@@ -48,7 +47,7 @@ object FoundationCoreModule :
                 AudioPlayer(
                     appContextProvider = get(),
                     appResourceProvider = get(),
-                    logger = LoggingModule.logger(),
+                    logger = Dependencies.logger(),
                 )
             }
         },
@@ -57,7 +56,7 @@ object FoundationCoreModule :
             factory<AudioPlaying> { FakeAudioPlayer() }
             single<DeviceInfoProviding> { FakeDeviceInfo() }
         },
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     FoundationCoreContract {
     private lateinit var appResourceProvider: AppResourceProvider
@@ -70,4 +69,5 @@ object FoundationCoreModule :
     override fun fileAssetLoader(): FileAssetLoading = get()
     override fun audioPlayer(): AudioPlaying = get()
     override fun deviceInfoProvider(): DeviceInfoProviding = get()
+    override fun deviceSizeCategoryProvider(): DeviceSizeCategoryProviding = get()
 }

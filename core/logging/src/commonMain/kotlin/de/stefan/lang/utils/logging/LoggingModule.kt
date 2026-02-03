@@ -1,7 +1,7 @@
 package de.stefan.lang.utils.logging
 
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.shapebyte.core.logging.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.core.logging.generated.Dependencies
 import de.stefan.lang.utils.logging.contract.Logging
 import de.stefan.lang.utils.logging.contract.LoggingContract
 import de.stefan.lang.utils.logging.contract.RecordingLogging
@@ -21,7 +21,7 @@ public object LoggingModule :
         testBindings = {
             single<Logging> { SilentLogger() }
         },
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     LoggingContract {
     public override fun logger(): Logging = get()

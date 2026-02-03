@@ -1,14 +1,12 @@
 package de.stefan.lang.shapebyte.featureToggles.data
 
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureTogglesDataModuleContract
 import de.stefan.lang.shapebyte.featureToggles.data.implementation.DefaultFeatureToggleDatasourceImpl
 import de.stefan.lang.shapebyte.featureToggles.data.implementation.FeatureToggleDatasourceMock
-import de.stefan.lang.shapebyte.features.featureToggles.data.generated.GeneratedDependencies
-import de.stefan.lang.utils.logging.LoggingModule
+import de.stefan.lang.shapebyte.features.featureToggles.data.generated.Dependencies
 import org.koin.core.component.get
 
 object FeatureTogglesDataModule :
@@ -16,7 +14,7 @@ object FeatureTogglesDataModule :
         globalBindings = {
             single<FeatureToggleRepository> {
                 FeatureToggleRepository(
-                    logger = LoggingModule.logger(),
+                    logger = Dependencies.logger(),
                     dataSource = get(),
                 )
             }
@@ -24,16 +22,20 @@ object FeatureTogglesDataModule :
         productionBindings = {
             single<FeatureToggleDatasource> {
                 DefaultFeatureToggleDatasourceImpl(
-                    logger = LoggingModule.logger(),
-                    assetLoader = get(),
-                    coroutineContextProviding = CoroutinesModule.coroutineContextProvider(),
+                    logger = Dependencies.logger(),
+                    assetLoader = Dependencies.fileAssetLoader(),
+                    coroutineContextProviding = Dependencies.coroutineContextProvider(),
                 )
             }
         },
         testBindings = {
-            single<FeatureToggleDatasource> { FeatureToggleDatasourceMock(logger = get()) }
+            single<FeatureToggleDatasource> {
+                FeatureToggleDatasourceMock(
+                    logger = Dependencies.logger(),
+                )
+            }
         },
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     FeatureTogglesDataModuleContract {
     override fun featureToggleRepository(): FeatureToggleRepository = get()

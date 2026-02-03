@@ -4,17 +4,21 @@ import de.stefan.lang.core.di.ModuleBindings
 import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.presentation.contract.FoundationPresentationContract
 import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
-import de.stefan.lang.shapebyte.foundation.presentation.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.foundation.presentation.generated.Dependencies
 import org.koin.core.component.get
 
 object FoundationPresentationModule :
     RootModule(
         bindings = ModuleBindings(
             allEnvironments = {
-                single<DimensionProvider> { DimensionProvider(deviceSizeCategoryProvider = get()) }
+                single<DimensionProvider> {
+                    DimensionProvider(
+                        deviceSizeCategoryProvider = Dependencies.deviceSizeCategoryProvider(),
+                    )
+                }
             },
         ),
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     FoundationPresentationContract {
 

@@ -8,7 +8,7 @@ import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutView
 import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.impl.countdown.CountdownItemSetsViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.impl.timed.TimedWorkoutViewModelImpl
-import de.stefan.lang.shapebyte.features.workout.presentation.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.features.workout.presentation.generated.Dependencies
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
@@ -18,19 +18,19 @@ object WorkoutPresentationModule :
             factory<TimedWorkoutViewModel> { (navHandler: NavigationRequestHandling) ->
                 TimedWorkoutViewModelImpl(
                     navigationHandler = navHandler,
-                    quickWorkoutForIdUseCase = WorkoutDomainModule.quickWorkoutForIdUseCase(),
-                    itemsExecutionBuilder = get(),
-                    dateStringFormatter = get(),
-                    logger = get(),
-                    audioPlayer = get(),
-                    coroutineContextProvider = get(),
+                    quickWorkoutForIdUseCase = Dependencies.quickWorkoutForIdUseCase(),
+                    itemsExecutionBuilder = Dependencies.itemsExecutionBuilder(),
+                    dateStringFormatter = Dependencies.dateTimeStringFormatter(),
+                    logger = Dependencies.logger(),
+                    audioPlayer = Dependencies.audioPlayer(),
+                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
                 )
             }
 
             factory<CountdownItemSetsViewModel> {
                 CountdownItemSetsViewModelImpl(
-                    logger = get(),
-                    coroutineContextProvider = get(),
+                    logger = Dependencies.logger(),
+                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
                     timedHandlerFactory = {
                             item, sets ->
                         WorkoutDomainModule.createTimedItemExecution(item, sets)
@@ -39,7 +39,7 @@ object WorkoutPresentationModule :
             }
         },
 
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     WorkoutPresentationContract {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()

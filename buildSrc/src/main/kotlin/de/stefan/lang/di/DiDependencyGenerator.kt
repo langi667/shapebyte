@@ -1,5 +1,6 @@
 package de.stefan.lang.di
 
+import java.io.File
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
@@ -13,7 +14,7 @@ fun Project.diModule(configuration: DiModuleExtension.() -> Unit) {
 
 fun Project.configureDiDependencies(
     packageName: String = defaultGeneratedPackage(),
-    className: String = "GeneratedDependencies",
+    className: String = "Dependencies",
     excludes: List<String> = emptyList(),
     transitive: Boolean = false,
 ) {
@@ -28,9 +29,9 @@ fun Project.configureDiDependencies(
         }
 
     afterEvaluate {
-        val resolvedModuleClasses = resolveDiModuleClasses(excludes, transitive)
+        val resolvedModuleClasses = resolveDiModuleDependencies(excludes, transitive)
         taskProvider.configure {
-            moduleClasses.set(resolvedModuleClasses)
+            moduleDependencies.set(resolvedModuleClasses)
         }
     }
 
@@ -44,12 +45,15 @@ fun Project.configureDiDependencies(
 fun Project.configureDi(
     moduleClassName: String,
     packageName: String = defaultGeneratedPackage(),
-    className: String = "GeneratedDependencies",
+    className: String = "Dependencies",
     excludes: List<String> = emptyList(),
     transitive: Boolean = false,
+    contractClassName: String? = null,
 ) {
+    val resolvedContractClass = contractClassName ?: inferContractClass(moduleClassName)
     diModule {
         moduleClass.set(moduleClassName)
+        contractClass.set(resolvedContractClass)
     }
     configureDiDependencies(
         packageName = packageName,
@@ -87,19 +91,22 @@ private fun Project.nameFromPath(): String =
         .filter { it.isNotBlank() }
         .joinToString(".")
 
-private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: Boolean): List<String> {
+private fun Project.resolveDiModuleDependencies(
+    excludes: List<String>,
+    transitive: Boolean,
+): List<ModuleDependency> {
     val apiConfigurations = listOf("commonMainApi")
     val implementationConfigurations = listOf("commonMainImplementation")
     val configurationNames = apiConfigurations + implementationConfigurations
     val exclusions = excludes.toSet()
     fun ensureEvaluated(project: Project) {
-        if (project != this@resolveDiModuleClasses) {
-            this@resolveDiModuleClasses.evaluationDependsOn(project.path)
+        if (project != this@resolveDiModuleDependencies) {
+            this@resolveDiModuleDependencies.evaluationDependsOn(project.path)
         }
     }
 
     if (!transitive) {
-        val result = linkedSetOf<String>()
+        val result = linkedSetOf<ModuleDependency>()
         configurationNames.forEach { configName ->
             val configuration = configurations.findByName(configName) ?: return@forEach
             configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
@@ -107,8 +114,12 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
                 val depPath = depProject.path
                 if (!exclusions.contains(depPath)) {
                     ensureEvaluated(depProject)
-                    depProject.extensions.findByType(DiModuleExtension::class.java)?.moduleClass?.orNull?.let {
-                        result += it
+                    depProject.extensions.findByType(DiModuleExtension::class.java)?.let { extension ->
+                        val moduleClass = extension.moduleClass.orNull
+                        val contractClass = extension.contractClass.orNull
+                        if (moduleClass != null && contractClass != null) {
+                            result += ModuleDependency(moduleClass, contractClass)
+                        }
                     }
                 }
             }
@@ -116,22 +127,23 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
         return result.toList()
     }
 
-    val result = linkedSetOf<String>()
+    val result = linkedSetOf<ModuleDependency>()
     val visited = mutableSetOf<Project>()
 
     fun addModuleIfPresent(project: Project): Boolean {
         ensureEvaluated(project)
         val extension = project.extensions.findByType(DiModuleExtension::class.java)
         val moduleClass = extension?.moduleClass?.orNull
-        if (moduleClass != null) {
-            result += moduleClass
+        val contractClass = extension?.contractClass?.orNull
+        if (moduleClass != null && contractClass != null) {
+            result += ModuleDependency(moduleClass, contractClass)
             return true
         }
         return false
     }
 
     fun visitApi(project: Project) {
-        this@resolveDiModuleClasses.evaluationDependsOn(project.path)
+        this@resolveDiModuleDependencies.evaluationDependsOn(project.path)
         if (!visited.add(project)) return
         if (addModuleIfPresent(project)) return
         apiConfigurations.forEach { configName ->
@@ -169,4 +181,97 @@ private fun Project.resolveDiModuleClasses(excludes: List<String>, transitive: B
     }
 
     return result.toList()
+}
+
+private fun Project.inferContractClass(moduleClassName: String): String {
+    val explicitFile = findModuleSourceFile(moduleClassName)
+        ?: error("Unable to locate source file for $moduleClassName")
+    val source = explicitFile.readText()
+    val contractRef = parseContractReference(source)
+        ?: error("Unable to detect contract interface for $moduleClassName")
+    if (contractRef.contains('.')) {
+        return contractRef
+    }
+    val imports = extractImportMap(source)
+    return imports[contractRef]
+        ?: run {
+            val packageName = moduleClassName.substringBeforeLast('.')
+            "$packageName.$contractRef"
+        }
+}
+
+private fun Project.findModuleSourceFile(moduleClassName: String): File? {
+    val packageName = moduleClassName.substringBeforeLast('.')
+    val simpleName = moduleClassName.substringAfterLast('.')
+    val relativePath = packageName.replace('.', '/') + "/$simpleName.kt"
+    val candidateDirs = listOf(
+        "src/commonMain/kotlin",
+        "src/main/kotlin",
+        "src/androidMain/kotlin",
+        "src/jvmMain/kotlin",
+        "src/iosMain/kotlin",
+    )
+    candidateDirs.forEach { dir ->
+        val file = projectDir.resolve("$dir/$relativePath")
+        if (file.exists()) {
+            return file
+        }
+    }
+    return null
+}
+
+private fun parseContractReference(source: String): String? {
+    val marker = "RootModule("
+    val start = source.indexOf(marker)
+    if (start == -1) return null
+    var depth = 0
+    var closingIndex = -1
+    for (index in start until source.length) {
+        val ch = source[index]
+        if (ch == '(') {
+            depth++
+        } else if (ch == ')') {
+            depth--
+            if (depth == 0) {
+                closingIndex = index
+                break
+            }
+        }
+    }
+    if (closingIndex == -1) return null
+    val after = source.substring(closingIndex + 1)
+    val builder = StringBuilder()
+    var started = false
+    for (ch in after) {
+        if (!started) {
+            if (ch.isWhitespace() || ch == ',') {
+                continue
+            }
+            if (ch == '{') {
+                break
+            }
+            if (ch == '.' || ch.isJavaIdentifierPart()) {
+                builder.append(ch)
+                started = true
+            } else {
+                break
+            }
+        } else {
+            if (ch == '.' || ch.isJavaIdentifierPart()) {
+                builder.append(ch)
+            } else {
+                break
+            }
+        }
+    }
+    return builder.toString().takeIf { it.isNotEmpty() }
+}
+
+private fun extractImportMap(source: String): Map<String, String> {
+    val regex = Regex("import\\s+([A-Za-z0-9_.]+)")
+    return regex.findAll(source).associate { match ->
+        val fqcn = match.groupValues[1]
+        val simple = fqcn.substringAfterLast('.')
+        simple to fqcn
+    }
 }

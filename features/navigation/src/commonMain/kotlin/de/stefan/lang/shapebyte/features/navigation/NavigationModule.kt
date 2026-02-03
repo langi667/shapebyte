@@ -7,7 +7,7 @@ import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestBu
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestResolving
 import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.contract.impl.NavigationRequestResolver
-import de.stefan.lang.shapebyte.features.navigation.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.features.navigation.generated.Dependencies
 import org.koin.core.component.get
 object NavigationModule :
     RootModule(
@@ -17,7 +17,7 @@ object NavigationModule :
                 single<NavigationRequestResolving> { NavigationRequestResolver() }
             },
         ),
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     NavigationModuleContract {
     override fun navigationRequestBuilder(): NavigationRequestBuilding = get()

@@ -6,4 +6,5 @@ import javax.inject.Inject
 
 open class DiModuleExtension @Inject constructor(objects: ObjectFactory) {
     val moduleClass: Property<String> = objects.property(String::class.java)
+    val contractClass: Property<String> = objects.property(String::class.java)
 }

@@ -1,7 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.data
 
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutDataContract
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
@@ -14,7 +13,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutS
 import de.stefan.lang.shapebyte.features.workout.data.fixture.QuickWorkoutsDatasourceFixture
 import de.stefan.lang.shapebyte.features.workout.data.fixture.WorkoutHistoryDataSourceFixture
 import de.stefan.lang.shapebyte.features.workout.data.fixture.WorkoutScheduleDatasourceFixture
-import de.stefan.lang.shapebyte.features.workout.data.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.features.workout.data.generated.Dependencies
 import org.koin.core.component.get
 
 object WorkoutDataModule :
@@ -49,13 +48,13 @@ object WorkoutDataModule :
             single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceFixture }
             single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceFixture }
         },
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     WorkoutDataContract {
     override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         WorkoutHistoryEntry(
             entry = scheduleEntry,
-            dateStringFormatter = FoundationCoreModule.dateTimeStringFormatter(),
+            dateStringFormatter = Dependencies.dateTimeStringFormatter(),
         )
 
     override fun workoutHistoryRepository(): WorkoutHistoryRepository = get()

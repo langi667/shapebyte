@@ -8,7 +8,7 @@ import de.stefan.lang.coroutines.implementation.CoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.CoroutineScopeProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
-import de.stefan.lang.shapebyte.core.coroutines.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.core.coroutines.generated.Dependencies
 import org.koin.core.component.get
 
 public object CoroutinesModule :
@@ -21,7 +21,7 @@ public object CoroutinesModule :
             single<CoroutineScopeProviding> { TestCoroutineScopeProvider }
             single<CoroutineContextProviding> { TestCoroutineContextProvider }
         },
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     CoreCoroutinesContract {
     public override fun coroutineScopeProvider(): CoroutineScopeProviding = get()

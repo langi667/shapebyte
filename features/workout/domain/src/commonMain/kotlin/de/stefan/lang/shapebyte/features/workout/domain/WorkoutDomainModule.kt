@@ -2,7 +2,6 @@ package de.stefan.lang.shapebyte.features.workout.domain
 
 import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
-import de.stefan.lang.shapebyte.features.workout.data.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsRepository
@@ -16,7 +15,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.shapebyte.features.workout.domain.generated.GeneratedDependencies
+import de.stefan.lang.shapebyte.features.workout.domain.generated.Dependencies
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder
@@ -33,19 +32,19 @@ object WorkoutDomainModule :
         globalBindings = {
             single<FetchRecentWorkoutHistoryUseCase> { (loadFeatureToggleUseCase: LoadFeatureToggleUseCase) ->
                 FetchRecentWorkoutHistoryUseCaseImpl(
-                    repository = WorkoutDataModule.workoutHistoryRepository(),
-                    logger = get(),
-                    coroutineContextProviding = get(),
-                    coroutineScopeProviding = get(),
+                    repository = Dependencies.workoutHistoryRepository(),
+                    logger = Dependencies.logger(),
+                    coroutineContextProviding = Dependencies.coroutineContextProvider(),
+                    coroutineScopeProviding = Dependencies.coroutineScopeProvider(),
                     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
                 )
             }
             single<CurrentWorkoutScheduleEntryUseCase> {
                 CurrentWorkoutScheduleEntryUseCaseImpl(
-                    repository = WorkoutDataModule.workoutScheduleRepository(),
-                    logger = get(),
-                    coroutineContextProviding = get(),
-                    coroutineScopeProviding = get(),
+                    repository = Dependencies.workoutScheduleRepository(),
+                    logger = Dependencies.logger(),
+                    coroutineContextProviding = Dependencies.coroutineContextProvider(),
+                    coroutineScopeProviding = Dependencies.coroutineScopeProvider(),
                 )
             }
 
@@ -59,10 +58,10 @@ object WorkoutDomainModule :
 
             single<QuickWorkoutsUseCase> { (featureTogglesUseCase: LoadFeatureToggleUseCase) ->
                 QuickWorkoutsUseCaseImpl(
-                    repository = WorkoutDataModule.quickWorkoutsRepository(),
-                    logger = get(),
-                    scopeProvider = get(),
-                    dispatcherProvider = get(),
+                    repository = Dependencies.quickWorkoutsRepository(),
+                    logger = Dependencies.logger(),
+                    scopeProvider = Dependencies.coroutineScopeProvider(),
+                    dispatcherProvider = Dependencies.coroutineContextProvider(),
                     loadFeatureToggleUseCase = featureTogglesUseCase,
                 )
             }
@@ -70,20 +69,20 @@ object WorkoutDomainModule :
             factory<QuickWorkoutForIdUseCase> { (repository: QuickWorkoutsRepository, loadFeatureToggleUseCase: LoadFeatureToggleUseCase) ->
                 QuickWorkoutForIdUseCaseImpl(
                     repository = repository,
-                    logger = get(),
-                    coroutineContextProvider = get(),
-                    coroutineScopeProvider = get(),
+                    logger = Dependencies.logger(),
+                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
+                    coroutineScopeProvider = Dependencies.coroutineScopeProvider(),
                     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
                 )
             }
 
             factory<ItemsExecuting> { (items: List<ItemExecuting<*, *>>) ->
-                ItemsExecution(items, get())
+                ItemsExecution(items, Dependencies.logger())
             }
 
             single<ItemsExecutionBuilding> {
                 ItemsExecutionBuilder(
-                    logger = get(),
+                    logger = Dependencies.logger(),
                 )
             }
         },
@@ -91,15 +90,15 @@ object WorkoutDomainModule :
         },
         testBindings = {
         },
-        dependencies = GeneratedDependencies.modules,
+        dependencies = Dependencies.modules,
     ),
     WorkoutDomainContract {
     override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase =
         fetchRecentWorkoutHistoryUseCase(get())
 
     override fun fetchRecentWorkoutHistoryUseCase(
-        featureTogglesUseCase: LoadFeatureToggleUseCase,
-    ): FetchRecentWorkoutHistoryUseCase = get { parametersOf(featureTogglesUseCase) }
+        loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
+    ): FetchRecentWorkoutHistoryUseCase = get { parametersOf(loadFeatureToggleUseCase) }
 
     override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
     override fun createTimedItemExecution(
@@ -143,7 +142,7 @@ object WorkoutDomainModule :
     )
 
     override fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = quickWorkoutForIdUseCase(
-        WorkoutDataModule.quickWorkoutsRepository(),
+        Dependencies.quickWorkoutsRepository(),
         get(),
     )
 
