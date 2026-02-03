@@ -1,17 +1,12 @@
-import de.stefan.lang.di.configureDi
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
 }
 
-configureDi(
-    moduleClassName = "de.stefan.lang.shapebyte.features.workout.WorkoutPresentationModule",
-    transitive = true,
-)
-
 kotlin {
+    explicitApi()
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -26,30 +21,32 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.features.workout.presentation.contract)
-
-            implementation(projects.features.workout.presentation.implementation)
-            implementation(projects.features.workout.data.contract)
-            implementation(projects.features.workout.domain)
-
-            implementation(projects.core.di)
-            implementation(projects.core.logging)
-            implementation(projects.core.coroutines)
             implementation(projects.foundation.presentation.contract)
+            implementation(projects.core.logging.contract)
+            implementation(projects.core.coroutines.contract)
+            implementation(projects.core.di)
 
-            implementation(projects.features.featureToggles.data.contract)
-            implementation(projects.features.featureToggles.domain.contract)
+            implementation(projects.core.utils)
             implementation(projects.features.navigation.contract)
+
+            implementation(projects.designsystem)
+            implementation(projects.foundation.core.contract)
+            implementation(projects.features.workout.data)
+            implementation(projects.features.workout.data.contract)
+            implementation(projects.features.workout.data.fixture)
+
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.datetime)
         }
 
         commonTest.dependencies {
-            implementation(projects.core.test)
+            implementation(libs.kotlin.test)
         }
     }
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.features.workout.presentation"
+    namespace = "de.stefan.lang.shapebyte.features.workout.presentation.contract"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

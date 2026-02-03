@@ -8,6 +8,7 @@ import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutView
 import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.impl.countdown.CountdownItemSetsViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.impl.timed.TimedWorkoutViewModelImpl
+import de.stefan.lang.shapebyte.features.workout.presentation.generated.GeneratedDependencies
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
@@ -37,6 +38,8 @@ object WorkoutPresentationModule :
                 )
             }
         },
+
+        dependencies = GeneratedDependencies.modules
     ),
     WorkoutPresentationContract {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()

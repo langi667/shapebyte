@@ -70,5 +70,8 @@ include(":features:workout:domain:contract")
 include(":features:workout:domain:implementation")
 include(":features:workout:domain:test")
 include(":features:workout:presentation")
+include(":features:workout:presentation:contract")
+include(":features:workout:presentation:implementation")
+include(":features:workout:presentation:test")
 
 include(":shared:sharedComponentTest")
