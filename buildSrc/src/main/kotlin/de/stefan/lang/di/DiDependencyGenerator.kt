@@ -221,8 +221,12 @@ private fun Project.findModuleSourceFile(moduleClassName: String): File? {
 }
 
 private fun parseContractReference(source: String): String? {
-    val marker = "RootModule("
-    val start = source.indexOf(marker)
+    val marker = listOf("Module(", "RootModule(")
+        .map { it to source.indexOf(it) }
+        .filter { it.second >= 0 }
+        .minByOrNull { it.second }
+        ?: return null
+    val start = marker.second + marker.first.length - 1
     if (start == -1) return null
     var depth = 0
     var closingIndex = -1

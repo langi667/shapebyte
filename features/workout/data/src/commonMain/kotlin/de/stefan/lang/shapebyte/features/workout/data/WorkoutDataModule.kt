@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.data
 
-import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutDataContract
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
@@ -14,10 +13,11 @@ import de.stefan.lang.shapebyte.features.workout.data.fixture.QuickWorkoutsDatas
 import de.stefan.lang.shapebyte.features.workout.data.fixture.WorkoutHistoryDataSourceFixture
 import de.stefan.lang.shapebyte.features.workout.data.fixture.WorkoutScheduleDatasourceFixture
 import de.stefan.lang.shapebyte.features.workout.data.generated.Dependencies
+import de.stefan.lang.shapebyte.features.workout.data.generated.Module
 import org.koin.core.component.get
 
 object WorkoutDataModule :
-    RootModule(
+    Module(
         globalBindings = {
             single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
             single<WorkoutScheduleRepository> { WorkoutScheduleRepository(datasource = get()) }
@@ -48,7 +48,6 @@ object WorkoutDataModule :
             single<WorkoutHistoryDataSource> { WorkoutHistoryDataSourceFixture }
             single<WorkoutScheduleDatasource> { WorkoutScheduleDatasourceFixture }
         },
-        dependencies = Dependencies.modules,
     ),
     WorkoutDataContract {
     override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =

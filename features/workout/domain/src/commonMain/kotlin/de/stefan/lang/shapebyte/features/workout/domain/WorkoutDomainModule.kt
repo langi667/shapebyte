@@ -1,6 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.domain
 
-import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
@@ -16,6 +15,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.Q
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.generated.Dependencies
+import de.stefan.lang.shapebyte.features.workout.domain.generated.Module
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecution
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder
@@ -28,7 +28,7 @@ import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 object WorkoutDomainModule :
-    RootModule(
+    Module(
         globalBindings = {
             single<FetchRecentWorkoutHistoryUseCase> { (loadFeatureToggleUseCase: LoadFeatureToggleUseCase) ->
                 FetchRecentWorkoutHistoryUseCaseImpl(
@@ -90,7 +90,6 @@ object WorkoutDomainModule :
         },
         testBindings = {
         },
-        dependencies = Dependencies.modules,
     ),
     WorkoutDomainContract {
     override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase =

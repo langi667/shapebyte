@@ -1,16 +1,16 @@
 package de.stefan.lang.shapebyte.features.home.presentation
 
-import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomePresentationContract
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.home.presentation.generated.Dependencies
+import de.stefan.lang.shapebyte.features.home.presentation.generated.Module
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 public object HomePresentationModule :
-    RootModule(
+    Module(
         globalBindings = {
             factory<HomeRootViewModel> { (navHandler: NavigationRequestHandling) ->
                 HomeRootViewModelImpl(
@@ -25,7 +25,6 @@ public object HomePresentationModule :
                 )
             }
         },
-        dependencies = Dependencies.modules,
     ),
     HomePresentationContract {
     override fun homeRootViewModel(

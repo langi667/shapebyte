@@ -1,6 +1,5 @@
 package de.stefan.lang.coroutines
 
-import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.coroutines.contract.CoreCoroutinesContract
 import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.coroutines.contract.CoroutineScopeProvider
@@ -9,10 +8,11 @@ import de.stefan.lang.coroutines.implementation.CoroutineScopeProviderImpl
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
 import de.stefan.lang.shapebyte.core.coroutines.generated.Dependencies
+import de.stefan.lang.shapebyte.core.coroutines.generated.Module
 import org.koin.core.component.get
 
 public object CoroutinesModule :
-    RootModule(
+    Module(
         productionBindings = {
             single<CoroutineScopeProvider> { CoroutineScopeProviderImpl() }
             single<CoroutineContextProvider> { CoroutineContextProviderImpl() }
@@ -21,7 +21,6 @@ public object CoroutinesModule :
             single<CoroutineScopeProvider> { TestCoroutineScopeProvider }
             single<CoroutineContextProvider> { TestCoroutineContextProvider }
         },
-        dependencies = Dependencies.modules,
     ),
     CoreCoroutinesContract {
     public override fun coroutineScopeProvider(): CoroutineScopeProvider = get()

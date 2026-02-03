@@ -1,9 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.history
 
-import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coreutils.contract.progress.Progress
-import de.stefan.lang.foundation.core.contract.FoundationCoreContract
-import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.features.workout.BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry

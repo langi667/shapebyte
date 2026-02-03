@@ -1,6 +1,5 @@
 package de.stefan.lang.foundationCore
 
-import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoader
 import de.stefan.lang.foundation.core.contract.audio.AudioPlayer
@@ -21,10 +20,11 @@ import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
 import de.stefan.lang.foundation.core.implementation.stringformatter.DateTimeStringFormatterImpl
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
 import de.stefan.lang.shapebyte.foundation.core.generated.Dependencies
+import de.stefan.lang.shapebyte.foundation.core.generated.Module
 import org.koin.core.component.get
 
 object FoundationCoreModule :
-    RootModule(
+    Module(
         globalBindings = {
             single<OperatingSystemInfoProviding> { get<DeviceInfoProvider>() }
             single<ScreenSizeProviding> { get<DeviceInfoProvider>() }
@@ -57,7 +57,6 @@ object FoundationCoreModule :
             factory<AudioPlayer> { AudioPlayerFake() }
             single<DeviceInfoProvider> { DeviceInfoProviderFake() }
         },
-        dependencies = Dependencies.modules,
     ),
     FoundationCoreContract {
     private lateinit var appResourceProvider: AppResourceProvider

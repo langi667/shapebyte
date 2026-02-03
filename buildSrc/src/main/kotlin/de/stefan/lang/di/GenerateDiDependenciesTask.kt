@@ -55,15 +55,33 @@ abstract class GenerateDiDependenciesTask : DefaultTask() {
             appendLine("package $pkg")
             appendLine()
             appendLine("import de.stefan.lang.core.di.RootModule")
+            appendLine("import de.stefan.lang.core.di.ModuleBindings")
+            appendLine("import org.koin.dsl.ModuleDeclaration")
             moduleImports.forEach { appendLine("import $it") }
             contractImports.forEach { appendLine("import $it") }
             appendLine()
             appendLine("internal object $klass$implementsClause {")
-            appendLine("    val modules: List<RootModule> = listOf(")
+            appendLine("    public val modules: List<RootModule> = listOf(")
             if (modules.isNotEmpty()) {
                 appendLine(modulesList)
             }
             appendLine("    )")
+            appendLine("}")
+            appendLine()
+            appendLine("public abstract class Module : RootModule {")
+            appendLine("    internal constructor(")
+            appendLine("        globalBindings: ModuleDeclaration = {},")
+            appendLine("        productionBindings: ModuleDeclaration = {},")
+            appendLine("        testBindings: ModuleDeclaration = {},")
+            appendLine("    ) : super(")
+            appendLine("        globalBindings = globalBindings,")
+            appendLine("        productionBindings = productionBindings,")
+            appendLine("        testBindings = testBindings,")
+            appendLine("        dependencies = Dependencies.modules,")
+            appendLine("    )")
+            appendLine()
+            appendLine()
+            appendLine("    init { /* dependencies wired automatically */ }")
             appendLine("}")
         }
     }
