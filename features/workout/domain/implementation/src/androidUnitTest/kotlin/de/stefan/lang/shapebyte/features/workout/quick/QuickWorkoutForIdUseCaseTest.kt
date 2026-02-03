@@ -1,26 +1,25 @@
 package de.stefan.lang.shapebyte.features.workout.quick
 
+import BaseTest
 import app.cash.turbine.test
-import de.stefan.lang.coretest.CoreTest
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.image.ImageResource
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
-import de.stefan.lang.shapebyte.features.workout.BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsError
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsRepository
-import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutForIdUseCaseImpl
+import de.stefan.lang.utils.logging.LoggingModule
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
-import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -151,9 +150,9 @@ internal class QuickWorkoutForIdUseCaseTest : BaseTest() {
 
         return QuickWorkoutForIdUseCaseImpl(
             repository = repository,
-            logger = WorkoutDomainModule.get(),
-            coroutineContextProvider = WorkoutDomainModule.get(),
-            coroutineScopeProvider = WorkoutDomainModule.get(),
+            logger = LoggingModule.logger(),
+            coroutineContextProvider = CoroutinesModule.coroutineContextProvider(),
+            coroutineScopeProvider = CoroutinesModule.coroutineScopeProvider(),
             loadFeatureToggleUseCase = loadFeatureToggleUseCase,
         )
     }

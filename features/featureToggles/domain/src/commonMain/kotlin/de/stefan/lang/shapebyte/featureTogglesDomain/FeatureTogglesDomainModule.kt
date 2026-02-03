@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.featureTogglesDomain
 
 import de.stefan.lang.core.di.ModuleBindings
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.coroutines.CoreCoroutinesModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.shapebyte.featureToggles.data.FeatureTogglesDataModule
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.FeatureToggleUseCaseImpl
 import de.stefan.lang.shapebyte.featureToggles.domain.implementation.LoadFeatureToggleUseCaseImpl
@@ -28,8 +28,8 @@ object FeatureTogglesDomainModule :
                     LoadFeatureToggleUseCaseImpl(
                         logger = LoggingModule.logger(),
                         repository = FeatureTogglesDataModule.featureToggleRepository(),
-                        coroutineScopeProviding = CoreCoroutinesModule.coroutineScopeProvider(),
-                        coroutineContextProviding = CoreCoroutinesModule.coroutineContextProvider(),
+                        coroutineScopeProviding = CoroutinesModule.coroutineScopeProvider(),
+                        coroutineContextProviding = CoroutinesModule.coroutineContextProvider(),
                     )
                 }
             },

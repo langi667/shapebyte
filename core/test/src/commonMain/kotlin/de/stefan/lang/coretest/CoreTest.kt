@@ -1,6 +1,6 @@
 package de.stefan.lang.coretest
 
-import de.stefan.lang.coroutines.CoreCoroutinesModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,13 +17,13 @@ import kotlin.test.BeforeTest
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class CoreTest {
     private val testDispatcher: CoroutineDispatcher by lazy {
-        CoreCoroutinesModule
+        CoroutinesModule
             .coroutineContextProvider()
             .mainDispatcher()
     }
 
     private val requiredModules: List<Module> = listOf(
-        CoreCoroutinesModule.testModules,
+        CoroutinesModule.testModules,
     )
 
     protected open val autostartKoin: Boolean = true

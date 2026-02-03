@@ -17,7 +17,7 @@ object WorkoutPresentationModule :
             factory<TimedWorkoutViewModel> { (navHandler: NavigationRequestHandling) ->
                 TimedWorkoutViewModelImpl(
                     navigationHandler = navHandler,
-                    quickWorkoutForIdUseCase = get(),
+                    quickWorkoutForIdUseCase = WorkoutDomainModule.quickWorkoutForIdUseCase(),
                     itemsExecutionBuilder = get(),
                     dateStringFormatter = get(),
                     logger = get(),

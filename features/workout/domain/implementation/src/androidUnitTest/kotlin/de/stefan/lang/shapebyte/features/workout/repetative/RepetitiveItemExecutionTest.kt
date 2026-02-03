@@ -1,15 +1,15 @@
 package de.stefan.lang.shapebyte.features.workout.repetative
 
-import de.stefan.lang.coretest.CoreTest
+import BaseTest
 import de.stefan.lang.coreutils.contract.progress.Progress
-import de.stefan.lang.shapebyte.features.workout.BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecutionData
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
+import de.stefan.lang.utils.logging.LoggingModule
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -338,5 +338,5 @@ internal class RepetitiveItemExecutionTest : BaseTest() {
     private fun createSUT(
         item: Item,
         sets: List<ItemSet.Repetition>,
-    ) = WorkoutDomainModule.createRepetitiveItemExecution(item, sets)
+    ) = ImplementationModule.createRepetitiveItemExecution(item, sets)
 }

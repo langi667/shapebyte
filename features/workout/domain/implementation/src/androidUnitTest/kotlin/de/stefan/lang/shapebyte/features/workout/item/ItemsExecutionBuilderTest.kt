@@ -1,16 +1,19 @@
 package de.stefan.lang.shapebyte.features.workout.item
 
-import de.stefan.lang.shapebyte.features.workout.BaseTest
+import BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder
+import de.stefan.lang.utils.logging.LoggingModule
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class ItemsExecutionBuilderTest : BaseTest() {
     @Test
     fun `buildWithTimedInterval should return correct items execution for timed interval`() {
-        val sut = ItemsExecutionBuilder()
+        val sut = ItemsExecutionBuilder(
+            LoggingModule.logger()
+        )
         val rounds = 5
         val highDurationSec = 15
         val lowDurationSec = 10

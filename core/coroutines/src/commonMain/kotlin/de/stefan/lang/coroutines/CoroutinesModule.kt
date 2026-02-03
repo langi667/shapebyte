@@ -10,7 +10,7 @@ import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvide
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
 import org.koin.core.component.get
 
-public object CoreCoroutinesModule :
+public object CoroutinesModule :
     ModuleBindings(
         allEnvironments = { },
         appEnvironmentOnly = {

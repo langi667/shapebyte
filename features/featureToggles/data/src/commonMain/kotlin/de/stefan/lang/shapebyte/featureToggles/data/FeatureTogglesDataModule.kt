@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.featureToggles.data
 
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.coroutines.CoreCoroutinesModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleRepository
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureTogglesDataModuleContract
@@ -26,7 +26,7 @@ object FeatureTogglesDataModule :
                 DefaultFeatureToggleDatasourceImpl(
                     logger = LoggingModule.logger(),
                     assetLoader = get(),
-                    coroutineContextProviding = CoreCoroutinesModule.coroutineContextProvider(),
+                    coroutineContextProviding = CoroutinesModule.coroutineContextProvider(),
                 )
             }
         },

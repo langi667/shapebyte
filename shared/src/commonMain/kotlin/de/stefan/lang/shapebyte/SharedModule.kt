@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte
 
 import de.stefan.lang.coreutils.CoreUtilsModule
-import de.stefan.lang.coroutines.CoreCoroutinesModule
+import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
@@ -41,7 +41,7 @@ object SharedModule :
     SharedInitializationProviding {
 
     val modules =
-        CoreCoroutinesModule.productionModules +
+        CoroutinesModule.productionModules +
             LoggingModule.productionModules +
             CoreUtilsModule.productionModules +
             FoundationCoreModule.productionModules +
@@ -53,7 +53,7 @@ object SharedModule :
             WorkoutPresentationModule.productionModules
 
     val testModules =
-        CoreCoroutinesModule.testModules +
+        CoroutinesModule.testModules +
             CoreUtilsModule.testModules +
             FoundationCoreModule.testModules +
             FoundationPresentationModule.testModules +

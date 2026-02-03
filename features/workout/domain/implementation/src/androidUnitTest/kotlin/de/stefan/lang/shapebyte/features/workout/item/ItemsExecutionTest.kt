@@ -1,20 +1,18 @@
 package de.stefan.lang.shapebyte.features.workout.item
 
-import app.cash.turbine.ReceiveTurbine
+import BaseTest
 import app.cash.turbine.test
-import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.contract.progress.Progress
-import de.stefan.lang.shapebyte.features.workout.BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
-import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
 import de.stefan.lang.utils.logging.LoggingModule
 import de.stefan.lang.utils.logging.contract.Logging
 import kotlinx.coroutines.CoroutineScope
@@ -84,10 +82,9 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
-                    sets = List(duration) { itemSet },
-                )
+                    sets = List(duration) { itemSet })
             },
         )
 
@@ -136,7 +133,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val ignoredItem = Exercise("Fail")
 
         val items = List(executionsSucceedBefore) {
-            WorkoutDomainModule.createTimedItemExecution(
+            ImplementationModule.createTimedItemExecution(
                 item = Exercise("Test $it"),
                 sets = List(duration) { ItemSet.Timed.Seconds(1) },
             )
@@ -148,7 +145,7 @@ internal class ItemsExecutionTest : BaseTest() {
             ),
         ) +
                 List(executionsSucceedAfter) {
-                    WorkoutDomainModule.createTimedItemExecution(
+                    ImplementationModule.createTimedItemExecution(
                         item = Exercise("Test ${executionsSucceedBefore + it}"),
                         sets = List(duration) { ItemSet.Timed.Seconds(1) },
                     )
@@ -186,7 +183,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -262,7 +259,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -279,7 +276,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -302,7 +299,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -330,7 +327,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -370,7 +367,7 @@ internal class ItemsExecutionTest : BaseTest() {
         val itemSet = ItemSet.Timed.Seconds(1)
         val sut = createSUT(
             List(executions) {
-                WorkoutDomainModule.createTimedItemExecution(
+                ImplementationModule.createTimedItemExecution(
                     item = Exercise("Test $it"),
                     sets = List(duration) { itemSet },
                 )
@@ -413,6 +410,6 @@ internal class ItemsExecutionTest : BaseTest() {
     // TODO: test for repetitive execution when implemented
 
     private fun createSUT(items: List<ItemExecuting<*, *>>): ItemsExecuting {
-        return WorkoutDomainModule.createItemsExecution(items)
+        return ImplementationModule.createItemsExecution(items)
     }
 }

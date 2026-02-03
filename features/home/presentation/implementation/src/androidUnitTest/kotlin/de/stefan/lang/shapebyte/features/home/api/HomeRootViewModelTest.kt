@@ -1,7 +1,6 @@
  package de.stefan.lang.shapebyte.features.home.api
 
 import app.cash.turbine.test
-import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.shapebyte.featureTogglesDomain.contract.LoadFeatureToggleUseCase
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.presentation.contract.state.UIState
@@ -13,8 +12,7 @@ import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRo
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.history.FetchRecentWorkoutHistoryUseCaseImpl
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutsUseCaseImpl
+import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -138,20 +136,9 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
         return HomeRootViewModelImpl(
             navigationHandler = mockk(relaxed = true),
             currentWorkoutScheduleEntryUseCase = get(),
-            recentHistoryUseCase = FetchRecentWorkoutHistoryUseCaseImpl(
-                repository = get(),
-                logger = get(),
-                coroutineContextProviding = get(),
-                coroutineScopeProviding = get(),
-                loadFeatureToggleUseCase = loadFeatureToggleUseCase,
-            ),
-            quickWorkoutsUseCase = QuickWorkoutsUseCaseImpl(
-                repository = get(),
-                logger = get(),
-                loadFeatureToggleUseCase = loadFeatureToggleUseCase,
-                scopeProvider = get(),
-                dispatcherProvider = get(),
-            ),
+
+            recentHistoryUseCase = WorkoutDomainModule.fetchRecentWorkoutHistoryUseCase(loadFeatureToggleUseCase),
+            quickWorkoutsUseCase = WorkoutDomainModule.quickWorkoutsUseCase(loadFeatureToggleUseCase),
             navigationRequestBuilder = get(),
             logger = get(),
             coroutineContextProvider = get(),

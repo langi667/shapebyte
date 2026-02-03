@@ -6,6 +6,7 @@ import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootView
 import de.stefan.lang.shapebyte.features.home.presentation.generated.GeneratedDependencies
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
@@ -18,8 +19,8 @@ public object HomePresentationModule :
                     coroutineContextProvider = get(),
                     navigationHandler = navHandler,
                     currentWorkoutScheduleEntryUseCase = get(),
-                    recentHistoryUseCase = get(),
-                    quickWorkoutsUseCase = get(),
+                    recentHistoryUseCase = WorkoutDomainModule.fetchRecentWorkoutHistoryUseCase(),
+                    quickWorkoutsUseCase = WorkoutDomainModule.quickWorkoutsUseCase(),
                     navigationRequestBuilder = get(),
                     dateTimeStringFormatter = get(),
                 )

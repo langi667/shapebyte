@@ -9,6 +9,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecution
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
 import de.stefan.lang.utils.logging.LoggingModule
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterIsInstance
@@ -347,5 +348,5 @@ internal class TimedItemExecutionTest : BaseTest() {
     }
 
     private fun createSUT(item: Item, sets: List<ItemSet.Timed.Seconds>) =
-        WorkoutDomainModule.createTimedItemExecution(item, sets)
+        ImplementationModule.createTimedItemExecution(item, sets)
 }

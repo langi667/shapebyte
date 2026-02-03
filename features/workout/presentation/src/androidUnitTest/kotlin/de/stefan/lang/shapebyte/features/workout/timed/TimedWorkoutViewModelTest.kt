@@ -18,7 +18,7 @@ import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutUIIn
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.impl.timed.TimedWorkoutViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsRepository
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.quick.QuickWorkoutForIdUseCaseImpl
+import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -379,13 +379,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
 
         return TimedWorkoutViewModelImpl(
             navigationHandler = mockk(relaxed = true),
-            quickWorkoutForIdUseCase = QuickWorkoutForIdUseCaseImpl(
-                repository = repository,
-                logger = get(),
-                coroutineContextProvider = get(),
-                coroutineScopeProvider = get(),
-                loadFeatureToggleUseCase = loadFeatureToggleUseCase,
-            ),
+            quickWorkoutForIdUseCase = WorkoutDomainModule.quickWorkoutForIdUseCase(repository, loadFeatureToggleUseCase),
             itemsExecutionBuilder = get(),
             dateStringFormatter = get(),
             logger = get(),
