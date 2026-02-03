@@ -41,6 +41,7 @@ include(":foundation:presentation")
 include(":foundation:presentation:contract")
 
 include(":designsystem")
+include(":designsystem:contract")
 
 include(":features")
 include(":features:navigation")

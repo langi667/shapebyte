@@ -1,7 +1,7 @@
 package de.stefan.lang.designsystem
 
-import de.stefan.lang.designsystem.api.ColorDescriptor
-import de.stefan.lang.designsystem.api.core.colorHexValue
+import de.stefan.lang.designsystem.contract.ColorDescriptor
+import de.stefan.lang.designsystem.contract.colorHexValue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.contract.timed
 
-import de.stefan.lang.designsystem.api.ColorDescriptor
+import de.stefan.lang.designsystem.contract.ColorDescriptor
 import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 import de.stefan.lang.foundation.presentation.contract.buttons.ButtonState
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ImageContaining

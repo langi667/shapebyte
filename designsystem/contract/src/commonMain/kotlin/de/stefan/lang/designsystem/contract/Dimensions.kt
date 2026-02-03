@@ -1,4 +1,4 @@
-package de.stefan.lang.designsystem.api
+package de.stefan.lang.designsystem.contract
 
 public data class Dimensions(
     val xTiny: Int,

@@ -1,6 +1,4 @@
-package de.stefan.lang.designsystem.api.core
-
-import de.stefan.lang.designsystem.api.ColorDescriptor
+package de.stefan.lang.designsystem.contract
 
 // TODO: test
 public val ColorDescriptor.colorHexValue: Long

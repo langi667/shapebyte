@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.impl.timed
 
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.coroutines.contract.CoroutineContextProviding
-import de.stefan.lang.designsystem.api.ColorDescriptor
+import de.stefan.lang.designsystem.contract.ColorDescriptor
 import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
 import de.stefan.lang.foundation.core.contract.audio.AudioResource
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
