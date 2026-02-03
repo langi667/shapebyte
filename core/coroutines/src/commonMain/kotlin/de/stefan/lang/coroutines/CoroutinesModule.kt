@@ -11,15 +11,15 @@ import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
 import de.stefan.lang.shapebyte.core.coroutines.generated.GeneratedDependencies
 import org.koin.core.component.get
 
-public object CoroutinesModule:
-    RootModule (
+public object CoroutinesModule :
+    RootModule(
         productionBindings = {
             single<CoroutineScopeProviding> { CoroutineScopeProvider() }
             single<CoroutineContextProviding> { CoroutineContextProvider() }
         },
         testBindings = {
-            single<CoroutineScopeProviding> {TestCoroutineScopeProvider}
-            single<CoroutineContextProviding> {TestCoroutineContextProvider}
+            single<CoroutineScopeProviding> { TestCoroutineScopeProvider }
+            single<CoroutineContextProviding> { TestCoroutineContextProvider }
         },
         dependencies = GeneratedDependencies.modules,
     ),

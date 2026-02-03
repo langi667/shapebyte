@@ -1,7 +1,6 @@
 package de.stefan.lang.foundationCore
 
 import de.stefan.lang.core.di.RootModule
-import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.FoundationCoreContract
 import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
 import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
@@ -20,6 +19,7 @@ import de.stefan.lang.foundation.core.implementation.deviceinfo.DeviceInfo
 import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
+import de.stefan.lang.shapebyte.foundation.core.generated.GeneratedDependencies
 import de.stefan.lang.utils.logging.LoggingModule
 import org.koin.core.component.get
 
@@ -57,10 +57,7 @@ object FoundationCoreModule :
             factory<AudioPlaying> { FakeAudioPlayer() }
             single<DeviceInfoProviding> { FakeDeviceInfo() }
         },
-        dependencies = listOf(
-            CoroutinesModule,
-            LoggingModule,
-        ),
+        dependencies = GeneratedDependencies.modules,
     ),
     FoundationCoreContract {
     private lateinit var appResourceProvider: AppResourceProvider

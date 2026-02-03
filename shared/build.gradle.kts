@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             api(projects.core.utils)
+            api(projects.core.logging)
 
             api(projects.foundation.core)
             api(projects.foundation.presentation)
@@ -78,7 +79,6 @@ kotlin {
             api(projects.features.navigation)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
-
         }
 
         commonTest.dependencies {

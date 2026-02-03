@@ -24,6 +24,7 @@ kotlin {
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
             implementation(projects.core.utils)
+            implementation(projects.core.logging.contract)
         }
 
         commonTest.dependencies {

@@ -1,9 +1,16 @@
+import de.stefan.lang.di.configureDi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
     kotlin("plugin.serialization") version "2.0.0"
 }
+
+configureDi(
+    moduleClassName = "de.stefan.lang.foundationCore.FoundationCoreModule",
+    transitive = true,
+)
 
 kotlin {
     androidTarget {
@@ -27,13 +34,12 @@ kotlin {
             api(projects.foundation.core.contract)
 
             implementation(libs.koin.core)
-
             implementation(projects.foundation.core.implementation)
             implementation(projects.foundation.core.fake)
             implementation(projects.core.di)
             implementation(projects.core.coroutines)
             implementation(projects.core.utils)
-
+            implementation(projects.core.logging)
         }
     }
 }

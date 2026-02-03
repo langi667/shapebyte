@@ -26,6 +26,7 @@ kotlin {
             implementation(projects.core.coroutines)
 
             implementation(projects.foundation.core.contract)
+            implementation(projects.core.logging.contract)
         }
 
         androidInstrumentedTest.dependencies {

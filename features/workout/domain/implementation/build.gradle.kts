@@ -28,6 +28,8 @@ kotlin {
             implementation(projects.core.di)
             implementation(projects.core.utils)
             implementation(projects.core.coroutines)
+            implementation(projects.core.logging)
+
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
