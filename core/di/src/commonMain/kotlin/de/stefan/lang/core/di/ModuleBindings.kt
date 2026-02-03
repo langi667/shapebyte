@@ -6,13 +6,13 @@ import org.koin.dsl.module
 
 open class ModuleBindings(
     allEnvironments: ModuleDeclaration,
-    appEnvironmentOnly: ModuleDeclaration = {},
+    productionEnvironmentOnly: ModuleDeclaration = {},
     testEnvironmentOnly: ModuleDeclaration = {},
 ) : FeatureGraph {
 
     override val productionModules: Module = module {
         allEnvironments()
-        appEnvironmentOnly()
+        productionEnvironmentOnly()
     }
 
     override val testModules: Module = module {

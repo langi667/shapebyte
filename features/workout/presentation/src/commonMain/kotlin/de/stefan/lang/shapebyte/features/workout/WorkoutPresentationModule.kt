@@ -39,7 +39,7 @@ object WorkoutPresentationModule :
             }
         },
 
-        dependencies = GeneratedDependencies.modules
+        dependencies = GeneratedDependencies.modules,
     ),
     WorkoutPresentationContract {
     override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()

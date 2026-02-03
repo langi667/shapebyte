@@ -34,7 +34,7 @@ open class RootModule(
     ) : this(
         bindings = ModuleBindings(
             allEnvironments = globalBindings,
-            appEnvironmentOnly = productionBindings,
+            productionEnvironmentOnly = productionBindings,
             testEnvironmentOnly = testBindings,
         ),
         dependencies = dependencies,
