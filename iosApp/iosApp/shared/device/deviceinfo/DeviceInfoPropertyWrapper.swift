@@ -5,9 +5,9 @@ import shared
 @MainActor
 struct Device {
     @Env private var environment
-    private let fakeDeviceInfo = DeviceInfoFake()
+    private let fakeDeviceInfo = DeviceInfoProviderFake()
 
-    var wrappedValue: DeviceInfoProviding {
+    var wrappedValue: DeviceInfoProvider {
         if environment.isInPreview || environment.isRunningUnitTests {
             return fakeDeviceInfo // TODO: this needs to be retrieved by the DPI as well
         } else {

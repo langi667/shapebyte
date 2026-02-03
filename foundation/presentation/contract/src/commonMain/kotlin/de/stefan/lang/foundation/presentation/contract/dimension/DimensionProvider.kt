@@ -1,12 +1,12 @@
 package de.stefan.lang.foundation.presentation.contract.dimension
 
 import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProviding
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 import kotlin.math.min
 
 public class DimensionProvider(
-    private val deviceSizeCategoryProvider: DeviceSizeCategoryProviding,
+    private val deviceSizeCategoryProvider: DeviceSizeCategoryProvider,
 ) {
     public val screenSize: Size
         get() = deviceSizeCategory.size

@@ -8,10 +8,10 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionBuilding
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecution
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 
 class ItemsExecutionBuilder(
-    private val logger: Logging,
+    private val logger: Logger,
 ) : ItemsExecutionBuilding {
     companion object {
         private val DefaultHighIntenseExercise = Exercise("High", "high-intense-exercise.png")

@@ -216,7 +216,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
         val objectName = "ThemeAdditions"
         val packageName = "de.stefan.lang.designsystem.theme"
 
-        val loggerProperty = PropertySpec.builder("logger", ClassName("de.stefan.lang.coreutils.logging", "Logging"))
+        val loggerProperty = PropertySpec.builder("logger", ClassName("de.stefan.lang.coreutils.logging", "Logger"))
             .getter(FunSpec.getterBuilder().addStatement("return SharedModule.logger()").build())
             .build()
 
@@ -231,7 +231,7 @@ class DesignSystemGeneratorAndroid: DesignSystemGenerating {
 
         val fileSpec = FileSpec.builder(packageName, objectName)
             .addType(themeAdditions)
-            .addImport("import de.stefan.lang.coreutils.logging", "Logging")
+            .addImport("import de.stefan.lang.coreutils.logging", "Logger")
             .addImport("de.stefan.lang.designsystem", "Dimensions")
             .addImport("de.stefan.lang.designsystem", "Spacings")
             .addImport("import de.stefan.lang.shapebyte", "SharedModule")

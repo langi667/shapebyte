@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.RepetitiveItemExecutionData
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 class RepetitiveItemExecution(
     override val item: Item,
     override val sets: List<ItemSet.Repetition>,
-    override val logger: Logging,
+    override val logger: Logger,
 ) : RepetitiveItemExecuting {
 
     private val _state: MutableStateFlow<ItemExecutionState<RepetitiveItemExecutionData>> =

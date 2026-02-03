@@ -1,9 +1,9 @@
 package de.stefan.lang.shapebyte.features.workout.impl.timed
 
 import de.stefan.lang.coreutils.contract.progress.Progress
-import de.stefan.lang.coroutines.contract.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.designsystem.contract.ColorDescriptor
-import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
+import de.stefan.lang.foundation.core.contract.audio.AudioPlayer
 import de.stefan.lang.foundation.core.contract.audio.AudioResource
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
@@ -26,7 +26,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecu
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,9 +42,9 @@ class TimedWorkoutViewModelImpl(
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilding,
     private val dateStringFormatter: DateTimeStringFormatter,
-    private val audioPlayer: AudioPlaying,
-    logger: Logging,
-    coroutineContextProvider: CoroutineContextProviding,
+    private val audioPlayer: AudioPlayer,
+    logger: Logger,
+    coroutineContextProvider: CoroutineContextProvider,
 ) : TimedWorkoutViewModel(logger, coroutineContextProvider) {
 
     private val _state = MutableStateFlow<UIState>(UIState.Idle)

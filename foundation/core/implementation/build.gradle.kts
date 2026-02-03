@@ -27,6 +27,7 @@ kotlin {
 
             implementation(projects.foundation.core.contract)
             implementation(projects.core.logging.contract)
+            implementation(libs.kotlinx.datetime)
         }
 
         androidInstrumentedTest.dependencies {

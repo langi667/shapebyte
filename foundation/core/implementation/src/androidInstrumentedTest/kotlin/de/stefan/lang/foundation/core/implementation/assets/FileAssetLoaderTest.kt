@@ -6,7 +6,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.foundation.core.contract.assets.FileAsset
-import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
+import de.stefan.lang.foundation.core.contract.assets.FileAssetLoader
 import de.stefan.lang.utils.logging.LoggingModule
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
@@ -40,8 +40,8 @@ class FileAssetLoaderTest: CoreTest(), KoinTest {
         assertTrue(content.isBlank())
     }
 
-    private fun createSUT(): FileAssetLoading {
-        val loader = FileAssetLoader(
+    private fun createSUT(): FileAssetLoader {
+        val loader = FileAssetLoaderImpl(
             appContextProvider = ContextProvider(context),
             logging = get()
         )

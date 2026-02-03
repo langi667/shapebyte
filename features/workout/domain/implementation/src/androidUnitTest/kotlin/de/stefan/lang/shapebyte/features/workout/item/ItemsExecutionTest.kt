@@ -14,7 +14,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemE
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.ImplementationModule
 import de.stefan.lang.utils.logging.LoggingModule
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,7 +35,7 @@ internal class ItemsExecutionTest : BaseTest() {
     class TimedFailing(
         override val item: Item,
         override val sets: List<ItemSet.Timed.Seconds>,
-        override val logger: Logging,
+        override val logger: Logger,
     ) : TimedItemExecuting {
 
         override val state: StateFlow<ItemExecutionState<TimedItemExecutionData>> =

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.home.presentation.implementation
 
-import de.stefan.lang.coroutines.contract.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
@@ -8,7 +8,7 @@ import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestBuilding
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
 import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
@@ -16,7 +16,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutS
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history.FetchRecentWorkoutHistoryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,10 +31,10 @@ public class HomeRootViewModelImpl(
     private val currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase,
     private val recentHistoryUseCase: FetchRecentWorkoutHistoryUseCase,
     private val quickWorkoutsUseCase: QuickWorkoutsUseCase,
-    private val navigationRequestBuilder: NavigationRequestBuilding,
+    private val navigationRequestBuilder: NavigationRequestBuilder,
     private val dateTimeStringFormatter: DateTimeStringFormatter,
-    logger: Logging,
-    coroutineContextProvider: CoroutineContextProviding,
+    logger: Logger,
+    coroutineContextProvider: CoroutineContextProvider,
 ) : HomeRootViewModel(logger, coroutineContextProvider) {
 
     private val _state: MutableStateFlow<UIState> = MutableStateFlow(

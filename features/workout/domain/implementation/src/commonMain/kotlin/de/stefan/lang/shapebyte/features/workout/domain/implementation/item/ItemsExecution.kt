@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecut
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecutionState
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class ItemsExecution(
     override val items: List<ItemExecuting<*, *>>,
-    override val logger: Logging,
+    override val logger: Logger,
 ) : ItemsExecuting {
 
     private val _state = MutableStateFlow<ItemsExecutionState>(ItemsExecutionState.Idle)

@@ -1,8 +1,8 @@
 package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import de.stefan.lang.utils.logging.contract.Loggable
-import de.stefan.lang.utils.logging.contract.Logging
-import de.stefan.lang.coroutines.contract.CoroutineContextProviding
+import de.stefan.lang.utils.logging.contract.Logger
+import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.foundation.presentation.contract.event.UIEvent
 import de.stefan.lang.foundation.presentation.contract.event.UIEventTransmitting
 import de.stefan.lang.foundation.presentation.contract.state.UIStateProviding
@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.buffer
 
 public actual abstract class BaseViewModel actual constructor(
-    actual override val logger: Logging,
-    public actual val coroutineContextProvider: CoroutineContextProviding
+    actual override val logger: Logger,
+    public actual val coroutineContextProvider: CoroutineContextProvider
 ) : Loggable, UIStateProviding, UIEventTransmitting {
 
     protected actual val scope: CoroutineScope = CoroutineScope(

@@ -2,7 +2,7 @@ import Foundation
 import shared
 
 protocol Loggable {
-    var logger: any Logging { get }
+    var logger: any Logger { get }
     var tag: String { get }
 
     func logD(message: String)
@@ -12,7 +12,7 @@ protocol Loggable {
 }
 
 extension Loggable {
-    var logger: any Logging { SharedModule.shared.logger()}
+    var logger: any Logger { SharedModule.shared.logger()}
     var tag: String { TypeDescriptionUtil.typeName(from: self) }
 
     func logD(message: String) {

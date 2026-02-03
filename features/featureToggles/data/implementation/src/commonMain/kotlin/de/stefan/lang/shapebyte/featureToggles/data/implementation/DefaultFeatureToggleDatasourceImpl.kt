@@ -1,20 +1,20 @@
 package de.stefan.lang.shapebyte.featureToggles.data.implementation
 
-import de.stefan.lang.coroutines.contract.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.foundation.core.contract.assets.FileAsset
-import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
+import de.stefan.lang.foundation.core.contract.assets.FileAssetLoader
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleError
 import de.stefan.lang.utils.logging.contract.Loggable
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.withContext
 
 class DefaultFeatureToggleDatasourceImpl(
-    override val logger: Logging,
-    private val assetLoader: FileAssetLoading,
-    coroutineContextProviding: CoroutineContextProviding,
+    override val logger: Logger,
+    private val assetLoader: FileAssetLoader,
+    coroutineContextProviding: CoroutineContextProvider,
 ) : FeatureToggleDatasource, Loggable {
 
     companion object {

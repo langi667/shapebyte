@@ -1,7 +1,7 @@
 package de.stefan.lang.foundation.core.fake.devicesize
 
 import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategory
-import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProviding
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 
@@ -9,7 +9,7 @@ class DeviceSizeCategoryProviderFake(
     override val screenSizeProvider: ScreenSizeProviding,
     override val sizeCategory: DeviceSizeCategory,
     private val sizeCategories: List<DeviceSizeCategory>,
-) : DeviceSizeCategoryProviding {
+) : DeviceSizeCategoryProvider {
 
     override val screenSize: Size = screenSizeProvider.screenSize
 

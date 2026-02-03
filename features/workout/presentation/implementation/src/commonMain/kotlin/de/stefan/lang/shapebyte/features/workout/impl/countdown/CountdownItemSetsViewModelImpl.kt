@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.impl.countdown
 
-import de.stefan.lang.coroutines.contract.CoroutineContextProviding
+import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.features.workout.contract.countdown.CountdownItemSetsUIIntent
 import de.stefan.lang.shapebyte.features.workout.contract.countdown.CountdownItemSetsViewData
@@ -11,15 +11,15 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.None
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class CountdownItemSetsViewModelImpl(
-    logger: Logging,
-    coroutineContextProvider: CoroutineContextProviding,
+    logger: Logger,
+    coroutineContextProvider: CoroutineContextProvider,
     private val timedHandlerFactory: (item: Item, sets: List<ItemSet.Timed.Seconds>) -> TimedItemExecuting,
 ) : CountdownItemSetsViewModel(logger, coroutineContextProvider) {
     companion object Companion {

@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.None
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemExecutionState
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecuting
 import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemExecutionData
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -23,13 +23,13 @@ import kotlin.time.Duration.Companion.milliseconds
 class TimedItemExecution(
     override val item: Item,
     override val sets: List<ItemSet.Timed.Seconds>,
-    override val logger: Logging,
+    override val logger: Logger,
 ) : TimedItemExecuting {
 
     companion object {
         fun countdown(
             seconds: UInt,
-            logging: Logging,
+            logging: Logger,
         ): TimedItemExecution {
             val sets = List(seconds.toInt()) {
                 ItemSet.Timed.Seconds(1)

@@ -1,7 +1,7 @@
 package de.stefan.lang.utils.logging.contract
 
 public interface Loggable {
-    public val logger: Logging
+    public val logger: Logger
     public val tag: String get() = this::class.simpleName ?: "Unknown"
 
     public fun logD(message: String) { logger.d(tag, message) }

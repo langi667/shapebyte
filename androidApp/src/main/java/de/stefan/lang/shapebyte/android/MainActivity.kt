@@ -14,7 +14,7 @@ import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.navigation.NavigationView
 import de.stefan.lang.shapebyte.initializing.AppInitializationState
 import de.stefan.lang.utils.logging.contract.Loggable
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -22,7 +22,7 @@ import org.koin.android.ext.android.inject
 class MainActivity :
     ComponentActivity(),
     Loggable {
-    override val logger: Logging by inject()
+    override val logger: Logger by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

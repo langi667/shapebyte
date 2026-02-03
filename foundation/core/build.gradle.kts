@@ -41,6 +41,14 @@ kotlin {
             implementation(projects.core.utils)
             implementation(projects.core.logging)
         }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation (libs.koin.test)
+            implementation (libs.kotlinx.datetime)
+
+            implementation (projects.core.test)
+        }
     }
 }
 

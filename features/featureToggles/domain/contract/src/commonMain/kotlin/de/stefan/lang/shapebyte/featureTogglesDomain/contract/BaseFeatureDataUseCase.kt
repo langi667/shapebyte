@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.featureTogglesDomain.contract
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asDataFlow
 import de.stefan.lang.foundation.core.contract.usecase.BaseDataUseCase
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -26,7 +26,7 @@ public open class BaseFeatureDataUseCase<T>(
     protected val scope: CoroutineScope,
     protected val dispatcher: CoroutineDispatcher,
     private val loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
-    logger: Logging,
+    logger: Logger,
 ) : BaseDataUseCase<T>(logger) {
 
     private val featureEnabled: Flow<Boolean> by lazy {

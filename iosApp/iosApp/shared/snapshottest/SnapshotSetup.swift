@@ -3,7 +3,7 @@ import shared
 
 struct SnapshotSetup: ViewModifier {
     @Device
-    fileprivate var device // returns mocked size, see DeviceInfoFake.ios.kt
+    fileprivate var device // returns mocked size, see DeviceInfoProviderFake.ios.kt
 
     let height: CGFloat?
     func body(content: Content) -> some View {

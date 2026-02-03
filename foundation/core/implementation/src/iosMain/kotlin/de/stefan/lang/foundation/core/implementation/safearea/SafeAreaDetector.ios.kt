@@ -1,6 +1,6 @@
 package de.stefan.lang.foundation.core.implementation.safearea
 import de.stefan.lang.utils.logging.contract.Loggable
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
@@ -14,8 +14,8 @@ import platform.UIKit.UIWindow
 import platform.UIKit.UIWindowScene
 
 @OptIn(ExperimentalForeignApi::class)
-actual class SafeAreaDetector actual constructor(logger: Logging) : Loggable {
-    actual override val logger: Logging = logger
+actual class SafeAreaDetector actual constructor(logger: Logger) : Loggable {
+    actual override val logger: Logger = logger
 
     actual fun detectSafeArea(): Flow<SafeArea> = flow {
         repeat(10) {

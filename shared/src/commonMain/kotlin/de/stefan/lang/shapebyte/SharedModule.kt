@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte
 import de.stefan.lang.coreutils.CoreUtilsModule
 import de.stefan.lang.coroutines.CoroutinesModule
 import de.stefan.lang.foundation.core.contract.app.AppInfo
-import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
+import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProvider
 import de.stefan.lang.foundation.core.contract.platformdependencies.PlatformDependencyProviding
 import de.stefan.lang.foundation.presentation.FoundationPresentationModule
 import de.stefan.lang.foundation.presentation.contract.dimension.DimensionProvider
@@ -85,7 +85,7 @@ object SharedModule :
         this.appInfo = platformDependencies.appInfo
     }
 
-    fun deviceInfoProvider(): DeviceInfoProviding {
+    fun deviceInfoProvider(): DeviceInfoProvider {
         return get()
     }
 

@@ -5,10 +5,10 @@ import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleDatasource
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleError
 import de.stefan.lang.utils.logging.contract.Loggable
-import de.stefan.lang.utils.logging.contract.Logging
+import de.stefan.lang.utils.logging.contract.Logger
 
 class FeatureToggleDatasourceMock(
-    override val logger: Logging,
+    override val logger: Logger,
     private val featureToggles: MutableMap<String, FeatureToggle> = hashMapOf(),
 ) : FeatureToggleDatasource, Loggable {
 

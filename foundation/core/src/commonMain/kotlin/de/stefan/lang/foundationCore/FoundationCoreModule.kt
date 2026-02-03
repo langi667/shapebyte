@@ -2,22 +2,23 @@ package de.stefan.lang.foundationCore
 
 import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.foundation.core.contract.FoundationCoreContract
-import de.stefan.lang.foundation.core.contract.assets.FileAssetLoading
-import de.stefan.lang.foundation.core.contract.audio.AudioPlaying
-import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProviding
-import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProviding
+import de.stefan.lang.foundation.core.contract.assets.FileAssetLoader
+import de.stefan.lang.foundation.core.contract.audio.AudioPlayer
+import de.stefan.lang.foundation.core.contract.deviceinfo.DeviceInfoProvider
+import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProvider
 import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.os.OperatingSystemInfoProviding
 import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
 import de.stefan.lang.foundation.core.fake.assets.FileAssetLoaderFake
 import de.stefan.lang.foundation.core.fake.audio.AudioPlayerFake
-import de.stefan.lang.foundation.core.fake.deviceinfo.DeviceInfoFake
-import de.stefan.lang.foundation.core.implementation.assets.FileAssetLoader
-import de.stefan.lang.foundation.core.implementation.audio.AudioPlayer
-import de.stefan.lang.foundation.core.implementation.deviceinfo.DeviceInfo
-import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProvider
+import de.stefan.lang.foundation.core.fake.deviceinfo.DeviceInfoProviderFake
+import de.stefan.lang.foundation.core.implementation.assets.FileAssetLoaderImpl
+import de.stefan.lang.foundation.core.implementation.audio.AudioPlayerImpl
+import de.stefan.lang.foundation.core.implementation.deviceinfo.DeviceInfoProviderImpl
+import de.stefan.lang.foundation.core.implementation.devicesize.DeviceSizeCategoryProviderImpl
 import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
+import de.stefan.lang.foundation.core.implementation.stringformatter.DateTimeStringFormatterImpl
 import de.stefan.lang.foundationCore.FoundationCoreModule.appResourceProvider
 import de.stefan.lang.shapebyte.foundation.core.generated.Dependencies
 import org.koin.core.component.get
@@ -25,26 +26,26 @@ import org.koin.core.component.get
 object FoundationCoreModule :
     RootModule(
         globalBindings = {
-            single<OperatingSystemInfoProviding> { get<DeviceInfoProviding>() }
-            single<ScreenSizeProviding> { get<DeviceInfoProviding>() }
-            single<DeviceSizeCategoryProviding> { DeviceSizeCategoryProvider(screenSizeProvider = get()) }
+            single<OperatingSystemInfoProviding> { get<DeviceInfoProvider>() }
+            single<ScreenSizeProviding> { get<DeviceInfoProvider>() }
+            single<DeviceSizeCategoryProvider> { DeviceSizeCategoryProviderImpl(screenSizeProvider = get()) }
             single<AppResourceProvider> { appResourceProvider }
 
             single<SafeAreaDetector> {
                 SafeAreaDetector(logger = Dependencies.logger())
             }
 
-            single<DateTimeStringFormatter> { DateTimeStringFormatter() }
+            single<DateTimeStringFormatter> { DateTimeStringFormatterImpl() }
         },
         productionBindings = {
-            single<FileAssetLoading> {
-                FileAssetLoader(logging = Dependencies.logger(), appContextProvider = get())
+            single<FileAssetLoader> {
+                FileAssetLoaderImpl(logging = Dependencies.logger(), appContextProvider = get())
             }
 
-            single<DeviceInfoProviding> { DeviceInfo(safeAreaDetector = get()) }
+            single<DeviceInfoProvider> { DeviceInfoProviderImpl(safeAreaDetector = get()) }
 
-            factory<AudioPlaying> {
-                AudioPlayer(
+            factory<AudioPlayer> {
+                AudioPlayerImpl(
                     appContextProvider = get(),
                     appResourceProvider = get(),
                     logger = Dependencies.logger(),
@@ -52,9 +53,9 @@ object FoundationCoreModule :
             }
         },
         testBindings = {
-            single<FileAssetLoading> { FileAssetLoaderFake() }
-            factory<AudioPlaying> { AudioPlayerFake() }
-            single<DeviceInfoProviding> { DeviceInfoFake() }
+            single<FileAssetLoader> { FileAssetLoaderFake() }
+            factory<AudioPlayer> { AudioPlayerFake() }
+            single<DeviceInfoProvider> { DeviceInfoProviderFake() }
         },
         dependencies = Dependencies.modules,
     ),
@@ -66,8 +67,8 @@ object FoundationCoreModule :
     }
 
     override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
-    override fun fileAssetLoader(): FileAssetLoading = get()
-    override fun audioPlayer(): AudioPlaying = get()
-    override fun deviceInfoProvider(): DeviceInfoProviding = get()
-    override fun deviceSizeCategoryProvider(): DeviceSizeCategoryProviding = get()
+    override fun fileAssetLoader(): FileAssetLoader = get()
+    override fun audioPlayer(): AudioPlayer = get()
+    override fun deviceInfoProvider(): DeviceInfoProvider = get()
+    override fun deviceSizeCategoryProvider(): DeviceSizeCategoryProvider = get()
 }

@@ -3,8 +3,8 @@ import shared
 
 struct LoggableTest {
     class TestClass: Loggable {
-        let logger: any Logging = shared.SharedModule.shared.recordingLogger()
-        var recLogger: RecordingLogging? { logger as? RecordingLogging }
+        let logger: any Logger = shared.SharedModule.shared.recordingLogger()
+        var recLogger: RecordingLogger? { logger as? RecordingLogger }
     }
 
     private let sut = TestClass()

@@ -2,10 +2,10 @@ package de.stefan.lang.coroutines
 
 import de.stefan.lang.core.di.RootModule
 import de.stefan.lang.coroutines.contract.CoreCoroutinesContract
-import de.stefan.lang.coroutines.contract.CoroutineContextProviding
-import de.stefan.lang.coroutines.contract.CoroutineScopeProviding
-import de.stefan.lang.coroutines.implementation.CoroutineContextProvider
-import de.stefan.lang.coroutines.implementation.CoroutineScopeProvider
+import de.stefan.lang.coroutines.contract.CoroutineContextProvider
+import de.stefan.lang.coroutines.contract.CoroutineScopeProvider
+import de.stefan.lang.coroutines.implementation.CoroutineContextProviderImpl
+import de.stefan.lang.coroutines.implementation.CoroutineScopeProviderImpl
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineContextProvider
 import de.stefan.lang.coroutines.implementation.test.TestCoroutineScopeProvider
 import de.stefan.lang.shapebyte.core.coroutines.generated.Dependencies
@@ -14,16 +14,16 @@ import org.koin.core.component.get
 public object CoroutinesModule :
     RootModule(
         productionBindings = {
-            single<CoroutineScopeProviding> { CoroutineScopeProvider() }
-            single<CoroutineContextProviding> { CoroutineContextProvider() }
+            single<CoroutineScopeProvider> { CoroutineScopeProviderImpl() }
+            single<CoroutineContextProvider> { CoroutineContextProviderImpl() }
         },
         testBindings = {
-            single<CoroutineScopeProviding> { TestCoroutineScopeProvider }
-            single<CoroutineContextProviding> { TestCoroutineContextProvider }
+            single<CoroutineScopeProvider> { TestCoroutineScopeProvider }
+            single<CoroutineContextProvider> { TestCoroutineContextProvider }
         },
         dependencies = Dependencies.modules,
     ),
     CoreCoroutinesContract {
-    public override fun coroutineScopeProvider(): CoroutineScopeProviding = get()
-    public override fun coroutineContextProvider(): CoroutineContextProviding = get()
+    public override fun coroutineScopeProvider(): CoroutineScopeProvider = get()
+    public override fun coroutineContextProvider(): CoroutineContextProvider = get()
 }

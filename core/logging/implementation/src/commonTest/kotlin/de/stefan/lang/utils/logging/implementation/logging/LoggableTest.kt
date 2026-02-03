@@ -2,7 +2,7 @@ package de.stefan.lang.utils.logging.implementation.logging
 
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.RecordLog
-import de.stefan.lang.utils.logging.contract.RecordingLogging
+import de.stefan.lang.utils.logging.contract.RecordingLogger
 import de.stefan.lang.utils.logging.implementation.recording.RecordingLogger
 import de.stefan.lang.utils.logging.implementation.silent.SilentLogger
 import kotlin.test.Test
@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 
 class LoggableTest {
     class TestLoggable : Loggable {
-        override val logger: RecordingLogging = RecordingLogger(SilentLogger())
+        override val logger: RecordingLogger = RecordingLogger(SilentLogger())
         val currentRecordLog: RecordLog? get() = logger.latestRecordLog
     }
 
