@@ -1,8 +1,11 @@
 package de.stefan.lang.shapebyte.features.workout.data.contract.schedule
 
+import de.stefan.lang.foundation.core.contract.loadstate.LoadState
+
 // TODO: Test
-class WorkoutScheduleRepository(
+public class WorkoutScheduleRepository public constructor(
     private val datasource: WorkoutScheduleDatasource,
 ) {
-    suspend fun currentWorkoutScheduleEntry() = datasource.currentWorkoutScheduleEntry()
+    public suspend fun currentWorkoutScheduleEntry(): LoadState.Result<WorkoutScheduleEntry?> =
+        datasource.currentWorkoutScheduleEntry()
 }

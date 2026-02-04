@@ -23,6 +23,10 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+
+        commonMain.dependencies {
+            implementation(libs.kotlinx.datetime)
+        }
     }
 }
 

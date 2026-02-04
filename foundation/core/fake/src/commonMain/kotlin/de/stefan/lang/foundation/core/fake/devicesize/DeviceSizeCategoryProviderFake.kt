@@ -5,7 +5,7 @@ import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProv
 import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 
-class DeviceSizeCategoryProviderFake(
+public class DeviceSizeCategoryProviderFake public constructor(
     override val screenSizeProvider: ScreenSizeProviding,
     override val sizeCategory: DeviceSizeCategory,
     private val sizeCategories: List<DeviceSizeCategory>,

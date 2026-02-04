@@ -20,7 +20,7 @@ import de.stefan.lang.utils.logging.contract.LoggingContract
 import org.koin.core.component.get
 import org.koin.core.module.Module as KoinModule
 
-object SharedModule :
+public object SharedModule :
     Module(),
     SharedModuleContract,
     AppInfoProvider,
@@ -31,10 +31,10 @@ object SharedModule :
     NavigationModuleContract by Dependencies,
     FoundationPresentationContract by Dependencies {
 
-    val productionModules: List<KoinModule>
+    internal val productionModules: List<KoinModule>
         get() = Dependencies.modules.map { it.productionDiModule }
 
-    val testModules: List<KoinModule>
+    internal val testModules: List<KoinModule>
         get() = Dependencies.modules.map { it.testDiModule }
 
     private val sharedInitializationUseCase: InitializationUseCase by lazy {
@@ -52,7 +52,7 @@ object SharedModule :
      * Call this method before you access the modules or testModules !
      */
 
-    fun setup(
+    public fun setup(
         platformDependencies: PlatformDependencyProviding,
     ) {
         CoreUtilsModule.initialize(
@@ -66,7 +66,7 @@ object SharedModule :
         this.appInfo = platformDependencies.appInfo
     }
 
-    fun deviceInfoProvider(): DeviceInfoProvider {
+    public fun deviceInfoProvider(): DeviceInfoProvider {
         return get()
     }
 
@@ -78,7 +78,7 @@ object SharedModule :
         return appInfo
     }
 
-    fun start(platformDependencies: PlatformDependencyProviding) {
+    public fun start(platformDependencies: PlatformDependencyProviding) {
         setup(platformDependencies)
 
         sharedInitializationUseCase().invoke(

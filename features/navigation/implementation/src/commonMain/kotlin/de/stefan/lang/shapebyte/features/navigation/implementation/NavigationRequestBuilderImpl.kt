@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequest
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestBuilder
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRoute
 
-class NavigationRequestBuilderImpl : NavigationRequestBuilder {
+public class NavigationRequestBuilderImpl : NavigationRequestBuilder {
     override fun quickWorkout(workoutId: Int): NavigationRequest.NavigateTo {
         return NavigationRequest.NavigateTo(
             NavigationRoute.QuickWorkout.pathFormat.replace(

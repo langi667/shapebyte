@@ -5,7 +5,7 @@ import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestRe
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRouteId
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationTarget
 
-class NavigationRequestResolverImpl : NavigationRequestResolver {
+public class NavigationRequestResolverImpl : NavigationRequestResolver {
     override fun resolve(request: NavigationRequest): NavigationTarget {
         return when (request) {
             is NavigationRequest.NavigateTo -> {

@@ -12,7 +12,7 @@ import de.stefan.lang.shapebyte.features.workout.presentation.generated.Module
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
-object WorkoutPresentationModule :
+public object WorkoutPresentationModule :
     Module(
         globalBindings = {
             factory<TimedWorkoutViewModel> { (navHandler: NavigationRequestHandling) ->
@@ -40,8 +40,8 @@ object WorkoutPresentationModule :
         },
     ),
     WorkoutPresentationContract {
-    override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
-    override fun timedWorkoutViewModel(navHandler: NavigationRequestHandling): TimedWorkoutViewModel {
+    public override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
+    public override fun timedWorkoutViewModel(navHandler: NavigationRequestHandling): TimedWorkoutViewModel {
         return get { parametersOf(navHandler) }
     }
 }

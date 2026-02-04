@@ -16,7 +16,7 @@ import de.stefan.lang.shapebyte.features.workout.data.generated.Dependencies
 import de.stefan.lang.shapebyte.features.workout.data.generated.Module
 import org.koin.core.component.get
 
-object WorkoutDataModule :
+public object WorkoutDataModule :
     Module(
         globalBindings = {
             single<WorkoutHistoryRepository> { WorkoutHistoryRepository(dataSource = get()) }
@@ -50,15 +50,15 @@ object WorkoutDataModule :
         },
     ),
     WorkoutDataContract {
-    override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
+    public override fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry =
         WorkoutHistoryEntry(
             entry = scheduleEntry,
             dateStringFormatter = Dependencies.dateTimeStringFormatter(),
         )
 
-    override fun workoutHistoryRepository(): WorkoutHistoryRepository = get()
+    public override fun workoutHistoryRepository(): WorkoutHistoryRepository = get()
 
-    override fun workoutScheduleRepository(): WorkoutScheduleRepository = get()
+    public override fun workoutScheduleRepository(): WorkoutScheduleRepository = get()
 
-    override fun quickWorkoutsRepository(): QuickWorkoutsRepository = get()
+    public override fun quickWorkoutsRepository(): QuickWorkoutsRepository = get()
 }

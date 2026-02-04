@@ -1,6 +1,6 @@
 package de.stefan.lang.foundation.core.contract.os
 
-sealed interface OperatingSystem {
-    data object Android : OperatingSystem
-    data object IOS : OperatingSystem
+public sealed interface OperatingSystem {
+    public data object Android : OperatingSystem
+    public data object IOS : OperatingSystem
 }

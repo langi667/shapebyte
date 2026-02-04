@@ -14,10 +14,10 @@ import platform.UIKit.UIWindow
 import platform.UIKit.UIWindowScene
 
 @OptIn(ExperimentalForeignApi::class)
-actual class SafeAreaDetector actual constructor(logger: Logger) : Loggable {
-    actual override val logger: Logger = logger
+public actual class SafeAreaDetector actual constructor(logger: Logger) : Loggable {
+    public actual override val logger: Logger = logger
 
-    actual fun detectSafeArea(): Flow<SafeArea> = flow {
+    public actual fun detectSafeArea(): Flow<SafeArea> = flow {
         repeat(10) {
             readSafeAreaSize()?.let { safeArea ->
                 emit(safeArea)

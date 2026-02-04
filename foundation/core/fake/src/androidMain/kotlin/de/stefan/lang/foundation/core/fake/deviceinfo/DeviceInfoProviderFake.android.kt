@@ -6,7 +6,7 @@ import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-actual class DeviceInfoProviderFake actual constructor() : DeviceInfoProvider {
+public actual class DeviceInfoProviderFake actual constructor() : DeviceInfoProvider {
     actual override fun readDeviceInfos(): Flow<DeviceInfoProvider> = flowOf(this)
     actual override val screenSize: Size = Size(width = 393.0f, height = 852.0f)
     actual override val operatingSystem: OperatingSystem = OperatingSystem.Android

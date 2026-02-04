@@ -1,5 +1,5 @@
 package de.stefan.lang.foundation.core.contract.assets
 
-interface FileAssetLoader {
-    fun loadFile(fileAsset: FileAsset): String
+public interface FileAssetLoader {
+    public fun loadFile(fileAsset: FileAsset): String
 }

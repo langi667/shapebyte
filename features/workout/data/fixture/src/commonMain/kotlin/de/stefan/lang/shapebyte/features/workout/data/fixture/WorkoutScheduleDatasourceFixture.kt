@@ -7,8 +7,8 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutS
 import kotlinx.datetime.Clock
 
 @Suppress("MagicNumber")
-object WorkoutScheduleDatasourceFixture : WorkoutScheduleDatasource {
-    override suspend fun currentWorkoutScheduleEntry(): LoadState.Result<WorkoutScheduleEntry?> {
+public object WorkoutScheduleDatasourceFixture : WorkoutScheduleDatasource {
+    public override suspend fun currentWorkoutScheduleEntry(): LoadState.Result<WorkoutScheduleEntry?> {
         val entry = WorkoutScheduleEntry(
             id = "1",
             name = "Leg Day",

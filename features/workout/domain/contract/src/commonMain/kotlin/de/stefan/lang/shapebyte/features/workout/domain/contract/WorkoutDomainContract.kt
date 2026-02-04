@@ -14,24 +14,24 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.Q
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutsUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
 
-interface WorkoutDomainContract {
-    fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase
-    fun fetchRecentWorkoutHistoryUseCase(loadFeatureToggleUseCase: LoadFeatureToggleUseCase): FetchRecentWorkoutHistoryUseCase
-    fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
-    fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution
-    fun createRepetitiveItemExecution(
+public interface WorkoutDomainContract {
+    public fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase
+    public fun fetchRecentWorkoutHistoryUseCase(loadFeatureToggleUseCase: LoadFeatureToggleUseCase): FetchRecentWorkoutHistoryUseCase
+    public fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase
+    public fun createTimedItemExecution(item: Item, sets: List<ItemSet.Timed.Seconds>): TimedItemExecution
+    public fun createRepetitiveItemExecution(
         item: Item,
         sets: List<ItemSet.Repetition>,
     ): RepetitiveItemExecution
 
-    fun quickWorkoutsUseCase(loadFeatureToggleUseCase: LoadFeatureToggleUseCase): QuickWorkoutsUseCase
-    fun quickWorkoutsUseCase(): QuickWorkoutsUseCase
-    fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase
-    fun quickWorkoutForIdUseCase(
+    public fun quickWorkoutsUseCase(loadFeatureToggleUseCase: LoadFeatureToggleUseCase): QuickWorkoutsUseCase
+    public fun quickWorkoutsUseCase(): QuickWorkoutsUseCase
+    public fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase
+    public fun quickWorkoutForIdUseCase(
         repository: QuickWorkoutsRepository,
         loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     ): QuickWorkoutForIdUseCase
 
-    fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution
-    fun itemsExecutionBuilder(): ItemsExecutionBuilding
+    public fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution
+    public fun itemsExecutionBuilder(): ItemsExecutionBuilding
 }

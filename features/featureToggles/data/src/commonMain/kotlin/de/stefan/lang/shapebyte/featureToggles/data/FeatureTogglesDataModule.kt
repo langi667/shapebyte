@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.features.featureToggles.data.generated.Dependenc
 import de.stefan.lang.shapebyte.features.featureToggles.data.generated.Module
 import org.koin.core.component.get
 
-object FeatureTogglesDataModule :
+public object FeatureTogglesDataModule :
     Module(
         globalBindings = {
             single<FeatureToggleRepository> {
@@ -37,5 +37,5 @@ object FeatureTogglesDataModule :
         },
     ),
     FeatureTogglesDataModuleContract {
-    override fun featureToggleRepository(): FeatureToggleRepository = get()
+    public override fun featureToggleRepository(): FeatureToggleRepository = get()
 }

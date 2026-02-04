@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.quick
 
-import BaseTest
+import de.stefan.lang.shapebyte.features.workout.domain.test.BaseTest
 import app.cash.turbine.test
 import de.stefan.lang.coretest.CoreTest
 import de.stefan.lang.coroutines.CoroutinesModule

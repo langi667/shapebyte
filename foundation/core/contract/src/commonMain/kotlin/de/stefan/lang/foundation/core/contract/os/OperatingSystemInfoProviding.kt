@@ -1,5 +1,5 @@
 package de.stefan.lang.foundation.core.contract.os
 
-interface OperatingSystemInfoProviding {
-    val operatingSystem: OperatingSystem
+public interface OperatingSystemInfoProviding {
+    public val operatingSystem: OperatingSystem
 }

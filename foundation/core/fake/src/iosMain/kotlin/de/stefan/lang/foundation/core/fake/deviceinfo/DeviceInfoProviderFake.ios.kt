@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOf
  */
 
 // TODO: consider reading from file
-actual class DeviceInfoProviderFake actual constructor() : DeviceInfoProvider {
+public actual class DeviceInfoProviderFake actual constructor() : DeviceInfoProvider {
     actual override fun readDeviceInfos(): Flow<DeviceInfoProvider> = flowOf(this)
     actual override val screenSize: Size = Size(width = 393.0f, height = 852.0f)
     actual override val operatingSystem: OperatingSystem = OperatingSystem.IOS

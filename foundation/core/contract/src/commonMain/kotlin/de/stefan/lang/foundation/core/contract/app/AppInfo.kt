@@ -1,8 +1,8 @@
 package de.stefan.lang.foundation.core.contract.app
 
-data class AppInfo(
-    val packageName: String,
-    val versionName: String,
-    val versionCode: Int,
-    var debugMode: Boolean,
+public data class AppInfo public constructor(
+    public val packageName: String,
+    public val versionName: String,
+    public val versionCode: Int,
+    public var debugMode: Boolean,
 )

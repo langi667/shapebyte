@@ -7,10 +7,10 @@ import de.stefan.lang.foundation.core.contract.safearea.SafeArea
 import de.stefan.lang.foundation.core.implementation.safearea.SafeAreaDetector
 import kotlinx.coroutines.flow.Flow
 
-expect class DeviceInfoProviderImpl(safeAreaDetector: SafeAreaDetector) : DeviceInfoProvider {
-    override val screenSize: Size
-    override val operatingSystem: OperatingSystem
-    override val safeArea: SafeArea
+public expect class DeviceInfoProviderImpl public constructor(safeAreaDetector: SafeAreaDetector) : DeviceInfoProvider {
+    public override val screenSize: Size
+    public override val operatingSystem: OperatingSystem
+    public override val safeArea: SafeArea
 
-    override fun readDeviceInfos(): Flow<DeviceInfoProvider>
+    public override fun readDeviceInfos(): Flow<DeviceInfoProvider>
 }

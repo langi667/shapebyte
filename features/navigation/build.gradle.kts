@@ -10,6 +10,7 @@ plugins {
 configureDi(moduleClassName = "de.stefan.lang.shapebyte.features.navigation.NavigationModule")
 
 kotlin {
+    explicitApi()
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -25,6 +26,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.features.navigation.contract)
+            implementation(projects.features.navigation.implementation)
 
             implementation(projects.core.di)
             implementation(libs.koin.core)

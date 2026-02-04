@@ -4,43 +4,43 @@ import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 
-sealed interface ItemExecutionState<out T> {
-    data object Idle : ItemExecutionState<Nothing>
+public sealed interface ItemExecutionState<out T> {
+    public data object Idle : ItemExecutionState<Nothing>
 
-    interface ItemContaining<out T> : ItemExecutionState<T> {
-        val item: Item
+    public interface ItemContaining<out T> : ItemExecutionState<T> {
+        public val item: Item
     }
 
-    data class Started(override val item: Item) : ItemContaining<Nothing>
+    public data class Started(override val item: Item) : ItemContaining<Nothing>
 
-    interface Running<out T> : ItemContaining<T> {
+    public interface Running<out T> : ItemContaining<T> {
         /**
          * The current item which sets are running
          */
-        override val item: Item
+        public override val item: Item
 
         /**
          * The current set of the item that is running
          */
-        val set: ItemSet
+        public val set: ItemSet
 
         /**
          * The progress of the current set
          */
-        val progress: Progress
+        public val progress: Progress
 
         /**
          * Progress in relations to all sets, basically the overall progress
          */
-        val totalProgress: Progress
+        public val totalProgress: Progress
 
         /**
          * The specific set data, like [TimedItemExecutionData]
          */
-        val setData: T
+        public val setData: T
     }
 
-    data class SetStarted<out T>(
+    public data class SetStarted<out T>(
         override val item: Item,
         override val set: ItemSet,
         override val progress: Progress,
@@ -48,7 +48,7 @@ sealed interface ItemExecutionState<out T> {
         override val setData: T,
     ) : Running<T>
 
-    data class SetRunning<out T>(
+    public data class SetRunning<out T>(
         override val item: Item,
         override val set: ItemSet,
         override val progress: Progress,
@@ -56,7 +56,7 @@ sealed interface ItemExecutionState<out T> {
         override val setData: T,
     ) : Running<T>
 
-    data class SetFinished<out T>(
+    public data class SetFinished<out T>(
         override val item: Item,
         override val set: ItemSet,
         override val progress: Progress,
@@ -64,6 +64,6 @@ sealed interface ItemExecutionState<out T> {
         override val setData: T,
     ) : Running<T>
 
-    data class Paused(val item: Item) : ItemExecutionState<Nothing>
-    data class Finished(val item: Item, val completed: Boolean) : ItemExecutionState<Nothing>
+    public data class Paused(val item: Item) : ItemExecutionState<Nothing>
+    public data class Finished(val item: Item, val completed: Boolean) : ItemExecutionState<Nothing>
 }

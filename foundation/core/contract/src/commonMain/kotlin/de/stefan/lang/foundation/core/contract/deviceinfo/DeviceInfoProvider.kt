@@ -5,10 +5,10 @@ import de.stefan.lang.foundation.core.contract.os.OperatingSystemInfoProviding
 import de.stefan.lang.foundation.core.contract.safearea.SafeAreaProviding
 import kotlinx.coroutines.flow.Flow
 
-interface DeviceInfoProvider :
+public interface DeviceInfoProvider :
     ScreenSizeProviding,
     OperatingSystemInfoProviding,
     SafeAreaProviding {
 
-    fun readDeviceInfos(): Flow<DeviceInfoProvider>
+    public fun readDeviceInfos(): Flow<DeviceInfoProvider>
 }

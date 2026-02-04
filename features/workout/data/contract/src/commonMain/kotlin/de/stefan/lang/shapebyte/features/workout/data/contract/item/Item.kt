@@ -6,14 +6,14 @@ import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 Represents any kind of workout item, such as exercise, breaks, countdown, cooldown, warm up ...
  */
 
-interface Item {
-    val name: String
+public interface Item {
+    public val name: String
 }
 
-interface ImageContaining {
-    val imageAsset: ImageAsset?
+public interface ImageContaining {
+    public val imageAsset: ImageAsset?
 }
 
-object None : Item {
+public object None : Item {
     override val name: String = "None"
 }

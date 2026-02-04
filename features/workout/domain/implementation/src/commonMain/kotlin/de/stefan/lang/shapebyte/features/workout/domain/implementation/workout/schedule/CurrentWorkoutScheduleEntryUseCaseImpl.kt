@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class CurrentWorkoutScheduleEntryUseCaseImpl(
+public class CurrentWorkoutScheduleEntryUseCaseImpl(
     private val repository: WorkoutScheduleRepository,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,
@@ -21,7 +21,7 @@ class CurrentWorkoutScheduleEntryUseCaseImpl(
         context = coroutineContextProvider.iODispatcher(),
     )
 
-    override operator fun invoke(): Flow<LoadState<WorkoutScheduleEntry?>> {
+    public override operator fun invoke(): Flow<LoadState<WorkoutScheduleEntry?>> {
         scope.launch {
             mutableFlow.emit(LoadState.Loading)
             mutableFlow.emit(repository.currentWorkoutScheduleEntry())

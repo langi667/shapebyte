@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class ItemsExecutionImpl(
+public class ItemsExecutionImpl(
     override val items: List<ItemExecuting<*, *>>,
     override val logger: Logger,
 ) : ItemsExecution {
 
     private val _state = MutableStateFlow<ItemsExecutionState>(ItemsExecutionState.Idle)
-    override val state: StateFlow<ItemsExecutionState> get() = _state
+    public override val state: StateFlow<ItemsExecutionState> get() = _state
 
     private var currItemIndex = -1
     private val allSets: List<ItemSet> = items.flatMap { it.sets }
@@ -31,7 +31,7 @@ class ItemsExecutionImpl(
     private var currJob: Job? = null
     private var pauseExecution: Boolean = false
 
-    override fun start(scope: CoroutineScope): Boolean {
+    public override fun start(scope: CoroutineScope): Boolean {
         when (state.value) {
             ItemsExecutionState.Idle -> {
                 _state.value = ItemsExecutionState.Started
@@ -65,7 +65,7 @@ class ItemsExecutionImpl(
         }
     }
 
-    override fun pause(): Boolean {
+    public override fun pause(): Boolean {
         if (state.value !is ItemsExecutionState.Running) {
             logW("Cannot pause a set that is not running")
             return false
@@ -90,7 +90,7 @@ class ItemsExecutionImpl(
         }
     }
 
-    override fun stop(): Boolean {
+    public override fun stop(): Boolean {
         if (state.value !is ItemsExecutionState.Launched) {
             logW("Cannot stop, items execution is not launched")
             return false
@@ -103,7 +103,7 @@ class ItemsExecutionImpl(
         return true
     }
 
-    override fun pauseOrStart(scope: CoroutineScope): Boolean {
+    public override fun pauseOrStart(scope: CoroutineScope): Boolean {
         return when (state.value) {
             is ItemsExecutionState.Running -> {
                 pause()

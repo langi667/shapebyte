@@ -1,8 +1,8 @@
 package de.stefan.lang.shapebyte.features.navigation.contract
 
-sealed class NavigationTarget {
-    data object Back : NavigationTarget()
-    data object Home : NavigationTarget()
+public sealed class NavigationTarget {
+    public data object Back : NavigationTarget()
+    public data object Home : NavigationTarget()
 
-    data class QuickWorkout(val workoutId: Int) : NavigationTarget()
+    public data class QuickWorkout(public val workoutId: Int) : NavigationTarget()
 }

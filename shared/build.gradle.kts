@@ -21,6 +21,7 @@ tasks.register("allTestDebugUnitTest") {
 }
 
 kotlin {
+    explicitApi()
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -49,31 +50,48 @@ kotlin {
         }
 
         commonMain.dependencies {
+            api(projects.shared.contract)
+            api(projects.core.utils.contract)
+            api(projects.core.logging.contract)
+
+            api(projects.foundation.core.contract)
+            api(projects.foundation.presentation.contract)
+            api(projects.designsystem.contract)
+            api(projects.features.featureToggles.data.contract)
+            api(projects.features.featureToggles.domain.contract)
+
+            api(projects.features.home.presentation.contract)
+            api(projects.features.workout.data.contract)
+            api(projects.features.workout.presentation.contract)
+            api(projects.features.navigation.contract)
+
+            implementation(projects.shared.implementation)
+            implementation(projects.core.di)
+            implementation(projects.core.coroutines)
+
+            implementation(projects.core.utils)
+            implementation(projects.core.logging)
+            implementation(projects.foundation.core)
+            implementation(projects.foundation.presentation)
+
+            implementation(projects.features.featureToggles.data)
+            implementation(projects.features.featureToggles.domain)
+
+            implementation(projects.features.navigation)
+
+            implementation(projects.features.workout.data)
+            implementation(projects.features.workout.domain)
+            implementation(projects.features.workout.presentation)
+            implementation(projects.features.home.presentation)
+
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            api(projects.shared.contract)
-            api(projects.core.utils)
-            api(projects.core.logging)
-
-            api(projects.foundation.core)
-            api(projects.foundation.presentation)
-            api(projects.designsystem)
-            api(projects.features.featureToggles.data)
-            api(projects.features.featureToggles.domain)
-
-            api(projects.features.home.presentation)
-            api(projects.features.workout.data)
-            api(projects.features.workout.data.contract)
-            api(projects.features.workout.presentation)
 
 
-            api(projects.features.navigation)
-            implementation(projects.core.di)
-            implementation(projects.core.coroutines)
-            implementation(projects.shared.implementation)
+
 
         }
 
@@ -89,16 +107,16 @@ kotlin {
     targets.withType<KotlinNativeTarget>{
         binaries.withType<Framework> {
             isStatic = false
-            export(projects.core.utils)
+            export(projects.core.utils.contract)
             export(projects.shared.contract)
-            export(projects.foundation.core)
-            export(projects.foundation.presentation)
-            export(projects.designsystem)
-            export(projects.features.featureToggles.domain)
-            export(projects.features.home.presentation)
-            export(projects.features.workout.presentation)
+            export(projects.foundation.core.contract)
+            export(projects.foundation.presentation.contract)
+            export(projects.designsystem.contract)
+            export(projects.features.featureToggles.domain.contract)
+            export(projects.features.home.presentation.contract)
+            export(projects.features.workout.presentation.contract)
             export(projects.features.workout.data.contract)
-            export(projects.features.navigation)
+            export(projects.features.navigation.contract)
 
             transitiveExport = true
         }

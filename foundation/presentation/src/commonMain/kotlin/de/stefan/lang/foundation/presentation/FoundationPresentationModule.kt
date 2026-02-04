@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.foundation.presentation.generated.Dependencies
 import de.stefan.lang.shapebyte.foundation.presentation.generated.Module
 import org.koin.core.component.get
 
-object FoundationPresentationModule :
+public object FoundationPresentationModule :
     Module(
         globalBindings = {
             single<DimensionProvider> {
@@ -18,5 +18,5 @@ object FoundationPresentationModule :
     ),
     FoundationPresentationContract {
 
-    override fun dimensionProvider(): DimensionProvider = get()
+    public override fun dimensionProvider(): DimensionProvider = get()
 }

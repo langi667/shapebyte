@@ -10,7 +10,7 @@ import de.stefan.lang.shapebyte.features.featureToggles.domain.generated.Module
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
-object FeatureTogglesDomainModule :
+public object FeatureTogglesDomainModule :
     Module(
         globalBindings = {
             factory<FeatureToggleUseCase> { (featureId: String) ->
@@ -30,8 +30,8 @@ object FeatureTogglesDomainModule :
         },
     ),
     FeatureTogglesDomainContract {
-    override fun loadFeatureToggleUseCase(): LoadFeatureToggleUseCase = get()
-    override fun featureToggleUseCase(featureId: String): FeatureToggleUseCase =
+    public override fun loadFeatureToggleUseCase(): LoadFeatureToggleUseCase = get()
+    public override fun featureToggleUseCase(featureId: String): FeatureToggleUseCase =
         get(
             parameters = {
                 parametersOf(featureId)

@@ -11,7 +11,7 @@ import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharedFlow
 
-abstract class QuickWorkoutForIdUseCase(
+public abstract class QuickWorkoutForIdUseCase(
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,
@@ -23,5 +23,5 @@ abstract class QuickWorkoutForIdUseCase(
     dispatcher = coroutineContextProvider.iODispatcher(),
     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
-    abstract operator fun invoke(id: Int): SharedFlow<LoadState<Workout>>
+    public abstract operator fun invoke(id: Int): SharedFlow<LoadState<Workout>>
 }

@@ -6,14 +6,14 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-fun List<ItemSet.Timed>.sumSeconds(): Duration =
+public fun List<ItemSet.Timed>.sumSeconds(): Duration =
     ((this.sumMilliSecsRaw()) / SECOND_IN_MILLISECONDS).seconds
 
-fun List<ItemSet.Timed>.sumSecondsTo(index: Int): Duration =
+public fun List<ItemSet.Timed>.sumSecondsTo(index: Int): Duration =
     ((this.sumMilliSecsRawTo(index)) / SECOND_IN_MILLISECONDS).seconds
 
-fun List<ItemSet.Timed>.sumMilliseconds(): Duration = this.sumMilliSecsRaw().milliseconds
-fun List<ItemSet.Timed>.sumMillisecondsTo(index: Int): Duration =
+public fun List<ItemSet.Timed>.sumMilliseconds(): Duration = this.sumMilliSecsRaw().milliseconds
+public fun List<ItemSet.Timed>.sumMillisecondsTo(index: Int): Duration =
     this.sumMilliSecsRawTo(index).milliseconds
 
 private fun List<ItemSet.Timed>.sumMilliSecsRaw(): Int {

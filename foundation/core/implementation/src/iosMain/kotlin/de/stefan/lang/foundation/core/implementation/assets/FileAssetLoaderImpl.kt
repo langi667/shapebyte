@@ -11,17 +11,17 @@ import platform.Foundation.NSString
 import platform.Foundation.NSUTF8StringEncoding
 import platform.Foundation.stringWithContentsOfFile
 
-actual class FileAssetLoaderImpl actual constructor(
+public actual class FileAssetLoaderImpl actual constructor(
     appContextProvider: ContextProvider,
     logging: Logger
 ) :
     FileAssetLoader,
     Loggable
 {
-    actual override val logger = logging
+    public actual override val logger: Logger = logging
 
     @OptIn(ExperimentalForeignApi::class)
-    actual override fun loadFile(fileAsset: FileAsset): String {
+    public actual override fun loadFile(fileAsset: FileAsset): String {
         val path = NSBundle.mainBundle.pathForResource(
             name = fileAsset.fileNameWithoutEnding,
             ofType = fileAsset.fileEnding

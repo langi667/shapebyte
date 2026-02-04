@@ -20,14 +20,14 @@ import kotlinx.coroutines.yield
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
-class TimedItemExecutionImpl(
+public class TimedItemExecutionImpl(
     override val item: Item,
     override val sets: List<ItemSet.Timed.Seconds>,
     override val logger: Logger,
 ) : TimedItemExecution {
 
-    companion object {
-        fun countdown(
+    public companion object {
+        public fun countdown(
             seconds: UInt,
             logging: Logger,
         ): TimedItemExecutionImpl {
@@ -48,14 +48,14 @@ class TimedItemExecutionImpl(
             ItemExecutionState.Idle,
         )
 
-    override val state: StateFlow<ItemExecutionState<TimedItemExecutionData>> get() = _state
+    public override val state: StateFlow<ItemExecutionState<TimedItemExecutionData>> get() = _state
 
     private var currJob: Job? = null
     private var currSetIndex: Int = 0
     private var pauseExecution: Boolean = false
     private var resumeAtMS: Duration = Duration.Companion.ZERO
 
-    override fun start(scope: CoroutineScope): Boolean {
+    public override fun start(scope: CoroutineScope): Boolean {
         if (isRunning) {
             logE("Cannot start a new set while another one is running")
             return false
@@ -77,7 +77,7 @@ class TimedItemExecutionImpl(
         return true
     }
 
-    override fun pause(): Boolean {
+    public override fun pause(): Boolean {
         if (!isRunning) {
             logE("Cannot pause a set that is not running")
             return false
@@ -95,7 +95,7 @@ class TimedItemExecutionImpl(
         return true
     }
 
-    override fun stop(): Boolean {
+    public override fun stop(): Boolean {
         if (!isRunning) {
             logE("Cannot pause a set that is not running")
             return false

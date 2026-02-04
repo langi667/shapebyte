@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.data.contract.quick
 
-sealed class QuickWorkoutsError : Throwable() {
-    data object FeatureDisabled : QuickWorkoutsError()
-    data class WorkoutDoesNotExist(val workoutId: Int) : QuickWorkoutsError()
+public sealed class QuickWorkoutsError : Throwable() {
+    public data object FeatureDisabled : QuickWorkoutsError()
+    public data class WorkoutDoesNotExist(public val workoutId: Int) : QuickWorkoutsError()
 }

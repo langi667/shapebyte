@@ -4,7 +4,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.ModuleDeclaration
 import org.koin.dsl.module
 
-open class ModuleBindings(
+public open class ModuleBindings public constructor(
     allEnvironments: ModuleDeclaration,
     productionEnvironmentOnly: ModuleDeclaration = {},
     testEnvironmentOnly: ModuleDeclaration = {},

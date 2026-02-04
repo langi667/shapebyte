@@ -1,26 +1,26 @@
 package de.stefan.lang.foundation.core.contract.loadstate
 
-sealed interface LoadState<out T> {
-    data object Loading : LoadState<Nothing>
+public sealed interface LoadState<out T> {
+    public data object Loading : LoadState<Nothing>
 
-    sealed interface Result<out T> : LoadState<T>
+    public sealed interface Result<out T> : LoadState<T>
 
-    data class Success<T>(val data: T) : Result<T>
-    data class Error(val reason: Throwable) : Result<Nothing>
+    public data class Success<T>(public val data: T) : Result<T>
+    public data class Error(public val reason: Throwable) : Result<Nothing>
 
-    val isLoading: Boolean
+    public val isLoading: Boolean
         get() = this is Loading
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> dataOrNull(): T? {
+    public fun <T> dataOrNull(): T? {
         val data = (this as? Success<T>)?.data
         return data
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> resultOrNull(): Result<T>? = (this as? Result<T>)
+    public fun <T> resultOrNull(): Result<T>? = (this as? Result<T>)
 
-    fun errorOrNull(): Throwable? {
+    public fun errorOrNull(): Throwable? {
         return (this as? Error)?.reason
     }
 }

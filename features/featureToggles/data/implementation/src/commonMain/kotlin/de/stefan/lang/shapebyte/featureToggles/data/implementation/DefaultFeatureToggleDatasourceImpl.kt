@@ -11,14 +11,14 @@ import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.withContext
 
-class DefaultFeatureToggleDatasourceImpl(
-    override val logger: Logger,
+public class DefaultFeatureToggleDatasourceImpl(
+    public override val logger: Logger,
     private val assetLoader: FileAssetLoader,
     coroutineContextProvider: CoroutineContextProvider,
 ) : FeatureToggleDatasource, Loggable {
 
-    companion object {
-        val defaultAssetFile = FileAsset(
+    public companion object {
+        public val defaultAssetFile: FileAsset = FileAsset(
             assetName = "featuretoggles/featuretoggle_defaults.json",
             locatedInBundle = true,
         )
@@ -27,7 +27,7 @@ class DefaultFeatureToggleDatasourceImpl(
     private val defaultFeatureToggles: List<FeatureToggle> by lazy { readDefaultFeatureToggles() }
     private val dispatcher = coroutineContextProvider.iODispatcher()
 
-    override suspend fun fetchFeatureToggle(
+    public override suspend fun fetchFeatureToggle(
         identifier: String,
     ): LoadState.Result<FeatureToggle> = withContext(dispatcher) {
         val featureToggle = defaultFeatureToggles.firstOrNull { it.identifier == identifier }

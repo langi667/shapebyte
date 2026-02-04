@@ -3,7 +3,7 @@ package de.stefan.lang.foundation.core.implementation.devicesize
 import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategory
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 
-enum class iPhoneSizeBounds(val category: DeviceSizeCategory) {
+public enum class iPhoneSizeBounds(public val category: DeviceSizeCategory) {
     xSmall(DeviceSizeCategory.XSmall(size = Size(width = 320f, height = 568f))),
     small(DeviceSizeCategory.Small(size = Size(width = 375f, height = 667f))),
     medium(DeviceSizeCategory.Medium(size = Size(width = 390f, height = 844f))),
@@ -13,14 +13,14 @@ enum class iPhoneSizeBounds(val category: DeviceSizeCategory) {
     ;
 
 
-    val bounds = category.size
-    val width = bounds.width
-    val widthInt = bounds.width.toInt()
+    public val bounds: Size = category.size
+    public val width: Float = bounds.width
+    public val widthInt: Int = bounds.width.toInt()
 
-    val height = bounds.height
-    val heightInt = bounds.height.toInt()
+    public val height: Float = bounds.height
+    public val heightInt: Int = bounds.height.toInt()
 
-    val widthCG = width.toDouble()
-    val heightCG = height.toDouble()
+    public val widthCG: Double = width.toDouble()
+    public val heightCG: Double = height.toDouble()
 
 }

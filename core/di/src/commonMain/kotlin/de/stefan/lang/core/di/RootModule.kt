@@ -6,7 +6,7 @@ import org.koin.dsl.ModuleDeclaration
 /**
  * Aggregates local bindings ([bindings]) with other [dependencies] into a single module and test module.
  */
-open class RootModule(
+public open class RootModule public constructor(
     /**
      * Local bindings for this module. Basically here you provide all instances that this module offers.
      */
@@ -21,12 +21,12 @@ open class RootModule(
     override val productionDiModule: Module = this.joinModules(allModules.map { it.productionDiModule })
     override val testDiModule: Module = this.joinModules(allModules.map { it.testDiModule })
 
-    constructor(dependencies: List<FeatureGraph>) : this(
+    public constructor(dependencies: List<FeatureGraph>) : this(
         bindings = ModuleBindings(allEnvironments = {}),
         dependencies = dependencies,
     )
 
-    constructor(
+    public constructor(
         globalBindings: ModuleDeclaration = {},
         productionBindings: ModuleDeclaration = {},
         testBindings: ModuleDeclaration = {},

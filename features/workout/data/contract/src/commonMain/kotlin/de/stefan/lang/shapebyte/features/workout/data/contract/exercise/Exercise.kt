@@ -4,15 +4,15 @@ import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ImageContaining
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 
-data class Exercise(
+public data class Exercise public constructor(
     override val name: String,
-    val assetName: String? = null,
+    public val assetName: String? = null,
 ) : Item, ImageContaining {
-    companion object {
-        val None = Exercise("")
+    public companion object {
+        public val None: Exercise = Exercise("")
     }
 
-    override val imageAsset: ImageAsset?
+    public override val imageAsset: ImageAsset?
         get() {
             val retVal: ImageAsset? = if (assetName != null) {
                 ImageAsset(assetName)

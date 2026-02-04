@@ -6,10 +6,10 @@ import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-actual class SafeAreaDetector actual constructor(logger: Logger) : Loggable {
-    actual override val logger: Logger = logger
+public actual class SafeAreaDetector actual constructor(logger: Logger) : Loggable {
+    public actual override val logger: Logger = logger
 
-    actual fun detectSafeArea(): Flow<SafeArea> {
+    public actual fun detectSafeArea(): Flow<SafeArea> {
         return flowOf(SafeArea())
     }
 }

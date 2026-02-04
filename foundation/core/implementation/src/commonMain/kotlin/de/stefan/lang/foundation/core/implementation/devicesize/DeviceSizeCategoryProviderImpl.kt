@@ -5,12 +5,12 @@ import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProv
 import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 
-expect class DeviceSizeCategoryProviderImpl(
+public expect class DeviceSizeCategoryProviderImpl public constructor(
     screenSizeProvider: ScreenSizeProviding,
 ) : DeviceSizeCategoryProvider {
-    override val screenSize: Size
-    override val sizeCategory: DeviceSizeCategory
-    override val screenSizeProvider: ScreenSizeProviding
+    public override val screenSize: Size
+    public override val sizeCategory: DeviceSizeCategory
+    public override val screenSizeProvider: ScreenSizeProviding
 
-    override fun sizeCategories(): List<DeviceSizeCategory>
+    public override fun sizeCategories(): List<DeviceSizeCategory>
 }

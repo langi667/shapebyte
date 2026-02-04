@@ -10,15 +10,15 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import platform.AVFAudio.AVAudioPlayer
 import platform.Foundation.NSURL
 
-actual class AudioPlayerImpl actual constructor(
+public actual class AudioPlayerImpl actual constructor(
     private val appContextProvider: ContextProvider,
     private val appResourceProvider: AppResourceProvider,
-    actual override val logger: Logger,
-): AudioPlayer, Loggable {
+    public actual override val logger: Logger,
+) : AudioPlayer, Loggable {
     private var audioPlayer: AVAudioPlayer? = null
 
     @OptIn(ExperimentalForeignApi::class)
-    actual override fun play(file: AudioResource) {
+    public actual override fun play(file: AudioResource) {
         logD("Playing audio file: ${file.id}")
 
         appResourceProvider.mainBundle.pathForResource(file.fileName, file.fileEnding)?.let { path ->

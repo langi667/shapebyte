@@ -5,8 +5,8 @@ import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.Flow
 
-expect class SafeAreaDetector(logger: Logger) : Loggable {
-    override val logger: Logger
+public expect class SafeAreaDetector public constructor(logger: Logger) : Loggable {
+    public override val logger: Logger
 
-    fun detectSafeArea(): Flow<SafeArea>
+    public fun detectSafeArea(): Flow<SafeArea>
 }

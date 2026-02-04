@@ -15,7 +15,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
 @OptIn(ExperimentalCoroutinesApi::class)
-abstract class CoreTest {
+public abstract class CoreTest {
     private val testDispatcher: CoroutineDispatcher by lazy {
         CoroutinesModule
             .coroutineContextProvider()
@@ -28,10 +28,10 @@ abstract class CoreTest {
 
     protected open val autostartKoin: Boolean = true
 
-    open val testModules: List<Module> = emptyList()
+    protected open val testModules: List<Module> = emptyList()
 
     @BeforeTest
-    fun startDI() {
+    public fun startDI() {
         try {
             startKoin { modules(requiredModules + testModules) }
         } catch (ex: Throwable) {
@@ -40,12 +40,12 @@ abstract class CoreTest {
     }
 
     @AfterTest
-    fun tearDown() {
+    public fun tearDown() {
         Dispatchers.resetMain()
         stopKoin()
     }
 
-    fun test(block: suspend CoroutineScope.() -> Unit) {
+    protected fun test(block: suspend CoroutineScope.() -> Unit) {
         Dispatchers.setMain(testDispatcher)
 
         runTest {
@@ -53,5 +53,5 @@ abstract class CoreTest {
         }
     }
 
-    companion object
+    protected companion object
 }

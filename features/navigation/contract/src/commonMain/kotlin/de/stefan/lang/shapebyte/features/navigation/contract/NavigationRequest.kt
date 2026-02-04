@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.navigation.contract
 
-sealed class NavigationRequest {
-    data object Back : NavigationRequest()
-    data class NavigateTo(val path: String) : NavigationRequest()
+public sealed class NavigationRequest {
+    public data object Back : NavigationRequest()
+    public data class NavigateTo(public val path: String) : NavigationRequest()
 }

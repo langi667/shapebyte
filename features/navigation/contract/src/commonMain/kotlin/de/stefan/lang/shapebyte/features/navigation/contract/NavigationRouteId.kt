@@ -1,19 +1,19 @@
 package de.stefan.lang.shapebyte.features.navigation.contract
 
-enum class NavigationRouteId {
+public enum class NavigationRouteId {
     Home,
     QuickWorkout,
     ;
 
-    val domain: String
+    public val domain: String
         get() = name
             .lowercase()
             .replace("_", "")
             .replace("-", "")
             .trim()
 
-    companion object {
-        fun routeIdForDomain(domain: String): NavigationRouteId? = NavigationRouteId
+    public companion object {
+        public fun routeIdForDomain(domain: String): NavigationRouteId? = NavigationRouteId
             .entries
             .firstOrNull { it.domain == domain }
     }

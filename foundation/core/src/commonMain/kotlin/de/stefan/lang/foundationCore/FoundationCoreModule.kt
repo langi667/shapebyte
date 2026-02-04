@@ -23,7 +23,7 @@ import de.stefan.lang.shapebyte.foundation.core.generated.Dependencies
 import de.stefan.lang.shapebyte.foundation.core.generated.Module
 import org.koin.core.component.get
 
-object FoundationCoreModule :
+public object FoundationCoreModule :
     Module(
         globalBindings = {
             single<OperatingSystemInfoProviding> { get<DeviceInfoProvider>() }
@@ -61,13 +61,13 @@ object FoundationCoreModule :
     FoundationCoreContract {
     private lateinit var appResourceProvider: AppResourceProvider
 
-    fun initialize(appResourceProvider: AppResourceProvider) {
+    public fun initialize(appResourceProvider: AppResourceProvider) {
         this.appResourceProvider = appResourceProvider
     }
 
-    override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
-    override fun fileAssetLoader(): FileAssetLoader = get()
-    override fun audioPlayer(): AudioPlayer = get()
-    override fun deviceInfoProvider(): DeviceInfoProvider = get()
-    override fun deviceSizeCategoryProvider(): DeviceSizeCategoryProvider = get()
+    public override fun dateTimeStringFormatter(): DateTimeStringFormatter = get()
+    public override fun fileAssetLoader(): FileAssetLoader = get()
+    public override fun audioPlayer(): AudioPlayer = get()
+    public override fun deviceInfoProvider(): DeviceInfoProvider = get()
+    public override fun deviceSizeCategoryProvider(): DeviceSizeCategoryProvider = get()
 }

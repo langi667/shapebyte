@@ -4,10 +4,10 @@ import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
 import kotlinx.datetime.Instant
 
-class WorkoutHistoryRepository(
+public class WorkoutHistoryRepository public constructor(
     private val dataSource: WorkoutHistoryDataSource,
 ) {
-    suspend fun historyForDates(
+    public suspend fun historyForDates(
         date: Instant,
         pastDate: Instant,
     ): LoadState.Result<List<WorkoutScheduleEntry>> {

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.navigation.contract
 
-enum class NavigationRoute(val id: String, val pathFormat: String) {
+public enum class NavigationRoute(public val id: String, public val pathFormat: String) {
     Home(
         id = NavigationRouteId.Home.domain,
         pathFormat = NavigationRouteId.Home.domain,

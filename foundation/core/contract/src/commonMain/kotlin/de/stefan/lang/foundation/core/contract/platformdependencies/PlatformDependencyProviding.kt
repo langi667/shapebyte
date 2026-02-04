@@ -4,8 +4,8 @@ import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 
-interface PlatformDependencyProviding {
-    val appInfo: AppInfo
-    val appContextProvider: ContextProvider
-    val appResourceProvider: AppResourceProvider
+public interface PlatformDependencyProviding {
+    public val appInfo: AppInfo
+    public val appContextProvider: ContextProvider
+    public val appResourceProvider: AppResourceProvider
 }

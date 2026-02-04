@@ -2,6 +2,6 @@ package de.stefan.lang.foundation.core.contract.resources
 
 import platform.Foundation.NSBundle
 
-actual class AppResourceProvider actual constructor() {
-    val mainBundle: NSBundle = NSBundle.mainBundle
+public actual class AppResourceProvider public actual constructor() {
+    public val mainBundle: NSBundle = NSBundle.mainBundle
 }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class RepetitiveItemExecutionImpl(
+public class RepetitiveItemExecutionImpl(
     override val item: Item,
     override val sets: List<ItemSet.Repetition>,
     override val logger: Logger,
@@ -20,34 +20,34 @@ class RepetitiveItemExecutionImpl(
     private val _state: MutableStateFlow<ItemExecutionState<RepetitiveItemExecutionData>> =
         MutableStateFlow(ItemExecutionState.Idle)
 
-    override val state: StateFlow<ItemExecutionState<RepetitiveItemExecutionData>> get() = _state
+    public override val state: StateFlow<ItemExecutionState<RepetitiveItemExecutionData>> get() = _state
 
-    val setRepsPerformed: UInt
+    public val setRepsPerformed: UInt
         get() = when (val currState = state.value) {
             is ItemExecutionState.Running -> currState.setData.repsPerSetPerformed
             else -> 0u
         }
 
-    val totalRepsPerformed: UInt
+    public val totalRepsPerformed: UInt
         get() = when (val currState = state.value) {
             is ItemExecutionState.Running -> currState.setData.totalRepsPerformed
             else -> 0u
         }
 
-    val totalRepsGoal: UInt?
+    public val totalRepsGoal: UInt?
         get() = if (hasSetWithoutMaxReps) {
             null
         } else {
             sets.sumOf { it.repetitions?.toInt() ?: 0 }.toUInt()
         }
 
-    val totalRepsRemaining: UInt?
+    public val totalRepsRemaining: UInt?
         get() = totalRepsRemaining(totalRepsPerformed)
 
     private val hasSetWithoutMaxReps = sets.firstOrNull { it.repetitions == null } != null
     private var currentSetIndex: UInt? = null
 
-    override fun setInputValue(value: UInt) {
+    public override fun setInputValue(value: UInt) {
         if (!isRunning) { // TODO: check if this is correct / can automatically start
             logE("Cannot add value to non started execution, call start first")
             return
@@ -100,7 +100,7 @@ class RepetitiveItemExecutionImpl(
         }
     }
 
-    override fun start(scope: CoroutineScope): Boolean {
+    public override fun start(scope: CoroutineScope): Boolean {
         if (isRunning) {
             logE("Cannot start a new set while another one is running")
             return false
@@ -112,12 +112,12 @@ class RepetitiveItemExecutionImpl(
         return true
     }
 
-    override fun pause(): Boolean {
+    public override fun pause(): Boolean {
         // TODO: implement
         return false
     }
 
-    override fun stop(): Boolean {
+    public override fun stop(): Boolean {
         // TODO: implement
         return false
     }

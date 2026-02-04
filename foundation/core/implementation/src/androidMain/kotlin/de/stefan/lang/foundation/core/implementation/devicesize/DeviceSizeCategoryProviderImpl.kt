@@ -5,15 +5,15 @@ import de.stefan.lang.foundation.core.contract.devicesize.DeviceSizeCategoryProv
 import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 
-actual class DeviceSizeCategoryProviderImpl actual constructor(
-    actual override val screenSizeProvider: ScreenSizeProviding,
+public actual class DeviceSizeCategoryProviderImpl actual constructor(
+    public actual override val screenSizeProvider: ScreenSizeProviding,
 ) : DeviceSizeCategoryProvider {
-    actual override val screenSize: Size by lazy { screenSizeProvider.screenSize }
-    actual override val sizeCategory: DeviceSizeCategory by lazy {
+    public actual override val screenSize: Size by lazy { screenSizeProvider.screenSize }
+    public actual override val sizeCategory: DeviceSizeCategory by lazy {
         deviceSizeCategoryForSize(this.screenSize)
     }
 
-    actual override fun sizeCategories(): List<DeviceSizeCategory> = AndroidSizeBounds
+    public actual override fun sizeCategories(): List<DeviceSizeCategory> = AndroidSizeBounds
         .entries
         .map { it.category }
 }

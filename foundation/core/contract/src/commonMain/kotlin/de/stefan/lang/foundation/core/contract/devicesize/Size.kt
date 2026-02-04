@@ -1,7 +1,7 @@
 package de.stefan.lang.foundation.core.contract.devicesize
 
-data class Size(val width: Float, val height: Float) {
-    companion object {
-        val ZERO = Size(0f, 0f)
+public data class Size public constructor(public val width: Float, public val height: Float) {
+    public companion object {
+        public val ZERO: Size = Size(0f, 0f)
     }
 }

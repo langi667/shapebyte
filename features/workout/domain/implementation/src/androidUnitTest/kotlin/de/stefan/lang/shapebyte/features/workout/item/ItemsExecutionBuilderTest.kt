@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.item
 
-import BaseTest
+import de.stefan.lang.shapebyte.features.workout.domain.test.BaseTest
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder

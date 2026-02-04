@@ -7,16 +7,16 @@ import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 import java.io.IOException
 
-actual class FileAssetLoaderImpl actual constructor(
+public actual class FileAssetLoaderImpl actual constructor(
     private val appContextProvider: ContextProvider,
     logging: Logger,
 ) :
     FileAssetLoader,
     Loggable {
 
-    actual override val logger = logging
+    public actual override val logger: Logger = logging
 
-    actual override fun loadFile(fileAsset: FileAsset): String {
+    public actual override fun loadFile(fileAsset: FileAsset): String {
         val retVal: String = try {
             appContextProvider.androidContext.assets.open(fileAsset.subPath).bufferedReader()
                 .use { it.readText() }

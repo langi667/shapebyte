@@ -5,14 +5,14 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-class DateTimeStringFormatterImpl(
+public class DateTimeStringFormatterImpl public constructor(
     private val timeZone: TimeZone = TimeZone.currentSystemDefault(),
 ) : DateTimeStringFormatter {
-    companion object {
-        const val SECONDS_PER_MINUTE = 60
+    public companion object {
+        public const val SECONDS_PER_MINUTE: Int = 60
     }
 
-    override fun formatDateToDDMMYYYY(date: Instant): String {
+    public override fun formatDateToDDMMYYYY(date: Instant): String {
         val localDate = date.toLocalDateTime(timeZone).date
 
         val day = localDate.dayOfMonth.toString().padStart(2, '0')
@@ -22,7 +22,7 @@ class DateTimeStringFormatterImpl(
         return "$day.$month.$year"
     }
 
-    override fun formatSecondsToString(seconds: Int): String {
+    public override fun formatSecondsToString(seconds: Int): String {
         val minutes = seconds / SECONDS_PER_MINUTE
         val remainingSeconds = seconds % SECONDS_PER_MINUTE
 

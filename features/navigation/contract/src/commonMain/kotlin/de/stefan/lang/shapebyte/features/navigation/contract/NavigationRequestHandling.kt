@@ -1,5 +1,5 @@
 package de.stefan.lang.shapebyte.features.navigation.contract
 
-interface NavigationRequestHandling {
-    fun handleNavigationRequest(request: NavigationRequest)
+public interface NavigationRequestHandling {
+    public fun handleNavigationRequest(request: NavigationRequest): Unit
 }

@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import platform.UIKit.UIScreen
 
-actual class DeviceInfoProviderImpl actual constructor(private val safeAreaDetector: SafeAreaDetector) :
+public actual class DeviceInfoProviderImpl actual constructor(private val safeAreaDetector: SafeAreaDetector) :
     DeviceInfoProvider {
-    actual override val screenSize: Size by lazy { computeScreenSize() }
-    actual override val operatingSystem: OperatingSystem = OperatingSystem.IOS
-    actual override val safeArea: SafeArea get() = _safeArea
+    public actual override val screenSize: Size by lazy { computeScreenSize() }
+    public actual override val operatingSystem: OperatingSystem = OperatingSystem.IOS
+    public actual override val safeArea: SafeArea get() = _safeArea
 
     private var _safeArea: SafeArea = SafeArea()
 
@@ -31,7 +31,7 @@ actual class DeviceInfoProviderImpl actual constructor(private val safeAreaDetec
         return size
     }
 
-    actual override fun readDeviceInfos(): Flow<DeviceInfoProvider> = flow {
+    public actual override fun readDeviceInfos(): Flow<DeviceInfoProvider> = flow {
         safeAreaDetector.detectSafeArea().collect {
             _safeArea = it
 

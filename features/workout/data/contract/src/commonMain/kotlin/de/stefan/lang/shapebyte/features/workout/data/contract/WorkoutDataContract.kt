@@ -6,9 +6,9 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkou
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleRepository
 
-interface WorkoutDataContract {
-    fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
-    fun workoutHistoryRepository(): WorkoutHistoryRepository
-    fun workoutScheduleRepository(): WorkoutScheduleRepository
-    fun quickWorkoutsRepository(): QuickWorkoutsRepository
+public interface WorkoutDataContract {
+    public fun workoutHistoryEntry(scheduleEntry: WorkoutScheduleEntry): WorkoutHistoryEntry
+    public fun workoutHistoryRepository(): WorkoutHistoryRepository
+    public fun workoutScheduleRepository(): WorkoutScheduleRepository
+    public fun quickWorkoutsRepository(): QuickWorkoutsRepository
 }

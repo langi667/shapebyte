@@ -12,10 +12,10 @@ import kotlin.time.Duration
  * @param totalTimePassed overall time that has passed (ex. 2.5 seconds => 2 sets are finished 3rd is in progress)
  * @param totalDuration total duration of the item (ex. 5 seconds)
  */
-data class TimedItemExecutionData(
-    val setDuration: Duration,
-    val setTimePassed: Duration,
-    val totalTimePassed: Duration,
-    val totalTimeRemaining: Duration,
-    val totalDuration: Duration,
+public data class TimedItemExecutionData(
+    public val setDuration: Duration,
+    public val setTimePassed: Duration,
+    public val totalTimePassed: Duration,
+    public val totalTimeRemaining: Duration,
+    public val totalDuration: Duration,
 )

@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.repetative
 
-import BaseTest
+import de.stefan.lang.shapebyte.features.workout.domain.test.BaseTest
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item

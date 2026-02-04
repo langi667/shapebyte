@@ -2,7 +2,6 @@ import SwiftUI
 import PreviewSnapshots
 import shared
 
-// TODO: on disappear: stop
 @MainActor
 struct TimedWorkoutView: View {
     @State
@@ -44,6 +43,9 @@ struct TimedWorkoutView: View {
         }
         .onAppear {
             viewModel.intent(intent: TimedWorkoutUIIntent.Load(workoutId: self.workoutId))
+        }
+        .onDisappear {
+            viewModel.intent(intent: .Stop())
         }
     }
 

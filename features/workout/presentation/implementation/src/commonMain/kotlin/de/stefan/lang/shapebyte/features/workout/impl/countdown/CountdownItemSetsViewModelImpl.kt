@@ -17,12 +17,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class CountdownItemSetsViewModelImpl(
+public class CountdownItemSetsViewModelImpl(
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     private val timedHandlerFactory: (item: Item, sets: List<ItemSet.Timed.Seconds>) -> TimedItemExecution,
 ) : CountdownItemSetsViewModel(logger, coroutineContextProvider) {
-    companion object Companion {
+    public companion object Companion {
         private const val TIMER_OFFSET = 100L
     }
 
@@ -32,10 +32,10 @@ class CountdownItemSetsViewModelImpl(
         ),
     )
     
-    override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>> = _state
+    public override val state: StateFlow<UIState.Data<CountdownItemSetsViewData>> = _state
     private var itemSets: List<ItemSet.Timed.Seconds>? = null
 
-    override fun intent(intent: CountdownItemSetsUIIntent) {
+    public override fun intent(intent: CountdownItemSetsUIIntent) {
         when (intent) {
             is CountdownItemSetsUIIntent.Start -> {
                 start(intent.itemSets)

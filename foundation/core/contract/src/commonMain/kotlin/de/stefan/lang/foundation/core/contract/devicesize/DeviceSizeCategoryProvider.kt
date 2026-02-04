@@ -1,13 +1,13 @@
 package de.stefan.lang.foundation.core.contract.devicesize
 
-interface DeviceSizeCategoryProvider {
-    val screenSize: Size
-    val sizeCategory: DeviceSizeCategory
-    val screenSizeProvider: ScreenSizeProviding
+public interface DeviceSizeCategoryProvider {
+    public val screenSize: Size
+    public val sizeCategory: DeviceSizeCategory
+    public val screenSizeProvider: ScreenSizeProviding
 
-    fun sizeCategories(): List<DeviceSizeCategory>
+    public fun sizeCategories(): List<DeviceSizeCategory>
 
-    fun deviceSizeCategoryForSize(size: Size): DeviceSizeCategory {
+    public fun deviceSizeCategoryForSize(size: Size): DeviceSizeCategory {
         val height = size.height.toInt()
         var prevHeight = 0
 

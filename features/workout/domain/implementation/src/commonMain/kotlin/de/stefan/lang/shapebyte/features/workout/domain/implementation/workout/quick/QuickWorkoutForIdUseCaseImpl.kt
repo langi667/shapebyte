@@ -11,7 +11,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.Q
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.SharedFlow
 
-class QuickWorkoutForIdUseCaseImpl(
+public class QuickWorkoutForIdUseCaseImpl(
     private val repository: QuickWorkoutsRepository,
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
@@ -23,7 +23,7 @@ class QuickWorkoutForIdUseCaseImpl(
     coroutineScopeProvider = coroutineScopeProvider,
     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
-    override operator fun invoke(id: Int): SharedFlow<LoadState<Workout>> {
+    public override operator fun invoke(id: Int): SharedFlow<LoadState<Workout>> {
         return super.invoke(
             onDisabled = { QuickWorkoutsError.FeatureDisabled },
             onEnabled = { repository.workoutForId(id) },

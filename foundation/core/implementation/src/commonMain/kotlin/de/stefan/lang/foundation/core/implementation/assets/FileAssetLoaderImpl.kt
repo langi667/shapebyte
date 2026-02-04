@@ -6,13 +6,13 @@ import de.stefan.lang.foundation.core.contract.assets.FileAssetLoader
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 
-expect class FileAssetLoaderImpl(
+public expect class FileAssetLoaderImpl public constructor(
     appContextProvider: ContextProvider,
     logging: Logger,
 ) :
     FileAssetLoader,
     Loggable {
-    override val logger: Logger
+    public override val logger: Logger
 
-    override fun loadFile(fileAsset: FileAsset): String
+    public override fun loadFile(fileAsset: FileAsset): String
 }

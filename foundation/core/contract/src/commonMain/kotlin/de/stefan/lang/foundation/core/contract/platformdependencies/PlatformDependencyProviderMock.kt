@@ -4,7 +4,7 @@ import de.stefan.lang.coreutils.contract.nativecontext.ContextProvider
 import de.stefan.lang.foundation.core.contract.app.AppInfo
 import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 
-class PlatformDependencyProviderMock(
+public class PlatformDependencyProviderMock public constructor(
     override val appContextProvider: ContextProvider = ContextProvider(Any()),
 ) : PlatformDependencyProviding {
     override val appInfo: AppInfo = AppInfo(

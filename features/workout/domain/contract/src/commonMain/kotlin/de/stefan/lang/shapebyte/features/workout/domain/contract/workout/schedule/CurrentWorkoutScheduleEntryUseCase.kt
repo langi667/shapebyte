@@ -6,7 +6,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutS
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.Flow
 
-abstract class CurrentWorkoutScheduleEntryUseCase(logger: Logger) :
+public abstract class CurrentWorkoutScheduleEntryUseCase(logger: Logger) :
     BaseDataUseCase<WorkoutScheduleEntry?>(logger) {
-    abstract operator fun invoke(): Flow<LoadState<WorkoutScheduleEntry?>>
+    public abstract operator fun invoke(): Flow<LoadState<WorkoutScheduleEntry?>>
 }

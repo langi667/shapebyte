@@ -1,13 +1,13 @@
 package de.stefan.lang.foundation.core.contract.resources
 
 // TODO: test
-interface ResourceFile : Resource {
-    val name: String
+public interface ResourceFile : Resource {
+    public val name: String
         get() = id
 
-    val fileName: String
+    public val fileName: String
         get() = name.substringBeforeLast('.')
 
-    val fileEnding: String
+    public val fileEnding: String
         get() = name.substringAfterLast('.')
 }

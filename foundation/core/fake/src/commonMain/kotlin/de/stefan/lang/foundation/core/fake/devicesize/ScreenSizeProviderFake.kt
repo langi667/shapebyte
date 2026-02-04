@@ -3,4 +3,4 @@ package de.stefan.lang.foundation.core.fake.devicesize
 import de.stefan.lang.foundation.core.contract.devicesize.ScreenSizeProviding
 import de.stefan.lang.foundation.core.contract.devicesize.Size
 
-class ScreenSizeProviderFake(override val screenSize: Size) : ScreenSizeProviding
+public class ScreenSizeProviderFake public constructor(override val screenSize: Size) : ScreenSizeProviding

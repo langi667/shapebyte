@@ -37,7 +37,7 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
-class TimedWorkoutViewModelImpl(
+public class TimedWorkoutViewModelImpl(
     private val navigationHandler: NavigationRequestHandling,
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilding,
@@ -48,22 +48,22 @@ class TimedWorkoutViewModelImpl(
 ) : TimedWorkoutViewModel(logger, coroutineContextProvider) {
 
     private val _state = MutableStateFlow<UIState>(UIState.Idle)
-    override val state: StateFlow<UIState> = _state
+    public override val state: StateFlow<UIState> = _state
 
-    override var workout: Workout? = null
+    public override var workout: Workout? = null
         private set
 
-    override var launchState: LaunchState = LaunchState.Idle
+    public override var launchState: LaunchState = LaunchState.Idle
         private set
 
-    override val isRunning: Boolean get() = launchState.isRunning
+    public override val isRunning: Boolean get() = launchState.isRunning
 
     private var remainingTotal: Duration = Duration.Companion.ZERO
     private var elapsedTotal: Duration = Duration.Companion.ZERO
     private var itemsExecution: ItemsExecution? = null
     private var loadWorkoutJob: Job? = null
 
-    override fun intent(intent: TimedWorkoutUIIntent) {
+    public override fun intent(intent: TimedWorkoutUIIntent) {
         when (intent) {
             is TimedWorkoutUIIntent.Load -> load(intent.workoutId)
             is TimedWorkoutUIIntent.Start -> start()

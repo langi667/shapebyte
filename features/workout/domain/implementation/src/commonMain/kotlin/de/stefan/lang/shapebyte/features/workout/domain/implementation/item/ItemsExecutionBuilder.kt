@@ -10,15 +10,15 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.item.ItemsExecu
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecutionImpl
 import de.stefan.lang.utils.logging.contract.Logger
 
-class ItemsExecutionBuilder(
+public class ItemsExecutionBuilder(
     private val logger: Logger,
 ) : ItemsExecutionBuilding {
-    companion object {
+    public companion object {
         private val DefaultHighIntenseExercise = Exercise("High", "high-intense-exercise.png")
         private val DefaultLowIntenseExercise = Exercise("Low", "low-intense-exercise.png")
     }
 
-    override fun buildWith(workoutType: WorkoutType): ItemsExecution {
+    public override fun buildWith(workoutType: WorkoutType): ItemsExecution {
         when (workoutType) {
             is WorkoutType.Timed.Interval -> {
                 return buildWithTimedInterval(workoutType)

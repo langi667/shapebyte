@@ -3,11 +3,11 @@ package de.stefan.lang.shapebyte.features.workout.domain.contract.item
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.data.contract.item.Item
 
-sealed class ItemsExecutionState {
-    data object Idle : ItemsExecutionState()
+public sealed class ItemsExecutionState {
+    public data object Idle : ItemsExecutionState()
 
-    sealed class Launched(val progress: Progress) : ItemsExecutionState()
-    data object Started : Launched(progress = Progress.ZERO)
+    public sealed class Launched(public val progress: Progress) : ItemsExecutionState()
+    public data object Started : Launched(progress = Progress.ZERO)
 
     /**
      * @param item The item/exercise is currently running
@@ -16,14 +16,14 @@ sealed class ItemsExecutionState {
      * @param itemState The specific state of the current executed item
      * @param totalProgress The overall progress
      */
-    data class Running(
-        val item: Item,
-        val itemIndex: Int,
-        val itemCount: Int,
-        val itemState: ItemExecutionState.Running<*>,
-        val totalProgress: Progress,
+    public data class Running(
+        public val item: Item,
+        public val itemIndex: Int,
+        public val itemCount: Int,
+        public val itemState: ItemExecutionState.Running<*>,
+        public val totalProgress: Progress,
     ) : Launched(totalProgress)
 
-    class Paused(progress: Progress) : Launched(progress = progress)
-    data class Finished(val completed: Boolean) : ItemsExecutionState()
+    public class Paused(progress: Progress) : Launched(progress = progress)
+    public data class Finished(val completed: Boolean) : ItemsExecutionState()
 }

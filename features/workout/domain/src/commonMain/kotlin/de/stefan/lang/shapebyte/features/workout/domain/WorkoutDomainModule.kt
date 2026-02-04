@@ -16,8 +16,8 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.Q
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.shapebyte.features.workout.domain.generated.Dependencies
 import de.stefan.lang.shapebyte.features.workout.domain.generated.Module
-import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionBuilder
+import de.stefan.lang.shapebyte.features.workout.domain.implementation.item.ItemsExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.repetative.RepetitiveItemExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.timed.TimedItemExecutionImpl
 import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.history.FetchRecentWorkoutHistoryUseCaseImpl
@@ -27,7 +27,7 @@ import de.stefan.lang.shapebyte.features.workout.domain.implementation.workout.s
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
-object WorkoutDomainModule :
+public object WorkoutDomainModule :
     Module(
         globalBindings = {
             single<FetchRecentWorkoutHistoryUseCase> { (loadFeatureToggleUseCase: LoadFeatureToggleUseCase) ->
@@ -100,15 +100,15 @@ object WorkoutDomainModule :
         },
     ),
     WorkoutDomainContract {
-    override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase =
+    public override fun fetchRecentWorkoutHistoryUseCase(): FetchRecentWorkoutHistoryUseCase =
         fetchRecentWorkoutHistoryUseCase(get())
 
-    override fun fetchRecentWorkoutHistoryUseCase(
+    public override fun fetchRecentWorkoutHistoryUseCase(
         loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     ): FetchRecentWorkoutHistoryUseCase = get { parametersOf(loadFeatureToggleUseCase) }
 
-    override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
-    override fun createTimedItemExecution(
+    public override fun currentWorkoutScheduleEntryUseCase(): CurrentWorkoutScheduleEntryUseCase = get()
+    public override fun createTimedItemExecution(
         item: Item,
         sets: List<ItemSet.Timed.Seconds>,
     ): TimedItemExecution =
@@ -118,28 +118,28 @@ object WorkoutDomainModule :
             },
         )
 
-    override fun createRepetitiveItemExecution(
+    public override fun createRepetitiveItemExecution(
         item: Item,
         sets: List<ItemSet.Repetition>,
-    ): RepetitiveItemExecutionImpl = get(
+    ): RepetitiveItemExecution = get(
         parameters = {
             parametersOf(item, sets)
         },
     )
 
-    override fun quickWorkoutsUseCase(): QuickWorkoutsUseCase =
+    public override fun quickWorkoutsUseCase(): QuickWorkoutsUseCase =
         quickWorkoutsUseCase(get())
-    override fun quickWorkoutsUseCase(
+    public override fun quickWorkoutsUseCase(
         loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     ): QuickWorkoutsUseCase = get(parameters = { parametersOf(loadFeatureToggleUseCase) })
 
-    override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
+    public override fun createItemsExecution(items: List<ItemExecuting<*, *>>): ItemsExecution = get(
         parameters = {
             parametersOf(items)
         },
     )
 
-    override fun quickWorkoutForIdUseCase(
+    public override fun quickWorkoutForIdUseCase(
         repository: QuickWorkoutsRepository,
         loadFeatureToggleUseCase: LoadFeatureToggleUseCase,
     ): QuickWorkoutForIdUseCase = get(
@@ -148,10 +148,10 @@ object WorkoutDomainModule :
         },
     )
 
-    override fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = quickWorkoutForIdUseCase(
+    public override fun quickWorkoutForIdUseCase(): QuickWorkoutForIdUseCase = quickWorkoutForIdUseCase(
         Dependencies.quickWorkoutsRepository(),
         get(),
     )
 
-    override fun itemsExecutionBuilder(): ItemsExecutionBuilding = get()
+    public override fun itemsExecutionBuilder(): ItemsExecutionBuilding = get()
 }

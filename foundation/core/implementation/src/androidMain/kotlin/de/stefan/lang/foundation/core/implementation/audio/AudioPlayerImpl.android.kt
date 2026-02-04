@@ -10,15 +10,15 @@ import de.stefan.lang.foundation.core.contract.resources.ResourceFileMapping
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 
-actual class AudioPlayerImpl actual constructor(
+public actual class AudioPlayerImpl actual constructor(
     private val appContextProvider: ContextProvider,
     private val appResourceProvider: AppResourceProvider,
-    actual override val logger: Logger,
+    public actual override val logger: Logger,
 ) : AudioPlayer, Loggable {
     private val context: Context = appContextProvider.androidContext
     private val audioMapping: ResourceFileMapping? = appResourceProvider.audioMapping
 
-    actual override fun play(file: AudioResource) {
+    public actual override fun play(file: AudioResource) {
         val audioMapping = audioMapping ?: kotlin.run {
             logE("audioMapping is null, Check if it is provided during app setup?")
             return

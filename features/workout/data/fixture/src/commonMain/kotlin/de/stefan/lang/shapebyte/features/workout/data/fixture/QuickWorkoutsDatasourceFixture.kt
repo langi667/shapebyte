@@ -8,8 +8,8 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkou
 import de.stefan.lang.shapebyte.features.workout.data.contract.quick.QuickWorkoutsError
 
 @Suppress("MagicNumber")
-class QuickWorkoutsDatasourceFixture : QuickWorkoutsDatasource {
-    val workouts = listOf(
+public class QuickWorkoutsDatasourceFixture : QuickWorkoutsDatasource {
+    public val workouts: List<Workout> = listOf(
         Workout(
             id = 1,
             name = "Interval",
@@ -47,11 +47,11 @@ class QuickWorkoutsDatasourceFixture : QuickWorkoutsDatasource {
         ),
     )
 
-    override suspend fun fetchQuickWorkouts(): LoadState.Result<List<Workout>> {
+    public override suspend fun fetchQuickWorkouts(): LoadState.Result<List<Workout>> {
         return LoadState.Success(workouts)
     }
 
-    override suspend fun workoutForId(id: Int): LoadState.Result<Workout> {
+    public override suspend fun workoutForId(id: Int): LoadState.Result<Workout> {
         val workout = workouts.firstOrNull { it.id == id }
         val result = if (workout != null) {
             LoadState.Success(workout)

@@ -7,11 +7,11 @@ import de.stefan.lang.foundation.core.contract.resources.AppResourceProvider
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 
-expect class AudioPlayerImpl(
+public expect class AudioPlayerImpl public constructor(
     appContextProvider: ContextProvider,
     appResourceProvider: AppResourceProvider,
     logger: Logger,
 ) : AudioPlayer, Loggable {
-    override val logger: Logger
-    override fun play(file: AudioResource)
+    public override val logger: Logger
+    public override fun play(file: AudioResource)
 }

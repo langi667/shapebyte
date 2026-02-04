@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
-abstract class FetchRecentWorkoutHistoryUseCase(
+public abstract class FetchRecentWorkoutHistoryUseCase(
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,
@@ -25,8 +25,8 @@ abstract class FetchRecentWorkoutHistoryUseCase(
     scope = coroutineScopeProvider.createCoroutineScope(SupervisorJob()),
     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
-    abstract operator fun invoke(today: Instant): SharedFlow<LoadState<List<WorkoutScheduleEntry>>>
-    operator fun invoke(): SharedFlow<LoadState<List<WorkoutScheduleEntry>>> = invoke(
+    public abstract operator fun invoke(today: Instant): SharedFlow<LoadState<List<WorkoutScheduleEntry>>>
+    public operator fun invoke(): SharedFlow<LoadState<List<WorkoutScheduleEntry>>> = invoke(
         today = Clock.System.now(),
     )
 }

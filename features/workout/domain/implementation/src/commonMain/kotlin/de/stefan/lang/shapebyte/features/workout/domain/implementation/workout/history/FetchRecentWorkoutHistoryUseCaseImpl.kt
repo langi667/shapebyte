@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
 
-class FetchRecentWorkoutHistoryUseCaseImpl(
+public class FetchRecentWorkoutHistoryUseCaseImpl(
     private val repository: WorkoutHistoryRepository,
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
@@ -25,7 +25,7 @@ class FetchRecentWorkoutHistoryUseCaseImpl(
     coroutineScopeProvider = coroutineScopeProvider,
     loadFeatureToggleUseCase = loadFeatureToggleUseCase,
 ) {
-    override operator fun invoke(
+    public override operator fun invoke(
         today: Instant,
     ): SharedFlow<LoadState<List<WorkoutScheduleEntry>>> = super.invoke(
         onDisabled = { HistoryError.FeatureDisabled },

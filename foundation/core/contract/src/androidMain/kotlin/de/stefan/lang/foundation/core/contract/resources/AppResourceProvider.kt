@@ -1,10 +1,10 @@
 package de.stefan.lang.foundation.core.contract.resources
 
-actual class AppResourceProvider actual constructor() {
-    var audioMapping: ResourceFileMapping? = null
+public actual class AppResourceProvider public actual constructor() {
+    public var audioMapping: ResourceFileMapping? = null
         private set
 
-    constructor(audioMapping: ResourceFileMapping?) : this() {
+    public constructor(audioMapping: ResourceFileMapping?) : this() {
         this.audioMapping = audioMapping
     }
 }

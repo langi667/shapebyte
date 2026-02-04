@@ -2,7 +2,7 @@ package de.stefan.lang.foundation.core.contract.stringformatter
 
 import kotlinx.datetime.Instant
 
-interface DateTimeStringFormatter {
-    fun formatDateToDDMMYYYY(date: Instant): String
-    fun formatSecondsToString(seconds: Int): String
+public interface DateTimeStringFormatter {
+    public fun formatDateToDDMMYYYY(date: Instant): String
+    public fun formatSecondsToString(seconds: Int): String
 }

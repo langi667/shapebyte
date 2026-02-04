@@ -4,12 +4,12 @@ import de.stefan.lang.utils.logging.contract.Loggable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 
-interface ItemsExecution : Loggable {
-    val items: List<ItemExecuting<*, *>>
-    val state: StateFlow<ItemsExecutionState>
+public interface ItemsExecution : Loggable {
+    public val items: List<ItemExecuting<*, *>>
+    public val state: StateFlow<ItemsExecutionState>
 
-    fun start(scope: CoroutineScope): Boolean
-    fun pause(): Boolean
-    fun stop(): Boolean
-    fun pauseOrStart(scope: CoroutineScope): Boolean
+    public fun start(scope: CoroutineScope): Boolean
+    public fun pause(): Boolean
+    public fun stop(): Boolean
+    public fun pauseOrStart(scope: CoroutineScope): Boolean
 }

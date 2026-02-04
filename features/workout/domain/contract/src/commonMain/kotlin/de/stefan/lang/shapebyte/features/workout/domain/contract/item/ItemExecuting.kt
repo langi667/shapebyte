@@ -7,35 +7,37 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.item.ItemSet
 import de.stefan.lang.utils.logging.contract.Loggable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
-
-sealed interface ItemExecuting<out STATE_DATA_CLASS, out ITEM_SET_CLASS : ItemSet> :
+// TODO: rename to ItemExecution
+public sealed interface ItemExecuting<out STATE_DATA_CLASS, out ITEM_SET_CLASS : ItemSet> :
     Loggable {
-    val item: Item
-    val sets: List<ITEM_SET_CLASS>
+    public val item: Item
+    public val sets: List<ITEM_SET_CLASS>
 
-    val state: StateFlow<ItemExecutionState<STATE_DATA_CLASS>>
-    val isRunning: Boolean get() = state.value is ItemExecutionState.Running || state.value is ItemExecutionState.Started
-    val isPaused: Boolean get() = state.value is ItemExecutionState.Paused
+    public val state: StateFlow<ItemExecutionState<STATE_DATA_CLASS>>
+    public val isRunning: Boolean
+        get() = state.value is ItemExecutionState.Running || state.value is ItemExecutionState.Started
+    public val isPaused: Boolean get() = state.value is ItemExecutionState.Paused
 
-    val currentSet: ITEM_SET_CLASS? get() = when (val currState = state.value) {
-        is ItemExecutionState.Running -> currState.set as ITEM_SET_CLASS
-        else -> null
-    }
+    public val currentSet: ITEM_SET_CLASS?
+        get() = when (val currState = state.value) {
+            is ItemExecutionState.Running -> currState.set as ITEM_SET_CLASS
+            else -> null
+        }
 
-    fun start(scope: CoroutineScope): Boolean
-    fun pause(): Boolean
-    fun stop(): Boolean
+    public fun start(scope: CoroutineScope): Boolean
+    public fun pause(): Boolean
+    public fun stop(): Boolean
 }
 
-interface ItemValueExecuting<
+public interface ItemValueExecuting<
     out STATE_DATA_CLASS,
     out ITEM_SET_CLASS : ItemSet,
     ITEM_SET_WITH_INPUT_VALUE,
     > : ItemExecuting<STATE_DATA_CLASS, ITEM_SET_CLASS> {
 
-    fun setInputValue(value: ITEM_SET_WITH_INPUT_VALUE)
+    public fun setInputValue(value: ITEM_SET_WITH_INPUT_VALUE)
 }
 
-interface TimedItemExecution : ItemExecuting<TimedItemExecutionData, ItemSet.Timed.Seconds>
-interface RepetitiveItemExecution :
+public interface TimedItemExecution : ItemExecuting<TimedItemExecutionData, ItemSet.Timed.Seconds>
+public interface RepetitiveItemExecution :
     ItemValueExecuting<RepetitiveItemExecutionData, ItemSet.Repetition, UInt>

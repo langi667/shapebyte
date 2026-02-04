@@ -1,5 +1,5 @@
 package de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history
 
-sealed class HistoryError : Throwable() {
-    data object FeatureDisabled : HistoryError()
+public sealed class HistoryError : Throwable() {
+    public data object FeatureDisabled : HistoryError()
 }

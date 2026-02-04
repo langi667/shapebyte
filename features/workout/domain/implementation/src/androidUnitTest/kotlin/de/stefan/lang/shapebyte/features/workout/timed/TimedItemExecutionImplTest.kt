@@ -1,6 +1,6 @@
 package de.stefan.lang.shapebyte.features.workout.timed
 
-import BaseTest
+import de.stefan.lang.shapebyte.features.workout.domain.test.BaseTest
 import app.cash.turbine.test
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.data.contract.exercise.Exercise

@@ -1,3 +1,3 @@
 package de.stefan.lang.foundation.core.contract.audio
 
-interface Audio
+public interface Audio

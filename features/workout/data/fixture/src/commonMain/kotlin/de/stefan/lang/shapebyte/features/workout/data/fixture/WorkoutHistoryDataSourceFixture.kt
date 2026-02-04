@@ -7,8 +7,8 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutS
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
 
-object WorkoutHistoryDataSourceFixture : WorkoutHistoryDataSource {
-    override suspend fun historyForDates(
+public object WorkoutHistoryDataSourceFixture : WorkoutHistoryDataSource {
+    public override suspend fun historyForDates(
         date: Instant,
         pastDate: Instant,
     ): LoadState.Result<List<WorkoutScheduleEntry>> {
@@ -16,7 +16,7 @@ object WorkoutHistoryDataSourceFixture : WorkoutHistoryDataSource {
         return LoadState.Success(history)
     }
 
-    fun createHistoryEntries(date: Instant, pastDate: Instant): List<WorkoutScheduleEntry> {
+    public fun createHistoryEntries(date: Instant, pastDate: Instant): List<WorkoutScheduleEntry> {
         val history = mutableListOf<WorkoutScheduleEntry>()
         val daysCount = date.minus(pastDate).inWholeDays
 

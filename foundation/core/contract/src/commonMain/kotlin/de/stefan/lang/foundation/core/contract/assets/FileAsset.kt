@@ -5,9 +5,9 @@ package de.stefan.lang.foundation.core.contract.assets
  * @param locatedInBundle only relevant for iOS, is true if the asset should be loaded
  * from the app bundle
  */
-data class FileAsset(
+public data class FileAsset public constructor(
     override val assetName: String,
-    val locatedInBundle: Boolean = false, // TODO: check if needed
+    public val locatedInBundle: Boolean = false, // TODO: check if needed
 ) : Asset {
     override val subPath: String = "files/$assetName"
 }

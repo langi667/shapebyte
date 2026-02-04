@@ -6,6 +6,7 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
     androidTarget {
         compilations.all {
             kotlinOptions {
