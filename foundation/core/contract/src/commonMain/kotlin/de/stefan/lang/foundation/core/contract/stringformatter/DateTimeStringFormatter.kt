@@ -1,6 +1,6 @@
 package de.stefan.lang.foundation.core.contract.stringformatter
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public interface DateTimeStringFormatter {
     public fun formatDateToDDMMYYYY(date: Instant): String

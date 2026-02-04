@@ -5,11 +5,11 @@ import shared
 @MainActor
 struct Device {
     @Env private var environment
-    private let fakeDeviceInfo = DeviceInfoProviderFake()
+    private let deviceInfoMock = DeviceInfoProviderFake()
 
     var wrappedValue: DeviceInfoProvider {
         if environment.isInPreview || environment.isRunningUnitTests {
-            return fakeDeviceInfo // TODO: this needs to be retrieved by the DPI as well
+            return deviceInfoMock // TODO: this needs to be retrieved by the DPI as well
         } else {
             return SharedModule.shared.deviceInfoProvider()
         }

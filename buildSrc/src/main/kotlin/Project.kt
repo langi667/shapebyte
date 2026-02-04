@@ -6,7 +6,7 @@ object Project {
         object BuildSettings {
             val javaVersion = JavaVersion.VERSION_21
             val minSdk = 24
-            val targetSdk = 34
+            val targetSdk = 36
             val excludedResourcesList = listOf(
                 "META-INF/*",
                 "META-INF/*.*",

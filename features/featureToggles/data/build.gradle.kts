@@ -9,13 +9,7 @@ plugins {
 
 kotlin {
     explicitApi()
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
-            }
-        }
-    }
+    androidTarget()
 
     iosX64()
     iosArm64()
@@ -26,7 +20,7 @@ kotlin {
             api(projects.features.featureToggles.data.contract)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
+            
             implementation(libs.kotlinx.serialization.json)
 
             implementation(projects.core.utils)

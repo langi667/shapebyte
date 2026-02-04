@@ -1,9 +1,10 @@
 package de.stefan.lang.foundation.core.implementation.stringformatter
 
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 public class DateTimeStringFormatterImpl public constructor(
     private val timeZone: TimeZone = TimeZone.currentSystemDefault(),
@@ -12,6 +13,7 @@ public class DateTimeStringFormatterImpl public constructor(
         public const val SECONDS_PER_MINUTE: Int = 60
     }
 
+    @OptIn(ExperimentalTime::class)
     public override fun formatDateToDDMMYYYY(date: Instant): String {
         val localDate = date.toLocalDateTime(timeZone).date
 

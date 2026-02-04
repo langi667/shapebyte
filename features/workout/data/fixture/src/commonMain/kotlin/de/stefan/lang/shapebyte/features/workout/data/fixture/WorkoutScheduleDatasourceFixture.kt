@@ -4,10 +4,12 @@ import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleDatasource
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 @Suppress("MagicNumber")
 public object WorkoutScheduleDatasourceFixture : WorkoutScheduleDatasource {
+    @OptIn(ExperimentalTime::class)
     public override suspend fun currentWorkoutScheduleEntry(): LoadState.Result<WorkoutScheduleEntry?> {
         val entry = WorkoutScheduleEntry(
             id = "1",

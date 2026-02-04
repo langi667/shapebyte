@@ -4,7 +4,7 @@ import de.stefan.lang.coretest.CoreTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class AssetTest : CoreTest() {
+public class AssetTest : CoreTest() {
     @Test
     fun `Test values`() {
         val fileNameWithoutEnding = "test"

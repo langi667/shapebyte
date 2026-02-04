@@ -10,8 +10,8 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.history.HistoryError
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
+import kotlin.time.Instant
 
 public class FetchRecentWorkoutHistoryUseCaseImpl(
     private val repository: WorkoutHistoryRepository,

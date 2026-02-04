@@ -1,8 +1,8 @@
 package de.stefan.lang.foundation.core.implementation.stringformatter
 
 import de.stefan.lang.coretest.CoreTest
-import kotlinx.datetime.Instant
 import kotlin.test.Test
+import kotlin.time.Instant
 import kotlin.test.assertEquals
 
 class DateTimeStringFormatterImplTest : CoreTest() {

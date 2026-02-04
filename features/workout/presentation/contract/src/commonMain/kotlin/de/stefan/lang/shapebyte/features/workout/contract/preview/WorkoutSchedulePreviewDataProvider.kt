@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.contract.preview
 
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 @Suppress("MagicNumber")
 public object WorkoutSchedulePreviewDataProvider {

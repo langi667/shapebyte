@@ -1,6 +1,6 @@
 package de.stefan.lang.coreutils.contract.date
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import platform.Foundation.NSDate
 import platform.Foundation.timeIntervalSince1970
 

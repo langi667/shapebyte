@@ -1,7 +1,7 @@
 package de.stefan.lang.shapebyte.features.workout.data.contract.schedule
 
 import de.stefan.lang.coreutils.contract.progress.Progress
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public data class WorkoutScheduleEntry public constructor(
     public val id: String,

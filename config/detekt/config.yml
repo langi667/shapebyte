@@ -59,8 +59,6 @@ naming:
 Compose:
   CompositionLocalAllowlist:
     active: true
-    # You can optionally define a list of CompositionLocals that are allowed here
-    allowedCompositionLocals: LocalRtlColors,LocalRtlTypography
   CompositionLocalNaming:
     active: true
   ContentEmitterReturningValues:
@@ -70,8 +68,6 @@ Compose:
   DefaultsVisibility:
     active: true
   ModifierClickableOrder:
-    active: true
-  ModifierComposable:
     active: true
   ModifierMissing:
     active: true

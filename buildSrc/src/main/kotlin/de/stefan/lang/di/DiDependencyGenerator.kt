@@ -54,18 +54,17 @@ fun Project.configureDi(
     isRootAggregator: Boolean = false,
 ) {
     val resolvedContractClass = contractClassName ?: inferContractClass(moduleClassName)
-    val aggregatorFlag = isRootAggregator
     diModule {
         moduleClass.set(moduleClassName)
         contractClass.set(resolvedContractClass)
-        this.isRootAggregator.set(aggregatorFlag)
+        this.isRootAggregator.set(isRootAggregator)
     }
     configureDiDependencies(
         packageName = packageName,
         className = className,
         excludes = excludes,
         transitive = transitive,
-        isRootAggregator = aggregatorFlag,
+        isRootAggregator = isRootAggregator,
     )
 }
 
@@ -116,8 +115,8 @@ private fun Project.resolveDiModuleDependencies(
         configurationNames.forEach { configName ->
             val configuration = configurations.findByName(configName) ?: return@forEach
             configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
-                val depProject = dependency.dependencyProject
-                val depPath = depProject.path
+                val depPath = dependency.path
+                val depProject = project(depPath)
                 if (!exclusions.contains(depPath)) {
                     ensureEvaluated(depProject)
                     depProject.extensions.findByType(DiModuleExtension::class.java)?.let { extension ->
@@ -155,8 +154,9 @@ private fun Project.resolveDiModuleDependencies(
         apiConfigurations.forEach { configName ->
             val configuration = project.configurations.findByName(configName) ?: return@forEach
             configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
-                val depProject = dependency.dependencyProject
-                val depPath = depProject.path
+                val depPath = dependency.path
+                val depProject = project(depPath)
+
                 if (!exclusions.contains(depPath)) {
                     visitApi(depProject)
                 }
@@ -167,8 +167,8 @@ private fun Project.resolveDiModuleDependencies(
     implementationConfigurations.forEach { configName ->
         val configuration = configurations.findByName(configName) ?: return@forEach
         configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
-            val depProject = dependency.dependencyProject
-            val depPath = depProject.path
+            val depPath = dependency.path
+            val depProject = project(depPath)
             if (!exclusions.contains(depPath)) {
                 addModuleIfPresent(depProject)
             }
@@ -178,8 +178,9 @@ private fun Project.resolveDiModuleDependencies(
     apiConfigurations.forEach { configName ->
         val configuration = configurations.findByName(configName) ?: return@forEach
         configuration.dependencies.withType(ProjectDependency::class.java).forEach { dependency ->
-            val depProject = dependency.dependencyProject
-            val depPath = depProject.path
+            val depPath = dependency.path
+            val depProject = project(depPath)
+
             if (!exclusions.contains(depPath)) {
                 visitApi(depProject)
             }

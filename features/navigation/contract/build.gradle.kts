@@ -6,13 +6,7 @@ plugins {
 
 kotlin {
     explicitApi()
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
-            }
-        }
-    }
+    androidTarget()
 
     iosX64()
     iosArm64()
@@ -21,7 +15,7 @@ kotlin {
     sourceSets  {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
+            
             implementation(libs.koin.core)
         }
 
@@ -39,7 +33,7 @@ kotlin {
 }
 
 android {
-    namespace = "de.stefan.lang.shapebyte.features.navigation.contract"
+    namespace = "de.stefan.lang.shapebyte.features.navigation.navigation"
     compileSdk = Project.Android.BuildSettings.targetSdk
     defaultConfig {
         minSdk = Project.Android.BuildSettings.minSdk

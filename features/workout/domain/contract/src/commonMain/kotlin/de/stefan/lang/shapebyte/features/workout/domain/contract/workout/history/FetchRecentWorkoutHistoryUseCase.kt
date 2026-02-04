@@ -10,8 +10,8 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutS
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 public abstract class FetchRecentWorkoutHistoryUseCase(
     logger: Logger,

@@ -7,13 +7,7 @@ plugins {
 kotlin {
     explicitApi()
 
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
-            }
-        }
-    }
+    androidTarget()
 
     iosX64()
     iosArm64()
@@ -32,6 +26,8 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(projects.core.di)
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlin.test.annotations.common)
 
         }
         androidMain.dependencies {
