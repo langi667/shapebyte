@@ -4,8 +4,8 @@ import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
-import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.days
+import kotlin.time.Instant
 
 public object WorkoutHistoryDataSourceFixture : WorkoutHistoryDataSource {
     public override suspend fun historyForDates(

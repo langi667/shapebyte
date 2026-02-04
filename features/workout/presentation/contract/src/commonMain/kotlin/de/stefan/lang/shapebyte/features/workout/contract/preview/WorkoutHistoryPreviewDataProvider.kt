@@ -3,7 +3,7 @@ package de.stefan.lang.shapebyte.features.workout.contract.preview
 import de.stefan.lang.shapebyte.features.workout.data.WorkoutDataModule
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.data.fixture.WorkoutHistoryDataSourceFixture
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 // TODO: consider using mock data from file
 public object WorkoutHistoryPreviewDataProvider {

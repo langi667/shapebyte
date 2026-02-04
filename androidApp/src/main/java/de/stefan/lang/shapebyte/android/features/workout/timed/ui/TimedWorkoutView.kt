@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -39,6 +40,7 @@ import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundation.core.contract.assets.ImageAsset
 import de.stefan.lang.foundation.presentation.contract.buttons.ButtonState
 import de.stefan.lang.foundation.presentation.contract.state.UIState
+import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.designsystem.ui.color
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.BodyMedium
 import de.stefan.lang.shapebyte.android.designsystem.ui.components.text.DisplayLarge
@@ -56,8 +58,6 @@ import de.stefan.lang.shapebyte.android.shared.progress.ui.GradientProgressIndic
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutUIIntent
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TimedWorkoutView(
@@ -65,11 +65,13 @@ fun TimedWorkoutView(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
-    val viewModel: TimedWorkoutViewModel = getViewModel(
-        parameters = {
-            parametersOf(NavigationHandler(navController))
-        },
-    )
+    val viewModel: TimedWorkoutViewModel = remember {
+        SharedModule.timedWorkoutViewModel(
+            navHandler = NavigationHandler(
+                navHostController = navController,
+            ),
+        )
+    }
 
     LaunchedEffect("Initial") {
         viewModel.intent(TimedWorkoutUIIntent.Load(workoutId))

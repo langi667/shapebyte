@@ -1,4 +1,6 @@
 import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     //trick: for the same plugin versions in all sub-modules
@@ -44,6 +46,20 @@ subprojects {
 
     tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
         jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
+    }
+
+    tasks.withType<KotlinCompilationTask<*>>().configureEach {
+        compilerOptions {
+            freeCompilerArgs.add("-opt-in=kotlin.time.ExperimentalTime")
+        }
+    }
+
+    plugins.withId("org.jetbrains.kotlin.multiplatform") {
+        extensions.configure<KotlinMultiplatformExtension> {
+            sourceSets.findByName("commonTest")?.dependencies {
+                implementation(libs.kotlin.test.annotations.common)
+            }
+        }
     }
 }
 

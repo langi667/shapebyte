@@ -1,3 +1,8 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -6,13 +11,17 @@ plugins {
 
 kotlin {
     explicitApi()
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
-            }
-        }
-    }
+    androidTarget()
+//    androidTarget {
+//        compilations.all {
+//            compilerOptions {
+//              jvmTarget.set(JvmTarget.valueOf(Project.Android.BuildSettings.javaVersion.toString()))
+//            }
+////            kotlinOptions {
+////                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
+////            }
+//        }
+//    }
 
     iosX64()
     iosArm64()

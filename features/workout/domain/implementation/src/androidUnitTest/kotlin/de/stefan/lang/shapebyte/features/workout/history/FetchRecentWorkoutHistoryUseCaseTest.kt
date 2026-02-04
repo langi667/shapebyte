@@ -17,7 +17,7 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import org.koin.core.component.get
 import kotlin.test.Test
 import kotlin.test.assertEquals

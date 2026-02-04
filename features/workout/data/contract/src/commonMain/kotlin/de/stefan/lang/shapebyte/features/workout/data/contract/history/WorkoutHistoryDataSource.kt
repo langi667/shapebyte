@@ -2,7 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.data.contract.history
 
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public interface WorkoutHistoryDataSource {
     public suspend fun historyForDates(

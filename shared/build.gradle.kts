@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    id("co.touchlab.skie") version "0.10.1"
+    id("co.touchlab.skie") version "0.10.9"
     kotlin("plugin.serialization") version "2.0.0"
 }
 
@@ -22,13 +22,7 @@ tasks.register("allTestDebugUnitTest") {
 
 kotlin {
     explicitApi()
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
-            }
-        }
-    }
+    androidTarget()
     
     listOf(
         iosX64(),
@@ -86,7 +80,7 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
+            
             implementation(libs.kotlinx.serialization.json)
 
 

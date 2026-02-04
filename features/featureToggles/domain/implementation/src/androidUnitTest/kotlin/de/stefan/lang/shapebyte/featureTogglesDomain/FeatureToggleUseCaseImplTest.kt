@@ -20,7 +20,6 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import io.mockk.mockk
-import org.koin.core.component.get
 
 class FeatureToggleUseCaseImplTest : BaseFeatureToggleDomainTest() {
     private val feature = "QUICK_WORKOUTS"

@@ -32,6 +32,8 @@ public abstract class CoreTest {
 
     @BeforeTest
     public fun startDI() {
+        stopKoin()
+        if (!autostartKoin) return
         try {
             startKoin { modules(requiredModules + testModules) }
         } catch (ex: Throwable) {
@@ -47,11 +49,10 @@ public abstract class CoreTest {
 
     protected fun test(block: suspend CoroutineScope.() -> Unit) {
         Dispatchers.setMain(testDispatcher)
-
         runTest {
             block()
         }
     }
 
-    protected companion object
+    public companion object
 }

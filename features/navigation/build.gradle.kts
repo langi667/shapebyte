@@ -11,13 +11,7 @@ configureDi(moduleClassName = "de.stefan.lang.shapebyte.features.navigation.Navi
 
 kotlin {
     explicitApi()
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
-            }
-        }
-    }
+    androidTarget()
 
     iosX64()
     iosArm64()

@@ -2,6 +2,7 @@
 import de.stefan.lang.designsystem.DesignSystemGeneratorAndroid
 import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
 import java.util.Locale
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -38,9 +39,6 @@ android {
     compileOptions {
         sourceCompatibility = Project.Android.BuildSettings.javaVersion
         targetCompatibility = Project.Android.BuildSettings.javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = Project.Android.BuildSettings.javaVersion.toString()
     }
 
     sourceSets {
@@ -100,6 +98,14 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget.set(
+            JvmTarget.fromTarget(Project.Android.BuildSettings.javaVersion.majorVersion)
+        )
+    }
+}
+
 dependencies {
     implementation(projects.shared)
     implementation(projects.core.di)
@@ -119,6 +125,9 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.compose.icons.core)
+    implementation(libs.compose.icons.ext)
+
     screenshotTestImplementation(libs.compose.ui.tooling)
 
     testImplementation(libs.kotlinx.coroutines.test)
