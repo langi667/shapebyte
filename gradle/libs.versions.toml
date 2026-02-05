@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.2"
+agp = "9.0.0"
 junitJupiter = "6.0.2"
 kotlin = "2.3.0"
 compose = "1.10.2"
@@ -14,8 +14,7 @@ kotlinxCoroutinesCore = "1.10.2"
 detekt = "1.23.8"
 composeRules = "0.5.6"
 kotlinxDatetime = "0.7.1"
-# TODO: try update if Kotlin is up to 2.3.x
-kotlinxSerializationJson = "1.7.0"
+kotlinxSerializationJson = "1.10.0"
 navigationCompose = "2.9.7"
 swiftpoet = "1.6.11"
 turbine = "1.2.1"
