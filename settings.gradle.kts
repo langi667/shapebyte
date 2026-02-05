@@ -77,7 +77,6 @@ include(":features:workout:presentation:contract")
 include(":features:workout:presentation:implementation")
 include(":features:workout:presentation:test")
 
-include(":shared:sharedComponentTest")
 include(":shared:contract")
 include(":shared:implementation")
 

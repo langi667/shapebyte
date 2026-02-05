@@ -5,14 +5,14 @@ import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootView
 import de.stefan.lang.shapebyte.features.home.presentation.generated.Dependencies
 import de.stefan.lang.shapebyte.features.home.presentation.generated.Module
 import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
-import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandler
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 public object HomePresentationModule :
     Module(
         globalBindings = {
-            factory<HomeRootViewModel> { (navHandler: NavigationRequestHandling) ->
+            factory<HomeRootViewModel> { (navHandler: NavigationRequestHandler) ->
                 HomeRootViewModelImpl(
                     logger = Dependencies.logger(),
                     coroutineContextProvider = Dependencies.coroutineContextProvider(),
@@ -28,6 +28,6 @@ public object HomePresentationModule :
     ),
     HomePresentationContract {
     override fun homeRootViewModel(
-        navigationHandler: NavigationRequestHandling,
+        navigationHandler: NavigationRequestHandler,
     ): HomeRootViewModel = get(parameters = { parametersOf(navigationHandler) })
 }

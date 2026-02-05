@@ -11,7 +11,7 @@ import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFor
 import de.stefan.lang.foundation.presentation.contract.buttons.ButtonState
 import de.stefan.lang.foundation.presentation.contract.state.UIState
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequest
-import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandler
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutUIIntent
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewData
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
@@ -38,7 +38,7 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
 public class TimedWorkoutViewModelImpl(
-    private val navigationHandler: NavigationRequestHandling,
+    private val navigationHandler: NavigationRequestHandler,
     private val quickWorkoutForIdUseCase: QuickWorkoutForIdUseCase,
     private val itemsExecutionBuilder: ItemsExecutionBuilding,
     private val dateStringFormatter: DateTimeStringFormatter,
