@@ -41,6 +41,7 @@ include(":foundation:core:implementation")
 include(":foundation:core:fake")
 include(":foundation:presentation")
 include(":foundation:presentation:contract")
+include(":foundation:presentation:contract:android")
 
 include(":designsystem")
 include(":designsystem:contract")
@@ -79,4 +80,3 @@ include(":features:workout:presentation:test")
 
 include(":shared:contract")
 include(":shared:implementation")
-

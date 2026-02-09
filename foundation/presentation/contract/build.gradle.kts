@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -30,10 +29,7 @@ kotlin {
         androidMain.dependencies {
             api(libs.androidx.lifecycle.viewmodel)
             api(libs.androidx.lifecycle.viewmodel.ktx)
-            implementation(libs.compose.ui)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
+
         }
 
         commonTest.dependencies {
