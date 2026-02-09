@@ -6,4 +6,8 @@ public interface HomePresentationContract {
     public fun homeRootViewModel(
         navigationHandler: NavigationRequestHandler,
     ): HomeRootViewModel
+
+    public fun homeRootViewModelV2(
+        navigationHandler: NavigationRequestHandler,
+    ): HomeRootViewModelV2
 }

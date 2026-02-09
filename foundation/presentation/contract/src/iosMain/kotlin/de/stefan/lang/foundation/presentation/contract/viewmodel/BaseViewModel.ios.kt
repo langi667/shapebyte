@@ -4,8 +4,8 @@ import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.foundation.presentation.contract.event.UIEvent
-import de.stefan.lang.foundation.presentation.contract.event.UIEventTransmitting
-import de.stefan.lang.foundation.presentation.contract.state.UIStateProviding
+import de.stefan.lang.foundation.presentation.contract.event.UIEventProvider
+import de.stefan.lang.foundation.presentation.contract.state.UIStateProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.buffer
 public actual abstract class BaseViewModel actual constructor(
     actual override val logger: Logger,
     public actual val coroutineContextProvider: CoroutineContextProvider
-) : Loggable, UIStateProviding, UIEventTransmitting {
+) : Loggable, UIStateProvider, UIEventProvider {
 
     protected actual val scope: CoroutineScope = CoroutineScope(
         context = coroutineContextProvider.mainImmediateDispatcher() + SupervisorJob()

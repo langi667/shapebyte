@@ -1,4 +1,5 @@
 import de.stefan.lang.designsystem.DesignSystemGeneratorIOS
+import org.gradle.kotlin.dsl.add
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
@@ -51,6 +52,7 @@ subprojects {
     tasks.withType<KotlinCompilationTask<*>>().configureEach {
         compilerOptions {
             freeCompilerArgs.add("-opt-in=kotlin.time.ExperimentalTime")
+            freeCompilerArgs.add("-XXLanguage:+ExplicitBackingFields")
         }
     }
 

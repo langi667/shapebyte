@@ -2,9 +2,9 @@ package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.foundation.presentation.contract.event.UIEvent
-import de.stefan.lang.foundation.presentation.contract.event.UIEventTransmitting
+import de.stefan.lang.foundation.presentation.contract.event.UIEventProvider
 import de.stefan.lang.foundation.presentation.contract.state.UIState
-import de.stefan.lang.foundation.presentation.contract.state.UIStateProviding
+import de.stefan.lang.foundation.presentation.contract.state.UIStateProvider
 import de.stefan.lang.utils.logging.contract.Loggable
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 public expect abstract class BaseViewModel(
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
-) : Loggable, UIStateProviding, UIEventTransmitting {
+) : Loggable, UIStateProvider, UIEventProvider {
     protected val scope: CoroutineScope
 
     override val logger: Logger
