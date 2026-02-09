@@ -31,6 +31,7 @@ mockkVersion = "1.14.9"
 screenshot = "0.0.1-alpha13"
 jetbrainsKotlinJvm = "2.3.0"
 autonomousAppsDependencyAnalysis = "3.5.1"
+ui-tooling = "1.10.2"
 
 [libraries]
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
@@ -72,6 +73,9 @@ androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core",
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+screenshot-validation-api = { group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot"}
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling"}
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

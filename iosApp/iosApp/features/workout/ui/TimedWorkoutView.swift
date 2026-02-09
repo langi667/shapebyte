@@ -14,7 +14,7 @@ struct TimedWorkoutView: View {
 
     init(
         workoutId: Int32,
-        navHandling: any NavigationRequestHandling
+        navHandling: any NavigationRequestHandler
     ) {
         self.workoutId = workoutId
         self.viewModel = SharedModule.shared.timedWorkoutViewModel(

@@ -9,7 +9,7 @@ import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIn
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestBuilder
-import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandling
+import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandler
 import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
@@ -27,7 +27,7 @@ import kotlin.time.Clock
 
 // TODO: make internal again
 public class HomeRootViewModelImpl(
-    private val navigationHandler: NavigationRequestHandling,
+    private val navigationHandler: NavigationRequestHandler,
     private val currentWorkoutScheduleEntryUseCase: CurrentWorkoutScheduleEntryUseCase,
     private val recentHistoryUseCase: FetchRecentWorkoutHistoryUseCase,
     private val quickWorkoutsUseCase: QuickWorkoutsUseCase,
