@@ -132,10 +132,12 @@ dependencies {
     implementation(libs.compose.icons.core)
     implementation(libs.compose.icons.ext)
 
-    screenshotTestImplementation(libs.compose.ui.tooling)
-
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
+
+    screenshotTestImplementation(libs.compose.ui.tooling)
+    screenshotTestImplementation(libs.screenshot.validation.api)
+    screenshotTestImplementation(libs.androidx.ui.tooling)
 }
