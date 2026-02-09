@@ -30,7 +30,7 @@ struct HomeRootView: View, Loggable {
         .onAppear { viewModel.intent(intent: HomeRootUIIntent.Update() ) }
     }
 
-    init(navHandling: any NavigationRequestHandling) {
+    init(navHandling: any NavigationRequestHandler) {
         self.viewModel = SharedModule.shared.homeRootViewModel(navigationHandler: navHandling)
     }
 

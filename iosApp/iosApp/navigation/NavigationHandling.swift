@@ -1,3 +1,3 @@
 import shared
 
-typealias NavigationHandling = NavigationRequestHandling & NavigationDestinationProviding
+typealias NavigationHandling = NavigationRequestHandler & NavigationDestinationProviding
