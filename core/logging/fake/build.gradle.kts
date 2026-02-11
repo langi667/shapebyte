@@ -16,8 +16,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.core.logging.contract)
-            implementation(projects.core.logging.implementation)
-
             implementation(libs.koin.core)
         }
     }

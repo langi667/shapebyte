@@ -13,10 +13,9 @@ public class SharedViewModelFactory(
     }
 }
 
-
 public class SharedViewModelFactoryOneArg<ARG>(
     private val provider: (ARG) -> SharedViewModel,
-    private val arg: ARG
+    private val arg: ARG,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

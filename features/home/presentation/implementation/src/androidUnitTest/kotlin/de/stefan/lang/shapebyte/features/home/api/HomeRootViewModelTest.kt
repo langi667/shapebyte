@@ -8,10 +8,10 @@ import de.stefan.lang.foundationCore.FoundationCoreModule
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggle
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureToggleState
-import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
+import de.stefan.lang.shapebyte.features.home.presentation.implementation.HomeRootViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
 import io.mockk.every
 import io.mockk.mockk
@@ -41,7 +41,7 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
     @Test
     fun `update should update state`() = test {
         val sut = createSUT()
-        sut.intent(HomeRootUIIntent.Update)
+        sut.handleIntent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -63,7 +63,7 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
             quickWorkoutsState = FeatureToggleState.DISABLED
         )
 
-        sut.intent(HomeRootUIIntent.Update)
+        sut.handleIntent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -83,7 +83,7 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
             recentHistoryState = FeatureToggleState.DISABLED,
             quickWorkoutsState = FeatureToggleState.ENABLED
         )
-        sut.intent(HomeRootUIIntent.Update)
+        sut.handleIntent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -104,7 +104,7 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
             quickWorkoutsState = FeatureToggleState.DISABLED
         )
 
-        sut.intent(HomeRootUIIntent.Update)
+        sut.handleIntent(HomeRootUIIntent.Update)
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -121,7 +121,7 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
     private fun createSUT(
         recentHistoryState: FeatureToggleState = FeatureToggleState.ENABLED,
         quickWorkoutsState: FeatureToggleState = FeatureToggleState.ENABLED,
-    ): HomeRootViewModel {
+    ): HomeRootViewModelImpl {
 
         val recentHistoryFT = FeatureToggle(FeatureId.RECENT_HISTORY.name, recentHistoryState)
         val quickWorkoutsFT = FeatureToggle(FeatureId.QUICK_WORKOUTS.name, quickWorkoutsState)
@@ -137,11 +137,14 @@ class HomeRootViewModelTest : BaseTest(), KoinTest {
             navigationHandler = mockk(relaxed = true),
             currentWorkoutScheduleEntryUseCase = get(),
 
-            recentHistoryUseCase = WorkoutDomainModule.fetchRecentWorkoutHistoryUseCase(loadFeatureToggleUseCase),
+            recentHistoryUseCase = WorkoutDomainModule.fetchRecentWorkoutHistoryUseCase(
+                loadFeatureToggleUseCase
+            ),
             quickWorkoutsUseCase = WorkoutDomainModule.quickWorkoutsUseCase(loadFeatureToggleUseCase),
             navigationRequestBuilder = get(),
             logger = get(),
             coroutineContextProvider = get(),
+            coroutineScopeProvider = get(),
             dateTimeStringFormatter = get()
         )
     }

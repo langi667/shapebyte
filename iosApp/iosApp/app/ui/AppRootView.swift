@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 import shared
-
+import Factory
 struct AppRootView: View {
     @ObservedObject private var viewModel = AppRootViewModel()
 
@@ -9,7 +9,11 @@ struct AppRootView: View {
         ZStack(alignment: .topLeading) {
             if viewModel.state is UIStateData<AppRootViewModel> {
                 NavigationView { navigationHandler in
-                    HomeRootView(navHandling: navigationHandler)
+                    HomeRootView(viewModel: Container
+                        .shared
+                        .homeRootViewModel
+                        .resolve(navigationHandler)
+                    )
                 }
             } else { // TODO: Loading State
                 EmptyView()

@@ -14,27 +14,24 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.launch
 
-
 // TODO: rename to BaseViewModel, once the current BaseViewModel is removed
-public open class SharedViewModelBase<INTENT: UIIntent> (
-    override val logger:  Logger,
+public open class SharedViewModelBase<INTENT : UIIntent> (
+    override val logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,
-): SharedViewModel {
+) : SharedViewModel {
     /**
      * Override to perform cleanup when the ViewModel is cleared.
      * This can be used to cancel any ongoing operations or release resources.
      */
     protected open fun onCleared() {
-
     }
 
     protected val scope: CoroutineScope by lazy {
         coroutineScopeProvider.createCoroutineScope(
-            context = SupervisorJob() + coroutineContextProvider.mainImmediateDispatcher()
+            context = SupervisorJob() + coroutineContextProvider.mainImmediateDispatcher(),
         )
     }
 
@@ -44,7 +41,7 @@ public open class SharedViewModelBase<INTENT: UIIntent> (
     final override val eventFlow: SharedFlow<UIEvent>
         field = MutableSharedFlow<UIEvent>(
             replay = 1,
-            onBufferOverflow = BufferOverflow.DROP_OLDEST
+            onBufferOverflow = BufferOverflow.DROP_OLDEST,
         )
 
     final override fun updateState(newState: UIState) {
@@ -64,20 +61,18 @@ public open class SharedViewModelBase<INTENT: UIIntent> (
 
     @Suppress("UNCHECKED_CAST")
     final override fun <T : UIIntent> handleIntent(
-        event: T
+        event: T,
     ) {
         val castedEvent = event as? INTENT
 
-        if(castedEvent == null) {
+        if (castedEvent == null) {
             logE("Received intent of type ${event::class} is not expected event, Ignoring intent.")
             return
-        }
-        else {
+        } else {
             onIntent(castedEvent)
         }
     }
 
     protected open fun onIntent(intent: INTENT) {
-
     }
 }

@@ -6,32 +6,27 @@ struct HomeRootView: View, Loggable {
     @Env
     private var environment
 
-    @State
-    private var viewModel: HomeRootViewModel
-
-    @State
-    private var viewState: UIState = UIState.Idle()
+    private var viewModel: HomeRootViewModelWrapper
 
     var body: some View {
         Group {
-            switch onEnum(of: viewState) {
-                case .idle:
-                    Text("Loading...") // TODO: loading state
-                case .loading:
-                    Text("Loading...") // TODO: loading state
-                case .content(let content):
-                    contentOrErrorView(content: content)
-            }
-        }.task {
-            for await currState in viewModel.state {
-                self.viewState = currState
+            switch onEnum(of: viewModel.viewState) {
+            case .idle:
+                Text("Loading...") // TODO: loading state
+            case .loading:
+                Text("Loading...") // TODO: loading state
+            case .content(let content):
+                contentOrErrorView(content: content)
             }
         }
-        .onAppear { viewModel.intent(intent: HomeRootUIIntent.Update() ) }
+        .addLifecycleReceiver(viewModel)
+        .onAppear {
+            viewModel.handleIntent(HomeRootUIIntent.Update())
+        }
     }
 
-    init(navHandling: any NavigationRequestHandler) {
-        self.viewModel = SharedModule.shared.homeRootViewModel(navigationHandler: navHandling)
+    init(viewModel: ViewModelWrapper<HomeRootViewModel>) {
+        self.viewModel = viewModel
     }
 
     @ViewBuilder

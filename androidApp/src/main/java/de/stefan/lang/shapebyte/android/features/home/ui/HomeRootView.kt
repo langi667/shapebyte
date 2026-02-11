@@ -19,15 +19,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundation.presentation.contract.state.UIState
-import de.stefan.lang.foundation.presentation.contract.viewmodel.v2.SharedViewModelFactory
-import de.stefan.lang.foundation.presentation.contract.viewmodel.v2.SharedViewModelFactoryOneArg
-import de.stefan.lang.foundation.presentation.contract.viewmodel.v2.SharedViewModelWrapper
 import de.stefan.lang.foundation.presentation.contract.viewmodel.v2.sharedViewModel
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
@@ -38,8 +33,6 @@ import de.stefan.lang.shapebyte.android.shared.preview.ui.PreviewContainer
 import de.stefan.lang.shapebyte.featureToggles.data.contract.FeatureId
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootUIIntent
 import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewData
-import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModel
-import de.stefan.lang.shapebyte.features.home.presentation.contract.HomeRootViewModelV2
 import de.stefan.lang.shapebyte.features.workout.contract.preview.QuickWorkoutsPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.contract.preview.WorkoutHistoryPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
@@ -52,8 +45,8 @@ fun HomeRootView(
     modifier: Modifier = Modifier,
 ) {
     val viewModel = sharedViewModel {
-        SharedModule.homeRootViewModelV2(
-            NavigationHandler(navController)
+        SharedModule.homeRootViewModel(
+            NavigationHandler(navController),
         )
     }
 

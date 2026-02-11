@@ -1,6 +1,7 @@
 package de.stefan.lang.shapebyte.features.home.presentation.implementation
 
 import de.stefan.lang.coroutines.contract.CoroutineContextProvider
+import de.stefan.lang.coroutines.contract.CoroutineScopeProvider
 import de.stefan.lang.foundation.core.contract.loadstate.LoadState
 import de.stefan.lang.foundation.core.contract.loadstate.asResultFlow
 import de.stefan.lang.foundation.core.contract.stringformatter.DateTimeStringFormatter
@@ -18,8 +19,6 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.Q
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.schedule.CurrentWorkoutScheduleEntryUseCase
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -35,13 +34,8 @@ public class HomeRootViewModelImpl(
     private val dateTimeStringFormatter: DateTimeStringFormatter,
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
-) : HomeRootViewModel(logger, coroutineContextProvider) {
-
-    private val _state: MutableStateFlow<UIState> = MutableStateFlow(
-        UIState.Idle,
-    )
-
-    override val state: StateFlow<UIState> = _state
+    coroutineScopeProvider: CoroutineScopeProvider,
+) : HomeRootViewModel(logger, coroutineContextProvider, coroutineScopeProvider) {
 
     private val dataFlow: Flow<UIState.Data<HomeRootViewData>> = combine(
         mapCurrentWorkoutScheduleEntry(currentWorkoutScheduleEntryUseCase.flow),
@@ -61,12 +55,12 @@ public class HomeRootViewModelImpl(
     init {
         scope.launch {
             dataFlow.collect {
-                _state.value = it
+                updateState(it)
             }
         }
     }
 
-    override fun intent(intent: HomeRootUIIntent) {
+    override fun onIntent(intent: HomeRootUIIntent) {
         when (intent) {
             is HomeRootUIIntent.Update -> update()
             is HomeRootUIIntent.QuickWorkoutSelected -> onQuickWorkoutSelected(intent.workout)
@@ -74,8 +68,7 @@ public class HomeRootViewModelImpl(
     }
 
     private fun update() {
-        _state.value = UIState.Loading // TODO: maybe refresh state, if data is available
-
+        updateState(UIState.Loading) // TODO: maybe refresh state, if data is available
         recentHistoryUseCase.invoke(today = Clock.System.now())
         currentWorkoutScheduleEntryUseCase.invoke()
         quickWorkoutsUseCase.invoke()

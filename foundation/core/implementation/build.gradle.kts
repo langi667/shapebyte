@@ -14,16 +14,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlinx.coroutines.core)
-
             implementation(projects.core.di)
-            implementation(projects.core.utils)
-            implementation(projects.core.coroutines)
+            implementation(projects.core.utils.contract)
+            implementation(projects.core.coroutines.contract)
 
             implementation(projects.foundation.core.contract)
             implementation(projects.core.logging.contract)
             implementation(libs.kotlinx.datetime)
-
+            implementation(libs.kotlinx.coroutines.core)
         }
 
         androidInstrumentedTest.dependencies {

@@ -1,6 +1,15 @@
 {
-  "originHash" : "55b3cd84b8dd1ad90336333896a644c496ac6cc039097f4e8f20601e70a04162",
+  "originHash" : "5a0c86aab8632c1940cb7bbc1adc94330bbdcdaa46d24633dfdefdb2ebbab833",
   "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory",
+      "state" : {
+        "revision" : "ccc898f21992ebc130bc04cc197460a5ae230bcf",
+        "version" : "2.5.3"
+      }
+    },
     {
       "identity" : "swift-custom-dump",
       "kind" : "remoteSourceControl",
@@ -35,6 +44,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "b7204bc507f897f8b7f717ee5cde4a34f7828124"
+      }
+    },
+    {
+      "identity" : "viewinspector",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nalexn/ViewInspector.git",
+      "state" : {
+        "revision" : "e9a06346499a3a889165647e3f23f8a7b2609a1c",
+        "version" : "0.10.3"
       }
     },
     {

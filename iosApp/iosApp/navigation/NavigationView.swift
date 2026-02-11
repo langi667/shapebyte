@@ -1,5 +1,6 @@
 import SwiftUI
 import shared
+import Factory
 
 struct NavigationView<T: View>: View {
     @State private var navigationPath = NavigationPath()
@@ -28,7 +29,12 @@ struct NavigationView<T: View>: View {
                         ).navigationBarBackButtonHidden()
 
                     case .home:
-                        HomeRootView(navHandling: navigationHandler)
+                        HomeRootView(
+                            viewModel: Container
+                                .shared
+                                .homeRootViewModel
+                                .resolve(navigationHandler)
+                        )
 
                     default:
                         Text("Unhandled destination: \(destination)")
