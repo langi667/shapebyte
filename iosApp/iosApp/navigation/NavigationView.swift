@@ -23,18 +23,10 @@ struct NavigationView<T: View>: View {
                     switch onEnum(of: destination) {
 
                     case .quickWorkout(let workout):
-                        TimedWorkoutView(
-                            workoutId: workout.workoutId,
-                            navHandling: navigationHandler
-                        ).navigationBarBackButtonHidden()
+                        timedWorkoutView(workout: workout).navigationBarBackButtonHidden()
 
                     case .home:
-                        HomeRootView(
-                            viewModel: Container
-                                .shared
-                                .homeRootViewModel
-                                .resolve(navigationHandler)
-                        )
+                        homeRootView()
 
                     default:
                         Text("Unhandled destination: \(destination)")
@@ -51,4 +43,26 @@ struct NavigationView<T: View>: View {
             }
         }
     }
+
+    @ViewBuilder
+    private func timedWorkoutView(workout: shared.NavigationTarget.QuickWorkout) -> some View {
+        TimedWorkoutView(
+            workoutId: workout.workoutId,
+            viewModel: Container
+                .shared
+                .timedWorkoutViewModel
+                .resolve(navigationHandler)
+        )
+    }
+
+    @ViewBuilder
+    private func homeRootView() -> some View {
+        HomeRootView(
+            viewModel: Container
+                .shared
+                .homeRootViewModel
+                .resolve(navigationHandler)
+        )
+    }
+
 }

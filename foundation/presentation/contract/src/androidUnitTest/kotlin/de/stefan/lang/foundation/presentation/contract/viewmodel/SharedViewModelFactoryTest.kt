@@ -1,4 +1,4 @@
-package de.stefan.lang.foundation.presentation.contract.viewmodel.v2
+package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import androidx.lifecycle.ViewModel
 import de.stefan.lang.coretest.CoreTest
@@ -23,7 +23,7 @@ class SharedViewModelFactoryTest : CoreTest() {
     @Test
     fun create_wrapsProvidedSharedViewModel() = test {
         var invocationCount = 0
-        val providedViewModel = TestCoreViewModel(
+        val providedViewModel = TestSharedViewModelBase(
             logger = LoggingModule.logger(),
             coroutineContextProvider = CoroutinesModule.coroutineContextProvider(),
             coroutineScopeProvider = CoroutinesModule.coroutineScopeProvider(),

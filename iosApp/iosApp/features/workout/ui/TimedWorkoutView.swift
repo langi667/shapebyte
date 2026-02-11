@@ -4,27 +4,21 @@ import shared
 
 @MainActor
 struct TimedWorkoutView: View {
-    @State
-    private var viewModel: TimedWorkoutViewModel
-
-    @State
-    private var viewState: UIState = UIState.Idle()
+    private var viewModel: TimedWorkoutViewModelWrapper
 
     let workoutId: Int32
 
     init(
         workoutId: Int32,
-        navHandling: any NavigationRequestHandler
+        viewModel: TimedWorkoutViewModelWrapper,
     ) {
         self.workoutId = workoutId
-        self.viewModel = SharedModule.shared.timedWorkoutViewModel(
-            navHandler: navHandling
-        )
+        self.viewModel = viewModel
     }
 
     var body: some View {
         Group {
-            switch onEnum(of: viewState) {
+            switch onEnum(of: viewModel.viewState) {
             case .idle:
                 Text("Loading...") // TODO: loading state
             case .loading:
@@ -32,20 +26,16 @@ struct TimedWorkoutView: View {
             case .content(let content):
                 contentOrErrorView(
                     content: content,
-                    onBack: {viewModel.intent(intent: TimedWorkoutUIIntent.OnCloseClicked()) }
+                    onBack: {viewModel.handleIntent(TimedWorkoutUIIntent.OnCloseClicked()) }
                 )
             }
         }
-        .task {
-            for await currState in viewModel.state {
-                self.viewState = currState
-            }
-        }
+        .addLifecycleReceiver(viewModel)
         .onAppear {
-            viewModel.intent(intent: TimedWorkoutUIIntent.Load(workoutId: self.workoutId))
+            viewModel.handleIntent(TimedWorkoutUIIntent.Load(workoutId: self.workoutId))
         }
         .onDisappear {
-            viewModel.intent(intent: .Stop())
+            viewModel.handleIntent(TimedWorkoutUIIntent.Stop())
         }
     }
 
@@ -57,7 +47,7 @@ struct TimedWorkoutView: View {
         if let viewData: TimedWorkoutViewData = content.viewData() {
             TimedWorkoutContentView(
                 data: viewData,
-                onPlayClicked: { viewModel.intent(intent: TimedWorkoutUIIntent.Start() ) },
+                onPlayClicked: { viewModel.handleIntent(TimedWorkoutUIIntent.Start() ) },
                 onPauseClicked: viewData.pauseButtonState.onClickAction,
                 onStopClicked: viewData.stopButtonState.onClickAction,
                 onCloseClicked: onBack

@@ -23,7 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import de.stefan.lang.designsystem.theme.ThemeAdditions
 import de.stefan.lang.foundation.presentation.contract.state.UIState
-import de.stefan.lang.foundation.presentation.contract.viewmodel.v2.sharedViewModel
+import de.stefan.lang.foundation.presentation.contract.viewmodel.sharedViewModel
 import de.stefan.lang.shapebyte.SharedModule
 import de.stefan.lang.shapebyte.android.features.workout.history.ui.WorkoutHistoryEntryView
 import de.stefan.lang.shapebyte.android.features.workout.quick.ui.QuickWorkoutsListView

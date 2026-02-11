@@ -1,4 +1,4 @@
-package de.stefan.lang.foundation.presentation.contract.viewmodel.v2
+package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel

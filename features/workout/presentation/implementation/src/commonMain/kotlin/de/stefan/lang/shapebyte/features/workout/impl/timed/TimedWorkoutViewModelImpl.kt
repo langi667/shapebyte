@@ -2,6 +2,7 @@ package de.stefan.lang.shapebyte.features.workout.impl.timed
 
 import de.stefan.lang.coreutils.contract.progress.Progress
 import de.stefan.lang.coroutines.contract.CoroutineContextProvider
+import de.stefan.lang.coroutines.contract.CoroutineScopeProvider
 import de.stefan.lang.designsystem.contract.ColorDescriptor
 import de.stefan.lang.foundation.core.contract.audio.AudioPlayer
 import de.stefan.lang.foundation.core.contract.audio.AudioResource
@@ -28,8 +29,6 @@ import de.stefan.lang.shapebyte.features.workout.domain.contract.item.TimedItemE
 import de.stefan.lang.shapebyte.features.workout.domain.contract.workout.quick.QuickWorkoutForIdUseCase
 import de.stefan.lang.utils.logging.contract.Logger
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
@@ -45,10 +44,8 @@ public class TimedWorkoutViewModelImpl(
     private val audioPlayer: AudioPlayer,
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
-) : TimedWorkoutViewModel(logger, coroutineContextProvider) {
-
-    private val _state = MutableStateFlow<UIState>(UIState.Idle)
-    public override val state: StateFlow<UIState> = _state
+    coroutineScopeProvider: CoroutineScopeProvider,
+) : TimedWorkoutViewModel(logger, coroutineContextProvider, coroutineScopeProvider) {
 
     public override var workout: Workout? = null
         private set
@@ -63,7 +60,7 @@ public class TimedWorkoutViewModelImpl(
     private var itemsExecution: ItemsExecution? = null
     private var loadWorkoutJob: Job? = null
 
-    public override fun intent(intent: TimedWorkoutUIIntent) {
+    public override fun onIntent(intent: TimedWorkoutUIIntent) {
         when (intent) {
             is TimedWorkoutUIIntent.Load -> load(intent.workoutId)
             is TimedWorkoutUIIntent.Start -> start()
@@ -73,9 +70,8 @@ public class TimedWorkoutViewModelImpl(
         }
     }
 
-    // TODO: map to Intent
     private fun load(workoutId: Int) {
-        _state.value = UIState.Loading
+        updateState(UIState.Loading)
 
         loadWorkoutJob = scope.launch {
             quickWorkoutForIdUseCase
@@ -178,7 +174,7 @@ public class TimedWorkoutViewModelImpl(
 
     private fun handleWorkoutPaused() {
         launchState = LaunchState.Pause
-        val currState = this._state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
+        val currState = this.state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
             logW("Cannot perform updateUI, TimedWorkoutViewData is null")
             return
         }
@@ -193,7 +189,7 @@ public class TimedWorkoutViewModelImpl(
     private fun handleWorkoutRunning(workoutState: ItemsExecutionState.Running) {
         launchState = LaunchState.Running
 
-        val currState = this._state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
+        val currState = this.state.value.dataOrNull<TimedWorkoutViewData>() ?: run {
             logW("Cannot perform updateUI, TimedWorkoutViewData is null")
             return
         }
@@ -368,7 +364,7 @@ public class TimedWorkoutViewModelImpl(
     }
 
     private fun updateUIStateWithData(viewData: TimedWorkoutViewData) {
-        _state.value = UIState.Data(viewData)
+        updateState(UIState.Data(viewData))
     }
 
     private fun finishWorkout() {

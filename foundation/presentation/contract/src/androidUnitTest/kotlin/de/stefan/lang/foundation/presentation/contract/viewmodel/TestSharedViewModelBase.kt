@@ -1,4 +1,4 @@
-package de.stefan.lang.foundation.presentation.contract.viewmodel.v2
+package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import de.stefan.lang.coroutines.contract.CoroutineContextProvider
 import de.stefan.lang.coroutines.contract.CoroutineScopeProvider
@@ -6,7 +6,7 @@ import de.stefan.lang.foundation.presentation.contract.event.UIEvent
 import de.stefan.lang.foundation.presentation.contract.intent.UIIntent
 import de.stefan.lang.utils.logging.contract.Logger
 
-internal class TestCoreViewModel(
+internal class TestSharedViewModelBase(
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,

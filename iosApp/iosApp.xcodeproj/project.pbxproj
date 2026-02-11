@@ -198,6 +198,7 @@
 				workout/ui/QuickWorkoutEntryView.swift,
 				workout/ui/QuickWorkoutsListView.swift,
 				workout/ui/TimedWorkoutView.swift,
+				workout/ui/TimedWorkoutViewModelWrapper.swift,
 				workout/ui/WorkoutHistoryEntryView.swift,
 			);
 			target = 1D2DC3A72CBD4D5900A29DA5 /* Development */;
@@ -214,6 +215,7 @@
 				workout/ui/QuickWorkoutEntryView.swift,
 				workout/ui/QuickWorkoutsListView.swift,
 				workout/ui/TimedWorkoutView.swift,
+				workout/ui/TimedWorkoutViewModelWrapper.swift,
 				workout/ui/WorkoutHistoryEntryView.swift,
 			);
 			target = 1D3DADB42CBD4DE100185160 /* Staging */;
@@ -230,6 +232,7 @@
 				workout/ui/QuickWorkoutEntryView.swift,
 				workout/ui/QuickWorkoutsListView.swift,
 				workout/ui/TimedWorkoutView.swift,
+				workout/ui/TimedWorkoutViewModelWrapper.swift,
 				workout/ui/WorkoutHistoryEntryView.swift,
 			);
 			target = 7555FF7A242A565900829871 /* Production */;

@@ -1,4 +1,4 @@
-package de.stefan.lang.foundation.presentation.contract.viewmodel.v2
+package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import app.cash.turbine.test
 import de.stefan.lang.coretest.CoreTest
@@ -60,7 +60,7 @@ class SharedViewModelBaseTest: CoreTest() {
         verify(exactly = 1) { callback.invoke() }
     }
 
-    private fun createSUT() = TestCoreViewModel(
+    private fun createSUT() = TestSharedViewModelBase(
         logger = LoggingModule.logger(),
         coroutineContextProvider = CoroutinesModule.coroutineContextProvider(),
         coroutineScopeProvider = CoroutinesModule.coroutineScopeProvider(),

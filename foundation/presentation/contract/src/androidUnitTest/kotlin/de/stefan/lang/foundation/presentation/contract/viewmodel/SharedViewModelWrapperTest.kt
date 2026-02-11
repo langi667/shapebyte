@@ -1,4 +1,4 @@
-package de.stefan.lang.foundation.presentation.contract.viewmodel.v2
+package de.stefan.lang.foundation.presentation.contract.viewmodel
 
 import app.cash.turbine.test
 import de.stefan.lang.coretest.CoreTest
@@ -60,7 +60,7 @@ class SharedViewModelWrapperTest : CoreTest() {
     }
 
     private fun createWrapper(): WrapperSetup {
-        val wrapped = TestCoreViewModel(
+        val wrapped = TestSharedViewModelBase(
             logger = LoggingModule.logger(),
             coroutineContextProvider = CoroutinesModule.coroutineContextProvider(),
             coroutineScopeProvider = CoroutinesModule.coroutineScopeProvider(),
@@ -70,8 +70,8 @@ class SharedViewModelWrapperTest : CoreTest() {
     }
 
     private class TestSharedViewModelWrapper(
-        wrapped: TestCoreViewModel,
-    ) : SharedViewModelWrapper<TestCoreViewModel>(wrapped) {
+        wrapped: TestSharedViewModelBase,
+    ) : SharedViewModelWrapper<TestSharedViewModelBase>(wrapped) {
         fun triggerOnCleared() {
             onCleared()
         }
@@ -79,7 +79,7 @@ class SharedViewModelWrapperTest : CoreTest() {
 
     private data class WrapperSetup(
         val wrapper: TestSharedViewModelWrapper,
-        val wrapped: TestCoreViewModel,
+        val wrapped: TestSharedViewModelBase,
     )
 
     private object WrapperTestEvent : UIEvent

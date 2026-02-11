@@ -31,7 +31,7 @@ import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-internal class TimedWorkoutViewModelTest : BaseTest() {
+internal class TimedWorkoutViewModelImplTest : BaseTest() {
     private val dateTimeStringFormatter: DateTimeStringFormatter by lazy {
         get()
     }
@@ -105,7 +105,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
         val workoutId = 1
         val workout = workouts.first { it.id == workoutId }
 
-        sut.intent(TimedWorkoutUIIntent.Load(workoutId))
+        sut.handleIntent(TimedWorkoutUIIntent.Load(workoutId))
 
         sut.state.test {
             assertEquals(UIState.Loading, awaitItem())
@@ -123,7 +123,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
     @Test
     fun `start should do nothing if update was not called`() = test {
         val sut = createSUT()
-        sut.intent(TimedWorkoutUIIntent.Start)
+        sut.handleIntent(TimedWorkoutUIIntent.Start)
 
         sut.state.test {
             assertEquals(UIState.Idle, awaitItem())
@@ -138,7 +138,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
         val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
-        sut.intent(TimedWorkoutUIIntent.Load(workout.id))
+        sut.handleIntent(TimedWorkoutUIIntent.Load(workout.id))
 
         // Initial/ Update state
         sut.state.test {
@@ -170,7 +170,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
             expectNoEvents()
         }
 
-        sut.intent(TimedWorkoutUIIntent.Start)
+        sut.handleIntent(TimedWorkoutUIIntent.Start)
         assertTrue(sut.isRunning)
 
         sut.state.test {
@@ -230,7 +230,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
         val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
         val workoutType = workout.type as WorkoutType.Timed.Interval
 
-        sut.intent(TimedWorkoutUIIntent.Load(workout.id))
+        sut.handleIntent(TimedWorkoutUIIntent.Load(workout.id))
 
         val elapsed = mutableListOf<String>()
         val remaining = mutableListOf<String>()
@@ -244,7 +244,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
             expectNoEvents()
         }
 
-        sut.intent(TimedWorkoutUIIntent.Start)
+        sut.handleIntent(TimedWorkoutUIIntent.Start)
         assertTrue(sut.isRunning)
 
         sut.state.test {
@@ -259,7 +259,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
                     remaining.add(data.remainingTotal)
 
                     if (data.progressTotal >= 0.5f) {
-                        sut.intent(TimedWorkoutUIIntent.PauseOrStartWorkout)
+                        sut.handleIntent(TimedWorkoutUIIntent.PauseOrStartWorkout)
                         isRunning = false
                     }
                 }
@@ -276,7 +276,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
         }
 
         // resuming
-        sut.intent(TimedWorkoutUIIntent.PauseOrStartWorkout)
+        sut.handleIntent(TimedWorkoutUIIntent.PauseOrStartWorkout)
 
         sut.state.test {
             awaitItem()
@@ -312,7 +312,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
         val sut = createSUT()
         val workout = workouts.first { it.type is WorkoutType.Timed.Interval }
 
-        sut.intent(TimedWorkoutUIIntent.Load(workout.id))
+        sut.handleIntent(TimedWorkoutUIIntent.Load(workout.id))
 
         val elapsed = mutableListOf<String>()
         val remaining = mutableListOf<String>()
@@ -326,7 +326,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
             expectNoEvents()
         }
 
-        sut.intent(TimedWorkoutUIIntent.Start)
+        sut.handleIntent(TimedWorkoutUIIntent.Start)
         assertTrue(sut.isRunning)
 
         sut.state.test {
@@ -341,7 +341,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
                     remaining.add(data.remainingTotal)
 
                     if (data.progressTotal >= 0.5f) {
-                        sut.intent(TimedWorkoutUIIntent.Stop)
+                        sut.handleIntent(TimedWorkoutUIIntent.Stop)
                         isRunning = false
                     }
                 }
@@ -385,6 +385,7 @@ internal class TimedWorkoutViewModelTest : BaseTest() {
             logger = get(),
             audioPlayer = get(),
             coroutineContextProvider = get(),
+            coroutineScopeProvider = get(),
         )
     }
 }

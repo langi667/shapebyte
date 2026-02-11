@@ -13,4 +13,14 @@ extension Container {
             )
         }.shared
     }
+
+    var timedWorkoutViewModel: ParameterFactory<NavigationRequestHandler, TimedWorkoutViewModelWrapper> {
+        ParameterFactory(self) {@MainActor handler in
+            TimedWorkoutViewModelWrapper(
+                viewModel: SharedModule.shared.timedWorkoutViewModel(
+                    navigationHandler: handler
+                )
+            )
+        }.shared
+    }
 }

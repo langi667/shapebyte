@@ -2,10 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandler
 import de.stefan.lang.shapebyte.features.workout.contract.WorkoutPresentationContract
-import de.stefan.lang.shapebyte.features.workout.contract.countdown.CountdownItemSetsViewModel
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
-import de.stefan.lang.shapebyte.features.workout.domain.WorkoutDomainModule
-import de.stefan.lang.shapebyte.features.workout.impl.countdown.CountdownItemSetsViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.impl.timed.TimedWorkoutViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.presentation.generated.Dependencies
 import de.stefan.lang.shapebyte.features.workout.presentation.generated.Module
@@ -24,24 +21,13 @@ public object WorkoutPresentationModule :
                     logger = Dependencies.logger(),
                     audioPlayer = Dependencies.audioPlayer(),
                     coroutineContextProvider = Dependencies.coroutineContextProvider(),
-                )
-            }
-
-            factory<CountdownItemSetsViewModel> {
-                CountdownItemSetsViewModelImpl(
-                    logger = Dependencies.logger(),
-                    coroutineContextProvider = Dependencies.coroutineContextProvider(),
-                    timedHandlerFactory = {
-                            item, sets ->
-                        WorkoutDomainModule.createTimedItemExecution(item, sets)
-                    },
+                    coroutineScopeProvider = Dependencies.coroutineScopeProvider(),
                 )
             }
         },
     ),
     WorkoutPresentationContract {
-    public override fun countdownItemSetsViewModel(): CountdownItemSetsViewModel = get()
-    public override fun timedWorkoutViewModel(navHandler: NavigationRequestHandler): TimedWorkoutViewModel {
-        return get { parametersOf(navHandler) }
+    public override fun timedWorkoutViewModel(navigationHandler: NavigationRequestHandler): TimedWorkoutViewModel {
+        return get { parametersOf(navigationHandler) }
     }
 }
