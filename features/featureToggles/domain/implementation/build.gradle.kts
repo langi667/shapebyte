@@ -19,14 +19,13 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-            implementation(projects.core.coroutines)
-            implementation(projects.core.logging)
+            implementation(projects.core.coroutines.contract)
+            implementation(projects.core.logging.contract)
             implementation(projects.core.di)
 
-            implementation(projects.foundation.core)
-            implementation(projects.core.logging)
+            implementation(projects.foundation.core.contract)
             implementation(projects.features.featureToggles.domain.contract)
-            implementation(projects.features.featureToggles.data)
+            implementation(projects.features.featureToggles.data.contract)
         }
 
         commonTest.dependencies {

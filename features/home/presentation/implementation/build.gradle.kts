@@ -16,21 +16,18 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.features.home.presentation.contract)
             implementation(projects.core.di)
-            implementation(projects.features.navigation)
-            implementation(projects.features.featureToggles.domain)
-            implementation(projects.core.logging)
+            implementation(projects.features.navigation.contract)
+            implementation(projects.features.featureToggles.domain.contract)
+            implementation(projects.core.logging.contract)
 
-            implementation(projects.foundation.core)
+            implementation(projects.foundation.core.contract)
             implementation(projects.foundation.presentation.contract)
             implementation(projects.core.coroutines.contract)
             implementation(projects.core.logging.contract)
             implementation(projects.features.navigation.contract)
-            implementation(projects.features.workout.data)
             implementation(projects.features.workout.data.contract)
-            implementation(projects.features.workout.domain)
-
+            implementation(projects.features.workout.domain.contract)
             implementation(projects.features.featureToggles.domain.contract)
-
             implementation(libs.kotlinx.coroutines.core)
             
         }

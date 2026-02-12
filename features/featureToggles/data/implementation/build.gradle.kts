@@ -17,9 +17,9 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.features.featureToggles.data.contract)
             implementation(projects.core.di)
-            implementation(projects.foundation.core)
-            implementation(projects.core.logging)
-            implementation(projects.core.coroutines)
+            implementation(projects.foundation.core.contract)
+            implementation(projects.core.logging.contract)
+            implementation(projects.core.coroutines.contract)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
         }

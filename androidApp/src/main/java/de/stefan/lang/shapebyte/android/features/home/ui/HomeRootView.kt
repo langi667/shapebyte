@@ -206,7 +206,7 @@ fun HomeRootViewPreviewHistoryOnly() {
     val uiState = UIState.Data(
         HomeRootViewData(
             quickWorkouts = emptyList(),
-            recentHistory = WorkoutHistoryPreviewDataProvider.previewData,
+            recentHistory = SharedModule.workoutHistoryPreviewDataProvider().previewData,
         ),
     )
 
@@ -235,7 +235,7 @@ fun HomeRootViewPreview() {
     val uiState = UIState.Data(
         HomeRootViewData(
             quickWorkouts = QuickWorkoutsPreviewDataProvider.previewData,
-            recentHistory = WorkoutHistoryPreviewDataProvider.previewData,
+            recentHistory = SharedModule.workoutHistoryPreviewDataProvider().previewData,
         ),
     )
 

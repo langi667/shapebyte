@@ -24,7 +24,7 @@ kotlin {
             api(projects.features.workout.presentation.contract)
 
             implementation(projects.features.workout.presentation.implementation)
-            implementation(projects.features.workout.data.contract)
+            implementation(projects.features.workout.data)
             implementation(projects.features.workout.domain)
             implementation(projects.foundation.core)
 

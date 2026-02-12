@@ -17,23 +17,16 @@ kotlin {
             implementation(projects.features.workout.presentation.contract)
 
             implementation(projects.core.di)
-            implementation(projects.core.utils)
-            implementation(projects.core.coroutines)
-            implementation(projects.core.logging)
+            implementation(projects.core.utils.contract)
+            implementation(projects.core.coroutines.contract)
             implementation(projects.core.logging.contract)
-
-            implementation(projects.foundation.core)
             implementation(projects.foundation.core.contract)
-            implementation(projects.foundation.presentation)
             implementation(projects.foundation.presentation.contract)
 
-            implementation(projects.designsystem)
-            implementation(projects.features.navigation)
+            implementation(projects.designsystem.contract)
             implementation(projects.features.navigation.contract)
 
-            implementation(projects.features.workout.data)
             implementation(projects.features.workout.data.contract)
-            implementation(projects.features.workout.domain)
             implementation(projects.features.workout.domain.contract)
             implementation(projects.features.featureToggles.domain.contract)
 

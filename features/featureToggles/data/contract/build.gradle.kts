@@ -16,7 +16,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.foundation.core.contract)
-            implementation(projects.core.logging)
+            implementation(projects.core.logging.contract)
             implementation(projects.core.di)
         }
 

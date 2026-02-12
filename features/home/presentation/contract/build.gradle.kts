@@ -20,8 +20,6 @@ kotlin {
             implementation(projects.core.logging.contract)
             implementation(projects.core.coroutines.contract)
             implementation(projects.features.navigation.contract)
-
-            implementation(projects.features.workout.data)
             implementation(projects.features.workout.data.contract)
         }
 

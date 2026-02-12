@@ -21,21 +21,21 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.core.di)
-            implementation(projects.core.utils)
-            implementation(projects.core.coroutines)
-            implementation(projects.core.logging)
+            implementation(projects.core.utils.contract)
+            implementation(projects.core.coroutines.contract)
+            implementation(projects.core.logging.contract)
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             
             implementation(libs.kotlinx.serialization.json)
 
-            implementation(projects.foundation.core)
-            implementation(projects.foundation.presentation)
-            implementation(projects.designsystem)
+            implementation(projects.foundation.core.contract)
+            implementation(projects.foundation.presentation.contract)
+            implementation(projects.designsystem.contract)
             implementation(projects.features.featureToggles.data.contract)
             implementation(projects.features.featureToggles.domain.contract)
-            implementation(projects.features.workout.data)
+            implementation(projects.features.workout.data.contract)
             implementation(projects.features.workout.domain.contract)
         }
 

@@ -2,6 +2,7 @@ package de.stefan.lang.shapebyte.features.workout
 
 import de.stefan.lang.shapebyte.features.navigation.contract.NavigationRequestHandler
 import de.stefan.lang.shapebyte.features.workout.contract.WorkoutPresentationContract
+import de.stefan.lang.shapebyte.features.workout.contract.preview.WorkoutHistoryPreviewDataProvider
 import de.stefan.lang.shapebyte.features.workout.contract.timed.TimedWorkoutViewModel
 import de.stefan.lang.shapebyte.features.workout.impl.timed.TimedWorkoutViewModelImpl
 import de.stefan.lang.shapebyte.features.workout.presentation.generated.Dependencies
@@ -24,10 +25,20 @@ public object WorkoutPresentationModule :
                     coroutineScopeProvider = Dependencies.coroutineScopeProvider(),
                 )
             }
+
+            single {
+                WorkoutHistoryPreviewDataProvider(
+                    workoutHistoryMapper = {
+                        Dependencies.workoutHistoryEntry(it)
+                    }
+                )
+            }
         },
     ),
     WorkoutPresentationContract {
     public override fun timedWorkoutViewModel(navigationHandler: NavigationRequestHandler): TimedWorkoutViewModel {
         return get { parametersOf(navigationHandler) }
     }
+
+    public override fun workoutHistoryPreviewDataProvider(): WorkoutHistoryPreviewDataProvider = get()
 }

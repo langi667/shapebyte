@@ -5,6 +5,7 @@ import de.stefan.lang.shapebyte.features.workout.data.contract.Workout
 import de.stefan.lang.shapebyte.features.workout.data.contract.WorkoutType
 import de.stefan.lang.shapebyte.features.workout.data.fixture.QuickWorkoutsDatasourceFixture
 
+// TODO: class, pass it through DPI
 // TODO: consider using mock data from file
 public object QuickWorkoutsPreviewDataProvider {
     private val datasource = QuickWorkoutsDatasourceFixture()

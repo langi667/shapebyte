@@ -20,12 +20,11 @@ kotlin {
             implementation(projects.core.coroutines.contract)
             implementation(projects.core.di)
 
-            implementation(projects.core.utils)
+            implementation(projects.core.utils.contract)
             implementation(projects.features.navigation.contract)
 
             implementation(projects.designsystem)
             implementation(projects.foundation.core.contract)
-            implementation(projects.features.workout.data)
             implementation(projects.features.workout.data.contract)
             implementation(projects.features.workout.data.fixture)
 
