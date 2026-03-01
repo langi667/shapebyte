@@ -83,7 +83,11 @@ public object SharedModule :
 
         sharedInitializationUseCase().invoke(
             platformDependencies,
-            modules = productionModules,
+            modules = if (appInfo.isTest) {
+                testModules
+            } else {
+                productionModules
+            },
         )
     }
 }

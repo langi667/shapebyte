@@ -8,6 +8,7 @@ public class AppInfoProviderFake : AppInfoProvider {
         packageName = "de.stefan.lang.fakeapp",
         versionName = "1.0.0-fake",
         versionCode = 1,
-        debugMode = false,
+        isDebug = false,
+        isTest = false,
     )
 }

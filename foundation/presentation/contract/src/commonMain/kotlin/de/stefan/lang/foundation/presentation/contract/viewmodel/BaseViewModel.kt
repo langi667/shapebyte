@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 // TODO: rename to BaseViewModel, once the current BaseViewModel is removed
-public open class SharedViewModelBase<INTENT : UIIntent> (
+public open class BaseViewModel<INTENT : UIIntent> (
     override val logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,

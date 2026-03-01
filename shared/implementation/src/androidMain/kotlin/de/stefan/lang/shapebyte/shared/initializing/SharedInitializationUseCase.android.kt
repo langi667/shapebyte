@@ -49,7 +49,7 @@ public actual class SharedInitializationUseCase actual constructor(
     }
 
     private fun setupStrictMode() {
-        if (appInfoProvider().appInfo().debugMode) {
+        if (appInfoProvider().appInfo().isDebug) {
             return
         }
 

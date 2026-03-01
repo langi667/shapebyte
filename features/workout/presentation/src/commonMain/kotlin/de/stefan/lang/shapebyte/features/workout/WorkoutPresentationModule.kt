@@ -30,7 +30,7 @@ public object WorkoutPresentationModule :
                 WorkoutHistoryPreviewDataProvider(
                     workoutHistoryMapper = {
                         Dependencies.workoutHistoryEntry(it)
-                    }
+                    },
                 )
             }
         },

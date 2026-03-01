@@ -11,7 +11,8 @@ public class PlatformDependencyProviderMock public constructor(
         packageName = "de.stefan.lang.shapebyte",
         versionName = "1.0",
         versionCode = 0,
-        debugMode = true,
+        isDebug = true,
+        isTest = false,
     )
 
     override val appResourceProvider: AppResourceProvider = AppResourceProvider()

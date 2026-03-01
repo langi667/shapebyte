@@ -48,7 +48,8 @@ struct ShapeByteApp: App {
             packageName: plistReader.bundleIdentifier,
             versionName: plistReader.appVersion,
             versionCode: Int32(plistReader.buildVersion),
-            debugMode: isDebugBuild()
+            isDebug: isDebugBuild(),
+            isTest: isRunningUnitTests
         )
 
         return retVal

@@ -199,8 +199,9 @@ struct HomeRootView_Previews: PreviewProvider {
                     name: "History only",
                     state: HomeRootViewData(
                         currWorkoutScheduleEntry: nil,
-                        recentHistory: WorkoutHistoryPreviewDataProvider
+                        recentHistory: SharedModule
                             .shared
+                            .workoutHistoryPreviewDataProvider()
                             .previewData,
                         quickWorkouts: []
                     )
@@ -219,8 +220,9 @@ struct HomeRootView_Previews: PreviewProvider {
                     name: "All Data",
                     state: HomeRootViewData(
                         currWorkoutScheduleEntry: nil,
-                        recentHistory: WorkoutHistoryPreviewDataProvider
+                        recentHistory: SharedModule
                             .shared
+                            .workoutHistoryPreviewDataProvider()
                             .previewData,
                         quickWorkouts: QuickWorkoutsPreviewDataProvider
                             .shared

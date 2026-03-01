@@ -10,7 +10,7 @@ internal class TestSharedViewModelBase(
     logger: Logger,
     coroutineContextProvider: CoroutineContextProvider,
     coroutineScopeProvider: CoroutineScopeProvider,
-    ) : SharedViewModelBase<UIIntent>(logger, coroutineContextProvider, coroutineScopeProvider) {
+    ) : BaseViewModel<UIIntent>(logger, coroutineContextProvider, coroutineScopeProvider) {
     override fun onIntent(intent: UIIntent) {
             lastIntent = intent
         }

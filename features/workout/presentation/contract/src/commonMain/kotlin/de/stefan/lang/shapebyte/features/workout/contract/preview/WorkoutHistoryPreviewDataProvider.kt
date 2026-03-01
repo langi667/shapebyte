@@ -1,14 +1,13 @@
 package de.stefan.lang.shapebyte.features.workout.contract.preview
 
 import de.stefan.lang.coreutils.contract.progress.Progress
-import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryDataSource
 import de.stefan.lang.shapebyte.features.workout.data.contract.history.WorkoutHistoryEntry
 import de.stefan.lang.shapebyte.features.workout.data.contract.schedule.WorkoutScheduleEntry
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Instant
 
 public class WorkoutHistoryPreviewDataProvider(
-    private val workoutHistoryMapper: (WorkoutScheduleEntry) -> WorkoutHistoryEntry
+    private val workoutHistoryMapper: (WorkoutScheduleEntry) -> WorkoutHistoryEntry,
 ) {
     public val previewData: List<WorkoutHistoryEntry> by lazy {
         createHistoryEntries(

@@ -12,7 +12,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class SharedViewModelBaseTest: CoreTest() {
+class BaseViewModelTest: CoreTest() {
 
     override val testModules = super.testModules + listOf(
         LoggingModule.testDiModule,

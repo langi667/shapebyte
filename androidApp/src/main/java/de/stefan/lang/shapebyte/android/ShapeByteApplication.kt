@@ -22,7 +22,8 @@ class ShapeByteApplication : Application() {
                     versionName = BuildConfig.VERSION_NAME,
                     packageName = BuildConfig.APPLICATION_ID,
                     versionCode = BuildConfig.VERSION_CODE,
-                    debugMode = BuildConfig.DEBUG,
+                    isDebug = BuildConfig.DEBUG,
+                    isTest = false,
                 ),
                 appContextProvider = ContextProvider(this),
                 appResourceProvider = AppResourceProvider(
