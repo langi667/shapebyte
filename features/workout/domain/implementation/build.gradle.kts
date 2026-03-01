@@ -43,6 +43,8 @@ kotlin {
             implementation(projects.core.test)
             implementation(libs.kotlin.test)
             implementation(libs.kotlin.test.annotations.common)
+            implementation(projects.core.logging)
+            implementation(projects.core.coroutines)
         }
 
         androidUnitTest.dependencies {

@@ -35,6 +35,8 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.core.test)
+            implementation(projects.core.logging)
+
             implementation(libs.kotlin.test)
             implementation(libs.kotlin.test.annotations.common)
         }

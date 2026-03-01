@@ -22,8 +22,9 @@ kotlin {
 
         commonTest.dependencies {
             implementation(projects.core.test)
-            implementation(libs.kotlinx.coroutines.test)
+            implementation(projects.core.logging)
 
+            implementation(libs.kotlinx.coroutines.test)
             implementation(libs.kotlin.test)
             implementation(libs.kotlin.test.annotations.common)
         }

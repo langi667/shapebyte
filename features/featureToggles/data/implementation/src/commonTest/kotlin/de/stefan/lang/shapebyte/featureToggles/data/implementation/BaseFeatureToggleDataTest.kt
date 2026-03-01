@@ -9,6 +9,5 @@ open class BaseFeatureToggleDataTest : CoreTest(), KoinTest {
     override val testModules: List<Module>
         get() = super.testModules + listOf(
             LoggingModule.testDiModule,
-            // FeatureTogglesDataModule.testModules,
         )
 }
